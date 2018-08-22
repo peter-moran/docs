@@ -247,12 +247,12 @@ CXX=/usr/bin/clang++
 </div>
 <p>If you want to override an environment variable that a package has inherited from its requirements, you can use either <strong>profiles</strong> or
 <strong class="command">-e</strong> to do it:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conan install -e MyPackage:PATH<span class="o">=</span>/other/path
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conan install . -e MyPackage:PATH<span class="o">=</span>/other/path
 </pre></div>
 </div>
 <p>If you want to define an environment variable but you want to append the variables declared in your requirements you can use the <code class="docutils literal notranslate"><span class="pre">[]</span></code>
 syntax:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install -e <span class="nv">PYTHONPATH</span><span class="o">=[</span>/other/path<span class="o">]</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . -e <span class="nv">PYTHONPATH</span><span class="o">=[</span>/other/path<span class="o">]</span>
 </pre></div>
 </div>
 <p>This way the first entry in the PYTHONPATH variable will be <em>/other/path</em> but the PYTHONPATH values declared in the requirements

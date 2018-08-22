@@ -248,7 +248,7 @@ binaries under your own username too.</li>
 <span id="id1"></span><h2>ERROR: Invalid setting<a class="headerlink" href="#error-invalid-setting" title="Permalink to this headline">¶</a></h2>
 <p>It might happen sometimes, when you specify a setting not present in the defaults
 that you receive a message like this:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install -s compiler.version<span class="o">=</span><span class="m">4</span>.19 ...
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . -s compiler.version<span class="o">=</span><span class="m">4</span>.19 ...
 
 ERROR: Invalid setting <span class="s1">&#39;4.19&#39;</span> is not a valid <span class="s1">&#39;settings.compiler.version&#39;</span> value.
 Possible values are <span class="o">[</span><span class="s1">&#39;4.4&#39;</span>, <span class="s1">&#39;4.5&#39;</span>, <span class="s1">&#39;4.6&#39;</span>, <span class="s1">&#39;4.7&#39;</span>, <span class="s1">&#39;4.8&#39;</span>, <span class="s1">&#39;4.9&#39;</span>, <span class="s1">&#39;5.1&#39;</span>, <span class="s1">&#39;5.2&#39;</span>, <span class="s1">&#39;5.3&#39;</span>, <span class="s1">&#39;5.4&#39;</span>, <span class="s1">&#39;6.1&#39;</span>, <span class="s1">&#39;6.2&#39;</span><span class="o">]</span>

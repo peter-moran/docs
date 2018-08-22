@@ -357,7 +357,7 @@ library(&#39;hello&#39;, [&#39;hello.cpp&#39;])
 </div>
 <p>This allows, to create the package with <strong class="command">conan create</strong> as well as to build the package locally:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> &lt;folder&gt;
-$ conan create user/testing
+$ conan create . user/testing
 <span class="c1"># Now local build</span>
 $ mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd</span> build
 $ conan install ..

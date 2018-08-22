@@ -377,7 +377,7 @@ lib/mylib.lib
 build the package, and finally <strong class="command">conan export-pkg</strong> to send the binary files to a package in the
 local cache:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan <span class="nb">source</span> . --source-folder src
-$ conan install --install-folder build_x86 -s <span class="nv">arch</span><span class="o">=</span>x86
+$ conan install . --install-folder build_x86 -s <span class="nv">arch</span><span class="o">=</span>x86
 $ conan build . --build-folder build_x86 --source-folder src
 <span class="hll">$ conan export-pkg . Hello/0.1@user/stable --build-folder build_x86
 </span></pre></div>
