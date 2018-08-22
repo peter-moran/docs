@@ -263,7 +263,7 @@ include(conanbuildinfo.pri)
 This project will depend on a multi-configuration (debug/release) “Hello World” package, that should be installed first:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/memsharded/hello_multi_config
 $ <span class="nb">cd</span> hello_multi_config
-$ conan create user/channel
+$ conan create . user/channel
 </pre></div>
 </div>
 <p>This hello package is created with cmake, but that doesn’t matter, it can be consumed from a qmake project:</p>

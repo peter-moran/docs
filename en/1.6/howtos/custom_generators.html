@@ -424,7 +424,7 @@ Premake
 </pre></div>
 </div>
 <p>Let’s install the requirements and build the project:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install  -s <span class="nv">compiler</span><span class="o">=</span>gcc -s compiler.version<span class="o">=</span><span class="m">4</span>.9 -s compiler.libcxx<span class="o">=</span>libstdc++ --build
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . -s <span class="nv">compiler</span><span class="o">=</span>gcc -s compiler.version<span class="o">=</span><span class="m">4</span>.9 -s compiler.libcxx<span class="o">=</span>libstdc++ --build
 $ premake4 gmake
 $ make <span class="o">(</span>or mingw32-make <span class="k">if</span> in windows-mingw<span class="o">)</span>
 $ ./MyApplication

@@ -487,7 +487,7 @@ independent in VS, we can just remove that setting field:</p>
 </pre></div>
 </div>
 <p>Option values can be given in command line, and they will have priority over the default values in the recipe:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install -o Pkg:shared<span class="o">=</span>True -o OtherPkg:option<span class="o">=</span>value
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . -o Pkg:shared<span class="o">=</span>True -o OtherPkg:option<span class="o">=</span>value
 </pre></div>
 </div>
 <p>You can also defined them in consumer <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code>, as described in <a class="reference internal" href="../../using_packages/conanfile_txt.html#options-txt"><span class="std std-ref">this section</span></a></p>
@@ -921,7 +921,7 @@ and <cite>False</cite> if we are running the conanfile in a user folder (local C
 </div>
 <p>It can be used for conditional logic in other methods too, like <code class="docutils literal notranslate"><span class="pre">requirements()</span></code>, <code class="docutils literal notranslate"><span class="pre">package()</span></code>, etc.</p>
 <p>This recipe will output “Develop mode” if:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan create user/testing
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan create . user/testing
 <span class="c1"># or</span>
 $ mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd</span> build <span class="o">&amp;&amp;</span> conan install ..
 $ conan build ..
