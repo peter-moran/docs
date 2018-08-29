@@ -302,7 +302,7 @@ the default one created by conan if VS2017 is present), then all we need to spec
 </pre></div>
 </div>
 <p>Now, you should be able to regenerate the CMake project from the IDE, Menu-&gt;CMake, build it, select the “example” executable to run, and run it.</p>
-<p>Now, lets say that you want to build the Release application. You switch configuration from the IDE, and then the above error happens again.
+<p>Now, let’s say that you want to build the Release application. You switch configuration from the IDE, and then the above error happens again.
 The dependencies for Release mode need to be installed too:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . -if<span class="o">=</span>C:<span class="se">\U</span>sers<span class="se">\u</span>ser<span class="se">\C</span>MakeBuilds<span class="se">\d</span>f6639d2-3ef2-bc32-abb3-2cd1bdb3c1ab<span class="se">\b</span>uild<span class="se">\x</span><span class="m">64</span>-Release
 </pre></div>
