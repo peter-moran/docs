@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Changelog &mdash; conan 1.6.1 documentation</title>
+  <title>Changelog &mdash; conan 1.7.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="conan 1.6.1 documentation" href="index.html"/>
+    <link rel="top" title="conan 1.7.0 documentation" href="index.html"/>
         <link rel="prev" title="Troubleshooting" href="faq/troubleshooting.html"/>
 
  <!-- Google Tag Manager -->
@@ -127,6 +127,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="videos.html">Videos and links</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#august-2018">1.7.0 (29-August-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#july-2018">1.6.1 (27-July-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id2">1.6.0 (19-July-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id3">1.5.2 (5-July-2018)</a></li>
@@ -286,8 +287,42 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>Check <a class="reference external" href="https://github.com/conan-io/conan">https://github.com/conan-io/conan</a> for issues and more details about development, contributors, etc.</p>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">Conan 1.6 shouldn’t break any existing 1.0 recipe, or command line invocation. If it does, please report in github.
+<p class="last">Conan 1.7 shouldn’t break any existing 1.0 recipe, or command line invocation. If it does, please report in github.
 Please read more <a class="reference internal" href="introduction.html#stability"><span class="std std-ref">about Conan stability</span></a>.</p>
+</div>
+<div class="section" id="august-2018">
+<h2>1.7.0 (29-August-2018)<a class="headerlink" href="#august-2018" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Feature: Support for C++20 in CMake &gt; 3.12.</li>
+<li>Feature: Included support for Python 3.7 in all platforms.</li>
+<li>Feature: <strong>[Experimental]</strong> <code class="docutils literal notranslate"><span class="pre">python_requires</span></code> function allows to require Conan packages with python code even to extend the
+<code class="docutils literal notranslate"><span class="pre">ConanFile</span></code> class. See: <a class="reference internal" href="mastering/python_requires.html#python-requires"><span class="std std-ref">Python requires: reusing python code in recipes</span></a></li>
+<li>Feature: <code class="docutils literal notranslate"><span class="pre">CMake</span></code> method <code class="docutils literal notranslate"><span class="pre">patch_config_paths</span></code> replaces absolute paths to Conan package’s dependencies as well as Conan package itself.</li>
+<li>Feature: <code class="docutils literal notranslate"><span class="pre">MSBuild</span></code> and <code class="docutils literal notranslate"><span class="pre">VisualStudioBuildEnvironment</span></code> build helpers adjust the <code class="docutils literal notranslate"><span class="pre">/MP</span></code> flag to build code in parallel using multiple
+cores.</li>
+<li>Feature: Added <code class="docutils literal notranslate"><span class="pre">print_errors</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">tools.PkgConfig()</span></code> helper.</li>
+<li>Feature: Added <strong class="command">--query</strong> argument to <strong class="command">conan upload</strong>.</li>
+<li>Feature: <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code>/<code class="docutils literal notranslate"><span class="pre">virtualbuildenv</span></code>/<code class="docutils literal notranslate"><span class="pre">virtualrunenv</span></code> generators now create bash scripts in Windows for its use in subsystems.</li>
+<li>Feature: Improved version ranges resolution speed trough caching of remote requests.</li>
+<li>Feature: Improved result of <code class="docutils literal notranslate"><span class="pre">tools.vcvars_dict(only_diff=True)</span></code> including a list return type that can be used with
+<code class="docutils literal notranslate"><span class="pre">tools.environment_append()</span></code>.</li>
+<li>Fix: <code class="docutils literal notranslate"><span class="pre">AutoToolsBuildEnvironment</span></code> build helper now keeps the <code class="docutils literal notranslate"><span class="pre">PKG_CONFIG_PATHS</span></code> already set in the environment previously.</li>
+<li>Fix: The SCM feature keeps the <code class="docutils literal notranslate"><span class="pre">.git</span></code> folder during the copy of a local directory to the local cache.</li>
+<li>Fix: The SCM feature now exclude correctly the ignored folders by git during the copy of a local directory to the local cache.</li>
+<li>Fix: Conan messages correctly spell “overridden” now.</li>
+<li>Fix: <code class="docutils literal notranslate"><span class="pre">MSBuild</span></code> build helper arguments using quotes.</li>
+<li>Fix: <code class="docutils literal notranslate"><span class="pre">vcvars_command</span></code> and <code class="docutils literal notranslate"><span class="pre">MSBuild</span></code> build helper use the <code class="docutils literal notranslate"><span class="pre">amd64_x86</span></code> when Visual Studio &gt; 12 and cross building for x86.</li>
+<li>Fix: Disabled <code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">init.TemplateDir</span></code> in <strong class="command">conan config install</strong> from a git repository.</li>
+<li>Fix: Clang compiler check in <code class="docutils literal notranslate"><span class="pre">cmake</span></code> generator.</li>
+<li>Fix: Detection of zypper package tool on latest versions of openSUSE.</li>
+<li>Fix: Improved help output of some commands.</li>
+<li>BugFix: <code class="docutils literal notranslate"><span class="pre">qmake</span></code> generator hyphen.</li>
+<li>Bugfix: Git submodules being initialized from repo <em>HEAD</em> prior to checking out the referenced revision when using <code class="docutils literal notranslate"><span class="pre">scm</span></code> attribute.</li>
+<li>BugFix: Declaration <code class="docutils literal notranslate"><span class="pre">default_options</span></code> without value, e.g. <code class="docutils literal notranslate"><span class="pre">default_options</span> <span class="pre">=</span> <span class="pre">&quot;config=&quot;</span></code>. Now it will throw an exception.</li>
+<li>BugFix: Deactivate script in <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code> generator causes PS1 to go unset.</li>
+<li>BugFix: Apply general scope options to a consumer ConanFile first.</li>
+<li>BugFix: Fixed detection of valid repository for git in SCM feature.</li>
+</ul>
 </div>
 <div class="section" id="july-2018">
 <h2>1.6.1 (27-July-2018)<a class="headerlink" href="#july-2018" title="Permalink to this headline">¶</a></h2>
@@ -1841,7 +1876,7 @@ can be checked.</li>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.6
+      Version: 1.7
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -1849,7 +1884,11 @@ can be checked.</li>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.6</a></dd>
+            <dd><a href="/en/latest/index.html">1.7</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.6/index.html">1.6</a></dd>
           
         
           
@@ -1879,7 +1918,7 @@ can be checked.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.6.1',
+            VERSION:'1.7.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

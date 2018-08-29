@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CMake &mdash; conan 1.6.1 documentation</title>
+  <title>CMake &mdash; conan 1.7.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.6.1 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.7.0 documentation" href="../../index.html"/>
         <link rel="up" title="Build helpers" href="../build_helpers.html"/>
         <link rel="next" title="AutoToolsBuildEnvironment (configure/make)" href="autotools.html"/>
         <link rel="prev" title="Build helpers" href="../build_helpers.html"/>
@@ -503,7 +503,9 @@ pc files of the requirements of the conanfile.</li>
 </pre></div>
 </div>
 <p>This method changes references to the absolute path of the installed package in exported CMake config files to the appropriate Conan
-variable. This makes most CMake config files portable.</p>
+variable. Method also changes references to other packages installation paths in export CMake config files to Conan variable
+with their installation roots.
+This makes most CMake config files portable.</p>
 <p>For example, if a package foo installs a file called <em>fooConfig.cmake</em> to be used by cmake’s <code class="docutils literal notranslate"><span class="pre">find_package()</span></code> method, normally this file
 will contain absolute paths to the installed package folder, for example it will contain a line such as:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>SET(Foo_INSTALL_DIR /home/developer/.conan/data/Foo/1.0.0/...)
@@ -515,6 +517,14 @@ paths to:</p>
 </pre></div>
 </div>
 <p>Which is a variable that is set by <em>conanbuildinfo.cmake</em>, so that <code class="docutils literal notranslate"><span class="pre">find_package()</span></code> now correctly works on this Conan package.</p>
+<p>For dependent packages method replaces lines with references to dependencies installation paths such as:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>SET_TARGET_PROPERTIES(foo PROPERTIES INTERFACE_INCLUDE_DIRECTORIES &quot;/home/developer/.conan/data/Bar/1.0.0/user/channel/id/include&quot;)
+</pre></div>
+</div>
+<p>to following lines:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>SET_TARGET_PROPERTIES(foo PROPERTIES INTERFACE_INCLUDE_DIRECTORIES &quot;${CONAN_BAR_ROOT}/include&quot;)
+</pre></div>
+</div>
 <p>If the <code class="docutils literal notranslate"><span class="pre">install()</span></code> method of the CMake object in the conanfile is used, this function should be called <strong>after</strong> that invocation. For
 example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -611,7 +621,7 @@ example:</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.6
+      Version: 1.7
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -619,7 +629,11 @@ example:</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.6</a></dd>
+            <dd><a href="/en/latest/index.html">1.7</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.6/index.html">1.6</a></dd>
           
         
           
@@ -649,7 +663,7 @@ example:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.6.1',
+            VERSION:'1.7.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tools &mdash; conan 1.6.1 documentation</title>
+  <title>Tools &mdash; conan 1.7.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.6.1 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.7.0 documentation" href="../index.html"/>
         <link rel="up" title="Reference" href="../reference.html"/>
         <link rel="next" title="Configuration files" href="config_files.html"/>
         <link rel="prev" title="RunEnvironment" href="build_helpers/run_environment.html"/>
@@ -331,7 +331,11 @@ to set the Visual Studio environment for these parameters.</p>
             <span class="n">vcvars_ver</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">winsdk_version</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">only_diff</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Returns a dictionary with the variables set by the <strong>tools.vcvars_command</strong>.</p>
+<p>Returns a dictionary with the variables set by the <strong>tools.vcvars_command</strong> that can be directly
+applied to <code class="docutils literal notranslate"><span class="pre">tools.environment_append</span></code>.</p>
+<p>The values of the variables <code class="docutils literal notranslate"><span class="pre">INCLUDE</span></code>,  <code class="docutils literal notranslate"><span class="pre">LIB</span></code>, <code class="docutils literal notranslate"><span class="pre">LIBPATH</span></code> and <code class="docutils literal notranslate"><span class="pre">PATH</span></code> will be returned
+as a list, so when used with <code class="docutils literal notranslate"><span class="pre">tools.environment_append</span></code>, the previous environment values that these variables
+could have, will be appended automatically.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">tools</span>
 
 <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -347,8 +351,10 @@ to set the Visual Studio environment for these parameters.</p>
 <li><strong>filter_known_paths</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">False</span></code>): When True, the function will only keep the PATH
 entries that follows some known patterns, filtering all the non-Visual Studio ones. When False,
 it will keep the PATH will all the system entries.</li>
-<li><strong>only_diff</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): Returns only the variables set by
-<code class="docutils literal notranslate"><span class="pre">vcvarsall</span></code> and not the whole environment.</li>
+<li><strong>only_diff</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): When True, the command will return only the variables set by
+<code class="docutils literal notranslate"><span class="pre">vcvarsall</span></code> and not the whole environment.
+If <cite>vcvars</cite> modifies an environment variable by appending values to the old value (separated by <code class="docutils literal notranslate"><span class="pre">;</span></code>),
+only the new values will be returned, as a list.</li>
 </ul>
 </dd>
 </dl>
@@ -824,6 +830,11 @@ manager block ends, the environment variables will be unset.</p>
 </div>
 <div class="section" id="tools-pythonpath">
 <h2>tools.pythonpath()<a class="headerlink" href="#tools-pythonpath" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This way of reusing python code from other recipes can be improved via <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code>.
+See this section: <a class="reference internal" href="../mastering/python_requires.html#python-requires"><span class="std std-ref">Python requires: reusing python code in recipes</span></a></p>
+</div>
 <p>This tool is automatically applied in the conanfile methods unless <a class="reference internal" href="conanfile/attributes.html#apply-env"><span class="std std-ref">apply_env</span></a> is deactivated, so
 any PYTHONPATH inherited from the requirements will be automatically available.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pythonpath</span><span class="p">(</span><span class="n">conanfile</span><span class="p">)</span>
@@ -1269,7 +1280,7 @@ a list with a dictionary for each installation found.</p>
 <li><strong>products</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): List of one or more product IDs to find. Defaults to Community, Professional, and
 Enterprise. Specify <code class="docutils literal notranslate"><span class="pre">[&quot;*&quot;]</span></code> by itself to search all product instances installed.</li>
 <li><strong>requires</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): List of one or more workload or component IDs required when finding instances. See
-<a class="reference external" href="https://docs.microsoft.com/en-us/visualstudio/install/workload-and-component-ids">https://docs.microsoft.com/en-us/visualstudio/install/workload-and-component-ids</a> for a list of workload and component IDs.</li>
+<a class="reference external" href="https://docs.microsoft.com/en-us/visualstudio/install/workload-and-component-ids?view=vs-2017">https://docs.microsoft.com/en-us/visualstudio/install/workload-and-component-ids?view=vs-2017</a> for a list of workload and component IDs.</li>
 <li><strong>version</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>): A version range for instances to find. Example: <code class="docutils literal notranslate"><span class="pre">&quot;[15.0,16.0)&quot;</span></code> will find versions 15.*.</li>
 <li><strong>latest</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">False</span></code>): Return only the newest version and last installed.</li>
 <li><strong>legacy</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">False</span></code>): Also searches Visual Studio 2015 and older products. Information is limited. This
@@ -1385,7 +1396,7 @@ them to achieve correct linking order.</p>
 <span id="pkgconfigtool"></span><h2>tools.PkgConfig()<a class="headerlink" href="#tools-pkgconfig" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PkgConfig</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">library</span><span class="p">,</span> <span class="n">pkg_config_executable</span><span class="o">=</span><span class="s2">&quot;pkg-config&quot;</span><span class="p">,</span> <span class="n">static</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">msvc_syntax</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">variables</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">library</span><span class="p">,</span> <span class="n">pkg_config_executable</span><span class="o">=</span><span class="s2">&quot;pkg-config&quot;</span><span class="p">,</span> <span class="n">static</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">msvc_syntax</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">variables</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">print_errors</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Wrapper of the <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code> tool.</p>
@@ -1406,6 +1417,7 @@ them to achieve correct linking order.</p>
 <li><strong>static</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">False</span></code>): Output libraries suitable for static linking (adds <code class="docutils literal notranslate"><span class="pre">--static</span></code> to <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code> command line).</li>
 <li><strong>msvc_syntax</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">False</span></code>): MSVC compatibility (adds <code class="docutils literal notranslate"><span class="pre">--msvc-syntax</span></code> to <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code> command line).</li>
 <li><strong>variables</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Dictionary of pkg-config variables (passed as <code class="docutils literal notranslate"><span class="pre">--define-variable=VARIABLENAME=VARIABLEVALUE</span></code>).</li>
+<li><strong>print_errors</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): Output error messages (adds –print-errors)</li>
 </ul>
 </dd>
 </dl>
@@ -1659,7 +1671,7 @@ them to achieve correct linking order.</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.6
+      Version: 1.7
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -1667,7 +1679,11 @@ them to achieve correct linking order.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.6</a></dd>
+            <dd><a href="/en/latest/index.html">1.7</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.6/index.html">1.6</a></dd>
           
         
           
@@ -1697,7 +1713,7 @@ them to achieve correct linking order.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.6.1',
+            VERSION:'1.7.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

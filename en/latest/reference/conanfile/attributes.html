@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Attributes &mdash; conan 1.6.1 documentation</title>
+  <title>Attributes &mdash; conan 1.7.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.6.1 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.7.0 documentation" href="../../index.html"/>
         <link rel="up" title="conanfile.py" href="../conanfile.html"/>
         <link rel="next" title="Methods" href="methods.html"/>
         <link rel="prev" title="conanfile.py" href="../conanfile.html"/>
@@ -163,7 +163,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="methods.html">Methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="other.html">Output and Running</a></li>
+<li class="toctree-l3"><a class="reference internal" href="other.html">Python requires</a></li>
+<li class="toctree-l3"><a class="reference internal" href="other.html#output-and-running">Output and Running</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../generators.html">Generators</a></li>
@@ -432,6 +433,18 @@ independent in VS, we can just remove that setting field:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyPkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
     <span class="o">...</span>
     <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">],</span> <span class="s2">&quot;commit&quot;</span><span class="p">:</span> <span class="s2">&quot;ANY&quot;</span><span class="p">}</span>
+    <span class="n">default_options</span> <span class="o">=</span> <span class="s2">&quot;shared=False&quot;</span><span class="p">,</span> <span class="s2">&quot;commit=None&quot;</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">commit</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;This evaluates to True&quot;</span><span class="p">)</span>
+        <span class="c1"># WARNING: Following comparisons are not recommended as this may cause trouble</span>
+        <span class="c1"># with the type conversion (String &lt;-&gt; None) applied to default_options.</span>
+        <span class="c1"># Use the above check instead.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">commit</span> <span class="o">==</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;This also evaluates to True&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">commit</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;This evaluates to False&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>When a package is installed, it will need all its options be defined a value. Those values can be defined in command line, profiles, but they can also (and they will be typically) defined in conan package recipes:</p>
@@ -691,9 +704,9 @@ The allowed <code class="docutils literal notranslate"><span class="pre">build_p
 <p>This will automatically “link” the <code class="docutils literal notranslate"><span class="pre">source</span></code> and <code class="docutils literal notranslate"><span class="pre">build</span></code> directories of the package to the drive root,
 something like <cite>C:/.conan/tmpdir</cite>. All the folder layout in the conan cache is maintained.</p>
 <p>This attribute will not have any effect in other OS, it will be discarded.</p>
-<p>From Windows 10 (ver. 10.0.14393), it is possible to opt-in disabling the path limits. Check <a class="reference external" href="https://docs.microsoft.com/es-es/windows/desktop/FileIO/naming-a-file#maximum-path-length-limitation">this link</a> for more info.
+<p>From Windows 10 (ver. 10.0.14393), it is possible to <a class="reference external" href="https://docs.microsoft.com/es-es/windows/desktop/FileIO/naming-a-file#maximum-path-length-limitation">opt-in disabling the path limits</a>.
 Latest python installers might offer to enable this while installing python. With this limit removed, the <code class="docutils literal notranslate"><span class="pre">short_paths</span></code> functionality is
-totally unnecessary. Please note that this only works with Python 3.6 and newer.</p>
+totally unnecessary.</p>
 </div>
 <div class="section" id="no-copy-source">
 <span id="id2"></span><h2>no_copy_source<a class="headerlink" href="#no-copy-source" title="Permalink to this headline">¶</a></h2>
@@ -1023,7 +1036,7 @@ to <a class="reference internal" href="../../devtools/running_packages.html#repa
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.6
+      Version: 1.7
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -1031,7 +1044,11 @@ to <a class="reference internal" href="../../devtools/running_packages.html#repa
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.6</a></dd>
+            <dd><a href="/en/latest/index.html">1.7</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.6/index.html">1.6</a></dd>
           
         
           
@@ -1061,7 +1078,7 @@ to <a class="reference internal" href="../../devtools/running_packages.html#repa
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.6.1',
+            VERSION:'1.7.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

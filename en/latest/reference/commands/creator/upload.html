@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan upload &mdash; conan 1.6.1 documentation</title>
+  <title>conan upload &mdash; conan 1.7.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.6.1 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.7.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan test" href="test.html"/>
         <link rel="prev" title="conan new" href="new.html"/>
@@ -230,8 +230,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="conan-upload">
 <span id="id1"></span><h1>conan upload<a class="headerlink" href="#conan-upload" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan upload <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-p PACKAGE<span class="o">]</span> <span class="o">[</span>-r REMOTE<span class="o">]</span> <span class="o">[</span>--all<span class="o">]</span> <span class="o">[</span>--skip-upload<span class="o">]</span>
-               <span class="o">[</span>--force<span class="o">]</span> <span class="o">[</span>--check<span class="o">]</span> <span class="o">[</span>-c<span class="o">]</span> <span class="o">[</span>--retry RETRY<span class="o">]</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan upload <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-p PACKAGE<span class="o">]</span> <span class="o">[</span>-q QUERY<span class="o">]</span> <span class="o">[</span>-r REMOTE<span class="o">]</span> <span class="o">[</span>--all<span class="o">]</span>
+               <span class="o">[</span>--skip-upload<span class="o">]</span> <span class="o">[</span>--force<span class="o">]</span> <span class="o">[</span>--check<span class="o">]</span> <span class="o">[</span>-c<span class="o">]</span> <span class="o">[</span>--retry RETRY<span class="o">]</span>
                <span class="o">[</span>--retry-wait RETRY_WAIT<span class="o">]</span> <span class="o">[</span>-no <span class="o">[{</span>all,recipe<span class="o">}]]</span> <span class="o">[</span>-j JSON<span class="o">]</span>
                pattern_or_reference
 </pre></div>
@@ -240,13 +240,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 the first configured remote (by default conan-center, use ‘conan remote list’
 to list the remotes) will be used.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>positional arguments:
-  pattern_or_reference  Pattern or package recipe reference, e.g., &#39;boost/*&#39;,
-                        &#39;MyPackage/1.2@user/channel&#39;
+  pattern_or_reference  Pattern or package recipe reference, e.g.,
+                        &#39;MyPackage/1.2@user/channel&#39;, &#39;boost/*&#39;
 
 optional arguments:
   -h, --help            show this help message and exit
   -p PACKAGE, --package PACKAGE
                         package ID to upload
+  -q QUERY, --query QUERY
+                        Only upload packages matching a specific query.
+                        Packages query: &#39;os=Windows AND (arch=x86 OR
+                        compiler=gcc)&#39;. The &#39;pattern_or_reference&#39; parameter
+                        has to be a reference: MyPackage/1.2@user/channel
   -r REMOTE, --remote REMOTE
                         upload to this specific remote
   --all                 Upload both package recipe and packages
@@ -279,6 +284,11 @@ optional arguments:
 </div>
 <p>Uploads all recipes and binary packages from our local cache to <code class="docutils literal notranslate"><span class="pre">my_remote</span></code> without confirmation:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan upload <span class="s2">&quot;*&quot;</span> --all -r my_remote -c
+</pre></div>
+</div>
+<p>Uploads the recipe for OpenCV alongside any of its binary packages which are built with settings
+<code class="docutils literal notranslate"><span class="pre">arch=x86_64</span></code> and <code class="docutils literal notranslate"><span class="pre">os=Linux</span></code> from our local cache to <code class="docutils literal notranslate"><span class="pre">my_remote</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan upload OpenCV/1.4.0@lasote/stable -q <span class="s1">&#39;arch=x86_64 and os=Linux&#39;</span> -r my_remote
 </pre></div>
 </div>
 <p>Upload all local packages and recipes beginning with “Op” retrying 3 times and waiting 10 seconds
@@ -336,7 +346,7 @@ between upload attempts:</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.6
+      Version: 1.7
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -344,7 +354,11 @@ between upload attempts:</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.6</a></dd>
+            <dd><a href="/en/latest/index.html">1.7</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.6/index.html">1.6</a></dd>
           
         
           
@@ -374,7 +388,7 @@ between upload attempts:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.6.1',
+            VERSION:'1.7.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

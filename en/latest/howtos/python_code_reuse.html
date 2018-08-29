@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>How to reuse Python code in recipes &mdash; conan 1.6.1 documentation</title>
+  <title>How to reuse Python code in recipes &mdash; conan 1.7.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.6.1 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.7.0 documentation" href="../index.html"/>
         <link rel="up" title="Howtos" href="../howtos.html"/>
         <link rel="next" title="How to create and share a custom generator with generator packages" href="custom_generators.html"/>
         <link rel="prev" title="How to use docker to create and cross build C and C++ conan packages" href="run_conan_in_docker.html"/>
@@ -234,6 +234,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="how-to-reuse-python-code-in-recipes">
 <span id="python-reuse"></span><h1>How to reuse Python code in recipes<a class="headerlink" href="#how-to-reuse-python-code-in-recipes" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">To reuse python code, from conan 1.7 there is a new <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code> feature.
+See: <a class="reference internal" href="../mastering/python_requires.html#python-requires"><span class="std std-ref">Python requires: reusing python code in recipes</span></a>
+This “how to” might be deprecated and removed in the future, it is left here for reference only.</p>
+</div>
 <p>First, if you feel that you are repeating a lot of Python code, and that repeated code could be
 useful for other Conan users, please propose it in a github issue.</p>
 <p>There are several ways to handle Python code reuse in package recipes:</p>
@@ -421,7 +427,7 @@ self-contained.</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.6
+      Version: 1.7
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -429,7 +435,11 @@ self-contained.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.6</a></dd>
+            <dd><a href="/en/latest/index.html">1.7</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.6/index.html">1.6</a></dd>
           
         
           
@@ -459,7 +469,7 @@ self-contained.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.6.1',
+            VERSION:'1.7.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

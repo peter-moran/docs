@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan info &mdash; conan 1.6.1 documentation</title>
+  <title>conan info &mdash; conan 1.7.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.6.1 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.7.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan search" href="search.html"/>
         <link rel="prev" title="conan get" href="get.html"/>
@@ -263,7 +263,7 @@ optional arguments:
                         specify both install-folder and any setting/option it
                         will raise an error.
   -j [JSON], --json [JSON]
-                        Only with --build_order option, return the information
+                        Only with --build-order option, return the information
                         in a json. e.g --json=/path/to/filename.json or --json
                         to output the json
   -n ONLY, --only ONLY  Show only the specified fields: &quot;id&quot;, &quot;build_id&quot;,
@@ -353,7 +353,7 @@ $ conan info . --install-folder<span class="o">=</span>build_debug
 </pre></div>
 </div>
 <p>It is possible to use the <strong class="command">conan info</strong> command to extract useful information for Continuous
-Integration systems. More precisely, it has the <strong class="command">--build_order, -bo</strong> option, that will produce
+Integration systems. More precisely, it has the <strong class="command">--build-order, -bo</strong> option, that will produce
 a machine-readable output with an ordered list of package references, in the order they should be
 built. E.g., lets assume that we have a project that depends on Boost and Poco, which in turn
 depends on OpenSSL and ZLib transitively. So we can query our project with a reference that has
@@ -365,7 +365,7 @@ changed (most likely due to a git push on that package):</p>
 <p>Note the result is a list of lists. When there is more than one element in one of the lists, it means
 that they are decoupled projects and they can be built in parallel by the CI system.</p>
 <p>You can also specify the <code class="docutils literal notranslate"><span class="pre">ALL</span></code> argument, if you want just to compute the whole dependency graph build order</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan info . --build_order<span class="o">=</span>ALL
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan info . --build-order<span class="o">=</span>ALL
 &gt; <span class="o">[</span>zlib/1.2.11@conan/stable<span class="o">]</span>, <span class="o">[</span>OpenSSL/1.0.2l@conan/stable<span class="o">]</span>, <span class="o">[</span>Boost/1.60.0@lasote/stable, Poco/1.7.8p3@pocoproject/stable<span class="o">]</span>
 </pre></div>
 </div>
@@ -423,7 +423,7 @@ $ file.html <span class="c1"># or open the file, double-click</span>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.6
+      Version: 1.7
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -431,7 +431,11 @@ $ file.html <span class="c1"># or open the file, double-click</span>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.6</a></dd>
+            <dd><a href="/en/latest/index.html">1.7</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.6/index.html">1.6</a></dd>
           
         
           
@@ -461,7 +465,7 @@ $ file.html <span class="c1"># or open the file, double-click</span>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.6.1',
+            VERSION:'1.7.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

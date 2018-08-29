@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan create &mdash; conan 1.6.1 documentation</title>
+  <title>conan create &mdash; conan 1.7.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.6.1 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.7.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan export" href="export.html"/>
         <link rel="prev" title="conan search" href="../consumer/search.html"/>
@@ -256,10 +256,11 @@ optional arguments:
   -j JSON, --json JSON  json file path where the install information will be
                         written to
   -k, -ks, --keep-source
-                        Do not remove the source folder in local cache. Use
-                        this for testing purposes only
-  -kb, --keep-build     Do not remove the build folder in local cache. Use
-                        this for testing purposes only
+                        Do not remove the source folder in local cache, even
+                        if the recipe changed. Use this for testing purposes
+                        only
+  -kb, --keep-build     Do not remove the build folder in local cache. Implies
+                        --keep-source. Use this for testing purposes only
   -ne, --not-export     Do not export the conanfile.py
   -tbf TEST_BUILD_FOLDER, --test-build-folder TEST_BUILD_FOLDER
                         Working directory for the build of the test project.
@@ -383,7 +384,7 @@ In that case you can skip/disable the test package stage:</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.6
+      Version: 1.7
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -391,7 +392,11 @@ In that case you can skip/disable the test package stage:</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.6</a></dd>
+            <dd><a href="/en/latest/index.html">1.7</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.6/index.html">1.6</a></dd>
           
         
           
@@ -421,7 +426,7 @@ In that case you can skip/disable the test package stage:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.6.1',
+            VERSION:'1.7.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
