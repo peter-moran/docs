@@ -279,7 +279,7 @@ cloud after pushing to Github. You can probably setup your own way, but conan ha
 Other setups might be possible, but for this example we are assuming that you are using github and also uploading your final packages to Bintray.
 You could follow these steps:</p>
 <ol class="arabic simple">
-<li>First, create an empty Github repository, lets call it “hello”, for creating a “hello world” package. Github allows to create it with a Readme, license and .gitignore.</li>
+<li>First, create an empty Github repository, let’s call it “hello”, for creating a “hello world” package. Github allows to create it with a Readme, license and .gitignore.</li>
 <li>Get the credentials User and API Key (remember, Bintray uses the API key as “password”, not your main Bintray account password)</li>
 <li>Create a conan repository in Bintray under your user or organization, and get its URL (“Set me up”). We will call it <code class="docutils literal notranslate"><span class="pre">UPLOAD_URL</span></code></li>
 <li>Under your project page, <em>Settings -&gt; Pipelines -&gt; Add a variable</em>, add the <code class="docutils literal notranslate"><span class="pre">CONAN_PASSWORD</span></code> environment variable with the Bintray API Key. If your Bintray user is different from the package user, you can define your Bintray username too, defining the environment variable <code class="docutils literal notranslate"><span class="pre">CONAN_LOGIN_USERNAME</span></code></li>

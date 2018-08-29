@@ -254,7 +254,7 @@ get the version from the metadata.</p>
 <div class="section" id="how-to-capture-package-version-from-text-or-build-files">
 <h1>How to capture package version from text or build files<a class="headerlink" href="#how-to-capture-package-version-from-text-or-build-files" title="Permalink to this headline">¶</a></h1>
 <p>It is common that a library version number would be already encoded in a text file, in some build scripts, etc.
-Lets take as an example that we have the following library layout, that we want to create a package from it:</p>
+Let’s take as an example that we have the following library layout, that we want to create a package from it:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>conanfile.py
 CMakeLists.txt
 src
@@ -262,7 +262,7 @@ src
    ...
 </pre></div>
 </div>
-<p>The <em>CMakeLists.txt</em> will have some variables to define the library version number. Lets assume for simplicity
+<p>The <em>CMakeLists.txt</em> will have some variables to define the library version number. Let’s assume for simplicity
 that it has some line like:</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8</span><span class="p">)</span>
 <span class="nb">set</span><span class="p">(</span><span class="s">MY_LIBRARY_VERSION</span> <span class="s">1.2.3</span><span class="p">)</span> <span class="c"># This is the version we want</span>
