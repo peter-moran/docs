@@ -291,8 +291,8 @@ Can be overwritten with the environment variable <code class="docutils literal n
 </pre></div>
 </div>
 <p>Returns, for given settings, the command that should be called to load the Visual
-Studio environment variables for a certain Visual Studio version. It wraps thefunctionality of
-<a class="reference external" href="https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line">vcvarsall</a> but
+Studio environment variables for a certain Visual Studio version. It wraps the functionality of
+<a class="reference external" href="https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=vs-2017">vcvarsall</a> but
 does not execute the command, as that typically have to be done in the same command as the compilation,
 so the variables are loaded for the same subprocess. It will be typically used in the <code class="docutils literal notranslate"><span class="pre">build()</span></code>
 method, like this:</p>
@@ -672,7 +672,7 @@ you need some special functionality.</p>
 </div>
 <p>This function is useful for a simple “patch” or modification of source files. A typical use would
 be to augment some library existing <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> in the <code class="docutils literal notranslate"><span class="pre">source()</span></code> method, so it uses
-conan dependencies without forking or modifying the original project:</p>
+Conan dependencies without forking or modifying the original project:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">tools</span>
 
 <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

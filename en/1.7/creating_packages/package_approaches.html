@@ -351,17 +351,16 @@ variables will be applied to all configurations.</p>
 <p class="first admonition-title">Important</p>
 <p>The above code assumes that the package will always use the default Visual Studio runtime (MD/MDd).
 To keep the package configurable for supporting static(MT)/dynamic(MD) linking with the VS runtime
-library, do the following:
-- Keep, the <code class="docutils literal notranslate"><span class="pre">compiler.runtime</span></code> setting, i.e. do not implement the <code class="docutils literal notranslate"><span class="pre">configure()</span></code> method removing it
-- Don’t let the <code class="docutils literal notranslate"><span class="pre">CMake</span></code> helper define the <code class="docutils literal notranslate"><span class="pre">CONAN_LINK_RUNTIME</span></code> env-var to define the runtime, because</p>
-<blockquote>
-<div>defining it by the consumer will cause it to be incorrectly applied to both the Debug and Release artifacts.
-This can be done with a <code class="docutils literal notranslate"><span class="pre">cmake.command_line.replace(&quot;CONAN_LINK_RUNTIME&quot;,</span> <span class="pre">&quot;CONAN_LINK_RUNTIME_MULTI&quot;)</span></code>
-to define a new variable</div></blockquote>
+library, do the following:</p>
 <ul class="simple">
-<li>Write a separate <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> methods for MD/MDd and for MT/MTd defining the packages to be built</li>
+<li>Keep the <code class="docutils literal notranslate"><span class="pre">compiler.runtime</span></code> setting, i.e. do not implement the <code class="docutils literal notranslate"><span class="pre">configure()</span></code> method removing it.</li>
+<li>Don’t let the CMake helper define the <code class="docutils literal notranslate"><span class="pre">CONAN_LINK_RUNTIME</span></code> env-var to define the runtime, because
+defining it by the consumer will cause it to be incorrectly applied to both the Debug and Release artifacts.
+This can be done with a <code class="docutils literal notranslate"><span class="pre">cmake.command_line.replace(&quot;CONAN_LINK_RUNTIME&quot;,</span> <span class="pre">&quot;CONAN_LINK_RUNTIME_MULTI&quot;)</span></code>
+to define a new variable.</li>
+<li>Write a separate <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> methods for MD/MDd and for MT/MTd defining the packages to be built.</li>
 <li>In <em>CMakeLists.txt</em>, use the <code class="docutils literal notranslate"><span class="pre">CONAN_LINK_RUNTIME_MULTI</span></code> variable to correctly setup up the runtime for
-debug and release flags</li>
+debug and release flags.</li>
 </ul>
 <p class="last">All these steps are already coded in the repo <a class="reference external" href="https://github.com/memsharded/hello_multi_config">https://github.com/memsharded/hello_multi_config</a> and commented
 out as <strong>“Alternative 2”</strong></p>
@@ -412,7 +411,7 @@ the method doesn’t change it, the hash will match the package folder one. By s
 hash will be the same (the particular string is mostly irrelevant, as long as it is the same for
 both configurations). Note that the build hash <code class="docutils literal notranslate"><span class="pre">sha3</span></code> will be different of both <code class="docutils literal notranslate"><span class="pre">sha1</span></code> and
 <code class="docutils literal notranslate"><span class="pre">sha2</span></code> package identifiers.</p>
-<p>This doesn not imply that there will be strictly one build folder. There will be a build folder for
+<p>This does not imply that there will be strictly one build folder. There will be a build folder for
 every configuration (architecture, compiler version, etc). So if we just have Debug/Release build
 types, and we’re producing N packages for N different configurations, we’ll have N/2 build folders,
 saving half of the build time.</p>
