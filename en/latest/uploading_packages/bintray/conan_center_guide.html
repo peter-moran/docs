@@ -228,8 +228,9 @@ that it is your responsibility to maintain acceptable standards of quality for a
 submit for inclusion in <a class="reference external" href="https://bintray.com/conan/conan-center">conan-center</a>.</li>
 <li>If you are packaging a third-party library, follow these guidelines:</li>
 </ul>
-<p>Contributing a library to Conan-Center is really straightforward when you know how to <a class="reference internal" href="uploading_bintray.html#uploading-to-bintray"><span class="std std-ref">upload your packages to your own Bintray repository</span></a>. All you have to do is to navigate to the main page of the package in Bintray and click the
-<strong>“Add to Conan Center”</strong> button to start the inclusion request process.</p>
+<p>Contributing a library to Conan-Center is really straightforward when you know how to
+<a class="reference internal" href="uploading_bintray.html#uploading-to-bintray"><span class="std std-ref">upload your packages to your own Bintray repository</span></a>. All you have to do is to navigate to the main page of the
+package in Bintray and click the <strong>“Add to Conan Center”</strong> button to start the inclusion request process.</p>
 <img alt="../../_images/add_to_conan-center.png" class="align-center" src="../../_images/add_to_conan-center.png" />
 <div class="section" id="inclusion-guidelines-for-third-party-libraries">
 <h2>Inclusion Guidelines for Third-Party libraries<a class="headerlink" href="#inclusion-guidelines-for-third-party-libraries" title="Permalink to this headline">¶</a></h2>
@@ -246,8 +247,7 @@ Bintray Conan package.</li>
 <li>It is recommended to contact the <strong>library author</strong> and suggest to maintain the Conan package.
 When possible, open a pull request to the original repository of the library with the required Conan
 files or suggest to open a new repository with the recipe.</li>
-<li>If you are going to collaborate with different users to maintain the Conan package, open a Bintray
-organization.</li>
+<li>If you are going to collaborate with different users to maintain the Conan package, open a Bintray organization.</li>
 </ul>
 </div>
 <div class="section" id="recipe-quality">
@@ -291,21 +291,17 @@ licenses in the <code class="docutils literal notranslate"><span class="pre">lic
     <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;license*&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;licenses&quot;</span><span class="p">,</span>  <span class="n">ignore_case</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">keep_path</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Sometimes there is no <code class="docutils literal notranslate"><span class="pre">license</span></code> file, and you will need to extract the license from a header file, as in the
-following
-.. code-block:: python</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>def package():</dt>
-<dd><p class="first"># Extract the License/s from the header to a file
-tmp = tools.load(“header.h”)
-license_contents = tmp[2:tmp.find(“<em>/”, 1)] # The license begins with a C comment /</em> and ends with <a href="#id1"><span class="problematic" id="id2">*</span></a>/
-tools.save(“LICENSE”, license_contents)</p>
-<p class="last"># Package it
-self.copy(“license*”, dst=”licenses”,  ignore_case=True, keep_path=False)</p>
-</dd>
-</dl>
-</div></blockquote>
+<p>Sometimes there is no <code class="docutils literal notranslate"><span class="pre">license</span></code> file, and you will need to extract the license from a header file, as in the following example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package</span><span class="p">():</span>
+    <span class="c1"># Extract the License/s from the header to a file</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="n">tools</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;header.h&quot;</span><span class="p">)</span>
+    <span class="n">license_contents</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="n">tmp</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;*/&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span> <span class="c1"># The license begins with a C comment /* and ends with */</span>
+    <span class="n">tools</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;LICENSE&quot;</span><span class="p">,</span> <span class="n">license_contents</span><span class="p">)</span>
+
+    <span class="c1"># Package it</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;license*&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;licenses&quot;</span><span class="p">,</span>  <span class="n">ignore_case</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">keep_path</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="ci-integration">
 <h3>CI Integration<a class="headerlink" href="#ci-integration" title="Permalink to this headline">¶</a></h3>
@@ -317,7 +313,7 @@ self.copy(“license*”, dst=”licenses”,  ignore_case=True, keep_path=False
 compiler, you will need to provide a CI systems integration to support:</p>
 <blockquote>
 <div><ul class="simple">
-<li><strong>Linux:</strong> GCC, latest version recommeded from each major (4.9, 5.4, 6.3)</li>
+<li><strong>Linux:</strong> GCC, latest version recommended from each major (4.9, 5.4, 6.3)</li>
 <li><strong>Linux:</strong> Clang, latest version recommended from each major (3.9, 4.0)</li>
 <li><strong>Mac OSX:</strong> Two latest versions of apple-clang, e.j (8.0, 8.1) or newer.</li>
 <li><strong>Windows:</strong> Visual Studio 12, 14 and 15 (or newer)</li>
