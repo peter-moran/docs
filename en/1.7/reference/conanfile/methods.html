@@ -448,6 +448,15 @@ if different dependencies are setting incompatible flags (c++11 after c++14).</l
         <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">cppflags</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;-pthread&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
+<p>Note that due to the way that some build systems, like CMake, manage forward and back slashes, it might
+be more robust passing flags for Visual Studio compiler with dash instead. Using <code class="docutils literal notranslate"><span class="pre">&quot;/NODEFAULTLIB:MSVCRT&quot;</span></code>,
+for example, might fail when using CMake targets mode, so the following is preferred and works both
+in the global and targets mode of CMake:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">exelinkflags</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;-NODEFAULTLIB:MSVCRT&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;-DEFAULTLIB:LIBCMT&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
 <p>If your recipe has requirements, you can access to your requirements <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> as well using the <code class="docutils literal notranslate"><span class="pre">deps_cpp_info</span></code> object.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OtherConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;OtherLib&quot;</span>
