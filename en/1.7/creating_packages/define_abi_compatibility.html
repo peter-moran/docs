@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Define package ABI compatibility &mdash; conan 1.7.0 documentation</title>
+  <title>Defining Package ABI Compatibility &mdash; conan 1.7.0 documentation</title>
   
 
   
@@ -41,9 +41,9 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="conan 1.7.0 documentation" href="../index.html"/>
-        <link rel="up" title="Creating packages" href="../creating_packages.html"/>
-        <link rel="next" title="Inspecting packages" href="inspecting_packages.html"/>
-        <link rel="prev" title="Understanding packaging" href="understand_packaging.html"/>
+        <link rel="up" title="Creating Packages" href="../creating_packages.html"/>
+        <link rel="next" title="Inspecting Packages" href="inspecting_packages.html"/>
+        <link rel="prev" title="Understanding Packaging" href="understand_packaging.html"/>
 
  <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -115,31 +115,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Install</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_packages.html">Using packages</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../creating_packages.html">Creating packages</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="external_repo.html">Recipe and sources in a different repo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="package_repo.html">Recipe and sources in the same repo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="existing_binaries.html">Packaging existing binaries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="understand_packaging.html">Understanding packaging</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Define package ABI compatibility</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#defining-a-custom-package-id">Defining a custom package_id()</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#the-problem-of-dependencies">The problem of dependencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#using-package-id-for-package-dependencies">Using package_id() for package dependencies</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#versioning-schema">Versioning schema</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#library-types-shared-static-header-only">Library types: Shared, static, header only</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../creating_packages.html">Creating Packages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_repo.html">Recipe and Sources in a Different Repo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_repo.html">Recipe and Sources in the Same Repo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="existing_binaries.html">Packaging Existing Binaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="understand_packaging.html">Understanding Packaging</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Defining Package ABI Compatibility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#defining-a-custom-package-id">Defining a Custom package_id()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dependency-issues">Dependency Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-package-id-for-package-dependencies">Using package_id() for Package Dependencies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#versioning-schema">Versioning Schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#library-types-shared-static-header-only">Library Types: Shared, Static, Header-only</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="inspecting_packages.html">Inspecting packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="package_approaches.html">Packaging approaches</a></li>
-<li class="toctree-l2"><a class="reference internal" href="package_tools.html">Tools for package creators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inspecting_packages.html">Inspecting Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_approaches.html">Packaging Approaches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_tools.html">Package Creator Tools</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../devtools.html">Package apps and devtools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
@@ -199,9 +199,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../creating_packages.html">Creating packages</a> &raquo;</li>
+          <li><a href="../creating_packages.html">Creating Packages</a> &raquo;</li>
         
-      <li>Define package ABI compatibility</li>
+      <li>Defining Package ABI Compatibility</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -220,9 +220,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="define-package-abi-compatibility">
-<span id="define-abi-compatibility"></span><h1>Define package ABI compatibility<a class="headerlink" href="#define-package-abi-compatibility" title="Permalink to this headline">¶</a></h1>
-<p>Each package recipe can generate <em>N</em> binary packages from it, depending on three things:
+  <div class="section" id="defining-package-abi-compatibility">
+<span id="define-abi-compatibility"></span><h1>Defining Package ABI Compatibility<a class="headerlink" href="#defining-package-abi-compatibility" title="Permalink to this headline">¶</a></h1>
+<p>Each package recipe can generate <em>N</em> binary packages from it, depending on these three items:
 <code class="docutils literal notranslate"><span class="pre">settings</span></code>, <code class="docutils literal notranslate"><span class="pre">options</span></code> and <code class="docutils literal notranslate"><span class="pre">requires</span></code>.</p>
 <p>When any of the <a class="reference internal" href="../reference/conanfile/attributes.html#settings-property"><span class="std std-ref">settings</span></a> of a package recipe changes, it will reference a
 different binary:</p>
@@ -236,56 +236,56 @@ different binary:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install MyLib/1.0@user/channel -s <span class="nv">arch</span><span class="o">=</span>x86_64 -s ...
 </pre></div>
 </div>
-<p>The process will be:</p>
+<p>The process is:</p>
 <ol class="arabic simple">
-<li>Conan will get the user input settings and options. Those settings and options can come from command line, profiles or from the values
+<li>Conan gets the user input settings and options. Those settings and options can come from the command line, profiles or from the values
 cached in the latest <strong class="command">conan install</strong> execution.</li>
-<li>Conan will retrieve the <code class="docutils literal notranslate"><span class="pre">MyLib/1.0&#64;user/channel</span></code> recipe, read the <code class="docutils literal notranslate"><span class="pre">settings</span></code> attribute, and assign the necessary values.</li>
-<li>With the current package values for <code class="docutils literal notranslate"><span class="pre">settings</span></code> (also <code class="docutils literal notranslate"><span class="pre">options</span></code> and <code class="docutils literal notranslate"><span class="pre">requires</span></code>), it will compute a SHA1 hash that will be the binary
+<li>Conan retrieves the <code class="docutils literal notranslate"><span class="pre">MyLib/1.0&#64;user/channel</span></code> recipe, reads the <code class="docutils literal notranslate"><span class="pre">settings</span></code> attribute, and assigns the necessary values.</li>
+<li>With the current package values for <code class="docutils literal notranslate"><span class="pre">settings</span></code> (also <code class="docutils literal notranslate"><span class="pre">options</span></code> and <code class="docutils literal notranslate"><span class="pre">requires</span></code>), it will compute a SHA1 hash that will serve as the binary
 package ID, e.g. <code class="docutils literal notranslate"><span class="pre">c6d75a933080ca17eb7f076813e7fb21aaa740f2</span></code>.</li>
-<li>Conan will try to find the <code class="docutils literal notranslate"><span class="pre">c6d75...</span></code> binary package. If it’s present it will retrieve it, if not, it will fail and indicate that it
+<li>Conan will try to find the <code class="docutils literal notranslate"><span class="pre">c6d75...</span></code> binary package. If it exists, it will be retrieved. If it cannot be found, it will fail and indicate that it
 can be built from sources using <strong class="command">conan install --build</strong>.</li>
 </ol>
-<p>If the package is installed again with different settings, for example, for 32 bits architecture:</p>
+<p>If the package is installed again using different settings, for example, on a 32-bit architecture:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install MyLib/1.0@user/channel -s <span class="nv">arch</span><span class="o">=</span>x86 -s ...
 </pre></div>
 </div>
-<p>The process will be repeated but generating a different package ID, because the <code class="docutils literal notranslate"><span class="pre">arch</span></code>
-setting will have a different value. The same applies for different compilers, compiler versions, build type, etc., generating multiple
-binaries, one for each configuration.</p>
-<p>When users of the package define the same settings as one of those binaries that have been uploaded, the computed package ID will be the
-same and such binary will be retrieved and reused without building it from sources.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">options</span></code> behavior is very similar. The main difference is that options can be more easily defined at the package level and they can
+<p>The process will be repeated with a different generated package ID, because the <code class="docutils literal notranslate"><span class="pre">arch</span></code>
+setting will have a different value. The same applies to different compilers, compiler versions, build types. When generating multiple
+binaries - a separate ID is generated for each configuration.</p>
+<p>When developers using the package use the same settings as one of those uploaded binaries, the computed package ID will be
+identical causing the binary to be retrieved and reused without the need of rebuilding it from the sources.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">options</span></code> behavior is very similar. The main difference is that <code class="docutils literal notranslate"><span class="pre">options</span></code> can be more easily defined at the package level and they can
 be defaulted. Check the <a class="reference internal" href="../reference/conanfile/attributes.html#conanfile-options"><span class="std std-ref">options, default_options</span></a> reference.</p>
-<p>Note the simple scenario of a <strong>header-only</strong> library. Such package does not need to be built, and it will not have any ABI issues at all.
-The recipe of such package will have to generate exactly 1 binary package, no more. This is easily achieved, just by not declaring
-<code class="docutils literal notranslate"><span class="pre">settings</span></code> nor <code class="docutils literal notranslate"><span class="pre">options</span></code> in the recipe:</p>
+<p>Note this simple scenario of a <strong>header-only</strong> library. The package does not need to be built, and it will not have any ABI issues at all.
+The recipe for such a package will be to generate a single binary package, no more. This is easily achieved by not declaring
+<code class="docutils literal notranslate"><span class="pre">settings</span></code> nor <code class="docutils literal notranslate"><span class="pre">options</span></code> in the recipe as follows:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyLibConanPackage</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;MyLib&quot;</span>
     <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;1.0&quot;</span>
     <span class="c1"># no settings defined!</span>
 </pre></div>
 </div>
-<p>No matter what are the settings defined by the users, which compiler or version: the package settings and options will always be the same
-(empty) and they will hash to the same binary package ID. That package will typically contain just the header files.</p>
-<p>What happens if we have a library that we know it can be built with GCC 4.8 and we know it will keep the ABI compatibility with GCC 4.9?
+<p>No matter the settings are defined by the users, including the compiler or version, the package settings and options will always be the same
+(left empty) and they will hash to the same binary package ID. That package will typically contain just the header files.</p>
+<p>What happens if we have a library that we can be built with GCC 4.8 and will preserve the ABI compatibility with GCC 4.9?
 (This kind of compatibility is easier to achieve for example for pure C libraries).</p>
-<p>Although it could be argued that it is worth rebuilding with 4.9 too -to get fixes and performance improvements for example-, let’s suppose
-that we don’t want to create 2 different binaries, just one built with GCC 4.8 and we want it to be compatible for GCC 4.9 installs.</p>
+<p>Although it could be argued that it is worth rebuilding with 4.9 too -to get fixes and performance improvements-. Let’s suppose
+that we don’t want to create 2 different binaries, but just a single built with GCC 4.8 which also needs to be compatible for GCC 4.9 installations.</p>
 <div class="section" id="defining-a-custom-package-id">
-<span id="define-custom-package-id"></span><h2>Defining a custom package_id()<a class="headerlink" href="#defining-a-custom-package-id" title="Permalink to this headline">¶</a></h2>
-<p>The default <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> uses the <code class="docutils literal notranslate"><span class="pre">settings</span></code> and <code class="docutils literal notranslate"><span class="pre">options</span></code> directly as defined, and assumes
-<a class="reference external" href="https://semver.org/">semantic versioning</a> for dependencies defined in <code class="docutils literal notranslate"><span class="pre">requires</span></code>.</p>
-<p>This <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> method can be overridden to control the package ID generation. Within the <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> we have access to the
-<code class="docutils literal notranslate"><span class="pre">self.info</span></code> object, which is the one that is hashed to compute the binary ID and contains:</p>
+<span id="define-custom-package-id"></span><h2>Defining a Custom package_id()<a class="headerlink" href="#defining-a-custom-package-id" title="Permalink to this headline">¶</a></h2>
+<p>The default <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> uses the <code class="docutils literal notranslate"><span class="pre">settings</span></code> and <code class="docutils literal notranslate"><span class="pre">options</span></code> directly as defined, and assumes the
+<a class="reference external" href="https://semver.org/">semantic versioning</a> for dependencies is defined in <code class="docutils literal notranslate"><span class="pre">requires</span></code>.</p>
+<p>This <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> method can be overridden to control the package ID generation. Within the <code class="docutils literal notranslate"><span class="pre">package_id()</span></code>, we have access to the
+<code class="docutils literal notranslate"><span class="pre">self.info</span></code> object, which is hashed to compute the binary ID and contains:</p>
 <ul class="simple">
-<li><strong>self.info.settings</strong>: Contains all the declared settings, always as string values. We can access/alter the settings. e.g:
+<li><strong>self.info.settings</strong>: Contains all the declared settings, always as string values. We can access/modify the settings. e.g:
 <code class="docutils literal notranslate"><span class="pre">self.info.settings.compiler.version</span></code>.</li>
 <li><strong>self.info.options</strong>: Contains all the declared options, always as string values too. e.g: <code class="docutils literal notranslate"><span class="pre">self.info.options.shared</span></code>.</li>
 </ul>
-<p>Initially this <code class="docutils literal notranslate"><span class="pre">info</span></code> object will contain the original settings and options, but they can be changed without constraints to any other
+<p>Initially this <code class="docutils literal notranslate"><span class="pre">info</span></code> object contains the original settings and options, but they can be changed without constraints to any other
 string value.</p>
-<p>For example, if you are sure your package ABI compatibility is fine for GCC versions &gt; 4.5 and &lt; 5.0 you could do this:</p>
+<p>For example, if you are sure your package ABI compatibility is fine for GCC versions &gt; 4.5 and &lt; 5.0, you could do the following:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">CMake</span><span class="p">,</span> <span class="n">tools</span>
 <span class="kn">from</span> <span class="nn">conans.model.version</span> <span class="kn">import</span> <span class="n">Version</span>
 
@@ -300,10 +300,10 @@ string value.</p>
             <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">compiler</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;GCC version between 4.5 and 5.0&quot;</span>
 </pre></div>
 </div>
-<p>We have set the <code class="docutils literal notranslate"><span class="pre">self.info.settings.compiler.version</span></code> with an arbitrary string, the value it’s not important (could be any string). The
-only important thing is that it is the same for any GCC version between 4.5 and 5.0. For all those versions, the compiler version will
+<p>We have set the <code class="docutils literal notranslate"><span class="pre">self.info.settings.compiler.version</span></code> with an arbitrary string, the value of which is not important (could be any string). The
+only importantance is that it is the same for any GCC version between 4.5 and 5.0. For all those versions, the compiler version will
 always be hashed to the same ID.</p>
-<p>Let’s try and check that it works properly installing the package for GCC 4.5:</p>
+<p>Let’s try and check that it works properly when installing the package for GCC 4.5:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan <span class="nb">export</span> myuser/mychannel
 $ conan install Pkg/1.0@myuser/mychannel -s <span class="nv">compiler</span><span class="o">=</span>gcc -s compiler.version<span class="o">=</span><span class="m">4</span>.5 ...
 
@@ -314,7 +314,7 @@ Packages
 ...
 </pre></div>
 </div>
-<p>We can see that the computed package ID is <code class="docutils literal notranslate"><span class="pre">af04...46ad</span></code> (not real). What would happen if we specify GCC 4.6?</p>
+<p>We can see that the computed package ID is <code class="docutils literal notranslate"><span class="pre">af04...46ad</span></code> (not real). What happens if we specify GCC 4.6?</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install Pkg/1.0@myuser/mychannel -s <span class="nv">compiler</span><span class="o">=</span>gcc -s compiler.version<span class="o">=</span><span class="m">4</span>.6 ...
 
 Requirements
@@ -323,7 +323,7 @@ Packages
     Pkg/1.0@myuser/mychannel:mychannel:af044f9619574eceb8e1cca737a64bdad88246ad
 </pre></div>
 </div>
-<p>Same result: the required package is again <code class="docutils literal notranslate"><span class="pre">af04...46ad</span></code>. Now we can try with GCC 4.4 (&lt; 4.5):</p>
+<p>The required package has the same resulte again <code class="docutils literal notranslate"><span class="pre">af04...46ad</span></code>. Now we can try using GCC 4.4 (&lt; 4.5):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install Pkg/1.0@myuser/mychannel -s <span class="nv">compiler</span><span class="o">=</span>gcc -s compiler.version<span class="o">=</span><span class="m">4</span>.4 ...
 
 Requirements
@@ -332,8 +332,8 @@ Packages
     Pkg/1.0@myuser/mychannel:mychannel:7d02dc01581029782b59dcc8c9783a73ab3c22dd
 </pre></div>
 </div>
-<p>Now the computed package ID is different: that means that we need a different binary package for GCC 4.4.</p>
-<p>The same way we have adjusted the <code class="docutils literal notranslate"><span class="pre">self.info.settings</span></code> we could set the <code class="docutils literal notranslate"><span class="pre">self.info.options</span></code> values if needed.</p>
+<p>The computed package ID is different which means that we need a different binary package for GCC 4.4.</p>
+<p>The same way we have adjusted the <code class="docutils literal notranslate"><span class="pre">self.info.settings</span></code>, we could set the <code class="docutils literal notranslate"><span class="pre">self.info.options</span></code> values if needed.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p>Check <a class="reference internal" href="../reference/conanfile/methods.html#method-package-id"><span class="std std-ref">package_id()</span></a> to see the available helper methods and change its behavior for things like:</p>
@@ -345,26 +345,24 @@ Packages
 </div></blockquote>
 </div>
 </div>
-<div class="section" id="the-problem-of-dependencies">
-<span id="problem-of-dependencies"></span><h2>The problem of dependencies<a class="headerlink" href="#the-problem-of-dependencies" title="Permalink to this headline">¶</a></h2>
-<p>Let’s define a simple scenario where there are two packages: one for <code class="docutils literal notranslate"><span class="pre">MyOtherLib/2.0</span></code> and another one <code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code> which depends
-on (requires) <code class="docutils literal notranslate"><span class="pre">MyOtherLib/2.0</span></code>. Let’s assume that their recipes and binaries have already been created and uploaded to a Conan remote.</p>
-<p>Now, a new release for <code class="docutils literal notranslate"><span class="pre">MyOtherLib/2.1</span></code> comes out with improved recipe and new binaries. The <code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code> is modified to upgrade the
-requires to <code class="docutils literal notranslate"><span class="pre">MyOtherLib/2.1</span></code>.</p>
+<div class="section" id="dependency-issues">
+<span id="problem-of-dependencies"></span><h2>Dependency Issues<a class="headerlink" href="#dependency-issues" title="Permalink to this headline">¶</a></h2>
+<p>Let’s define a simple scenario whereby there are two packages: <code class="docutils literal notranslate"><span class="pre">MyOtherLib/2.0</span></code> and <code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code> which depends on
+<code class="docutils literal notranslate"><span class="pre">MyOtherLib/2.0</span></code>. Let’s assume that their recipes and binaries have already been created and uploaded to a Conan remote.</p>
+<p>Now, a new release for <code class="docutils literal notranslate"><span class="pre">MyOtherLib/2.1</span></code> is released with an improved recipe and new binaries. The <code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code> is modified and is required to be upgraded to <code class="docutils literal notranslate"><span class="pre">MyOtherLib/2.1</span></code>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This scenario will be the same in the case that a consuming project of <code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code> defines a dependency to <code class="docutils literal notranslate"><span class="pre">MyOtherLib/2.1</span></code>, which
-would have precedence over the existing one in <code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code>.</p>
+takes precedence over the existing project in <code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code>.</p>
 </div>
-<p>The question is: <strong>Is it necessary to build new MyLib/1.0 binary packages?</strong> Or are the existing packages still valid?</p>
+<p>The question is: <strong>Is it necessary to build new MyLib/1.0 binary packages?</strong> or are the existing packages still valid?</p>
 <p>The answer: <strong>It depends</strong>.</p>
-<p>Let’s suppose that both are being compiled as static libraries and that the API exposed by <code class="docutils literal notranslate"><span class="pre">MyOtherLib</span></code> to <code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code> through the
-public headers has not changed at all. Then, it is not necessary to build new binaries for <code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code> because the final consumer will
+<p>Let’s assume that both packages are compiled as static libraries and that the API exposed by <code class="docutils literal notranslate"><span class="pre">MyOtherLib</span></code> to <code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code> through the
+public headers, has not changed at all. In this case, it is not required to build new binaries for <code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code> because the final consumer will
 link against both <code class="docutils literal notranslate"><span class="pre">Mylib/1.0</span></code> and <code class="docutils literal notranslate"><span class="pre">MyOtherLib/2.1</span></code>.</p>
-<p>On the other hand, it could happen that the API exposed by <strong>MyOtherLib</strong> in public headers has changed, but without affecting the
-<code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code> binary for any reason (like changes consisting on new functions not used by <strong>MyLib</strong>). The same reasoning would still be
-valid if <strong>MyOtherLib</strong> was header only.</p>
-<p>But what if one header file of <code class="docutils literal notranslate"><span class="pre">MyOtherLib</span></code> -named <em>myadd.h</em>- has changed from <code class="docutils literal notranslate"><span class="pre">2.0</span></code> to <code class="docutils literal notranslate"><span class="pre">2.1</span></code>:</p>
+<p>On the other hand, it could happen that the API exposed by <strong>MyOtherLib</strong> in the public headers has changed, but without affecting the
+<code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code> binary for any reason (like changes consisting on new functions not used by <strong>MyLib</strong>). The same reasoning would apply if <strong>MyOtherLib</strong> was only the header.</p>
+<p>But what if a header file of <code class="docutils literal notranslate"><span class="pre">MyOtherLib</span></code> -named <em>myadd.h</em>- has changed from <code class="docutils literal notranslate"><span class="pre">2.0</span></code> to <code class="docutils literal notranslate"><span class="pre">2.1</span></code>:</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text"><em>myadd.h</em> header file in version 2.0</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span> <span class="kt">int</span> <span class="nf">addition</span> <span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">;</span> <span class="p">}</span>
@@ -377,15 +375,15 @@ valid if <strong>MyOtherLib</strong> was header only.</p>
 </pre></div>
 </div>
 </div>
-<p>And the <code class="docutils literal notranslate"><span class="pre">addition()</span></code> function is being called from compiled <em>.cpp</em> files of <code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code>?</p>
-<p>Then, <strong>a new binary for MyLib/1.0 has to be built for the new dependency version</strong>. Otherwise it will maintain the old, buggy
+<p>And the <code class="docutils literal notranslate"><span class="pre">addition()</span></code> function is called from the compiled <em>.cpp</em> files of <code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code>?</p>
+<p>Then, <strong>a new binary for MyLib/1.0 is required to be built for the new dependency version</strong>. Otherwise it will maintain the old, buggy
 <code class="docutils literal notranslate"><span class="pre">addition()</span></code> version. Even in the case that <code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code> doesn’t have any change in its code lines neither in the recipe, the resulting
-binary rebuilding <code class="docutils literal notranslate"><span class="pre">MyLib</span></code> requiring <cite>MyOtherLib/2.1`</cite> will be different and the package needs to be different.</p>
+binary rebuilding <code class="docutils literal notranslate"><span class="pre">MyLib</span></code> requires <cite>MyOtherLib/2.1`</cite> and the package to be different.</p>
 </div>
 <div class="section" id="using-package-id-for-package-dependencies">
-<h2>Using package_id() for package dependencies<a class="headerlink" href="#using-package-id-for-package-dependencies" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">self.info</span></code> object has also a <code class="docutils literal notranslate"><span class="pre">requires</span></code> object. It is a dictionary with the necessary information for each requirement, all direct
-and transitive dependencies. e.g. <code class="docutils literal notranslate"><span class="pre">self.info.requires[&quot;MyOtherLib&quot;]</span></code> is a <code class="docutils literal notranslate"><span class="pre">RequirementInfo</span></code> object.</p>
+<h2>Using package_id() for Package Dependencies<a class="headerlink" href="#using-package-id-for-package-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">self.info</span></code> object has also a <code class="docutils literal notranslate"><span class="pre">requires</span></code> object. It is a dictionary containing the necessary information for each requirement, all direct
+and transitive dependencies. For example, <code class="docutils literal notranslate"><span class="pre">self.info.requires[&quot;MyOtherLib&quot;]</span></code> is a <code class="docutils literal notranslate"><span class="pre">RequirementInfo</span></code> object.</p>
 <ul>
 <li><p class="first">Each <code class="docutils literal notranslate"><span class="pre">RequirementInfo</span></code> has the following <cite>read only</cite> reference fields:</p>
 <blockquote>
@@ -398,7 +396,7 @@ and transitive dependencies. e.g. <code class="docutils literal notranslate"><sp
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">The following fields are the ones used in the <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> evaluation:</p>
+<li><p class="first">The following fields are used in the <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> evaluation:</p>
 <blockquote>
 <div><ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">name</span></code>: By default same value as full_name. E.g <strong>MyOtherLib</strong>.</li>
@@ -412,16 +410,16 @@ E.g <strong>1.Y</strong> for a <strong>1.2</strong> <code class="docutils litera
 </div></blockquote>
 </li>
 </ul>
-<p>When defining a package ID to model dependencies, it is necessary to take into account two factors:</p>
+<p>When defining a package ID for model dependencies, it is necessary to take into account two factors:</p>
 <ul class="simple">
 <li>The versioning schema followed by our requirements (semver?, custom?).</li>
-<li>Type of library being built and type of library being reused (shared (<em>.so</em>, <em>.dll</em>, <em>.dylib</em>), static).</li>
+<li>The type of library being built or reused (shared (<em>.so</em>, <em>.dll</em>, <em>.dylib</em>), static).</li>
 </ul>
 <div class="section" id="versioning-schema">
-<h3>Versioning schema<a class="headerlink" href="#versioning-schema" title="Permalink to this headline">¶</a></h3>
-<p>By default Conan assumes <a class="reference external" href="https://semver.org/">semver</a> compatibility. e.g., if a version changes from minor <strong>2.0</strong> to <strong>2.1</strong> Conan will
-assume that the API is compatible (headers not changing), and that it is not necessary to build a new binary for it. Exactly the same for
-patches, changing from <strong>2.1.10</strong> to <strong>2.1.11</strong> doesn’t require a re-build.</p>
+<h3>Versioning Schema<a class="headerlink" href="#versioning-schema" title="Permalink to this headline">¶</a></h3>
+<p>By default Conan assumes <a class="reference external" href="https://semver.org/">semver</a> compatibility. For example, if a version changes from minor <strong>2.0</strong> to <strong>2.1</strong>, Conan will
+assume that the API is compatible (headers not changing), and that it is not necessary to build a new binary for it. This also applies to
+patches, whereby changing from <strong>2.1.10</strong> to <strong>2.1.11</strong> doesn’t require a re-build.</p>
 <p>If it is necessary to change the default behavior, the applied versioning schema can be customized within the <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> method:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">CMake</span><span class="p">,</span> <span class="n">tools</span>
 <span class="kn">from</span> <span class="nn">conans.model.version</span> <span class="kn">import</span> <span class="n">Version</span>
@@ -443,9 +441,9 @@ patches, changing from <strong>2.1.10</strong> to <strong>2.1.11</strong> doesn�
         <span class="n">myotherlib</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">myotherlib</span><span class="o">.</span><span class="n">full_version</span><span class="o">.</span><span class="n">minor</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Besides the <code class="docutils literal notranslate"><span class="pre">version</span></code>, there are some other helpers that can be used to decide whether the <strong>channel</strong> and <strong>user</strong> of one dependency also
+<p>Besides <code class="docutils literal notranslate"><span class="pre">version</span></code>, there are additional helpers that can be used to determine whether the <strong>channel</strong> and <strong>user</strong> of one dependency also
 affects the binary package, or even the required package ID can change your own package ID.</p>
-<p>You can decide if those variables of any requirement will change the ID of your binary package using the following modes:</p>
+<p>You can determine if the following variables within any requirement change the ID of your binary package using the following modes:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="22%" />
@@ -531,8 +529,8 @@ affects the binary package, or even the required package ID can change your own 
 </tbody>
 </table>
 <ul>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">semver_mode()</span></code>: This is the default mode. In this mode only major release version (starting from <strong>1.0.0</strong>) changes the package ID.
-Every version change before 1.0.0 will change the package ID, but only major changes after 1.0.0 will do.</p>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">semver_mode()</span></code>: This is the default mode. In this mode, only a major release version (starting from <strong>1.0.0</strong>) changes the package ID.
+Every version change prior to 1.0.0 changes the package ID, but only major changes after 1.0.0 will be applied.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="p">[</span><span class="s2">&quot;MyOtherLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">semver_mode</span><span class="p">()</span>
 </pre></div>
@@ -550,21 +548,21 @@ Every version change before 1.0.0 will change the package ID, but only major cha
 </pre></div>
 </div>
 </li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">patch_mode()</span></code>: Any change in major, minor or patch (not build) version of the required dependency changes the package ID.</p>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">patch_mode()</span></code>: Any changes to major, minor or patch (not build) versions of the required dependency change the package ID.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="p">[</span><span class="s2">&quot;MyOtherLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">patch_mode</span><span class="p">()</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">base_mode()</span></code>: Any change in the base of the version (not build) of the required dependency changes the package ID. Note that in the
-case of semver notation this may produce same result as <code class="docutils literal notranslate"><span class="pre">patch_mode()</span></code>, but it is actually intended to dismiss the build part of the
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">base_mode()</span></code>: Any changes to the base of the version (not build) of the required dependency changes the package ID. Note that in the
+case of semver notation this may produce the same result as <code class="docutils literal notranslate"><span class="pre">patch_mode()</span></code>, but it is actually intended to dismiss the build part of the
 version even without strict semver.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="p">[</span><span class="s2">&quot;MyOtherLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">base_mode</span><span class="p">()</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">full_version_mode()</span></code>: Any change in the version of the required dependency changes the package ID.</p>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">full_version_mode()</span></code>: Any changes to the version of the required dependency changes the package ID.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="p">[</span><span class="s2">&quot;MyOtherLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">full_version_mode</span><span class="p">()</span>
 </pre></div>
@@ -605,8 +603,8 @@ version even without strict semver.</p>
 </pre></div>
 </div>
 <p>The result of the <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> is the package ID hash, but the details can be checked in the
-generated <em>conaninfo.txt</em> file. The <code class="docutils literal notranslate"><span class="pre">[requires]</span></code>, <code class="docutils literal notranslate"><span class="pre">[options]</span></code> and <code class="docutils literal notranslate"><span class="pre">[settings]</span></code> are those taken
-into account to generate the SHA1 hash for the package ID, while the <code class="docutils literal notranslate"><span class="pre">[full_xxxx]</span></code> fields show the
+generated <em>conaninfo.txt</em> file. The <code class="docutils literal notranslate"><span class="pre">[requires]</span></code>, <code class="docutils literal notranslate"><span class="pre">[options]</span></code> and <code class="docutils literal notranslate"><span class="pre">[settings]</span></code> are taken
+into account when generating the SHA1 hash for the package ID, while the <code class="docutils literal notranslate"><span class="pre">[full_xxxx]</span></code> fields show the
 complete reference information.</p>
 <p>The default behavior produces a <em>conaninfo.txt</em> that looks like:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
@@ -618,7 +616,7 @@ complete reference information.</p>
 </div>
 </div>
 <div class="section" id="library-types-shared-static-header-only">
-<h3>Library types: Shared, static, header only<a class="headerlink" href="#library-types-shared-static-header-only" title="Permalink to this headline">¶</a></h3>
+<h3>Library Types: Shared, Static, Header-only<a class="headerlink" href="#library-types-shared-static-header-only" title="Permalink to this headline">¶</a></h3>
 <p>Let’s see some examples, corresponding to common scenarios:</p>
 <ul>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code> is a shared library that links with a static library <code class="docutils literal notranslate"><span class="pre">MyOtherLib/2.0</span></code> package.
@@ -640,7 +638,7 @@ When a new <code class="docutils literal notranslate"><span class="pre">MyOtherL
 <p>It depends. If the public headers have not changed at all, it is not necessary. Actually it might
 be necessary to consider transitive dependencies that are shared among the public headers, how
 they are linked and if they cross the frontiers of the API, it might also lead to
-incompatibilities. If public headers have changed, it would depend on what changes and how are
+incompatibilities. If the public headers have changed, it would depend on what changes and how are
 they used in <code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code>. Adding new methods to the public headers will have no impact, but
 changing the implementation of some functions that will be inlined when compiled from
 <code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code> will definitely require re-building. For this case, it could make sense to have this configuration:</p>
@@ -666,13 +664,13 @@ changed to:</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code> is a static library, linking with a header only library in <code class="docutils literal notranslate"><span class="pre">MyOtherLib/2.0</span></code>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code> is a static library linking to a header only library in <code class="docutils literal notranslate"><span class="pre">MyOtherLib/2.0</span></code>
 package. When a new <code class="docutils literal notranslate"><span class="pre">MyOtherLib/2.1</span></code> version is released: Do I need to create a new binary for
 <code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code> to link with it? It could happen that the <code class="docutils literal notranslate"><span class="pre">MyOtherLib</span></code> headers are strictly used
-in some <code class="docutils literal notranslate"><span class="pre">MyLib</span></code> headers, which are not compiled, but transitively included. But in the general
-case it is likely that <code class="docutils literal notranslate"><span class="pre">MyOtherLib</span></code> headers are used in <code class="docutils literal notranslate"><span class="pre">MyLib</span></code> implementation files, so every
+in some <code class="docutils literal notranslate"><span class="pre">MyLib</span></code> headers, which are not compiled, but transitively included. But in general,
+it is more likely that <code class="docutils literal notranslate"><span class="pre">MyOtherLib</span></code> headers are used in <code class="docutils literal notranslate"><span class="pre">MyLib</span></code> implementation files, so every
 change in them should imply a new binary to be built. If we know that changes in the channel never
-imply a source code change, because it is the way we have defined our workflow/lifecycle, we could
+imply a source code change, as set in our workflow/lifecycle, we could
 write:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="p">[</span><span class="s2">&quot;MyOtherLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">full_package</span><span class="p">()</span>
@@ -695,10 +693,10 @@ write:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="inspecting_packages.html" class="btn btn-neutral float-right" title="Inspecting packages" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="inspecting_packages.html" class="btn btn-neutral float-right" title="Inspecting Packages" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="understand_packaging.html" class="btn btn-neutral" title="Understanding packaging" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="understand_packaging.html" class="btn btn-neutral" title="Understanding Packaging" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

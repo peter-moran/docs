@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Recipe and sources in a different repo &mdash; conan 1.7.0 documentation</title>
+  <title>Recipe and Sources in a Different Repo &mdash; conan 1.7.0 documentation</title>
   
 
   
@@ -41,9 +41,9 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="conan 1.7.0 documentation" href="../index.html"/>
-        <link rel="up" title="Creating packages" href="../creating_packages.html"/>
-        <link rel="next" title="Recipe and sources in the same repo" href="package_repo.html"/>
-        <link rel="prev" title="Getting started" href="getting_started.html"/>
+        <link rel="up" title="Creating Packages" href="../creating_packages.html"/>
+        <link rel="next" title="Recipe and Sources in the Same Repo" href="package_repo.html"/>
+        <link rel="prev" title="Getting Started" href="getting_started.html"/>
 
  <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -115,22 +115,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Install</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_packages.html">Using packages</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../creating_packages.html">Creating packages</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting started</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Recipe and sources in a different repo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="package_repo.html">Recipe and sources in the same repo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="existing_binaries.html">Packaging existing binaries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="understand_packaging.html">Understanding packaging</a></li>
-<li class="toctree-l2"><a class="reference internal" href="define_abi_compatibility.html">Define package ABI compatibility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="inspecting_packages.html">Inspecting packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="package_approaches.html">Packaging approaches</a></li>
-<li class="toctree-l2"><a class="reference internal" href="package_tools.html">Tools for package creators</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../creating_packages.html">Creating Packages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Recipe and Sources in a Different Repo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_repo.html">Recipe and Sources in the Same Repo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="existing_binaries.html">Packaging Existing Binaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="understand_packaging.html">Understanding Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="define_abi_compatibility.html">Defining Package ABI Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inspecting_packages.html">Inspecting Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_approaches.html">Packaging Approaches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_tools.html">Package Creator Tools</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../devtools.html">Package apps and devtools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
@@ -190,9 +190,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../creating_packages.html">Creating packages</a> &raquo;</li>
+          <li><a href="../creating_packages.html">Creating Packages</a> &raquo;</li>
         
-      <li>Recipe and sources in a different repo</li>
+      <li>Recipe and Sources in a Different Repo</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -212,12 +212,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
            <div itemprop="articleBody">
             
   <div class="section" id="recipe-and-sources-in-a-different-repo">
-<span id="external-repo"></span><h1>Recipe and sources in a different repo<a class="headerlink" href="#recipe-and-sources-in-a-different-repo" title="Permalink to this headline">¶</a></h1>
-<p>In the previous section we fetched the sources of our library from an external repository.
+<span id="external-repo"></span><h1>Recipe and Sources in a Different Repo<a class="headerlink" href="#recipe-and-sources-in-a-different-repo" title="Permalink to this headline">¶</a></h1>
+<p>In the previous section, we fetched the sources of our library from an external repository.
 It is a typical workflow for packaging third party libraries.</p>
 <p>There are two different ways to fetch the sources from an external repository:</p>
 <ol class="arabic simple">
-<li>Using the <code class="docutils literal notranslate"><span class="pre">source()</span></code> method as we saw in the previous section:</li>
+<li>Using the <code class="docutils literal notranslate"><span class="pre">source()</span></code> method as we displayed in the previous section:</li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">CMake</span><span class="p">,</span> <span class="n">tools</span>
 
@@ -243,7 +243,7 @@ It is a typical workflow for packaging third party libraries.</p>
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
-<li>Using the <a class="reference internal" href="../reference/conanfile/attributes.html#scm-attribute"><span class="std std-ref">scm attribute</span></a> of the conanfile [EXPERIMENTAL]:</li>
+<li>Using the <a class="reference internal" href="../reference/conanfile/attributes.html#scm-attribute"><span class="std std-ref">scm attribute</span></a> of the conanFile [EXPERIMENTAL]:</li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">CMake</span><span class="p">,</span> <span class="n">tools</span>
 
@@ -278,10 +278,10 @@ retrieve more sources, but it is not necessary in most cases.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="package_repo.html" class="btn btn-neutral float-right" title="Recipe and sources in the same repo" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="package_repo.html" class="btn btn-neutral float-right" title="Recipe and Sources in the Same Repo" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="getting_started.html" class="btn btn-neutral" title="Getting started" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="getting_started.html" class="btn btn-neutral" title="Getting Started" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

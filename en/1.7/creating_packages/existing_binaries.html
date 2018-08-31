@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Packaging existing binaries &mdash; conan 1.7.0 documentation</title>
+  <title>Packaging Existing Binaries &mdash; conan 1.7.0 documentation</title>
   
 
   
@@ -41,9 +41,9 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="conan 1.7.0 documentation" href="../index.html"/>
-        <link rel="up" title="Creating packages" href="../creating_packages.html"/>
-        <link rel="next" title="Understanding packaging" href="understand_packaging.html"/>
-        <link rel="prev" title="Recipe and sources in the same repo" href="package_repo.html"/>
+        <link rel="up" title="Creating Packages" href="../creating_packages.html"/>
+        <link rel="next" title="Understanding Packaging" href="understand_packaging.html"/>
+        <link rel="prev" title="Recipe and Sources in the Same Repo" href="package_repo.html"/>
 
  <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -115,26 +115,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Install</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_packages.html">Using packages</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../creating_packages.html">Creating packages</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="external_repo.html">Recipe and sources in a different repo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="package_repo.html">Recipe and sources in the same repo</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Packaging existing binaries</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#packaging-pre-built-binaries">Packaging pre-built binaries</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#downloading-and-packaging-pre-built-binaries">Downloading and Packaging pre-built binaries</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../creating_packages.html">Creating Packages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_repo.html">Recipe and Sources in a Different Repo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_repo.html">Recipe and Sources in the Same Repo</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Packaging Existing Binaries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#packaging-pre-built-binaries">Packaging Pre-built Binaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#downloading-and-packaging-pre-built-binaries">Downloading and Packaging Pre-built Binaries</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="understand_packaging.html">Understanding packaging</a></li>
-<li class="toctree-l2"><a class="reference internal" href="define_abi_compatibility.html">Define package ABI compatibility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="inspecting_packages.html">Inspecting packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="package_approaches.html">Packaging approaches</a></li>
-<li class="toctree-l2"><a class="reference internal" href="package_tools.html">Tools for package creators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="understand_packaging.html">Understanding Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="define_abi_compatibility.html">Defining Package ABI Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inspecting_packages.html">Inspecting Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_approaches.html">Packaging Approaches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_tools.html">Package Creator Tools</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../devtools.html">Package apps and devtools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
@@ -194,9 +194,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../creating_packages.html">Creating packages</a> &raquo;</li>
+          <li><a href="../creating_packages.html">Creating Packages</a> &raquo;</li>
         
-      <li>Packaging existing binaries</li>
+      <li>Packaging Existing Binaries</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -216,32 +216,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
            <div itemprop="articleBody">
             
   <div class="section" id="packaging-existing-binaries">
-<span id="existing-binaries"></span><h1>Packaging existing binaries<a class="headerlink" href="#packaging-existing-binaries" title="Permalink to this headline">¶</a></h1>
-<p>Sometimes, it is necessary to create packages from existing binaries, like binaries from third
-parties, or previously built by another process or team not using conan, so building from sources is
-not wanted. You would want to package local files in two situations:</p>
+<span id="existing-binaries"></span><h1>Packaging Existing Binaries<a class="headerlink" href="#packaging-existing-binaries" title="Permalink to this headline">¶</a></h1>
+<p>There are specific scenerios in which it is necessary to create packages from existing binaries, for example from 3rd
+parties or binaries previously built by another process or team that are not using Conan. Under these circumstances building from sources is
+not what you want. You should package the local files in the following situations:</p>
 <blockquote>
 <div><ul class="simple">
-<li>When it is not possible to build the packages from sources (only pre-built binaries available).</li>
-<li>When you are developing your package locally and want to export the built artifacts to the local
+<li>When you cannot build the packages from sources (when only pre-built binaries are available).</li>
+<li>When you are developing your package locally and you want to export the built artifacts to the local
 cache.
 As you don’t want to rebuild again (clean copy) your artifacts, you don’t want to call
 <strong class="command">conan create</strong>.
-This way you can keep your build cache if you are using an IDE or calling locally to the
+This method will keep your build cache if you are using an IDE or calling locally to the
 <strong class="command">conan build</strong> command.</li>
 </ul>
 </div></blockquote>
 <div class="section" id="packaging-pre-built-binaries">
-<h2>Packaging pre-built binaries<a class="headerlink" href="#packaging-pre-built-binaries" title="Permalink to this headline">¶</a></h2>
-<p>If the files we want to package are just local, creating a <code class="docutils literal notranslate"><span class="pre">build()</span></code> method that would copy them
-from the user folder is not reproducible, so it doesn’t add any value. For this use case, it is
-possible to use <strong class="command">conan export-pkg</strong> command directly.</p>
-<p>A conan recipe is still needed, in this case it will be very simple, just the meta information of
-the package. A basic recipe can be created with the <strong class="command">conan new</strong> command:</p>
+<h2>Packaging Pre-built Binaries<a class="headerlink" href="#packaging-pre-built-binaries" title="Permalink to this headline">¶</a></h2>
+<p>Running the <code class="docutils literal notranslate"><span class="pre">build()</span></code> method, when the files you want to package are local, results in no added value as the files
+copied from the user folder cannot be reproduced. For this scenario, run <strong class="command">conan export-pkg</strong> command directly.</p>
+<p>A Conan recipe is still required, but is very simple and will only include the package meta information. A basic recipe can be created with the <strong class="command">conan new</strong> command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan new Hello/0.1 --bare
 </pre></div>
 </div>
-<p>This will create and store in the local cache the following package recipe:</p>
+<p>This will create and store the following package recipe in the local cache:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HelloConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Hello&quot;</span>
     <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;0.1&quot;</span>
@@ -254,21 +252,21 @@ the package. A basic recipe can be created with the <strong class="command">cona
         <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">libs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">collect_libs</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The provided <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method will scan the package files to provide the end consumers with
-the name of the libraries to link with. This method can be further customized to provide other build
-flags (typically conditioned to the settings). The default <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> applies: it will
-define headers in “include” folder, libraries in “lib” folder, binaries in “bin” folder. A different
-package layout can be defined in <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method.</p>
+<p>The provided <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method scans the package files to provide end-users with
+the name of the libraries to link to. This method can be further customized to provide additional build
+flags (typically dependent on the settings). The default <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> applies as follows: it
+defines headers in the “include” folder, libraries in the “lib” folder, and binaries in the “bin” folder. A different
+package layout can be defined in the <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method.</p>
 <p>This package recipe can be also extended to provide support for more configurations (for example,
 adding options: shared/static, or using different settings), adding dependencies (<code class="docutils literal notranslate"><span class="pre">requires</span></code>),
-etc.</p>
-<p>Then, we will assume that we have in our current directory a <em>lib</em> folder with some binary for this
+and more.</p>
+<p>Based on the above, We can assume that our current directory contains a <em>lib</em> folder with a number binaries for this
 “hello” library <em>libhello.a</em>, compatible for example with Windows MinGW (gcc) version 4.9:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan export-pkg . Hello/0.1@myuser/testing  -s <span class="nv">os</span><span class="o">=</span>Windows -s <span class="nv">compiler</span><span class="o">=</span>gcc -s compiler.version<span class="o">=</span><span class="m">4</span>.9 ...
 </pre></div>
 </div>
-<p>Having a <em>test_package</em> folder is still very recommended, to locally test the package before
-uploading. As we don’t want to build the package from sources, the flow would be:</p>
+<p>Having a <em>test_package</em> folder is still highly recommended for testing the package locally before
+upload. As we don’t want to build the package from the sources, the flow would be:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan new Hello/0.1 --bare --test
 <span class="c1"># customize test_package project</span>
 <span class="c1"># customize package recipe if necessary</span>
@@ -277,13 +275,13 @@ $ conan export-pkg PATH/TO/conanfile.py Hello/0.1@myuser/testing  -s <span class
 $ conan <span class="nb">test</span> PATH/TO/test_package/conanfile.py Hello/0.1@myuser/testing -s <span class="nv">os</span><span class="o">=</span>Windows -s <span class="nv">compiler</span><span class="o">=</span>gcc -s ...
 </pre></div>
 </div>
-<p>The last 2 steps can be repeated for any number of configurations.</p>
+<p>The last two steps can be repeated for any number of configurations.</p>
 </div>
 <div class="section" id="downloading-and-packaging-pre-built-binaries">
-<h2>Downloading and Packaging pre-built binaries<a class="headerlink" href="#downloading-and-packaging-pre-built-binaries" title="Permalink to this headline">¶</a></h2>
-<p>In this case, having a complete conan recipe, with the detailed retrieval of the binaries could be
-the preferred way, because it has better reproducibility, and the original binaries might be traced.
-Such a recipe would be like:</p>
+<h2>Downloading and Packaging Pre-built Binaries<a class="headerlink" href="#downloading-and-packaging-pre-built-binaries" title="Permalink to this headline">¶</a></h2>
+<p>In this scenario, creating a complete Conan recipe, with the detailed retrieval of the binaries could be
+the preferred method, because it is reproducible, and the original binaries might be traced.
+Follow our sample recipe for this purpose:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HelloConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Hello&quot;</span>
     <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;0.1&quot;</span>
@@ -311,15 +309,15 @@ Such a recipe would be like:</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <ul class="last simple">
-<li>This is a normal conan package, even if the binaries are being retrieved from somewhere.
-The <strong>recommended approach</strong> is using <strong class="command">conan create</strong>, and have a small consuming project
-besides the above recipe, to test locally, then upload the conan package with the binaries to
-the conan remote with <strong class="command">conan upload</strong>.</li>
-<li>The same building policies apply. Having a recipe will fail if no conan packages are
+<li>This is a standard Conan package even if the binaries are being retrieved from elsewhere.
+The <strong>recommended approach</strong> is to use <strong class="command">conan create</strong>, and include a small consuming project
+in addition to the above recipe, to test locally and then proceed to upload the Conan package with the binaries to
+the Conan remote with <strong class="command">conan upload</strong>.</li>
+<li>The same building policies apply. Having a recipe fails if no Conan packages are
 created, and the <strong class="command">--build</strong> argument is not defined. A typical approach for this kind of
 packages could be to define a <strong class="command">build_policy=&quot;missing&quot;</strong>, especially if the URLs are also
-under the team control. If they are external (internet), it could be better to create the
-packages and store them in your own conan server, so builds do not rely on the third party URL
+under the team control. If they are external (on the internet), it could be better to create the
+packages and store them on your own Conan server, so that the builds do not rely on third party URL
 being available.</li>
 </ul>
 </div>
@@ -336,10 +334,10 @@ being available.</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="understand_packaging.html" class="btn btn-neutral float-right" title="Understanding packaging" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="understand_packaging.html" class="btn btn-neutral float-right" title="Understanding Packaging" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="package_repo.html" class="btn btn-neutral" title="Recipe and sources in the same repo" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="package_repo.html" class="btn btn-neutral" title="Recipe and Sources in the Same Repo" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

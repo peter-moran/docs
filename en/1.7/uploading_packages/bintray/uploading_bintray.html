@@ -42,7 +42,7 @@
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="conan 1.7.0 documentation" href="../../index.html"/>
         <link rel="up" title="Using Bintray" href="../using_bintray.html"/>
-        <link rel="next" title="Contributing packages to conan-center" href="conan_center_guide.html"/>
+        <link rel="next" title="Contributing Packages to Conan-Center" href="conan_center_guide.html"/>
         <link rel="prev" title="Using Bintray" href="../using_bintray.html"/>
 
  <!-- Google Tag Manager -->
@@ -115,22 +115,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Install</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../using_packages.html">Using packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../creating_packages.html">Creating packages</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../uploading_packages.html">Uploading packages</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../creating_packages.html">Creating Packages</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../uploading_packages.html">Uploading Packages</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../remotes.html">Remotes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../uploading_to_remotes.html">Uploading packages to remotes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uploading_to_remotes.html">Uploading Packages to Remotes</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../using_bintray.html">Using Bintray</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Uploading to Bintray</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conan_center_guide.html">Contributing packages to conan-center</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conan_center_guide.html">Contributing Packages to Conan-Center</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../artifactory_ce.html">Artifactory Community Edition for C/C++</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../running_your_server.html">Running conan_server</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developing_packages.html">Developing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../devtools.html">Package apps and devtools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../mastering.html">Mastering conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../systems_cross_building.html">Systems and cross building</a></li>
@@ -190,7 +190,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../../uploading_packages.html">Uploading packages</a> &raquo;</li>
+          <li><a href="../../uploading_packages.html">Uploading Packages</a> &raquo;</li>
         
           <li><a href="../using_bintray.html">Using Bintray</a> &raquo;</li>
         
@@ -216,16 +216,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="section" id="uploading-to-bintray">
 <span id="id1"></span><h1>Uploading to Bintray<a class="headerlink" href="#uploading-to-bintray" title="Permalink to this headline">¶</a></h1>
 <p>Conan packages can be uploaded to Bintray under your own users or organizations. To create a
-repository you can follow these steps:</p>
+repository follow these steps:</p>
 <ol class="arabic">
 <li><p class="first"><strong>Create a Bintray Open Source account</strong></p>
 <p>Browse to <a class="reference external" href="https://bintray.com/signup/oss">https://bintray.com/signup/oss</a> and submit the form to create your account. Note that
-you don’t have to use the same username that you had in your Conan account.</p>
+you don’t have to use the same username that you use for your Conan account.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">Please <strong>make sure you use the Open Source Software OSS account</strong>.
 Follow this link: <a class="reference external" href="https://bintray.com/signup/oss">https://bintray.com/signup/oss</a>.
-Bintray provides free conan repositories for OSS projects, no need to open a Pro or
+Bintray provides free Conan repositories for OSS projects, so there is no need to open a Pro or
 Enterprise Trial account.</p>
 </div>
 </li>
@@ -233,29 +233,29 @@ Enterprise Trial account.</p>
 <p>If you intend to collaborate with other users, you first need to create a Bintray organization,
 and create your repository under the organization’s profile rather than under your own user
 profile.</p>
-<p>On your user profile (or organization profile) click “Add new repository”. Fill in the Create
-Repository form making sure to select Conan as the Type.</p>
+<p>In your user profile (or organization profile), click “Add new repository” and fill in the Create
+Repository form. Make sure to select Conan as the Type.</p>
 </li>
 <li><p class="first"><strong>Add your Bintray repository</strong></p>
 <p>Add a Conan remote in your Conan client pointing to your Bintray repository</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan remote add &lt;REMOTE&gt; &lt;YOUR_BINTRAY_REPO_URL&gt;
 </pre></div>
 </div>
-<p>Use the Set Me Up button on your repository’s page on Bintray to get its URL.</p>
+<p>Use the Set Me Up button on your repository page on Bintray to get its URL.</p>
 </li>
 <li><p class="first"><strong>Get your API key</strong></p>
 <p>Your API key is the “password” used to authenticate the Conan client to Bintray, NOT your Bintray
-password. To get your API key, you need to go to “Edit Your Profile” in your Bintray account and
+password. To get your API key, go to “Edit Your Profile” in your Bintray account and
 check the API Key section.</p>
 </li>
 <li><p class="first"><strong>Set your user credentials</strong></p>
-<p>Add your conan user with the API Key, your remote and your Bintray user name:</p>
+<p>Add your Conan user with the API Key, your remote and your Bintray user name:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan user -p &lt;APIKEY&gt; -r &lt;REMOTE&gt; &lt;USERNAME&gt;
 </pre></div>
 </div>
 </li>
 </ol>
-<p>Setting the remotes in this way will make your Conan client resolve packages and install them from
+<p>Setting the remotes in this way will cause your Conan client to resolve packages and install them from
 repositories in the following order of priority:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -263,7 +263,7 @@ repositories in the following order of priority:</p>
 <li>Your own repository</li>
 </ol>
 </div></blockquote>
-<p>If you want to have your own repository prioritized, please use the <code class="docutils literal notranslate"><span class="pre">--insert</span></code> command line option
+<p>If you want to have your own repository first, please use the <code class="docutils literal notranslate"><span class="pre">--insert</span></code> command line option
 when adding it:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan remote add &lt;your_remote&gt; &lt;your_url&gt; --insert <span class="m">0</span>
 $ conan remote list
@@ -287,7 +287,7 @@ $ conan remote list
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="conan_center_guide.html" class="btn btn-neutral float-right" title="Contributing packages to conan-center" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="conan_center_guide.html" class="btn btn-neutral float-right" title="Contributing Packages to Conan-Center" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../using_bintray.html" class="btn btn-neutral" title="Using Bintray" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>

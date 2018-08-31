@@ -113,11 +113,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Install</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_packages.html">Using packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_packages.html">Creating packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="uploading_packages.html">Uploading packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_packages.html">Creating Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uploading_packages.html">Uploading Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing_packages.html">Developing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="devtools.html">Package apps and devtools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mastering.html">Mastering conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="systems_cross_building.html">Systems and cross building</a></li>
@@ -287,7 +287,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>Check <a class="reference external" href="https://github.com/conan-io/conan">https://github.com/conan-io/conan</a> for issues and more details about development, contributors, etc.</p>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">Conan 1.7 shouldn’t break any existing 1.0 recipe, or command line invocation. If it does, please report in github.
+<p class="last">Conan 1.7 shouldn’t break any existing 1.0 recipe or command line invocation. If it does, please submit a report on GitHub.
 Please read more <a class="reference internal" href="introduction.html#stability"><span class="std std-ref">about Conan stability</span></a>.</p>
 </div>
 <div class="section" id="august-2018">
@@ -295,33 +295,33 @@ Please read more <a class="reference internal" href="introduction.html#stability
 <ul class="simple">
 <li>Feature: Support for C++20 in CMake &gt; 3.12.</li>
 <li>Feature: Included support for Python 3.7 in all platforms.</li>
-<li>Feature: <strong>[Experimental]</strong> <code class="docutils literal notranslate"><span class="pre">python_requires</span></code> function allows to require Conan packages with python code even to extend the
+<li>Feature: <strong>[Experimental]</strong> New <code class="docutils literal notranslate"><span class="pre">python_requires</span></code> function that allows you to reuse Pyton code by “requiring” it in Conan packages, even to extend the
 <code class="docutils literal notranslate"><span class="pre">ConanFile</span></code> class. See: <a class="reference internal" href="mastering/python_requires.html#python-requires"><span class="std std-ref">Python requires: reusing python code in recipes</span></a></li>
-<li>Feature: <code class="docutils literal notranslate"><span class="pre">CMake</span></code> method <code class="docutils literal notranslate"><span class="pre">patch_config_paths</span></code> replaces absolute paths to Conan package’s dependencies as well as Conan package itself.</li>
+<li>Feature: <code class="docutils literal notranslate"><span class="pre">CMake</span></code> method <code class="docutils literal notranslate"><span class="pre">patch_config_paths</span></code> replaces absolute paths to a Conan package’s dependencies as well as to the Conan package itself.</li>
 <li>Feature: <code class="docutils literal notranslate"><span class="pre">MSBuild</span></code> and <code class="docutils literal notranslate"><span class="pre">VisualStudioBuildEnvironment</span></code> build helpers adjust the <code class="docutils literal notranslate"><span class="pre">/MP</span></code> flag to build code in parallel using multiple
 cores.</li>
-<li>Feature: Added <code class="docutils literal notranslate"><span class="pre">print_errors</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">tools.PkgConfig()</span></code> helper.</li>
+<li>Feature: Added a <code class="docutils literal notranslate"><span class="pre">print_errors</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">tools.PkgConfig()</span></code> helper.</li>
 <li>Feature: Added <strong class="command">--query</strong> argument to <strong class="command">conan upload</strong>.</li>
-<li>Feature: <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code>/<code class="docutils literal notranslate"><span class="pre">virtualbuildenv</span></code>/<code class="docutils literal notranslate"><span class="pre">virtualrunenv</span></code> generators now create bash scripts in Windows for its use in subsystems.</li>
-<li>Feature: Improved version ranges resolution speed trough caching of remote requests.</li>
-<li>Feature: Improved result of <code class="docutils literal notranslate"><span class="pre">tools.vcvars_dict(only_diff=True)</span></code> including a list return type that can be used with
+<li>Feature: <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code>/<code class="docutils literal notranslate"><span class="pre">virtualbuildenv</span></code>/<code class="docutils literal notranslate"><span class="pre">virtualrunenv</span></code> generators now create bash scripts in Windows for use in subsystems.</li>
+<li>Feature: Improved resolution speed for version ranges through caching of remote requests.</li>
+<li>Feature: Improved the result of <code class="docutils literal notranslate"><span class="pre">tools.vcvars_dict(only_diff=True)</span></code> including a “list” return type that can be used with
 <code class="docutils literal notranslate"><span class="pre">tools.environment_append()</span></code>.</li>
-<li>Fix: <code class="docutils literal notranslate"><span class="pre">AutoToolsBuildEnvironment</span></code> build helper now keeps the <code class="docutils literal notranslate"><span class="pre">PKG_CONFIG_PATHS</span></code> already set in the environment previously.</li>
+<li>Fix: <code class="docutils literal notranslate"><span class="pre">AutoToolsBuildEnvironment</span></code> build helper now keeps the <code class="docutils literal notranslate"><span class="pre">PKG_CONFIG_PATHS</span></code> variable previously set in the environment.</li>
 <li>Fix: The SCM feature keeps the <code class="docutils literal notranslate"><span class="pre">.git</span></code> folder during the copy of a local directory to the local cache.</li>
-<li>Fix: The SCM feature now exclude correctly the ignored folders by git during the copy of a local directory to the local cache.</li>
-<li>Fix: Conan messages correctly spell “overridden” now.</li>
+<li>Fix: The SCM feature now correctly excludes the folders ignored by Git during the copy of a local directory to the local cache.</li>
+<li>Fix: Conan messages now spell “overridden” correctly.</li>
 <li>Fix: <code class="docutils literal notranslate"><span class="pre">MSBuild</span></code> build helper arguments using quotes.</li>
-<li>Fix: <code class="docutils literal notranslate"><span class="pre">vcvars_command</span></code> and <code class="docutils literal notranslate"><span class="pre">MSBuild</span></code> build helper use the <code class="docutils literal notranslate"><span class="pre">amd64_x86</span></code> when Visual Studio &gt; 12 and cross building for x86.</li>
-<li>Fix: Disabled <code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">init.TemplateDir</span></code> in <strong class="command">conan config install</strong> from a git repository.</li>
+<li>Fix: <code class="docutils literal notranslate"><span class="pre">vcvars_command</span></code> and <code class="docutils literal notranslate"><span class="pre">MSBuild</span></code> build helper use the <code class="docutils literal notranslate"><span class="pre">amd64_x86</span></code> parameter when Visual Studio &gt; 12 and when cross building for x86.</li>
+<li>Fix: Disabled <code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">init.TemplateDir</span></code> in <strong class="command">conan config install</strong> from a Git repository.</li>
 <li>Fix: Clang compiler check in <code class="docutils literal notranslate"><span class="pre">cmake</span></code> generator.</li>
-<li>Fix: Detection of zypper package tool on latest versions of openSUSE.</li>
+<li>Fix: Detection of Zypper package tool on latest versions of openSUSE.</li>
 <li>Fix: Improved help output of some commands.</li>
 <li>BugFix: <code class="docutils literal notranslate"><span class="pre">qmake</span></code> generator hyphen.</li>
-<li>Bugfix: Git submodules being initialized from repo <em>HEAD</em> prior to checking out the referenced revision when using <code class="docutils literal notranslate"><span class="pre">scm</span></code> attribute.</li>
+<li>Bugfix: Git submodules are now initialized from repo <em>HEAD</em> <strong>after</strong> checking out the referenced revision when using the <code class="docutils literal notranslate"><span class="pre">scm</span></code> attribute.</li>
 <li>BugFix: Declaration <code class="docutils literal notranslate"><span class="pre">default_options</span></code> without value, e.g. <code class="docutils literal notranslate"><span class="pre">default_options</span> <span class="pre">=</span> <span class="pre">&quot;config=&quot;</span></code>. Now it will throw an exception.</li>
 <li>BugFix: Deactivate script in <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code> generator causes PS1 to go unset.</li>
 <li>BugFix: Apply general scope options to a consumer ConanFile first.</li>
-<li>BugFix: Fixed detection of valid repository for git in SCM feature.</li>
+<li>BugFix: Fixed detection of a valid repository for Git in the SCM feature.</li>
 </ul>
 </div>
 <div class="section" id="july-2018">

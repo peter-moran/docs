@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Understanding packaging &mdash; conan 1.7.0 documentation</title>
+  <title>Understanding Packaging &mdash; conan 1.7.0 documentation</title>
   
 
   
@@ -41,9 +41,9 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="conan 1.7.0 documentation" href="../index.html"/>
-        <link rel="up" title="Creating packages" href="../creating_packages.html"/>
-        <link rel="next" title="Define package ABI compatibility" href="define_abi_compatibility.html"/>
-        <link rel="prev" title="Packaging existing binaries" href="existing_binaries.html"/>
+        <link rel="up" title="Creating Packages" href="../creating_packages.html"/>
+        <link rel="next" title="Defining Package ABI Compatibility" href="define_abi_compatibility.html"/>
+        <link rel="prev" title="Packaging Existing Binaries" href="existing_binaries.html"/>
 
  <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -115,26 +115,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Install</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_packages.html">Using packages</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../creating_packages.html">Creating packages</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="external_repo.html">Recipe and sources in a different repo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="package_repo.html">Recipe and sources in the same repo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="existing_binaries.html">Packaging existing binaries</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Understanding packaging</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#manual-package-creation-and-testing">Manual package creation and testing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#the-package-creation-process">The package creation process</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../creating_packages.html">Creating Packages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_repo.html">Recipe and Sources in a Different Repo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_repo.html">Recipe and Sources in the Same Repo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="existing_binaries.html">Packaging Existing Binaries</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Understanding Packaging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-and-testing-packages-manually">Creating and Testing Packages Manually</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#package-creation-process">Package Creation Process</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="define_abi_compatibility.html">Define package ABI compatibility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="inspecting_packages.html">Inspecting packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="package_approaches.html">Packaging approaches</a></li>
-<li class="toctree-l2"><a class="reference internal" href="package_tools.html">Tools for package creators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="define_abi_compatibility.html">Defining Package ABI Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inspecting_packages.html">Inspecting Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_approaches.html">Packaging Approaches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_tools.html">Package Creator Tools</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../devtools.html">Package apps and devtools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
@@ -194,9 +194,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../creating_packages.html">Creating packages</a> &raquo;</li>
+          <li><a href="../creating_packages.html">Creating Packages</a> &raquo;</li>
         
-      <li>Understanding packaging</li>
+      <li>Understanding Packaging</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -216,10 +216,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
            <div itemprop="articleBody">
             
   <div class="section" id="understanding-packaging">
-<span id="understand-packaging"></span><h1>Understanding packaging<a class="headerlink" href="#understanding-packaging" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="manual-package-creation-and-testing">
-<h2>Manual package creation and testing<a class="headerlink" href="#manual-package-creation-and-testing" title="Permalink to this headline">¶</a></h2>
-<p>The previous <strong>create</strong> approach  using <em>test_package</em> subfolder, is not strictly necessary, though
+<span id="understand-packaging"></span><h1>Understanding Packaging<a class="headerlink" href="#understanding-packaging" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="creating-and-testing-packages-manually">
+<h2>Creating and Testing Packages Manually<a class="headerlink" href="#creating-and-testing-packages-manually" title="Permalink to this headline">¶</a></h2>
+<p>The previous <strong>create</strong> approach using <em>test_package</em> subfolder, is not strictly necessary, though
 <strong>very strongly recommended</strong>. If we didn’t want to use the <em>test_package</em> functionality, we could
 just write our recipe ourselves or use the <strong class="command">conan new</strong> command without the <strong class="command">-t</strong>.
 command line argument.</p>
@@ -227,54 +227,53 @@ command line argument.</p>
 $ conan new Hello/0.1
 </pre></div>
 </div>
-<p>This will create just the <em>conanfile.py</em> recipe file. Now we could create our package:</p>
+<p>This will create just the <em>conanfile.py</em> recipe file. Now we can create our package:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan create . demo/testing
 </pre></div>
 </div>
-<p>This would be equivalent to:</p>
+<p>This is equivalent to:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan <span class="nb">export</span> . demo/testing
 $ conan install Hello/0.1@demo/testing --build<span class="o">=</span>Hello
 </pre></div>
 </div>
-<p>Once the package is there, it can be consumed like any other package, just add
-<code class="docutils literal notranslate"><span class="pre">Hello/0.1&#64;demo/testing</span></code> to some project <em>conanfile.txt</em> or <em>conanfile.py</em> requirements and run:</p>
+<p>Once the package is created, it can be consumed like any other package, by adding
+<code class="docutils literal notranslate"><span class="pre">Hello/0.1&#64;demo/testing</span></code> to a project <em>conanfile.txt</em> or <em>conanfile.py</em> requirements and running:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install .
 <span class="c1"># build and run your project to ensure the package works</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="the-package-creation-process">
-<h2>The package creation process<a class="headerlink" href="#the-package-creation-process" title="Permalink to this headline">¶</a></h2>
-<p>It is very useful for package creators and conan users in general to understand the flow of package
-creation inside the conan local cache, and its layout.</p>
-<p>For every package recipe, there are 5 important folders in the <strong>local cache</strong>:</p>
+<div class="section" id="package-creation-process">
+<h2>Package Creation Process<a class="headerlink" href="#package-creation-process" title="Permalink to this headline">¶</a></h2>
+<p>It is very useful for package creators and Conan users in general to understand the flow for creating a package
+inside the conan local cache, and all about its layout.</p>
+<p>Each package recipe contains five important folders in the <strong>local cache</strong>:</p>
 <ul class="simple">
-<li><strong>export</strong>: The folder where the package recipe is stored.</li>
-<li><strong>export_source</strong>: The folder where code copied with the recipe <code class="docutils literal notranslate"><span class="pre">exports_sources</span></code> attribute is
+<li><strong>export</strong>: The folder in which the package recipe is stored.</li>
+<li><strong>export_source</strong>: The folder in which code copied with the recipe <code class="docutils literal notranslate"><span class="pre">exports_sources</span></code> attribute is
 stored.</li>
-<li><strong>source</strong>: Where the source code for building from sources is stored.</li>
-<li><strong>build</strong>: Where the actual compilation of sources is done. There will typically be one subfolder
+<li><strong>source</strong>: The folder in which the source code for building from sources is stored.</li>
+<li><strong>build</strong>: The folder in which the actual compilation of sources is done. There will typically be one subfolder
 for each different binary configuration</li>
-<li><strong>package</strong>: Where the final package artifacts are stored. There will be one subfolder for each
+<li><strong>package</strong>: The folder in which the final package artifacts are stored. There will be one subfolder for each
 different binary configuration</li>
 </ul>
 <p>The <em>source</em> and <em>build</em> folders only exist when the packages have been built from sources.</p>
 <a class="reference internal image-reference" href="../_images/package_create_flow.png"><img alt="../_images/package_create_flow.png" class="align-center" src="../_images/package_create_flow.png" style="width: 600px; height: 500px;" /></a>
 <p>The process starts when a package is “exported”, via the <strong class="command">conan export</strong> command or more
 typically, with the <strong class="command">conan create</strong> command. The <em>conanfile.py</em> and files specified by the
-<code class="docutils literal notranslate"><span class="pre">exports_sources</span></code> field are copied from the user space into the <strong>local cache</strong>.</p>
+<code class="docutils literal notranslate"><span class="pre">exports_sources</span></code> field are copied from the user space to the <strong>local cache</strong>.</p>
 <p>The <em>export</em> and <em>export_source</em> files are copied to the <em>source</em> folder, and then the <code class="docutils literal notranslate"><span class="pre">source()</span></code>
-method is executed (if existing). Note that there is only one source folder for all the binary
-packages. If some source code is to be generated that will be different for different
-configurations, it cannot be generated in the <code class="docutils literal notranslate"><span class="pre">source()</span></code> method, it has to be done in the
+method is executed (if it exists). Note that there is only one source folder for all the binary
+packages. If when generating the code, there is source code that varies for the different
+configurations, it cannot be generated using the <code class="docutils literal notranslate"><span class="pre">source()</span></code> method, but rather needs to be generated using the
 <code class="docutils literal notranslate"><span class="pre">build()</span></code> method.</p>
 <p>Then, for each different configuration of settings and options, a package ID will be computed in the
-form of a SHA-1 hash of such configuration. Sources will be copied to the <em>build/hashXXX</em> folder,
+form of a SHA-1 hash for this configuration. Sources will be copied to the <em>build/hashXXX</em> folder,
 and the <code class="docutils literal notranslate"><span class="pre">build()</span></code> method will be triggered.</p>
 <p>After that, the <code class="docutils literal notranslate"><span class="pre">package()</span></code> method will be called to copy artifacts from the <em>build/hashXXX</em>
 folder to the <em>package/hashXXX</em> folder.</p>
-<p>Finally, the <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> methods of all dependencies will be called and gathered to be able
-to generate files for the consumer build system, as the <em>conanbuildinfo.cmake</em> for the <code class="docutils literal notranslate"><span class="pre">cmake</span></code>
+<p>Finally, the <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> methods of all dependencies will be called and gathered so you can generate files for the consumer build system, as the <em>conanbuildinfo.cmake</em> for the <code class="docutils literal notranslate"><span class="pre">cmake</span></code>
 generator. Also the <code class="docutils literal notranslate"><span class="pre">imports</span></code> feature will copy artifacts from the local cache into user space if
 specified.</p>
 <p>Any doubts? Please check out our <a class="reference internal" href="../faq.html#faq"><span class="std std-ref">FAQ section</span></a> or <a href="mailto:info@conan.io" target="_blank">write us</a>.</p>
@@ -291,10 +290,10 @@ specified.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="define_abi_compatibility.html" class="btn btn-neutral float-right" title="Define package ABI compatibility" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="define_abi_compatibility.html" class="btn btn-neutral float-right" title="Defining Package ABI Compatibility" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="existing_binaries.html" class="btn btn-neutral" title="Packaging existing binaries" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="existing_binaries.html" class="btn btn-neutral" title="Packaging Existing Binaries" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
