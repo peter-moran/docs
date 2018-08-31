@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tools for package creators &mdash; conan 1.7.0 documentation</title>
+  <title>Package Creator Tools &mdash; conan 1.7.0 documentation</title>
   
 
   
@@ -41,9 +41,9 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="conan 1.7.0 documentation" href="../index.html"/>
-        <link rel="up" title="Creating packages" href="../creating_packages.html"/>
-        <link rel="next" title="Uploading packages" href="../uploading_packages.html"/>
-        <link rel="prev" title="Packaging approaches" href="package_approaches.html"/>
+        <link rel="up" title="Creating Packages" href="../creating_packages.html"/>
+        <link rel="next" title="Uploading Packages" href="../uploading_packages.html"/>
+        <link rel="prev" title="Packaging Approaches" href="package_approaches.html"/>
 
  <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -115,22 +115,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Install</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../using_packages.html">Using packages</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../creating_packages.html">Creating packages</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="external_repo.html">Recipe and sources in a different repo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="package_repo.html">Recipe and sources in the same repo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="existing_binaries.html">Packaging existing binaries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="understand_packaging.html">Understanding packaging</a></li>
-<li class="toctree-l2"><a class="reference internal" href="define_abi_compatibility.html">Define package ABI compatibility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="inspecting_packages.html">Inspecting packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="package_approaches.html">Packaging approaches</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Tools for package creators</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../creating_packages.html">Creating Packages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_repo.html">Recipe and Sources in a Different Repo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_repo.html">Recipe and Sources in the Same Repo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="existing_binaries.html">Packaging Existing Binaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="understand_packaging.html">Understanding Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="define_abi_compatibility.html">Defining Package ABI Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inspecting_packages.html">Inspecting Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="package_approaches.html">Packaging Approaches</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Package Creator Tools</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../devtools.html">Package apps and devtools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
@@ -190,9 +190,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../creating_packages.html">Creating packages</a> &raquo;</li>
+          <li><a href="../creating_packages.html">Creating Packages</a> &raquo;</li>
         
-      <li>Tools for package creators</li>
+      <li>Package Creator Tools</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -211,9 +211,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="tools-for-package-creators">
-<span id="package-tools"></span><h1>Tools for package creators<a class="headerlink" href="#tools-for-package-creators" title="Permalink to this headline">¶</a></h1>
-<p>With some python (or just pure shell or bash) scripting, we could easily automate the whole package
+  <div class="section" id="package-creator-tools">
+<span id="package-tools"></span><h1>Package Creator Tools<a class="headerlink" href="#package-creator-tools" title="Permalink to this headline">¶</a></h1>
+<p>Using Python (or just pure shell or bash) scripting, allows you to easily automate the whole package
 creation and testing process, for many different configurations. For example you could put the
 following script in the package root folder. Name it <em>build.py</em>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
@@ -235,31 +235,30 @@ following script in the package root folder. Name it <em>build.py</em>:</p>
         <span class="k">pass</span>
 </pre></div>
 </div>
-<p>This is a pure python script, not related to conan, and should be run as such:</p>
+<p>This is a pure Python script, not related to Conan, and should be run as such:</p>
 <div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>$ python build.py
 </pre></div>
 </div>
-<p>We have developed another FOSS tool for package creators, <strong>Conan Package Tools</strong> to ease the
-task of generating multiple binary packages from a package recipe.
+<p>We have developed another FOSS tool for package creators, the <strong>Conan Package Tools</strong> to help you generate multiple binary packages from a package recipe.
 It offers a simple way to define the different configurations and to call <strong class="command">conan test</strong>.
-Also offers CI integration like <strong>Travis CI, Appveyor and Bamboo</strong>, for cloud based automated
-binary package creation, testing and uploading.</p>
+In addition to offering CI integration like <strong>Travis CI, Appveyor and Bamboo</strong>, for cloud-based automated
+binary package creation, testing, and uploading.</p>
 <p>This tool enables the creation of hundreds of binary packages in the cloud with a simple
-<code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">git</span> <span class="pre">push</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">git</span> <span class="pre">push</span></code> and supports:</p>
 <ul class="simple">
-<li>Make easier the <strong>generation of multiple conan packages</strong> with different configurations.</li>
+<li>Easy <strong>generation of multiple Conan packages</strong> with different configurations.</li>
 <li>Automated/remote package generation in <strong>Travis/Appveyor</strong> server with distributed builds in CI
 jobs for big/slow builds.</li>
 <li><strong>Docker</strong>: Automatic generation of packages for several versions of <code class="docutils literal notranslate"><span class="pre">gcc</span></code> and <code class="docutils literal notranslate"><span class="pre">clang</span></code> in
-Linux, also in Travis CI.</li>
-<li>Automatic creation of OSX packages with apple-clang, also in Travis-CI.</li>
-<li><strong>Visual Studio</strong>: Automatic configuration of command line environment with detected settings.</li>
+Linux, and in Travis CI.</li>
+<li>Automatic creation of OSX packages with apple-clang, and in Travis-CI.</li>
+<li><strong>Visual Studio</strong>: Automatic configuration of the command line environment with detected settings.</li>
 </ul>
 <p>It’s available in pypi:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install conan_package_tools
 </pre></div>
 </div>
-<p>Read the README.md in the <a class="reference external" href="https://github.com/conan-io/conan-package-tools">Conan Package Tools repository</a>.</p>
+<p>For more information, read the README.md in the <a class="reference external" href="https://github.com/conan-io/conan-package-tools">Conan Package Tools repository</a>.</p>
 </div>
 
 
@@ -272,10 +271,10 @@ Linux, also in Travis CI.</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../uploading_packages.html" class="btn btn-neutral float-right" title="Uploading packages" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../uploading_packages.html" class="btn btn-neutral float-right" title="Uploading Packages" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="package_approaches.html" class="btn btn-neutral" title="Packaging approaches" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="package_approaches.html" class="btn btn-neutral" title="Packaging Approaches" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Creating packages &mdash; conan 1.7.0 documentation</title>
+  <title>Creating Packages &mdash; conan 1.7.0 documentation</title>
   
 
   
@@ -41,7 +41,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="conan 1.7.0 documentation" href="index.html"/>
-        <link rel="next" title="Getting started" href="creating_packages/getting_started.html"/>
+        <link rel="next" title="Getting Started" href="creating_packages/getting_started.html"/>
         <link rel="prev" title="Workflows" href="using_packages/workflows.html"/>
 
  <!-- Google Tag Manager -->
@@ -114,22 +114,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Install</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_packages.html">Using packages</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating packages</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/getting_started.html">Getting started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/external_repo.html">Recipe and sources in a different repo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/package_repo.html">Recipe and sources in the same repo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/existing_binaries.html">Packaging existing binaries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/understand_packaging.html">Understanding packaging</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/define_abi_compatibility.html">Define package ABI compatibility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/inspecting_packages.html">Inspecting packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/package_approaches.html">Packaging approaches</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/package_tools.html">Tools for package creators</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating Packages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/external_repo.html">Recipe and Sources in a Different Repo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/package_repo.html">Recipe and Sources in the Same Repo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/existing_binaries.html">Packaging Existing Binaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/understand_packaging.html">Understanding Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/define_abi_compatibility.html">Defining Package ABI Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/inspecting_packages.html">Inspecting Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/package_approaches.html">Packaging Approaches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/package_tools.html">Package Creator Tools</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="uploading_packages.html">Uploading packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="developing_packages.html">Developing packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uploading_packages.html">Uploading Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing_packages.html">Developing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="devtools.html">Package apps and devtools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mastering.html">Mastering conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="systems_cross_building.html">Systems and cross building</a></li>
@@ -189,7 +189,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Creating packages</li>
+      <li>Creating Packages</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -209,47 +209,47 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
            <div itemprop="articleBody">
             
   <div class="section" id="creating-packages">
-<span id="packaging"></span><h1>Creating packages<a class="headerlink" href="#creating-packages" title="Permalink to this headline">¶</a></h1>
+<span id="packaging"></span><h1>Creating Packages<a class="headerlink" href="#creating-packages" title="Permalink to this headline">¶</a></h1>
 <p>This section shows how to create, build and test your packages.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="creating_packages/getting_started.html">Getting started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/getting_started.html#creating-the-package-recipe">Creating the package recipe</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/getting_started.html#the-test-package-folder">The test_package folder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/getting_started.html#creating-and-testing-packages">Creating and testing packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/getting_started.html#settings-vs-options">Settings vs. options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_packages/getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/getting_started.html#creating-the-package-recipe">Creating the Package Recipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/getting_started.html#the-test-package-folder">The test_package Folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/getting_started.html#creating-and-testing-packages">Creating and Testing Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/getting_started.html#settings-vs-options">Settings vs. Options</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="creating_packages/external_repo.html">Recipe and sources in a different repo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_packages/package_repo.html">Recipe and sources in the same repo</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/package_repo.html#exporting-the-sources-with-the-recipe-exports-sources">Exporting the sources with the recipe: <code class="docutils literal notranslate"><span class="pre">exports_sources</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/package_repo.html#capturing-the-remote-and-commit-from-git-scm-experimental">Capturing the remote and commit from git: <code class="docutils literal notranslate"><span class="pre">scm</span></code> [EXPERIMENTAL]</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_packages/external_repo.html">Recipe and Sources in a Different Repo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_packages/package_repo.html">Recipe and Sources in the Same Repo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/package_repo.html#exporting-the-sources-with-the-recipe-exports-sources">Exporting the Sources with the Recipe: <code class="docutils literal notranslate"><span class="pre">exports_sources</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/package_repo.html#capturing-the-remote-and-commit-from-git-scm-experimental">Capturing the Remote and Commit from Git: <code class="docutils literal notranslate"><span class="pre">scm</span></code> [EXPERIMENTAL]</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="creating_packages/existing_binaries.html">Packaging existing binaries</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/existing_binaries.html#packaging-pre-built-binaries">Packaging pre-built binaries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/existing_binaries.html#downloading-and-packaging-pre-built-binaries">Downloading and Packaging pre-built binaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_packages/existing_binaries.html">Packaging Existing Binaries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/existing_binaries.html#packaging-pre-built-binaries">Packaging Pre-built Binaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/existing_binaries.html#downloading-and-packaging-pre-built-binaries">Downloading and Packaging Pre-built Binaries</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="creating_packages/understand_packaging.html">Understanding packaging</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/understand_packaging.html#manual-package-creation-and-testing">Manual package creation and testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/understand_packaging.html#the-package-creation-process">The package creation process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_packages/understand_packaging.html">Understanding Packaging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/understand_packaging.html#creating-and-testing-packages-manually">Creating and Testing Packages Manually</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/understand_packaging.html#package-creation-process">Package Creation Process</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="creating_packages/define_abi_compatibility.html">Define package ABI compatibility</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/define_abi_compatibility.html#defining-a-custom-package-id">Defining a custom package_id()</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/define_abi_compatibility.html#the-problem-of-dependencies">The problem of dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_packages/define_abi_compatibility.html#using-package-id-for-package-dependencies">Using package_id() for package dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_packages/define_abi_compatibility.html">Defining Package ABI Compatibility</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/define_abi_compatibility.html#defining-a-custom-package-id">Defining a Custom package_id()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/define_abi_compatibility.html#dependency-issues">Dependency Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_packages/define_abi_compatibility.html#using-package-id-for-package-dependencies">Using package_id() for Package Dependencies</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="creating_packages/inspecting_packages.html">Inspecting packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_packages/package_approaches.html">Packaging approaches</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="creating_packages/inspecting_packages.html">Inspecting Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_packages/package_approaches.html">Packaging Approaches</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="creating_packages/package_approaches.html#config-1-build-1-package">1 config (1 build) -&gt; 1 package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="creating_packages/package_approaches.html#n-configs-1-package">N configs -&gt; 1 package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="creating_packages/package_approaches.html#n-configs-1-build-n-packages">N configs (1 build) -&gt; N packages</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="creating_packages/package_tools.html">Tools for package creators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_packages/package_tools.html">Package Creator Tools</a></li>
 </ul>
 </div>
 </div>
@@ -264,7 +264,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="creating_packages/getting_started.html" class="btn btn-neutral float-right" title="Getting started" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="creating_packages/getting_started.html" class="btn btn-neutral float-right" title="Getting Started" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="using_packages/workflows.html" class="btn btn-neutral" title="Workflows" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
