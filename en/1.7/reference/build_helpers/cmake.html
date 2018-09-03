@@ -555,12 +555,12 @@ example:</p>
 
 <span class="k">def</span> <span class="nf">configure_cmake</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="n">cmake</span> <span class="o">=</span> <span class="n">CMake</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-    <span class="n">cmake</span><span class="o">.</span><span class="n">configure</span><span class="p">()</span>
 
     <span class="c1"># put definitions here so that they are re-used in cmake between</span>
     <span class="c1"># build() and package()</span>
     <span class="n">cmake</span><span class="o">.</span><span class="n">definitions</span><span class="p">[</span><span class="s2">&quot;SOME_DEFINITION_NAME&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;On&quot;</span>
 
+    <span class="n">cmake</span><span class="o">.</span><span class="n">configure</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">cmake</span>
 
 <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
