@@ -220,11 +220,11 @@ Conan. Would you add it as a requirement to the <code class="docutils literal no
 <li>There are requirements that are only needed when you need to build a package from sources, but if the binary package already exists, you
 don’t want to install or retrieve them.</li>
 <li>These could be dev tools, compilers, build systems, code analyzers, testing libraries, etc.</li>
-<li>They can be very orthogonal to the creation of the package. It doesn’t matter whether you build ZLib with CMake 3.4, 3.5 or 3.6. As long
+<li>They can be very orthogonal to the creation of the package. It doesn’t matter whether you build zlib with CMake 3.4, 3.5 or 3.6. As long
 as the <em>CMakeLists.txt</em> is compatible, it will produce the same final package.</li>
 <li>You don’t want to add a lot of different versions (like those of CMake) to be able to use them to build the package. You want to easily
-change the requirements, without needing to edit the ZLib package recipe.</li>
-<li>Some of them might not be even be taken into account when a package like ZLib is created, such as cross-compiling it to Android (in which
+change the requirements, without needing to edit the zlib package recipe.</li>
+<li>Some of them might not be even be taken into account when a package like zlib is created, such as cross-compiling it to Android (in which
 the Android toolchain would be a build requirement too).</li>
 </ul>
 <p>To address these needs Conan implements <code class="docutils literal notranslate"><span class="pre">build_requires</span></code>.</p>

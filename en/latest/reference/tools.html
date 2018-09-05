@@ -380,7 +380,7 @@ environment:</p>
 </div>
 </div>
 <div class="section" id="tools-build-sln-command-deprecated">
-<span id="build-sln-commmand"></span><h2>tools.build_sln_command() (DEPRECATED)<a class="headerlink" href="#tools-build-sln-command-deprecated" title="Permalink to this headline">¶</a></h2>
+<span id="build-sln-command"></span><h2>tools.build_sln_command() (DEPRECATED)<a class="headerlink" href="#tools-build-sln-command-deprecated" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">This tool is deprecated and will be removed in Conan 2.0.
@@ -452,7 +452,7 @@ Use <a class="reference internal" href="build_helpers/visual_studio.html#msbuild
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd><ul class="first last simple">
-<li>Same parameters as the above <a class="reference internal" href="#build-sln-commmand"><span class="std std-ref">tools.build_sln_command()</span></a>.</li>
+<li>Same parameters as the above <a class="reference internal" href="#build-sln-command"><span class="std std-ref">tools.build_sln_command()</span></a>.</li>
 <li><strong>force_vcvars</strong>: Optional. Defaulted to False. Will set <code class="docutils literal notranslate"><span class="pre">vcvars_command(force=force_vcvars)</span></code>.</li>
 </ul>
 </dd>
@@ -1028,7 +1028,7 @@ It’s not necessary to specify the extension.</p>
 <p>Useful to escape commands to be executed in a windows bash (msys2, cygwin etc).</p>
 <ul class="simple">
 <li>Adds escapes so the argument can be unpacked by <code class="docutils literal notranslate"><span class="pre">CommandLineToArgvW()</span></code>.</li>
-<li>Adds escapes for cmmd.exe so the argument survives cmmd.exe’s substitutions.</li>
+<li>Adds escapes for cmd.exe so the argument survives cmd.exe’s substitutions.</li>
 </ul>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1130,7 +1130,7 @@ Returns the content of the file.</p>
 </pre></div>
 </div>
 <p>Utility functions to create/delete a directory.
-The existance of the specified directory is checked, so <code class="docutils literal notranslate"><span class="pre">mkdir()</span></code> will do nothing if the directory
+The existence of the specified directory is checked, so <code class="docutils literal notranslate"><span class="pre">mkdir()</span></code> will do nothing if the directory
 already exists and <code class="docutils literal notranslate"><span class="pre">rmdir()</span></code> will do nothing if the directory does not exists.</p>
 <p>This makes it safe to use these functions in the <code class="docutils literal notranslate"><span class="pre">package()</span></code> method of a <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code>
 when <code class="docutils literal notranslate"><span class="pre">no_copy_source=True</span></code>.</p>
@@ -1218,7 +1218,7 @@ when <code class="docutils literal notranslate"><span class="pre">no_copy_source
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">touch</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">times</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Updates the timestamp (last access and last modificatiion times) of a file.
+<p>Updates the timestamp (last access and last modification times) of a file.
 This is similar to Unix’ <code class="docutils literal notranslate"><span class="pre">touch</span></code> command, except the command fails if the file does not exist.</p>
 <p>Optionally, a tuple of two numbers can be specified, which denotes the new values for the
 ‘last access’ and ‘last modified’ times respectively.</p>
@@ -1482,8 +1482,8 @@ them to achieve correct linking order.</p>
 <div><ul class="simple">
 <li><strong>folder</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Specify a subfolder where the code will be cloned. If not specified it will clone in the current directory.</li>
 <li><strong>verify_ssl</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): Verify SSL certificate of the specified <strong>url</strong>.</li>
-<li><strong>username</strong> (Optional, Defauted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): When present, it will be used as the login to authenticate with the remote.</li>
-<li><strong>password</strong> (Optional, Defauted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): When present, it will be used as the password to authenticate with the remote.</li>
+<li><strong>username</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): When present, it will be used as the login to authenticate with the remote.</li>
+<li><strong>password</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): When present, it will be used as the password to authenticate with the remote.</li>
 <li><strong>force_english</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): The encoding of the tool will be forced to use <code class="docutils literal notranslate"><span class="pre">en_US.UTF-8</span></code> to ease the output parsing.</li>
 <li><strong>runner</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): By default <code class="docutils literal notranslate"><span class="pre">subprocess.check_output</span></code> will be used to invoke the <code class="docutils literal notranslate"><span class="pre">git</span></code> tool.</li>
 </ul>
@@ -1537,7 +1537,7 @@ them to achieve correct linking order.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">is_apple_os</span><span class="p">(</span><span class="n">os_</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if OS is an Apple one: Macos, iOS, watchOS or tvOS.</p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if OS is an Apple one: macOS, iOS, watchOS or tvOS.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd><ul class="first last simple">

@@ -492,7 +492,7 @@ consumers can use those executables easily:</p>
 </pre></div>
 </div>
 <p>The <a class="reference internal" href="../../mastering/virtualenv.html#virtual-environment-generator"><span class="std std-ref">virtualenv</span></a> generator will use the <code class="docutils literal notranslate"><span class="pre">self.env_info</span></code> variables to prepare a script to
-activate/deactive a virtual environment. However, this could be directly done using the <a class="reference internal" href="../generators/virtualrunenv.html#virtualrunenv-generator"><span class="std std-ref">virtualrunenv</span></a> generator.</p>
+activate/deactivate a virtual environment. However, this could be directly done using the <a class="reference internal" href="../generators/virtualrunenv.html#virtualrunenv-generator"><span class="std std-ref">virtualrunenv</span></a> generator.</p>
 <p>They will be automatically applied before calling the consumer <em>conanfile.py</em> methods <code class="docutils literal notranslate"><span class="pre">source()</span></code>, <code class="docutils literal notranslate"><span class="pre">build()</span></code>, <code class="docutils literal notranslate"><span class="pre">package()</span></code> and
 <code class="docutils literal notranslate"><span class="pre">imports()</span></code>.</p>
 <p>If your recipe has requirements, you can access to your requirements <code class="docutils literal notranslate"><span class="pre">env_info</span></code> as well using the <code class="docutils literal notranslate"><span class="pre">deps_env_info</span></code> object.</p>
@@ -630,14 +630,14 @@ you need there.</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">os_info.is_linux</span></code>: True if Linux.</li>
 <li><code class="docutils literal notranslate"><span class="pre">os_info.is_windows</span></code>: True if Windows.</li>
-<li><code class="docutils literal notranslate"><span class="pre">os_info.is_macos</span></code>: True if OSx.</li>
+<li><code class="docutils literal notranslate"><span class="pre">os_info.is_macos</span></code>: True if macOS.</li>
 <li><code class="docutils literal notranslate"><span class="pre">os_info.is_freebsd</span></code>: True if FreeBSD.</li>
 <li><code class="docutils literal notranslate"><span class="pre">os_info.is_solaris</span></code>: True if SunOS.</li>
 <li><code class="docutils literal notranslate"><span class="pre">os_info.os_version</span></code>: OS version.</li>
 <li><code class="docutils literal notranslate"><span class="pre">os_info.os_version_name</span></code>: Common name of the OS (Windows 7, Mountain Lion, Wheezy…).</li>
 <li><code class="docutils literal notranslate"><span class="pre">os_info.linux_distro</span></code>: Linux distribution name (None if not Linux).</li>
 <li><code class="docutils literal notranslate"><span class="pre">os_info.bash_path</span></code>: Returns the absolute path to a bash in the system.</li>
-<li><code class="docutils literal notranslate"><span class="pre">os_info.uname(options=None)</span></code>: Runs the “uname” command and returns the ouput. You can pass arguments with the <cite>options</cite> parameter.</li>
+<li><code class="docutils literal notranslate"><span class="pre">os_info.uname(options=None)</span></code>: Runs the “uname” command and returns the output. You can pass arguments with the <cite>options</cite> parameter.</li>
 <li><code class="docutils literal notranslate"><span class="pre">os_info.detect_windows_subsystem()</span></code>: Returns “MSYS”, “MSYS2”, “CYGWIN” or “WSL” if any of these Windows subsystems are detected.</li>
 </ul>
 <p>You can also use <code class="docutils literal notranslate"><span class="pre">SystemPackageTool</span></code> class, that will automatically invoke the right system package tool: <strong>apt</strong>, <strong>yum</strong>, <strong>pkg</strong>,
@@ -732,7 +732,7 @@ bin folder.</p>
 <li><strong>dst</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>): Destination local folder, with reference to current directory, to which the files will be
 copied.</li>
 <li><strong>src</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>): Source folder in which those files will be searched. This folder will be stripped from the
-dst parameter. Eg.: lib/Debug/x86</li>
+dst parameter. E.g., <cite>lib/Debug/x86</cite></li>
 <li><strong>root_package</strong> (Optional, Defaulted to <em>all packages in deps</em>): An fnmatch pattern of the package name (“OpenCV”, “Boost”) from
 which files will be copied.</li>
 <li><strong>folder</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">False</span></code>): If enabled, it will copy the files from the local cache to a subfolder named as the
@@ -770,7 +770,7 @@ do:</p>
 <div class="section" id="package-id">
 <span id="method-package-id"></span><h2>package_id()<a class="headerlink" href="#package-id" title="Permalink to this headline">¶</a></h2>
 <p>Creates a unique ID for the package. Default package ID is calculated using <code class="docutils literal notranslate"><span class="pre">settings</span></code>, <code class="docutils literal notranslate"><span class="pre">options</span></code> and <code class="docutils literal notranslate"><span class="pre">requires</span></code> properties. When a
-package creator specifies the values for any of thoses properties, it is telling that any value change will require a different binary
+package creator specifies the values for any of those properties, it is telling that any value change will require a different binary
 package.</p>
 <p>However, sometimes a package creator would need to alter the default behavior, for example, to have only one binary package for several
 different compiler versions. In that case you can set a custom <code class="docutils literal notranslate"><span class="pre">self.info</span></code> object implementing this method and the package ID will be
@@ -948,7 +948,7 @@ be done.</p>
 <li><code class="docutils literal notranslate"><span class="pre">self.copy_deps()</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">self.copy()</span></code> method inside <a class="reference internal" href="#method-imports"><span class="std std-ref">imports() method</span></a>.</li>
 </ul>
 <p>Both methods allow the definition of absolute paths (to install in the system), in the <code class="docutils literal notranslate"><span class="pre">dst</span></code> argument. By default, the <code class="docutils literal notranslate"><span class="pre">dst</span></code>
-destionation folder will be the current one.</p>
+destination folder will be the current one.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">deploy()</span></code> method is designed to work on a package that is installed directly from its reference, as:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install Pkg/0.1@user/channel
 &gt; ...

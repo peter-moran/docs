@@ -239,7 +239,7 @@ allow also to take away with you very easily the requirements of a certain proje
 <p>Using different caches is very simple. You can just define the environment variable <strong>CONAN_USER_HOME</strong>.
 By setting this variable to different paths, you have multiple conan caches,
 something like python “virtualenvs”. Just changing the value of <strong>CONAN_USER_HOME</strong> you can
-switch among isolated conan instantes that will have independent package storage caches, but also
+switch among isolated conan instances that will have independent package storage caches, but also
 different user credentials, different user default settings, and different remotes configuration.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -250,14 +250,14 @@ different user credentials, different user default settings, and different remot
 $ conan install . <span class="c1"># call conan normally, config &amp; data will be in c:\data</span>
 </pre></div>
 </div>
-<p>Linux/OSx users:</p>
+<p>Linux/macOS users:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">export</span> <span class="nv">CONAN_USER_HOME</span><span class="o">=</span>/tmp/conan
 $ conan install . <span class="c1"># call conan normally, config &amp; data will be in /tmp/conan</span>
 </pre></div>
 </div>
 <p>You can now:</p>
 <ul class="simple">
-<li>Build concurrent jobs, parallel builds in Continous Integration or locally, just setting the variable before launching conan commands.</li>
+<li>Build concurrent jobs, parallel builds in Continuous Integration or locally, just setting the variable before launching conan commands.</li>
 <li>You can test locally different user credentials, default configurations, different remotes, just by switching from one cache to the
 others.</li>
 </ul>

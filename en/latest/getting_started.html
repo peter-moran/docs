@@ -431,7 +431,7 @@ building your timer project with a different configuration. For example, try bui
 <ul class="simple">
 <li>In Windows, change the CMake invocation to <code class="docutils literal notranslate"><span class="pre">Visual</span> <span class="pre">Studio</span> <span class="pre">14</span></code>.</li>
 <li>In Linux, you have to add the <code class="docutils literal notranslate"><span class="pre">-m32</span></code> flag to your <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> by running <code class="docutils literal notranslate"><span class="pre">SET(CMAKE_CXX_FLAGS</span> <span class="pre">&quot;${CMAKE_CXX_FLAGS}</span> <span class="pre">-m32&quot;)</span></code>, and the
-same applies nto <code class="docutils literal notranslate"><span class="pre">CMAKE_C_FLAGS,</span> <span class="pre">CMAKE_SHARED_LINK_FLAGS</span> <span class="pre">and</span> <span class="pre">CMAKE_EXE_LINKER_FLAGS</span></code>. This can also be done more easily, by automatically using
+same applies to <code class="docutils literal notranslate"><span class="pre">CMAKE_C_FLAGS,</span> <span class="pre">CMAKE_SHARED_LINK_FLAGS</span> <span class="pre">and</span> <span class="pre">CMAKE_EXE_LINKER_FLAGS</span></code>. This can also be done more easily, by automatically using
 Conan, as we’ll show later.
 - In Mac, you need to add the definition <code class="docutils literal notranslate"><span class="pre">-DCMAKE_OSX_ARCHITECTURES=i386</span></code>.</li>
 </ul>

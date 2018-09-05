@@ -335,7 +335,7 @@ difference is that it doesn’t try to install or build the binaries, but the pa
 will be retrieved from remotes if necessary.</p>
 <p>It is very important to note, that the <strong class="command">info</strong> command outputs the dependency graph for a
 given configuration (settings, options), as the dependency graph can be different for different
-configurations. Then, the input to the <strong class="command">conan info</strong> commmand is the same as <strong class="command">conan install</strong>,
+configurations. Then, the input to the <strong class="command">conan info</strong> command is the same as <strong class="command">conan install</strong>,
 the configuration can be specified directly with settings and options, or using profiles.</p>
 <p>Also, if you did a previous <strong class="command">conan install</strong> with a specific configuration, or maybe different
 installs with different configurations, you can reuse that information with the <strong class="command">--install-folder</strong>
@@ -356,7 +356,7 @@ $ conan info . --install-folder<span class="o">=</span>build_debug
 Integration systems. More precisely, it has the <strong class="command">--build-order, -bo</strong> option, that will produce
 a machine-readable output with an ordered list of package references, in the order they should be
 built. E.g., let’s assume that we have a project that depends on Boost and Poco, which in turn
-depends on OpenSSL and ZLib transitively. So we can query our project with a reference that has
+depends on OpenSSL and zlib transitively. So we can query our project with a reference that has
 changed (most likely due to a git push on that package):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan info . -bo zlib/1.2.11@conan/stable
 <span class="o">[</span>zlib/1.2.11@conan/stable<span class="o">]</span>, <span class="o">[</span>OpenSSL/1.0.2l@conan/stable<span class="o">]</span>, <span class="o">[</span>Boost/1.60.0@lasote/stable, Poco/1.7.8p3@pocoproject/stable<span class="o">]</span>

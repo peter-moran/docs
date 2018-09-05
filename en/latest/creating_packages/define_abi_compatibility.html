@@ -301,7 +301,7 @@ string value.</p>
 </pre></div>
 </div>
 <p>We have set the <code class="docutils literal notranslate"><span class="pre">self.info.settings.compiler.version</span></code> with an arbitrary string, the value of which is not important (could be any string). The
-only importantance is that it is the same for any GCC version between 4.5 and 5.0. For all those versions, the compiler version will
+only important thing is that it is the same for any GCC version between 4.5 and 5.0. For all those versions, the compiler version will
 always be hashed to the same ID.</p>
 <p>Let’s try and check that it works properly when installing the package for GCC 4.5:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan <span class="nb">export</span> myuser/mychannel
@@ -323,7 +323,7 @@ Packages
     Pkg/1.0@myuser/mychannel:mychannel:af044f9619574eceb8e1cca737a64bdad88246ad
 </pre></div>
 </div>
-<p>The required package has the same resulte again <code class="docutils literal notranslate"><span class="pre">af04...46ad</span></code>. Now we can try using GCC 4.4 (&lt; 4.5):</p>
+<p>The required package has the same result again <code class="docutils literal notranslate"><span class="pre">af04...46ad</span></code>. Now we can try using GCC 4.4 (&lt; 4.5):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install Pkg/1.0@myuser/mychannel -s <span class="nv">compiler</span><span class="o">=</span>gcc -s compiler.version<span class="o">=</span><span class="m">4</span>.4 ...
 
 Requirements

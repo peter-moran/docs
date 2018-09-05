@@ -473,7 +473,7 @@ a package is retrieved from a remote repository.</p>
 uploading packages, as they will be read-only and that could have other side-effects.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">It is not recommended to upload packages directly from developers machines with read-only mode as it could lead to insconsistencies.
+<p class="last">It is not recommended to upload packages directly from developers machines with read-only mode as it could lead to inconsistencies.
 For better reproducibility we recommend that packages are created and uploaded by CI machines.</p>
 </div>
 </div>
@@ -516,7 +516,7 @@ with <a class="reference internal" href="../howtos/header_only.html#header-only-
 <div class="section" id="conan-skip-vs-projects-upgrade">
 <span id="env-var-conan-skip-vs-project-upgrade"></span><h2>CONAN_SKIP_VS_PROJECTS_UPGRADE<a class="headerlink" href="#conan-skip-vs-projects-upgrade" title="Permalink to this headline">¶</a></h2>
 <p><strong>Defaulted to</strong>: <code class="docutils literal notranslate"><span class="pre">False</span></code>/<code class="docutils literal notranslate"><span class="pre">0</span></code></p>
-<p>When set to <code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">1</span></code>, the <a class="reference internal" href="tools.html#build-sln-commmand"><span class="std std-ref">build_sln_commmand</span></a>, the <a class="reference internal" href="tools.html#msvc-build-command"><span class="std std-ref">msvc_build_command</span></a>
+<p>When set to <code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">1</span></code>, the <a class="reference internal" href="tools.html#build-sln-command"><span class="std std-ref">build_sln_command</span></a>, the <a class="reference internal" href="tools.html#msvc-build-command"><span class="std std-ref">msvc_build_command</span></a>
 and the <a class="reference internal" href="build_helpers/visual_studio.html#msbuild"><span class="std std-ref">MSBuild()</span></a> build helper, will not call <code class="docutils literal notranslate"><span class="pre">devenv</span></code> command to upgrade the <code class="docutils literal notranslate"><span class="pre">sln</span></code> project, irrespective of
 the <code class="docutils literal notranslate"><span class="pre">upgrade_project</span></code> parameter value.</p>
 </div>
@@ -525,7 +525,7 @@ the <code class="docutils literal notranslate"><span class="pre">upgrade_project
 <p><strong>Defaulted to</strong>: <code class="docutils literal notranslate"><span class="pre">enabled</span></code> allowed values <code class="docutils literal notranslate"><span class="pre">enabled</span></code>/<code class="docutils literal notranslate"><span class="pre">verify</span></code>/<code class="docutils literal notranslate"><span class="pre">disabled</span></code></p>
 <p>This environment variable controls whether system packages should be installed into the system
 via <code class="docutils literal notranslate"><span class="pre">SystemPackageTool</span></code> helper, typically used in <a class="reference internal" href="conanfile/methods.html#method-system-requirements"><span class="std std-ref">system_requirements()</span></a>.</p>
-<p>See values behaviour:</p>
+<p>See values behavior:</p>
 <blockquote>
 <div><ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">enabled</span></code>: Default value and any call to install method of <code class="docutils literal notranslate"><span class="pre">SystemPackageTool</span></code> helper should modify
@@ -546,7 +546,7 @@ for example in your development environment.</li>
 packages via <code class="docutils literal notranslate"><span class="pre">SystemPackageTool</span></code> helper, typically used in <code class="docutils literal notranslate"><span class="pre">system_requirements()</span></code>.
 By default when the environment variable does not exist, “True” is assumed, and <code class="docutils literal notranslate"><span class="pre">sudo</span></code> is
 automatically prefixed in front of package management commands.  If you set this to “False” or “0”
-<code class="docutils literal notranslate"><span class="pre">sudo</span></code> will not be prefixed in front of the comands, however installation or updates of some
+<code class="docutils literal notranslate"><span class="pre">sudo</span></code> will not be prefixed in front of the commands, however installation or updates of some
 packages may fail due to a lack of privilege, depending on the user account Conan is running under.</p>
 </div>
 <div class="section" id="conan-temp-test-folder">
@@ -607,7 +607,7 @@ marked as <cite>short_paths</cite> will be stored in the <cite>C:.conan</cite> (
 <div class="section" id="conan-vs-installation-preference">
 <h2>CONAN_VS_INSTALLATION_PREFERENCE<a class="headerlink" href="#conan-vs-installation-preference" title="Permalink to this headline">¶</a></h2>
 <p><strong>Defaulted to</strong>: <code class="docutils literal notranslate"><span class="pre">Enterprise,</span> <span class="pre">Professional,</span> <span class="pre">Community,</span> <span class="pre">BuildTools</span></code></p>
-<p>This envirnoment variables defines the order of preference when searching for a Visual installation product. This would affect every tool
+<p>This environment variables defines the order of preference when searching for a Visual installation product. This would affect every tool
 that uses <code class="docutils literal notranslate"><span class="pre">tools.vs_installation_path()</span></code> and will search in the order indicated.</p>
 <p>For example:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span> <span class="nv">CONAN_VS_INSTALLATION_PREFERENCE</span><span class="o">=</span>Enterprise, Professional, Community, BuildTools

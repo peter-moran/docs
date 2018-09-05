@@ -233,7 +233,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>Conan can create packages and reuse them with Makefiles. The <code class="docutils literal notranslate"><span class="pre">AutoToolsBuildEnvironment</span></code>
 build helper helps with most of the necessary task.</p>
 <p>This how-to has been tested in Windows with MinGW and Linux with gcc. It is using static libraries
-but could be exteded to shared libraries too. The Makefiles surely can be improved they are just an example.</p>
+but could be extended to shared libraries too. The Makefiles surely can be improved they are just an example.</p>
 <div class="section" id="creating-packages">
 <h2>Creating packages<a class="headerlink" href="#creating-packages" title="Permalink to this headline">¶</a></h2>
 <p>Start cloning the existing example repository, containing a simple “Hello World” library, and application:</p>
@@ -262,7 +262,7 @@ standard variables like <code class="docutils literal notranslate"><span class="
 </pre></div>
 </div>
 <p>The <em>conanfile.py</em> file uses the <code class="docutils literal notranslate"><span class="pre">AutoToolsBuildEnvironment</span></code> build helper. This helper defines
-the necessasry environment variables with information from dependencies, as well as other variables
+the necessary environment variables with information from dependencies, as well as other variables
 to match the current conan settings (like <code class="docutils literal notranslate"><span class="pre">-m32</span></code> or <code class="docutils literal notranslate"><span class="pre">-m64</span></code> based on the conan <code class="docutils literal notranslate"><span class="pre">arch</span></code> setting)</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">AutoToolsBuildEnvironment</span>
 <span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">tools</span>
