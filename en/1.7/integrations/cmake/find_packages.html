@@ -267,7 +267,7 @@ CMake <strong>find_library</strong> function will be able to locate the librarie
 You can override the default behavior of any find_package() by creating a <code class="docutils literal notranslate"><span class="pre">findXXX.cmake</span></code> file in your package.</p>
 <div class="section" id="creating-a-custom-findxxx-cmake-file">
 <h2>Creating a custom FindXXX.cmake file<a class="headerlink" href="#creating-a-custom-findxxx-cmake-file" title="Permalink to this headline">¶</a></h2>
-<p>Sometimes the “official” CMake FindXXX.cmake scripts are not ready to find our libraries (not supported library names for specific settings, fixed installation directories like C:\OpenSSL… etc)
+<p>Sometimes the “official” CMake FindXXX.cmake scripts are not ready to find our libraries (not supported library names for specific settings, fixed installation directories like <code class="docutils literal notranslate"><span class="pre">C:\OpenSSL</span></code>, etc.)
 Or maybe there is no “official” CMake script for our library.</p>
 <p>So in these cases we can provide a custom <strong>FindXXX.cmake</strong> file in our conan packages.</p>
 <p>1. Create a file named FindXXX.cmake and save it in your conan package root folder. Where XXX is the name of the library that we will use in the <strong>find_package</strong> CMake function.

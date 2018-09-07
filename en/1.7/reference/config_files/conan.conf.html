@@ -346,7 +346,7 @@ Timeout is not a time limit on the entire response download; rather, an exceptio
 response for timeout seconds (more precisely, if no bytes have been received on the underlying socket for timeout seconds).
 If no timeout is specified explicitly, it do not timeout.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">user_home_short</span></code> specify the base folder to be used with the <a class="reference internal" href="../conanfile/attributes.html#short-paths-reference"><span class="std std-ref">short paths</span></a> feature.
-If not specified, the packages marked as <cite>short_paths</cite> will be stored in the <cite>C:.conan</cite> (or the current drive letter).</p>
+If not specified, the packages marked as <cite>short_paths</cite> will be stored in the <code class="docutils literal notranslate"><span class="pre">C:\.conan</span></code> (or the current drive letter).</p>
 <p>If the variable is set to “None” will disable the <cite>short_paths</cite> feature in Windows,
 for modern Windows that enable long paths at the system level.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">verbose_traceback</span></code> variable will print the complete traceback when an error occurs in a recipe or even
