@@ -207,8 +207,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="getting-started">
 <span id="id1"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p>Let’s get started with an example using one of the most popular C++ libraries: <a class="reference external" href="https://pocoproject.org/">POCO</a>. We’ll use CMake as our sample build system. Keep in mind that
-Conan <strong>works with any build system</strong> and is not limited to using CMake.</p>
+<p>Let’s get started with an example using one of the most popular C++ libraries: <a class="reference external" href="https://pocoproject.org/">POCO</a>. We’ll use CMake as our sample build system. Keep in
+mind that Conan <strong>works with any build system</strong> and is not limited to using CMake.</p>
 <div class="section" id="a-timer-using-poco-libraries">
 <h2>A Timer Using POCO Libraries<a class="headerlink" href="#a-timer-using-poco-libraries" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
@@ -302,19 +302,30 @@ $ <span class="nb">cd</span> mytimer
 </div>
 <div class="section" id="installing-dependencies">
 <h2>Installing Dependencies<a class="headerlink" href="#installing-dependencies" title="Permalink to this headline">¶</a></h2>
-<p>To improve visibility, if you have a terminal with bright colors, like the default GNOME terminal in Ubuntu, set <code class="docutils literal notranslate"><span class="pre">CONAN_COLOR_DARK=1</span></code> to increase the contrast.
-Then create a build folder for temporary build files, and install the requirements (pointing to the parent directory, where the
-<em>conanfile.txt</em> is located):</p>
+<p>To improve visibility, if you have a terminal with bright colors, like the default GNOME terminal in Ubuntu, set <code class="docutils literal notranslate"><span class="pre">CONAN_COLOR_DARK=1</span></code> to
+increase the contrast. Then create a build folder for temporary build files, and install the requirements (pointing to the parent directory,
+where the <em>conanfile.txt</em> is located):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd</span> build
 $ conan install ..
 </pre></div>
 </div>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<ul class="last simple">
+<li>It is strongly recommended to review the generated default profile and adjust the settings to accurately describe your system as
+described in the following section <a class="reference internal" href="#getting-started-other-configurations"><span class="std std-ref">Building with Other Configurations</span></a>.</li>
+<li>When a GCC <strong>compiler &gt;= 5.1</strong> is detected, the setting modeling for the c++ standard library is set as follows: The
+<code class="docutils literal notranslate"><span class="pre">compiler.libcxx</span></code> is set to <code class="docutils literal notranslate"><span class="pre">libstdc++</span></code> that represents the old ABI compatibility for better compatibility. Your compiler default
+is most likely to be set to the new ABI, so you might want to change it to <code class="docutils literal notranslate"><span class="pre">libstdc++11</span></code> to use the new ABI compliant with CXX11
+directives and run <strong class="command">conan install ..</strong> again to install the right binaries. Read more in <a class="reference internal" href="howtos/manage_gcc_abi.html#manage-gcc-abi"><span class="std std-ref">How to manage the GCC &gt;= 5 ABI</span></a>.</li>
+</ul>
+</div>
 <p>This <strong class="command">conan install</strong> command downloads the binary package required for your configuration (detected the first time you ran the
 command), <strong>together with other (transitively required by Poco) libraries, like OpenSSL and Zlib</strong>. It will also create the
-<em>conanbuildinfo.cmake</em> file in the current directory, in which you can see the CMake variables, and a <em>conaninfo.txt</em> in which
-the settings,requirements and optional information is saved.</p>
-<p>It is very important to understand the installation process. When the <strong class="command">conan install</strong> command runs, settings
-specified on the command line or taken from the defaults in <code class="docutils literal notranslate"><span class="pre">&lt;userhome&gt;/.conan/profiles/default</span></code> file are applied.</p>
+<em>conanbuildinfo.cmake</em> file in the current directory, in which you can see the CMake variables, and a <em>conaninfo.txt</em> in which the settings,
+requirements and optional information is saved.</p>
+<p>It is very important to understand the installation process. When the <strong class="command">conan install</strong> command runs, settings specified on the
+command line or taken from the defaults in <em>&lt;userhome&gt;/.conan/profiles/default</em> file are applied.</p>
 <a class="reference internal image-reference" href="_images/install_flow.png"><img alt="_images/install_flow.png" class="align-center" src="_images/install_flow.png" style="width: 500px; height: 400px;" /></a>
 <p>For example, the command <strong class="command">conan install . -s os=&quot;Linux&quot; -s compiler=&quot;gcc&quot;</strong>, performs these steps:</p>
 <ul class="simple">
@@ -322,20 +333,20 @@ specified on the command line or taken from the defaults in <code class="docutil
 cache is empty.</li>
 <li>Looks for the package recipe in the defined remotes. Conan comes with <a class="reference external" href="https://bintray.com/conan/conan-center">conan-center</a> Bintray remote as the default, but can be changed.</li>
 <li>If the recipe exists, the Conan client fetches and stores it in your local cache.</li>
-<li>With the package recipe and the input settings (Linux, gcc), the Conan client will validate that the corresponding binary is
-in the local cache. This test will not run when installing for the first time.</li>
+<li>With the package recipe and the input settings (Linux, GCC), the Conan client will validate that the corresponding binary is in the local
+cache. This test will not run when installing for the first time.</li>
 <li>The Conan client searches for the corresponding binary package in the remote. It will be fetched if it exists.</li>
-<li>The Conan client will then  generate the requested files specified in the <code class="docutils literal notranslate"><span class="pre">generators</span></code>.</li>
+<li>The Conan client will then  generate the requested files specified in the <code class="docutils literal notranslate"><span class="pre">[generators]</span></code> section.</li>
 </ul>
 <p>The Conan client will throw an error If the binary package required for specific settings doesn’t exist. It is possible to try to build the
-binary package from sources using the <code class="docutils literal notranslate"><span class="pre">--build=missing</span></code> command line argument to install. A detailed description on how to build a binary package is
-from sources is described in the below sections.</p>
+binary package from sources using the <strong class="command">--build=missing</strong> command line argument to install. A detailed description on how to build a
+binary package is from sources is described in the below sections.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">In the Bintray repositories, there are binaries for several mainstream compilers and versions, such as Visual Studio 12, 14, Linux GCC
-4.9 and Apple Clang 3.5. If you are using a different setup, running the command might fail because of the missing package. You could try to change
-your settings or build the package from source, using the <code class="docutils literal notranslate"><span class="pre">--build=missing</span></code> option, instead of retrieving the binaries. Such a build
-might not have been tested and may eventually fail.</p>
+<p class="last">In the Bintray repositories there are binaries for several mainstream compilers and versions, such as Visual Studio 12, 14, Linux GCC
+4.9 and Apple Clang 3.5. If you are using a different setup, running the command might fail because of the missing package. You could
+try to change your settings or build the package from source, using the <strong class="command">--build=missing</strong> option, instead of retrieving the
+binaries. Such a build might not have been tested and may eventually fail.</p>
 </div>
 </div>
 <div class="section" id="building-the-timer-example">
@@ -358,9 +369,9 @@ Callback called after <span class="m">250</span> milliseconds.
 </div>
 <div class="section" id="inspecting-dependencies">
 <h2>Inspecting Dependencies<a class="headerlink" href="#inspecting-dependencies" title="Permalink to this headline">¶</a></h2>
-<p>The retrieved packages are installed to your local user cache (typically <code class="docutils literal notranslate"><span class="pre">.conan/data</span></code>), and can be reused from this location for other projects.
-This allows to clean your current project and continue working even without network connection.
-To search for packages in the local cache run:</p>
+<p>The retrieved packages are installed to your local user cache (typically <em>.conan/data</em>), and can be reused from this location for other
+projects. This allows to clean your current project and continue working even without network connection. To search for packages in the
+local cache run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan search
 </pre></div>
 </div>
@@ -368,7 +379,7 @@ To search for packages in the local cache run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan search Poco/1.9.0@pocoproject/stable
 </pre></div>
 </div>
-<p>There is also the option to generate a table for all binaries from a given recipe with the <code class="docutils literal notranslate"><span class="pre">--table</span></code> option, even in remotes:</p>
+<p>There is also the option to generate a table for all binaries from a given recipe with the <strong class="command">--table</strong> option, even in remotes:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan search zlib/1.2.11@conan/stable --table<span class="o">=</span>file.html -r<span class="o">=</span>conan-center
 $ file.html <span class="c1"># or open the file, double-click</span>
 </pre></div>
@@ -376,7 +387,8 @@ $ file.html <span class="c1"># or open the file, double-click</span>
 <a class="reference internal image-reference" href="_images/search_binary_table.png"><img alt="_images/search_binary_table.png" class="align-center" src="_images/search_binary_table.png" style="width: 300px; height: 250px;" /></a>
 <p>Check the reference for more information on how to search in remotes, how to remove or clean packages from the local cache, and how to
 define a custom cache directory per user or per project.</p>
-<p>Inspect your current project’s dependencies with the <code class="docutils literal notranslate"><span class="pre">info</span></code> command, by pointing to the location of the <em>conanfile.txt</em> folder:</p>
+<p>Inspect your current project’s dependencies with the <strong class="command">conan info</strong> command, by pointing to the location of the <em>conanfile.txt</em>
+folder:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan info ..
 </pre></div>
 </div>
@@ -389,51 +401,42 @@ $ file.html <span class="c1"># or open the file, double-click</span>
 </div>
 <div class="section" id="searching-packages">
 <h2>Searching Packages<a class="headerlink" href="#searching-packages" title="Permalink to this headline">¶</a></h2>
-<p>The installed packages from the remote repository are configured by default in the Conan client in the “conan-center” located in Bintray. To search for existing packages run:</p>
+<p>The installed packages from the remote repository are configured by default in the Conan client in the “conan-center” located in Bintray. To
+search for existing packages run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan search <span class="s2">&quot;zlib*&quot;</span> -r<span class="o">=</span>conan-center
 </pre></div>
 </div>
-<p>There are additional community repositories that can be configured and used. For more information, see <a class="reference internal" href="uploading_packages/remotes.html#remotes"><span class="std std-ref">this section about remotes</span></a>.</p>
+<p>There are additional community repositories that can be configured and used. For more information, see
+<a class="reference internal" href="uploading_packages/remotes.html#remotes"><span class="std std-ref">Remotes</span></a>.</p>
 </div>
 <div class="section" id="building-with-other-configurations">
-<h2>Building with Other Configurations<a class="headerlink" href="#building-with-other-configurations" title="Permalink to this headline">¶</a></h2>
+<span id="getting-started-other-configurations"></span><h2>Building with Other Configurations<a class="headerlink" href="#building-with-other-configurations" title="Permalink to this headline">¶</a></h2>
 <p>In this example, we have built our project using the default configuration detected by Conan. This configuration is known as the
 <a class="reference internal" href="reference/config_files/default_profile.html#default-profile"><span class="std std-ref">default profile</span></a>.</p>
-<p>A profile needs to be available prior to running commands such as <strong class="command">conan install</strong>. When running the command, your settings are automatically detected (compiler,
-architecture…) and stored as the default profile. You can edit these settings <code class="docutils literal notranslate"><span class="pre">~/.conan/profiles/default</span></code> or create new profiles with your desired
-configuration.</p>
-<div class="admonition attention">
-<p class="first admonition-title">Attention</p>
-<ul class="last simple">
-<li>It is strongly recommended to review the generated default profile and adjust the settings to accurately describe your system.</li>
-<li>When a GCC <strong>compiler &gt;= 5.1</strong> is detected, the setting modeling for the c++ standard library is set as follows:
-The <code class="docutils literal notranslate"><span class="pre">compiler.libcxx</span></code> is set to <code class="docutils literal notranslate"><span class="pre">libstdc++</span></code> that represents the old ABI compatibility for better compatibility. Your compiler
-default is most likely to be set to the new ABI so you might want to change it to <code class="docutils literal notranslate"><span class="pre">libstdc++11</span></code> to use the new ABI compliant with CXX11 directives.
-<a class="reference internal" href="howtos/manage_gcc_abi.html#manage-gcc-abi"><span class="std std-ref">Read more here</span></a>.</li>
-</ul>
-</div>
-<p>For example, if we have a profile with a 32-bit gcc configuration in a profile called <em>gcc_x86</em>, we can run the following n``install`` command:</p>
+<p>A profile needs to be available prior to running commands such as <strong class="command">conan install</strong>. When running the command, your settings are
+automatically detected (compiler, architecture…) and stored as the default profile. You can edit these settings
+<em>~/.conan/profiles/default</em> or create new profiles with your desired configuration.</p>
+<p>For example, if we have a profile with a 32-bit GCC configuration in a profile called <em>gcc_x86</em>, we can run the following:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . -pr gcc_x86
 </pre></div>
 </div>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p class="last">We strongly recommend using profiles. To learn more, see <a class="reference internal" href="reference/profiles.html#profiles"><span class="std std-ref">here</span></a>.</p>
+<p class="last">We strongly recommend using <a class="reference internal" href="reference/profiles.html#profiles"><span class="std std-ref">Profiles</span></a> and managing them with <a class="reference internal" href="reference/commands/consumer/config.html#conan-config-install"><span class="std std-ref">conan config install</span></a>.</p>
 </div>
-<p>However, the user can always override the default profile settings in the <code class="docutils literal notranslate"><span class="pre">install</span></code> command using the <code class="docutils literal notranslate"><span class="pre">-s</span></code> parameter. As an exercise, try
-building your timer project with a different configuration. For example, try building the 32-bit version:</p>
+<p>However, the user can always override the default profile settings in the <strong class="command">conan install</strong> command using the <strong class="command">-s</strong>
+parameter. As an exercise, try building your timer project with a different configuration. For example, try building the 32-bit version:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . -s <span class="nv">arch</span><span class="o">=</span>x86
 </pre></div>
 </div>
-<p>The above command installs a different package, using the <code class="docutils literal notranslate"><span class="pre">-s</span> <span class="pre">arch=x86</span></code> setting, instead of the default used previously. The majority of cases use
-<code class="docutils literal notranslate"><span class="pre">x86_64</span></code>.</p>
+<p>The above command installs a different package, using the <strong class="command">-s arch=x86</strong> setting, instead of the default used previously.</p>
 <p>To use the 32-bit binaries, you will also have to change your project build:</p>
 <ul class="simple">
 <li>In Windows, change the CMake invocation to <code class="docutils literal notranslate"><span class="pre">Visual</span> <span class="pre">Studio</span> <span class="pre">14</span></code>.</li>
-<li>In Linux, you have to add the <code class="docutils literal notranslate"><span class="pre">-m32</span></code> flag to your <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> by running <code class="docutils literal notranslate"><span class="pre">SET(CMAKE_CXX_FLAGS</span> <span class="pre">&quot;${CMAKE_CXX_FLAGS}</span> <span class="pre">-m32&quot;)</span></code>, and the
-same applies to <code class="docutils literal notranslate"><span class="pre">CMAKE_C_FLAGS,</span> <span class="pre">CMAKE_SHARED_LINK_FLAGS</span> <span class="pre">and</span> <span class="pre">CMAKE_EXE_LINKER_FLAGS</span></code>. This can also be done more easily, by automatically using
-Conan, as we’ll show later.
-- In Mac, you need to add the definition <code class="docutils literal notranslate"><span class="pre">-DCMAKE_OSX_ARCHITECTURES=i386</span></code>.</li>
+<li>In Linux, you have to add the <code class="docutils literal notranslate"><span class="pre">-m32</span></code> flag to your <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> by running <code class="docutils literal notranslate"><span class="pre">SET(CMAKE_CXX_FLAGS</span> <span class="pre">&quot;${CMAKE_CXX_FLAGS}</span> <span class="pre">-m32&quot;)</span></code>, and
+the same applies to <code class="docutils literal notranslate"><span class="pre">CMAKE_C_FLAGS,</span> <span class="pre">CMAKE_SHARED_LINK_FLAGS</span> <span class="pre">and</span> <span class="pre">CMAKE_EXE_LINKER_FLAGS</span></code>. This can also be done more easily, by
+automatically using Conan, as we’ll show later.</li>
+<li>In macOS, you need to add the definition <code class="docutils literal notranslate"><span class="pre">-DCMAKE_OSX_ARCHITECTURES=i386</span></code>.</li>
 </ul>
 <p>Got any doubts? Check out our <a class="reference internal" href="faq.html#faq"><span class="std std-ref">FAQ section</span></a> or <a href="mailto:info@conan.io" target="_blank">write us</a>.</p>
 </div>
