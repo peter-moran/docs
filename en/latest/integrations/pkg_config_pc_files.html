@@ -295,7 +295,7 @@ You can adjust the <cite>PKG_CONFIG_PATH</cite> to let <code class="docutils lit
 
         <span class="k">with</span> <span class="n">tools</span><span class="o">.</span><span class="n">environment_append</span><span class="p">({</span><span class="s2">&quot;PKG_CONFIG_PATH&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()}):</span>
            <span class="c1"># CALL YOUR BUILD SYSTEM (configure, make etc)</span>
-           <span class="c1"># E.j: self.run(&#39;g++ main.cpp $(pkg-config libB --libs --cflags) -o main&#39;)</span>
+           <span class="c1"># E.g., self.run(&#39;g++ main.cpp $(pkg-config libB --libs --cflags) -o main&#39;)</span>
 </pre></div>
 </div>
 </div>

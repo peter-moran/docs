@@ -247,7 +247,7 @@ can be build from sources using the ‘–build’ option. When the package is
 installed, Conan will write the files for the specified generators.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>positional arguments:
   path_or_reference     Path to a folder containing a recipe (conanfile.py or
-                        conanfile.txt) or to a recipe file. e.g.,
+                        conanfile.txt) or to a recipe file. E.g.,
                         ./my_project/conanfile.txt. It could also be a
                         reference
 
@@ -257,7 +257,7 @@ optional arguments:
                         Generators to use
   -if INSTALL_FOLDER, --install-folder INSTALL_FOLDER
                         Use this directory as the directory where to put the
-                        generatorfiles. e.g., conaninfo/conanbuildinfo.txt
+                        generatorfiles. E.g., conaninfo/conanbuildinfo.txt
   -m [MANIFESTS], --manifests [MANIFESTS]
                         Install dependencies manifests in folder for later
                         verify. Default folder is .conan_manifests, but can be
@@ -297,7 +297,7 @@ optional arguments:
                         Look in the specified remote server
   -s SETTINGS, --settings SETTINGS
                         Settings to build the package, overwriting the
-                        defaults. e.g., -s compiler=gcc
+                        defaults. E.g., -s compiler=gcc
   -u, --update          Check updates exist from upstream remotes
 </pre></div>
 </div>
@@ -372,10 +372,10 @@ case it will throw an error.</li>
 requested configuration was not found on any of the active remotes.</li>
 <li><strong class="command">--build=outdated</strong>: Conan will try to build from code if the binary is not built with the
 current recipe or when missing binary package.</li>
-<li><strong class="command">--build=[pattern]</strong>: A fnmatch file pattern of a package name. e.j <code class="docutils literal notranslate"><span class="pre">zl*</span></code> will match
+<li><strong class="command">--build=[pattern]</strong>: A fnmatch file pattern of a package name. E.g., <code class="docutils literal notranslate"><span class="pre">zl*</span></code> will match
 <code class="docutils literal notranslate"><span class="pre">zlib</span></code> package. Conan will force the build of the packages, the name of which matches the given
 <strong>pattern</strong>. Several patterns can be specified, chaining multiple options,
-e.g. <strong class="command">--build=pattern1 --build=pattern2</strong>.</li>
+e.g., <strong class="command">--build=pattern1 --build=pattern2</strong>.</li>
 <li><strong class="command">--build</strong>: Always build everything from source. Produces a clean re-build of all packages
 and transitively dependent packages</li>
 </ul>
@@ -387,7 +387,7 @@ and transitively dependent packages</li>
 <li>Global environment variables (<strong class="command">-e SOME_VAR=&quot;SOME_VALUE&quot;</strong>). These variables will be defined
 before the <cite>build</cite> step in all the packages and will be cleaned after the <cite>build</cite> execution.</li>
 <li>Specific package environment variables (<strong class="command">-e zlib:SOME_VAR=&quot;SOME_VALUE&quot;</strong>). These variables will
-be defined only in the specified packages (e.g. zlib).</li>
+be defined only in the specified packages (e.g., zlib).</li>
 </ul>
 <p>You can specify this variables not only for your direct <code class="docutils literal notranslate"><span class="pre">requires</span></code> but for any package in the
 dependency graph.</p>

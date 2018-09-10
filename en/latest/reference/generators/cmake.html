@@ -363,7 +363,7 @@ method a set of variables will be declared following this naming:</p>
 </tr>
 </tbody>
 </table>
-<p><code class="docutils literal notranslate"><span class="pre">XXXX</span></code> is the name of the requirement in uppercase and <code class="docutils literal notranslate"><span class="pre">YYYY</span></code> the variable name. e.j:</p>
+<p><code class="docutils literal notranslate"><span class="pre">XXXX</span></code> is the name of the requirement in uppercase and <code class="docutils literal notranslate"><span class="pre">YYYY</span></code> the variable name, e.g.:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyLibConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;MyLib&quot;</span>
     <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;1.6.0&quot;</span>
@@ -386,7 +386,7 @@ method a set of variables will be declared following this naming:</p>
 <div class="section" id="conan-basic-setup">
 <h3>conan_basic_setup<a class="headerlink" href="#conan-basic-setup" title="Permalink to this headline">¶</a></h3>
 <p>Setup all the CMake vars according to our settings, by default with the global approach (no targets).</p>
-<p><strong>parameters</strong>: You can combine several parameters to the <code class="docutils literal notranslate"><span class="pre">conan_basic_setup</span></code> macro. e.j: <code class="docutils literal notranslate"><span class="pre">conan_basic_setup(TARGETS</span> <span class="pre">KEEP_RPATHS)</span></code></p>
+<p><strong>parameters</strong>: You can combine several parameters to the <code class="docutils literal notranslate"><span class="pre">conan_basic_setup</span></code> macro, e.g., <code class="docutils literal notranslate"><span class="pre">conan_basic_setup(TARGETS</span> <span class="pre">KEEP_RPATHS)</span></code></p>
 <blockquote>
 <div><ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">TARGETS</span></code>:  Setup all the CMake vars by target (only CMake &gt; 3.1.2)</li>

@@ -268,7 +268,7 @@ helpers, etc.</li>
 etc., so be aware that a minimal commitment is required. The Conan organization reserves the right to unlink a
 poorly maintained package or replace it with better alternatives.</li>
 <li><strong>Raise errors on invalid configurations:</strong> If the library doesn’t work for a specific
-configuration, e.g. requires <strong>gcc&gt;7</strong>, the recipe must contain a <code class="docutils literal notranslate"><span class="pre">configure(self)</span></code> method  that
+configuration, e.g., requires <strong>gcc&gt;7</strong>, the recipe must contain a <code class="docutils literal notranslate"><span class="pre">configure(self)</span></code> method  that
 raises an exception in case of invalid settings/options.</li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">configure</span><span class="p">():</span>
@@ -307,7 +307,7 @@ licenses in the <code class="docutils literal notranslate"><span class="pre">lic
 <h3>CI Integration<a class="headerlink" href="#ci-integration" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p class="first">If you are packaging a header-only library, you will only need to provide one CI configuration
-(e.g. Travis with gcc 6.1) to validate that the package is built correctly (use <strong class="command">conan create</strong>).</p>
+(e.g., Travis with gcc 6.1) to validate that the package is built correctly (use <strong class="command">conan create</strong>).</p>
 </li>
 <li><p class="first">Unless your library is a header-only library or doesn’t support a concrete operating system or
 compiler, you will need to provide a CI systems integration to support:</p>
@@ -315,7 +315,7 @@ compiler, you will need to provide a CI systems integration to support:</p>
 <div><ul class="simple">
 <li><strong>Linux:</strong> GCC, latest version recommended from each major (4.9, 5.4, 6.3)</li>
 <li><strong>Linux:</strong> Clang, latest version recommended from each major (3.9, 4.0)</li>
-<li><strong>Mac OSX:</strong> Two latest versions of apple-clang, e.j (8.0, 8.1) or newer.</li>
+<li><strong>Mac OSX:</strong> Two latest versions of apple-clang, e.g., (8.0, 8.1) or newer.</li>
 <li><strong>Windows:</strong> Visual Studio 12, 14 and 15 (or newer)</li>
 </ul>
 </div></blockquote>
@@ -347,11 +347,11 @@ look at the options to generate a library layout with the required appveyor/trav
 <li>Tags</li>
 <li>Maturity</li>
 <li>Website: If any, website of the library</li>
-<li>Issues tracker: URL of the issue tracker from your github repository e.j:
+<li>Issues tracker: URL of the issue tracker from your github repository e.g.,
 <a class="reference external" href="https://github.com/conan-community/conan-zlib/issues">https://github.com/conan-community/conan-zlib/issues</a></li>
-<li>Version control: URL of your recipe github repository. e.j:
+<li>Version control: URL of your recipe github repository, e.g.,
 <a class="reference external" href="https://github.com/conan-community/conan-zlib">https://github.com/conan-community/conan-zlib</a></li>
-<li>GitHub repo (user/repo): e.j lasote/conan-zlib</li>
+<li>GitHub repo (user/repo): e.g., lasote/conan-zlib</li>
 </ul>
 </div></blockquote>
 <p>For each version page (optional, but recommended):</p>

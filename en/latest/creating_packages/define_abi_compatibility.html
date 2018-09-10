@@ -242,7 +242,7 @@ different binary:</p>
 cached in the latest <strong class="command">conan install</strong> execution.</li>
 <li>Conan retrieves the <code class="docutils literal notranslate"><span class="pre">MyLib/1.0&#64;user/channel</span></code> recipe, reads the <code class="docutils literal notranslate"><span class="pre">settings</span></code> attribute, and assigns the necessary values.</li>
 <li>With the current package values for <code class="docutils literal notranslate"><span class="pre">settings</span></code> (also <code class="docutils literal notranslate"><span class="pre">options</span></code> and <code class="docutils literal notranslate"><span class="pre">requires</span></code>), it will compute a SHA1 hash that will serve as the binary
-package ID, e.g. <code class="docutils literal notranslate"><span class="pre">c6d75a933080ca17eb7f076813e7fb21aaa740f2</span></code>.</li>
+package ID, e.g., <code class="docutils literal notranslate"><span class="pre">c6d75a933080ca17eb7f076813e7fb21aaa740f2</span></code>.</li>
 <li>Conan will try to find the <code class="docutils literal notranslate"><span class="pre">c6d75...</span></code> binary package. If it exists, it will be retrieved. If it cannot be found, it will fail and indicate that it
 can be built from sources using <strong class="command">conan install --build</strong>.</li>
 </ol>
@@ -279,9 +279,9 @@ that we don’t want to create 2 different binaries, but just a single built wit
 <p>This <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> method can be overridden to control the package ID generation. Within the <code class="docutils literal notranslate"><span class="pre">package_id()</span></code>, we have access to the
 <code class="docutils literal notranslate"><span class="pre">self.info</span></code> object, which is hashed to compute the binary ID and contains:</p>
 <ul class="simple">
-<li><strong>self.info.settings</strong>: Contains all the declared settings, always as string values. We can access/modify the settings. e.g:
+<li><strong>self.info.settings</strong>: Contains all the declared settings, always as string values. We can access/modify the settings, e.g.,
 <code class="docutils literal notranslate"><span class="pre">self.info.settings.compiler.version</span></code>.</li>
-<li><strong>self.info.options</strong>: Contains all the declared options, always as string values too. e.g: <code class="docutils literal notranslate"><span class="pre">self.info.options.shared</span></code>.</li>
+<li><strong>self.info.options</strong>: Contains all the declared options, always as string values too, e.g., <code class="docutils literal notranslate"><span class="pre">self.info.options.shared</span></code>.</li>
 </ul>
 <p>Initially this <code class="docutils literal notranslate"><span class="pre">info</span></code> object contains the original settings and options, but they can be changed without constraints to any other
 string value.</p>
@@ -388,20 +388,20 @@ and transitive dependencies. For example, <code class="docutils literal notransl
 <li><p class="first">Each <code class="docutils literal notranslate"><span class="pre">RequirementInfo</span></code> has the following <cite>read only</cite> reference fields:</p>
 <blockquote>
 <div><ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">full_name</span></code>: Full require’s name. E.g <strong>MyOtherLib</strong></li>
-<li><code class="docutils literal notranslate"><span class="pre">full_version</span></code>: Full require’s version. E.g <strong>1.2</strong></li>
-<li><code class="docutils literal notranslate"><span class="pre">full_user</span></code>: Full require’s user. E.g <strong>my_user</strong></li>
-<li><code class="docutils literal notranslate"><span class="pre">full_channel</span></code>: Full require’s channel. E.g <strong>stable</strong></li>
-<li><code class="docutils literal notranslate"><span class="pre">full_package_id</span></code>: Full require’s package ID. E.g <strong>c6d75a…</strong></li>
+<li><code class="docutils literal notranslate"><span class="pre">full_name</span></code>: Full require’s name, e.g., <strong>MyOtherLib</strong></li>
+<li><code class="docutils literal notranslate"><span class="pre">full_version</span></code>: Full require’s version, e.g., <strong>1.2</strong></li>
+<li><code class="docutils literal notranslate"><span class="pre">full_user</span></code>: Full require’s user, e.g., <strong>my_user</strong></li>
+<li><code class="docutils literal notranslate"><span class="pre">full_channel</span></code>: Full require’s channel, e.g., <strong>stable</strong></li>
+<li><code class="docutils literal notranslate"><span class="pre">full_package_id</span></code>: Full require’s package ID, e.g., <strong>c6d75a…</strong></li>
 </ul>
 </div></blockquote>
 </li>
 <li><p class="first">The following fields are used in the <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> evaluation:</p>
 <blockquote>
 <div><ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">name</span></code>: By default same value as full_name. E.g <strong>MyOtherLib</strong>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">name</span></code>: By default same value as full_name, e.g., <strong>MyOtherLib</strong>.</li>
 <li><code class="docutils literal notranslate"><span class="pre">version</span></code>: By default the major version representation of the <code class="docutils literal notranslate"><span class="pre">full_version</span></code>.
-E.g <strong>1.Y</strong> for a <strong>1.2</strong> <code class="docutils literal notranslate"><span class="pre">full_version</span></code> field and <strong>1.Y.Z</strong> for a <strong>1.2.3</strong>
+E.g., <strong>1.Y</strong> for a <strong>1.2</strong> <code class="docutils literal notranslate"><span class="pre">full_version</span></code> field and <strong>1.Y.Z</strong> for a <strong>1.2.3</strong>
 <code class="docutils literal notranslate"><span class="pre">full_version</span></code> field.</li>
 <li><code class="docutils literal notranslate"><span class="pre">user</span></code>: By default <code class="docutils literal notranslate"><span class="pre">None</span></code> (doesn’t affect the package ID).</li>
 <li><code class="docutils literal notranslate"><span class="pre">channel</span></code>: By default <code class="docutils literal notranslate"><span class="pre">None</span></code> (doesn’t affect the package ID).</li>
@@ -437,7 +437,7 @@ patches, whereby changing from <strong>2.1.10</strong> to <strong>2.1.11</strong
         <span class="n">myotherlib</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">myotherlib</span><span class="o">.</span><span class="n">full_version</span>
 
         <span class="c1"># Changes in major and minor versions will change the Package ID but</span>
-        <span class="c1"># only a MyOtherLib patch won&#39;t. E.j: From 1.2.3 to 1.2.89 won&#39;t change.</span>
+        <span class="c1"># only a MyOtherLib patch won&#39;t. E.g., from 1.2.3 to 1.2.89 won&#39;t change.</span>
         <span class="n">myotherlib</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">myotherlib</span><span class="o">.</span><span class="n">full_version</span><span class="o">.</span><span class="n">minor</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -465,56 +465,56 @@ affects the binary package, or even the required package ID can change your own 
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">semver_mode()</span></code></td>
 <td>Yes</td>
-<td>Yes, only &gt; 1.0.0 (e.g. <strong>1</strong>.2.Z+b102)</td>
+<td>Yes, only &gt; 1.0.0 (e.g., <strong>1</strong>.2.Z+b102)</td>
 <td>No</td>
 <td>No</td>
 <td>No</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">major_mode()</span></code></td>
 <td>Yes</td>
-<td>Yes (e.g. <strong>1</strong>.2.Z+b102)</td>
+<td>Yes (e.g., <strong>1</strong>.2.Z+b102)</td>
 <td>No</td>
 <td>No</td>
 <td>No</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">minor_mode()</span></code></td>
 <td>Yes</td>
-<td>Yes (e.g. <strong>1.2</strong>.Z+b102)</td>
+<td>Yes (e.g., <strong>1.2</strong>.Z+b102)</td>
 <td>No</td>
 <td>No</td>
 <td>No</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">patch_mode()</span></code></td>
 <td>Yes</td>
-<td>Yes (e.g. <strong>1.2.3</strong>+b102)</td>
+<td>Yes (e.g., <strong>1.2.3</strong>+b102)</td>
 <td>No</td>
 <td>No</td>
 <td>No</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">base_mode()</span></code></td>
 <td>Yes</td>
-<td>Yes (e.g. <strong>1.7</strong>+b102)</td>
+<td>Yes (e.g., <strong>1.7</strong>+b102)</td>
 <td>No</td>
 <td>No</td>
 <td>No</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">full_version_mode()</span></code></td>
 <td>Yes</td>
-<td>Yes (e.g. <strong>1.2.3+b102</strong>)</td>
+<td>Yes (e.g., <strong>1.2.3+b102</strong>)</td>
 <td>No</td>
 <td>No</td>
 <td>No</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">full_recipe_mode()</span></code></td>
 <td>Yes</td>
-<td>Yes (e.g. <strong>1.2.3+b102</strong>)</td>
+<td>Yes (e.g., <strong>1.2.3+b102</strong>)</td>
 <td>Yes</td>
 <td>Yes</td>
 <td>No</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">full_package_mode()</span></code></td>
 <td>Yes</td>
-<td>Yes (e.g. <strong>1.2.3+b102</strong>)</td>
+<td>Yes (e.g., <strong>1.2.3+b102</strong>)</td>
 <td>Yes</td>
 <td>Yes</td>
 <td>Yes</td>

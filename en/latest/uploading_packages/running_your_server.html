@@ -347,7 +347,7 @@ If your Conan clients are connecting with “https”, set <cite>ssl_enabled</ci
 <p><strong>Important</strong>: The Conan client, by default, will validate the server SSL certificates and won’t connect if it’s invalid.
 If you have self signed certificates you have two options:</p>
 <ol class="arabic simple">
-<li>Use the <strong class="command">conan remote</strong> command to disable the SSL certificate checks. e.j: <em>conan remote add/update myremote https://somedir False</em></li>
+<li>Use the <strong class="command">conan remote</strong> command to disable the SSL certificate checks. E.g., <em>conan remote add/update myremote https://somedir False</em></li>
 <li>Append the server <em>.crt</em> file contents to <em>~/.conan/cacert.pem</em> file.</li>
 </ol>
 <p class="last">To learn more, see <a class="reference internal" href="../howtos/use_tls_certificates.html#use-tls-certificates"><span class="std std-ref">How to manage SSL (TLS) certificates</span></a>.</p>
@@ -423,7 +423,7 @@ port: 9300
 <h3>Running Conan Server using Apache<a class="headerlink" href="#running-conan-server-using-apache" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><p>You need to install <code class="docutils literal notranslate"><span class="pre">mod_wsgi</span></code>. If you want to use Conan installed from <code class="docutils literal notranslate"><span class="pre">pip</span></code>, the conf file should be similar to the following example:</p>
-<p><strong>Apache conf file</strong> (e.j /etc/apache2/sites-available/0_conan.conf)</p>
+<p><strong>Apache conf file</strong> (e.g., /etc/apache2/sites-available/0_conan.conf)</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;VirtualHost *:80&gt;
     WSGIScriptAlias / /usr/local/lib/python2.7/dist-packages/conans/server/server_launcher.py
     WSGICallableObject app
@@ -436,7 +436,7 @@ port: 9300
 </pre></div>
 </div>
 <p>If you want to use Conan checked out from source in, for example in <cite>/srv/conan</cite>, the conf file should be as follows:</p>
-<p><strong>Apache conf file</strong> (e.j /etc/apache2/sites-available/0_conan.conf)</p>
+<p><strong>Apache conf file</strong> (e.g., /etc/apache2/sites-available/0_conan.conf)</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;VirtualHost *:80&gt;
     WSGIScriptAlias / /srv/conan/conans/server/server_launcher.py
     WSGICallableObject app
@@ -450,7 +450,7 @@ port: 9300
 </div>
 <p>The directive <code class="docutils literal notranslate"><span class="pre">WSGIPassAuthorization</span> <span class="pre">On</span></code> is needed to pass the HTTP basic authentication to Conan.</p>
 <p>Also take into account that the server config files are located in the home of the configured Apache user,
-e.j var/www/.conan_server, so remember to use that directory to configure your Conan server.</p>
+e.g., var/www/.conan_server, so remember to use that directory to configure your Conan server.</p>
 </div></blockquote>
 </div>
 <div class="section" id="permissions-parameters">
