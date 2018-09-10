@@ -241,7 +241,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 recipe or a reference for any existing package in your local cache.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>positional arguments:
   path_or_reference     Path to a folder containing a recipe (conanfile.py or
-                        conanfile.txt) or to a recipe file. e.g.,
+                        conanfile.txt) or to a recipe file. E.g.,
                         ./my_project/conanfile.txt. It could also be a
                         reference
 
@@ -264,7 +264,7 @@ optional arguments:
                         will raise an error.
   -j [JSON], --json [JSON]
                         Only with --build-order option, return the information
-                        in a json. e.g --json=/path/to/filename.json or --json
+                        in a json. E.g., --json=/path/to/filename.json or --json
                         to output the json
   -n ONLY, --only ONLY  Show only the specified fields: &quot;id&quot;, &quot;build_id&quot;,
                         &quot;remote&quot;, &quot;url&quot;, &quot;license&quot;, &quot;requires&quot;, &quot;update&quot;,
@@ -294,7 +294,7 @@ optional arguments:
                         Look in the specified remote server
   -s SETTINGS, --settings SETTINGS
                         Settings to build the package, overwriting the
-                        defaults. e.g., -s compiler=gcc
+                        defaults. E.g., -s compiler=gcc
   -u, --update          Check updates exist from upstream remotes
 </pre></div>
 </div>
@@ -369,8 +369,8 @@ that they are decoupled projects and they can be built in parallel by the CI sys
 &gt; <span class="o">[</span>zlib/1.2.11@conan/stable<span class="o">]</span>, <span class="o">[</span>OpenSSL/1.0.2l@conan/stable<span class="o">]</span>, <span class="o">[</span>Boost/1.60.0@lasote/stable, Poco/1.7.8p3@pocoproject/stable<span class="o">]</span>
 </pre></div>
 </div>
-<p>Also you can get a list of nodes that would be built (simulation) in an install command specifying a build policy with the <code class="docutils literal notranslate"><span class="pre">--build</span></code> parameter:</p>
-<p>e.g., If I try to install <code class="docutils literal notranslate"><span class="pre">Boost/1.60.0&#64;lasote/stable</span></code> recipe with <code class="docutils literal notranslate"><span class="pre">--build</span> <span class="pre">missing</span></code> build policy and <code class="docutils literal notranslate"><span class="pre">arch=x86</span></code>, which libraries will be built?</p>
+<p>Also you can get a list of nodes that would be built (simulation) in an install command specifying a build policy with the <code class="docutils literal notranslate"><span class="pre">--build</span></code> parameter.</p>
+<p>E.g., if I try to install <code class="docutils literal notranslate"><span class="pre">Boost/1.60.0&#64;lasote/stable</span></code> recipe with <code class="docutils literal notranslate"><span class="pre">--build</span> <span class="pre">missing</span></code> build policy and <code class="docutils literal notranslate"><span class="pre">arch=x86</span></code>, which libraries will be built?</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan info Boost/1.60.0@lasote/stable --build missing -s <span class="nv">arch</span><span class="o">=</span>x86
 bzip2/1.0.6@lasote/stable, zlib/1.2.8@lasote/stable, Boost/1.60.0@lasote/stable
 </pre></div>
