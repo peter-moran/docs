@@ -285,7 +285,7 @@ $ conan search Boost/1.60.0@lasote/stable -q <span class="s2">&quot;(arch=x86_64
 </pre></div>
 </div>
 <p>If you specify a query filter for a setting and the package recipe is not restricted by this
-setting, will find all packages:</p>
+setting, Conan won’t find the packages. e.g:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyRecipe</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
     <span class="n">settings</span><span class="o">=</span><span class="s2">&quot;arch&quot;</span>
 </pre></div>
@@ -293,8 +293,11 @@ setting, will find all packages:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan search MyRecipe/1.0@lasote/stable -q <span class="nv">os</span><span class="o">=</span>Windows
 </pre></div>
 </div>
-<p>The query above will find all the <code class="docutils literal notranslate"><span class="pre">MyRecipe</span></code> binary packages, because the recipe doesn’t declare
-“os” as a setting.</p>
+<p>The query above won’t find the <code class="docutils literal notranslate"><span class="pre">MyRecipe</span></code> binary packages (because the recipe doesn’t declare
+“os” as a setting) unless you specify the <code class="docutils literal notranslate"><span class="pre">None</span></code> value:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan search MyRecipe/1.0@lasote/stable -q <span class="nv">os</span><span class="o">=</span>None
+</pre></div>
+</div>
 <p>You can generate a table for all binaries from a given recipe with the <code class="docutils literal notranslate"><span class="pre">--table</span></code> option:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan search zlib/1.2.11@conan/stable --table<span class="o">=</span>file.html -r<span class="o">=</span>conan-center
 $ file.html <span class="c1"># or open the file, double-click</span>
@@ -395,6 +398,7 @@ $ file.html <span class="c1"># or open the file, double-click</span>
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
