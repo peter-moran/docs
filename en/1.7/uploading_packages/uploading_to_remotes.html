@@ -214,11 +214,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </pre></div>
 </div>
 <p>You can easily add any remote. To run a remote on your machine:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">code</span><span class="o">-</span><span class="n">block</span><span class="p">::</span> <span class="n">bash</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan remote add my_local_server http://localhost:9300
 </pre></div>
 </div>
-<blockquote>
-<div>$ conan remote add my_local_server <a class="reference external" href="http://localhost:9300">http://localhost:9300</a></div></blockquote>
 <p>You can search any remote in the same way you search your computer. Actually, many Conan commands
 can specify a specific remote.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan search -r<span class="o">=</span>my_local_server
