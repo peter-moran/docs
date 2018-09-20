@@ -273,11 +273,11 @@ something different, you can just use them individually.</p>
 <p class="last">This approach makes all dependencies visible to all CMake targets and may also
 increase the build times due to unneeded include and library path components.
 This is particularly relevant if you have multiple targets with different dependencies.
-In that case, you should consider using the <span class="xref std std-ref">gen_cmake_targets</span>.</p>
+In that case, you should consider using the <a class="reference internal" href="#cmake-targets-approach"><span class="std std-ref">Targets approach</span></a>.</p>
 </div>
 </div>
 <div class="section" id="targets-approach">
-<h2>Targets approach<a class="headerlink" href="#targets-approach" title="Permalink to this headline">¶</a></h2>
+<span id="cmake-targets-approach"></span><h2>Targets approach<a class="headerlink" href="#targets-approach" title="Permalink to this headline">¶</a></h2>
 <p>For <strong>modern cmake (&gt;=3.1.2)</strong>, you can use the following approach:</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="o">}</span><span class="s">/conanbuildinfo.cmake</span><span class="p">)</span>
 <span class="nb">conan_basic_setup</span><span class="p">(</span><span class="s">TARGETS</span><span class="p">)</span>
@@ -290,7 +290,7 @@ In that case, you should consider using the <span class="xref std std-ref">gen_c
 which defines cmake <code class="docutils literal notranslate"><span class="pre">INTERFACE</span> <span class="pre">IMPORTED</span></code> targets, one per package. These targets, named <code class="docutils literal notranslate"><span class="pre">CONAN_PKG::PackageName</span></code> can be used to link with, instead of using global cmake setup.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">Check the section <a class="reference internal" href="../../reference/generators/cmake.html#cmake-generator"><span class="std std-ref">Reference/Generators/cmake</span></a> to read more about this generator.</p>
+<p class="last">Check the <a class="reference internal" href="../../reference/generators/cmake.html#cmake-generator"><span class="std std-ref">CMake generator</span></a> section to read more.</p>
 </div>
 </div>
 </div>
