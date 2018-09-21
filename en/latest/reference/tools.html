@@ -1369,14 +1369,16 @@ otherwise <code class="docutils literal notranslate"><span class="pre">None</spa
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">collect_libs</span><span class="p">(</span><span class="n">conanfile</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="s2">&quot;lib&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Fetches a list of all libraries in the package folder. Useful to collect not inter-dependent
-libraries or with complex names like <code class="docutils literal notranslate"><span class="pre">libmylib-x86-debug-en.lib</span></code>.</p>
+<p>Returns a list of library names from the libraries (files with extensions <em>.so</em>, <em>.lib</em>, <em>.a</em> and <em>.dylib</em>) located inside the <strong>folder</strong>
+directory relative to the package folder. Useful to collect not inter-dependent libraries or with complex names like
+<code class="docutils literal notranslate"><span class="pre">libmylib-x86-debug-en.lib</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">tools</span>
 
 <span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">libs</span> <span class="o">=</span> <span class="n">tools</span><span class="o">.</span><span class="n">collect_libs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>For UNIX libraries staring with <strong>lib</strong>, like <em>libmath.a</em>, this tool will collect the library name <strong>math</strong>.</p>
 <dl class="docutils">
 <dt><strong>Parameters:</strong></dt>
 <dd><ul class="first last simple">
