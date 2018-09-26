@@ -284,6 +284,32 @@ filenames-&gt;contents in the <code class="docutils literal notranslate"><span c
 <p>Once, it is defined in the <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> you can treat is as a regular package, typically you
 will <code class="docutils literal notranslate"><span class="pre">export</span></code> it first to your local cache, test it, and once it is working fine, you would
 <code class="docutils literal notranslate"><span class="pre">upload</span></code> it to a server.</p>
+<p>You have access to the <code class="docutils literal notranslate"><span class="pre">conanfile</span></code> instance at <code class="docutils literal notranslate"><span class="pre">self.conanfile</span></code> and get information from the requirements:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Variable</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>self.conanfile.deps_cpp_info</td>
+<td><a class="reference internal" href="../reference/conanfile/attributes.html#deps-cpp-info-attributes-reference"><span class="std std-ref">deps_cpp_info</span></a></td>
+</tr>
+<tr class="row-odd"><td>self.conanfile.deps_env_info</td>
+<td><a class="reference internal" href="../reference/conanfile/attributes.html#deps-env-info-attributes-reference"><span class="std std-ref">deps_env_info</span></a></td>
+</tr>
+<tr class="row-even"><td>self.conanfile.deps_user_info</td>
+<td><a class="reference internal" href="../reference/conanfile/attributes.html#deps-user-info-attributes-reference"><span class="std std-ref">deps_user_info</span></a></td>
+</tr>
+<tr class="row-odd"><td>self.conanfile.env</td>
+<td>dict with the applied env vars declared in the requirements</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="premake-generator-example">
 <h2>Premake generator example<a class="headerlink" href="#premake-generator-example" title="Permalink to this headline">¶</a></h2>
