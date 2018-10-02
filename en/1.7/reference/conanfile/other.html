@@ -261,6 +261,9 @@ functionality, doing something like:</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">self.run()</span></code> is a helper to run system commands and throw exceptions when errors occur,
 so that command errors are do not pass unnoticed. It is just a wrapper for <code class="docutils literal notranslate"><span class="pre">os.system()</span></code></p>
+<p>When the environment variable <code class="docutils literal notranslate"><span class="pre">CONAN_PRINT_RUN_COMMANDS</span></code> is set to true (or its equivalent
+<code class="docutils literal notranslate"><span class="pre">print_run_commands</span></code> <em>conan.conf</em> configuration variable, under <code class="docutils literal notranslate"><span class="pre">[general]</span></code>) then all the
+invocations of <code class="docutils literal notranslate"><span class="pre">self.run()</span></code> will print to output the command to be executed.</p>
 <p>Optional parameters:</p>
 <ul class="simple">
 <li><dl class="first docutils">
