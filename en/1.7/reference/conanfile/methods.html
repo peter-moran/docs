@@ -575,6 +575,10 @@ can be done:</p>
 <p>This will be executed before the actual assignment of <code class="docutils literal notranslate"><span class="pre">options</span></code> (then, such <code class="docutils literal notranslate"><span class="pre">options</span></code> values cannot be used inside this function), so
 the command <strong class="command">conan install -o Pkg:shared=True</strong> will raise an exception in Windows saying that <code class="docutils literal notranslate"><span class="pre">shared</span></code> is not an option for such
 package.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Setting conditional default options using <code class="docutils literal notranslate"><span class="pre">config_options()</span></code>: <a class="reference internal" href="attributes.html#conanfile-default-options"><span class="std std-ref">default_options</span></a>.</p>
+</div>
 </div>
 <div class="section" id="requirements">
 <h2>requirements()<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
@@ -1009,7 +1013,11 @@ of the installed package to deploy what it needs from its dependencies.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.7</a></dd>
+            <dd><a href="/en/latest/index.html">1.8</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.7/index.html">1.7</a></dd>
           
         
           
@@ -1032,7 +1040,7 @@ of the installed package to deploy what it needs from its dependencies.</p>
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/1.7/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>

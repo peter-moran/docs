@@ -139,7 +139,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l4"><a class="reference internal" href="#author">author</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#user-channel">user, channel</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#settings">settings</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#options-default-options">options, default_options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#options">options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#default-options">default_options</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#requires">requires</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#build-requires">build_requires</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#exports">exports</a></li>
@@ -334,8 +335,8 @@ contain any text, including hyperlinks to license files elsewhere.</p>
 </div>
 <div class="section" id="author">
 <h2>author<a class="headerlink" href="#author" title="Permalink to this headline">¶</a></h2>
-<p>Intended to add information about the author, in case it is different from the conan user. It is
-possible that the conan user is the name of an organization, project, company or group, and many
+<p>Intended to add information about the author, in case it is different from the Conan user. It is
+possible that the Conan user is the name of an organization, project, company or group, and many
 users have permissions over that account. In this case, the author information can explicitly
 define who is the creator/maintainer of the package</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HelloConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
@@ -421,8 +422,8 @@ independent in VS, we can just remove that setting field:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="options-default-options">
-<span id="conanfile-options"></span><h2>options, default_options<a class="headerlink" href="#options-default-options" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="options">
+<span id="conanfile-options"></span><h2>options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <p>Conan packages recipes can generate different binary packages when different settings are used, but can also customize, per-package any other configuration that will produce a different binary.</p>
 <p>A typical option would be being shared or static for a certain library. Note that this is optional, different packages can have this option, or not (like header-only packages), and different packages can have different values for this option, as opposed to settings, which typically have the same values for all packages being installed (though this can be controlled too, defining different settings for specific packages)</p>
 <p>Options are defined in package recipes as dictionaries of name and allowed values:</p>
@@ -477,22 +478,6 @@ independent in VS, we can just remove that setting field:</p>
     <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;cmake --build . </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">cmake</span><span class="o">.</span><span class="n">build_config</span><span class="p">)</span> <span class="c1"># or cmake.build()</span>
 </pre></div>
 </div>
-<p>You can also specify default option values of the required dependencies:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OtherPkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
-    <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;Pkg/0.1@user/channel&quot;</span>
-    <span class="n">default_options</span> <span class="o">=</span> <span class="s2">&quot;Pkg:pkg_option=value&quot;</span>
-</pre></div>
-</div>
-<p>You can also specify default option values of the conditional required dependencies:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OtherPkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
-    <span class="n">default_options</span> <span class="o">=</span> <span class="s2">&quot;Pkg:pkg_option=value&quot;</span>
-
-    <span class="k">def</span> <span class="nf">requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">os</span> <span class="o">!=</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="s2">&quot;Pkg/0.1@user/channel&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>This will always work, on Windows the <cite>default_options</cite> for the <cite>Pkg/0.1&#64;user/channel</cite> will be ignored, they will only be used on every other os.</p>
 <p>If you need to dynamically set some dependency options, you could do:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OtherPkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
     <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;Pkg/0.1@user/channel&quot;</span>
@@ -505,7 +490,7 @@ independent in VS, we can just remove that setting field:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . -o Pkg:shared<span class="o">=</span>True -o OtherPkg:option<span class="o">=</span>value
 </pre></div>
 </div>
-<p>You can also defined them in consumer <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code>, as described in <a class="reference internal" href="../../using_packages/conanfile_txt.html#options-txt"><span class="std std-ref">this section</span></a></p>
+<p>You can also define them in consumer <em>conanfile.txt</em> as described in <a class="reference internal" href="../../using_packages/conanfile_txt.html#options-txt"><span class="std std-ref">Options</span></a>.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
 Poco/1.9.0@pocoproject/stable
 
@@ -514,7 +499,7 @@ Poco:shared=True
 OpenSSL:shared=True
 </pre></div>
 </div>
-<p>And finally, you can define options in <a class="reference internal" href="../profiles.html#profiles"><span class="std std-ref">profiles</span></a> too, with the same syntax:</p>
+<p>And finally, you can define options in <a class="reference internal" href="../profiles.html#profiles"><span class="std std-ref">Profiles</span></a> too, with the same syntax:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># file &quot;myprofile&quot;
 # use it as $ conan install -pr=myprofile
 [settings]
@@ -527,6 +512,51 @@ MyLib:shared=True
 <p>You can inspect available package options, reading the package recipe, which is conveniently done with:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan get Pkg/0.1@user/channel
 </pre></div>
+</div>
+</div>
+<div class="section" id="default-options">
+<span id="conanfile-default-options"></span><h2>default_options<a class="headerlink" href="#default-options" title="Permalink to this headline">¶</a></h2>
+<p>As you have seen in the examples above, recipe’s default options can be assigned to the desired value. However, you can also specify
+default option values of the required dependencies:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OtherPkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;Pkg/0.1@user/channel&quot;</span>
+    <span class="n">default_options</span> <span class="o">=</span> <span class="s2">&quot;Pkg:pkg_option=value&quot;</span>
+</pre></div>
+</div>
+<p>And it also works with default option values of conditional required dependencies:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OtherPkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">default_options</span> <span class="o">=</span> <span class="s2">&quot;Pkg:pkg_option=value&quot;</span>
+
+    <span class="k">def</span> <span class="nf">requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">os</span> <span class="o">!=</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="s2">&quot;Pkg/0.1@user/channel&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For this example running in Windows, the <cite>default_options</cite> for the <cite>Pkg/0.1&#64;user/channel</cite> will be ignored, they will only be used on every
+other OS.</p>
+<p>You can also set the options conditionally to a final value with <code class="docutils literal notranslate"><span class="pre">config_options()</span></code> instead of using <code class="docutils literal notranslate"><span class="pre">default_options</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OtherPkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;some_option&quot;</span><span class="p">:</span> <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">]}</span>
+    <span class="c1"># Do NOT declare &#39;default_options&#39;, use &#39;config_options()&#39;</span>
+
+    <span class="k">def</span> <span class="nf">config_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">some_option</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">os</span> <span class="o">==</span> <span class="s1">&#39;Android&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">some_option</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">some_option</span> <span class="o">=</span> <span class="bp">False</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Setting options conditionally without a default value works only to define a default value if not defined in command line. However,
+doing it this way will assign a final value to the option and not an initial one, so those option values will not be overridable from
+downstream dependent packages.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Read more about the <a class="reference internal" href="methods.html#method-configure-config-options"><span class="std std-ref">config_options()</span></a> method.</p>
 </div>
 </div>
 <div class="section" id="requires">
@@ -1070,7 +1100,11 @@ to <a class="reference internal" href="../../devtools/running_packages.html#repa
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.7</a></dd>
+            <dd><a href="/en/latest/index.html">1.8</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.7/index.html">1.7</a></dd>
           
         
           
@@ -1093,7 +1127,7 @@ to <a class="reference internal" href="../../devtools/running_packages.html#repa
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/1.7/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>

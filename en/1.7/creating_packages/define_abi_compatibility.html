@@ -256,7 +256,7 @@ binaries - a separate ID is generated for each configuration.</p>
 <p>When developers using the package use the same settings as one of those uploaded binaries, the computed package ID will be
 identical causing the binary to be retrieved and reused without the need of rebuilding it from the sources.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">options</span></code> behavior is very similar. The main difference is that <code class="docutils literal notranslate"><span class="pre">options</span></code> can be more easily defined at the package level and they can
-be defaulted. Check the <a class="reference internal" href="../reference/conanfile/attributes.html#conanfile-options"><span class="std std-ref">options, default_options</span></a> reference.</p>
+be defaulted. Check the <a class="reference internal" href="../reference/conanfile/attributes.html#conanfile-options"><span class="std std-ref">options</span></a> reference.</p>
 <p>Note this simple scenario of a <strong>header-only</strong> library. The package does not need to be built, and it will not have any ABI issues at all.
 The recipe for such a package will be to generate a single binary package, no more. This is easily achieved by not declaring
 <code class="docutils literal notranslate"><span class="pre">settings</span></code> nor <code class="docutils literal notranslate"><span class="pre">options</span></code> in the recipe as follows:</p>
@@ -731,7 +731,11 @@ write:</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.7</a></dd>
+            <dd><a href="/en/latest/index.html">1.8</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.7/index.html">1.7</a></dd>
           
         
           
@@ -754,7 +758,7 @@ write:</p>
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/1.7/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>
