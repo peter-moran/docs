@@ -121,8 +121,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../devtools.html">Package apps and devtools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../extending.html">Extending Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../integrations.html">Integrations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../howtos.html">Howtos</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../reference.html">Reference</a><ul class="current">
@@ -179,16 +180,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#tools-collect-libs">tools.collect_libs()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-pkgconfig">tools.PkgConfig()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-git">tools.Git()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tools-svn">tools.SVN()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-is-apple-os">tools.is_apple_os()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-to-apple-arch">tools.to_apple_arch()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-apple-sdk-name">tools.apple_sdk_name()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-apple-deployment-target-env">tools.apple_deployment_target_env()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-apple-deployment-target-flag">tools.apple_deployment_target_flag()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-xcrun">tools.XCRun()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tools-latest-vs-version-installed">tools.latest_vs_version_installed()</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="config_files.html">Configuration files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="env_vars.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html">Plugins</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../videos.html">Videos and links</a></li>
@@ -833,7 +837,7 @@ manager block ends, the environment variables will be unset.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">This way of reusing python code from other recipes can be improved via <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code>.
-See this section: <a class="reference internal" href="../mastering/python_requires.html#python-requires"><span class="std std-ref">Python requires: reusing python code in recipes</span></a></p>
+See this section: <a class="reference internal" href="../extending/python_requires.html#python-requires"><span class="std std-ref">Python requires: reusing python code in recipes</span></a></p>
 </div>
 <p>This tool is automatically applied in the conanfile methods unless <a class="reference internal" href="conanfile/attributes.html#apply-env"><span class="std std-ref">apply_env</span></a> is deactivated, so
 any PYTHONPATH inherited from the requirements will be automatically available.</p>
@@ -940,14 +944,14 @@ It is mostly used by the conan downloads and unzip progress, but you can use it 
 </div>
 <div class="section" id="tools-get-gnu-triplet">
 <h2>tools.get_gnu_triplet()<a class="headerlink" href="#tools-get-gnu-triplet" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_gnu_triplet</span><span class="p">(</span><span class="n">os</span><span class="p">,</span> <span class="n">arch</span><span class="p">,</span> <span class="n">compiler</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_gnu_triplet</span><span class="p">(</span><span class="n">os_</span><span class="p">,</span> <span class="n">arch</span><span class="p">,</span> <span class="n">compiler</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Returns string with GNU like <code class="docutils literal notranslate"><span class="pre">&lt;machine&gt;-&lt;vendor&gt;-&lt;op_system&gt;</span></code> triplet.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd><ul class="first last simple">
-<li><strong>os</strong> (Required): Operating system to be used to create the triplet.</li>
+<li><strong>os_</strong> (Required): Operating system to be used to create the triplet.</li>
 <li><strong>arch</strong> (Required): Architecture to be used to create the triplet.</li>
 <li><strong>compiler</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Compiler used to create the triplet (only needed for Windows).</li>
 </ul>
@@ -1366,15 +1370,16 @@ otherwise <code class="docutils literal notranslate"><span class="pre">None</spa
 </div>
 <div class="section" id="tools-collect-libs">
 <h2>tools.collect_libs()<a class="headerlink" href="#tools-collect-libs" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">collect_libs</span><span class="p">(</span><span class="n">conanfile</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="s2">&quot;lib&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">collect_libs</span><span class="p">(</span><span class="n">conanfile</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Returns a list of library names from the libraries (files with extensions <em>.so</em>, <em>.lib</em>, <em>.a</em> and <em>.dylib</em>) located inside the <strong>folder</strong>
-directory relative to the package folder. Useful to collect not inter-dependent libraries or with complex names like
-<code class="docutils literal notranslate"><span class="pre">libmylib-x86-debug-en.lib</span></code>.</p>
+<p>Returns a list of library names from the libraries (files with extensions <em>.so</em>, <em>.lib</em>, <em>.a</em> and <em>.dylib</em>) located inside the
+<code class="docutils literal notranslate"><span class="pre">conanfile.cpp_info.libdirs</span></code> (by default) or the <strong>folder</strong> directory relative to the package folder. Useful to collect not
+inter-dependent libraries or with complex names like <code class="docutils literal notranslate"><span class="pre">libmylib-x86-debug-en.lib</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">tools</span>
 
 <span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">libdirs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;lib&quot;</span><span class="p">,</span> <span class="s2">&quot;other_libdir&quot;</span><span class="p">]</span>  <span class="c1"># Deafult value is &#39;lib&#39;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">libs</span> <span class="o">=</span> <span class="n">tools</span><span class="o">.</span><span class="n">collect_libs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1382,15 +1387,16 @@ directory relative to the package folder. Useful to collect not inter-dependent 
 <dl class="docutils">
 <dt><strong>Parameters:</strong></dt>
 <dd><ul class="first last simple">
-<li><strong>conanfile</strong> (Required): A <cite>ConanFile</cite> object from which to get the <cite>package_folder</cite>.</li>
-<li><strong>folder</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">&quot;lib&quot;</span></code>): The subfolder where the library files are.</li>
+<li><strong>conanfile</strong> (Required): A <code class="docutils literal notranslate"><span class="pre">ConanFile</span></code> object to get the <code class="docutils literal notranslate"><span class="pre">package_folder</span></code> and <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code>.</li>
+<li><strong>folder</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): String indicating the subfolder name inside <code class="docutils literal notranslate"><span class="pre">conanfile.package_folder</span></code> where
+the library files are.</li>
 </ul>
 </dd>
 </dl>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">This tool collects the libraries searching directly inside the package folder and returns them
-in no specific order. If libraries are inter-dependent, then package_info() method should order
+in no specific order. If libraries are inter-dependent, then <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method should order
 them to achieve correct linking order.</p>
 </div>
 </div>
@@ -1475,7 +1481,8 @@ them to achieve correct linking order.</p>
 <span id="id9"></span><h2>tools.Git()<a class="headerlink" href="#tools-git" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Git</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">verify_ssl</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">force_english</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">runner</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">verify_ssl</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">force_english</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">runner</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
 </pre></div>
 </div>
 <p>Wrapper of the <code class="docutils literal notranslate"><span class="pre">git</span></code> tool.</p>
@@ -1508,8 +1515,9 @@ them to achieve correct linking order.</p>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><strong>checkout(element)</strong>:</dt>
-<dd>Checkout a branch, commit or tag.</dd>
+<dt><strong>checkout(element, submodule=None)</strong>:</dt>
+<dd>Checkout a branch, commit or tag given by <code class="docutils literal notranslate"><span class="pre">element</span></code>. Argument <code class="docutils literal notranslate"><span class="pre">submodule</span></code> can get values in
+<code class="docutils literal notranslate"><span class="pre">shallow</span></code> or <code class="docutils literal notranslate"><span class="pre">recursive</span></code> to instruct what to do with submodules.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
@@ -1518,7 +1526,12 @@ them to achieve correct linking order.</p>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><strong>get_revision()</strong>:</dt>
+<dt><strong>get_qualified_remote_url()</strong>:</dt>
+<dd>Returns the remote url (see <code class="docutils literal notranslate"><span class="pre">get_remote_url()</span></code>) but with forward slashes if it is a local folder.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>get_revision(), get_commit()</strong>:</dt>
 <dd>Gets the current commit hash.</dd>
 </dl>
 </li>
@@ -1530,6 +1543,119 @@ them to achieve correct linking order.</p>
 <li><dl class="first docutils">
 <dt><strong>excluded_files()</strong>:</dt>
 <dd>Gets a list of the files and folders that would be excluded by <em>.gitignore</em> file.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>is_local_repository()</strong>:</dt>
+<dd>Returns <cite>True</cite> if the remote is a local folder.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>is_pristine()</strong>:</dt>
+<dd>Returns <cite>True</cite> if there aren’t modified or uncommitted files in the working copy.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>get_repo_root()</strong>:</dt>
+<dd>Returns the root folder of the working copy.</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="tools-svn">
+<span id="id10"></span><h2>tools.SVN()<a class="headerlink" href="#tools-svn" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SVN</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">verify_ssl</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">force_english</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">runner</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>Wrapper of the <code class="docutils literal notranslate"><span class="pre">svn</span></code> tool.</p>
+<p>Parameters of the constructor:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>folder</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Specify a subfolder where the code will be cloned. If not specified it will clone in the current directory.</li>
+<li><strong>verify_ssl</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): Verify SSL certificate of the specified <strong>url</strong>.</li>
+<li><strong>username</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): When present, it will be used as the login to authenticate with the remote.</li>
+<li><strong>password</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): When present, it will be used as the password to authenticate with the remote.</li>
+<li><strong>force_english</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): The encoding of the tool will be forced to use <code class="docutils literal notranslate"><span class="pre">en_US.UTF-8</span></code> to ease the output parsing.</li>
+<li><strong>runner</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): By default <code class="docutils literal notranslate"><span class="pre">subprocess.check_output</span></code> will be used to invoke the <code class="docutils literal notranslate"><span class="pre">svn</span></code> tool.</li>
+</ul>
+</div></blockquote>
+<p>Methods:</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt><strong>version()</strong>:</dt>
+<dd>Retrieve version from the installed SVN client.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>run(command)</strong>:</dt>
+<dd>Run any “svn” command, e.g., <code class="docutils literal notranslate"><span class="pre">run(&quot;status&quot;)</span></code></dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>get_url_with_credentials(url)</strong>:</dt>
+<dd>Return the passed url but containing the <code class="docutils literal notranslate"><span class="pre">username</span></code> and <code class="docutils literal notranslate"><span class="pre">password</span></code> in the URL to authenticate (only if <code class="docutils literal notranslate"><span class="pre">username</span></code> and <code class="docutils literal notranslate"><span class="pre">password</span></code> is specified)</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>checkout(url, revision=”HEAD”)</strong>:</dt>
+<dd>Checkout the revision number given by <code class="docutils literal notranslate"><span class="pre">revision</span></code> from the specified <code class="docutils literal notranslate"><span class="pre">url</span></code>.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>update(revision=”HEAD”)</strong>:</dt>
+<dd>Update working copy to revision number given by <code class="docutils literal notranslate"><span class="pre">revision</span></code>.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>get_remote_url()</strong>:</dt>
+<dd>Returns the remote url of working copy.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>get_qualified_remote_url()</strong>:</dt>
+<dd>Returns the remote url of the working copy with the
+<a class="reference external" href="http://svnbook.red-bean.com/en/1.7/svn.advanced.pegrevs.html">peg revision</a> appended to it.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>get_revision()</strong>:</dt>
+<dd>Gets the current revision number from the repo server.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>get_last_changed_revision(use_wc_root=True)</strong>:</dt>
+<dd>Returns the revision number corresponding to the last changed item in the working folder
+(<code class="docutils literal notranslate"><span class="pre">use_wc_root=False</span></code>) or in the working copy root (<code class="docutils literal notranslate"><span class="pre">use_wc_root=True</span></code>).</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>get_branch()</strong>:</dt>
+<dd>Tries to deduce the branch name from the
+<a class="reference external" href="http://svnbook.red-bean.com/en/1.7/svn.branchmerge.maint.html">standard SVN layout</a>. Will
+raise if cannot resolve it.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>excluded_files()</strong>:</dt>
+<dd>Gets a list of the files and folders that are marked to be ignored.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>is_local_repository()</strong>:</dt>
+<dd>Returns <cite>True</cite> if the remote is a local folder.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>is_pristine()</strong>:</dt>
+<dd>Returns <cite>True</cite> if there aren’t modified or uncommitted files in the working copy.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>get_repo_root()</strong>:</dt>
+<dd>Returns the root folder of the working copy.</dd>
 </dl>
 </li>
 </ul>
@@ -1631,6 +1757,14 @@ them to achieve correct linking order.</p>
 </dd>
 </dl>
 </div>
+<div class="section" id="tools-latest-vs-version-installed">
+<h2>tools.latest_vs_version_installed()<a class="headerlink" href="#tools-latest-vs-version-installed" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">latest_vs_version_installed</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns a string with the major version of latest Microsoft Visual Studio available on machine. If no Microsoft Visual Studio installed,
+it returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</div>
 </div>
 
 
@@ -1681,7 +1815,11 @@ them to achieve correct linking order.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.7</a></dd>
+            <dd><a href="/en/latest/index.html">1.8</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.7/index.html">1.7</a></dd>
           
         
           
@@ -1704,7 +1842,7 @@ them to achieve correct linking order.</p>
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/1.7/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>

@@ -42,7 +42,7 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="conan 1.7.4 documentation" href="../index.html"/>
         <link rel="up" title="Reference" href="../reference.html"/>
-        <link rel="next" title="Videos and links" href="../videos.html"/>
+        <link rel="next" title="Plugins" href="plugins.html"/>
         <link rel="prev" title="artifacts.properties" href="config_files/artifacts.properties.html"/>
 
  <!-- Google Tag Manager -->
@@ -121,8 +121,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../devtools.html">Package apps and devtools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../extending.html">Extending Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../integrations.html">Integrations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../howtos.html">Howtos</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../reference.html">Reference</a><ul class="current">
@@ -142,6 +143,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#conan-color-display">CONAN_COLOR_DISPLAY</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-compression-level">CONAN_COMPRESSION_LEVEL</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-cpu-count">CONAN_CPU_COUNT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conan-default-profile-path">CONAN_DEFAULT_PROFILE_PATH</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-non-interactive">CONAN_NON_INTERACTIVE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-env-xxxx-yyyy">CONAN_ENV_XXXX_YYYY</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-log-run-to-file">CONAN_LOG_RUN_TO_FILE</a></li>
@@ -150,6 +152,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#conan-login-username-conan-login-username-remote-name">CONAN_LOGIN_USERNAME, CONAN_LOGIN_USERNAME_{REMOTE_NAME}</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-make-program">CONAN_MAKE_PROGRAM</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-password-conan-password-remote-name">CONAN_PASSWORD, CONAN_PASSWORD_{REMOTE_NAME}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conan-plugins">CONAN_PLUGINS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-print-run-commands">CONAN_PRINT_RUN_COMMANDS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-read-only-cache">CONAN_READ_ONLY_CACHE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-run-tests">CONAN_RUN_TESTS</a></li>
@@ -165,6 +168,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#conan-vs-installation-preference">CONAN_VS_INSTALLATION_PREFERENCE</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html">Plugins</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../videos.html">Videos and links</a></li>
@@ -243,11 +247,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="environment-variables">
 <span id="env-vars"></span><h1>Environment variables<a class="headerlink" href="#environment-variables" title="Permalink to this headline">¶</a></h1>
-<p>These are the environment variables used to customize conan.</p>
-<p>Most of them can be set in the <code class="docutils literal notranslate"><span class="pre">conan.conf</span></code> configuration file (inside your <code class="docutils literal notranslate"><span class="pre">&lt;userhome&gt;/.conan</span></code> folder).</p>
+<p>These are the environment variables used to customize Conan.</p>
+<blockquote>
+<div>Most of them can be set in the <em>conan.conf</em> configuration file (inside your <code class="docutils literal notranslate"><span class="pre">&lt;userhome&gt;/.conan</span></code> folder). However, this environment
+variables will take precedence over the <em>conan.conf</em> configuration.</div></blockquote>
 <div class="section" id="cmake-related-variables">
 <span id="id1"></span><h2>CMAKE RELATED VARIABLES<a class="headerlink" href="#cmake-related-variables" title="Permalink to this headline">¶</a></h2>
-<p>There are some conan environment variables that will set the equivalent CMake variable using the <a class="reference internal" href="generators/cmake.html#cmake-generator"><span class="std std-ref">cmake generator</span></a> and
+<p>There are some Conan environment variables that will set the equivalent CMake variable using the <a class="reference internal" href="generators/cmake.html#cmake-generator"><span class="std std-ref">cmake generator</span></a> and
 the <a class="reference internal" href="build_helpers/cmake.html#cmake-reference"><span class="std std-ref">CMake build tool</span></a>:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -335,6 +341,12 @@ bigger archives but much better compression speed.</p>
 <p><strong>Defaulted to</strong>: Number of available cores in your machine.</p>
 <p>Set the number of cores that the <a class="reference internal" href="tools.html#cpu-count"><span class="std std-ref">tools.cpu_count()</span></a> will return.
 Conan recipes can use the cpu_count() tool to build the library using more than one core.</p>
+</div>
+<div class="section" id="conan-default-profile-path">
+<h2>CONAN_DEFAULT_PROFILE_PATH<a class="headerlink" href="#conan-default-profile-path" title="Permalink to this headline">¶</a></h2>
+<p><strong>Defaulted to</strong>: Not defined</p>
+<p>This variable can be used to define a path to an existing profile file that Conan will use
+as default. If relative, the path will be resolved from the profiles folder.</p>
 </div>
 <div class="section" id="conan-non-interactive">
 <h2>CONAN_NON_INTERACTIVE<a class="headerlink" href="#conan-non-interactive" title="Permalink to this headline">¶</a></h2>
@@ -442,6 +454,11 @@ Conan will request to the user to input a password.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>SET <span class="nv">CONAN_PASSWORD_CONAN_CENTER</span><span class="o">=</span>Mypassword
 </pre></div>
 </div>
+</div>
+<div class="section" id="conan-plugins">
+<h2>CONAN_PLUGINS<a class="headerlink" href="#conan-plugins" title="Permalink to this headline">¶</a></h2>
+<p><strong>Defaulted to</strong>: Not defined</p>
+<p>Can be set to a comma separated list with the names of the plugins that will be executed when running a Conan command.</p>
 </div>
 <div class="section" id="conan-print-run-commands">
 <span id="id4"></span><h2>CONAN_PRINT_RUN_COMMANDS<a class="headerlink" href="#conan-print-run-commands" title="Permalink to this headline">¶</a></h2>
@@ -630,7 +647,7 @@ that uses <code class="docutils literal notranslate"><span class="pre">tools.vs_
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../videos.html" class="btn btn-neutral float-right" title="Videos and links" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="plugins.html" class="btn btn-neutral float-right" title="Plugins" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="config_files/artifacts.properties.html" class="btn btn-neutral" title="artifacts.properties" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -668,7 +685,11 @@ that uses <code class="docutils literal notranslate"><span class="pre">tools.vs_
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.7</a></dd>
+            <dd><a href="/en/latest/index.html">1.8</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.7/index.html">1.7</a></dd>
           
         
           
@@ -691,7 +712,7 @@ that uses <code class="docutils literal notranslate"><span class="pre">tools.vs_
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/1.7/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>

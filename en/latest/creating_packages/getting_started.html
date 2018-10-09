@@ -138,8 +138,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../devtools.html">Package apps and devtools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../extending.html">Extending Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../integrations.html">Integrations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../howtos.html">Howtos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
@@ -259,7 +260,7 @@ that our package is correctly created.</p>
     <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;0.1&quot;</span>
     <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span>
     <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">]}</span>
-    <span class="n">default_options</span> <span class="o">=</span> <span class="s2">&quot;shared=False&quot;</span>
+    <span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">}</span>
     <span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;cmake&quot;</span>
 
     <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -344,6 +345,11 @@ information is used for files created by generators to be used by consumers, as
 <em>conanbuildinfo.cmake</em>.</p>
 </li>
 </ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When writing your own <em>conanfile.py</em> references, please bear in mind that you should follow the rules in
+<a class="reference internal" href="../reference/conanfile.html#conanfile-reference"><span class="std std-ref">conanfile.py</span></a></p>
+</div>
 </div>
 <div class="section" id="the-test-package-folder">
 <h2>The test_package Folder<a class="headerlink" href="#the-test-package-folder" title="Permalink to this headline">¶</a></h2>
@@ -517,7 +523,11 @@ If not specified other. the package will be static.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.7</a></dd>
+            <dd><a href="/en/latest/index.html">1.8</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.7/index.html">1.7</a></dd>
           
         
           
@@ -540,7 +550,7 @@ If not specified other. the package will be static.</p>
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/1.7/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>

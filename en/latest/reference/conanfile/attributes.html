@@ -121,8 +121,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../../uploading_packages.html">Uploading Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../developing_packages.html">Developing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../devtools.html">Package apps and devtools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../mastering.html">Mastering conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mastering.html">Mastering Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../extending.html">Extending Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../integrations.html">Integrations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../howtos.html">Howtos</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../reference.html">Reference</a><ul class="current">
@@ -139,7 +140,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l4"><a class="reference internal" href="#author">author</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#user-channel">user, channel</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#settings">settings</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#options-default-options">options, default_options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#options">options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#default-options">default_options</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#requires">requires</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#build-requires">build_requires</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#exports">exports</a></li>
@@ -175,6 +177,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="../tools.html">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../config_files.html">Configuration files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../env_vars.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins.html">Plugins</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../videos.html">Videos and links</a></li>
@@ -330,12 +333,17 @@ the <strong class="command">conan info</strong> command and possibly other searc
 </div>
 <p>This attribute can contain several, comma separated licenses. It is a text string, so it can
 contain any text, including hyperlinks to license files elsewhere.</p>
+<p>However, we strongly recommend packagers of Open-Source projects to use
+[SPDX](<a class="reference external" href="https://spdx.org/">https://spdx.org/</a>) identifiers from the [SPDX license
+list](<a class="reference external" href="https://spdx.org/licenses/">https://spdx.org/licenses/</a>) instead of free-formed text. This will help
+people wanting to automate license compatibility checks, like consumers of your
+package, or you if your package has Open-Source dependencies.</p>
 <p>This is a recommended, but not mandatory attribute.</p>
 </div>
 <div class="section" id="author">
 <h2>author<a class="headerlink" href="#author" title="Permalink to this headline">¶</a></h2>
-<p>Intended to add information about the author, in case it is different from the conan user. It is
-possible that the conan user is the name of an organization, project, company or group, and many
+<p>Intended to add information about the author, in case it is different from the Conan user. It is
+possible that the Conan user is the name of an organization, project, company or group, and many
 users have permissions over that account. In this case, the author information can explicitly
 define who is the creator/maintainer of the package</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HelloConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
@@ -421,8 +429,8 @@ independent in VS, we can just remove that setting field:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="options-default-options">
-<span id="conanfile-options"></span><h2>options, default_options<a class="headerlink" href="#options-default-options" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="options">
+<span id="conanfile-options"></span><h2>options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <p>Conan packages recipes can generate different binary packages when different settings are used, but can also customize, per-package any other configuration that will produce a different binary.</p>
 <p>A typical option would be being shared or static for a certain library. Note that this is optional, different packages can have this option, or not (like header-only packages), and different packages can have different values for this option, as opposed to settings, which typically have the same values for all packages being installed (though this can be controlled too, defining different settings for specific packages)</p>
 <p>Options are defined in package recipes as dictionaries of name and allowed values:</p>
@@ -431,59 +439,142 @@ independent in VS, we can just remove that setting field:</p>
     <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">]}</span>
 </pre></div>
 </div>
-<p>There is an special value <code class="docutils literal notranslate"><span class="pre">ANY</span></code> to allow any value for a given option. The range of values for such an option will not be checked, and any value (as string) will be accepted:</p>
+<p>Options are defined as a python dictionary inside the <code class="docutils literal notranslate"><span class="pre">ConanFile</span></code> where each key must be a
+string with the identifier of the option and the value be a list with all the possible option
+values:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyPkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
     <span class="o">...</span>
-    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">],</span> <span class="s2">&quot;commit&quot;</span><span class="p">:</span> <span class="s2">&quot;ANY&quot;</span><span class="p">}</span>
-    <span class="n">default_options</span> <span class="o">=</span> <span class="s2">&quot;shared=False&quot;</span><span class="p">,</span> <span class="s2">&quot;commit=None&quot;</span>
-
-    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">commit</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;This evaluates to True&quot;</span><span class="p">)</span>
-        <span class="c1"># WARNING: Following comparisons are not recommended as this may cause trouble</span>
-        <span class="c1"># with the type conversion (String &lt;-&gt; None) applied to default_options.</span>
-        <span class="c1"># Use the above check instead.</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">commit</span> <span class="o">==</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;This also evaluates to True&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">commit</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;This evaluates to False&quot;</span><span class="p">)</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">],</span>
+               <span class="s2">&quot;option1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;value1&quot;</span><span class="p">,</span> <span class="s2">&quot;value2&quot;</span><span class="p">],}</span>
 </pre></div>
 </div>
-<p>When a package is installed, it will need all its options be defined a value. Those values can be defined in command line, profiles, but they can also (and they will be typically) defined in conan package recipes:</p>
+<p>Values for each option can be typed or plain strings, and there is an special value, <code class="docutils literal notranslate"><span class="pre">ANY</span></code>, for
+options that can take any value.</p>
+<p>The attribute <code class="docutils literal notranslate"><span class="pre">default_options</span></code> has the purpose of defining the default values for the options
+if the consumer (consuming recipe, project, profile or the user through the command line) does
+not define them. It is worth noticing that <strong>an uninitialized option will get the value</strong> <code class="docutils literal notranslate"><span class="pre">None</span></code>
+<strong>and it will be a valid value if its contained in the list of valid values</strong>. This attribute
+should be defined as a python dictionary too, although other definitions could be valid for
+legacy reasons.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyPkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
     <span class="o">...</span>
-    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">],</span> <span class="s2">&quot;fPIC&quot;</span><span class="p">:</span> <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">]}</span>
-    <span class="n">default_options</span> <span class="o">=</span> <span class="s2">&quot;shared=False&quot;</span><span class="p">,</span> <span class="s2">&quot;fPIC=False&quot;</span>
-</pre></div>
-</div>
-<p>The options will typically affect the <code class="docutils literal notranslate"><span class="pre">build()</span></code> of the package in some way, for example:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyPkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
-    <span class="o">...</span>
-    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">]}</span>
-    <span class="n">default_options</span> <span class="o">=</span> <span class="s2">&quot;shared=False&quot;</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">],</span>
+               <span class="s2">&quot;option1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;value1&quot;</span><span class="p">,</span> <span class="s2">&quot;value2&quot;</span><span class="p">],</span>
+               <span class="s2">&quot;option2&quot;</span><span class="p">:</span> <span class="s2">&quot;ANY&quot;</span><span class="p">}</span>
+    <span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+                       <span class="s2">&quot;option1&quot;</span><span class="p">:</span> <span class="s2">&quot;value1&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;option2&quot;</span><span class="p">:</span> <span class="mi">42</span><span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">shared</span> <span class="o">=</span> <span class="s2">&quot;-DBUILD_SHARED_LIBS=ON&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">shared</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
         <span class="n">cmake</span> <span class="o">=</span> <span class="n">CMake</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;cmake . </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cmake</span><span class="o">.</span><span class="n">command_line</span><span class="p">,</span> <span class="n">shared</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;cmake --build . </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">cmake</span><span class="o">.</span><span class="n">build_config</span><span class="p">)</span>
+        <span class="o">...</span>
 </pre></div>
 </div>
-<p>Note that you have to consider the option properly in your build scripts. In this case, we are using the CMake way. So if you had explicit <strong>STATIC</strong> linkage in the <strong>CMakeLists.txt</strong> file, you have to remove it. If you are using VS, you also need to change your code to correctly import/export symbols for the dll.</p>
-<p>This is only an example. Actually, the <code class="docutils literal notranslate"><span class="pre">CMake</span></code> helper already automates this, so it is enough to do:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="n">cmake</span> <span class="o">=</span> <span class="n">CMake</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="c1"># internally it will check self.options.shared</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;cmake . </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">cmake</span><span class="o">.</span><span class="n">command_line</span><span class="p">)</span> <span class="c1"># or cmake.configure()</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;cmake --build . </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">cmake</span><span class="o">.</span><span class="n">build_config</span><span class="p">)</span> <span class="c1"># or cmake.build()</span>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can inspect available package options reading the package recipe, which can be
+done with the command <strong class="command">conan get MyPkg/0.1&#64;user/channel</strong>.</p>
+</div>
+<p>As we mentioned before, values for options in a recipe can be defined using different ways, let’s
+go over all of them for the example recipe <code class="docutils literal notranslate"><span class="pre">MyPkg</span></code> defined above:</p>
+<ul>
+<li><p class="first">Using the attribute <code class="docutils literal notranslate"><span class="pre">default_options</span></code> in the recipe itself.</p>
+</li>
+<li><p class="first">In the <code class="docutils literal notranslate"><span class="pre">default_options</span></code> of a recipe that requires this one: the values defined here
+will override the default ones in the recipe.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OtherPkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;MyPkg/0.1@user/channel&quot;</span>
+    <span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;MyPkg:shared&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">}</span>
 </pre></div>
 </div>
-<p>You can also specify default option values of the required dependencies:</p>
+<p>Of course, this will work in the same way working with a <em>conanfile.txt</em>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
+MyPkg/0.1@user/channel
+
+[options]
+MyPkg:shared=False
+</pre></div>
+</div>
+</li>
+<li><p class="first">It is also possible to define default values for the options of a recipe using
+<a class="reference internal" href="../profiles.html#profiles"><span class="std std-ref">profiles</span></a>. They will apply whenever that recipe is used:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># file &quot;myprofile&quot;
+# use it as $ conan install -pr=myprofile
+[settings]
+setting=value
+
+[options]
+MyPkg:shared=False
+</pre></div>
+</div>
+</li>
+<li><p class="first">Last way of defining values for options, with the highest priority over them all, is to pass
+these values using the command argument <strong class="command">-o</strong> in the command line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . -o MyPkg:shared<span class="o">=</span>True -o OtherPkg:option<span class="o">=</span>value
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Values for options can be also conditionally assigned (or even deleted) in the methods
+<code class="docutils literal notranslate"><span class="pre">configure()</span></code> and <code class="docutils literal notranslate"><span class="pre">config_options()</span></code>, the
+<a class="reference internal" href="methods.html#method-configure-config-options"><span class="std std-ref">corresponding section</span></a> has examples documenting these
+use cases. However, conditionally assigning values to options can have it drawbacks as it is
+explained in the <a class="reference internal" href="../../mastering/conditional.html#conditional-settings-options-requirements"><span class="std std-ref">mastering section</span></a>.</p>
+<p>One important notice is how these options values are evaluated and how the different conditionals
+that we can implement in Python will behave. As seen before, values for options can be defined
+in Python code (assigning a dictionary to <code class="docutils literal notranslate"><span class="pre">default_options</span></code>) or through strings (using a
+<code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code>, a profile file, or through the command line). In order to provide a
+consistent implementation take into account these considerations:</p>
+<ul>
+<li><p class="first">Evaluation for the typed value and the string one is the same, so all these inputs would
+behave the same:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">default_options</span> <span class="pre">=</span> <span class="pre">{&quot;shared&quot;:</span> <span class="pre">True,</span> <span class="pre">&quot;option&quot;:</span> <span class="pre">None}</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">default_options</span> <span class="pre">=</span> <span class="pre">{&quot;shared&quot;:</span> <span class="pre">&quot;True&quot;,</span> <span class="pre">&quot;option&quot;:</span> <span class="pre">&quot;None&quot;}</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">MyPkg:shared=True</span></code>, <code class="docutils literal notranslate"><span class="pre">MyPkg:option=None</span></code> on profiles, command line or <em>conanfile.txt</em></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>Implicit conversion to boolean is case insensitive</strong>, so the
+expression <code class="docutils literal notranslate"><span class="pre">bool(self.options.option)</span></code>:</p>
+<blockquote>
+<div><ul class="simple">
+<li>equals <code class="docutils literal notranslate"><span class="pre">True</span></code> for the values <code class="docutils literal notranslate"><span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;True&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;true&quot;</span></code>, and any other value that
+would be evaluated the same way in Python code.</li>
+<li>equals <code class="docutils literal notranslate"><span class="pre">False</span></code> for the values <code class="docutils literal notranslate"><span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;False&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;false&quot;</span></code>, also for the empty
+string and for <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;0&quot;</span></code> as expected.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Comparaison using <code class="docutils literal notranslate"><span class="pre">is</span></code> is always equals to <code class="docutils literal notranslate"><span class="pre">False</span></code> because the types would be different as
+the option value is encapsulated inside a Conan class.</p>
+</li>
+<li><p class="first">Explicit comparaisons with the <code class="docutils literal notranslate"><span class="pre">==</span></code> symbol <strong>are case sensitive</strong>, so:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">self.options.option</span> <span class="pre">=</span> <span class="pre">&quot;False&quot;</span></code> satisfies <code class="docutils literal notranslate"><span class="pre">assert</span> <span class="pre">self.options.option</span> <span class="pre">==</span> <span class="pre">False</span></code>,
+<code class="docutils literal notranslate"><span class="pre">assert</span> <span class="pre">self.options.option</span> <span class="pre">==</span> <span class="pre">&quot;False&quot;</span></code>, but <code class="docutils literal notranslate"><span class="pre">assert</span> <span class="pre">self.options.option</span> <span class="pre">!=</span> <span class="pre">&quot;false&quot;</span></code>.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">A different behaviour has <code class="docutils literal notranslate"><span class="pre">self.options.option</span> <span class="pre">=</span> <span class="pre">None</span></code>, because
+<code class="docutils literal notranslate"><span class="pre">assert</span> <span class="pre">self.options.option</span> <span class="pre">!=</span> <span class="pre">None</span></code>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="default-options">
+<span id="conanfile-default-options"></span><h2>default_options<a class="headerlink" href="#default-options" title="Permalink to this headline">¶</a></h2>
+<p>As you have seen in the examples above, recipe’s default options can be assigned to the desired value. However, you can also specify
+default option values of the required dependencies:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OtherPkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
     <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;Pkg/0.1@user/channel&quot;</span>
     <span class="n">default_options</span> <span class="o">=</span> <span class="s2">&quot;Pkg:pkg_option=value&quot;</span>
 </pre></div>
 </div>
-<p>You can also specify default option values of the conditional required dependencies:</p>
+<p>And it also works with default option values of conditional required dependencies:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OtherPkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
     <span class="n">default_options</span> <span class="o">=</span> <span class="s2">&quot;Pkg:pkg_option=value&quot;</span>
 
@@ -492,41 +583,31 @@ independent in VS, we can just remove that setting field:</p>
             <span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="s2">&quot;Pkg/0.1@user/channel&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>This will always work, on Windows the <cite>default_options</cite> for the <cite>Pkg/0.1&#64;user/channel</cite> will be ignored, they will only be used on every other os.</p>
-<p>If you need to dynamically set some dependency options, you could do:</p>
+<p>For this example running in Windows, the <cite>default_options</cite> for the <cite>Pkg/0.1&#64;user/channel</cite> will be ignored, they will only be used on every
+other OS.</p>
+<p>You can also set the options conditionally to a final value with <code class="docutils literal notranslate"><span class="pre">config_options()</span></code> instead of using <code class="docutils literal notranslate"><span class="pre">default_options</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OtherPkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
-    <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;Pkg/0.1@user/channel&quot;</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;some_option&quot;</span><span class="p">:</span> <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">]}</span>
+    <span class="c1"># Do NOT declare &#39;default_options&#39;, use &#39;config_options()&#39;</span>
 
-    <span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;Pkg&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pkg_option</span> <span class="o">=</span> <span class="s2">&quot;value&quot;</span>
+    <span class="k">def</span> <span class="nf">config_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">some_option</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">os</span> <span class="o">==</span> <span class="s1">&#39;Android&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">some_option</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">some_option</span> <span class="o">=</span> <span class="bp">False</span>
 </pre></div>
 </div>
-<p>Option values can be given in command line, and they will have priority over the default values in the recipe:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . -o Pkg:shared<span class="o">=</span>True -o OtherPkg:option<span class="o">=</span>value
-</pre></div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Setting options conditionally without a default value works only to define a default value if not defined in command line. However,
+doing it this way will assign a final value to the option and not an initial one, so those option values will not be overridable from
+downstream dependent packages.</p>
 </div>
-<p>You can also defined them in consumer <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code>, as described in <a class="reference internal" href="../../using_packages/conanfile_txt.html#options-txt"><span class="std std-ref">this section</span></a></p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
-Poco/1.9.0@pocoproject/stable
-
-[options]
-Poco:shared=True
-OpenSSL:shared=True
-</pre></div>
-</div>
-<p>And finally, you can define options in <a class="reference internal" href="../profiles.html#profiles"><span class="std std-ref">profiles</span></a> too, with the same syntax:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># file &quot;myprofile&quot;
-# use it as $ conan install -pr=myprofile
-[settings]
-setting=value
-
-[options]
-MyLib:shared=True
-</pre></div>
-</div>
-<p>You can inspect available package options, reading the package recipe, which is conveniently done with:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan get Pkg/0.1@user/channel
-</pre></div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Read more about the <a class="reference internal" href="methods.html#method-configure-config-options"><span class="std std-ref">config_options()</span></a> method.</p>
 </div>
 </div>
 <div class="section" id="requires">
@@ -718,7 +799,7 @@ This is mostly an optimization for packages with large source codebases, to avoi
 <p>When this attribute is set to True, the <code class="docutils literal notranslate"><span class="pre">package()</span></code> method will be called twice, one copying from the <code class="docutils literal notranslate"><span class="pre">source</span></code> folder and the other copying from the <code class="docutils literal notranslate"><span class="pre">build</span></code> folder.</p>
 </div>
 <div class="section" id="folders">
-<h2>folders<a class="headerlink" href="#folders" title="Permalink to this headline">¶</a></h2>
+<span id="folders-attributes-reference"></span><h2>folders<a class="headerlink" href="#folders" title="Permalink to this headline">¶</a></h2>
 <p>In the package recipe methods, some attributes pointing to the relevant folders can be defined. Not all of them will be defined always, only in those relevant methods that might use them.</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">self.source_folder</span></code>: the folder in which the source code to be compiled lives. When a package is built in the conan local cache, by default it is the <code class="docutils literal notranslate"><span class="pre">build</span></code> folder,
@@ -993,13 +1074,11 @@ to <a class="reference internal" href="../../devtools/running_packages.html#repa
 </pre></div>
 </div>
 <ul class="simple">
-<li><strong>type</strong> (Required): Currently only <code class="docutils literal notranslate"><span class="pre">git</span></code> supported. Others like <code class="docutils literal notranslate"><span class="pre">svn</span></code> will be added eventually.</li>
-<li><strong>url</strong> (Required): URL of the remote or <code class="docutils literal notranslate"><span class="pre">auto</span></code> to capture the remote from the local directory.</li>
-<li><dl class="first docutils">
-<dt><strong>revision</strong> (Required):</dt>
-<dd>When type is <code class="docutils literal notranslate"><span class="pre">git</span></code>, it can be a string with a branch name, a commit or a tag.</dd>
-</dl>
-</li>
+<li><strong>type</strong> (Required): Currently only <code class="docutils literal notranslate"><span class="pre">git</span></code> and <code class="docutils literal notranslate"><span class="pre">svn</span></code> are supported. Others can be added eventually.</li>
+<li><strong>url</strong> (Required): URL of the remote or <code class="docutils literal notranslate"><span class="pre">auto</span></code> to capture the remote from the local working copy.
+When type is <code class="docutils literal notranslate"><span class="pre">svn</span></code> it can contain the <a class="reference external" href="http://svnbook.red-bean.com/en/1.7/svn.advanced.pegrevs.html">peg_revision</a>.</li>
+<li><strong>revision</strong> (Required): id of the revision or <code class="docutils literal notranslate"><span class="pre">auto</span></code> to capture the current working copy one.
+When type is <code class="docutils literal notranslate"><span class="pre">git</span></code>, it can also be the branch name or a tag.</li>
 <li><strong>subfolder</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">.</span></code>): A subfolder where the repository will be cloned.</li>
 <li><strong>username</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): When present, it will be used as the login to authenticate with the remote.</li>
 <li><strong>password</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): When present, it will be used as the password to authenticate with the remote.</li>
@@ -1070,7 +1149,11 @@ to <a class="reference internal" href="../../devtools/running_packages.html#repa
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.7</a></dd>
+            <dd><a href="/en/latest/index.html">1.8</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.7/index.html">1.7</a></dd>
           
         
           
@@ -1093,7 +1176,7 @@ to <a class="reference internal" href="../../devtools/running_packages.html#repa
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/1.7/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>

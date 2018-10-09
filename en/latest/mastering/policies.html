@@ -41,7 +41,7 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="conan 1.7.4 documentation" href="../index.html"/>
-        <link rel="up" title="Mastering conan" href="../mastering.html"/>
+        <link rel="up" title="Mastering Conan" href="../mastering.html"/>
         <link rel="next" title="Environment variables" href="envvars.html"/>
         <link rel="prev" title="Version ranges" href="version_ranges.html"/>
 
@@ -121,8 +121,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../devtools.html">Package apps and devtools</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../mastering.html">Mastering conan</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="python_requires.html">Python requires: reusing python code in recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../mastering.html">Mastering Conan</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="conanfile_py.html">Use conanfile.py for consumers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="conditional.html">Conditional settings, options and requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="version_ranges.html">Version ranges</a></li>
@@ -135,6 +134,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../extending.html">Extending Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../integrations.html">Integrations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../howtos.html">Howtos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
@@ -191,7 +191,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../mastering.html">Mastering conan</a> &raquo;</li>
+          <li><a href="../mastering.html">Mastering Conan</a> &raquo;</li>
         
       <li>Build policies</li>
     
@@ -233,7 +233,7 @@ option.</li>
      <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span>
      <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;Poco/1.7.8p3@pocoproject/stable&quot;</span> <span class="c1"># comma-separated list of requirements</span>
      <span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;cmake&quot;</span><span class="p">,</span> <span class="s2">&quot;gcc&quot;</span><span class="p">,</span> <span class="s2">&quot;txt&quot;</span>
-     <span class="n">default_options</span> <span class="o">=</span> <span class="s2">&quot;Poco:shared=True&quot;</span><span class="p">,</span> <span class="s2">&quot;OpenSSL:shared=True&quot;</span>
+     <span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Poco:shared&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s2">&quot;OpenSSL:shared&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
 <span class="hll">     <span class="n">build_policy</span> <span class="o">=</span> <span class="s2">&quot;always&quot;</span> <span class="c1"># &quot;missing&quot;</span>
 </span></pre></div>
 </div>
@@ -291,7 +291,11 @@ or ignoring the uploaded binary packages.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.7</a></dd>
+            <dd><a href="/en/latest/index.html">1.8</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.7/index.html">1.7</a></dd>
           
         
           
@@ -314,7 +318,7 @@ or ignoring the uploaded binary packages.</p>
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/1.7/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>

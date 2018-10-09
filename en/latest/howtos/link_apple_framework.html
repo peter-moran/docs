@@ -121,8 +121,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../devtools.html">Package apps and devtools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../extending.html">Extending Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../integrations.html">Integrations</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../howtos.html">Howtos</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="header_only.html">How to package header-only libraries</a></li>
@@ -256,31 +257,31 @@ it will indicate to the linker to link with the specified frameworks.</p>
 </div>
 <div class="section" id="how-to-package-apple-frameworks">
 <span id="package-apple-framework"></span><h1>How to package Apple Frameworks<a class="headerlink" href="#how-to-package-apple-frameworks" title="Permalink to this headline">¶</a></h1>
-<p>To package an Apple framework:</p>
-<ul class="simple">
-<li>Copy/create a framework folder <code class="docutils literal notranslate"><span class="pre">XXX.framework</span></code> (<code class="docutils literal notranslate"><span class="pre">XXX</span></code> being the name of your framework),
-to your package folder, where you should put all the subdirectories (<code class="docutils literal notranslate"><span class="pre">Headers</span></code>, <code class="docutils literal notranslate"><span class="pre">Modules</span></code>, etc).</li>
-</ul>
+<p>To package a <strong>MyFramework</strong> Apple framework, copy/create a folder
+<code class="docutils literal notranslate"><span class="pre">MyFramework.framework</span></code> to your package folder, where you should put all the subdirectories
+(<code class="docutils literal notranslate"><span class="pre">Headers</span></code>, <code class="docutils literal notranslate"><span class="pre">Modules</span></code>, etc).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="c1"># If you have the framework folder built in your build_folder:</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;XXX.framework/*&quot;</span><span class="p">,</span> <span class="n">symlinks</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;MyFramework.framework/*&quot;</span><span class="p">,</span> <span class="n">symlinks</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="c1"># Or build the destination folder:</span>
-    <span class="n">tools</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&quot;XXX.framework/Headers&quot;</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.h&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;XXX.framework/Headers&quot;</span><span class="p">)</span>
+    <span class="n">tools</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&quot;MyFramework.framework/Headers&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.h&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;MyFramework.framework/Headers&quot;</span><span class="p">)</span>
     <span class="c1"># ...</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li>Declare the framework in the <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> object.</li>
-</ul>
+<p>Declare the framework in the <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> object, passing a compiler flag <code class="docutils literal notranslate"><span class="pre">-F</span></code> with the
+directory of the framework folder (self.package_folder) and linker flags with the <code class="docutils literal notranslate"><span class="pre">-F</span></code> and <code class="docutils literal notranslate"><span class="pre">-framework</span></code> with
+the framework name.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="o">...</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">includedirs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;XXX.framework/Headers&#39;</span><span class="p">]</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">exelinkflags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;-framework XXX&quot;</span><span class="p">)</span>
     <span class="c1"># Note that -F flags are not automatically adjusted in &quot;cmake&quot;</span>
     <span class="c1"># generator so it will be needed to declare its path like this:</span>
-    <span class="c1"># self.cpp_info.exelinkflags.append(&quot;-F path/to/the/framework -framework XXX&quot;)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">sharedlinkflags</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">exelinkflags</span>
+    <span class="c1"># self.cpp_info.exelinkflags.append(&quot;-F path/to/the/framework -framework MyFramework&quot;)</span>
+
+    <span class="n">f_location</span> <span class="o">=</span> <span class="s1">&#39;-F &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">package_folder</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">cflags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f_location</span><span class="p">)</span> <span class="c1"># or cpp_info.cppflags if cpp library</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">sharedlinkflags</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">f_location</span><span class="p">,</span> <span class="s2">&quot;-framework MyFramework&quot;</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">exelinkflags</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">sharedlinkflags</span>
 </pre></div>
 </div>
 </div>
@@ -333,7 +334,11 @@ to your package folder, where you should put all the subdirectories (<code class
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.7</a></dd>
+            <dd><a href="/en/latest/index.html">1.8</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.7/index.html">1.7</a></dd>
           
         
           
@@ -356,7 +361,7 @@ to your package folder, where you should put all the subdirectories (<code class
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/1.7/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>

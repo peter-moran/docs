@@ -120,8 +120,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../creating_packages.html">Creating Packages</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../uploading_packages.html">Uploading Packages</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Remotes</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#bintray-official-repositories">Bintray Official Repositories</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#bintray-community-repositories">Bintray Community Repositories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bintray-official-repositories">Bintray Official Repositories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#conan-center">Conan Center</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conan-transit">Conan Transit</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bintray-community-repositories">Bintray Community Repositories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bincrafters">Bincrafters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conan-community">Conan Community</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="uploading_to_remotes.html">Uploading Packages to Remotes</a></li>
@@ -132,8 +140,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../devtools.html">Package apps and devtools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../extending.html">Extending Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../integrations.html">Integrations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../howtos.html">Howtos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
@@ -245,12 +254,17 @@ server to distribute to the C and C++ communities. Check <a class="reference int
 <h2>Bintray Official Repositories<a class="headerlink" href="#bintray-official-repositories" title="Permalink to this headline">¶</a></h2>
 <p>Conan official repositories for open source libraries are hosted in Bintray. These repositories are maintained by the Conan
 team. Currently there are two central repositories:</p>
+<div class="section" id="conan-center">
+<span id="id2"></span><h3>Conan Center<a class="headerlink" href="#conan-center" title="Permalink to this headline">¶</a></h3>
 <p><strong>conan-center</strong>: <a class="reference external" href="https://bintray.com/conan/conan-center">https://bintray.com/conan/conan-center</a></p>
 <blockquote class="pull-quote">
 <div>This repository contains moderated, curated and well-maintained packages, and is the place in which you
 can share your packages with the community. To share your package, upload it to your own
 (or your organization’s) repositories and submit an inclusion request to <a class="reference external" href="https://bintray.com/conan/conan-center">conan-center</a>.
 Check <a class="reference internal" href="bintray/conan_center_guide.html#conan-center-flow"><span class="std std-ref">conan-center guide</span></a> for more information.</div></blockquote>
+</div>
+<div class="section" id="conan-transit">
+<h3>Conan Transit<a class="headerlink" href="#conan-transit" title="Permalink to this headline">¶</a></h3>
 <p><strong>conan-transit</strong>: <a class="reference external" href="https://bintray.com/conan/conan-transit">https://bintray.com/conan/conan-transit</a> (DEPRECATED)</p>
 <blockquote class="pull-quote">
 <div>Deprecated. Contains mostly outdated packages some of which are not compatible with the latest Conan
@@ -265,10 +279,13 @@ always add it like this:</p>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="section" id="bintray-community-repositories">
 <h2>Bintray Community Repositories<a class="headerlink" href="#bintray-community-repositories" title="Permalink to this headline">¶</a></h2>
 <p>There are a number of popular community repositories that may be of interest for Conan users for retrieving
 open source packages. A number of these repositories are not affiliated with the Conan team.</p>
+<div class="section" id="bincrafters">
+<h3>Bincrafters<a class="headerlink" href="#bincrafters" title="Permalink to this headline">¶</a></h3>
 <p><strong>bincrafters</strong> : <a class="reference external" href="https://bintray.com/bincrafters/public-conan">https://bintray.com/bincrafters/public-conan</a></p>
 <blockquote class="pull-quote">
 <div><p>The <a class="reference external" href="https://bincrafters.github.io">Bincrafters</a> team builds binary software packages for the
@@ -279,6 +296,9 @@ contributors.</p>
 </pre></div>
 </div>
 </div></blockquote>
+</div>
+<div class="section" id="conan-community">
+<h3>Conan Community<a class="headerlink" href="#conan-community" title="Permalink to this headline">¶</a></h3>
 <p><strong>conan-community</strong> : <a class="reference external" href="https://bintray.com/conan-community/conan">https://bintray.com/conan-community/conan</a></p>
 <blockquote class="pull-quote">
 <div><p>Created by Conan developers, and should be considered an incubator for maturing packages before contacting authors or including them in
@@ -293,6 +313,7 @@ contributors.</p>
 <p class="last">If you are working in a team, you probably want to use the same remotes everywhere: developer machines, CI. The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">config</span> <span class="pre">install</span></code>
 command can automatically define the remotes in a conan client, as well as other resources as profiles. Have a look at the
 <a class="reference internal" href="../reference/commands/consumer/config.html#conan-config-install"><span class="std std-ref">conan config install</span></a> command.</p>
+</div>
 </div>
 </div>
 </div>
@@ -345,7 +366,11 @@ command can automatically define the remotes in a conan client, as well as other
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.7</a></dd>
+            <dd><a href="/en/latest/index.html">1.8</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.7/index.html">1.7</a></dd>
           
         
           
@@ -368,7 +393,7 @@ command can automatically define the remotes in a conan client, as well as other
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/1.7/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>

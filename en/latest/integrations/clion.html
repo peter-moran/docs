@@ -121,8 +121,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../devtools.html">Package apps and devtools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../extending.html">Extending Conan</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../integrations.html">Integrations</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="cmake.html"> CMake</a></li>
 <li class="toctree-l2"><a class="reference internal" href="makefile.html">Autotools: configure/make</a></li>
@@ -138,6 +139,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="ninja.html">Ninja, NMake, Borland</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pkg_config_pc_files.html"><strong class="command">pkg-config</strong> and <em>.pc</em> files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="boost_build.html"> Boost Build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b2.html"> B2 (Boost Build)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="qmake.html">QMake</a></li>
 <li class="toctree-l2"><a class="reference internal" href="premake.html"> Premake</a></li>
 <li class="toctree-l2"><a class="reference internal" href="qbs.html">qbs</a></li>
@@ -346,7 +348,7 @@ we have the <code class="docutils literal notranslate"><span class="pre">library
     <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;&lt;Description of Mylibrary here&gt;&quot;</span>
     <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span>
     <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">]}</span>
-    <span class="n">default_options</span> <span class="o">=</span> <span class="s2">&quot;shared=False&quot;</span>
+    <span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">}</span>
     <span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;cmake&quot;</span>
     <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;zlib/1.2.11@conan/stable&quot;</span>
 
@@ -451,7 +453,11 @@ you can use the <strong class="command">conan package</strong> command to create
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.7</a></dd>
+            <dd><a href="/en/latest/index.html">1.8</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.7/index.html">1.7</a></dd>
           
         
           
@@ -474,7 +480,7 @@ you can use the <strong class="command">conan package</strong> command to create
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/1.7/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>

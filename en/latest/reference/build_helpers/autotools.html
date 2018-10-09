@@ -121,8 +121,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../../uploading_packages.html">Uploading Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../developing_packages.html">Developing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../devtools.html">Package apps and devtools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../mastering.html">Mastering conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mastering.html">Mastering Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../extending.html">Extending Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../integrations.html">Integrations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../howtos.html">Howtos</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../reference.html">Reference</a><ul class="current">
@@ -150,6 +151,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="../tools.html">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../config_files.html">Configuration files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../env_vars.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins.html">Plugins</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../videos.html">Videos and links</a></li>
@@ -237,7 +239,7 @@ This helper sets <code class="docutils literal notranslate"><span class="pre">LI
 <span class="k">class</span> <span class="nc">ExampleConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span>
    <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;Poco/1.9.0@pocoproject/stable&quot;</span>
-   <span class="n">default_options</span> <span class="o">=</span> <span class="s2">&quot;Poco:shared=True&quot;</span><span class="p">,</span> <span class="s2">&quot;OpenSSL:shared=True&quot;</span>
+   <span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Poco:shared&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s2">&quot;OpenSSL:shared&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
 
    <span class="k">def</span> <span class="nf">imports</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
       <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.dll&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;bin&quot;</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;bin&quot;</span><span class="p">)</span>
@@ -404,8 +406,36 @@ dictionaries.</p>
 <p>Configures <cite>Autotools</cite> project with the given parameters.</p>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">This method sets by default the <code class="docutils literal notranslate"><span class="pre">--prefix</span></code> argument to <code class="docutils literal notranslate"><span class="pre">self.package_folder</span></code> whenever <code class="docutils literal notranslate"><span class="pre">--prefix</span></code> is not provided in the <code class="docutils literal notranslate"><span class="pre">args</span></code>
+<p>This method sets by default the <code class="docutils literal notranslate"><span class="pre">--prefix</span></code> argument to <code class="docutils literal notranslate"><span class="pre">self.package_folder</span></code> whenever <code class="docutils literal notranslate"><span class="pre">--prefix</span></code> is not provided in the <code class="docutils literal notranslate"><span class="pre">args</span></code>
 parameter during the configure step.</p>
+<p>There are other flags set automatically to fix the install directories by default:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">--bindir</span></code>, <code class="docutils literal notranslate"><span class="pre">--sbin</span></code> and <code class="docutils literal notranslate"><span class="pre">--libexec</span></code> set to <em>bin</em> folder.</li>
+<li><code class="docutils literal notranslate"><span class="pre">--libdir</span></code> set to <em>lib</em> folder.</li>
+<li><code class="docutils literal notranslate"><span class="pre">--includedir</span></code>, <code class="docutils literal notranslate"><span class="pre">--oldincludedir</span></code> set to <em>include</em> folder.</li>
+<li><code class="docutils literal notranslate"><span class="pre">--datarootdir</span></code> set to <em>res</em> folder.</li>
+</ul>
+<p class="last">These flags will be set on demand, so only the available options in the <em>./configure</em> are actually set. They can also be totally skipped
+using <code class="docutils literal notranslate"><span class="pre">use_default_install_dirs=False</span></code> as described in the section below.</p>
+</div>
+<div class="admonition warning" id="autotools-lib64-warning">
+<p class="first admonition-title">Warning</p>
+<p>From Conan 1.8 this build helper sets the output library directory via <code class="docutils literal notranslate"><span class="pre">--libdir</span></code> automatically to <code class="docutils literal notranslate"><span class="pre">${prefix}/lib</span></code>. This means that
+if you are using the <code class="docutils literal notranslate"><span class="pre">install()</span></code> to package with AutoTools, library artifacts will be stored in the <code class="docutils literal notranslate"><span class="pre">lib</span></code> directory unless indicated
+explicitly by the user.</p>
+<p>This change was introduced in order to fix issues detected in some Linux distributions where libraries were being installed to the
+<code class="docutils literal notranslate"><span class="pre">lib64</span></code> folder (instead of <code class="docutils literal notranslate"><span class="pre">lib</span></code>) when rebuilding a package from sources. In those cases, if <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> was declaring
+<code class="docutils literal notranslate"><span class="pre">self.cpp_info.libdirs</span></code> as <code class="docutils literal notranslate"><span class="pre">lib</span></code>, the consumption of the package was broken.</p>
+<p>This was considered a bug in the build helper, as it should be as much deterministic as possible when building the same package for the
+same settings and generally for any other user input.</p>
+<p>If you were already modelling the <code class="docutils literal notranslate"><span class="pre">lib64</span></code> folder in your recipe, make sure you use <code class="docutils literal notranslate"><span class="pre">lib</span></code> for <code class="docutils literal notranslate"><span class="pre">self.cpp_info.libdirs</span></code> or inject
+the argument in the Autotools’ <code class="docutils literal notranslate"><span class="pre">configure()</span></code> method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">atools</span> <span class="o">=</span> <span class="n">AutoToolsBuildEnvironment</span><span class="p">()</span>
+<span class="n">atools</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;--libdir=${prefix}/lib64&quot;</span><span class="p">])</span>
+<span class="n">atools</span><span class="o">.</span><span class="n">install</span><span class="p">()</span>
+</pre></div>
+</div>
+<p class="last">You can also skip its default value using the parameter <code class="docutils literal notranslate"><span class="pre">use_default_install_dirs=False</span></code>.</p>
 </div>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -413,7 +443,8 @@ parameter during the configure step.</p>
 <li><strong>configure_dir</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Directory where the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script is. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, it will use the current
 directory.</li>
 <li><strong>args</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): A list of additional arguments to be passed to the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script. Each argument
-will be escaped according to the current shell. No extra arguments will be added if <code class="docutils literal notranslate"><span class="pre">args=None</span></code>.</li>
+will be escaped according to the current shell. <code class="docutils literal notranslate"><span class="pre">--prefix</span></code> and <code class="docutils literal notranslate"><span class="pre">--libdir</span></code>, will be adjusted automatically if not indicated
+specifically.</li>
 <li><strong>build</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): To specify a value for the parameter <code class="docutils literal notranslate"><span class="pre">--build</span></code>. If <code class="docutils literal notranslate"><span class="pre">None</span></code> it will try to detect the
 value if cross-building is detected according to the settings. If <code class="docutils literal notranslate"><span class="pre">False</span></code>, it will not use this argument at all.</li>
 <li><strong>host</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): To specify a value for the parameter <code class="docutils literal notranslate"><span class="pre">--host</span></code>. If <code class="docutils literal notranslate"><span class="pre">None</span></code> it will try to detect the
@@ -425,6 +456,8 @@ absolute ones where to find <code class="docutils literal notranslate"><span cla
 using the <code class="docutils literal notranslate"><span class="pre">pkg_config</span></code> generator, the <code class="docutils literal notranslate"><span class="pre">self.install_folder</span></code> will be added to the <code class="docutils literal notranslate"><span class="pre">PKG_CONFIG_PATH</span></code> in order to locate the pc
 files of the requirements of the conanfile.</li>
 <li><strong>vars</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Overrides custom environment variables in the configure step.</li>
+<li><strong>use_default_install_dirs</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): Use or not the defaulted installation dirs such as <code class="docutils literal notranslate"><span class="pre">--libdir</span></code>,
+<code class="docutils literal notranslate"><span class="pre">--bindir</span></code>…</li>
 </ul>
 </dd>
 </dl>
@@ -556,7 +589,11 @@ environment variable <a class="reference internal" href="../env_vars.html#conan-
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.7</a></dd>
+            <dd><a href="/en/latest/index.html">1.8</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.7/index.html">1.7</a></dd>
           
         
           
@@ -579,7 +616,7 @@ environment variable <a class="reference internal" href="../env_vars.html#conan-
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/1.7/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>

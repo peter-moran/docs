@@ -121,8 +121,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../../uploading_packages.html">Uploading Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../developing_packages.html">Developing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../devtools.html">Package apps and devtools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../mastering.html">Mastering conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mastering.html">Mastering Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../extending.html">Extending Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../integrations.html">Integrations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../howtos.html">Howtos</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../reference.html">Reference</a><ul class="current">
@@ -150,6 +151,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="../tools.html">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../config_files.html">Configuration files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../env_vars.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins.html">Plugins</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../videos.html">Videos and links</a></li>
@@ -403,8 +405,49 @@ not will be taken from the settings.</li>
 <tr class="row-odd"><td>CMAKE_EXPORT_NO_PACKAGE_REGISTRY</td>
 <td>By default, disable the package registry</td>
 </tr>
-<tr class="row-even"><td>CONAN_EXPORTED</td>
+<tr class="row-even"><td>CONAN_IN_LOCAL_CACHE</td>
+<td><code class="docutils literal notranslate"><span class="pre">ON</span></code> if installing the package (runs in local cache), <code class="docutils literal notranslate"><span class="pre">OFF</span></code> if running in a user folder</td>
+</tr>
+<tr class="row-odd"><td>CONAN_EXPORTED</td>
 <td>Defined when CMake is called using Conan CMake helper</td>
+</tr>
+</tbody>
+</table>
+<p>There are some definitions set to be used later on the the <code class="docutils literal notranslate"><span class="pre">install()</span></code> step too:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="39%" />
+<col width="61%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Variable</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>CMAKE_INSTALL_PREFIX</td>
+<td>Set to <code class="docutils literal notranslate"><span class="pre">conanfile.package_folder</span></code></td>
+</tr>
+<tr class="row-odd"><td>CMAKE_INSTALL_BINDIR</td>
+<td>Set to <em>bin</em> inside the package folder.</td>
+</tr>
+<tr class="row-even"><td>CMAKE_INSTALL_SBINDIR</td>
+<td>Set to <em>bin</em> inside the package folder.</td>
+</tr>
+<tr class="row-odd"><td>CMAKE_INSTALL_LIBEXECDIR</td>
+<td>Set to <em>bin</em> inside the package folder.</td>
+</tr>
+<tr class="row-even"><td>CMAKE_INSTALL_LIBDIR</td>
+<td>Set to <em>lib</em> inside the package folder.</td>
+</tr>
+<tr class="row-odd"><td>CMAKE_INSTALL_INCLUDEDIR</td>
+<td>Set to <em>include</em> inside the package folder.</td>
+</tr>
+<tr class="row-even"><td>CMAKE_INSTALL_OLDINCLUDEDIR</td>
+<td>Set to <em>include</em> inside the package folder.</td>
+</tr>
+<tr class="row-odd"><td>CMAKE_INSTALL_DATAROOTDIR</td>
+<td>Set to <em>res</em> inside the package folder.</td>
 </tr>
 </tbody>
 </table>
@@ -539,6 +582,15 @@ example:</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="get-version">
+<h3>get_version()<a class="headerlink" href="#get-version" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@staticmethod</span>
+<span class="k">def</span> <span class="nf">get_version</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns the CMake version in a <code class="docutils literal notranslate"><span class="pre">conans.model.Version</span></code> object as it is evaluated by the
+command line. Will raise if cannot resolve it to valid version.</p>
+</div>
 </div>
 <div class="section" id="environment-variables">
 <h2>Environment variables<a class="headerlink" href="#environment-variables" title="Permalink to this headline">¶</a></h2>
@@ -632,7 +684,11 @@ example:</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.7</a></dd>
+            <dd><a href="/en/latest/index.html">1.8</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.7/index.html">1.7</a></dd>
           
         
           
@@ -655,7 +711,7 @@ example:</p>
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/1.7/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>

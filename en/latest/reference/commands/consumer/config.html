@@ -121,8 +121,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../../../uploading_packages.html">Uploading Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../developing_packages.html">Developing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../devtools.html">Package apps and devtools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../mastering.html">Mastering conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mastering.html">Mastering Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../extending.html">Extending Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../integrations.html">Integrations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../howtos.html">Howtos</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../../reference.html">Reference</a><ul class="current">
@@ -149,6 +150,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="../../tools.html">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../config_files.html">Configuration files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../env_vars.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins.html">Plugins</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../videos.html">Videos and links</a></li>
@@ -263,13 +265,14 @@ $&gt; <span class="m">10</span>
 <span id="id2"></span><h2>conan config install<a class="headerlink" href="#conan-config-install" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">install</span></code> is intended to share the Conan client configuration. For example, in a company or organization,
 is important to have common <code class="docutils literal notranslate"><span class="pre">settings.yml</span></code>, <code class="docutils literal notranslate"><span class="pre">profiles</span></code>, etc.</p>
-<p>It retrieves a zip file from a local directory or url and apply the files in the local Conan configuration.</p>
-<p>The zip can contain only a subset of all the allowed configuration files, only the present files will be
-replaced, except the <strong>conan.conf</strong> file, that will apply only the declared variables in the zipped <code class="docutils literal notranslate"><span class="pre">conan.conf</span></code> file
-and will keep the rest of the local variables.</p>
-<p>The <strong>profiles files</strong>, that will be overwritten if already present, but won’t delete any other profile file that the user
-has in the local machine.</p>
-<p>All files in the zip will be copied to the conan home directory.
+<p>It can get its configuration files from a local or remote zip file, or a local directory. It then installs the files
+in the local Conan configuration.</p>
+<p>The configuration may contain all or a subset of the allowed configuration files. Only the files that are present will be
+replaced. The only exception is the <strong>conan.conf</strong> file for which only the variables declared will be installed,
+leaving the other variables unchanged.</p>
+<p>This means for example that <strong>profiles</strong> and <strong>plugins</strong> files will be overwritten if already present, but no profile or
+plugin file that the user has in the local machine will be deleted.</p>
+<p>All the configuration files will be copied to the conan home directory.
 These are the special files and the rules applied to merge them:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -395,7 +398,11 @@ so following calls to <strong class="command">conan config install</strong> comm
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.7</a></dd>
+            <dd><a href="/en/latest/index.html">1.8</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.7/index.html">1.7</a></dd>
           
         
           
@@ -418,7 +425,7 @@ so following calls to <strong class="command">conan config install</strong> comm
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/1.7/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>

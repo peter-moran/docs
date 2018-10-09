@@ -135,8 +135,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../developing_packages.html">Developing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../devtools.html">Package apps and devtools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../mastering.html">Mastering conan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mastering.html">Mastering Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../systems_cross_building.html">Systems and cross building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../extending.html">Extending Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../integrations.html">Integrations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../howtos.html">Howtos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../reference.html">Reference</a></li>
@@ -252,25 +253,31 @@ files or suggest to open a new repository with the recipe.</li>
 </div>
 <div class="section" id="recipe-quality">
 <h3>Recipe Quality<a class="headerlink" href="#recipe-quality" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><strong>Git public repository</strong>: The recipe needs to be hosted in a public Git repository that supports
-collaboration.</li>
-<li><strong>Recipe fields</strong>: <cite>description</cite>, <cite>license</cite> and <cite>url</cite> are required. The <cite>license</cite> field refers to
-the library being packaged.</li>
-<li><strong>Linter:</strong> Is important to have a reasonably clean Linter, <strong class="command">conan export</strong> and  <strong class="command">conan create</strong>
+<ul>
+<li><p class="first"><strong>Git public repository</strong>: The recipe needs to be hosted in a public Git repository that supports
+collaboration.</p>
+</li>
+<li><p class="first"><strong>Recipe fields</strong>: <cite>description</cite>, <cite>license</cite> and <cite>url</cite> are required. The <cite>license</cite> field refers to
+the library being packaged.</p>
+</li>
+<li><p class="first"><strong>Linter:</strong> Is important to have a reasonably clean Linter, <strong class="command">conan export</strong> and  <strong class="command">conan create</strong>
 otherwise it will generate warnings and errors. Keep it as clean as possible to guarantee a recipe less
-prone to error and more coherent.</li>
-<li><strong>Updated:</strong> Don’t use deprecated features and when possible use the latest Conan features, build
-helpers, etc.</li>
-<li><strong>Clean:</strong> The code style will be reviewed to guarantee the readability of the recipe.</li>
-<li><strong>test_package:</strong> The recipes must contain a <a class="reference internal" href="../../creating_packages/getting_started.html#packaging-getting-started"><span class="std std-ref">test_package</span></a>.</li>
-<li><strong>Maintenance commitment:</strong> You are responsible for keeping the recipe updated, fix issues
+prone to error and more coherent.</p>
+</li>
+<li><p class="first"><strong>Updated:</strong> Don’t use deprecated features and when possible use the latest Conan features, build
+helpers, etc.</p>
+</li>
+<li><p class="first"><strong>Clean:</strong> The code style will be reviewed to guarantee the readability of the recipe.</p>
+</li>
+<li><p class="first"><strong>test_package:</strong> The recipes must contain a <a class="reference internal" href="../../creating_packages/getting_started.html#packaging-getting-started"><span class="std std-ref">test_package</span></a>.</p>
+</li>
+<li><p class="first"><strong>Maintenance commitment:</strong> You are responsible for keeping the recipe updated, fix issues
 etc., so be aware that a minimal commitment is required. The Conan organization reserves the right to unlink a
-poorly maintained package or replace it with better alternatives.</li>
-<li><strong>Raise errors on invalid configurations:</strong> If the library doesn’t work for a specific
+poorly maintained package or replace it with better alternatives.</p>
+</li>
+<li><p class="first"><strong>Raise errors on invalid configurations:</strong> If the library doesn’t work for a specific
 configuration, e.g., requires <strong>gcc&gt;7</strong>, the recipe must contain a <code class="docutils literal notranslate"><span class="pre">configure(self)</span></code> method  that
-raises an exception in case of invalid settings/options.</li>
-</ul>
+raises an exception in case of invalid settings/options.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">configure</span><span class="p">():</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">compiler</span> <span class="o">==</span> <span class="s2">&quot;gcc&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">compiler</span><span class="o">.</span><span class="n">version</span> <span class="o">&lt;</span> <span class="s2">&quot;7.0&quot;</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">ConanException</span><span class="p">(</span><span class="s2">&quot;GCC &gt; 7.0 is required&quot;</span><span class="p">)</span>
@@ -278,15 +285,16 @@ raises an exception in case of invalid settings/options.</li>
         <span class="k">raise</span> <span class="n">ConanException</span><span class="p">(</span><span class="s2">&quot;Windows not supported&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><strong>Without version ranges</strong>: Due to the fact that many libraries do not follow semantic versioning, and that dependency resolution of version ranges is not
-always clear, recipes in the Conan center should fix the version of their dependencies and not use version ranges.</li>
-<li><strong>LICENSE of the recipe:</strong> The public repository must contain a <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code> file with an OSS
-license.</li>
-<li><strong>LICENSE of the library:</strong> Every built binary package must contain one or more <code class="docutils literal notranslate"><span class="pre">license*</span></code>
+</li>
+<li><p class="first"><strong>Without version ranges</strong>: Due to the fact that many libraries do not follow semantic versioning, and that dependency resolution of version ranges is not
+always clear, recipes in the Conan center should fix the version of their dependencies and not use version ranges.</p>
+</li>
+<li><p class="first"><strong>LICENSE of the recipe:</strong> The public repository must contain a <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code> file with an OSS
+license.</p>
+</li>
+<li><p class="first"><strong>LICENSE of the library:</strong> Every built binary package must contain one or more <code class="docutils literal notranslate"><span class="pre">license*</span></code>
 file(s), so make sure that in the <code class="docutils literal notranslate"><span class="pre">package()</span></code> method of your recipe, you include the library
-licenses in the <code class="docutils literal notranslate"><span class="pre">licenses</span></code> subfolder.</li>
-</ul>
+licenses in the <code class="docutils literal notranslate"><span class="pre">licenses</span></code> subfolder.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package</span><span class="p">():</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;license*&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;licenses&quot;</span><span class="p">,</span>  <span class="n">ignore_case</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">keep_path</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </pre></div>
@@ -302,6 +310,13 @@ licenses in the <code class="docutils literal notranslate"><span class="pre">lic
     <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;license*&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;licenses&quot;</span><span class="p">,</span>  <span class="n">ignore_case</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">keep_path</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </pre></div>
 </div>
+</li>
+<li><p class="first"><strong>Invalid configurations:</strong> There is an special exception, <code class="docutils literal notranslate"><span class="pre">conans.errors.ConanInvalidConfiguration</span></code> to be launched
+from <code class="docutils literal notranslate"><span class="pre">configure()</span></code> function in a recipe if the given configuration/options is known not to work. This way the recipe
+owner can declare an invalid configuration and consumers (e.g. CI tools like <code class="docutils literal notranslate"><span class="pre">conan-package-tools</span></code>) will be able to
+handle it.</p>
+</li>
+</ul>
 </div>
 <div class="section" id="ci-integration">
 <h3>CI Integration<a class="headerlink" href="#ci-integration" title="Permalink to this headline">¶</a></h3>
@@ -413,7 +428,11 @@ look at the options to generate a library layout with the required appveyor/trav
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.7</a></dd>
+            <dd><a href="/en/latest/index.html">1.8</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.7/index.html">1.7</a></dd>
           
         
           
@@ -436,7 +455,7 @@ look at the options to generate a library layout with the required appveyor/trav
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/1.7/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>
