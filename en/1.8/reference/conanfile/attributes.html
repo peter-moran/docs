@@ -551,10 +551,10 @@ string and for <code class="docutils literal notranslate"><span class="pre">0</s
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">Comparaison using <code class="docutils literal notranslate"><span class="pre">is</span></code> is always equals to <code class="docutils literal notranslate"><span class="pre">False</span></code> because the types would be different as
+<li><p class="first">Comparison using <code class="docutils literal notranslate"><span class="pre">is</span></code> is always equals to <code class="docutils literal notranslate"><span class="pre">False</span></code> because the types would be different as
 the option value is encapsulated inside a Conan class.</p>
 </li>
-<li><p class="first">Explicit comparaisons with the <code class="docutils literal notranslate"><span class="pre">==</span></code> symbol <strong>are case sensitive</strong>, so:</p>
+<li><p class="first">Explicit comparisons with the <code class="docutils literal notranslate"><span class="pre">==</span></code> symbol <strong>are case sensitive</strong>, so:</p>
 <blockquote>
 <div><ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">self.options.option</span> <span class="pre">=</span> <span class="pre">&quot;False&quot;</span></code> satisfies <code class="docutils literal notranslate"><span class="pre">assert</span> <span class="pre">self.options.option</span> <span class="pre">==</span> <span class="pre">False</span></code>,
@@ -562,23 +562,23 @@ the option value is encapsulated inside a Conan class.</p>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">A different behaviour has <code class="docutils literal notranslate"><span class="pre">self.options.option</span> <span class="pre">=</span> <span class="pre">None</span></code>, because
+<li><p class="first">A different behavior has <code class="docutils literal notranslate"><span class="pre">self.options.option</span> <span class="pre">=</span> <span class="pre">None</span></code>, because
 <code class="docutils literal notranslate"><span class="pre">assert</span> <span class="pre">self.options.option</span> <span class="pre">!=</span> <span class="pre">None</span></code>.</p>
 </li>
 </ul>
 </div>
 <div class="section" id="default-options">
 <span id="conanfile-default-options"></span><h2>default_options<a class="headerlink" href="#default-options" title="Permalink to this headline">¶</a></h2>
-<p>As you have seen in the examples above, recipe’s default options can be assigned to the desired value. However, you can also specify
-default option values of the required dependencies:</p>
+<p>As you have seen in the examples above, recipe’s default options are declared as a dictionary with the initial desired value of the options.
+However, you can also specify default option values of the required dependencies:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OtherPkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
     <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;Pkg/0.1@user/channel&quot;</span>
-    <span class="n">default_options</span> <span class="o">=</span> <span class="s2">&quot;Pkg:pkg_option=value&quot;</span>
+    <span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Pkg:pkg_option&quot;</span><span class="p">:</span> <span class="s2">&quot;value&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>And it also works with default option values of conditional required dependencies:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OtherPkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
-    <span class="n">default_options</span> <span class="o">=</span> <span class="s2">&quot;Pkg:pkg_option=value&quot;</span>
+    <span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Pkg:pkg_option&quot;</span><span class="p">:</span> <span class="s2">&quot;value&quot;</span><span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">os</span> <span class="o">!=</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
