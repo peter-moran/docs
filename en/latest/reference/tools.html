@@ -147,6 +147,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#tools-download">tools.download()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-ftp-download">tools.ftp_download()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-replace-in-file">tools.replace_in_file()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tools-replace-path-in-file">tools.replace_path_in_file()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-run-environment">tools.run_environment()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-check-with-algorithm-sum">tools.check_with_algorithm_sum()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-patch">tools.patch()</a></li>
@@ -697,6 +698,38 @@ Conan dependencies without forking or modifying the original project:</p>
 <li><strong>replace</strong> (Required): String to replace the searched string.</li>
 <li><strong>strict</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): If <code class="docutils literal notranslate"><span class="pre">True</span></code>, it raises an error if the searched string
 is not found, so nothing is actually replaced.</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="tools-replace-path-in-file">
+<h2>tools.replace_path_in_file()<a class="headerlink" href="#tools-replace-path-in-file" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">replace_path_in_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">search</span><span class="p">,</span> <span class="n">replace</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">windows_paths</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Replace a path in a file with another string. In Windows, it will match the path even if the
+casing and the path separator doesn’t match.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">tools</span>
+
+<span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">tools</span><span class="o">.</span><span class="n">replace_path_in_file</span><span class="p">(</span><span class="s2">&quot;hello/somefile.cmake&quot;</span><span class="p">,</span> <span class="s2">&quot;c:\Some/PATH/to\File.txt&quot;</span><span class="p">,</span><span class="s2">&quot;PATTERN/file.txt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li><strong>file_path</strong> (Required): File path of the file to perform the replace in.</li>
+<li><strong>search</strong> (Required): String with the path you want to be replaced.</li>
+<li><strong>replace</strong> (Required): String to replace the searched path.</li>
+<li><strong>strict</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): If <code class="docutils literal notranslate"><span class="pre">True</span></code>, it raises an error if the search string
+is not found and nothing is actually replaced.</li>
+<li><strong>windows_paths</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Controls whether the casing of the path and the different
+directory separators are taken into account:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">None</span></code>: Only when Windows operating system is detected.</li>
+<li><code class="docutils literal notranslate"><span class="pre">False</span></code>: Deactivated, it will match exact patterns (like <code class="docutils literal notranslate"><span class="pre">tools.replace_in_file()</span></code>).</li>
+<li><code class="docutils literal notranslate"><span class="pre">True</span></code>: Always activated, irrespective of the detected operating system.</li>
+</ul>
+</li>
 </ul>
 </dd>
 </dl>
