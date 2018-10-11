@@ -233,8 +233,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="premake-logo-premake">
 <h1><img alt="premake_logo" src="../_images/premake_logo.png" /> Premake<a class="headerlink" href="#premake-logo-premake" title="Permalink to this headline">¶</a></h1>
-<p>From conan 0.9, generator packages are available. Premake4 has experimental support in one
-of those packages. You can use it as:</p>
+<p><a class="reference external" href="https://premake.github.io/">Premake</a> version 4 has <strong>experimental</strong> support as a generator package.</p>
+<p>You can find this generator in this repository: <a class="reference external" href="https://github.com/memsharded/conan-premake">https://github.com/memsharded/conan-premake</a></p>
+<p>In order to use it, clone the repository and export the recipe to the local cache:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/memsharded/conan-premake
+$ conan <span class="nb">export</span> conan-premake memsharded/testing
+</pre></div>
+</div>
+<p>Now you can use this generator as a requirement in your recipes <strong>but also as a generator</strong>:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
 PremakeGen@0.1@memsharded/testing
 
@@ -242,9 +248,10 @@ PremakeGen@0.1@memsharded/testing
 Premake
 </pre></div>
 </div>
-<p>Check the <a class="reference internal" href="../howtos/custom_generators.html#dyn-generators"><span class="std std-ref">generator package examples</span></a></p>
-<p><a class="reference external" href="https://github.com/memsharded/conan-premake">https://github.com/memsharded/conan-premake</a></p>
-<p>Link to conan package:</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Check the <a class="reference internal" href="../howtos/custom_generators.html#dyn-generators"><span class="std std-ref">generator package examples</span></a> to learn how to create and share custom generators like this one.</p>
+</div>
 </div>
 
 

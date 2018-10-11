@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan inspect &mdash; conan 1.8.2 documentation</title>
+  <title>conan inspect [EXPERIMENTAL] &mdash; conan 1.8.2 documentation</title>
   
 
   
@@ -140,7 +140,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l4"><a class="reference internal" href="download.html">conan download</a></li>
 <li class="toctree-l4"><a class="reference internal" href="remove.html">conan remove</a></li>
 <li class="toctree-l4"><a class="reference internal" href="alias.html">conan alias</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">conan inspect</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">conan inspect [EXPERIMENTAL]</a></li>
 <li class="toctree-l4"><a class="reference internal" href="help.html">conan help</a></li>
 </ul>
 </li>
@@ -155,7 +155,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="../../tools.html">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../config_files.html">Configuration files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../env_vars.html">Environment variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../plugins.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins.html">Plugins [EXPERIMENTAL]</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../videos.html">Videos and links</a></li>
@@ -215,7 +215,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
           <li><a href="../../commands.html">Commands</a> &raquo;</li>
         
-      <li>conan inspect</li>
+      <li>conan inspect [EXPERIMENTAL]</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -236,11 +236,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="conan-inspect">
-<span id="id1"></span><h1>conan inspect<a class="headerlink" href="#conan-inspect" title="Permalink to this headline">¶</a></h1>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This is an EXPERIMENTAL new command in Conan 1.8, and might be subject to changes in future releases.</p>
+  <div class="section" id="conan-inspect-experimental">
+<span id="conan-inspect"></span><h1>conan inspect [EXPERIMENTAL]<a class="headerlink" href="#conan-inspect-experimental" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan inspect <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-a <span class="o">[</span>ATTRIBUTE<span class="o">]]</span> <span class="o">[</span>-r REMOTE<span class="o">]</span> <span class="o">[</span>-j JSON<span class="o">]</span>
                  path_or_reference

@@ -43,7 +43,7 @@
     <link rel="top" title="conan 1.8.2 documentation" href="../index.html"/>
         <link rel="up" title="Extending Conan" href="../extending.html"/>
         <link rel="next" title="Integrations" href="../integrations.html"/>
-        <link rel="prev" title="Python requires: reusing python code in recipes" href="python_requires.html"/>
+        <link rel="prev" title="Python requires: reusing python code in recipes [EXPERIMENTAL]" href="python_requires.html"/>
 
  <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -124,7 +124,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../extending.html">Extending Conan</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="python_requires.html">Python requires: reusing python code in recipes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_requires.html">Python requires: reusing python code in recipes [EXPERIMENTAL]</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Plugins [EXPERIMENTAL]</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#plugin-structure">Plugin structure</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#importing-from-a-module">Importing from a module</a></li>
@@ -218,6 +218,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="plugins-experimental">
 <span id="plugins"></span><h1>Plugins [EXPERIMENTAL]<a class="headerlink" href="#plugins-experimental" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
+</div>
 <p>The Conan plugins is a feature intended to extend the Conan functionalities and let users customize the client behavior at determined
 points.</p>
 <div class="section" id="plugin-structure">
@@ -274,7 +278,7 @@ the context of the commands being executed such as the recipe being in the local
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
 <p class="last">A detailed description of the functions allowed and its parameters as well as their execution can be found in it dedicated reference
-section: <a class="reference internal" href="../reference/plugins.html#plugins-reference"><span class="std std-ref">Plugins</span></a>.</p>
+section: <a class="reference internal" href="../reference/plugins.html#plugins-reference"><span class="std std-ref">Plugins [EXPERIMENTAL]</span></a>.</p>
 </div>
 <p>Other useful task where a plugin may come handy are the upload and download actions. There are <strong>pre</strong> and <strong>post</strong> functions for every
 download/upload as a whole and for fine download tasks such as recipe and package downloads/uploads.</p>
@@ -402,7 +406,7 @@ this variable and values in the environment variable will be used to load the pl
         <a href="../integrations.html" class="btn btn-neutral float-right" title="Integrations" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="python_requires.html" class="btn btn-neutral" title="Python requires: reusing python code in recipes" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="python_requires.html" class="btn btn-neutral" title="Python requires: reusing python code in recipes [EXPERIMENTAL]" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
