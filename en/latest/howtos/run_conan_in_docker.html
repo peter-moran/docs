@@ -243,7 +243,7 @@ different images with different compilers or toolchains and run containers every
 build tools and compilers as well as Conan installed.</p>
 <div class="section" id="using-conan-inside-a-container">
 <h2>Using conan inside a container<a class="headerlink" href="#using-conan-inside-a-container" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ docker run -it --rm lasote/conangcc7 /bin/bash
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ docker run -it --rm conanio/gcc7 /bin/bash
 </pre></div>
 </div>
 <div class="admonition note">
@@ -254,7 +254,7 @@ build tools and compilers as well as Conan installed.</p>
 <ul class="simple">
 <li><strong class="command">-it</strong>: Keep STDIN open and allocate a pseudo-tty, in other words, we want to type in the container because we are opening a bash.</li>
 <li><strong class="command">--rm</strong>: Once the container exits, remove the container. Helps to keep clean or hard drive.</li>
-<li><strong class="command">lasote/conangcc7</strong>: Image name, check the <a class="reference internal" href="#available-docker-images"><span class="std std-ref">available docker images</span></a>.</li>
+<li><strong class="command">conanio/gcc7</strong>: Image name, check the <a class="reference internal" href="#available-docker-images"><span class="std std-ref">available docker images</span></a>.</li>
 <li><strong class="command">/bin/bash</strong>: The command to run</li>
 </ul>
 <p>Now we are running on the conangcc7 container we can use Conan normally. In the following example we are
@@ -272,7 +272,7 @@ $ conan create . user/channel
 <p>You can share a local folder with your container, for example a project:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/conan-community/conan-openssl
 $ <span class="nb">cd</span> conan-openssl
-$ docker run -it -v<span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/conan/project --rm lasote/conangcc7 /bin/bash
+$ docker run -it -v<span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/conan/project --rm conanio/gcc7 /bin/bash
 </pre></div>
 </div>
 <ul class="simple">
@@ -299,7 +299,7 @@ is adjusted to declare the correct arch (<code class="docutils literal notransla
 <p>Cross-building and uploading a package along with all its missing dependencies for <code class="docutils literal notranslate"><span class="pre">Linux/armv7hf</span></code> is done in few steps:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/conan-community/conan-openssl
 $ <span class="nb">cd</span> conan-openssl
-$ docker run -it -v<span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/conan/project --rm lasote/conangcc49-armv7hf /bin/bash
+$ docker run -it -v<span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/conan/project --rm conanio/gcc49-armv7hf /bin/bash
 
 <span class="c1"># Now we are running on the conangcc49-armv7hf container</span>
 <span class="c1"># The default profile is automatically adjusted to armv7hf</span>
@@ -332,65 +332,65 @@ $ conan upload <span class="s2">&quot;*&quot;</span> -r myremoteARMV7 --all
 <p><strong>GCC</strong> images</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="86%" />
-<col width="14%" />
+<col width="84%" />
+<col width="16%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Version</strong></td>
 <td><strong>Target Arch</strong></td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conangcc49/">lasote/conangcc49 (GCC 4.9)</a></td>
+<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/conanio/gcc49/">conanio/gcc49 (GCC 4.9)</a></td>
 <td>x86_64</td>
 </tr>
-<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conangcc49-i386/">lasote/conangcc49-i386 (GCC 4.9)</a></td>
+<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/conanio/gcc49-i386/">conanio/gcc49-i386 (GCC 4.9)</a></td>
 <td>x86</td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conangcc49-armv7/">lasote/conangcc49-armv7 (GCC 4.9)</a></td>
+<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/conanio/gcc49-armv7/">conanio/gcc49-armv7 (GCC 4.9)</a></td>
 <td>armv7</td>
 </tr>
-<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conangcc49-armv7hf/">lasote/conangcc49-armv7hf (GCC 4.9)</a></td>
+<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/conanio/gcc49-armv7hf/">conanio/gcc49-armv7hf (GCC 4.9)</a></td>
 <td>armv7hf</td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conangcc5-armv7/">lasote/conangcc5-armv7 (GCC 5)</a></td>
+<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/conanio/gcc5-armv7/">conanio/gcc5-armv7 (GCC 5)</a></td>
 <td>armv7</td>
 </tr>
-<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conangcc5-armv7hf/">lasote/conangcc5-armv7hf (GCC 5)</a></td>
+<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/conanio/gcc5-armv7hf/">conanio/gcc5-armv7hf (GCC 5)</a></td>
 <td>armv7hf</td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conangcc5/">lasote/conangcc5 (GCC 5)</a></td>
+<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/conanio/gcc5/">conanio/gcc5 (GCC 5)</a></td>
 <td>x86_64</td>
 </tr>
-<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conangcc5-i386/">lasote/conangcc5-i386 (GCC 5)</a></td>
+<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/conanio/gcc5-i386/">conanio/gcc5-i386 (GCC 5)</a></td>
 <td>x86</td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conangcc5-armv7/">lasote/conangcc5-armv7 (GCC 5)</a></td>
+<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/conanio/gcc5-armv7/">conanio/gcc5-armv7 (GCC 5)</a></td>
 <td>armv7</td>
 </tr>
-<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conangcc5-armv7hf/">lasote/conangcc5-armv7hf (GCC 5)</a></td>
+<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/conanio/gcc5-armv7hf/">conanio/gcc5-armv7hf (GCC 5)</a></td>
 <td>armv7hf</td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conangcc6/">lasote/conangcc6 (GCC 6)</a></td>
+<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/conanio/gcc6/">conanio/gcc6 (GCC 6)</a></td>
 <td>x86_64</td>
 </tr>
-<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conangcc6-i386/">lasote/conangcc6-i386 (GCC 6)</a></td>
+<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/conanio/gcc6-i386/">conanio/gcc6-i386 (GCC 6)</a></td>
 <td>x86</td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conangcc6-armv7/">lasote/conangcc6-armv7 (GCC 6)</a></td>
+<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/conanio/gcc6-armv7/">conanio/gcc6-armv7 (GCC 6)</a></td>
 <td>armv7</td>
 </tr>
-<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conangcc6-armv7hf/">lasote/conangcc6-armv7hf: (GCC 6)</a></td>
+<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/conanio/gcc6-armv7hf/">conanio/gcc6-armv7hf: (GCC 6)</a></td>
 <td>armv7hf</td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conangcc7-i386/">lasote/conangcc7-i386 (GCC 7)</a></td>
+<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/conanio/gcc7-i386/">conanio/gcc7-i386 (GCC 7)</a></td>
 <td>x86</td>
 </tr>
-<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conangcc7/">lasote/conangcc7 (GCC 7)</a></td>
+<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/conanio/gcc7/">conanio/gcc7 (GCC 7)</a></td>
 <td>x86_64</td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conangcc7-armv7/">lasote/conangcc7-armv7 (GCC 7)</a></td>
+<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/conanio/gcc7-armv7/">conanio/gcc7-armv7 (GCC 7)</a></td>
 <td>armv7</td>
 </tr>
-<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conangcc7-armv7hf/">lasote/conangcc7-armv7hf (GCC 7)</a></td>
+<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/conanio/gcc7-armv7hf/">conanio/gcc7-armv7hf (GCC 7)</a></td>
 <td>armv7hf</td>
 </tr>
 </tbody>
@@ -398,32 +398,32 @@ $ conan upload <span class="s2">&quot;*&quot;</span> -r myremoteARMV7 --all
 <p><strong>Clang</strong> images</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="85%" />
-<col width="15%" />
+<col width="83%" />
+<col width="17%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td>Version</td>
 <td><strong>Target Arch</strong></td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conanclang38/">lasote/conanclang38 (Clang 3.8)</a></td>
+<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/conanio/clang38/">conanio/clang38 (Clang 3.8)</a></td>
 <td>x86_64</td>
 </tr>
-<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conanclang39-i386/">lasote/conanclang39-i386 (Clang 3.9)</a></td>
+<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/conanio/clang39-i386/">conanio/clang39-i386 (Clang 3.9)</a></td>
 <td>x86</td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conanclang39/">lasote/conanclang39 (Clang 3.9)</a></td>
+<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/conanio/clang39/">conanio/clang39 (Clang 3.9)</a></td>
 <td>x86_64</td>
 </tr>
-<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conanclang40/-i386">lasote/conanclang40-i386 (Clang 4)</a></td>
+<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/conanio/clang40/-i386">conanio/clang40-i386 (Clang 4)</a></td>
 <td>x86</td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conanclang40/">lasote/conanclang40 (Clang 4)</a></td>
+<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/conanio/clang40/">conanio/clang40 (Clang 4)</a></td>
 <td>x86_64</td>
 </tr>
-<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conanclang50-i386/">lasote/conanclang50-i386 (Clang 5)</a></td>
+<tr class="row-odd"><td><a class="reference external" href="https://hub.docker.com/r/conanio/clang50-i386/">conanio/clang50-i386 (Clang 5)</a></td>
 <td>x86</td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/lasote/conanclang50/">lasote/conanclang50 (Clang 5)</a></td>
+<tr class="row-even"><td><a class="reference external" href="https://hub.docker.com/r/conanio/clang50/">conanio/clang50 (Clang 5)</a></td>
 <td>x86_64</td>
 </tr>
 </tbody>

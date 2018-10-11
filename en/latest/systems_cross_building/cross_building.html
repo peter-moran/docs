@@ -511,7 +511,7 @@ LDFLAGS=
 <ul class="simple">
 <li>Clone, for example, the zlib library to try to build it to Android</li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/lasote/conan-zlib.git
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/conan-community/conan-zlib.git
 </pre></div>
 </div>
 <ul class="simple">
@@ -606,7 +606,7 @@ Currently there are <code class="docutils literal notranslate"><span class="pre"
 <p><strong>Example</strong>: Cross-building and uploading a package along with all its missing dependencies for <code class="docutils literal notranslate"><span class="pre">Linux/armv7hf</span></code> is done in few steps:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/conan-community/conan-openssl
 $ <span class="nb">cd</span> conan-openssl
-$ docker run -it -v<span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/conan/project --rm lasote/conangcc49-armv7hf /bin/bash
+$ docker run -it -v<span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/conan/project --rm conanio/gcc49-armv7hf /bin/bash
 
 <span class="c1"># Now we are running on the conangcc49-armv7hf container</span>
 $ sudo pip install conan --upgrade
