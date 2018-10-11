@@ -143,6 +143,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="link_apple_framework.html#how-to-package-apple-frameworks">How to package Apple Frameworks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="collect_licenses.html">How to collect licenses of dependencies</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">How to capture package version from SCM: git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-capture-package-version-from-scm-svn">How to capture package version from SCM: svn</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-capture-package-version-from-text-or-build-files">How to capture package version from text or build files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="other_languages_package_manager.html">How to use Conan as other language package manager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="use_tls_certificates.html">How to manage SSL (TLS) certificates</a></li>
@@ -252,6 +253,40 @@ the <em>conanfile.py</em> recipe resides, and use it to define the version of th
 <code class="docutils literal notranslate"><span class="pre">Hello/branch_commit&#64;user/channel</span></code>. Note that <code class="docutils literal notranslate"><span class="pre">get_version()</span></code> returns <code class="docutils literal notranslate"><span class="pre">None</span></code>
 if it is not able to get the Git data. This is necessary when the recipe is already in the
 Conan cache, and the Git repository may not be there,. A value of <code class="docutils literal notranslate"><span class="pre">None</span></code> makes Conan
+get the version from the metadata.</p>
+</div>
+<div class="section" id="how-to-capture-package-version-from-scm-svn">
+<h1>How to capture package version from SCM: svn<a class="headerlink" href="#how-to-capture-package-version-from-scm-svn" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">SVN()</span></code> helper from tools, can be used to capture data from the subversion repo in which
+the <em>conanfile.py</em> recipe resides, and use it to define the version of the Conan package.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">tools</span>
+
+<span class="k">def</span> <span class="nf">get_svn_version</span><span class="p">(</span><span class="n">version</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">scm</span> <span class="o">=</span> <span class="n">tools</span><span class="o">.</span><span class="n">SVN</span><span class="p">()</span>
+        <span class="n">revision</span> <span class="o">=</span> <span class="n">scm</span><span class="o">.</span><span class="n">get_revision</span><span class="p">()</span>
+        <span class="n">branch</span> <span class="o">=</span> <span class="n">scm</span><span class="o">.</span><span class="n">get_branch</span><span class="p">()</span> <span class="c1"># Delivers e.g trunk, tags/v1.0.0, branches/my_branch</span>
+        <span class="n">branch</span> <span class="o">=</span> <span class="n">branch</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">scm</span><span class="o">.</span><span class="n">is_pristine</span><span class="p">():</span>
+            <span class="n">dirty</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dirty</span> <span class="o">=</span> <span class="s2">&quot;.dirty&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">-</span><span class="si">%s</span><span class="s2">+</span><span class="si">%s%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">version</span><span class="p">,</span> <span class="n">revision</span><span class="p">,</span> <span class="n">branch</span><span class="p">,</span> <span class="n">dirty</span><span class="p">)</span> <span class="c1"># e.g. 1.2.0-1234+trunk.dirty</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+<span class="k">class</span> <span class="nc">HelloLibrary</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Hello&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="n">get_svn_version</span><span class="p">(</span><span class="s2">&quot;1.2.0&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<p>In this example, the package created with <strong class="command">conan create</strong> will be called
+<code class="docutils literal notranslate"><span class="pre">Hello/generated_version&#64;user/channel</span></code>. Note that <code class="docutils literal notranslate"><span class="pre">get_svn_version()</span></code> returns <code class="docutils literal notranslate"><span class="pre">None</span></code>
+if it is not able to get the subversion data. This is necessary when the recipe is already in the
+Conan cache, and the subversion repository may not be there. A value of <code class="docutils literal notranslate"><span class="pre">None</span></code> makes Conan
 get the version from the metadata.</p>
 </div>
 <div class="section" id="how-to-capture-package-version-from-text-or-build-files">
