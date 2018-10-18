@@ -240,10 +240,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                    path reference
 </pre></div>
 </div>
-<p>Exports a recipe &amp; creates a package with given files calling the package()
-method applied to the local folders ‘–source-folder’ and ‘–build-folder’ and
-creates a new package in the local cache for the specified ‘reference’ and for
-the specified ‘–settings’, ‘–options’ and or ‘–profile’.</p>
+<p>Exports a recipe, then creates a package from local source and build folders.
+The package is created by calling the package() method applied to the local
+folders ‘–source-folder’ and ‘–build-folder’ It’s created in the local cache
+for the specified ‘reference’ and for the specified ‘–settings’, ‘–options’
+and or ‘–profile’.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>positional arguments:
   path                  Path to a folder containing a conanfile.py or to a
                         recipe file e.g., my_folder/conanfile.py

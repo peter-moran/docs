@@ -246,12 +246,13 @@ specified, the search will be done in the local cache. Search is case
 sensitive, exact case has to be used. For case insensitive file systems, like
 Windows, case sensitive search can be forced with ‘–case-sensitive’.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>positional arguments:
-  pattern_or_reference  Pattern or package recipe reference, e.g., &#39;boost/*&#39;,
-                        &#39;MyPackage/1.2@user/channel&#39;
+  pattern_or_reference  Pattern or package recipe reference, e.g.,
+                        &#39;MyPackage/1.2@user/channel&#39;, &#39;boost/*&#39;
 
 optional arguments:
   -h, --help            show this help message and exit
-  -o, --outdated        Show only outdated from recipe packages
+  -o, --outdated        Show only outdated from recipe packages. This flag can
+                        only be used with a reference
   -q QUERY, --query QUERY
                         Packages query: &#39;os=Windows AND (arch=x86 OR
                         compiler=gcc)&#39;. The &#39;pattern_or_reference&#39; parameter
