@@ -514,7 +514,7 @@ host machine building the package.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . -e <span class="nv">CONAN_RUN_TEST</span><span class="o">=</span><span class="m">0</span>
 </pre></div>
 </div>
-<p>See how to retrieve the value with <a class="reference internal" href="tools.html#tools-get-env"><span class="std std-ref">tools.get_env()</span></a> and check an use case
+<p>See how to retrieve the value with <a class="reference internal" href="tools.html#tools-get-env"><span class="std std-ref">tools.get_env()</span></a> and check a use case
 with <a class="reference internal" href="../howtos/header_only.html#header-only-unit-tests-tip"><span class="std std-ref">a header only with unit tests recipe</span></a> while cross building.</p>
 <p>See example of build method in <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> to enable/disable running tests with CMake:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">CMake</span><span class="p">,</span> <span class="n">tools</span>
