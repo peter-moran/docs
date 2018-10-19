@@ -137,10 +137,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="autotools.html">AutoToolsBuildEnvironment (configure/make)</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">MSBuild</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#constructor">Constructor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#attributes">Attributes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#methods">Methods</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#visualstudiobuildenvironment">VisualStudioBuildEnvironment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#visualstudiobuildenvironment">VisualStudioBuildEnvironment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#environment-variables">Environment variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Attributes</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="meson.html">Meson</a></li>
 <li class="toctree-l3"><a class="reference internal" href="run_environment.html">RunEnvironment</a></li>
 </ul>
@@ -231,7 +236,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="msbuild">
 <span id="id1"></span><h1>MSBuild<a class="headerlink" href="#msbuild" title="Permalink to this headline">¶</a></h1>
-<p>Calls Visual Studio <code class="docutils literal notranslate"><span class="pre">msbuild</span></code> command to build a <code class="docutils literal notranslate"><span class="pre">sln</span></code> project:</p>
+<p>Calls Visual Studio :command:’msbuild` command to build a <em>.sln</em> project:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">MSBuild</span>
 
 <span class="k">class</span> <span class="nc">ExampleConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
@@ -242,16 +247,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <span class="n">msbuild</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="s2">&quot;MyProject.sln&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Internally the <code class="docutils literal notranslate"><span class="pre">MSBuild</span></code> build helper uses:</p>
-<blockquote>
-<div><ul class="simple">
-<li><a class="reference internal" href="#visual-studio-build"><span class="std std-ref">VisualStudioBuildEnvironment</span></a> to adjust the <code class="docutils literal notranslate"><span class="pre">LIB</span></code> and <code class="docutils literal notranslate"><span class="pre">CL</span></code>
-environment variables with all the information from the requirements: include directories, library names, flags etc.</li>
-<li><a class="reference internal" href="../tools.html#msvc-build-command"><span class="std std-ref">tools.msvc_build_command</span></a> to call msbuild.</li>
-</ul>
-</div></blockquote>
-<p>You can adjust all the information from the requirements accessing to the <code class="docutils literal notranslate"><span class="pre">build_env</span></code> that it is a
-<a class="reference internal" href="#visual-studio-build"><span class="std std-ref">VisualStudioBuildEnvironment</span></a> object:</p>
+<p>Internally the <code class="docutils literal notranslate"><span class="pre">MSBuild</span></code> build helper uses <a class="reference internal" href="#visual-studio-build"><span class="std std-ref">VisualStudioBuildEnvironment</span></a> to adjust the <code class="docutils literal notranslate"><span class="pre">LIB</span></code> and <code class="docutils literal notranslate"><span class="pre">CL</span></code> environment variables with all the
+information from the requirements: include directories, library names, flags etc. and then calls <strong class="command">msbuild</strong>.</p>
+<p>You can adjust all the information from the requirements accessing to the <code class="docutils literal notranslate"><span class="pre">build_env</span></code> that it is a <a class="reference internal" href="#visual-studio-build"><span class="std std-ref">VisualStudioBuildEnvironment</span></a> object:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">MSBuild</span>
 
  <span class="k">class</span> <span class="nc">ExampleConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
@@ -276,10 +274,17 @@ environment variables with all the information from the requirements: include di
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd><ul class="first last simple">
-<li><strong>conanfile</strong> (Required): ConanFile object. Usually <code class="docutils literal notranslate"><span class="pre">self</span></code> in a <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code>.</li>
+<li><strong>conanfile</strong> (Required): ConanFile object. Usually <code class="docutils literal notranslate"><span class="pre">self</span></code> in a <em>conanfile.py</em>.</li>
 </ul>
 </dd>
 </dl>
+</div>
+<div class="section" id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="build-env">
+<h3>build_env<a class="headerlink" href="#build-env" title="Permalink to this headline">¶</a></h3>
+<p>A <a class="reference internal" href="#visual-studio-build"><span class="std std-ref">VisualStudioBuildEnvironment</span></a> object with the needed environment variables.</p>
+</div>
 </div>
 <div class="section" id="methods">
 <h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
@@ -287,33 +292,32 @@ environment variables with all the information from the requirements: include di
 <h3>build()<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project_file</span><span class="p">,</span> <span class="n">targets</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">upgrade_project</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">build_type</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">arch</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
           <span class="n">parallel</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">force_vcvars</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">toolset</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">platforms</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">use_env</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-          <span class="n">vcvars_ver</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">winsdk_version</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+          <span class="n">vcvars_ver</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">winsdk_version</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Builds Visual Studio project with the given parameters. It will call <code class="docutils literal notranslate"><span class="pre">tools.msvc_build_command()</span></code>.</p>
+<p>Builds Visual Studio project with the given parameters.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd><ul class="first last">
-<li><p class="first"><strong>project_file</strong> (Required): Path to the <code class="docutils literal notranslate"><span class="pre">sln</span></code> file.</p>
+<li><p class="first"><strong>project_file</strong> (Required): Path to the <em>.sln</em> file.</p>
 </li>
 <li><p class="first"><strong>targets</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): List of targets to build.</p>
 </li>
-<li><p class="first"><strong>upgrade_project</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): Will call <code class="docutils literal notranslate"><span class="pre">devenv</span></code> to upgrade the solution to your current Visual Studio.</p>
+<li><p class="first"><strong>upgrade_project</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): Will call <strong class="command">devenv</strong> to upgrade the solution to your current Visual Studio.</p>
 </li>
-<li><p class="first"><strong>build_type</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Optional. Defaulted to None, will use the <code class="docutils literal notranslate"><span class="pre">settings.build_type</span></code></p>
+<li><p class="first"><strong>build_type</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Use a custom build type name instead of the detault <code class="docutils literal notranslate"><span class="pre">settings.build_type</span></code> one.</p>
 </li>
-<li><p class="first"><strong>arch</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Optional. Defaulted to None, will use <code class="docutils literal notranslate"><span class="pre">settings.arch</span></code></p>
+<li><p class="first"><strong>arch</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Use a custom architecture name instead of the <code class="docutils literal notranslate"><span class="pre">settings.arch</span></code> one.</p>
 </li>
 <li><p class="first"><strong>force_vcvars</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">False</span></code>): Will ignore if the environment is already set for a different Visual Studio version.</p>
 </li>
-<li><dl class="first docutils">
-<dt><strong>parallel</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): Will use the configured number of cores in the <a class="reference internal" href="../config_files/conan.conf.html#conan-conf"><span class="std std-ref">conan.conf</span></a> file (<code class="docutils literal notranslate"><span class="pre">cpu_count</span></code>):</dt>
-<dd><ul class="first last simple">
-<li><strong>In the solution</strong>: Building the solution with the projects in parallel. (<code class="docutils literal notranslate"><span class="pre">/m:</span></code> parameter)</li>
+<li><p class="first"><strong>parallel</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): Will use the configured number of cores in the <a class="reference internal" href="../config_files/conan.conf.html#conan-conf"><span class="std std-ref">conan.conf</span></a> file or <a class="reference internal" href="../tools.html#cpu-count"><span class="std std-ref">tools.cpu_count()</span></a>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>In the solution</strong>: Building the solution with the projects in parallel. (<code class="docutils literal notranslate"><span class="pre">/m:</span></code> parameter).</li>
 <li><strong>CL compiler</strong>: Building the sources in parallel. (<code class="docutils literal notranslate"><span class="pre">/MP:</span></code> compiler flag)</li>
 </ul>
-</dd>
-</dl>
+</div></blockquote>
 </li>
 <li><p class="first"><strong>toolset</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Specify a toolset. Will append a <code class="docutils literal notranslate"><span class="pre">/p:PlatformToolset</span></code> option.</p>
 </li>
@@ -327,13 +331,13 @@ solution uses “Win32” instead of “x86”). This dictionary will update the
 </pre></div>
 </div>
 </li>
-<li><p class="first"><strong>use_env</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>: Applies the argument <code class="docutils literal notranslate"><span class="pre">/p:UseEnv=true</span></code> to the <code class="docutils literal notranslate"><span class="pre">msbuild()</span></code> call.</p>
+<li><p class="first"><strong>use_env</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>: Applies the argument <code class="docutils literal notranslate"><span class="pre">/p:UseEnv=true</span></code> to the <strong class="command">msbuild</strong> call.</p>
 </li>
 <li><p class="first"><strong>vcvars_ver</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Specifies the Visual Studio compiler toolset to use.</p>
 </li>
 <li><p class="first"><strong>winsdk_version</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Specifies the version of the Windows SDK to use.</p>
 </li>
-<li><p class="first"><strong>properties</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Dictionary with new properties, for each element in the dict {name: value}
+<li><p class="first"><strong>properties</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Dictionary with new properties, for each element in the dictionary <code class="docutils literal notranslate"><span class="pre">{name:</span> <span class="pre">value}</span></code>
 it will append a <code class="docutils literal notranslate"><span class="pre">/p:name=&quot;value&quot;</span></code> option.</p>
 </li>
 </ul>
@@ -342,7 +346,7 @@ it will append a <code class="docutils literal notranslate"><span class="pre">/p
 </div>
 <div class="section" id="get-command">
 <h3>get_command()<a class="headerlink" href="#get-command" title="Permalink to this headline">¶</a></h3>
-<p>Returns a string command calling <code class="docutils literal notranslate"><span class="pre">msbuild</span></code></p>
+<p>Returns a string command calling <strong class="command">msbuild</strong>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project_file</span><span class="p">,</span> <span class="n">props_file_path</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">targets</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">upgrade_project</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">build_type</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                 <span class="n">arch</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">toolset</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">platforms</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">use_env</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
 </pre></div>
@@ -350,8 +354,7 @@ it will append a <code class="docutils literal notranslate"><span class="pre">/p
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd><ul class="first last simple">
-<li><strong>project_file</strong> (Optional, defaulted to None): Path to a properties file to include in the project.</li>
-<li>Same other parameters than <strong>build()</strong></li>
+<li>Same parameters as the <code class="docutils literal notranslate"><span class="pre">build()</span></code> method.</li>
 </ul>
 </dd>
 </dl>
@@ -361,7 +364,7 @@ it will append a <code class="docutils literal notranslate"><span class="pre">/p
 <div class="section" id="visualstudiobuildenvironment">
 <span id="visual-studio-build"></span><h1>VisualStudioBuildEnvironment<a class="headerlink" href="#visualstudiobuildenvironment" title="Permalink to this headline">¶</a></h1>
 <p>Prepares the needed environment variables to invoke the Visual Studio compiler.
-Use it together with <a class="reference internal" href="../tools.html#tools"><span class="std std-ref">vcvars_command tool</span></a></p>
+Use it together with <a class="reference internal" href="../tools.html#vcvars-command"><span class="std std-ref">tools.vcvars_command()</span></a>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">VisualStudioBuildEnvironment</span>
 
 <span class="k">class</span> <span class="nc">ExampleConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
@@ -377,7 +380,21 @@ Use it together with <a class="reference internal" href="../tools.html#tools"><s
                <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> &amp;&amp; lib hello.obj -OUT:hello.lib&#39;</span> <span class="o">%</span> <span class="n">vcvars</span>
 </pre></div>
 </div>
-<p>Set environment variables:</p>
+<p>You can adjust the automatically filled attribures:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">compiler</span> <span class="o">==</span> <span class="s2">&quot;Visual Studio&quot;</span><span class="p">:</span>
+<span class="hll">     <span class="n">env_build</span> <span class="o">=</span> <span class="n">VisualStudioBuildEnvironment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span><span class="hll">     <span class="n">env_build</span><span class="o">.</span><span class="n">include_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;mycustom/directory/to/headers&quot;</span><span class="p">)</span>
+</span><span class="hll">     <span class="n">env_build</span><span class="o">.</span><span class="n">lib_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;mycustom/directory/to/libs&quot;</span><span class="p">)</span>
+</span>     <span class="n">env_build</span><span class="o">.</span><span class="n">link_flags</span> <span class="o">=</span> <span class="p">[]</span>
+     <span class="k">with</span> <span class="n">tools</span><span class="o">.</span><span class="n">environment_append</span><span class="p">(</span><span class="n">env_build</span><span class="o">.</span><span class="n">vars</span><span class="p">):</span>
+         <span class="n">vcvars</span> <span class="o">=</span> <span class="n">tools</span><span class="o">.</span><span class="n">vcvars_command</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">)</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> &amp;&amp; cl /c /EHsc hello.cpp&#39;</span> <span class="o">%</span> <span class="n">vcvars</span><span class="p">)</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> &amp;&amp; lib hello.obj -OUT:hello.lib&#39;</span> <span class="o">%</span> <span class="n">vcvars</span>
+</pre></div>
+</div>
+<div class="section" id="environment-variables">
+<h2>Environment variables<a class="headerlink" href="#environment-variables" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
 <col width="15%" />
@@ -397,65 +414,52 @@ Use it together with <a class="reference internal" href="../tools.html#tools"><s
 </tr>
 </tbody>
 </table>
-<p><strong>Attributes</strong></p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="19%" />
-<col width="81%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">PROPERTY</th>
-<th class="head">DESCRIPTION</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>.include_paths</td>
-<td>List with directories of include paths</td>
-</tr>
-<tr class="row-odd"><td>.lib_paths</td>
-<td>List with directories of libraries</td>
-</tr>
-<tr class="row-even"><td>.defines</td>
-<td>List with definitions (from requirements cpp_info.defines)</td>
-</tr>
-<tr class="row-odd"><td>.runtime</td>
-<td>List with directories (from settings.compiler.runtime)</td>
-</tr>
-<tr class="row-even"><td>.flags</td>
-<td>List with flag (from requirements cpp_info.cflags</td>
-</tr>
-<tr class="row-odd"><td>.cxx_flags</td>
-<td>List with cxx flags (from requirements cpp_info.cppflags</td>
-</tr>
-<tr class="row-even"><td>.link_flags</td>
-<td>List with linker flags (from requirements cpp_info.sharedlinkflags and cpp_info.exelinkflags</td>
-</tr>
-<tr class="row-odd"><td>.std</td>
-<td>If the setting <cite>cppstd</cite> is set, the property will contain the corresponding flag of the language standard</td>
-</tr>
-<tr class="row-even"><td>.parallel</td>
-<td>Default False, when True, the flag <cite>/MP</cite> will be adjusted in order to compiler the sources in parallel (using cpu_count)</td>
-</tr>
-</tbody>
-</table>
-<p>You can adjust the automatically filled values modifying the attributes above:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>   <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">compiler</span> <span class="o">==</span> <span class="s2">&quot;Visual Studio&quot;</span><span class="p">:</span>
-<span class="hll">         <span class="n">env_build</span> <span class="o">=</span> <span class="n">VisualStudioBuildEnvironment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-</span><span class="hll">         <span class="n">env_build</span><span class="o">.</span><span class="n">include_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;mycustom/directory/to/headers&quot;</span><span class="p">)</span>
-</span><span class="hll">         <span class="n">env_build</span><span class="o">.</span><span class="n">lib_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;mycustom/directory/to/libs&quot;</span><span class="p">)</span>
-</span>         <span class="n">env_build</span><span class="o">.</span><span class="n">link_flags</span> <span class="o">=</span> <span class="p">[]</span>
-         <span class="k">with</span> <span class="n">tools</span><span class="o">.</span><span class="n">environment_append</span><span class="p">(</span><span class="n">env_build</span><span class="o">.</span><span class="n">vars</span><span class="p">):</span>
-             <span class="n">vcvars</span> <span class="o">=</span> <span class="n">tools</span><span class="o">.</span><span class="n">vcvars_command</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">)</span>
-             <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> &amp;&amp; cl /c /EHsc hello.cpp&#39;</span> <span class="o">%</span> <span class="n">vcvars</span><span class="p">)</span>
-             <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> &amp;&amp; lib hello.obj -OUT:hello.lib&#39;</span> <span class="o">%</span> <span class="n">vcvars</span>
-</pre></div>
 </div>
+<div class="section" id="id2">
+<h2>Attributes<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="include-paths">
+<h3>include_paths<a class="headerlink" href="#include-paths" title="Permalink to this headline">¶</a></h3>
+<p>List with directories of include paths.</p>
+</div>
+<div class="section" id="lib-paths">
+<h3>lib_paths<a class="headerlink" href="#lib-paths" title="Permalink to this headline">¶</a></h3>
+<p>List with directories of libraries.</p>
+</div>
+<div class="section" id="defines">
+<h3>defines<a class="headerlink" href="#defines" title="Permalink to this headline">¶</a></h3>
+<p>List with definitions from requirements’ <code class="docutils literal notranslate"><span class="pre">cpp_info.defines</span></code>.</p>
+</div>
+<div class="section" id="runtime">
+<h3>runtime<a class="headerlink" href="#runtime" title="Permalink to this headline">¶</a></h3>
+<p>List with directories from <code class="docutils literal notranslate"><span class="pre">settings.compiler.runtime</span></code>.</p>
+</div>
+<div class="section" id="flags">
+<h3>flags<a class="headerlink" href="#flags" title="Permalink to this headline">¶</a></h3>
+<p>List with flags from requirements’ <code class="docutils literal notranslate"><span class="pre">cpp_info.cflags</span></code>.</p>
+</div>
+<div class="section" id="cxx-flags">
+<h3>cxx_flags<a class="headerlink" href="#cxx-flags" title="Permalink to this headline">¶</a></h3>
+<p>List with cxx flags from requirements’ <code class="docutils literal notranslate"><span class="pre">cpp_info.cppflags</span></code>.</p>
+</div>
+<div class="section" id="link-flags">
+<h3>link_flags<a class="headerlink" href="#link-flags" title="Permalink to this headline">¶</a></h3>
+<p>List with linker flags from requirements’ <code class="docutils literal notranslate"><span class="pre">cpp_info.sharedlinkflags</span></code> and <code class="docutils literal notranslate"><span class="pre">cpp_info.exelinkflags</span></code></p>
+</div>
+<div class="section" id="std">
+<h3>std<a class="headerlink" href="#std" title="Permalink to this headline">¶</a></h3>
+<p>If the setting <code class="docutils literal notranslate"><span class="pre">cppstd</span></code> is set, the property will contain the corresponding flag of the language
+standard.</p>
+</div>
+<div class="section" id="parallel">
+<h3>parallel<a class="headerlink" href="#parallel" title="Permalink to this headline">¶</a></h3>
+<p>Defaulted to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>Sets the flag <code class="docutils literal notranslate"><span class="pre">/MP</span></code> in order to compile the sources in parallel using cores found by
+<a class="reference internal" href="../tools.html#cpu-count"><span class="std std-ref">tools.cpu_count()</span></a>.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<ul class="last simple">
-<li><a class="reference internal" href="../tools.html#environment-append-tool"><span class="std std-ref">tools.environment_append()</span></a></li>
-</ul>
+<p class="last">Read more about <a class="reference internal" href="../tools.html#environment-append-tool"><span class="std std-ref">tools.environment_append()</span></a>.</p>
+</div>
+</div>
 </div>
 </div>
 
