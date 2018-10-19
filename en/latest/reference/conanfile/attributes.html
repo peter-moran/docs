@@ -373,7 +373,7 @@ channel than the current package, which could be achieved with something like:</
         <span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="s2">&quot;Say/0.1@</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>Only package recipes that are in the conan local cache (i.e. “exported”) have an user/channel assigned.
+<p>Only package recipes that are in the conan local cache (i.e. “exported”) have a user/channel assigned.
 For package recipes working in user space, there is no current user/channel. The properties <code class="docutils literal notranslate"><span class="pre">self.user</span></code>
 and <code class="docutils literal notranslate"><span class="pre">self.channel</span></code> will then look for environment variables <code class="docutils literal notranslate"><span class="pre">CONAN_USERNAME</span></code> and <code class="docutils literal notranslate"><span class="pre">CONAN_CHANNEL</span></code>
 respectively. If they are not defined, an error will be raised unless <code class="docutils literal notranslate"><span class="pre">default_user</span></code> and <code class="docutils literal notranslate"><span class="pre">default_channel</span></code>
@@ -474,7 +474,7 @@ values:</p>
                <span class="s2">&quot;option1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;value1&quot;</span><span class="p">,</span> <span class="s2">&quot;value2&quot;</span><span class="p">],}</span>
 </pre></div>
 </div>
-<p>Values for each option can be typed or plain strings, and there is an special value, <code class="docutils literal notranslate"><span class="pre">ANY</span></code>, for
+<p>Values for each option can be typed or plain strings, and there is a special value, <code class="docutils literal notranslate"><span class="pre">ANY</span></code>, for
 options that can take any value.</p>
 <p>The attribute <code class="docutils literal notranslate"><span class="pre">default_options</span></code> has the purpose of defining the default values for the options
 if the consumer (consuming recipe, project, profile or the user through the command line) does
