@@ -222,7 +222,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>Conan needs access to some, per user, configuration files, as the <strong>conan.conf</strong> file that
 defines the basic client app configuration. By convention, this file will be located in the
 user home folder <strong>~/.conan/</strong>. This folder will typically also store the package cache, in
-<strong>~/.conan/data</strong>. Though the latter is configurable in <em>conan.conf</em>, still conan needs
+<strong>~/.conan/data</strong>. Though the latter is configurable in <em>conan.conf</em>, conan needs
 some place to look for this initial configuration file.</p>
 <p>There are some scenarios in which you might want to use different initial locations for the
 conan client application:</p>
@@ -233,10 +233,8 @@ remote configurations, etc. Note that using Continuous Integration with the same
 isolated machine instances (virtual machines), or with sequential jobs is perfectly possible. For
 example, we use a lot CI cloud services of travis-ci and appveyor.</li>
 <li>Independent per project management and storage. If as a single developer you want to
-manage different projects with different user credentials (for the same remote, having different
-users for different remotes is also fine), consuming packages from different remotes, you might
-find that having a single user configuration is not enough. Having independent caches might
-allow also to take away with you very easily the requirements of a certain project.</li>
+manage different projects with different user credentials and/or different remotes, you might find
+that having multiple independent caches makes it easier.</li>
 </ul>
 <p>Using different caches is very simple. You can just define the environment variable <strong>CONAN_USER_HOME</strong>.
 By setting this variable to different paths, you have multiple conan caches,

@@ -233,42 +233,42 @@ $ <span class="nb">cd</span> mytimer
 </ol>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text"><strong>timer.cpp</strong></span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span> <span class="c1">// $Id: //poco/1.4/Foundation/samples/Timer/src/Timer.cpp#1 $</span>
- <span class="c1">// This sample demonstrates the Timer and Stopwatch classes.</span>
- <span class="c1">// Copyright (c) 2004-2006, Applied Informatics Software Engineering GmbH.</span>
- <span class="c1">// and Contributors.</span>
- <span class="c1">// SPDX-License-Identifier:    BSL-1.0</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// $Id: //poco/1.4/Foundation/samples/Timer/src/Timer.cpp#1 $</span>
+<span class="c1">// This sample demonstrates the Timer and Stopwatch classes.</span>
+<span class="c1">// Copyright (c) 2004-2006, Applied Informatics Software Engineering GmbH.</span>
+<span class="c1">// and Contributors.</span>
+<span class="c1">// SPDX-License-Identifier:    BSL-1.0</span>
 
- <span class="cp">#include</span> <span class="cpf">&quot;Poco/Timer.h&quot;</span><span class="cp"></span>
- <span class="cp">#include</span> <span class="cpf">&quot;Poco/Thread.h&quot;</span><span class="cp"></span>
- <span class="cp">#include</span> <span class="cpf">&quot;Poco/Stopwatch.h&quot;</span><span class="cp"></span>
- <span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Poco/Timer.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Poco/Thread.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Poco/Stopwatch.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 
- <span class="k">using</span> <span class="n">Poco</span><span class="o">::</span><span class="n">Timer</span><span class="p">;</span>
- <span class="k">using</span> <span class="n">Poco</span><span class="o">::</span><span class="n">TimerCallback</span><span class="p">;</span>
- <span class="k">using</span> <span class="n">Poco</span><span class="o">::</span><span class="n">Thread</span><span class="p">;</span>
- <span class="k">using</span> <span class="n">Poco</span><span class="o">::</span><span class="n">Stopwatch</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">Poco</span><span class="o">::</span><span class="n">Timer</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">Poco</span><span class="o">::</span><span class="n">TimerCallback</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">Poco</span><span class="o">::</span><span class="n">Thread</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">Poco</span><span class="o">::</span><span class="n">Stopwatch</span><span class="p">;</span>
 
- <span class="k">class</span> <span class="nc">TimerExample</span><span class="p">{</span>
- <span class="k">public</span><span class="o">:</span>
-     <span class="n">TimerExample</span><span class="p">(){</span> <span class="n">_sw</span><span class="p">.</span><span class="n">start</span><span class="p">();}</span>
+<span class="k">class</span> <span class="nc">TimerExample</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">TimerExample</span><span class="p">(){</span> <span class="n">_sw</span><span class="p">.</span><span class="n">start</span><span class="p">();}</span>
 
-     <span class="kt">void</span> <span class="n">onTimer</span><span class="p">(</span><span class="n">Timer</span><span class="o">&amp;</span> <span class="n">timer</span><span class="p">){</span>
-         <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Callback called after &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">_sw</span><span class="p">.</span><span class="n">elapsed</span><span class="p">()</span><span class="o">/</span><span class="mi">1000</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; milliseconds.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-     <span class="p">}</span>
- <span class="k">private</span><span class="o">:</span>
-     <span class="n">Stopwatch</span> <span class="n">_sw</span><span class="p">;</span>
- <span class="p">};</span>
+    <span class="kt">void</span> <span class="n">onTimer</span><span class="p">(</span><span class="n">Timer</span><span class="o">&amp;</span> <span class="n">timer</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Callback called after &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">_sw</span><span class="p">.</span><span class="n">elapsed</span><span class="p">()</span><span class="o">/</span><span class="mi">1000</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; milliseconds.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="n">Stopwatch</span> <span class="n">_sw</span><span class="p">;</span>
+<span class="p">};</span>
 
- <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">){</span>
-     <span class="n">TimerExample</span> <span class="n">example</span><span class="p">;</span>
-     <span class="n">Timer</span> <span class="n">timer</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">500</span><span class="p">);</span>
-     <span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">(</span><span class="n">TimerCallback</span><span class="o">&lt;</span><span class="n">TimerExample</span><span class="o">&gt;</span><span class="p">(</span><span class="n">example</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">TimerExample</span><span class="o">::</span><span class="n">onTimer</span><span class="p">));</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">){</span>
+    <span class="n">TimerExample</span> <span class="n">example</span><span class="p">;</span>
+    <span class="n">Timer</span> <span class="n">timer</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">500</span><span class="p">);</span>
+    <span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">(</span><span class="n">TimerCallback</span><span class="o">&lt;</span><span class="n">TimerExample</span><span class="o">&gt;</span><span class="p">(</span><span class="n">example</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">TimerExample</span><span class="o">::</span><span class="n">onTimer</span><span class="p">));</span>
 
-     <span class="n">Thread</span><span class="o">::</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5000</span><span class="p">);</span>
-     <span class="n">timer</span><span class="p">.</span><span class="n">stop</span><span class="p">();</span>
-     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
- <span class="p">}</span>
+    <span class="n">Thread</span><span class="o">::</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5000</span><span class="p">);</span>
+    <span class="n">timer</span><span class="p">.</span><span class="n">stop</span><span class="p">();</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -277,11 +277,11 @@ $ <span class="nb">cd</span> mytimer
 </ol>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text"><strong>conanfile.txt</strong></span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> [requires]
- Poco/1.9.0@pocoproject/stable
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
+Poco/1.9.0@pocoproject/stable
 
- [generators]
- cmake
+[generators]
+cmake
 </pre></div>
 </div>
 </div>
@@ -290,15 +290,15 @@ $ <span class="nb">cd</span> mytimer
 <p>To do so, include the generated file and add these variables to our <em>CMakeLists.txt</em>:</p>
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text"><strong>CMakeLists.txt</strong></span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span> <span class="nb">project</span><span class="p">(</span><span class="s">FoundationTimer</span><span class="p">)</span>
- <span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8.12</span><span class="p">)</span>
- <span class="nb">add_definitions</span><span class="p">(</span><span class="s2">&quot;-std=c++11&quot;</span><span class="p">)</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">project</span><span class="p">(</span><span class="s">FoundationTimer</span><span class="p">)</span>
+<span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8.12</span><span class="p">)</span>
+<span class="nb">add_definitions</span><span class="p">(</span><span class="s2">&quot;-std=c++11&quot;</span><span class="p">)</span>
 
- <span class="nb">include</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="o">}</span><span class="s">/conanbuildinfo.cmake</span><span class="p">)</span>
- <span class="nb">conan_basic_setup</span><span class="p">()</span>
+<span class="nb">include</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="o">}</span><span class="s">/conanbuildinfo.cmake</span><span class="p">)</span>
+<span class="nb">conan_basic_setup</span><span class="p">()</span>
 
- <span class="nb">add_executable</span><span class="p">(</span><span class="s">timer</span> <span class="s">timer.cpp</span><span class="p">)</span>
- <span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">timer</span> <span class="o">${</span><span class="nv">CONAN_LIBS</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">timer</span> <span class="s">timer.cpp</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">timer</span> <span class="o">${</span><span class="nv">CONAN_LIBS</span><span class="o">}</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
