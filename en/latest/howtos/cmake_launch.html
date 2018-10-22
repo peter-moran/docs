@@ -237,24 +237,24 @@ packages themselves.</p>
 <p>To be able to use it, you can directly download the code from your CMake script:</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text"><em>CMakeLists.txt</em></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span> <span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8</span><span class="p">)</span>
- <span class="nb">project</span><span class="p">(</span><span class="s">myproject</span> <span class="s">CXX</span><span class="p">)</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">myproject</span> <span class="s">CXX</span><span class="p">)</span>
 
- <span class="c"># Download automatically, you can also just copy the conan.cmake file</span>
- <span class="nb">if</span><span class="p">(</span><span class="s">NOT</span> <span class="s">EXISTS</span> <span class="s2">&quot;${CMAKE_BINARY_DIR}/conan.cmake&quot;</span><span class="p">)</span>
-    <span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span> <span class="s2">&quot;Downloading conan.cmake from https://github.com/conan-io/cmake-conan&quot;</span><span class="p">)</span>
-    <span class="nb">file</span><span class="p">(</span><span class="s">DOWNLOAD</span> <span class="s2">&quot;https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake&quot;</span>
+<span class="c"># Download automatically, you can also just copy the conan.cmake file</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">NOT</span> <span class="s">EXISTS</span> <span class="s2">&quot;${CMAKE_BINARY_DIR}/conan.cmake&quot;</span><span class="p">)</span>
+   <span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span> <span class="s2">&quot;Downloading conan.cmake from https://github.com/conan-io/cmake-conan&quot;</span><span class="p">)</span>
+   <span class="nb">file</span><span class="p">(</span><span class="s">DOWNLOAD</span> <span class="s2">&quot;https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake&quot;</span>
                   <span class="s2">&quot;${CMAKE_BINARY_DIR}/conan.cmake&quot;</span><span class="p">)</span>
- <span class="nb">endif</span><span class="p">()</span>
+<span class="nb">endif</span><span class="p">()</span>
 
- <span class="nb">include</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="o">}</span><span class="s">/conan.cmake</span><span class="p">)</span>
+<span class="nb">include</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="o">}</span><span class="s">/conan.cmake</span><span class="p">)</span>
 
- <span class="nb">conan_cmake_run</span><span class="p">(</span><span class="s">REQUIRES</span> <span class="s">Hello/0.1@memsharded/testing</span>
-                 <span class="s">BASIC_SETUP</span>
-                 <span class="s">BUILD</span> <span class="s">missing</span><span class="p">)</span>
+<span class="nb">conan_cmake_run</span><span class="p">(</span><span class="s">REQUIRES</span> <span class="s">Hello/0.1@memsharded/testing</span>
+                <span class="s">BASIC_SETUP</span>
+                <span class="s">BUILD</span> <span class="s">missing</span><span class="p">)</span>
 
- <span class="nb">add_executable</span><span class="p">(</span><span class="s">main</span> <span class="s">main.cpp</span><span class="p">)</span>
- <span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">main</span> <span class="o">${</span><span class="nv">CONAN_LIBS</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">main</span> <span class="s">main.cpp</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">main</span> <span class="o">${</span><span class="nv">CONAN_LIBS</span><span class="o">}</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
