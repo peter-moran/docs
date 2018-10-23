@@ -252,7 +252,7 @@ Tool2/0.1@user/channel, Tool3/0.1@user/channel
 </div>
 </div>
 <p>A profile file can be stored in the default profile folder, or anywhere else in your project file structure. To use the configuration specified in a profile file, pass in the file as a command line argument as shown in the example below:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan create demo/testing -pr<span class="o">=</span>clang_3.5
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan create . demo/testing -pr<span class="o">=</span>clang_3.5
 </pre></div>
 </div>
 <p>Continuing with the example of Poco, instead of passing in a long list of command line arguments, we can define a handy profile that defines them all and pass that to the command line when installing the different project dependencies.</p>
@@ -293,7 +293,9 @@ Tool2/0.1@user/channel, Tool3/0.1@user/channel
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">Read more about <a class="reference internal" href="../reference/profiles.html#profiles"><span class="std std-ref">Profiles</span></a> for full reference.</p>
+<p class="last">Read more about <a class="reference internal" href="../reference/profiles.html#profiles"><span class="std std-ref">Profiles</span></a> for full reference. There is a conan command, <a class="reference internal" href="../reference/commands/misc/profile.html#conan-profile"><span class="std std-ref">conan profile</span></a>,
+that can help inspecting and managing profiles. Profiles can be also shared and installed with the
+<a class="reference internal" href="../reference/commands/consumer/config.html#conan-config-install"><span class="std std-ref">conan config install</span></a> command.</p>
 </div>
 </div>
 
