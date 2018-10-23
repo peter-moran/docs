@@ -326,7 +326,12 @@ and this is the linkage that should be used if consumers don’t specify otherwi
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>You can see the available options for a package by inspecting the recipe with <strong class="command">conan get &lt;reference&gt;</strong> command:</p>
-<div class="last highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan get Poco/1.9.0@pocoproject/stable
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan get Poco/1.9.0@pocoproject/stable
+</pre></div>
+</div>
+<p>To see only specific fields of the recipe you can use the <strong class="command">conan inspect</strong> command instead:</p>
+<div class="last highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan inspect Poco/1.9.0@pocoproject/stable -a=options
+$ conan inspect Poco/1.9.0@pocoproject/stable -a=default_options
 </pre></div>
 </div>
 </div>
