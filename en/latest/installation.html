@@ -120,6 +120,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="#install-the-binaries">Install the binaries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#initial-configuration">Initial configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#install-from-source">Install from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#update">Update</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#python-2-deprecation-notice">Python 2 Deprecation Notice</a></li>
 </ul>
 </li>
@@ -328,6 +329,18 @@ main(sys.argv[1:])
 </pre></div>
 </div>
 <p>You should see the Conan commands help.</p>
+</div>
+<div class="section" id="update">
+<h2>Update<a class="headerlink" href="#update" title="Permalink to this headline">¶</a></h2>
+<p>If installed via <code class="docutils literal notranslate"><span class="pre">pip</span></code>, Conan can be easily updated:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install conan --upgrade  <span class="c1"># Might need sudo or --user</span>
+</pre></div>
+</div>
+<p>If installed via the installers (<em>.exe</em>, <em>.deb</em>), download the new installer and execute it.</p>
+<p>The default <em>&lt;userhome&gt;/.conan/settings.yml</em> file, containing the definition of compiler versions, etc.,
+will be upgraded if Conan does not detect local changes, otherwise it will create a <em>settings.yml.new</em> with the new settings.
+If you want to regenerate the settings, you can remove the <em>settings.yml</em> file manually and it will be created with the new information the first time it is required.</p>
+<p>The upgrade shouldn’t affect the installed packages or cache information. If the cache becomes inconsistent somehow, you may want to remove its content by deleting it (<em>&lt;userhome&gt;/.conan</em>).</p>
 </div>
 <div class="section" id="python-2-deprecation-notice">
 <span id="python2"></span><h2>Python 2 Deprecation Notice<a class="headerlink" href="#python-2-deprecation-notice" title="Permalink to this headline">¶</a></h2>
