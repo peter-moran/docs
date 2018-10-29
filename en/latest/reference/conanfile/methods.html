@@ -580,7 +580,7 @@ can be done:</p>
 the command <strong class="command">conan install -o Pkg:shared=True</strong> will raise an exception in Windows saying that <code class="docutils literal notranslate"><span class="pre">shared</span></code> is not an option for such
 package.</p>
 <div class="section" id="invalid-configuration">
-<h3>Invalid configuration<a class="headerlink" href="#invalid-configuration" title="Permalink to this headline">¶</a></h3>
+<span id="id2"></span><h3>Invalid configuration<a class="headerlink" href="#invalid-configuration" title="Permalink to this headline">¶</a></h3>
 <p>Conan allows the recipe creator to declare invalid configurations, those that are known not to work
 with the library being packaged. There is an especial kind of exception that can be raised from
 the <code class="docutils literal notranslate"><span class="pre">configure()</span></code> method to state this situation: <code class="docutils literal notranslate"><span class="pre">conans.errors.ConanInvalidConfiguration</span></code>. Here
