@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan remote &mdash; conan 1.8.4 documentation</title>
+  <title>conan remote &mdash; conan 1.9.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.8.4 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.9.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan user" href="user.html"/>
         <link rel="prev" title="conan profile" href="profile.html"/>
@@ -156,7 +156,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="../../tools.html">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../config_files.html">Configuration files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../env_vars.html">Environment variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../plugins.html">Plugins [EXPERIMENTAL]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hooks.html">Hooks [EXPERIMENTAL]</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../videos.html">Videos and links</a></li>
@@ -240,13 +240,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="section" id="conan-remote">
 <span id="id1"></span><h1>conan remote<a class="headerlink" href="#conan-remote" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan remote <span class="o">[</span>-h<span class="o">]</span>
-               <span class="o">{</span>list,add,remove,update,rename,list_ref,add_ref,remove_ref,update_ref<span class="o">}</span>
+               <span class="o">{</span>list,add,remove,update,rename,list_ref,add_ref,remove_ref,update_ref,list_pref,add_pref,remove_pref,update_pref,clean<span class="o">}</span>
                ...
 </pre></div>
 </div>
 <p>Manages the remote list and the package recipes associated to a remote.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>positional arguments:
-  {list,add,remove,update,rename,list_ref,add_ref,remove_ref,update_ref}
+  {list,add,remove,update,rename,list_ref,add_ref,remove_ref,update_ref,list_pref,add_pref,remove_pref,update_pref,clean}
                         sub-command help
     list                List current remotes
     add                 Add a remote
@@ -257,6 +257,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     add_ref             Associate a recipe&#39;s reference to a remote
     remove_ref          Dissociate a recipe&#39;s reference and its remote
     update_ref          Update the remote associated with a package recipe
+    list_pref           List the package binaries and its associated remotes
+    add_pref            Associate a package reference to a remote
+    remove_pref         Dissociate a package&#39;s reference and its remote
+    update_pref         Update the remote associated with a binary package
+    clean               Clean the list of remotes and all recipe-remote
+                        associations
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -312,6 +318,11 @@ the command will insert the remote in the specified position</p>
 <ul>
 <li><p class="first">Remove a remote:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan remote remove remote_name
+</pre></div>
+</div>
+</li>
+<li><p class="first">Remove all configured remotes (this will also remove all recipe-remote associations):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan remote clean
 </pre></div>
 </div>
 </li>
@@ -396,7 +407,7 @@ know more about server certificates verification and client certifications manag
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.8
+      Version: 1.9
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -404,7 +415,11 @@ know more about server certificates verification and client certifications manag
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.8</a></dd>
+            <dd><a href="/en/latest/index.html">1.9</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.8/index.html">1.8</a></dd>
           
         
           
@@ -442,7 +457,7 @@ know more about server certificates verification and client certifications manag
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.8.4',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

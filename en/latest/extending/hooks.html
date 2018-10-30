@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Plugins [EXPERIMENTAL] &mdash; conan 1.8.4 documentation</title>
+  <title>Hooks [EXPERIMENTAL] &mdash; conan 1.9.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.8.4 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.9.0 documentation" href="../index.html"/>
         <link rel="up" title="Extending Conan" href="../extending.html"/>
         <link rel="next" title="Integrations" href="../integrations.html"/>
         <link rel="prev" title="Python requires: reusing python code in recipes [EXPERIMENTAL]" href="python_requires.html"/>
@@ -125,11 +125,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../extending.html">Extending Conan</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="python_requires.html">Python requires: reusing python code in recipes [EXPERIMENTAL]</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Plugins [EXPERIMENTAL]</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#plugin-structure">Plugin structure</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Hooks [EXPERIMENTAL]</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hook-structure">Hook structure</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#importing-from-a-module">Importing from a module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#storage-activation-and-sharing">Storage, activation and sharing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#official-plugins">Official Plugins</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#official-hooks">Official Hooks</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#attribute-checker">attribute_checker</a></li>
 </ul>
 </li>
@@ -195,14 +195,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
           <li><a href="../extending.html">Extending Conan</a> &raquo;</li>
         
-      <li>Plugins [EXPERIMENTAL]</li>
+      <li>Hooks [EXPERIMENTAL]</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/conan-io/docs/blob/master/extending/plugins.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/conan-io/docs/blob/master/extending/hooks.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -216,21 +216,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="plugins-experimental">
-<span id="plugins"></span><h1>Plugins [EXPERIMENTAL]<a class="headerlink" href="#plugins-experimental" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="hooks-experimental">
+<span id="hooks"></span><h1>Hooks [EXPERIMENTAL]<a class="headerlink" href="#hooks-experimental" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
 </div>
-<p>The Conan plugins is a feature intended to extend the Conan functionalities and let users customize the client behavior at determined
+<p>The Conan hooks is a feature intended to extend the Conan functionalities and let users customize the client behavior at determined
 points.</p>
-<div class="section" id="plugin-structure">
-<h2>Plugin structure<a class="headerlink" href="#plugin-structure" title="Permalink to this headline">¶</a></h2>
-<p>Plugins are Python files containing <strong>pre</strong> and <strong>post</strong> functions that will be executed prior and after a determined task performed by the
+<div class="section" id="hook-structure">
+<h2>Hook structure<a class="headerlink" href="#hook-structure" title="Permalink to this headline">¶</a></h2>
+<p>Hooks are Python files containing <strong>pre</strong> and <strong>post</strong> functions that will be executed prior and after a determined task performed by the
 Conan client. Those tasks could be Conan commands, recipe interactions such as exporting or packaging or interactions with the remotes.</p>
-<p>Here you can see an example of a simple plugin:</p>
+<p>Here you can see an example of a simple hook:</p>
 <div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text"><em>example_plugin.py</em></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>example_hook.py</em></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">tools</span>
 
 
@@ -265,27 +265,27 @@ Conan client. Those tasks could be Conan commands, recipe interactions such as e
 </pre></div>
 </div>
 </div>
-<p>This plugin is only checking the recipe content prior to the recipe being exported and prior to downloading the sources. Basically the
+<p>This hook is only checking the recipe content prior to the recipe being exported and prior to downloading the sources. Basically the
 <code class="docutils literal notranslate"><span class="pre">pre_export()</span></code> function is checking the attributes of the <code class="docutils literal notranslate"><span class="pre">conanfile</span></code> object to see if there is an URL, a license and a description and
 warning the user with a message through the <code class="docutils literal notranslate"><span class="pre">output</span></code>. This is done <strong>before</strong> the recipe is exported to the local cache.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">pre_source()</span></code> function checks if the recipe contains a <code class="docutils literal notranslate"><span class="pre">source()</span></code> method (this time it is using the conanfile content instead of
 the <code class="docutils literal notranslate"><span class="pre">conanfile</span></code> object) and in that case it checks if the download of the sources are likely coming from immutable places (a compressed
 file or a determined <strong class="command">git checkout</strong>). This is done <strong>before</strong> the <strong>source()</strong> method of the recipe is called.</p>
-<p>Any kind of Python scripting can be executed. You can create global functions and call them from different plugin functions, import from a
+<p>Any kind of Python scripting can be executed. You can create global functions and call them from different hook functions, import from a
 relative module and warn, error or even raise to abort the Conan client execution.</p>
 <p>As you can see each function receives some parameters but not all of them are available for all functions as this may change depending on
 the context of the commands being executed such as the recipe being in the local cache or not.</p>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
 <p class="last">A detailed description of the functions allowed and its parameters as well as their execution can be found in it dedicated reference
-section: <a class="reference internal" href="../reference/plugins.html#plugins-reference"><span class="std std-ref">Plugins [EXPERIMENTAL]</span></a>.</p>
+section: <a class="reference internal" href="../reference/hooks.html#hooks-reference"><span class="std std-ref">Hooks [EXPERIMENTAL]</span></a>.</p>
 </div>
-<p>Other useful task where a plugin may come handy are the upload and download actions. There are <strong>pre</strong> and <strong>post</strong> functions for every
+<p>Other useful task where a hook may come handy are the upload and download actions. There are <strong>pre</strong> and <strong>post</strong> functions for every
 download/upload as a whole and for fine download tasks such as recipe and package downloads/uploads.</p>
 <p>For example they can be used to sign the packages (including a file with the signature) when the package is created and and checking that
-signature everytime they are downloaded.</p>
+signature every time they are downloaded.</p>
 <div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text"><em>signing_plugin.py</em></span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>signing_hook.py</em></span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">os</span>
  <span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">tools</span>
 
@@ -308,10 +308,10 @@ signature everytime they are downloaded.</p>
 </div>
 <div class="section" id="importing-from-a-module">
 <h2>Importing from a module<a class="headerlink" href="#importing-from-a-module" title="Permalink to this headline">¶</a></h2>
-<p>The plugin interface should always be placed inside a Python file with the name of the plugin and stored in the <em>plugins</em> folder. However,
+<p>The hook interface should always be placed inside a Python file with the name of the hook and stored in the <em>hooks</em> folder. However,
 you can use functionalities from imported modules if you have them installed in your system or if they are installed with Conan:</p>
 <div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">example_plugin.py</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">example_hook.py</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">requests</span>
  <span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">tools</span>
 
@@ -323,12 +323,11 @@ you can use functionalities from imported modules if you have them installed in 
 </div>
 </div>
 <p>You can also import functionalities from a relative module:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>plugins
-|   my_plugin.py
-|
-\---custom_module
-        custom.py
-        __init__.py
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hooks
+├── custom_module
+│   ├── custom.py
+│   └── __init__.py
+└── my_hook.py
 </pre></div>
 </div>
 <p>Inside the <em>custom.py</em> from my <em>custom_module</em> there is:</p>
@@ -336,7 +335,7 @@ you can use functionalities from imported modules if you have them installed in 
     <span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;my_printer(): CUSTOM MODULE&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>And it can be used in plugin importing the module:</p>
+<p>And it can be used in hook importing the module:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">custom_module.custom</span> <span class="kn">import</span> <span class="n">my_printer</span>
 
 
@@ -347,35 +346,35 @@ you can use functionalities from imported modules if you have them installed in 
 </div>
 <div class="section" id="storage-activation-and-sharing">
 <h2>Storage, activation and sharing<a class="headerlink" href="#storage-activation-and-sharing" title="Permalink to this headline">¶</a></h2>
-<p>Plugins are Python files stored under <em>~/.conan/plugins</em> folder and <strong>their file name should be the same used for activation</strong> (without the
+<p>Hooks are Python files stored under <em>~/.conan/hooks</em> folder and <strong>their file name should be the same used for activation</strong> (without the
 <em>.py</em> extension).</p>
-<p>The activation of the plugins is done in the <em>conan.conf</em> section named <code class="docutils literal notranslate"><span class="pre">[plugins]</span></code>. The plugin names listed under this section will be
+<p>The activation of the hooks is done in the <em>conan.conf</em> section named <code class="docutils literal notranslate"><span class="pre">[hooks]</span></code>. The hook names listed under this section will be
 considered activated.</p>
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text"><em>conan.conf</em></span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span> ...
- [plugins]
+ [hooks]
  attribute_checker
  conan-center
 </pre></div>
 </div>
 </div>
 <p>They can be easily activated and deactivated from the command line using the <strong class="command">conan config set</strong> command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan config <span class="nb">set</span> plugins.attribute_checker  <span class="c1"># Activates &#39;attribute_checker&#39;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan config <span class="nb">set</span> hooks.attribute_checker  <span class="c1"># Activates &#39;attribute_checker&#39;</span>
 
-$ conan config rm plugins.attribute_checker  <span class="c1"># Deactivates &#39;attribute_checker&#39;</span>
+$ conan config rm hooks.attribute_checker  <span class="c1"># Deactivates &#39;attribute_checker&#39;</span>
 </pre></div>
 </div>
-<p>There is also an environment variable <code class="docutils literal notranslate"><span class="pre">CONAN_PLUGINS</span></code> to list the active plugins. Plugins listed in <em>conan.conf</em> will be loaded into
-this variable and values in the environment variable will be used to load the plugins.</p>
-<p>Plugins are considered part of the Conan client configuration and can be shared as usual with the <a class="reference internal" href="../reference/commands/consumer/config.html#conan-config-install"><span class="std std-ref">conan config install</span></a> command.</p>
+<p>There is also an environment variable <code class="docutils literal notranslate"><span class="pre">CONAN_HOOKS</span></code> to list the active hooks. Hooks listed in <em>conan.conf</em> will be loaded into
+this variable and values in the environment variable will be used to load the hooks.</p>
+<p>Hooks are considered part of the Conan client configuration and can be shared as usual with the <a class="reference internal" href="../reference/commands/consumer/config.html#conan-config-install"><span class="std std-ref">conan config install</span></a> command.</p>
 </div>
-<div class="section" id="official-plugins">
-<h2>Official Plugins<a class="headerlink" href="#official-plugins" title="Permalink to this headline">¶</a></h2>
-<p>There is a simple <em>attribute_checker</em> plugin ready to be used in Conan. You can take it as a starting point to create your own ones.</p>
+<div class="section" id="official-hooks">
+<h2>Official Hooks<a class="headerlink" href="#official-hooks" title="Permalink to this headline">¶</a></h2>
+<p>There is a simple <em>attribute_checker</em> hook ready to be used in Conan. You can take it as a starting point to create your own ones.</p>
 <div class="section" id="attribute-checker">
 <h3>attribute_checker<a class="headerlink" href="#attribute-checker" title="Permalink to this headline">¶</a></h3>
-<p>This plugin is shipped together with the Conan client and its functionality is warning when recipes do not contain some metadata attributes.</p>
+<p>This hook is shipped together with the Conan client and its functionality is warning when recipes do not contain some metadata attributes.</p>
 <div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption"><span class="caption-text"><em>attribute_checker.py</em></span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="k">def</span> <span class="nf">pre_export</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">conanfile</span><span class="p">,</span> <span class="n">conanfile_path</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -388,7 +387,7 @@ this variable and values in the environment variable will be used to load the pl
 </pre></div>
 </div>
 </div>
-<p>This plugin comes activated by default.</p>
+<p>This hook comes activated by default.</p>
 </div>
 </div>
 </div>
@@ -433,7 +432,7 @@ this variable and values in the environment variable will be used to load the pl
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.8
+      Version: 1.9
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -441,7 +440,11 @@ this variable and values in the environment variable will be used to load the pl
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.8</a></dd>
+            <dd><a href="/en/latest/index.html">1.9</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.8/index.html">1.8</a></dd>
           
         
           
@@ -479,7 +482,7 @@ this variable and values in the environment variable will be used to load the pl
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.4',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

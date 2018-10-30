@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Extending Conan &mdash; conan 1.8.4 documentation</title>
+  <title>Extending Conan &mdash; conan 1.9.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="conan 1.8.4 documentation" href="index.html"/>
+    <link rel="top" title="conan 1.9.0 documentation" href="index.html"/>
         <link rel="next" title="Python requires: reusing python code in recipes [EXPERIMENTAL]" href="extending/python_requires.html"/>
         <link rel="prev" title="Windows Subsystems" href="systems_cross_building/windows_subsystems.html"/>
 
@@ -124,7 +124,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="systems_cross_building.html">Systems and cross building</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Extending Conan</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="extending/python_requires.html">Python requires: reusing python code in recipes [EXPERIMENTAL]</a></li>
-<li class="toctree-l2"><a class="reference internal" href="extending/plugins.html">Plugins [EXPERIMENTAL]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending/hooks.html">Hooks [EXPERIMENTAL]</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="integrations.html">Integrations</a></li>
@@ -210,11 +210,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="extending/python_requires.html">Python requires: reusing python code in recipes [EXPERIMENTAL]</a></li>
-<li class="toctree-l1"><a class="reference internal" href="extending/plugins.html">Plugins [EXPERIMENTAL]</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="extending/plugins.html#plugin-structure">Plugin structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="extending/plugins.html#importing-from-a-module">Importing from a module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="extending/plugins.html#storage-activation-and-sharing">Storage, activation and sharing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="extending/plugins.html#official-plugins">Official Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extending/hooks.html">Hooks [EXPERIMENTAL]</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="extending/hooks.html#hook-structure">Hook structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending/hooks.html#importing-from-a-module">Importing from a module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending/hooks.html#storage-activation-and-sharing">Storage, activation and sharing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending/hooks.html#official-hooks">Official Hooks</a></li>
 </ul>
 </li>
 </ul>
@@ -261,7 +261,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.8
+      Version: 1.9
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -269,7 +269,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.8</a></dd>
+            <dd><a href="/en/latest/index.html">1.9</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.8/index.html">1.8</a></dd>
           
         
           
@@ -307,7 +311,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.8.4',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

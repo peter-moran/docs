@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Install and Create output [EXPERIMENTAL] &mdash; conan 1.8.4 documentation</title>
+  <title>Install and Create output [EXPERIMENTAL] &mdash; conan 1.9.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.8.4 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.9.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="Search output [EXPERIMENTAL]" href="search.html"/>
         <link rel="prev" title="conan help" href="../misc/help.html"/>
@@ -150,7 +150,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="../../tools.html">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../config_files.html">Configuration files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../env_vars.html">Environment variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../plugins.html">Plugins [EXPERIMENTAL]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hooks.html">Hooks [EXPERIMENTAL]</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../videos.html">Videos and links</a></li>
@@ -256,6 +256,10 @@ a file containing the information of the installation process.</p>
 <li><strong>time</strong>: <code class="docutils literal notranslate"><span class="pre">ISO</span> <span class="pre">8601</span></code> string with the time the recipe was downloaded/retrieved.</li>
 <li><strong>error</strong>: <code class="docutils literal notranslate"><span class="pre">true</span></code>/<code class="docutils literal notranslate"><span class="pre">false</span></code>.</li>
 <li><strong>id</strong>: Reference. E.g., “<a class="reference external" href="mailto:OpenSSL/1&#46;0&#46;2n&#37;&#52;&#48;conan/stable">OpenSSL/1<span>&#46;</span>0<span>&#46;</span>2n<span>&#64;</span>conan/stable</a>”</li>
+<li><strong>name</strong>: name of the packaged library. E.g., “OpenSSL”</li>
+<li><strong>version</strong>: version of the packaged library. E.g., “1.0.2n”</li>
+<li><strong>user</strong>: user of the packaged library. E.g., “conan”</li>
+<li><strong>channel</strong>: channel of the packaged library. E.g., “stable”</li>
 <li><strong>dependency</strong>: <code class="docutils literal notranslate"><span class="pre">true</span></code>/<code class="docutils literal notranslate"><span class="pre">false</span></code>. Is the package being installed/created or a
 dependency. Same as <a class="reference internal" href="../../conanfile/attributes.html#develop-attribute"><span class="std std-ref">develop conanfile attribute</span></a>.</li>
 </ul>
@@ -273,6 +277,8 @@ element.</p>
 <li><strong>time</strong>: ISO 8601 string with the time the recipe was downloaded/retrieved.</li>
 <li><strong>error</strong>: <code class="docutils literal notranslate"><span class="pre">true</span></code>/<code class="docutils literal notranslate"><span class="pre">false</span></code>.</li>
 <li><strong>id</strong>: Package ID. E.g., “8018a4df6e7d2b4630a814fa40c81b85b9182d2b”</li>
+<li><strong>cpp_info</strong>: dictionary containing the build information defined in the <code class="docutils literal notranslate"><span class="pre">package_info</span></code>
+method on the recipe.</li>
 </ul>
 </div></blockquote>
 </li>
@@ -282,60 +288,73 @@ element.</p>
 </ul>
 </div></blockquote>
 <p><strong>Example:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install OpenSSL/1.0.2n@conan/stable --json install.json
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install zlib/1.2.11@conan/stable --json install.json
 </pre></div>
 </div>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">install.json</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span> <span class="p">{</span>
-    <span class="nt">&quot;installed&quot;</span><span class="p">:[</span>
-       <span class="p">{</span>
-          <span class="nt">&quot;packages&quot;</span><span class="p">:[</span>
-             <span class="p">{</span>
-                <span class="nt">&quot;remote&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
-                <span class="nt">&quot;built&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
-                <span class="nt">&quot;cache&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
-                <span class="nt">&quot;downloaded&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
-                <span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="s2">&quot;2018-03-28T08:39:41.385285&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
-                <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;227fb0ea22f4797212e72ba94ea89c7b3fbc2a0c&quot;</span>
-             <span class="p">}</span>
-          <span class="p">],</span>
-          <span class="nt">&quot;recipe&quot;</span><span class="p">:{</span>
-             <span class="nt">&quot;remote&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
-             <span class="nt">&quot;cache&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
-             <span class="nt">&quot;downloaded&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
-             <span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="s2">&quot;2018-03-28T08:39:41.365836&quot;</span><span class="p">,</span>
-             <span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
-             <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;OpenSSL/1.0.2n@conan/stable&quot;</span>
-          <span class="p">}</span>
-       <span class="p">},</span>
-       <span class="p">{</span>
-          <span class="nt">&quot;packages&quot;</span><span class="p">:[</span>
-             <span class="p">{</span>
-                <span class="nt">&quot;remote&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
-                <span class="nt">&quot;built&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
-                <span class="nt">&quot;cache&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
-                <span class="nt">&quot;downloaded&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
-                <span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="s2">&quot;2018-03-28T08:39:41.384952&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
-                <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;8018a4df6e7d2b4630a814fa40c81b85b9182d2b&quot;</span>
-             <span class="p">}</span>
-          <span class="p">],</span>
-          <span class="nt">&quot;recipe&quot;</span><span class="p">:{</span>
-             <span class="nt">&quot;remote&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
-             <span class="nt">&quot;cache&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
-             <span class="nt">&quot;downloaded&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
-             <span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="s2">&quot;2018-03-28T08:39:41.379354&quot;</span><span class="p">,</span>
-             <span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
-             <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;zlib/1.2.11@conan/stable&quot;</span>
-          <span class="p">}</span>
-       <span class="p">}</span>
-    <span class="p">],</span>
-    <span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="kc">false</span>
- <span class="p">}</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&quot;installed&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;recipe&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;zlib/1.2.11@conan/stable&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;zlib&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.11&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;user&quot;</span><span class="p">:</span> <span class="s2">&quot;conan&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;channel&quot;</span><span class="p">:</span> <span class="s2">&quot;stable&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;downloaded&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+                <span class="nt">&quot;cache&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+                <span class="nt">&quot;remote&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+                <span class="nt">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-10-10T10:28:28.351753&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;dependency&quot;</span><span class="p">:</span> <span class="kc">true</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;packages&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;0eaf3bfbc94fb6d2c8f230d052d75c6c1a57a4ce&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;downloaded&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+                    <span class="nt">&quot;cache&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+                    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+                    <span class="nt">&quot;remote&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+                    <span class="nt">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-10-10T10:28:28.356103&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;built&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+                    <span class="nt">&quot;cpp_info&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="nt">&quot;includedirs&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="s2">&quot;include&quot;</span>
+                        <span class="p">],</span>
+                        <span class="nt">&quot;libdirs&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="s2">&quot;lib&quot;</span>
+                        <span class="p">],</span>
+                        <span class="nt">&quot;resdirs&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="s2">&quot;res&quot;</span>
+                        <span class="p">],</span>
+                        <span class="nt">&quot;bindirs&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="s2">&quot;bin&quot;</span>
+                        <span class="p">],</span>
+                        <span class="nt">&quot;builddirs&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="s2">&quot;&quot;</span>
+                        <span class="p">],</span>
+                        <span class="nt">&quot;libs&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="s2">&quot;z&quot;</span>
+                        <span class="p">],</span>
+                        <span class="nt">&quot;rootpath&quot;</span><span class="p">:</span> <span class="s2">&quot;/Users/jgsogo/.conan/data/zlib/1.2.11/conan/stable/package/0eaf3bfbc94fb6d2c8f230d052d75c6c1a57a4ce&quot;</span><span class="p">,</span>
+                        <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.11&quot;</span><span class="p">,</span>
+                        <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;A Massively Spiffy Yet Delicately Unobtrusive Compression Library (Also Free, Not to Mention Unencumbered by Patents)&quot;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As this is a marked as <em>experimental</em>, some fields may be removed or added: fields
+<code class="docutils literal notranslate"><span class="pre">version</span></code> and <code class="docutils literal notranslate"><span class="pre">description</span></code> inside <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> will eventually be removed and paths
+may be changed for absolute ones.</p>
 </div>
 </div>
 
@@ -379,7 +398,7 @@ element.</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.8
+      Version: 1.9
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -387,7 +406,11 @@ element.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.8</a></dd>
+            <dd><a href="/en/latest/index.html">1.9</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.8/index.html">1.8</a></dd>
           
         
           
@@ -425,7 +448,7 @@ element.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.8.4',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

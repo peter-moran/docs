@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Attributes &mdash; conan 1.8.4 documentation</title>
+  <title>Attributes &mdash; conan 1.9.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.8.4 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.9.0 documentation" href="../../index.html"/>
         <link rel="up" title="conanfile.py" href="../conanfile.html"/>
         <link rel="next" title="Methods" href="methods.html"/>
         <link rel="prev" title="conanfile.py" href="../conanfile.html"/>
@@ -138,6 +138,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l4"><a class="reference internal" href="#url">url</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#license">license</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#author">author</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#topics">topics</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#user-channel">user, channel</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#default-user-default-channel">default_user, default_channel</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#settings">settings</a></li>
@@ -178,7 +179,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="../tools.html">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../config_files.html">Configuration files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../env_vars.html">Environment variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../plugins.html">Plugins [EXPERIMENTAL]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hooks.html">Hooks [EXPERIMENTAL]</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../videos.html">Videos and links</a></li>
@@ -353,6 +354,19 @@ define who is the creator/maintainer of the package</p>
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Hello&quot;</span>
     <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;0.1&quot;</span>
     <span class="n">author</span> <span class="o">=</span> <span class="s2">&quot;John J. Smith (john.smith@company.com)&quot;</span>
+</pre></div>
+</div>
+<p>This is an optional attribute</p>
+</div>
+<div class="section" id="topics">
+<h2>topics<a class="headerlink" href="#topics" title="Permalink to this headline">¶</a></h2>
+<p>Topics provide a useful way to group related tags together and to quickly tell developers what a
+package is about. Tags also make it easier for customers to find your recipe. It could be useful
+when filtering packages by topics or reusing on Bintray package page.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HelloConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Hello&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;0.1&quot;</span>
+    <span class="n">topics</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="s2">&quot;baz&quot;</span><span class="p">,</span> <span class="s2">&quot;qux&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>This is an optional attribute</p>
@@ -801,8 +815,18 @@ The allowed <code class="docutils literal notranslate"><span class="pre">build_p
 </div>
 <div class="section" id="short-paths">
 <span id="short-paths-reference"></span><h2>short_paths<a class="headerlink" href="#short-paths" title="Permalink to this headline">¶</a></h2>
-<p>If one of the packages you are creating hits the limit of 260 chars path length in Windows, add
-<code class="docutils literal notranslate"><span class="pre">short_paths=True</span></code> in your conanfile.py:</p>
+<p>This attribute is specific to Windows, and ignored on other operating systems.
+It tells Conan to workaround the limitation of 260 chars in Windows paths.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Since Windows 10 (ver. 10.0.14393), it is possible to <a class="reference external" href="https://docs.microsoft.com/es-es/windows/desktop/FileIO/naming-a-file#maximum-path-length-limitation">enable long paths at the system level</a>.
+Latest python 2.x and 3.x installers enable this by default. With the path limit removed both on the OS
+and on Python, the <code class="docutils literal notranslate"><span class="pre">short_paths</span></code> functionality becomes unnecessary, and may be disabled explicitly
+through the <code class="docutils literal notranslate"><span class="pre">CONAN_USER_HOME_SHORT</span></code> environment variable.</p>
+</div>
+<p>Enabling short paths management will “link” the <code class="docutils literal notranslate"><span class="pre">source</span></code> and <code class="docutils literal notranslate"><span class="pre">build</span></code> directories of the package to the drive root, something like
+<code class="docutils literal notranslate"><span class="pre">C:\.conan\tmpdir</span></code>. All the folder layout in the local cache is maintained.</p>
+<p>Set <code class="docutils literal notranslate"><span class="pre">short_paths=True</span></code> in your <em>conanfile.py</em>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
 
 <span class="k">class</span> <span class="nc">ConanFileTest</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
@@ -810,12 +834,10 @@ The allowed <code class="docutils literal notranslate"><span class="pre">build_p
     <span class="n">short_paths</span> <span class="o">=</span> <span class="bp">True</span>
 </pre></div>
 </div>
-<p>This will automatically “link” the <code class="docutils literal notranslate"><span class="pre">source</span></code> and <code class="docutils literal notranslate"><span class="pre">build</span></code> directories of the package to the drive root,
-something like <cite>C:/.conan/tmpdir</cite>. All the folder layout in the conan cache is maintained.</p>
-<p>This attribute will not have any effect in other OS, it will be discarded.</p>
-<p>From Windows 10 (ver. 10.0.14393), it is possible to <a class="reference external" href="https://docs.microsoft.com/es-es/windows/desktop/FileIO/naming-a-file#maximum-path-length-limitation">opt-in disabling the path limits</a>.
-Latest python installers might offer to enable this while installing python. With this limit removed, the <code class="docutils literal notranslate"><span class="pre">short_paths</span></code> functionality is
-totally unnecessary.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">There is an <a class="reference internal" href="../env_vars.html#env-vars"><span class="std std-ref">environment variable</span></a> <code class="docutils literal notranslate"><span class="pre">CONAN_USE_ALWAYS_SHORT_PATHS</span></code> to globally enable this behavior for all packages.</p>
+</div>
 </div>
 <div class="section" id="no-copy-source">
 <span id="id2"></span><h2>no_copy_source<a class="headerlink" href="#no-copy-source" title="Permalink to this headline">¶</a></h2>
@@ -1167,7 +1189,7 @@ When type is <code class="docutils literal notranslate"><span class="pre">git</s
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.8
+      Version: 1.9
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -1175,7 +1197,11 @@ When type is <code class="docutils literal notranslate"><span class="pre">git</s
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.8</a></dd>
+            <dd><a href="/en/latest/index.html">1.9</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.8/index.html">1.8</a></dd>
           
         
           
@@ -1213,7 +1239,7 @@ When type is <code class="docutils literal notranslate"><span class="pre">git</s
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.8.4',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

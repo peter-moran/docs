@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan export-pkg &mdash; conan 1.8.4 documentation</title>
+  <title>conan export-pkg &mdash; conan 1.9.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.8.4 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.9.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan new" href="new.html"/>
         <link rel="prev" title="conan export" href="export.html"/>
@@ -152,7 +152,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="../../tools.html">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../config_files.html">Configuration files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../env_vars.html">Environment variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../plugins.html">Plugins [EXPERIMENTAL]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hooks.html">Hooks [EXPERIMENTAL]</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../videos.html">Videos and links</a></li>
@@ -385,14 +385,18 @@ local cache:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan <span class="nb">source</span> . --source-folder src
 $ conan install . --install-folder build_x86 -s <span class="nv">arch</span><span class="o">=</span>x86
 $ conan build . --build-folder build_x86 --source-folder src
-<span class="hll">$ conan export-pkg . Hello/0.1@user/stable --build-folder build_x86
+<span class="hll">$ conan export-pkg . Hello/0.1@user/stable --build-folder build_x86 -s <span class="nv">arch</span><span class="o">=</span>x86
 </span></pre></div>
 </div>
-<p>In this case, in the <strong class="command">conan export-pkg</strong>, you don’t need to specify the <strong class="command">-s arch=x86</strong> or any other setting, option, or profile,
-because it will all the information in the <strong class="command">--build-folder</strong> the <em>conaninfo.txt</em> and <em>conanbuildinfo.txt`</em> that have been created with
-<strong class="command">conan install</strong>.</p>
 </li>
 </ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note that if <strong class="command">--profile</strong> or settings, options, are not provided to <strong class="command">export-pkg</strong>,
+the configuration will be extracted from the information from a previous <strong class="command">conan install</strong>.
+That information might be incomplete in some edge cases, so we strongly recommend the usage of
+<strong class="command">--profile</strong> or <strong class="command">--settings, --options</strong>, etc.</p>
+</div>
 </div>
 
 
@@ -435,7 +439,7 @@ because it will all the information in the <strong class="command">--build-folde
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.8
+      Version: 1.9
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -443,7 +447,11 @@ because it will all the information in the <strong class="command">--build-folde
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.8</a></dd>
+            <dd><a href="/en/latest/index.html">1.9</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.8/index.html">1.8</a></dd>
           
         
           
@@ -481,7 +489,7 @@ because it will all the information in the <strong class="command">--build-folde
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.8.4',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

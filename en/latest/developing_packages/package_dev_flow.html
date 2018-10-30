@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Package development flow &mdash; conan 1.8.4 documentation</title>
+  <title>Package development flow &mdash; conan 1.9.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.8.4 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.9.0 documentation" href="../index.html"/>
         <link rel="up" title="Developing Packages" href="../developing_packages.html"/>
         <link rel="next" title="Workspaces [EXPERIMENTAL]" href="workspaces.html"/>
         <link rel="prev" title="Developing Packages" href="../developing_packages.html"/>
@@ -407,7 +407,7 @@ is still recommended in the dev-flow to debug the <code class="docutils literal 
 it will create an exact copy of the provided folder. It assumes the package has already been created by a previous
 <strong class="command">conan package</strong> command or with a <strong class="command">conan build</strong> command with a <code class="docutils literal notranslate"><span class="pre">build()</span></code> method running a <code class="docutils literal notranslate"><span class="pre">cmake.install()</span></code>.</li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan export-pkg . user/channel --source-folder<span class="o">=</span>tmp/source --build-folder<span class="o">=</span>tmp/build
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan export-pkg . user/channel --source-folder<span class="o">=</span>tmp/source --build-folder<span class="o">=</span>tmp/build --profile<span class="o">=</span>myprofile
 
 Packaging to 6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7
 Hello/1.1@user/channel: Generating the package
@@ -443,13 +443,16 @@ Hello/1.1@user/channel <span class="o">(</span><span class="nb">test</span> pack
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone git@github.com:memsharded/example_conan_flow.git
 $ <span class="nb">cd</span> example_conan_flow
 $ conan <span class="nb">source</span> .
-$ conan install .
+$ conan install . -pr<span class="o">=</span>default
 $ conan build .
 $ conan package .
+<span class="c1"># So far, this is local. Now put the local binaries in cache</span>
+$ conan export-pkg . Hello/1.1@user/testing -pr<span class="o">=</span>default
+<span class="c1"># And test it, to check it is working in the local cache</span>
+$ conan <span class="nb">test</span> test_package Hello/1.1@user/testing
 ...
-PROJECT package<span class="o">()</span>: Copied <span class="m">1</span> <span class="s1">&#39;.h&#39;</span> files: hello.h
-PROJECT package<span class="o">()</span>: Copied <span class="m">2</span> <span class="s1">&#39;.lib&#39;</span> files: greet.lib, hello.lib
-PROJECT: Package <span class="s1">&#39;package&#39;</span> created
+Hello/1.1@user/testing <span class="o">(</span><span class="nb">test</span> package<span class="o">)</span>: Running test<span class="o">()</span>
+Hello World!
 </pre></div>
 </div>
 </div>
@@ -538,7 +541,7 @@ Hello/1.1@user/channel: Calling build<span class="o">()</span>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.8
+      Version: 1.9
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -546,7 +549,11 @@ Hello/1.1@user/channel: Calling build<span class="o">()</span>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.8</a></dd>
+            <dd><a href="/en/latest/index.html">1.9</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.8/index.html">1.8</a></dd>
           
         
           
@@ -584,7 +591,7 @@ Hello/1.1@user/channel: Calling build<span class="o">()</span>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.4',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

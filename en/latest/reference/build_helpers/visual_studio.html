@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>MSBuild &mdash; conan 1.8.4 documentation</title>
+  <title>MSBuild &mdash; conan 1.9.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.8.4 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.9.0 documentation" href="../../index.html"/>
         <link rel="up" title="Build helpers" href="../build_helpers.html"/>
         <link rel="next" title="Meson" href="meson.html"/>
         <link rel="prev" title="AutoToolsBuildEnvironment (configure/make)" href="autotools.html"/>
@@ -142,8 +142,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#visualstudiobuildenvironment">VisualStudioBuildEnvironment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Constructor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#environment-variables">Environment variables</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id2">Attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Attributes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="meson.html">Meson</a></li>
@@ -153,7 +154,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="../tools.html">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../config_files.html">Configuration files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../env_vars.html">Environment variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../plugins.html">Plugins [EXPERIMENTAL]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hooks.html">Hooks [EXPERIMENTAL]</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../videos.html">Videos and links</a></li>
@@ -393,6 +394,23 @@ Use it together with <a class="reference internal" href="../tools.html#vcvars-co
          <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> &amp;&amp; lib hello.obj -OUT:hello.lib&#39;</span> <span class="o">%</span> <span class="n">vcvars</span>
 </pre></div>
 </div>
+<div class="section" id="id2">
+<h2>Constructor<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">VisualStudioBuildEnvironment</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conanfile</span><span class="p">,</span> <span class="n">with_build_type_flags</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li><strong>conanfile</strong> (Required): ConanFile object. Usually <code class="docutils literal notranslate"><span class="pre">self</span></code> in a <em>conanfile.py</em>.</li>
+<li><strong>with_build_type_flags</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): If <code class="docutils literal notranslate"><span class="pre">True</span></code>, it adjusts the compiler flags
+according to the <code class="docutils literal notranslate"><span class="pre">build_type</span></code> setting. e.g: <cite>-Zi</cite>, <cite>-Ob0</cite>, <cite>-Od</cite>…</li>
+</ul>
+</dd>
+</dl>
+</div>
 <div class="section" id="environment-variables">
 <h2>Environment variables<a class="headerlink" href="#environment-variables" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
@@ -415,8 +433,8 @@ Use it together with <a class="reference internal" href="../tools.html#vcvars-co
 </tbody>
 </table>
 </div>
-<div class="section" id="id2">
-<h2>Attributes<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h2>Attributes<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="include-paths">
 <h3>include_paths<a class="headerlink" href="#include-paths" title="Permalink to this headline">¶</a></h3>
 <p>List with directories of include paths.</p>
@@ -503,7 +521,7 @@ standard.</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.8
+      Version: 1.9
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -511,7 +529,11 @@ standard.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.8</a></dd>
+            <dd><a href="/en/latest/index.html">1.9</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.8/index.html">1.8</a></dd>
           
         
           
@@ -549,7 +571,7 @@ standard.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.8.4',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

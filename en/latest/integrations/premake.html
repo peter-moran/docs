@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Premake &mdash; conan 1.8.4 documentation</title>
+  <title>Premake &mdash; conan 1.9.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.8.4 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.9.0 documentation" href="../index.html"/>
         <link rel="up" title="Integrations" href="../integrations.html"/>
         <link rel="next" title="qbs" href="qbs.html"/>
         <link rel="prev" title="QMake" href="qmake.html"/>
@@ -137,7 +137,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="boost_build.html"> Boost Build</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b2.html"> B2 (Boost Build)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="qmake.html">QMake</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#"> Premake</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"> Premake</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="qbs.html">qbs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="meson.html"> Meson Build</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docker.html"> Docker</a></li>
@@ -232,25 +235,111 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
            <div itemprop="articleBody">
             
   <div class="section" id="premake-logo-premake">
-<h1><img alt="premake_logo" src="../_images/premake_logo.png" /> Premake<a class="headerlink" href="#premake-logo-premake" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://premake.github.io/">Premake</a> version 4 has <strong>experimental</strong> support as a generator package.</p>
-<p>You can find this generator in this repository: <a class="reference external" href="https://github.com/memsharded/conan-premake">https://github.com/memsharded/conan-premake</a></p>
-<p>In order to use it, clone the repository and export the recipe to the local cache:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/memsharded/conan-premake
-$ conan <span class="nb">export</span> conan-premake memsharded/testing
+<span id="premake"></span><h1><img alt="premake_logo" src="../_images/premake_logo.png" /> Premake<a class="headerlink" href="#premake-logo-premake" title="Permalink to this headline">¶</a></h1>
+<p>Since Conan 1.9.0 the <code class="docutils literal notranslate"><span class="pre">premake</span></code> generator is built-in and works with <strong class="command">premake5</strong>, so the following should be enough to use it:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[generators]
+premake
 </pre></div>
 </div>
-<p>Now you can use this generator as a requirement in your recipes <strong>but also as a generator</strong>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
-PremakeGen@0.1@memsharded/testing
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>We are going to use the same example from <a class="reference internal" href="../getting_started.html#getting-started"><span class="std std-ref">Getting Started</span></a>, a MD5 Encrypter app.</p>
+<p>This is the main file for it:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">main.cpp</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span> <span class="cp">#include</span> <span class="cpf">&quot;Poco/MD5Engine.h&quot;</span><span class="cp"></span>
+ <span class="cp">#include</span> <span class="cpf">&quot;Poco/DigestStream.h&quot;</span><span class="cp"></span>
 
-[generators]
-Premake
+ <span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+
+ <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+ <span class="p">{</span>
+     <span class="n">Poco</span><span class="o">::</span><span class="n">MD5Engine</span> <span class="n">md5</span><span class="p">;</span>
+     <span class="n">Poco</span><span class="o">::</span><span class="n">DigestOutputStream</span> <span class="n">ds</span><span class="p">(</span><span class="n">md5</span><span class="p">);</span>
+     <span class="n">ds</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;abcdefghijklmnopqrstuvwxyz&quot;</span><span class="p">;</span>
+     <span class="n">ds</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">Poco</span><span class="o">::</span><span class="n">DigestEngine</span><span class="o">::</span><span class="n">digestToHex</span><span class="p">(</span><span class="n">md5</span><span class="p">.</span><span class="n">digest</span><span class="p">())</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="p">}</span>
 </pre></div>
 </div>
+</div>
+<p>As this project has relies on the Poco Libraries we are going to create a <em>conanfile.txt</em> with our requirement and declare there the
+Premake generator too:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">conanfile.txt</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> [requires]
+ Poco/1.9.0@pocoproject/stable
+
+ [generators]
+ premake
+</pre></div>
+</div>
+</div>
+<p>In order to use new generator within your project, use the following Premake script as a reference:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">premake5.lua</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span> <span class="c1">-- premake5.lua</span>
+
+ <span class="nb">require</span> <span class="s1">&#39;conanbuildinfo&#39;</span>
+
+ <span class="n">workspace</span> <span class="s2">&quot;ConanPremakeDemo&quot;</span>
+     <span class="n">configurations</span> <span class="p">{</span> <span class="s2">&quot;Debug&quot;</span><span class="p">,</span> <span class="s2">&quot;Release&quot;</span> <span class="p">}</span>
+     <span class="n">platforms</span> <span class="p">{</span> <span class="s2">&quot;Win32&quot;</span><span class="p">,</span> <span class="s2">&quot;x64&quot;</span> <span class="p">}</span>
+
+     <span class="n">filter</span> <span class="p">{</span> <span class="s2">&quot;platforms:Win32&quot;</span> <span class="p">}</span>
+     <span class="n">system</span> <span class="s2">&quot;Windows&quot;</span>
+     <span class="n">architecture</span> <span class="s2">&quot;x32&quot;</span>
+
+     <span class="n">filter</span> <span class="p">{</span> <span class="s2">&quot;platforms:x64&quot;</span> <span class="p">}</span>
+     <span class="n">system</span> <span class="s2">&quot;Windows&quot;</span>
+     <span class="n">architecture</span> <span class="s2">&quot;x64&quot;</span>
+
+ <span class="n">project</span> <span class="s2">&quot;ConanPremakeDemo&quot;</span>
+     <span class="n">kind</span> <span class="s2">&quot;ConsoleApp&quot;</span>
+     <span class="n">language</span> <span class="s2">&quot;C++&quot;</span>
+     <span class="n">targetdir</span> <span class="s2">&quot;bin/%{cfg.buildcfg}&quot;</span>
+
+     <span class="n">includedirs</span> <span class="p">{</span> <span class="n">conan_includedirs</span> <span class="p">}</span>
+     <span class="n">libdirs</span> <span class="p">{</span> <span class="n">conan_libdirs</span> <span class="p">}</span>
+     <span class="n">links</span> <span class="p">{</span> <span class="n">conan_libs</span> <span class="p">}</span>
+     <span class="n">linkoptions</span> <span class="p">{</span> <span class="n">conan_exelinkflags</span> <span class="p">}</span>
+
+     <span class="n">files</span> <span class="p">{</span> <span class="s2">&quot;**.h&quot;</span><span class="p">,</span> <span class="s2">&quot;**.cpp&quot;</span> <span class="p">}</span>
+
+     <span class="n">filter</span> <span class="s2">&quot;configurations:Debug&quot;</span>
+     <span class="n">defines</span> <span class="p">{</span> <span class="s2">&quot;DEBUG&quot;</span> <span class="p">}</span>
+     <span class="n">symbols</span> <span class="s2">&quot;On&quot;</span>
+
+     <span class="n">filter</span> <span class="s2">&quot;configurations:Release&quot;</span>
+     <span class="n">defines</span> <span class="p">{</span> <span class="s2">&quot;NDEBUG&quot;</span> <span class="p">}</span>
+     <span class="n">optimize</span> <span class="s2">&quot;On&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Now we are going to let Conan retrieve the dependencies and generate the dependency information in a <em>conanbuildinfo.lua</em>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install .
+</pre></div>
+</div>
+<p>Then let’s call <strong class="command">premake</strong> to generate our project:</p>
+<ul>
+<li><p class="first">Use this command for Windows Visual Studio:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ premake5 vs2017  <span class="c1"># Generates a .sln</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Use this command for Linux or macOS:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ premake5 gmake  <span class="c1"># Generates a makefile</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Now you can build your project with Visual Studio or Make.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">Check the <a class="reference internal" href="../howtos/custom_generators.html#dyn-generators"><span class="std std-ref">generator package examples</span></a> to learn how to create and share custom generators like this one.</p>
+<p class="last">Check the complete reference of the <a class="reference internal" href="../reference/generators/premake.html#premake-generator"><span class="std std-ref">premake generator</span></a>.</p>
+</div>
 </div>
 </div>
 
@@ -294,7 +383,7 @@ Premake
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.8
+      Version: 1.9
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -302,7 +391,11 @@ Premake
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.8</a></dd>
+            <dd><a href="/en/latest/index.html">1.9</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.8/index.html">1.8</a></dd>
           
         
           
@@ -340,7 +433,7 @@ Premake
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.4',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

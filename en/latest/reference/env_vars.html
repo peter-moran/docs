@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Environment variables &mdash; conan 1.8.4 documentation</title>
+  <title>Environment variables &mdash; conan 1.9.0 documentation</title>
   
 
   
@@ -40,9 +40,9 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.8.4 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.9.0 documentation" href="../index.html"/>
         <link rel="up" title="Reference" href="../reference.html"/>
-        <link rel="next" title="Plugins [EXPERIMENTAL]" href="plugins.html"/>
+        <link rel="next" title="Hooks [EXPERIMENTAL]" href="hooks.html"/>
         <link rel="prev" title="artifacts.properties" href="config_files/artifacts.properties.html"/>
 
  <!-- Google Tag Manager -->
@@ -152,7 +152,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#conan-login-username-conan-login-username-remote-name">CONAN_LOGIN_USERNAME, CONAN_LOGIN_USERNAME_{REMOTE_NAME}</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-make-program">CONAN_MAKE_PROGRAM</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-password-conan-password-remote-name">CONAN_PASSWORD, CONAN_PASSWORD_{REMOTE_NAME}</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#conan-plugins">CONAN_PLUGINS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conan-hooks">CONAN_HOOKS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-print-run-commands">CONAN_PRINT_RUN_COMMANDS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-read-only-cache">CONAN_READ_ONLY_CACHE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-run-tests">CONAN_RUN_TESTS</a></li>
@@ -164,11 +164,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#conan-user-conan-channel">CONAN_USER, CONAN_CHANNEL</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-user-home">CONAN_USER_HOME</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-user-home-short">CONAN_USER_HOME_SHORT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conan-use-always-short-paths">CONAN_USE_ALWAYS_SHORT_PATHS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-verbose-traceback">CONAN_VERBOSE_TRACEBACK</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-vs-installation-preference">CONAN_VS_INSTALLATION_PREFERENCE</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="plugins.html">Plugins [EXPERIMENTAL]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hooks.html">Hooks [EXPERIMENTAL]</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../videos.html">Videos and links</a></li>
@@ -457,10 +458,10 @@ Conan will request to the user to input a password.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="conan-plugins">
-<h2>CONAN_PLUGINS<a class="headerlink" href="#conan-plugins" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="conan-hooks">
+<h2>CONAN_HOOKS<a class="headerlink" href="#conan-hooks" title="Permalink to this headline">¶</a></h2>
 <p><strong>Defaulted to</strong>: Not defined</p>
-<p>Can be set to a comma separated list with the names of the plugins that will be executed when running a Conan command.</p>
+<p>Can be set to a comma separated list with the names of the hooks that will be executed when running a Conan command.</p>
 </div>
 <div class="section" id="conan-print-run-commands">
 <span id="id4"></span><h2>CONAN_PRINT_RUN_COMMANDS<a class="headerlink" href="#conan-print-run-commands" title="Permalink to this headline">¶</a></h2>
@@ -616,7 +617,14 @@ users in CI, to retrieve and store per-project specific dependencies (useful for
 <p><strong>Defaulted to</strong>: Not defined</p>
 <p>Specify the base folder to be used with the <a class="reference internal" href="conanfile/attributes.html#short-paths-reference"><span class="std std-ref">short paths</span></a> feature. When not specified, the packages
 marked as <cite>short_paths</cite> will be stored in the <code class="docutils literal notranslate"><span class="pre">C:\.conan</span></code> (or the current drive letter).</p>
-<p>If set to “None”, it will disable the <cite>short_paths</cite> feature in Windows for modern Windows that enable long paths at the system level.</p>
+<p>If set to <code class="docutils literal notranslate"><span class="pre">None</span></code>, it will disable the <cite>short_paths</cite> feature in Windows for modern Windows that enable long paths at the system level.</p>
+</div>
+<div class="section" id="conan-use-always-short-paths">
+<h2>CONAN_USE_ALWAYS_SHORT_PATHS<a class="headerlink" href="#conan-use-always-short-paths" title="Permalink to this headline">¶</a></h2>
+<p><strong>Defaulted to</strong>: Not defined</p>
+<p>If defined to <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>, every package will be stored in the <em>short paths directory</em> resolved
+by Conan after evaluating <code class="docutils literal notranslate"><span class="pre">CONAN_USER_HOME_SHORT</span></code> variable (see above). This variable, therefore,
+overrides the value defined in recipes for the attribute <a class="reference internal" href="conanfile/attributes.html#short-paths-reference"><span class="std std-ref">short paths</span></a>.</p>
 </div>
 <div class="section" id="conan-verbose-traceback">
 <h2>CONAN_VERBOSE_TRACEBACK<a class="headerlink" href="#conan-verbose-traceback" title="Permalink to this headline">¶</a></h2>
@@ -649,7 +657,7 @@ that uses <code class="docutils literal notranslate"><span class="pre">tools.vs_
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="plugins.html" class="btn btn-neutral float-right" title="Plugins [EXPERIMENTAL]" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="hooks.html" class="btn btn-neutral float-right" title="Hooks [EXPERIMENTAL]" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="config_files/artifacts.properties.html" class="btn btn-neutral" title="artifacts.properties" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -679,7 +687,7 @@ that uses <code class="docutils literal notranslate"><span class="pre">tools.vs_
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.8
+      Version: 1.9
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -687,7 +695,11 @@ that uses <code class="docutils literal notranslate"><span class="pre">tools.vs_
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.8</a></dd>
+            <dd><a href="/en/latest/index.html">1.9</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.8/index.html">1.8</a></dd>
           
         
           
@@ -725,7 +737,7 @@ that uses <code class="docutils literal notranslate"><span class="pre">tools.vs_
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.8.4',
+            VERSION:'1.9.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
