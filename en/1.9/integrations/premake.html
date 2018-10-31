@@ -309,11 +309,11 @@ Premake generator too:</p>
      <span class="n">files</span> <span class="p">{</span> <span class="s2">&quot;**.h&quot;</span><span class="p">,</span> <span class="s2">&quot;**.cpp&quot;</span> <span class="p">}</span>
 
      <span class="n">filter</span> <span class="s2">&quot;configurations:Debug&quot;</span>
-     <span class="n">defines</span> <span class="p">{</span> <span class="s2">&quot;DEBUG&quot;</span> <span class="p">}</span>
+     <span class="n">defines</span> <span class="p">{</span> <span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span> <span class="n">conan_cppdefines</span> <span class="p">}</span>
      <span class="n">symbols</span> <span class="s2">&quot;On&quot;</span>
 
      <span class="n">filter</span> <span class="s2">&quot;configurations:Release&quot;</span>
-     <span class="n">defines</span> <span class="p">{</span> <span class="s2">&quot;NDEBUG&quot;</span> <span class="p">}</span>
+     <span class="n">defines</span> <span class="p">{</span> <span class="s2">&quot;NDEBUG&quot;</span><span class="p">,</span> <span class="n">conan_cppdefines</span> <span class="p">}</span>
      <span class="n">optimize</span> <span class="s2">&quot;On&quot;</span>
 </pre></div>
 </div>
