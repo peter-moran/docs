@@ -356,20 +356,21 @@ define who is the creator/maintainer of the package</p>
     <span class="n">author</span> <span class="o">=</span> <span class="s2">&quot;John J. Smith (john.smith@company.com)&quot;</span>
 </pre></div>
 </div>
-<p>This is an optional attribute</p>
+<p>This is an optional attribute.</p>
 </div>
 <div class="section" id="topics">
 <h2>topics<a class="headerlink" href="#topics" title="Permalink to this headline">¶</a></h2>
 <p>Topics provide a useful way to group related tags together and to quickly tell developers what a
-package is about. Tags also make it easier for customers to find your recipe. It could be useful
-when filtering packages by topics or reusing on Bintray package page.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HelloConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Hello&quot;</span>
+package is about. Topics also make it easier for customers to find your recipe. It could be useful
+to filter packages by topics or to reuse them in Bintray package page.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">topics</span></code> attribute should be a tuple with the needed topics inside.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ProtocInstallerConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;protoc_installer&quot;</span>
     <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;0.1&quot;</span>
-    <span class="n">topics</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="s2">&quot;baz&quot;</span><span class="p">,</span> <span class="s2">&quot;qux&quot;</span><span class="p">)</span>
+    <span class="n">topics</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;protocol-buffers&quot;</span><span class="p">,</span> <span class="s2">&quot;protocol-compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;serialization&quot;</span><span class="p">,</span> <span class="s2">&quot;rpc&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>This is an optional attribute</p>
+<p>This is an optional attribute.</p>
 </div>
 <div class="section" id="user-channel">
 <span id="id1"></span><h2>user, channel<a class="headerlink" href="#user-channel" title="Permalink to this headline">¶</a></h2>
