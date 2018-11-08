@@ -705,7 +705,9 @@ you need there.</p>
 <li><strong>update()</strong>: Updates the system package manager database. It’s called automatically from the <code class="docutils literal notranslate"><span class="pre">install()</span></code> method by default.</li>
 <li><strong>install(packages, update=True, force=False)</strong>: Installs the <code class="docutils literal notranslate"><span class="pre">packages</span></code> (could be a list or a string). If <code class="docutils literal notranslate"><span class="pre">update</span></code> is True it
 will execute <code class="docutils literal notranslate"><span class="pre">update()</span></code> first if it’s needed. The packages won’t be installed if they are already installed at least of <code class="docutils literal notranslate"><span class="pre">force</span></code>
-parameter is set to True. If <code class="docutils literal notranslate"><span class="pre">packages</span></code> is a list the first available package will be picked (short-circuit like logical <strong>or</strong>).</li>
+parameter is set to True. If <code class="docutils literal notranslate"><span class="pre">packages</span></code> is a list the first available package will be picked (short-circuit like logical <strong>or</strong>).
+<strong>Note</strong>: This list of packages is intended for providing <strong>alternative</strong> names for the same package, to account for small variations
+of the name for the same package in different distros. To install different packages, one call to <code class="docutils literal notranslate"><span class="pre">install()</span></code> per package is necessary.</li>
 </ul>
 </dd>
 </dl>
