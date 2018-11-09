@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tools &mdash; conan 1.9.0 documentation</title>
+  <title>Tools &mdash; conan 1.9.1 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.9.0 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.9.1 documentation" href="../index.html"/>
         <link rel="up" title="Reference" href="../reference.html"/>
         <link rel="next" title="Configuration files" href="config_files.html"/>
         <link rel="prev" title="RunEnvironment" href="build_helpers/run_environment.html"/>
@@ -331,6 +331,11 @@ to set the Visual Studio environment for these parameters.</p>
 </ul>
 </dd>
 </dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When cross-building from x64 to x86 the toolchain by default is <code class="docutils literal notranslate"><span class="pre">x86</span></code>.
+If you want to use <code class="docutils literal notranslate"><span class="pre">amd64_x86</span></code> instead, set the environment variable <code class="docutils literal notranslate"><span class="pre">PreferredToolArchitecture=x64</span></code>.</p>
+</div>
 </div>
 <div class="section" id="tools-vcvars-dict">
 <h2>tools.vcvars_dict()<a class="headerlink" href="#tools-vcvars-dict" title="Permalink to this headline">¶</a></h2>
@@ -1892,7 +1897,7 @@ it returns <code class="docutils literal notranslate"><span class="pre">None</sp
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.9.0',
+            VERSION:'1.9.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
