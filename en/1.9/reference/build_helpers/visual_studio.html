@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>MSBuild &mdash; conan 1.9.0 documentation</title>
+  <title>MSBuild &mdash; conan 1.9.1 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.9.0 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.9.1 documentation" href="../../index.html"/>
         <link rel="up" title="Build helpers" href="../build_helpers.html"/>
         <link rel="next" title="Meson" href="meson.html"/>
         <link rel="prev" title="AutoToolsBuildEnvironment (configure/make)" href="autotools.html"/>
@@ -308,7 +308,9 @@ information from the requirements: include directories, library names, flags etc
 </li>
 <li><p class="first"><strong>build_type</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Use a custom build type name instead of the detault <code class="docutils literal notranslate"><span class="pre">settings.build_type</span></code> one.</p>
 </li>
-<li><p class="first"><strong>arch</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Use a custom architecture name instead of the <code class="docutils literal notranslate"><span class="pre">settings.arch</span></code> one.</p>
+<li><p class="first"><strong>arch</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Use a custom architecture name instead of the <code class="docutils literal notranslate"><span class="pre">settings.arch</span></code> one.
+It will be used to build the <code class="docutils literal notranslate"><span class="pre">/p:Configuration=</span></code> parameter of <code class="docutils literal notranslate"><span class="pre">msbuild</span></code>.
+It can be used as the key of the <strong>platforms</strong> parameter. E.g. <code class="docutils literal notranslate"><span class="pre">arch=&quot;x86&quot;,</span> <span class="pre">platforms={&quot;x86&quot;:</span> <span class="pre">&quot;i386&quot;}</span></code></p>
 </li>
 <li><p class="first"><strong>force_vcvars</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">False</span></code>): Will ignore if the environment is already set for a different Visual Studio version.</p>
 </li>
@@ -344,6 +346,12 @@ it will append a <code class="docutils literal notranslate"><span class="pre">/p
 </ul>
 </dd>
 </dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">MSBuild()</span></code> build helper will, before calling to <code class="docutils literal notranslate"><span class="pre">msbuild</span></code>, call <a class="reference internal" href="../tools.html#vcvars-command"><span class="std std-ref">vcvars_command</span></a> to adjust the environment according to the settings.
+When cross-building from x64 to x86 the toolchain by default is <code class="docutils literal notranslate"><span class="pre">x86</span></code>.
+If you want to use <code class="docutils literal notranslate"><span class="pre">amd64_x86</span></code> instead, set the environment variable <code class="docutils literal notranslate"><span class="pre">PreferredToolArchitecture=x64</span></code>.</p>
+</div>
 </div>
 <div class="section" id="get-command">
 <h3>get_command()<a class="headerlink" href="#get-command" title="Permalink to this headline">¶</a></h3>
@@ -571,7 +579,7 @@ standard.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.9.0',
+            VERSION:'1.9.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
