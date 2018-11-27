@@ -536,6 +536,20 @@ recipe has requirements, you can access to your requirements <code class="docuti
         <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_user_info</span><span class="p">[</span><span class="s2">&quot;MyLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">var1</span><span class="p">)</span>
 </pre></div>
 </div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p>Both <code class="docutils literal notranslate"><span class="pre">env_info</span></code> and <code class="docutils literal notranslate"><span class="pre">user_info</span></code> objects store information in a “key &lt;-&gt; value” form and the values are always considered strings.
+This is done for serialization purposes to <em>conanbuildinfo.txt</em> files and to avoid the deserialization of complex structures. It is up to the consumer to convert the string to the expected type:</p>
+<div class="last highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># In a dependency</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">user_info</span><span class="o">.</span><span class="n">jars</span><span class="o">=</span><span class="s2">&quot;jar1.jar, jar2.jar, jar3.jar&quot;</span>  <span class="c1"># Use a string, not a list</span>
+<span class="o">...</span>
+
+<span class="c1"># In the dependent conanfile</span>
+<span class="n">jars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deps_user_info</span><span class="p">[</span><span class="s2">&quot;Pkg&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">jars</span>
+<span class="n">jar_list</span> <span class="o">=</span> <span class="n">jars</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="configure-config-options">
