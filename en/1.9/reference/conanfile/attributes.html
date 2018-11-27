@@ -867,13 +867,17 @@ Only when <code class="docutils literal notranslate"><span class="pre">no_copy_s
 </div>
 <div class="section" id="cpp-info">
 <span id="cpp-info-attributes-reference"></span><h2>cpp_info<a class="headerlink" href="#cpp-info" title="Permalink to this headline">¶</a></h2>
-<p>This attribute is only defined inside <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method, being None elsewhere, so please use it only inside this method.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">self.cpp_info</span></code> object can be filled with the needed information for the consumers of the current
-package:</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">This attribute is only defined inside <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method being <cite>None</cite> elsewhere.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">self.cpp_info</span></code> is responsible for storing all the information needed by consumers of a package: include directories, library names,
+library paths… There are some default values that will be applied automatically if not indicated otherwise.</p>
+<p>This object should be filled in <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method.</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="26%" />
-<col width="74%" />
+<col width="23%" />
+<col width="77%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">NAME</th>
@@ -894,7 +898,11 @@ package:</p>
 <td>Ordered list with include paths, by default [‘bin’]</td>
 </tr>
 <tr class="row-even"><td>self.cpp_info.builddirs</td>
-<td>Ordered list with build scripts paths, by default [‘’]. CMake will search in these dirs for cmake files, like findXXX.cmake</td>
+<td><div class="first last line-block">
+<div class="line">Ordered list with build scripts directory paths, by default [‘’] (Package folder directory)</div>
+<div class="line">CMake generators will search in these dirs for files like <em>findXXX.cmake</em></div>
+</div>
+</td>
 </tr>
 <tr class="row-odd"><td>self.cpp_info.libs</td>
 <td>Ordered list with the library names, by default empty []</td>
@@ -915,10 +923,12 @@ package:</p>
 <td>Ordered list with linker flags (executables), by default empty []</td>
 </tr>
 <tr class="row-odd"><td>self.cpp_info.rootpath</td>
-<td>Filled with the root directory of the package, see deps_cpp_info</td>
+<td>Filled with the root directory of the package, see <code class="docutils literal notranslate"><span class="pre">deps_cpp_info</span></code></td>
 </tr>
 </tbody>
 </table>
+<p>The paths of the directories in the directory variables indicated above are relative to the
+<a class="reference internal" href="#folders-attributes-reference"><span class="std std-ref">self.package_folder</span></a> directory.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last">Read <a class="reference internal" href="methods.html#method-package-info"><span class="std std-ref">package_info() method docs</span></a> for more info.</p>
