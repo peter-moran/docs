@@ -249,16 +249,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h1><code class="docutils literal notranslate"><span class="pre">cmake</span></code> generator<a class="headerlink" href="#cmake-generator" title="Permalink to this headline">¶</a></h1>
 <p>If you are using <strong>CMake</strong> to build your project, you can use the <code class="docutils literal notranslate"><span class="pre">cmake</span></code> generator to define all your requirements information in cmake syntax.
 It creates a file named <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.cmake</span></code> that can be imported from your <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>.</p>
-<p><strong>conanfile.txt</strong></p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><em>conanfile.txt</em></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>...
-
 [generators]
 cmake
 </pre></div>
 </div>
-<p>When <strong>conan install</strong> is executed, a file named <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.cmake</span></code> is created.</p>
-<p>We can include <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.cmake</span></code> in our project’s <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> to manage our requirements.
-The inclusion of <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.cmake</span></code> doesn’t alter cmake environment at all, it just provides <code class="docutils literal notranslate"><span class="pre">CONAN_</span></code> variables and some useful macros.</p>
+</div>
+<p>When <strong class="command">conan install</strong> is executed, a file named <em>conanbuildinfo.cmake</em> is created.</p>
+<p>You can include <em>conanbuildinfo.cmake</em> in your project’s <em>CMakeLists.txt</em> to manage our requirements.
+The inclusion of <em>conanbuildinfo.cmake</em> doesn’t alter the CMake environment at all, it just provides <code class="docutils literal notranslate"><span class="pre">CONAN_</span></code> variables and some useful macros.</p>
 <div class="section" id="global-variables-approach">
 <h2>Global variables approach<a class="headerlink" href="#global-variables-approach" title="Permalink to this headline">¶</a></h2>
 <p>The simplest way to consume it would be to invoke the <code class="docutils literal notranslate"><span class="pre">conan_basic_setup()</span></code> macro, which will basically
@@ -295,6 +296,12 @@ which defines cmake <code class="docutils literal notranslate"><span class="pre"
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last">Check the <a class="reference internal" href="../../reference/generators/cmake.html#cmake-generator"><span class="std std-ref">CMake generator</span></a> section to read more.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">CMAKE_MODULE_PATH</span></code> and <code class="docutils literal notranslate"><span class="pre">CMAKE_PREFIX_PATH</span></code> contain the paths to the <code class="docutils literal notranslate"><span class="pre">self.info.builddirs</span></code> of every required package.
+By default, the root package folder is the only one declared in <code class="docutils literal notranslate"><span class="pre">builddirs</span></code>. Check <a class="reference internal" href="../../reference/conanfile/attributes.html#cpp-info-attributes-reference"><span class="std std-ref">cpp_info</span></a> for
+more information.</p>
 </div>
 </div>
 </div>
