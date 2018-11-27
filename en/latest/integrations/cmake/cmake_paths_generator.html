@@ -130,8 +130,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="cmake_multi_generator.html"><code class="docutils literal notranslate"><span class="pre">cmake_multi</span></code> generator</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">cmake_paths</span></code> generator</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#included-as-a-toolchain">Included as a toolchain</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#included-using-the-cmake-project-project-name-include">Included using the CMAKE_PROJECT_&lt;PROJECT-NAME&gt;_INCLUDE</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#included-in-your-cmakelists-txt">Included in your CMakeLists.txt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#included-using-the-cmake-project-project-name-include">Included using the <code class="docutils literal notranslate"><span class="pre">CMAKE_PROJECT_&lt;PROJECT-NAME&gt;_INCLUDE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#included-in-your-cmakelists-txt">Included in your <em>CMakeLists.txt</em></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="cmake_find_package_generator.html"><code class="docutils literal notranslate"><span class="pre">cmake_find_package</span></code> generator</a></li>
@@ -252,44 +252,43 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 feature to locate the dependencies.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">cmake_paths</span></code> generator creates a file named <code class="docutils literal notranslate"><span class="pre">conan_paths.cmake</span></code> declaring:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">CMAKE_MODULE_PATH</span></code> with the folders of the required packages, to allow CMake to locate the included cmake scripts and <code class="docutils literal notranslate"><span class="pre">FindXXX.cmake</span></code> files.
-The folder containing the <code class="docutils literal notranslate"><span class="pre">conan_paths.cmake</span></code> (<cite>self.install_folder</cite> when used in a recipe) is also included,
-so any custom file will be located too. Check <a class="reference internal" href="cmake_find_package_generator.html#cmake-find-package-generator"><span class="std std-ref">cmake_find_package</span></a> generator.</li>
-<li><code class="docutils literal notranslate"><span class="pre">CMAKE_PREFIX_PATH</span></code> used by <code class="docutils literal notranslate"><span class="pre">FIND_LIBRARY()</span></code> to locate library files (.a, .lib, .so, .dll) in your packages.</li>
+<li><code class="docutils literal notranslate"><span class="pre">CMAKE_MODULE_PATH</span></code> with the folders of the required packages, to allow CMake to locate the included cmake scripts and <code class="docutils literal notranslate"><span class="pre">FindXXX.cmake</span></code>
+files. The folder containing the <em>conan_paths.cmake</em> (<cite>self.install_folder</cite> when used in a recipe) is also included, so any custom file
+will be located too. Check <a class="reference internal" href="cmake_find_package_generator.html#cmake-find-package-generator"><span class="std std-ref">cmake_find_package generator</span></a> generator.</li>
+<li><code class="docutils literal notranslate"><span class="pre">CMAKE_PREFIX_PATH</span></code> used by <code class="docutils literal notranslate"><span class="pre">find_library()</span></code> to locate library files (<em>.a</em>, <em>.lib</em>, <em>.so</em>, <em>.dll</em>) in your packages.</li>
 </ul>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">conanfile.txt</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
-zlib/1.2.11@conan/stable
-...
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> [requires]
+ zlib/1.2.11@conan/stable
+ ...
 
-[generators]
-cmake_paths
+ [generators]
+ cmake_paths
 </pre></div>
 </div>
 </div>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">CMakeList.txt</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">3.0</span><span class="p">)</span>
-<span class="nb">project</span><span class="p">(</span><span class="s">helloworld</span><span class="p">)</span>
-<span class="nb">add_executable</span><span class="p">(</span><span class="s">helloworld</span> <span class="s">hello.c</span><span class="p">)</span>
-<span class="hll"><span class="nb">find_package</span><span class="p">(</span><span class="s">Zlib</span><span class="p">)</span>
-</span><span class="nb">if</span><span class="p">(</span><span class="s">ZLIB_FOUND</span><span class="p">)</span>
-   <span class="nb">include_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">ZLIB_INCLUDE_DIRS</span><span class="o">}</span><span class="p">)</span>
-   <span class="nb">target_link_libraries</span> <span class="p">(</span><span class="s">helloworld</span> <span class="o">${</span><span class="nv">ZLIB_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
-<span class="nb">endif</span><span class="p">()</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span> <span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">3.0</span><span class="p">)</span>
+ <span class="nb">project</span><span class="p">(</span><span class="s">helloworld</span><span class="p">)</span>
+ <span class="nb">add_executable</span><span class="p">(</span><span class="s">helloworld</span> <span class="s">hello.c</span><span class="p">)</span>
+<span class="hll"> <span class="nb">find_package</span><span class="p">(</span><span class="s">Zlib</span><span class="p">)</span>
+</span> <span class="nb">if</span><span class="p">(</span><span class="s">ZLIB_FOUND</span><span class="p">)</span>
+    <span class="nb">include_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">ZLIB_INCLUDE_DIRS</span><span class="o">}</span><span class="p">)</span>
+    <span class="nb">target_link_libraries</span> <span class="p">(</span><span class="s">helloworld</span> <span class="o">${</span><span class="nv">ZLIB_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+ <span class="nb">endif</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <p>In the example above, the <code class="docutils literal notranslate"><span class="pre">zlib/1.2.11&#64;conan/stable</span></code> package is not packaging a custom <code class="docutils literal notranslate"><span class="pre">FindZLIB.cmake</span></code> file, but the <code class="docutils literal notranslate"><span class="pre">FindZLIB.cmake</span></code>
-included in the CMake installation directory (<cite>/Modules</cite>) will locate the zlib library from the Conan package because of the <code class="docutils literal notranslate"><span class="pre">CMAKE_PREFIX_PATH</span></code>
-used by the <code class="docutils literal notranslate"><span class="pre">FIND_LIBRARY()</span></code>.</p>
-<p>If the <code class="docutils literal notranslate"><span class="pre">zlib/1.2.11&#64;conan/stable</span></code> would had included a custom <code class="docutils literal notranslate"><span class="pre">FindZLIB.cmake</span></code> in the package root folder or any declared <a class="reference internal" href="../../reference/conanfile/attributes.html#cpp-info-attributes-reference"><span class="std std-ref">self.cpp_info.builddirs</span></a>,
-it would have been located because of the <code class="docutils literal notranslate"><span class="pre">CMAKE_MODULE_PATH</span></code> variable.</p>
-<p>You can use the generated <code class="docutils literal notranslate"><span class="pre">conan_paths.cmake</span></code> file as a <strong>cmake toolchain</strong> or including it in a <strong>CMakeLists.txt</strong> of even including it in another toolchain:</p>
+included in the CMake installation directory (<cite>/Modules</cite>) will locate the zlib library from the Conan package because of the
+<code class="docutils literal notranslate"><span class="pre">CMAKE_PREFIX_PATH</span></code> used by the <code class="docutils literal notranslate"><span class="pre">find_library()</span></code>.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">zlib/1.2.11&#64;conan/stable</span></code> would had included a custom <code class="docutils literal notranslate"><span class="pre">FindZLIB.cmake</span></code> in the package root folder or any declared
+<a class="reference internal" href="../../reference/conanfile/attributes.html#cpp-info-attributes-reference"><span class="std std-ref">self.cpp_info.builddirs</span></a>, it would have been located because of the <code class="docutils literal notranslate"><span class="pre">CMAKE_MODULE_PATH</span></code> variable.</p>
 <div class="section" id="included-as-a-toolchain">
 <h2>Included as a toolchain<a class="headerlink" href="#included-as-a-toolchain" title="Permalink to this headline">¶</a></h2>
-<p>Without modifying your <strong>CMakeLists.txt</strong> file you can use the <code class="docutils literal notranslate"><span class="pre">conan_paths.cmake</span></code> as a toolchain:</p>
+<p>You can use the <em>conan_paths.cmake</em> as a toolchain without modifying your <em>CMakeLists.txt</em> file:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span> $ mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd</span> build
  $ conan install ..
 <span class="hll"> $ cmake .. -DCMAKE_TOOLCHAIN_FILE<span class="o">=</span>conan_paths.cmake -G <span class="s2">&quot;Unix Makefiles&quot;</span> -DCMAKE_BUILD_TYPE<span class="o">=</span>Release
@@ -298,10 +297,10 @@ it would have been located because of the <code class="docutils literal notransl
 </div>
 </div>
 <div class="section" id="included-using-the-cmake-project-project-name-include">
-<h2>Included using the CMAKE_PROJECT_&lt;PROJECT-NAME&gt;_INCLUDE<a class="headerlink" href="#included-using-the-cmake-project-project-name-include" title="Permalink to this headline">¶</a></h2>
-<p>With <code class="docutils literal notranslate"><span class="pre">CMAKE_PROJECT_&lt;PROJECT-NAME&gt;_INCLUDE</span></code> you can specify a file to be included by the project() command.
-If you already have a toolchain file you can use this variable to include the <code class="docutils literal notranslate"><span class="pre">conan_paths.cmake</span></code>
-and insert your toolchain with the <code class="docutils literal notranslate"><span class="pre">CMAKE_TOOLCHAIN_FILE</span></code>.</p>
+<h2>Included using the <code class="docutils literal notranslate"><span class="pre">CMAKE_PROJECT_&lt;PROJECT-NAME&gt;_INCLUDE</span></code><a class="headerlink" href="#included-using-the-cmake-project-project-name-include" title="Permalink to this headline">¶</a></h2>
+<p>With <code class="docutils literal notranslate"><span class="pre">CMAKE_PROJECT_&lt;PROJECT-NAME&gt;_INCLUDE</span></code> you can specify a file to be included by the <code class="docutils literal notranslate"><span class="pre">project()</span></code> command.
+If you already have a toolchain file you can use this variable to include the <code class="docutils literal notranslate"><span class="pre">conan_paths.cmake</span></code> and insert your toolchain with the
+<code class="docutils literal notranslate"><span class="pre">CMAKE_TOOLCHAIN_FILE</span></code>.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd</span> build
 $ conan install ..
 $ cmake .. -G <span class="s2">&quot;Unix Makefiles&quot;</span> -DCMAKE_BUILD_TYPE<span class="o">=</span>Release -DCMAKE_PROJECT_helloworld_INCLUDE<span class="o">=</span>build/conan_paths.cmake
@@ -310,18 +309,22 @@ $ cmake --build .
 </div>
 </div>
 <div class="section" id="included-in-your-cmakelists-txt">
-<h2>Included in your CMakeLists.txt<a class="headerlink" href="#included-in-your-cmakelists-txt" title="Permalink to this headline">¶</a></h2>
+<h2>Included in your <em>CMakeLists.txt</em><a class="headerlink" href="#included-in-your-cmakelists-txt" title="Permalink to this headline">¶</a></h2>
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">CMakeList.txt</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">3.0</span><span class="p">)</span>
-<span class="nb">project</span><span class="p">(</span><span class="s">helloworld</span><span class="p">)</span>
-<span class="hll"><span class="nb">include</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="o">}</span><span class="s">/conan_paths.cmake</span><span class="p">)</span>
-</span><span class="nb">add_executable</span><span class="p">(</span><span class="s">helloworld</span> <span class="s">hello.c</span><span class="p">)</span>
-<span class="nb">find_package</span><span class="p">(</span><span class="s">Zlib</span><span class="p">)</span>
-<span class="nb">if</span><span class="p">(</span><span class="s">ZLIB_FOUND</span><span class="p">)</span>
-   <span class="nb">include_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">ZLIB_INCLUDE_DIRS</span><span class="o">}</span><span class="p">)</span>
-   <span class="nb">target_link_libraries</span> <span class="p">(</span><span class="s">helloworld</span> <span class="o">${</span><span class="nv">ZLIB_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
-<span class="nb">endif</span><span class="p">()</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span> <span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">3.0</span><span class="p">)</span>
+ <span class="nb">project</span><span class="p">(</span><span class="s">helloworld</span><span class="p">)</span>
+<span class="hll">
+</span> <span class="nb">include</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="o">}</span><span class="s">/conan_paths.cmake</span><span class="p">)</span>
+
+ <span class="nb">add_executable</span><span class="p">(</span><span class="s">helloworld</span> <span class="s">hello.c</span><span class="p">)</span>
+
+ <span class="nb">find_package</span><span class="p">(</span><span class="s">zlib</span><span class="p">)</span>
+
+ <span class="nb">if</span><span class="p">(</span><span class="s">ZLIB_FOUND</span><span class="p">)</span>
+    <span class="nb">include_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">ZLIB_INCLUDE_DIRS</span><span class="o">}</span><span class="p">)</span>
+    <span class="nb">target_link_libraries</span> <span class="p">(</span><span class="s">helloworld</span> <span class="o">${</span><span class="nv">ZLIB_LIBRARIES</span><span class="o">}</span><span class="p">)</span>
+ <span class="nb">endif</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -333,13 +336,12 @@ $ cmake --build .
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">Check the section <a class="reference internal" href="../../reference/generators/cmake_paths.html#cmake-paths-generator-reference"><span class="std std-ref">Reference/Generators/cmake_paths</span></a> to read more about this generator.</p>
+<p class="last">Check the section <a class="reference internal" href="../../reference/generators/cmake_paths.html#cmake-paths-generator-reference"><span class="std std-ref">cmake_paths</span></a> to read more about this generator.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The <code class="docutils literal notranslate"><span class="pre">CMAKE_MODULE_PATH</span></code> and <code class="docutils literal notranslate"><span class="pre">CMAKE_PREFIX_PATH</span></code> contain the paths to the <code class="docutils literal notranslate"><span class="pre">builddirs</span></code> of every required package.
-By default, the root package folder is the only declared <code class="docutils literal notranslate"><span class="pre">builddirs</span></code> directory.
-Check the <a class="reference internal" href="../../reference/conanfile/attributes.html#cpp-info-attributes-reference"><span class="std std-ref">Reference/conanfile.py/attributes</span></a>.</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">CMAKE_MODULE_PATH</span></code> and <code class="docutils literal notranslate"><span class="pre">CMAKE_PREFIX_PATH</span></code> contain the paths to the <code class="docutils literal notranslate"><span class="pre">builddirs</span></code> of every required package. By default the
+root package folder is the only declared <code class="docutils literal notranslate"><span class="pre">builddirs</span></code> directory. Check <a class="reference internal" href="../../reference/conanfile/attributes.html#cpp-info-attributes-reference"><span class="std std-ref">cpp_info</span></a>.</p>
 </div>
 </div>
 </div>

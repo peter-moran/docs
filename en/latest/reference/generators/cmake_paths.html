@@ -134,7 +134,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="cmake.html"><cite>cmake</cite></a></li>
 <li class="toctree-l3"><a class="reference internal" href="cmakemulti.html"><cite>cmake_multi</cite></a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#"><cite>cmake_paths</cite></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#variables-in-conan-paths-cmake">Variables in conan_paths.cmake</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#variables-in-conan-paths-cmake">Variables in <em>conan_paths.cmake</em></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="cmake_find_package.html"><cite>cmake_find_package</cite></a></li>
@@ -252,11 +252,11 @@ This is the reference page for <code class="docutils literal notranslate"><span 
 Go to <a class="reference internal" href="../../integrations/cmake.html#cmake"><span class="std std-ref">Integrations/CMake</span></a> if you want to learn how to integrate your project or recipes with CMake.</div>
 <p>It generates a file named <code class="docutils literal notranslate"><span class="pre">conan_paths.cmake</span></code> and declares two variables:</p>
 <div class="section" id="variables-in-conan-paths-cmake">
-<span id="conan-paths-cmake-variables"></span><h2>Variables in conan_paths.cmake<a class="headerlink" href="#variables-in-conan-paths-cmake" title="Permalink to this headline">¶</a></h2>
+<span id="conan-paths-cmake-variables"></span><h2>Variables in <em>conan_paths.cmake</em><a class="headerlink" href="#variables-in-conan-paths-cmake" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="18%" />
-<col width="82%" />
+<col width="12%" />
+<col width="88%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">NAME</th>
@@ -265,10 +265,10 @@ Go to <a class="reference internal" href="../../integrations/cmake.html#cmake"><
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>CMAKE_MODULE_PATH</td>
-<td>Containing all requires root folders and any declared <a class="reference internal" href="../conanfile/attributes.html#cpp-info-attributes-reference"><span class="std std-ref">self.cpp_info.builddirs</span></a> and the current directory</td>
+<td>Containing all requires root folders, any declared <a class="reference internal" href="../conanfile/attributes.html#cpp-info-attributes-reference"><span class="std std-ref">self.cpp_info.builddirs</span></a> and the current directory of this file</td>
 </tr>
 <tr class="row-odd"><td>CMAKE_PREFIX_PATH</td>
-<td>Containing all requires root folders and any declared <a class="reference internal" href="../conanfile/attributes.html#cpp-info-attributes-reference"><span class="std std-ref">self.cpp_info.builddirs</span></a> and the current directory</td>
+<td>Containing all requires root folders, any declared <a class="reference internal" href="../conanfile/attributes.html#cpp-info-attributes-reference"><span class="std std-ref">self.cpp_info.builddirs</span></a> and the current directory of this file</td>
 </tr>
 </tbody>
 </table>
