@@ -886,41 +886,41 @@ library paths… There are some default values that will be applied automaticall
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>self.cpp_info.includedirs</td>
-<td>Ordered list with include paths, by default [‘include’]</td>
+<td>Ordered list with include paths. Defaulted to <code class="docutils literal notranslate"><span class="pre">[&quot;include&quot;]</span></code></td>
 </tr>
 <tr class="row-odd"><td>self.cpp_info.libdirs</td>
-<td>Ordered list with lib paths, by default [‘lib’]</td>
+<td>Ordered list with lib paths. Defaulted to <code class="docutils literal notranslate"><span class="pre">[&quot;lib&quot;]</span></code></td>
 </tr>
 <tr class="row-even"><td>self.cpp_info.resdirs</td>
-<td>Ordered list of resource (data) paths, by default [‘res’]</td>
+<td>Ordered list of resource (data) paths. Defaulted to <code class="docutils literal notranslate"><span class="pre">[&quot;res&quot;]</span></code></td>
 </tr>
 <tr class="row-odd"><td>self.cpp_info.bindirs</td>
-<td>Ordered list with include paths, by default [‘bin’]</td>
+<td>Ordered list with include paths. Defaulted to <code class="docutils literal notranslate"><span class="pre">[&quot;bin&quot;]</span></code></td>
 </tr>
 <tr class="row-even"><td>self.cpp_info.builddirs</td>
 <td><div class="first last line-block">
-<div class="line">Ordered list with build scripts directory paths, by default [‘’] (Package folder directory)</div>
+<div class="line">Ordered list with build scripts directory paths. Defaulted to <code class="docutils literal notranslate"><span class="pre">[&quot;&quot;]</span></code> (Package folder directory)</div>
 <div class="line">CMake generators will search in these dirs for files like <em>findXXX.cmake</em></div>
 </div>
 </td>
 </tr>
 <tr class="row-odd"><td>self.cpp_info.libs</td>
-<td>Ordered list with the library names, by default empty []</td>
+<td>Ordered list with the library names, Defaulted to <code class="docutils literal notranslate"><span class="pre">[]</span></code> (empty)</td>
 </tr>
 <tr class="row-even"><td>self.cpp_info.defines</td>
-<td>Preprocessor definitions, by default empty []</td>
+<td>Preprocessor definitions. Defaulted to <code class="docutils literal notranslate"><span class="pre">[]</span></code> (empty)</td>
 </tr>
 <tr class="row-odd"><td>self.cpp_info.cflags</td>
-<td>Ordered list with pure C flags, by default empty []</td>
+<td>Ordered list with pure C flags. Defaulted to <code class="docutils literal notranslate"><span class="pre">[]</span></code> (empty)</td>
 </tr>
 <tr class="row-even"><td>self.cpp_info.cppflags</td>
-<td>Ordered list with C++ flags, by default empty []</td>
+<td>Ordered list with C++ flags. Defaulted to <code class="docutils literal notranslate"><span class="pre">[]</span></code> (empty)</td>
 </tr>
 <tr class="row-odd"><td>self.cpp_info.sharedlinkflags</td>
-<td>Ordered list with linker flags (shared libs), by default empty []</td>
+<td>Ordered list with linker flags (shared libs). Defaulted to <code class="docutils literal notranslate"><span class="pre">[]</span></code> (empty)</td>
 </tr>
 <tr class="row-even"><td>self.cpp_info.exelinkflags</td>
-<td>Ordered list with linker flags (executables), by default empty []</td>
+<td>Ordered list with linker flags (executables). Defaulted to <code class="docutils literal notranslate"><span class="pre">[]</span></code> (empty)</td>
 </tr>
 <tr class="row-odd"><td>self.cpp_info.rootpath</td>
 <td>Filled with the root directory of the package, see <code class="docutils literal notranslate"><span class="pre">deps_cpp_info</span></code></td>
@@ -931,13 +931,13 @@ library paths… There are some default values that will be applied automaticall
 <a class="reference internal" href="#folders-attributes-reference"><span class="std std-ref">self.package_folder</span></a> directory.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">Read <a class="reference internal" href="methods.html#method-package-info"><span class="std std-ref">package_info() method docs</span></a> for more info.</p>
+<p class="last">Read <a class="reference internal" href="methods.html#method-package-info"><span class="std std-ref">package_info()</span></a> for more info.</p>
 </div>
 </div>
 <div class="section" id="deps-cpp-info">
 <span id="deps-cpp-info-attributes-reference"></span><h2>deps_cpp_info<a class="headerlink" href="#deps-cpp-info" title="Permalink to this headline">¶</a></h2>
-<p>Contains the <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> object of the requirements of the recipe. In addition of the above fields, there are also
-properties to obtain the absolute paths:</p>
+<p>Contains the <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> object of the requirements of the recipe. In addition of the above fields, there are also properties to obtain the
+absolute paths:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="38%" />
