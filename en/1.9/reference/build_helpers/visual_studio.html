@@ -306,7 +306,7 @@ information from the requirements: include directories, library names, flags etc
 </li>
 <li><p class="first"><strong>upgrade_project</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): Will call <strong class="command">devenv</strong> to upgrade the solution to your current Visual Studio.</p>
 </li>
-<li><p class="first"><strong>build_type</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Use a custom build type name instead of the detault <code class="docutils literal notranslate"><span class="pre">settings.build_type</span></code> one.</p>
+<li><p class="first"><strong>build_type</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Use a custom build type name instead of the default <code class="docutils literal notranslate"><span class="pre">settings.build_type</span></code> one.</p>
 </li>
 <li><p class="first"><strong>arch</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Use a custom architecture name instead of the <code class="docutils literal notranslate"><span class="pre">settings.arch</span></code> one.
 It will be used to build the <code class="docutils literal notranslate"><span class="pre">/p:Configuration=</span></code> parameter of <code class="docutils literal notranslate"><span class="pre">msbuild</span></code>.
@@ -389,7 +389,7 @@ Use it together with <a class="reference internal" href="../tools.html#vcvars-co
                <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> &amp;&amp; lib hello.obj -OUT:hello.lib&#39;</span> <span class="o">%</span> <span class="n">vcvars</span>
 </pre></div>
 </div>
-<p>You can adjust the automatically filled attribures:</p>
+<p>You can adjust the automatically filled attributes:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">compiler</span> <span class="o">==</span> <span class="s2">&quot;Visual Studio&quot;</span><span class="p">:</span>
 <span class="hll">     <span class="n">env_build</span> <span class="o">=</span> <span class="n">VisualStudioBuildEnvironment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
