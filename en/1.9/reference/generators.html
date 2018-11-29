@@ -242,10 +242,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="generators">
 <span id="generators-reference"></span><h1>Generators<a class="headerlink" href="#generators" title="Permalink to this headline">¶</a></h1>
+<p>Generators are specific components that provide the information of dependencies calculated by Conan in a suitable format for a build system.
+They normally provide Conan users with a <em>conanbuildinfo.XXX</em> file that can be included or injected to the specific build system. The file
+generated contains information of dependencies in form of different variables and sometimes function helpers too.</p>
 <p>You can specify a generator in:</p>
 <ul class="simple">
-<li>The <strong>[generators]</strong> section from <a class="reference internal" href="conanfile_txt.html#conanfile-txt-reference"><span class="std std-ref">conanfile.txt</span></a></li>
-<li>The <strong>generators</strong> attribute in <a class="reference internal" href="conanfile.html#conanfile-reference"><span class="std std-ref">conanfile.py</span></a></li>
+<li>The <code class="docutils literal notranslate"><span class="pre">[generators]</span></code> section from <a class="reference internal" href="conanfile_txt.html#conanfile-txt-reference"><span class="std std-ref">conanfile.txt</span></a></li>
+<li>The <code class="docutils literal notranslate"><span class="pre">generators</span></code> attribute in <a class="reference internal" href="conanfile.html#conanfile-reference"><span class="std std-ref">conanfile.py</span></a></li>
 </ul>
 <p>Available generators:</p>
 <div class="toctree-wrapper compound">
