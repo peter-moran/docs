@@ -288,73 +288,81 @@ method on the recipe.</li>
 </ul>
 </div></blockquote>
 <p><strong>Example:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install zlib/1.2.11@conan/stable --json install.json
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install OpenSSL/1.0.2l@conan/stable --json install.json
 </pre></div>
 </div>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">install.json</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="nt">&quot;installed&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="nt">&quot;recipe&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;zlib/1.2.11@conan/stable&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;zlib&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.11&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;user&quot;</span><span class="p">:</span> <span class="s2">&quot;conan&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;channel&quot;</span><span class="p">:</span> <span class="s2">&quot;stable&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;downloaded&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                <span class="nt">&quot;cache&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-                <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-                <span class="nt">&quot;remote&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-                <span class="nt">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-10-10T10:28:28.351753&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;dependency&quot;</span><span class="p">:</span> <span class="kc">true</span>
-            <span class="p">},</span>
-            <span class="nt">&quot;packages&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="p">{</span>
-                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;0eaf3bfbc94fb6d2c8f230d052d75c6c1a57a4ce&quot;</span><span class="p">,</span>
-                    <span class="nt">&quot;downloaded&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                    <span class="nt">&quot;cache&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-                    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-                    <span class="nt">&quot;remote&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-                    <span class="nt">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-10-10T10:28:28.356103&quot;</span><span class="p">,</span>
-                    <span class="nt">&quot;built&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-                    <span class="nt">&quot;cpp_info&quot;</span><span class="p">:</span> <span class="p">{</span>
-                        <span class="nt">&quot;includedirs&quot;</span><span class="p">:</span> <span class="p">[</span>
-                            <span class="s2">&quot;include&quot;</span>
-                        <span class="p">],</span>
-                        <span class="nt">&quot;libdirs&quot;</span><span class="p">:</span> <span class="p">[</span>
-                            <span class="s2">&quot;lib&quot;</span>
-                        <span class="p">],</span>
-                        <span class="nt">&quot;resdirs&quot;</span><span class="p">:</span> <span class="p">[</span>
-                            <span class="s2">&quot;res&quot;</span>
-                        <span class="p">],</span>
-                        <span class="nt">&quot;bindirs&quot;</span><span class="p">:</span> <span class="p">[</span>
-                            <span class="s2">&quot;bin&quot;</span>
-                        <span class="p">],</span>
-                        <span class="nt">&quot;builddirs&quot;</span><span class="p">:</span> <span class="p">[</span>
-                            <span class="s2">&quot;&quot;</span>
-                        <span class="p">],</span>
-                        <span class="nt">&quot;libs&quot;</span><span class="p">:</span> <span class="p">[</span>
-                            <span class="s2">&quot;z&quot;</span>
-                        <span class="p">],</span>
-                        <span class="nt">&quot;rootpath&quot;</span><span class="p">:</span> <span class="s2">&quot;/Users/jgsogo/.conan/data/zlib/1.2.11/conan/stable/package/0eaf3bfbc94fb6d2c8f230d052d75c6c1a57a4ce&quot;</span><span class="p">,</span>
-                        <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.11&quot;</span><span class="p">,</span>
-                        <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;A Massively Spiffy Yet Delicately Unobtrusive Compression Library (Also Free, Not to Mention Unencumbered by Patents)&quot;</span>
-                    <span class="p">}</span>
-                <span class="p">}</span>
-            <span class="p">]</span>
-        <span class="p">}</span>
-    <span class="p">]</span>
-<span class="p">}</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span> <span class="p">{</span>
+     <span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+     <span class="nt">&quot;installed&quot;</span><span class="p">:[</span>
+         <span class="p">{</span>
+             <span class="nt">&quot;recipe&quot;</span><span class="p">:{</span>
+                 <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;OpenSSL/1.0.2l@conan/stable&quot;</span><span class="p">,</span>
+                 <span class="nt">&quot;downloaded&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+                 <span class="nt">&quot;exported&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+                 <span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+                 <span class="nt">&quot;remote&quot;</span><span class="p">:</span><span class="s2">&quot;https://api.bintray.com/conan/conan/conan-center&quot;</span><span class="p">,</span>
+                 <span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="s2">&quot;2018-11-29T11:59:53.601813&quot;</span><span class="p">,</span>
+                 <span class="nt">&quot;dependency&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+                 <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;OpenSSL&quot;</span><span class="p">,</span>
+                 <span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0.2l&quot;</span><span class="p">,</span>
+                 <span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="s2">&quot;conan&quot;</span><span class="p">,</span>
+                 <span class="nt">&quot;channel&quot;</span><span class="p">:</span><span class="s2">&quot;stable&quot;</span>
+             <span class="p">},</span>
+             <span class="nt">&quot;packages&quot;</span><span class="p">:[</span>
+                 <span class="p">{</span>
+                     <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;606fdb601e335c2001bdf31d478826b644747077&quot;</span><span class="p">,</span>
+                     <span class="nt">&quot;downloaded&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+                     <span class="nt">&quot;exported&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+                     <span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+                     <span class="nt">&quot;remote&quot;</span><span class="p">:</span><span class="s2">&quot;https://api.bintray.com/conan/conan/conan-center&quot;</span><span class="p">,</span>
+                     <span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="s2">&quot;2018-11-29T12:00:03.874284&quot;</span><span class="p">,</span>
+                     <span class="nt">&quot;built&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+                     <span class="nt">&quot;cpp_info&quot;</span><span class="p">:{</span>
+                         <span class="nt">&quot;includedirs&quot;</span><span class="p">:[</span>
+                             <span class="s2">&quot;include&quot;</span>
+                         <span class="p">],</span>
+                         <span class="nt">&quot;libdirs&quot;</span><span class="p">:[</span>
+                             <span class="s2">&quot;lib&quot;</span>
+                         <span class="p">],</span>
+                         <span class="nt">&quot;resdirs&quot;</span><span class="p">:[</span>
+                             <span class="s2">&quot;res&quot;</span>
+                         <span class="p">],</span>
+                         <span class="nt">&quot;bindirs&quot;</span><span class="p">:[</span>
+                             <span class="s2">&quot;bin&quot;</span>
+                         <span class="p">],</span>
+                         <span class="nt">&quot;builddirs&quot;</span><span class="p">:[</span>
+                             <span class="s2">&quot;&quot;</span>
+                         <span class="p">],</span>
+                         <span class="nt">&quot;libs&quot;</span><span class="p">:[</span>
+                             <span class="s2">&quot;ssleay32&quot;</span><span class="p">,</span>
+                             <span class="s2">&quot;libeay32&quot;</span><span class="p">,</span>
+                             <span class="s2">&quot;crypt32&quot;</span><span class="p">,</span>
+                             <span class="s2">&quot;msi&quot;</span><span class="p">,</span>
+                             <span class="s2">&quot;ws2_32&quot;</span>
+                         <span class="p">],</span>
+                         <span class="nt">&quot;rootpath&quot;</span><span class="p">:</span><span class="s2">&quot;C:/Users/user/.conan/data/OpenSSL/1.0.2l/conan/stable/package/606fdb601e335c2001bdf31d478826b644747077&quot;</span><span class="p">,</span>
+                         <span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0.2l&quot;</span><span class="p">,</span>
+                         <span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="s2">&quot;OpenSSL is an open source project that provides a robust, commercial-grade, and full-featured toolkit for the Transport Layer Security (TLS) and Secure Sockets Layer (SSL) protocols&quot;</span><span class="p">,</span>
+                         <span class="nt">&quot;public_deps&quot;</span><span class="p">:[</span>
+                             <span class="s2">&quot;zlib&quot;</span>
+                         <span class="p">]</span>
+                     <span class="p">}</span>
+                 <span class="p">}</span>
+             <span class="p">]</span>
+         <span class="p">},</span>
+         <span class="p">{</span><span class="nt">&quot;...&quot;</span><span class="p">:</span><span class="s2">&quot;...&quot;</span>
+         <span class="p">}</span>
+     <span class="p">]</span>
+ <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">As this is a marked as <em>experimental</em>, some fields may be removed or added: fields
-<code class="docutils literal notranslate"><span class="pre">version</span></code> and <code class="docutils literal notranslate"><span class="pre">description</span></code> inside <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> will eventually be removed and paths
-may be changed for absolute ones.</p>
+<p class="last">As this is a marked as <em>experimental</em>, some fields may be removed or added: fields <code class="docutils literal notranslate"><span class="pre">version</span></code> and <code class="docutils literal notranslate"><span class="pre">description</span></code> inside <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code>
+will eventually be removed and paths may be changed for absolute ones.</p>
 </div>
 </div>
 
