@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Autotools: configure/make &mdash; conan 1.10.0 documentation</title>
+  <title>Make &mdash; conan 1.10.0 documentation</title>
   
 
   
@@ -42,8 +42,8 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="conan 1.10.0 documentation" href="../index.html"/>
         <link rel="up" title="Integrations" href="../integrations.html"/>
-        <link rel="next" title="Visual Studio" href="visual_studio.html"/>
-        <link rel="prev" title="Find Packages" href="cmake/find_packages.html"/>
+        <link rel="next" title="qbs" href="qbs.html"/>
+        <link rel="prev" title="Premake" href="premake.html"/>
 
  <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -126,7 +126,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../extending.html">Extending Conan</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../integrations.html">Integrations</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="cmake.html"> CMake</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Autotools: configure/make</a></li>
+<li class="toctree-l2"><a class="reference internal" href="makefile.html">Autotools: configure/make</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visual_studio.html"> Visual Studio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="xcode.html">  Apple/Xcode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gcc.html">Compilers on command line</a></li>
@@ -138,7 +138,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="b2.html"> B2 (Boost Build)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="qmake.html">QMake</a></li>
 <li class="toctree-l2"><a class="reference internal" href="premake.html"> Premake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="make.html">Make</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Make</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="qbs.html">qbs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="meson.html"> Meson Build</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docker.html"> Docker</a></li>
@@ -211,14 +214,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
           <li><a href="../integrations.html">Integrations</a> &raquo;</li>
         
-      <li>Autotools: configure/make</li>
+      <li>Make</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/conan-io/docs/blob/master/integrations/makefile.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/conan-io/docs/blob/master/integrations/make.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -232,11 +235,138 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="autotools-configure-make">
-<span id="autotools-build-tool"></span><h1>Autotools: configure/make<a class="headerlink" href="#autotools-configure-make" title="Permalink to this headline">¶</a></h1>
-<p>If you are using <strong>configure</strong>/<strong>make</strong> you can use <strong>AutoToolsBuildEnvironment</strong> helper.
-This helper sets <code class="docutils literal notranslate"><span class="pre">LIBS</span></code>, <code class="docutils literal notranslate"><span class="pre">LDFLAGS</span></code>, <code class="docutils literal notranslate"><span class="pre">CFLAGS</span></code>, <code class="docutils literal notranslate"><span class="pre">CXXFLAGS</span></code> and <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code> environment variables based on your requirements.</p>
-<p>Check <a class="reference internal" href="../reference/build_helpers/autotools.html#autotools-reference"><span class="std std-ref">Building with Autotools</span></a> for more info.</p>
+  <div class="section" id="make">
+<span id="id1"></span><h1>Make<a class="headerlink" href="#make" title="Permalink to this headline">¶</a></h1>
+<p>Conan provides integration with plain Makefiles by means of the <code class="docutils literal notranslate"><span class="pre">make</span></code> generator. If you are using <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> to build your project you
+could get the information of the dependencies in a <em>conanbuildinfo.mak</em> file. All you have to do is indicate the generator like this:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text"><em>conanfile.txt</em></span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> [generators]
+ make
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><em>conanfile.py</em></span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> class MyConan(ConanFile):
+     ...
+     generators = &quot;make&quot;
+</pre></div>
+</div>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>We are going to use the same example from <a class="reference internal" href="../getting_started.html#getting-started"><span class="std std-ref">Getting Started</span></a>, a MD5 Encrypter app.</p>
+<p>This is the main file for it:</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">main.cpp</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span> <span class="cp">#include</span> <span class="cpf">&quot;Poco/MD5Engine.h&quot;</span><span class="cp"></span>
+ <span class="cp">#include</span> <span class="cpf">&quot;Poco/DigestStream.h&quot;</span><span class="cp"></span>
+
+ <span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+
+ <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+ <span class="p">{</span>
+     <span class="n">Poco</span><span class="o">::</span><span class="n">MD5Engine</span> <span class="n">md5</span><span class="p">;</span>
+     <span class="n">Poco</span><span class="o">::</span><span class="n">DigestOutputStream</span> <span class="n">ds</span><span class="p">(</span><span class="n">md5</span><span class="p">);</span>
+     <span class="n">ds</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;abcdefghijklmnopqrstuvwxyz&quot;</span><span class="p">;</span>
+     <span class="n">ds</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">Poco</span><span class="o">::</span><span class="n">DigestEngine</span><span class="o">::</span><span class="n">digestToHex</span><span class="p">(</span><span class="n">md5</span><span class="p">.</span><span class="n">digest</span><span class="p">())</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>As this project relies on the Poco Libraries we are going to create a <em>conanfile.txt</em> with our requirement and declare there the Make
+generator too:</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">conanfile.txt</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> [requires]
+ Poco/1.9.0@pocoproject/stable
+
+ [generators]
+ make
+</pre></div>
+</div>
+</div>
+<p>In order to use this generator within your project, use the following Makefile as a reference:</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">Makefile</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="cp"> include conanbuildinfo.mak</span>
+
+<span class="c"> #----------------------------------------</span>
+<span class="c"> #     Make variables for a sample App</span>
+<span class="c"> #----------------------------------------</span>
+
+ <span class="nv">CXX_SRCS</span> <span class="o">=</span> <span class="se">\</span>
+ main.cpp
+
+ <span class="nv">CXX_OBJ_FILES</span> <span class="o">=</span> <span class="se">\</span>
+ main.o
+
+ <span class="nv">EXE_FILENAME</span> <span class="o">=</span> <span class="se">\</span>
+ main
+
+
+<span class="c"> #----------------------------------------</span>
+<span class="c"> #     Prepare flags from variables</span>
+<span class="c"> #----------------------------------------</span>
+
+ <span class="nv">CFLAGS</span>          <span class="o">+=</span> <span class="k">$(</span>CONAN_CFLAGS<span class="k">)</span>
+ <span class="nv">CXXFLAGS</span>        <span class="o">+=</span> <span class="k">$(</span>CONAN_CPPFLAGS<span class="k">)</span>
+ <span class="nv">CPPFLAGS</span>        <span class="o">+=</span> <span class="k">$(</span>addprefix -I, <span class="k">$(</span>CONAN_INCLUDE_PATHS<span class="k">))</span>
+ <span class="nv">CPPFLAGS</span>        <span class="o">+=</span> <span class="k">$(</span>addprefix -D, <span class="k">$(</span>CONAN_DEFINES<span class="k">))</span>
+ <span class="nv">LDFLAGS</span>         <span class="o">+=</span> <span class="k">$(</span>addprefix -L, <span class="k">$(</span>CONAN_LIB_PATHS<span class="k">))</span>
+ <span class="nv">LDLIBS</span>          <span class="o">+=</span> <span class="k">$(</span>addprefix -l, <span class="k">$(</span>CONAN_LIBS<span class="k">))</span>
+
+
+<span class="c"> #----------------------------------------</span>
+<span class="c"> #     Make Commands</span>
+<span class="c"> #----------------------------------------</span>
+
+ COMPILE_CXX_COMMAND         ?<span class="o">=</span> <span class="se">\</span>
+     g++ -c <span class="k">$(</span>CPPFLAGS<span class="k">)</span> <span class="k">$(</span>CXXFLAGS<span class="k">)</span> $&lt; -o <span class="nv">$@</span>
+
+ CREATE_EXE_COMMAND          ?<span class="o">=</span> <span class="se">\</span>
+     g++ <span class="k">$(</span>CXX_OBJ_FILES<span class="k">)</span> <span class="se">\</span>
+     <span class="k">$(</span>CXXFLAGS<span class="k">)</span> <span class="k">$(</span>LDFLAGS<span class="k">)</span> <span class="k">$(</span>LDLIBS<span class="k">)</span> <span class="se">\</span>
+     -o <span class="k">$(</span>EXE_FILENAME<span class="k">)</span>
+
+
+<span class="c"> #----------------------------------------</span>
+<span class="c"> #     Make Rules</span>
+<span class="c"> #----------------------------------------</span>
+
+ .PHONY                  :   exe
+ exe                     :   <span class="k">$(</span>EXE_FILENAME<span class="k">)</span>
+
+ <span class="k">$(</span>EXE_FILENAME<span class="k">)</span>         :   <span class="k">$(</span>CXX_OBJ_FILES<span class="k">)</span>
+     <span class="k">$(</span>CREATE_EXE_COMMAND<span class="k">)</span>
+
+ %.o                     :   <span class="k">$(</span>CXX_SRCS<span class="k">)</span>
+     <span class="k">$(</span>COMPILE_CXX_COMMAND<span class="k">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now we are going to let Conan retrieve the dependencies and generate the dependency information in a <em>conanbuildinfo.mak</em>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install .
+</pre></div>
+</div>
+<p>Then let’s call <strong class="command">make</strong> to generate our project:</p>
+<ul>
+<li><p class="first">Use this command for Windows Visual Studio:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ make exe
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Now you can run your application with <code class="docutils literal notranslate"><span class="pre">./main</span></code>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Check the complete reference of the <a class="reference internal" href="../reference/generators/make.html#make-generator"><span class="std std-ref">Make generator</span></a>.</p>
+</div>
+</div>
 </div>
 
 
@@ -249,10 +379,10 @@ This helper sets <code class="docutils literal notranslate"><span class="pre">LI
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="visual_studio.html" class="btn btn-neutral float-right" title="Visual Studio" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="qbs.html" class="btn btn-neutral float-right" title="qbs" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="cmake/find_packages.html" class="btn btn-neutral" title="Find Packages" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="premake.html" class="btn btn-neutral" title="Premake" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

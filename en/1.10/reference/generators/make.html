@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>virtualrunenv &mdash; conan 1.10.0 documentation</title>
+  <title>make &mdash; conan 1.10.0 documentation</title>
   
 
   
@@ -42,8 +42,8 @@
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="conan 1.10.0 documentation" href="../../index.html"/>
         <link rel="up" title="Generators" href="../generators.html"/>
-        <link rel="next" title="youcompleteme" href="ycm.html"/>
-        <link rel="prev" title="virtualbuildenv" href="virtualbuildenv.html"/>
+        <link rel="next" title="Profiles" href="../profiles.html"/>
+        <link rel="prev" title="premake [EXPERIMENTAL]" href="premake.html"/>
 
  <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -149,17 +149,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="pkg_config.html">pkg_config</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualenv.html">virtualenv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualbuildenv.html">virtualbuildenv</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">virtualrunenv</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#created-files">Created files</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#variables-declared">Variables declared</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="virtualrunenv.html">virtualrunenv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ycm.html">youcompleteme</a></li>
 <li class="toctree-l3"><a class="reference internal" href="text.html">txt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="json.html">json</a></li>
 <li class="toctree-l3"><a class="reference internal" href="premake.html"><cite>premake</cite> [EXPERIMENTAL]</a></li>
-<li class="toctree-l3"><a class="reference internal" href="make.html">make</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">make</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#variables">Variables</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../profiles.html">Profiles</a></li>
@@ -227,14 +225,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
           <li><a href="../generators.html">Generators</a> &raquo;</li>
         
-      <li>virtualrunenv</li>
+      <li>make</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/conan-io/docs/blob/master/reference/generators/virtualrunenv.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/conan-io/docs/blob/master/reference/generators/make.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -248,53 +246,166 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="virtualrunenv">
-<span id="virtualrunenv-generator"></span><h1>virtualrunenv<a class="headerlink" href="#virtualrunenv" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="make">
+<span id="make-generator"></span><h1>make<a class="headerlink" href="#make" title="Permalink to this headline">¶</a></h1>
 <div class="out-reference-box docutils container">
-This is the reference page for <code class="docutils literal notranslate"><span class="pre">virtualrunenv</span></code> generator.
-Go to <a class="reference internal" href="../../mastering/virtualenv.html#virtual-environment-generator"><span class="std std-ref">Mastering/Virtual Environments</span></a> if you want to learn how to use conan virtual environments.</div>
-<div class="section" id="created-files">
-<h2>Created files<a class="headerlink" href="#created-files" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>activate_run.{sh|bat}</li>
-<li>deactivate_run.{sh|bat}</li>
-</ul>
-</div>
-<div class="section" id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
-<p>Linux/macOS:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt; <span class="nb">source</span> activate_run.sh
-</pre></div>
-</div>
-<p>Windows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt; activate_run.bat
-</pre></div>
-</div>
-</div>
-<div class="section" id="variables-declared">
-<h2>Variables declared<a class="headerlink" href="#variables-declared" title="Permalink to this headline">¶</a></h2>
+This is the reference page for <code class="docutils literal notranslate"><span class="pre">make</span></code> generator.
+Go to <a class="reference internal" href="../../integrations/make.html#make"><span class="std std-ref">Integrations/make</span></a> if you want to learn how to integrate your project or recipes with make.</div>
+<p>This generators creates a file named <em>conanbuildinfo.mak</em> with information of dependencies in different variables that can be used for your
+make builds.</p>
+<div class="section" id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+<p>Variables per package. The <code class="docutils literal notranslate"><span class="pre">&lt;PKG-NAME&gt;</span></code> placeholder is filled with the name of the Conan package.</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="22%" />
-<col width="78%" />
+<col width="34%" />
+<col width="66%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">ENVIRONMENT VAR</th>
-<th class="head">DESCRIPTION</th>
+<tr class="row-odd"><th class="head">NAME</th>
+<th class="head">VALUE</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>PATH</td>
-<td>With every <code class="docutils literal notranslate"><span class="pre">bin</span></code> folder of your requirements.</td>
+<tr class="row-even"><td>CONAN_ROOT_&lt;PKG-NAME&gt;</td>
+<td>Absolute path to root package folder</td>
 </tr>
-<tr class="row-odd"><td>LD_LIBRARY_PATH</td>
-<td><code class="docutils literal notranslate"><span class="pre">lib</span></code> folders of  your requirements.</td>
+<tr class="row-odd"><td>CONAN_SYSROOT_&lt;PKG-NAME&gt;</td>
+<td>System root folder</td>
 </tr>
-<tr class="row-even"><td>DYLD_LIBRARY_PATH</td>
-<td><code class="docutils literal notranslate"><span class="pre">lib</span></code> folders of  your requirements.</td>
+<tr class="row-even"><td>CONAN_INCLUDE_PATHS_&lt;PKG-NAME&gt;</td>
+<td>Headers folders</td>
+</tr>
+<tr class="row-odd"><td>CONAN_LIB_PATHS_&lt;PKG-NAME&gt;</td>
+<td>Library folders</td>
+</tr>
+<tr class="row-even"><td>CONAN_BIN_PATHS_&lt;PKG-NAME&gt;</td>
+<td>Binary folders</td>
+</tr>
+<tr class="row-odd"><td>CONAN_BUILD_PATHS_&lt;PKG-NAME&gt;</td>
+<td>Build folders</td>
+</tr>
+<tr class="row-even"><td>CONAN_RES_PATHS_&lt;PKG-NAME&gt;</td>
+<td>Resources folders</td>
+</tr>
+<tr class="row-odd"><td>CONAN_LIBS_&lt;PKG-NAME&gt;</td>
+<td>Library names to link with</td>
+</tr>
+<tr class="row-even"><td>CONAN_DEFINES_&lt;PKG-NAME&gt;</td>
+<td>Library definitions</td>
+</tr>
+<tr class="row-odd"><td>CONAN_CFLAGS_&lt;PKG-NAME&gt;</td>
+<td>Options for the C compiler (-g, -s, -m64, -m32, -fPIC)</td>
+</tr>
+<tr class="row-even"><td>CONAN_CPPFLAGS_&lt;PKG-NAME&gt;</td>
+<td>Options for the C++ compiler (-g, -s, -stdlib, -m64, -m32, -fPIC, -std)</td>
+</tr>
+<tr class="row-odd"><td>CONAN_SHAREDLINKFLAGS_&lt;PKG-NAME&gt;</td>
+<td>Library Shared linker flags</td>
+</tr>
+<tr class="row-even"><td>CONAN_EXELINK_FLAGS_&lt;PKG-NAME&gt;</td>
+<td>Executable linker flags</td>
 </tr>
 </tbody>
 </table>
+<p>Conan also declares some <strong>global variables</strong> with the aggregated values of all our requirements. The values are ordered in the right order
+according to the dependency tree.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="31%" />
+<col width="69%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">NAME</th>
+<th class="head">VALUE</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>CONAN_ROOTPATH</td>
+<td>Aggregated root folders</td>
+</tr>
+<tr class="row-odd"><td>CONAN_SYSROOT</td>
+<td>Aggregated system root folders</td>
+</tr>
+<tr class="row-even"><td>CONAN_INCLUDE_PATHS</td>
+<td>Aggregated header folders</td>
+</tr>
+<tr class="row-odd"><td>CONAN_LIB_PATHS</td>
+<td>Aggregated library folders</td>
+</tr>
+<tr class="row-even"><td>CONAN_BIN_PATHS</td>
+<td>Aggregated binary folders</td>
+</tr>
+<tr class="row-odd"><td>CONAN_BUILD_PATHS</td>
+<td>Aggregated build folders</td>
+</tr>
+<tr class="row-even"><td>CONAN_RES_PATHS</td>
+<td>Aggregated resource folders</td>
+</tr>
+<tr class="row-odd"><td>CONAN_LIBS</td>
+<td>Aggregated library names to link with</td>
+</tr>
+<tr class="row-even"><td>CONAN_DEFINES</td>
+<td>Aggregated library definitions</td>
+</tr>
+<tr class="row-odd"><td>CONAN_CFLAGS</td>
+<td>Aggregated options for the C compiler</td>
+</tr>
+<tr class="row-even"><td>CONAN_CPPFLAGS</td>
+<td>Aggregated options for the C++ compiler</td>
+</tr>
+<tr class="row-odd"><td>CONAN_SHAREDLINKFLAGS</td>
+<td>Aggregated Shared linker flags</td>
+</tr>
+<tr class="row-even"><td>CONAN_EXELINKFLAGS</td>
+<td>Aggregated Executable linker flags</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p>Note that the mapping of the Conan variables to the Make ones is done taking the following rules into account and we suggest to use the
+variables indicated under the <em>Makefile</em> column to apply to a common naming:</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="29%" />
+<col width="46%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><code class="docutils literal notranslate"><span class="pre">cpp_info</span></code></th>
+<th class="head"><em>conanbuildinfo.mak</em></th>
+<th class="head"><em>Makefile</em></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>defines</td>
+<td>CONAN_DEFINES</td>
+<td>CPPFLAGS</td>
+</tr>
+<tr class="row-odd"><td>includedirs</td>
+<td>CONAN_INCLUDE_PATHS</td>
+<td>CPPFLAGS</td>
+</tr>
+<tr class="row-even"><td>libdirs</td>
+<td>CONAN_LIB_PATHS</td>
+<td>LDFLAGS</td>
+</tr>
+<tr class="row-odd"><td>libs</td>
+<td>CONAN_LIBS</td>
+<td>LDLIBS</td>
+</tr>
+<tr class="row-even"><td>cflags</td>
+<td>CONAN_CFLAGS</td>
+<td>CFLAGS</td>
+</tr>
+<tr class="row-odd"><td>cppflags</td>
+<td>CONAN_CPPFLAGS</td>
+<td>CXXFLAGS</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 
@@ -308,10 +419,10 @@ Go to <a class="reference internal" href="../../mastering/virtualenv.html#virtua
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ycm.html" class="btn btn-neutral float-right" title="youcompleteme" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../profiles.html" class="btn btn-neutral float-right" title="Profiles" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="virtualbuildenv.html" class="btn btn-neutral" title="virtualbuildenv" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="premake.html" class="btn btn-neutral" title="premake [EXPERIMENTAL]" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
