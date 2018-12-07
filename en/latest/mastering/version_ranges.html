@@ -233,6 +233,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <span class="p">[</span><span class="mf">1.2</span><span class="o">.</span><span class="mi">7</span> <span class="o">||</span> <span class="o">&gt;=</span><span class="mf">1.2</span><span class="o">.</span><span class="mi">9</span> <span class="o">&lt;</span><span class="mf">2.0</span><span class="o">.</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># This range would match the versions 1.2.7, 1.2.9, and 1.4.6, but not the versions 1.2.8 or 2.0.0.</span>
 </pre></div>
 </div>
+<dl class="docutils">
+<dt>There are two options for the version range:</dt>
+<dd><ul class="first last simple">
+<li><em>loose=True|False</em>: As default Conan uses the <cite>loose=True</cite> mode. When using <cite>loose=False</cite> the loose mode is deactivated, so that only valid Semantic Versioning strings are accepted.</li>
+<li><em>include_prerelease=True|False</em>: Default is <cite>include_prerelease=False</cite>. When set to <cite>include_prerelease=True</cite>, it will include prerelease versions in the search range.</li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&gt;</span><span class="mf">1.1</span> <span class="o">&lt;</span><span class="mf">2.1</span><span class="p">,</span> <span class="n">include_prerelease</span><span class="o">=</span><span class="bp">True</span><span class="p">]</span>            <span class="c1"># Would e.g. accept &quot;2.0.0-pre.1&quot; as match</span>
+<span class="p">[</span><span class="o">~</span><span class="mf">1.2</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span> <span class="n">loose</span><span class="o">=</span><span class="bp">False</span><span class="p">]</span>                           <span class="c1"># Would only accept correct Semantic Versioning strings.</span>
+                                                <span class="c1"># E.g. version &quot;1.2.3.4&quot; would not be accepted.</span>
+<span class="p">[</span><span class="o">~</span><span class="mf">1.2</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span> <span class="n">loose</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">include_prerelease</span><span class="o">=</span><span class="bp">True</span><span class="p">]</span>  <span class="c1"># Both options can be used for the same version range.</span>
+</pre></div>
+</div>
 <p>Version range expressions are evaluated at the time of building the dependency graph, from
 downstream to upstream dependencies. No joint-compatibility of the full graph is computed, instead,
 version ranges are evaluated when dependencies are first retrieved.</p>

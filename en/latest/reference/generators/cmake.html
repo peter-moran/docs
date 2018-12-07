@@ -159,6 +159,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="text.html">txt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="json.html">json</a></li>
 <li class="toctree-l3"><a class="reference internal" href="premake.html"><cite>premake</cite> [EXPERIMENTAL]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="make.html">make</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../profiles.html">Profiles</a></li>
@@ -405,8 +406,8 @@ method a set of variables will be declared following this naming:</p>
 <h3>conan_target_link_libraries<a class="headerlink" href="#conan-target-link-libraries" title="Permalink to this headline">¶</a></h3>
 <p>Helper to link all libraries to a specified target.</p>
 </div>
-<div class="section" id="other-optional-methods">
-<h3>Other optional methods<a class="headerlink" href="#other-optional-methods" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="other-optional-methods-and-variables">
+<h3>Other optional methods and variables<a class="headerlink" href="#other-optional-methods-and-variables" title="Permalink to this headline">¶</a></h3>
 <p>There are other methods automatically called by <code class="docutils literal notranslate"><span class="pre">conan_basic_setup()</span></code> but you can use them directly:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -447,6 +448,9 @@ method a set of variables will be declared following this naming:</p>
 </tr>
 <tr class="row-even"><td>conan_set_find_paths()</td>
 <td>Adjust CMAKE_MODULE_PATH and CMAKE_PREFIX_PATH</td>
+</tr>
+<tr class="row-odd"><td>CONAN_CMAKE_SILENT_OUTPUT</td>
+<td>Silences the Conan message output</td>
 </tr>
 </tbody>
 </table>
