@@ -243,15 +243,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <span id="visual-studio"></span><h1><img alt="visual_logo" src="../_images/visual-studio-logo.png" /> Visual Studio<a class="headerlink" href="#visual-logo-visual-studio" title="Permalink to this headline">¶</a></h1>
 <p>Conan can be integrated with <strong>Visual Studio</strong> in two different ways:</p>
 <ul class="simple">
-<li>Using the <strong>cmake</strong> generator to create a <strong>conanbuildinfo.cmake</strong> file.</li>
-<li>Using the <strong>visual_studio</strong> generator to create a  <strong>conanbuildinfo.props</strong> file.</li>
+<li>Using the <code class="docutils literal notranslate"><span class="pre">cmake</span></code> generator to create a <em>conanbuildinfo.cmake</em> file.</li>
+<li>Using the <code class="docutils literal notranslate"><span class="pre">visual_studio</span></code> generator to create a <em>conanbuildinfo.props</em> file.</li>
 </ul>
 <div class="section" id="with-cmake">
 <h2>With CMake<a class="headerlink" href="#with-cmake" title="Permalink to this headline">¶</a></h2>
-<p>Use the <strong>cmake</strong> generator, or <strong>cmake_multi</strong>, if you are using cmake to machine-generate your Visual Studio projects.</p>
-<p>Check the <a class="reference internal" href="../using_packages/conanfile_txt.html#generators"><span class="std std-ref">generator</span></a> section to read about the <strong>cmake</strong> generator.
+<p>Use the <code class="docutils literal notranslate"><span class="pre">cmake</span></code> generator or <code class="docutils literal notranslate"><span class="pre">cmake_multi</span></code> if you are using CMake to machine-generate your Visual Studio projects.</p>
+<p>Check the <a class="reference internal" href="../using_packages/conanfile_txt.html#generators"><span class="std std-ref">Generators</span></a> section to read about the <code class="docutils literal notranslate"><span class="pre">cmake</span></code> generator.
 Check the official <a class="reference external" href="https://cmake.org/cmake/help/v3.0/manual/cmake-generators.7.html">CMake docs</a> to find out more about generating Visual Studio projects with CMake.</p>
-<p>However, beware of some current cmake limitations, such as not dealing well with find-packages, because cmake doesn’t know how to handle finding both debug and release packages.</p>
+<p>However, beware of some current CMake limitations, such as not dealing well with find-packages, because CMake doesn’t know how to handle finding both debug and release packages.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">If you want to use the Visual Studio 2017 + CMake integration, <a class="reference internal" href="../howtos/vs2017_cmake.html#visual2017-cmake-howto"><span class="std std-ref">check this how-to</span></a></p>
@@ -261,8 +261,8 @@ Check the official <a class="reference external" href="https://cmake.org/cmake/h
 <h2>With <em>visual_studio</em> generator<a class="headerlink" href="#with-visual-studio-generator" title="Permalink to this headline">¶</a></h2>
 <p>Use this, or <strong>visual_studio_multi</strong>, if you are maintaining your Visual Studio projects, and want to use Conan to to tell Visual Studio how to find your third-party dependencies.</p>
 <p>You can use the <strong>visual_studio</strong> generator to manage your requirements via your <em>Visual Studio</em>  project.</p>
-<p>This generator creates a <a class="reference external" href="https://msdn.microsoft.com/en-us/library/669zx6zc.aspx">Visual Studio project properties</a> file, with all the <em>include paths</em>, <em>lib paths</em>, <em>libs</em>, <em>flags</em> etc, that can be imported in your project.</p>
-<p>Open <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code> and change (or add) the <strong>visual_studio</strong> generator:</p>
+<p>This generator creates a <a class="reference external" href="https://docs.microsoft.com/en-us/cpp/ide/working-with-project-properties?view=vs-2017">Visual Studio project properties</a> file, with all the <em>include paths</em>, <em>lib paths</em>, <em>libs</em>, <em>flags</em> etc., that can be imported in your project.</p>
+<p>Open <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code> and change (or add) the <code class="docutils literal notranslate"><span class="pre">visual_studio</span></code> generator:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
 Poco/1.7.8p3@pocoproject/stable
 
@@ -276,25 +276,25 @@ visual_studio
 </div>
 <p>Go to your Visual Studio project, and open the <strong>Property Manager</strong>, usually in <strong>View -&gt; Other Windows -&gt; Property Manager</strong>.</p>
 <img alt="../_images/property_manager.png" src="../_images/property_manager.png" />
-<p>Click the <strong>“+”</strong> icon and select the generated <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.props</span></code> file:</p>
+<p>Click the <strong>+</strong> icon and select the generated <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.props</span></code> file:</p>
 <img alt="../_images/property_manager2.png" src="../_images/property_manager2.png" />
 <p>Build your project as usual.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>Remember to set your project’s architecture and build type accordingly, explicitly or implicitly, when issuing the <strong>conan install</strong> command.
-If these values don’t match, you build will probably fail.</p>
+<p>Remember to set your project’s architecture and build type accordingly, explicitly or implicitly, when issuing the
+<strong class="command">conan install</strong> command. If these values don’t match, you build will probably fail.</p>
 <p class="last">e.g. <strong>Release/x64</strong></p>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">Check the <a class="reference internal" href="../reference/generators/visualstudio.html#visualstudio-generator"><span class="std std-ref">Reference/Generators/visual_studio</span></a> for the complete reference.</p>
+<p class="last">Check the <a class="reference internal" href="../reference/generators/visualstudio.html#visualstudio-generator"><span class="std std-ref">visual_studio</span></a> for the complete reference.</p>
 </div>
 </div>
 <div class="section" id="calling-visual-studio-compiler">
 <h2>Calling Visual Studio compiler<a class="headerlink" href="#calling-visual-studio-compiler" title="Permalink to this headline">¶</a></h2>
-<p>You can call your Visual Studio compiler from your <code class="docutils literal notranslate"><span class="pre">build()</span></code> method using the <code class="docutils literal notranslate"><span class="pre">VisualStudioBuildEnvironment</span></code>
-and the <code class="docutils literal notranslate"><span class="pre">tools.vcvars_command</span></code>.</p>
-<p>Check <a class="reference internal" href="../reference/build_helpers/visual_studio.html#msbuild"><span class="std std-ref">Build with Visual Studio</span></a> section for more info.</p>
+<p>You can call your Visual Studio compiler from your <code class="docutils literal notranslate"><span class="pre">build()</span></code> method using the <code class="docutils literal notranslate"><span class="pre">VisualStudioBuildEnvironment</span></code> and the
+<code class="docutils literal notranslate"><span class="pre">tools.vcvars_command</span></code>.</p>
+<p>Check the <a class="reference internal" href="../reference/build_helpers/visual_studio.html#msbuild"><span class="std std-ref">MSBuild</span></a> section for more info.</p>
 </div>
 <div class="section" id="build-an-existing-visual-studio-project">
 <span id="building-visual-project"></span><h2>Build an existing Visual Studio project<a class="headerlink" href="#build-an-existing-visual-studio-project" title="Permalink to this headline">¶</a></h2>
@@ -312,7 +312,7 @@ and the <code class="docutils literal notranslate"><span class="pre">tools.vcvar
 </div>
 <div class="section" id="toolsets">
 <h2>Toolsets<a class="headerlink" href="#toolsets" title="Permalink to this headline">¶</a></h2>
-<p>You can use the subsetting <code class="docutils literal notranslate"><span class="pre">toolset</span></code> of the Visual Studio compiler to specify a custom toolset.
+<p>You can use the sub-setting <code class="docutils literal notranslate"><span class="pre">toolset</span></code> of the Visual Studio compiler to specify a custom toolset.
 It will be automatically applied when using the <code class="docutils literal notranslate"><span class="pre">CMake()</span></code> and <code class="docutils literal notranslate"><span class="pre">MSBuild()</span></code> build helpers.
 The toolset can be also specified manually in these build helpers with the <code class="docutils literal notranslate"><span class="pre">toolset</span></code> parameter.</p>
 <p>By default, Conan will not generate a new binary package if the specified <code class="docutils literal notranslate"><span class="pre">compiler.toolset</span></code>
@@ -320,9 +320,7 @@ matches an already generated package for the corresponding <code class="docutils
 Check the <a class="reference internal" href="../reference/conanfile/methods.html#method-package-id"><span class="std std-ref">package_id()</span></a> reference to know more.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<ul class="last simple">
-<li>Check the <a class="reference internal" href="../reference/build_helpers/cmake.html#cmake-reference"><span class="std std-ref">CMake()</span></a> reference section for more info.</li>
-</ul>
+<p class="last">Check the <a class="reference internal" href="../reference/build_helpers/cmake.html#cmake-reference"><span class="std std-ref">CMake()</span></a> reference section for more info.</p>
 </div>
 </div>
 </div>
