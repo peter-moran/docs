@@ -301,17 +301,7 @@ licenses in the <code class="docutils literal notranslate"><span class="pre">lic
     <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;license*&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;licenses&quot;</span><span class="p">,</span>  <span class="n">ignore_case</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">keep_path</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Sometimes there is no <code class="docutils literal notranslate"><span class="pre">license</span></code> file, and you will need to extract the license from a header file, as in the following example:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package</span><span class="p">():</span>
-    <span class="c1"># Extract the License/s from the header to a file</span>
-    <span class="n">tmp</span> <span class="o">=</span> <span class="n">tools</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;header.h&quot;</span><span class="p">)</span>
-    <span class="n">license_contents</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="n">tmp</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;*/&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span> <span class="c1"># The license begins with a C comment /* and ends with */</span>
-    <span class="n">tools</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;LICENSE&quot;</span><span class="p">,</span> <span class="n">license_contents</span><span class="p">)</span>
-
-    <span class="c1"># Package it</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;license*&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;licenses&quot;</span><span class="p">,</span>  <span class="n">ignore_case</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">keep_path</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-</pre></div>
-</div>
+<p>Sometimes there is no <code class="docutils literal notranslate"><span class="pre">license</span></code> file, for that, read <a class="reference internal" href="../../howtos/extract_licenses_from_headers.html#extract-licenses-from-headers"><span class="std std-ref">Howtos/Extract licenses from headers</span></a>.</p>
 </li>
 <li><p class="first"><strong>Invalid configurations:</strong> There is a special exception, <code class="docutils literal notranslate"><span class="pre">conans.errors.ConanInvalidConfiguration</span></code> to be launched
 from <code class="docutils literal notranslate"><span class="pre">configure()</span></code> function in a recipe if the given configuration/options is known not to work. This way the recipe
