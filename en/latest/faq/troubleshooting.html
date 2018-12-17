@@ -138,6 +138,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#error-setting-value-not-defined">ERROR: Setting value not defined</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#error-failed-to-create-process">ERROR: Failed to create process</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#error-failed-to-remove-folder-windows">ERROR: Failed to remove folder (Windows)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-error-while-initializing-options">ERROR: Error while initializing Options</a></li>
 </ul>
 </li>
 </ul>
@@ -323,6 +324,16 @@ $ mkvirtualenv conan
 <li>The user has some file or folder open (in a file editor, in the terminal), so it cannot be removed, and the process fails. Make sure to close files, specially if you are opening or inspecting the local conan cache.</li>
 <li>In Windows, the Search Indexer might be opening and locking the files, producing random, difficult to reproduce and annoying errors. Please <strong>disable the Windows Search Indexer for the conan local storage folder</strong></li>
 </ul>
+</div>
+<div class="section" id="error-error-while-initializing-options">
+<h2>ERROR: Error while initializing Options<a class="headerlink" href="#error-error-while-initializing-options" title="Permalink to this headline">¶</a></h2>
+<p>When installing a Conan package and the follow error occurs:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ERROR: conanfile.py: Error while initializing options. Please define your default_options as list or multiline string
+</pre></div>
+</div>
+<p>Problably your Conan version is outdated.
+The error is related to <cite>default_options</cite> be used as dictionary and only can be handled by Conan &gt;= 1.8.
+To fix this error, update Conan to 1.8 or higher.</p>
 </div>
 </div>
 
