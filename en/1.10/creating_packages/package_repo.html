@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Recipe and Sources in the Same Repo &mdash; conan 1.10.2 documentation</title>
+  <title>Recipe and Sources in the Same Repo &mdash; conan 1.11.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.10.2 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.11.0 documentation" href="../index.html"/>
         <link rel="up" title="Creating Packages" href="../creating_packages.html"/>
         <link rel="next" title="Packaging Existing Binaries" href="existing_binaries.html"/>
         <link rel="prev" title="Recipe and Sources in a Different Repo" href="external_repo.html"/>
@@ -318,7 +318,7 @@ remote and commit of the local repository:</p>
      <span class="o">...</span>
 </pre></div>
 </div>
-<p>You can commit and push the <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> to your origin repository, which will always preserve the “auto”
+<p>You can commit and push the <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> to your origin repository, which will always preserve the <code class="docutils literal notranslate"><span class="pre">auto</span></code>
 values. But when the file is exported to the conan local cache, the copied recipe in the local cache
 will point to the captured remote and commit:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">CMake</span><span class="p">,</span> <span class="n">tools</span>
@@ -334,9 +334,31 @@ will point to the captured remote and commit:</p>
 </pre></div>
 </div>
 <p>So when you <a class="reference internal" href="../uploading_packages.html#uploading-packages"><span class="std std-ref">upload the recipe</span></a> to a conan remote, the recipe will contain
-the “absolute” URL and commit.</p>
+the “resolved” URL and commit.</p>
 <p>When you are requiring your <code class="docutils literal notranslate"><span class="pre">HelloConan</span></code>, the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">install</span></code> will retrieve the recipe from the
 remote. If you are building the package, the source code will be fetched from the captured url/commit.</p>
+<p>As SCM attributes are evaluated in the workspace context (see <a class="reference internal" href="../reference/conanfile/attributes.html#scm-attribute"><span class="std std-ref">scm attribute</span></a>),
+you can write more complex functions to retrieve the proper values, this source <em>conanfile.py</em> will
+be valid too:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">os</span>
+ <span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">CMake</span><span class="p">,</span> <span class="n">tools</span>
+
+ <span class="k">def</span> <span class="nf">get_remote_url</span><span class="p">():</span>
+      <span class="sd">&quot;&quot;&quot; Get remote url regardless of the cloned directory &quot;&quot;&quot;</span>
+      <span class="n">here</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+<span class="hll">      <span class="n">svn</span> <span class="o">=</span> <span class="n">tools</span><span class="o">.</span><span class="n">SVN</span><span class="p">(</span><span class="n">here</span><span class="p">)</span>
+</span><span class="hll">      <span class="k">return</span> <span class="n">svn</span><span class="o">.</span><span class="n">get_remote_url</span><span class="p">()</span>
+</span>
+ <span class="k">class</span> <span class="nc">HelloConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+      <span class="n">scm</span> <span class="o">=</span> <span class="p">{</span>
+         <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;svn&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;subfolder&quot;</span><span class="p">:</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">get_remote_url</span><span class="p">(),</span>
+         <span class="s2">&quot;revision&quot;</span><span class="p">:</span> <span class="s2">&quot;auto&quot;</span>
+      <span class="p">}</span>
+     <span class="o">...</span>
+</pre></div>
+</div>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p class="last">While you are in the same computer (the same conan cache), even when you have exported the recipe and
@@ -388,7 +410,7 @@ This allows you to speed up the development of your packages when cloning from a
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.10
+      Version: 1.11
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -435,7 +457,7 @@ This allows you to speed up the development of your packages when cloning from a
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/1.11/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>
@@ -446,7 +468,7 @@ This allows you to speed up the development of your packages when cloning from a
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.10.2',
+            VERSION:'1.11.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
