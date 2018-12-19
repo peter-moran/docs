@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Hooks [EXPERIMENTAL] &mdash; conan 1.10.2 documentation</title>
+  <title>Hooks [EXPERIMENTAL] &mdash; conan 1.11.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.10.2 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.11.0 documentation" href="../index.html"/>
         <link rel="up" title="Extending Conan" href="../extending.html"/>
         <link rel="next" title="Integrations" href="../integrations.html"/>
         <link rel="prev" title="Python requires: reusing python code in recipes [EXPERIMENTAL]" href="python_requires.html"/>
@@ -348,7 +348,7 @@ you can use functionalities from imported modules if you have them installed in 
 <h2>Storage, activation and sharing<a class="headerlink" href="#storage-activation-and-sharing" title="Permalink to this headline">¶</a></h2>
 <p>Hooks are Python files stored under <em>~/.conan/hooks</em> folder and <strong>their file name should be the same used for activation</strong> (without the
 <em>.py</em> extension).</p>
-<p>The activation of the hooks is done in the <em>conan.conf</em> section named <code class="docutils literal notranslate"><span class="pre">[hooks]</span></code>. The hook names listed under this section will be
+<p>The activation of the hooks is done in the <em>conan.conf</em> section named <code class="docutils literal notranslate"><span class="pre">[hooks]</span></code>. The hook names or paths listed under this section will be
 considered activated.</p>
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text"><em>conan.conf</em></span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
@@ -356,18 +356,26 @@ considered activated.</p>
  [hooks]
  attribute_checker
  conan-center
+ my_custom_hook/hook.py
 </pre></div>
 </div>
 </div>
 <p>They can be easily activated and deactivated from the command line using the <strong class="command">conan config set</strong> command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan config <span class="nb">set</span> hooks.attribute_checker  <span class="c1"># Activates &#39;attribute_checker&#39;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan config <span class="nb">set</span> hooks.my_custom_hook/hook.py  <span class="c1"># Activates &#39;my_custom_hook&#39;</span>
 
-$ conan config rm hooks.attribute_checker  <span class="c1"># Deactivates &#39;attribute_checker&#39;</span>
+$ conan config rm hooks.my_custom_hook/hook.py  <span class="c1"># Deactivates &#39;my_custom_hook&#39;</span>
 </pre></div>
 </div>
 <p>There is also an environment variable <code class="docutils literal notranslate"><span class="pre">CONAN_HOOKS</span></code> to list the active hooks. Hooks listed in <em>conan.conf</em> will be loaded into
 this variable and values in the environment variable will be used to load the hooks.</p>
-<p>Hooks are considered part of the Conan client configuration and can be shared as usual with the <a class="reference internal" href="../reference/commands/consumer/config.html#conan-config-install"><span class="std std-ref">conan config install</span></a> command.</p>
+<p>Hooks are considered part of the Conan client configuration and can be shared as usual with the <a class="reference internal" href="../reference/commands/consumer/config.html#conan-config-install"><span class="std std-ref">conan config install</span></a> command.
+However, they can also be managed in isolated git repositories cloned into the <em>hooks</em> folder:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/.conan/hooks
+$ git clone https://github.com/conan-io/hooks.git conan_hooks
+$ conan <span class="nb">set</span> hooks.conan_hooks/hooks/conan-center.py
+</pre></div>
+</div>
+<p>This way you can easily change from one version to another.</p>
 </div>
 <div class="section" id="official-hooks">
 <h2>Official Hooks<a class="headerlink" href="#official-hooks" title="Permalink to this headline">¶</a></h2>
@@ -432,7 +440,7 @@ this variable and values in the environment variable will be used to load the ho
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.10
+      Version: 1.11
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -441,6 +449,10 @@ this variable and values in the environment variable will be used to load the ho
         
           
             <dd><a href="/en/latest/index.html">1.10</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.10/index.html">1.10</a></dd>
           
         
           
@@ -475,7 +487,7 @@ this variable and values in the environment variable will be used to load the ho
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/1.11/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>
@@ -486,7 +498,7 @@ this variable and values in the environment variable will be used to load the ho
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.10.2',
+            VERSION:'1.11.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

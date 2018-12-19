@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan export &mdash; conan 1.10.2 documentation</title>
+  <title>conan export &mdash; conan 1.11.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.10.2 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.11.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan export-pkg" href="export-pkg.html"/>
         <link rel="prev" title="conan create" href="create.html"/>
@@ -256,6 +256,16 @@ optional arguments:
                         only
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">reference</span></code> field can be:</p>
+<ul class="simple">
+<li>A complete package reference: <code class="docutils literal notranslate"><span class="pre">pkg/version&#64;user/channel</span></code>. In this case, the recipe doesn’t need
+to declare the name or the version. If the recipe declares them, they should match the provided values
+in the command line.</li>
+<li>The user and channel: <code class="docutils literal notranslate"><span class="pre">user/channel</span></code>. The command will assume that the name and version are provided
+by the recipe.</li>
+<li>The version, user and channel: <code class="docutils literal notranslate"><span class="pre">version&#64;user/channel</span></code>. The recipe must provide the name, and if it
+does provide the version, it should match the command line one.</li>
+</ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">export</span></code> command will run a linting of the package recipe, looking for possible
 inconsistencies, bugs and py2-3 incompatibilities. It is possible to customize the rules for this
 linting, as well as totally disabling it. Look at the <code class="docutils literal notranslate"><span class="pre">recipe_linter</span></code> and <code class="docutils literal notranslate"><span class="pre">pylintrc</span></code> variables
@@ -321,7 +331,7 @@ the recipe:</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.10
+      Version: 1.11
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -330,6 +340,10 @@ the recipe:</p>
         
           
             <dd><a href="/en/latest/index.html">1.10</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.10/index.html">1.10</a></dd>
           
         
           
@@ -364,7 +378,7 @@ the recipe:</p>
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/1.11/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>
@@ -375,7 +389,7 @@ the recipe:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.10.2',
+            VERSION:'1.11.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
