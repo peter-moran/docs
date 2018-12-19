@@ -410,6 +410,7 @@ source folder), and the other will copy from the build folder (<code class="docu
 <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">libdirs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lib&#39;</span><span class="p">]</span>  <span class="c1"># Directories where libraries can be found</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">resdirs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;res&#39;</span><span class="p">]</span>  <span class="c1"># Directories where resources, data, etc can be found</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">bindirs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;bin&#39;</span><span class="p">]</span>  <span class="c1"># Directories where executables and shared libs can be found</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">srcdirs</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Directories where sources can be found (debugging, reusing sources)</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">defines</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># preprocessor definitions</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">cflags</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># pure C flags</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">cppflags</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># C++ compilation flags</span>
@@ -437,6 +438,9 @@ different library names. For example:</li>
 default it is initialized to <code class="docutils literal notranslate"><span class="pre">['res']</span></code>, and it is rarely changed.</li>
 <li><strong>bindirs</strong>: List of relative paths (starting from the package root) of directories in which to find library runtime binaries (like
 Windows .dlls). By default it is initialized to <code class="docutils literal notranslate"><span class="pre">['bin']</span></code>, and it is rarely changed.</li>
+<li><strong>srcdirs</strong>: List of relative paths (starting from the package root) of directories in which to find sources (like
+.c, .cpp). By default it is empty. It might be used to store sources (for later debugging of packages, or to reuse those sources building
+them in other packages too).</li>
 <li><strong>defines</strong>: Ordered list of preprocessor directives. It is common that the consumers have to specify some sort of defines in some cases,
 so that including the library headers matches the binaries:</li>
 <li><strong>cflags</strong>, <strong>cppflags</strong>, <strong>sharedlinkflags</strong>, <strong>exelinkflags</strong>: List of flags that the consumer should activate for proper behavior.
