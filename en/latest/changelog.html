@@ -128,7 +128,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="videos.html">Videos and links</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#dec-2018">1.11.2 (19-Dec-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dec-2018">1.11.0 (19-Dec-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id20">1.10.2 (17-Dec-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id22">1.10.1 (11-Dec-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id26">1.10.0 (4-Dec-2018)</a></li>
@@ -306,29 +306,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>Check <a class="reference external" href="https://github.com/conan-io/conan">https://github.com/conan-io/conan</a> for issues and more details about development, contributors, etc.</p>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">Conan 1.10 shouldn’t break any existing 1.0 recipe or command line invocation. If it does, please submit a report on GitHub.
+<p class="last">Conan 1.11 shouldn’t break any existing 1.0 recipe or command line invocation. If it does, please submit a report on GitHub.
 Read more about the <a class="reference internal" href="introduction.html#stability"><span class="std std-ref">Conan stability commitment</span></a>.</p>
 </div>
 <div class="section" id="dec-2018">
-<h2>1.11.2 (19-Dec-2018)<a class="headerlink" href="#dec-2018" title="Permalink to this headline">¶</a></h2>
+<h2>1.11.0 (19-Dec-2018)<a class="headerlink" href="#dec-2018" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Feature: Store verify_ssl argument in <cite>conan config install</cite> <a class="reference external" href="https://github.com/conan-io/conan/pull/4158">#4158</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/976">here</a></li>
+<li>Feature: Store <code class="docutils literal notranslate"><span class="pre">verify_ssl</span></code> argument in <strong class="command">conan config install</strong> <a class="reference external" href="https://github.com/conan-io/conan/pull/4158">#4158</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/976">here</a></li>
 <li>Feature: Tox launcher to run the test suite. <a class="reference external" href="https://github.com/conan-io/conan/pull/4151">#4151</a></li>
-<li>Feature: Allow <code class="docutils literal notranslate"><span class="pre">--graph=file.html</span></code> html output using local <em>vis.min.js</em> and <em>vis.min.css</em> resources if they are found in the local cache (can be deployed via <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">config</span> <span class="pre">install</span></code>) <a class="reference external" href="https://github.com/conan-io/conan/pull/4133">#4133</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/972">here</a></li>
+<li>Feature: Allow <code class="docutils literal notranslate"><span class="pre">--graph=file.html</span></code> html output using local <em>vis.min.js</em> and <em>vis.min.css</em> resources if they are found in the local cache (can be deployed via <strong class="command">conan config install</strong>) <a class="reference external" href="https://github.com/conan-io/conan/pull/4133">#4133</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/972">here</a></li>
 <li>Feature: Improve client DEBUG traces with better and more complete messages. <a class="reference external" href="https://github.com/conan-io/conan/pull/4128">#4128</a></li>
 <li>Feature: Server prints the configuration used at startup to help debugging issues. <a class="reference external" href="https://github.com/conan-io/conan/pull/4128">#4128</a></li>
 <li>Feature: Allow hooks to be stored in folders <a class="reference external" href="https://github.com/conan-io/conan/pull/4106">#4106</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/979">here</a></li>
 <li>Feature: Remove files containing Macos meta-data (files beginning by <cite>._</cite>) <a class="reference external" href="https://github.com/conan-io/conan/pull/4103">#4103</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/978">here</a></li>
-<li>Feature: Allow arguments in git clone for <cite>conan config install</cite> <a class="reference external" href="https://github.com/conan-io/conan/pull/4083">#4083</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/975">here</a></li>
+<li>Feature: Allow arguments in <strong class="command">git clone</strong> for <cite>:command:`conan config install</cite> <a class="reference external" href="https://github.com/conan-io/conan/pull/4083">#4083</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/975">here</a></li>
 <li>Feature: Display the version-ranges resolutions in a cleaner way. <a class="reference external" href="https://github.com/conan-io/conan/pull/4065">#4065</a></li>
 <li>Feature: allow <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">export</span> <span class="pre">.</span> <span class="pre">version&#64;user/channel</span></code> and <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">create</span> <span class="pre">.</span> <span class="pre">version&#64;user/channel</span></code> <a class="reference external" href="https://github.com/conan-io/conan/pull/4062">#4062</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/982">here</a></li>
 <li>Fix: <cite>cmake_find_package</cite> generator not forwarding all dependency properties <a class="reference external" href="https://github.com/conan-io/conan/pull/4125">#4125</a></li>
-<li>Fix: Recent updates in python break ConfigParser with % in values, like in path names containing % (jenkins) <a class="reference external" href="https://github.com/conan-io/conan/pull/4122">#4122</a></li>
-<li>Fix: The property file that the <cite>MSBuild()</cite> is now generated in the <cite>build_folder</cite> instead of a temporary folder to allow more reproducible builds. <a class="reference external" href="https://github.com/conan-io/conan/pull/4113">#4113</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/980">here</a></li>
+<li>Fix: Recent updates in python break <code class="docutils literal notranslate"><span class="pre">ConfigParser</span></code> with <code class="docutils literal notranslate"><span class="pre">%</span></code> in values, like in path names containing % (jenkins) <a class="reference external" href="https://github.com/conan-io/conan/pull/4122">#4122</a></li>
+<li>Fix: The property file that the <code class="docutils literal notranslate"><span class="pre">MSBuild()</span></code> is now generated in the <cite>build_folder</cite> instead of a temporary folder to allow more reproducible builds. <a class="reference external" href="https://github.com/conan-io/conan/pull/4113">#4113</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/980">here</a></li>
 <li>Fix: Fixed the check of the return code from Artifactory when using the checksum deploy feature. <a class="reference external" href="https://github.com/conan-io/conan/pull/4100">#4100</a></li>
 <li>Fix: Evaluate always SCM attribute before exporting the recipe <a class="reference external" href="https://github.com/conan-io/conan/pull/4088">#4088</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/981">here</a></li>
 <li>Fix: Reordered Python imports <a class="reference external" href="https://github.com/conan-io/conan/pull/4064">#4064</a></li>
-<li>Bugfix: In ftp_download function there is extra call to ftp.login() with empty args. This causes ftp lib to login again with empty credentials and throwing exception because authentication is required by server. <a class="reference external" href="https://github.com/conan-io/conan/pull/4092">#4092</a></li>
+<li>Bugfix: In ftp_download function there is extra call to <code class="docutils literal notranslate"><span class="pre">ftp.login()</span></code> with empty args. This causes ftp lib to login again with empty credentials and throwing exception because authentication is required by server. <a class="reference external" href="https://github.com/conan-io/conan/pull/4092">#4092</a></li>
 <li>Bugfix: Take into account <code class="docutils literal notranslate"><span class="pre">os_build</span></code> and <code class="docutils literal notranslate"><span class="pre">arch_build</span></code> for search queries. <a class="reference external" href="https://github.com/conan-io/conan/pull/4061">#4061</a></li>
 </ul>
 </div>
