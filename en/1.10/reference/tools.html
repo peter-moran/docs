@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tools &mdash; conan 1.10.2 documentation</title>
+  <title>Tools &mdash; conan 1.11.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.10.2 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.11.0 documentation" href="../index.html"/>
         <link rel="up" title="Reference" href="../reference.html"/>
         <link rel="next" title="Configuration files" href="config_files.html"/>
         <link rel="prev" title="RunEnvironment" href="build_helpers/run_environment.html"/>
@@ -189,6 +189,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#tools-apple-deployment-target-flag">tools.apple_deployment_target_flag()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-xcrun">tools.XCRun()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-latest-vs-version-installed">tools.latest_vs_version_installed()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tools-apple-dot-clean">tools.apple_dot_clean()</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="config_files.html">Configuration files</a></li>
@@ -1707,6 +1708,12 @@ raise if cannot resolve it.</dd>
 </dl>
 </li>
 </ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">SVN allows to checkout a subdirectory of the remote repository, take into account that the
+return value of some of these functions may depend on the root of the working copy that has been
+checked out.</p>
+</div>
 </div>
 <div class="section" id="tools-is-apple-os">
 <span id="tools-apple"></span><h2>tools.is_apple_os()<a class="headerlink" href="#tools-is-apple-os" title="Permalink to this headline">¶</a></h2>
@@ -1813,6 +1820,22 @@ raise if cannot resolve it.</dd>
 <p>Returns a string with the major version of latest Microsoft Visual Studio available on machine. If no Microsoft Visual Studio installed,
 it returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </div>
+<div class="section" id="tools-apple-dot-clean">
+<h2>tools.apple_dot_clean()<a class="headerlink" href="#tools-apple-dot-clean" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">apple_dot_clean</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Remove recursively all <code class="docutils literal notranslate"><span class="pre">._</span></code> files inside <code class="docutils literal notranslate"><span class="pre">folder</span></code> containing metadata information for Apple
+operating systems, these files can appear when unzipping a file that has been created in Macos.
+This tool will remove only files matching the pattern if there is file without the prefix too.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li><strong>folder</strong> (Required): root folder to start deleting <code class="docutils literal notranslate"><span class="pre">._</span></code> files.</li>
+</ul>
+</dd>
+</dl>
+</div>
 </div>
 
 
@@ -1855,7 +1878,7 @@ it returns <code class="docutils literal notranslate"><span class="pre">None</sp
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.10
+      Version: 1.11
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -1864,6 +1887,10 @@ it returns <code class="docutils literal notranslate"><span class="pre">None</sp
         
           
             <dd><a href="/en/latest/index.html">1.10</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.10/index.html">1.10</a></dd>
           
         
           
@@ -1898,7 +1925,7 @@ it returns <code class="docutils literal notranslate"><span class="pre">None</sp
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/1.11/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>
@@ -1909,7 +1936,7 @@ it returns <code class="docutils literal notranslate"><span class="pre">None</sp
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.10.2',
+            VERSION:'1.11.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
