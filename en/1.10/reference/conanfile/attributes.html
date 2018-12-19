@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Attributes &mdash; conan 1.11.0 documentation</title>
+  <title>Attributes &mdash; conan 1.10.2 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.11.0 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.10.2 documentation" href="../../index.html"/>
         <link rel="up" title="conanfile.py" href="../conanfile.html"/>
         <link rel="next" title="Methods" href="methods.html"/>
         <link rel="prev" title="conanfile.py" href="../conanfile.html"/>
@@ -719,7 +719,7 @@ Go to <a class="reference internal" href="../../mastering/version_ranges.html#ve
 <p>Read more: <a class="reference internal" href="../../devtools/build_requires.html#build-requires"><span class="std std-ref">Build requirements</span></a></p>
 </div>
 <div class="section" id="exports">
-<span id="exports-attribute"></span><h2>exports<a class="headerlink" href="#exports" title="Permalink to this headline">¶</a></h2>
+<h2>exports<a class="headerlink" href="#exports" title="Permalink to this headline">¶</a></h2>
 <p>If a package recipe <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> requires other external files, like other python files that
 it is importing (python importing), or maybe some text file with data it is reading, those files
 must be exported with the <code class="docutils literal notranslate"><span class="pre">exports</span></code> field, so they are stored together, side by side with the
@@ -1160,12 +1160,6 @@ When type is <code class="docutils literal notranslate"><span class="pre">git</s
 </dl>
 </li>
 </ul>
-<p>SCM attributes are evaluated in the workspace context where the <em>conanfile.py</em> is located before
-exporting it to the Conan cache, so these values can be returned from arbitrary functions that
-depend on the workspace layout. Nevertheless, all the other code in the recipe must be able to
-run in the export folder inside the cache, where it has access only to the files exported (see
-attribute <a class="reference internal" href="#exports-attribute"><span class="std std-ref">exports</span></a>) and to any other functionality
-from a <a class="reference internal" href="../../extending/python_requires.html#python-requires"><span class="std std-ref">python_requires</span></a>.</p>
 <p>To know more about the usage of <code class="docutils literal notranslate"><span class="pre">scm</span></code> check:</p>
 <ul class="simple">
 <li><a class="reference internal" href="../../creating_packages/external_repo.html#external-repo"><span class="std std-ref">Creating packages/Recipe and sources in a different repo</span></a></li>
@@ -1214,7 +1208,7 @@ from a <a class="reference internal" href="../../extending/python_requires.html#
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.11
+      Version: 1.10
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -1261,7 +1255,7 @@ from a <a class="reference internal" href="../../extending/python_requires.html#
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/1.11/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>
@@ -1272,7 +1266,7 @@ from a <a class="reference internal" href="../../extending/python_requires.html#
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.11.0',
+            VERSION:'1.10.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

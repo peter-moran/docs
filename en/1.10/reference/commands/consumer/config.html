@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan config &mdash; conan 1.11.0 documentation</title>
+  <title>conan config &mdash; conan 1.10.2 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.11.0 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.10.2 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan get" href="get.html"/>
         <link rel="prev" title="conan install" href="install.html"/>
@@ -268,14 +268,15 @@ $&gt; <span class="m">10</span>
 <span id="id2"></span><h2>conan config install<a class="headerlink" href="#conan-config-install" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">install</span></code> is intended to share the Conan client configuration. For example, in a company or organization,
 is important to have common <code class="docutils literal notranslate"><span class="pre">settings.yml</span></code>, <code class="docutils literal notranslate"><span class="pre">profiles</span></code>, etc.</p>
-<p>It can get its configuration files from a local or remote zip file, from a local directory or from a git repository. It then installs the
-files in the local Conan configuration.</p>
+<p>It can get its configuration files from a local or remote zip file, or a local directory. It then installs the files
+in the local Conan configuration.</p>
 <p>The configuration may contain all or a subset of the allowed configuration files. Only the files that are present will be
-replaced. The only exception is the <em>conan.conf</em> file for which only the variables declared will be installed,
+replaced. The only exception is the <strong>conan.conf</strong> file for which only the variables declared will be installed,
 leaving the other variables unchanged.</p>
-<p>This means for example that <strong>profiles</strong> and <strong>hooks</strong> files will be overwritten if already present, but no profile or hook file that the
-user has in the local machine will be deleted.</p>
-<p>All the configuration files will be copied to the Conan home directory. These are the special files and the rules applied to merge them:</p>
+<p>This means for example that <strong>profiles</strong> and <strong>hooks</strong> files will be overwritten if already present, but no profile or
+hook file that the user has in the local machine will be deleted.</p>
+<p>All the configuration files will be copied to the conan home directory.
+These are the special files and the rules applied to merge them:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -299,13 +300,10 @@ user has in the local machine will be deleted.</p>
 <tr class="row-odd"><td>config/conan.conf</td>
 <td>Merges the variables, overriding only the declared variables</td>
 </tr>
-<tr class="row-even"><td>hooks/my_hook.py</td>
-<td>Overrides the local ~/.conan/hooks/my_hook.py if already exists</td>
-</tr>
 </tbody>
 </table>
 <p>The file <em>remotes.txt</em> is the only file listed above which does not have a direct counterpart in
-the <em>~/.conan</em> folder. Its format is a list of entries, one on each line, with the form of</p>
+the <code class="docutils literal notranslate"><span class="pre">~/.conan</span></code> folder. Its format is a list of entries, one on each line, with the form</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[remote name] [remote url] [bool]
 </pre></div>
 </div>
@@ -315,9 +313,8 @@ to remotes. In general it is not a good idea to add it to the installed files. T
 definitions part of the <em>registry.txt</em> file uses the format required for <em>remotes.txt</em>, so you may find it
 provides a helpful starting point when writing a <em>remotes.txt</em> to be packaged in a Conan
 client configuration.</p>
-<p>The specified URL or path, the arguments used (if any) and the source type (from git, from dir, from zip file or from URL) will be stored in
-the <code class="docutils literal notranslate"><span class="pre">general.config_install</span></code> variable of the <em>conan.conf</em> file, so as following calls to <strong class="command">conan config install</strong> command doesn’t
-need to specify them.</p>
+<p>The specified URL will be stored in the <code class="docutils literal notranslate"><span class="pre">general.config_install</span></code> variable of the <code class="docutils literal notranslate"><span class="pre">conan.conf</span></code> file,
+so following calls to <strong class="command">conan config install</strong> command doesn’t need to specify the URL.</p>
 <p><strong>Examples</strong>:</p>
 <ul>
 <li><p class="first">Install the configuration from a URL:</p>
@@ -326,8 +323,8 @@ need to specify them.</p>
 </div>
 <p>Conan config command stores the specified URL in the conan.conf <code class="docutils literal notranslate"><span class="pre">general.config_install</span></code> variable.</p>
 </li>
-<li><p class="first">Install the configuration from a Git repository with submodules:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan config install http://github.com/user/conan_config/.git --args <span class="s2">&quot;--recursive&quot;</span>
+<li><p class="first">Install the configuration from a Git repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan config install http://github.com/user/conan_config/.git
 </pre></div>
 </div>
 <p>You can also force the git download by using <strong class="command">--type git</strong> (in case it is not deduced from the URL automatically):</p>
@@ -339,8 +336,7 @@ need to specify them.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan config install http://url/to/some/config.zip --verify-ssl<span class="o">=</span>False
 </pre></div>
 </div>
-<p>This will disable the SSL check of the certificate. This option is defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code> and it is also stored in <em>conan.conf</em>, so
-following calls to this command don’t need to specify it again.</p>
+<p>This will disable the SSL check of the certificate. This option is defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 </li>
 <li><p class="first">Refresh the configuration again:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan config install
@@ -397,7 +393,7 @@ following calls to this command don’t need to specify it again.</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.11
+      Version: 1.10
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -444,7 +440,7 @@ following calls to this command don’t need to specify it again.</p>
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/1.11/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>
@@ -455,7 +451,7 @@ following calls to this command don’t need to specify it again.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.11.0',
+            VERSION:'1.10.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
