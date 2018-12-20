@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Attributes &mdash; conan 1.11.0 documentation</title>
+  <title>Attributes &mdash; conan 1.11.1 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.11.0 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.11.1 documentation" href="../../index.html"/>
         <link rel="up" title="conanfile.py" href="../conanfile.html"/>
         <link rel="next" title="Methods" href="methods.html"/>
         <link rel="prev" title="conanfile.py" href="../conanfile.html"/>
@@ -403,7 +403,7 @@ are declared.</p>
 <p>For package recipes working in the user space, with local methods like <strong class="command">conan install .</strong> and <strong class="command">conan build .</strong>,
 there is no current user/channel. If you are accessing to <code class="docutils literal notranslate"><span class="pre">self.user</span></code> or <code class="docutils literal notranslate"><span class="pre">self.channel</span></code> in your recipe,
 you need to declare the environment variables <code class="docutils literal notranslate"><span class="pre">CONAN_USERNAME</span></code> and <code class="docutils literal notranslate"><span class="pre">CONAN_CHANNEL</span></code> or you can set the attributes
-<code class="docutils literal notranslate"><span class="pre">default_user</span></code> and <code class="docutils literal notranslate"><span class="pre">default_channel</span></code>. You can also use python &#64;properties:</p>
+<code class="docutils literal notranslate"><span class="pre">default_user</span></code> and <code class="docutils literal notranslate"><span class="pre">default_channel</span></code>. You can also use python <code class="docutils literal notranslate"><span class="pre">&#64;properties</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
 
 <span class="k">class</span> <span class="nc">HelloConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
@@ -1272,7 +1272,7 @@ from a <a class="reference internal" href="../../extending/python_requires.html#
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.11.0',
+            VERSION:'1.11.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
