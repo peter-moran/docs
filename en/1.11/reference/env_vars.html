@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Environment variables &mdash; conan 1.11.0 documentation</title>
+  <title>Environment variables &mdash; conan 1.11.1 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.11.0 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.11.1 documentation" href="../index.html"/>
         <link rel="up" title="Reference" href="../reference.html"/>
         <link rel="next" title="Hooks [EXPERIMENTAL]" href="hooks.html"/>
         <link rel="prev" title="artifacts.properties" href="config_files/artifacts.properties.html"/>
@@ -161,7 +161,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#conan-sysrequires-sudo">CONAN_SYSREQUIRES_SUDO</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-temp-test-folder">CONAN_TEMP_TEST_FOLDER</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-trace-file">CONAN_TRACE_FILE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#conan-user-conan-channel">CONAN_USER, CONAN_CHANNEL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conan-username-conan-channel">CONAN_USERNAME, CONAN_CHANNEL</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-user-home">CONAN_USER_HOME</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-user-home-short">CONAN_USER_HOME_SHORT</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-use-always-short-paths">CONAN_USE_ALWAYS_SHORT_PATHS</a></li>
@@ -552,9 +552,9 @@ via <code class="docutils literal notranslate"><span class="pre">SystemPackageTo
 <li><code class="docutils literal notranslate"><span class="pre">enabled</span></code>: Default value and any call to install method of <code class="docutils literal notranslate"><span class="pre">SystemPackageTool</span></code> helper should modify
 the system packages.</li>
 <li><code class="docutils literal notranslate"><span class="pre">verify</span></code>: Display a report of system packages to be installed and abort with exception.
-Useful if you don’t want to allow conan to modify your system but you want to get a report of
+Useful if you don’t want to allow Conan to modify your system but you want to get a report of
 packages to be installed.</li>
-<li><code class="docutils literal notranslate"><span class="pre">disabled</span></code>: Display a report of system packages that should be installed but continue the conan execution and
+<li><code class="docutils literal notranslate"><span class="pre">disabled</span></code>: Display a report of system packages that should be installed but continue the Conan execution and
 doesn’t install any package in your system. Useful if you want to keep manual control of these dependencies,
 for example in your development environment.</li>
 </ul>
@@ -578,12 +578,12 @@ packages may fail due to a lack of privilege, depending on the user account Cona
 <div class="section" id="conan-trace-file">
 <span id="id6"></span><h2>CONAN_TRACE_FILE<a class="headerlink" href="#conan-trace-file" title="Permalink to this headline">¶</a></h2>
 <p><strong>Defaulted to</strong>: Not defined</p>
-<p>If you want extra logging information about your conan command executions, you can enable it by setting the <code class="docutils literal notranslate"><span class="pre">CONAN_TRACE_FILE</span></code> environment variable.
+<p>If you want extra logging information about your Conan command executions, you can enable it by setting the <code class="docutils literal notranslate"><span class="pre">CONAN_TRACE_FILE</span></code> environment variable.
 Set it with an absolute path to a file.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">CONAN_TRACE_FILE</span><span class="o">=</span>/tmp/conan_trace.log
 </pre></div>
 </div>
-<p>When the conan command is executed, some traces will be appended to the specified file.
+<p>When the Conan command is executed, some traces will be appended to the specified file.
 Each line contains a JSON object. The <code class="docutils literal notranslate"><span class="pre">_action</span></code> field contains the action type, like <code class="docutils literal notranslate"><span class="pre">COMMAND</span></code> for command executions,
 <code class="docutils literal notranslate"><span class="pre">EXCEPTION</span></code> for errors and <code class="docutils literal notranslate"><span class="pre">REST_API_CALL</span></code> for HTTP calls to a remote.</p>
 <p>The logger will append the traces until the <code class="docutils literal notranslate"><span class="pre">CONAN_TRACE_FILE</span></code> variable is unset or pointed to a different file.</p>
@@ -592,12 +592,10 @@ Each line contains a JSON object. The <code class="docutils literal notranslate"
 <p class="last">Read more here: <a class="reference internal" href="../mastering/logging.html#logging-and-debugging"><span class="std std-ref">How to log and debug a conan execution</span></a></p>
 </div>
 </div>
-<div class="section" id="conan-user-conan-channel">
-<h2>CONAN_USER, CONAN_CHANNEL<a class="headerlink" href="#conan-user-conan-channel" title="Permalink to this headline">¶</a></h2>
-<p>Environment variables commonly used in <code class="docutils literal notranslate"><span class="pre">test_package</span></code> conanfiles, to allow package creation for
-different users and channel without modifying the code. They are also the environment variables
-that will be checked when using <code class="docutils literal notranslate"><span class="pre">self.user</span></code> or <code class="docutils literal notranslate"><span class="pre">self.channel</span></code> in <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> package recipes
-in user space, where a user/channel has not been assigned yet (it is assigned when exported in the local cache).</p>
+<div class="section" id="conan-username-conan-channel">
+<h2>CONAN_USERNAME, CONAN_CHANNEL<a class="headerlink" href="#conan-username-conan-channel" title="Permalink to this headline">¶</a></h2>
+<p>These environment variables will be checked when using <code class="docutils literal notranslate"><span class="pre">self.user</span></code> or <code class="docutils literal notranslate"><span class="pre">self.channel</span></code> in package recipes in user space, where the user
+and channel have not been assigned yet (they are assigned when exported in the local cache).</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last">Read more about it in <a class="reference internal" href="conanfile/attributes.html#user-channel"><span class="std std-ref">user, channel</span></a></p>
@@ -606,7 +604,7 @@ in user space, where a user/channel has not been assigned yet (it is assigned wh
 <div class="section" id="conan-user-home">
 <h2>CONAN_USER_HOME<a class="headerlink" href="#conan-user-home" title="Permalink to this headline">¶</a></h2>
 <p><strong>Defaulted to</strong>: Not defined</p>
-<p>Allows defining a custom conan cache directory. Can be useful for concurrent builds under different
+<p>Allows defining a custom Conan cache directory. Can be useful for concurrent builds under different
 users in CI, to retrieve and store per-project specific dependencies (useful for deployment, for example).</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
@@ -630,7 +628,7 @@ overrides the value defined in recipes for the attribute <a class="reference int
 <div class="section" id="conan-verbose-traceback">
 <h2>CONAN_VERBOSE_TRACEBACK<a class="headerlink" href="#conan-verbose-traceback" title="Permalink to this headline">¶</a></h2>
 <p><strong>Defaulted to</strong>: <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
-<p>When an error is raised in a recipe or even in the conan code base, if set to <code class="docutils literal notranslate"><span class="pre">1</span></code> it will show the complete traceback to ease the debugging.</p>
+<p>When an error is raised in a recipe or even in the Conan code base, if set to <code class="docutils literal notranslate"><span class="pre">1</span></code> it will show the complete traceback to ease the debugging.</p>
 </div>
 <div class="section" id="conan-vs-installation-preference">
 <h2>CONAN_VS_INSTALLATION_PREFERENCE<a class="headerlink" href="#conan-vs-installation-preference" title="Permalink to this headline">¶</a></h2>
@@ -746,7 +744,7 @@ that uses <code class="docutils literal notranslate"><span class="pre">tools.vs_
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.11.0',
+            VERSION:'1.11.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
