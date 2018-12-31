@@ -137,6 +137,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#how-to-obtain-the-dependents-of-a-given-package">How to obtain the dependents of a given package?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#packages-got-outdated-when-uploading-an-unchanged-recipe-from-a-different-machine">Packages got outdated when uploading an unchanged recipe from a different machine</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#is-there-any-recommendation-regarding-which-user-or-channel-to-use-in-a-reference">Is there any recommendation regarding which <code class="docutils literal notranslate"><span class="pre">&lt;user&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;channel&gt;</span></code> to use in a reference?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-does-outdated-from-recipe-mean-exactly">What does “outdated from recipe” mean exactly?</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
@@ -281,6 +282,25 @@ configurations).</p>
 <p>From the perspective of a library developer, channels could be used to create different scopes of your library. For example, use <code class="docutils literal notranslate"><span class="pre">rc</span></code>
 channel for release candidates, maybe <code class="docutils literal notranslate"><span class="pre">experimental</span></code> for those kind of features, or even <code class="docutils literal notranslate"><span class="pre">qa</span></code>/<code class="docutils literal notranslate"><span class="pre">testing</span></code> before the library is checked
 by QA department or testers.</p>
+</div>
+<div class="section" id="what-does-outdated-from-recipe-mean-exactly">
+<h2>What does “outdated from recipe” mean exactly?<a class="headerlink" href="#what-does-outdated-from-recipe-mean-exactly" title="Permalink to this headline">¶</a></h2>
+<p>In some output or commands there are references to “outdated” or “outdated from recipe”. For example, there is a flag <strong class="command">--outdated</strong>
+in <strong class="command">conan search</strong> and <strong class="command">conan remove</strong> to filter by outdated packages.</p>
+<p>When packages are created, Conan stores some metadata of the package such as the settings, the final resolution of the dependencies… and
+it also saves the recipe hash of the recipe contents they were generated with. This way Conan is able to know the real relation between a
+recipe and a package.</p>
+<p>Basically outdated packages appear when you modify a recipe and export and/or upload it, without re-building binary packages with it. This
+information is displayed in yellow with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan search Pkg/0.1@user/channel --table<span class="o">=</span>file.html
+<span class="c1"># open file.html</span>
+<span class="c1"># It will show outdated binaries in yellow.</span>
+</pre></div>
+</div>
+<p>This information is important to know if the packages are up to date with the recipe or even if the packages are still “accessible” from the
+recipe. That means: if the recipe has completely removed an option (it could be a setting or a requirement) but there are old packages
+that were generated previously with that option, those packages will be impossible to install as their package ID are calculated from the
+recipe file (and that option does not exist anymore).</p>
 </div>
 </div>
 
