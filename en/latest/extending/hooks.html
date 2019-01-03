@@ -356,14 +356,14 @@ considered activated.</p>
  [hooks]
  attribute_checker
  conan-center
- my_custom_hook/hook.py
+ my_custom_hook/hook
 </pre></div>
 </div>
 </div>
 <p>They can be easily activated and deactivated from the command line using the <strong class="command">conan config set</strong> command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan config <span class="nb">set</span> hooks.my_custom_hook/hook.py  <span class="c1"># Activates &#39;my_custom_hook&#39;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan config <span class="nb">set</span> hooks.my_custom_hook/hook  <span class="c1"># Activates &#39;my_custom_hook&#39;</span>
 
-$ conan config rm hooks.my_custom_hook/hook.py  <span class="c1"># Deactivates &#39;my_custom_hook&#39;</span>
+$ conan config rm hooks.my_custom_hook/hook  <span class="c1"># Deactivates &#39;my_custom_hook&#39;</span>
 </pre></div>
 </div>
 <p>There is also an environment variable <code class="docutils literal notranslate"><span class="pre">CONAN_HOOKS</span></code> to list the active hooks. Hooks listed in <em>conan.conf</em> will be loaded into
