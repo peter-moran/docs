@@ -114,7 +114,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Install</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#install-with-pip-recommended">Install with pip (recommended)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-with-pip-recommended">Install with pip (recommended)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#known-installation-issues-with-pip">Known installation issues with pip</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#install-from-brew-osx">Install from brew (OSX)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#install-from-aur-arch-linux">Install from AUR (Arch Linux)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#install-the-binaries">Install the binaries</a></li>
@@ -255,6 +258,18 @@ installation, so Conan is found in the path.</li>
 workarounds is available here: <a class="reference external" href="https://github.com/GrahamDumpleton/wrapt/issues/112">https://github.com/GrahamDumpleton/wrapt/issues/112</a>.</li>
 <li>Conan works with Python 2.7, but not all features are available when not using Python 3.x starting with version 1.6</li>
 </ul>
+</div>
+<div class="section" id="known-installation-issues-with-pip">
+<h3>Known installation issues with pip<a class="headerlink" href="#known-installation-issues-with-pip" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>With Python 3.4 the installation sometimes fails with <code class="docutils literal notranslate"><span class="pre">NameError:</span> <span class="pre">name</span> <span class="pre">'implementation_name'</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">defined</span></code>. This issue seems to
+happen when using <cite>pip</cite> without a virtual environment. You can fix it by upgrading <cite>pip</cite> this way:</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+$ python3.4 get-pip.py
+$ pip install conan
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="install-from-brew-osx">
