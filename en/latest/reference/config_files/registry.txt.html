@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>registry.txt &mdash; conan 1.11.2 documentation</title>
+  <title>registry.txt / registry.json &mdash; conan 1.11.2 documentation</title>
   
 
   
@@ -138,7 +138,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="conan.conf.html">conan.conf</a></li>
 <li class="toctree-l3"><a class="reference internal" href="default_profile.html">profiles/default</a></li>
 <li class="toctree-l3"><a class="reference internal" href="settings.yml.html">settings.yml</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">registry.txt</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">registry.txt / registry.json</a></li>
 <li class="toctree-l3"><a class="reference internal" href="client_certificates.html">client.crt / client.key</a></li>
 <li class="toctree-l3"><a class="reference internal" href="artifacts.properties.html">artifacts.properties</a></li>
 </ul>
@@ -204,7 +204,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
           <li><a href="../config_files.html">Configuration files</a> &raquo;</li>
         
-      <li>registry.txt</li>
+      <li>registry.txt / registry.json</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -225,25 +225,68 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="registry-txt">
-<span id="id1"></span><h1>registry.txt<a class="headerlink" href="#registry-txt" title="Permalink to this headline">¶</a></h1>
-<p>This file is generally automatically managed, and it has also access via the <strong class="command">conan remote</strong>
-command but just in case you might need to change it. It contains information about the known
-remotes and from which remotes are each package retrieved:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>conan-center https://conan.bintray.com True
-local http://localhost:9300 True
+  <div class="section" id="registry-txt-registry-json">
+<span id="registry-txt"></span><h1>registry.txt / registry.json<a class="headerlink" href="#registry-txt-registry-json" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><em>registry.json</em> was introduced in Conan 1.9 and it substitutes the <em>registry.txt</em>. Both files are equivalent in content.</p>
+</div>
+<p>This file is generally automatically managed and it stores information about the remotes configured in the Conan client and the installed
+packages in your cache associated with the remote they were retrieved from.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">The recommendation is not to modify this file directly and only use it as registry information. In case you want to change a remote the
+information of the remotes can be accessed or changed via the <strong class="command">conan remote</strong> command.</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><em>registry.txt</em></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> conan-center https://conan.bintray.com True
+ local http://localhost:9300 True
 
-Hello/0.1@demo/testing local
+ Hello/0.1@demo/testing local
 </pre></div>
 </div>
+</div>
 <p>The first section of the file is listing <code class="docutils literal notranslate"><span class="pre">remote-name</span></code>: <code class="docutils literal notranslate"><span class="pre">remote-url</span></code> <code class="docutils literal notranslate"><span class="pre">verify_ssl</span></code>. Adding, removing or changing
-those lines, will add, remove or change the respective remote. If verify_ssl, conan client will verify the SSL certificates
-for that remote server.</p>
-<p>The second part of the file contains a list of conan-package-reference: remote-name. This is
-a reference to which remote was that package retrieved from, which will act also as the default
-for operations on that package.</p>
-<p>Be careful when modifying the remotes, as the information of the packages has to remain consistent,
-e.g. if removing a remote, all package references referencing that remote has to be removed too.</p>
+those lines, will add, remove or change the respective remote. If <code class="docutils literal notranslate"><span class="pre">verify_ssl</span></code> is enabled, Conan will verify the SSL certificates for that
+remote server.</p>
+<p>The second part of the file contains a list of package references and the remote-name. This is a reference to which remote was that package
+retrieved from, which will act also as the default for operations on that package.</p>
+<p>Here you have an example of the file <em>registry.json</em>:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text"><em>registry.json</em></span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span> <span class="p">{</span>
+     <span class="nt">&quot;remotes&quot;</span><span class="p">:[</span>
+         <span class="p">{</span>
+             <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;conan-center&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;https://api.bintray.com/conan/conan/conan-center&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;verify_ssl&quot;</span><span class="p">:</span><span class="kc">true</span>
+         <span class="p">},</span>
+         <span class="p">{</span>
+             <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;artifactory_local&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;http://192.168.43.191:8081/artifactory/api/conan/conan-local&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;verify_ssl&quot;</span><span class="p">:</span><span class="kc">true</span>
+         <span class="p">},</span>
+         <span class="p">{</span>
+             <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;bincrafters&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;https://api.bintray.com/conan/bincrafters/public-conan&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;verify_ssl&quot;</span><span class="p">:</span><span class="kc">true</span>
+         <span class="p">}</span>
+     <span class="p">],</span>
+     <span class="nt">&quot;references&quot;</span><span class="p">:{</span>
+         <span class="nt">&quot;nanomsg/1.1.2@bincrafters/stable&quot;</span><span class="p">:</span><span class="s2">&quot;bincrafters&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;Poco/1.9.0@pocoproject/stable:09378ed7f51185386e9f04b212b79fe2d12d005c&quot;</span><span class="p">:</span><span class="s2">&quot;conan-center&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;hello/1.0@user/channel:2bb76c9adac7b8cd7c5e3b377ac9f06934aba606&quot;</span><span class="p">:</span><span class="s2">&quot;artifactory_local&quot;</span>
+     <span class="p">},</span>
+     <span class="nt">&quot;package_references&quot;</span><span class="p">:{</span>
+         <span class="nt">&quot;nanomsg/1.1.2@bincrafters/stable:26d575619895d584ff4fb07701901d53ff4cdd6b&quot;</span><span class="p">:</span> <span class="s2">&quot;bincrafters&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;Poco/1.9.0@pocoproject/stable:09378ed7f51185386e9f04b212b79fe2d12d005c&quot;</span><span class="p">:</span><span class="s2">&quot;conan-center&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;hello/1.0@user/channel:2bb76c9adac7b8cd7c5e3b377ac9f06934aba606&quot;</span><span class="p">:</span><span class="s2">&quot;artifactory_local&quot;</span>
+     <span class="p">}</span>
+ <span class="p">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
