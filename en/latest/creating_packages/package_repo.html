@@ -122,7 +122,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="external_repo.html">Recipe and Sources in a Different Repo</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Recipe and Sources in the Same Repo</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#exporting-the-sources-with-the-recipe-exports-sources">Exporting the Sources with the Recipe: <code class="docutils literal notranslate"><span class="pre">exports_sources</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#capturing-the-remote-and-commit-scm-experimental">Capturing the Remote and Commit: <code class="docutils literal notranslate"><span class="pre">scm</span></code> [EXPERIMENTAL]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#capturing-the-remote-and-commit-scm">Capturing the Remote and Commit: <code class="docutils literal notranslate"><span class="pre">scm</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="existing_binaries.html">Packaging Existing Binaries</a></li>
@@ -301,8 +301,12 @@ Hello world!
 </pre></div>
 </div>
 </div>
-<div class="section" id="capturing-the-remote-and-commit-scm-experimental">
-<span id="scm-feature"></span><h2>Capturing the Remote and Commit: <code class="docutils literal notranslate"><span class="pre">scm</span></code> [EXPERIMENTAL]<a class="headerlink" href="#capturing-the-remote-and-commit-scm-experimental" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="capturing-the-remote-and-commit-scm">
+<span id="scm-feature"></span><h2>Capturing the Remote and Commit: <code class="docutils literal notranslate"><span class="pre">scm</span></code><a class="headerlink" href="#capturing-the-remote-and-commit-scm" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
+</div>
 <p>You can use the <a class="reference internal" href="../reference/conanfile/attributes.html#scm-attribute"><span class="std std-ref">scm attribute</span></a> with the <code class="docutils literal notranslate"><span class="pre">url</span></code> and <code class="docutils literal notranslate"><span class="pre">revision</span></code> field set to <code class="docutils literal notranslate"><span class="pre">auto</span></code>.
 When you export the recipe (or when <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">create</span></code> is called) the exported recipe will capture the
 remote and commit of the local repository:</p>
