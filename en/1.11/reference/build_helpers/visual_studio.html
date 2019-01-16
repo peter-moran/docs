@@ -256,7 +256,7 @@ information from the requirements: include directories, library names, flags etc
 <div><ul class="simple">
 <li><a class="reference internal" href="#visual-studio-build"><span class="std std-ref">VisualStudioBuildEnvironment</span></a> to adjust the <code class="docutils literal notranslate"><span class="pre">LIB</span></code> and <code class="docutils literal notranslate"><span class="pre">CL</span></code>
 environment variables with all the information from the requirements: include directories, library names, flags etc.</li>
-<li><a class="reference internal" href="../tools.html#msvc-build-command"><span class="std std-ref">tools.msvc_build_command</span></a> to call <code class="docutils literal notranslate"><span class="pre">MSBuild</span></code>.</li>
+<li><a class="reference internal" href="../tools.html#tools-msvc-build-command"><span class="std std-ref">tools.msvc_build_command() [DEPRECATED]</span></a> to call <code class="docutils literal notranslate"><span class="pre">msbuild</span></code>.</li>
 </ul>
 </div></blockquote>
 <p>You can adjust all the information from the requirements accessing to the <code class="docutils literal notranslate"><span class="pre">build_env</span></code> that it is a <a class="reference internal" href="#visual-studio-build"><span class="std std-ref">VisualStudioBuildEnvironment</span></a> object:</p>
@@ -327,7 +327,7 @@ It can be used as the key of the <strong>platforms</strong> parameter. E.g. <cod
 version.</p>
 </li>
 <li><p class="first"><strong>parallel</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): Will use the configured number of cores in the <a class="reference internal" href="../config_files/conan.conf.html#conan-conf"><span class="std std-ref">conan.conf</span></a> file or
-<a class="reference internal" href="../tools.html#cpu-count"><span class="std std-ref">tools.cpu_count()</span></a>:</p>
+<a class="reference internal" href="../tools.html#tools-cpu-count"><span class="std std-ref">tools.cpu_count()</span></a>:</p>
 <blockquote>
 <div><ul class="simple">
 <li><strong>In the solution</strong>: Building the solution with the projects in parallel. (<code class="docutils literal notranslate"><span class="pre">/m:</span></code> parameter).</li>
@@ -369,7 +369,7 @@ You can specify a different name for the generated properties file.</p>
 </dl>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The <code class="docutils literal notranslate"><span class="pre">MSBuild()</span></code> build helper will, before calling to <strong class="command">MSBuild</strong>, call <a class="reference internal" href="../tools.html#vcvars-command"><span class="std std-ref">tools.vcvars_command()</span></a> to adjust the environment
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">MSBuild()</span></code> build helper will, before calling to <strong class="command">MSBuild</strong>, call <a class="reference internal" href="../tools.html#tools-vcvars-command"><span class="std std-ref">tools.vcvars_command()</span></a> to adjust the environment
 according to the settings. When cross-building from x64 to x86 the toolchain by default is <code class="docutils literal notranslate"><span class="pre">x86</span></code>. If you want to use <code class="docutils literal notranslate"><span class="pre">amd64_x86</span></code>
 instead, set the environment variable <code class="docutils literal notranslate"><span class="pre">PreferredToolArchitecture=x64</span></code>.</p>
 </div>
@@ -413,7 +413,7 @@ resolve it to a valid result.</p>
 <div class="section" id="visualstudiobuildenvironment">
 <span id="visual-studio-build"></span><h1>VisualStudioBuildEnvironment<a class="headerlink" href="#visualstudiobuildenvironment" title="Permalink to this headline">¶</a></h1>
 <p>Prepares the needed environment variables to invoke the Visual Studio compiler.
-Use it together with <a class="reference internal" href="../tools.html#vcvars-command"><span class="std std-ref">tools.vcvars_command()</span></a>.</p>
+Use it together with <a class="reference internal" href="../tools.html#tools-vcvars-command"><span class="std std-ref">tools.vcvars_command()</span></a>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">VisualStudioBuildEnvironment</span>
 
 <span class="k">class</span> <span class="nc">ExampleConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
@@ -519,10 +519,10 @@ standard.</p>
 <div class="section" id="parallel">
 <h3>parallel<a class="headerlink" href="#parallel" title="Permalink to this headline">¶</a></h3>
 <p>Defaulted to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
-<p>Sets the flag <code class="docutils literal notranslate"><span class="pre">/MP</span></code> in order to compile the sources in parallel using cores found by <a class="reference internal" href="../tools.html#cpu-count"><span class="std std-ref">tools.cpu_count()</span></a>.</p>
+<p>Sets the flag <code class="docutils literal notranslate"><span class="pre">/MP</span></code> in order to compile the sources in parallel using cores found by <a class="reference internal" href="../tools.html#tools-cpu-count"><span class="std std-ref">tools.cpu_count()</span></a>.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">Read more about <a class="reference internal" href="../tools.html#environment-append-tool"><span class="std std-ref">tools.environment_append()</span></a>.</p>
+<p class="last">Read more about <a class="reference internal" href="../tools.html#tools-environment-append"><span class="std std-ref">tools.environment_append()</span></a>.</p>
 </div>
 </div>
 </div>
