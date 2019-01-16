@@ -307,7 +307,7 @@ create irrespective of the configurations and dependencies:</li>
 <p id="header-only-unit-tests-tip">If you are <a class="reference internal" href="../systems_cross_building/cross_building.html#cross-building"><span class="std std-ref">cross building</span></a> your <strong>library</strong> or <strong>app</strong> you’ll probably need
 to skip the <strong>unit tests</strong> because your target binary cannot be executed in current building host.
 To do it you can use <a class="reference internal" href="../reference/tools.html#tools-get-env"><span class="std std-ref">tools.get_env()</span></a> in combination with
-<a class="reference internal" href="../reference/env_vars.html#conan-run-tests"><span class="std std-ref">CONAN_RUN_TESTS</span></a> env variable, defined as <strong>False</strong>
+<a class="reference internal" href="../reference/env_vars.html#env-vars-conan-run-tests"><span class="std std-ref">CONAN_RUN_TESTS</span></a> environment variable, defined as <strong>False</strong>
 in profile for cross building and replace <code class="docutils literal notranslate"><span class="pre">cmake.test()</span></code> with:</p>
 <div class="last highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">tools</span><span class="o">.</span><span class="n">get_env</span><span class="p">(</span><span class="s2">&quot;CONAN_RUN_TESTS&quot;</span><span class="p">,</span> <span class="bp">True</span><span class="p">):</span>
     <span class="n">cmake</span><span class="o">.</span><span class="n">test</span><span class="p">()</span>

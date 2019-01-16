@@ -326,13 +326,13 @@ can also adjust the environment variable <code class="docutils literal notransla
 <p>The <code class="docutils literal notranslate"><span class="pre">verbose_traceback</span></code> variable will print the complete traceback when an error occurs in a recipe or even in the conan code base, allowing
 to debug the detected error.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">bash_path</span></code> variable is used only in windows to help the
-<a class="reference internal" href="../tools.html#run-in-windows-bash-tool"><span class="std std-ref">tools.run_in_windows_bash()</span></a> function to locate our Cygwin/MSYS2 bash.
+<a class="reference internal" href="../tools.html#tools-run-in-windows-bash"><span class="std std-ref">tools.run_in_windows_bash()</span></a> function to locate our Cygwin/MSYS2 bash.
 Set it with the bash executable path if it’s not in the PATH or you want to use a different one.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">cmake_***</span></code> variables will declare the corresponding CMake variable when you use the
 <a class="reference internal" href="../generators/cmake.html#cmake-generator"><span class="std std-ref">cmake generator</span></a> and the <a class="reference internal" href="../build_helpers/cmake.html#cmake-reference"><span class="std std-ref">CMake build tool</span></a>.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">cpu_count</span></code> variable set the number of cores that the <a class="reference internal" href="../tools.html#cpu-count"><span class="std std-ref">tools.cpu_count()</span></a> will return,
+<p>The <code class="docutils literal notranslate"><span class="pre">cpu_count</span></code> variable set the number of cores that the <a class="reference internal" href="../tools.html#tools-cpu-count"><span class="std std-ref">tools.cpu_count()</span></a> will return,
 by default the number of cores available in your machine.
-Conan recipes can use the cpu_count() tool to build the library using more than one core.</p>
+Conan recipes can use the <code class="docutils literal notranslate"><span class="pre">cpu_count()</span></code> tool to build the library using more than one core.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">pylintrc</span></code> variable points to a custom <code class="docutils literal notranslate"><span class="pre">pylintrc</span></code> file that allows configuring custom rules
 for the python linter executed at <code class="docutils literal notranslate"><span class="pre">export</span></code> time. A use case could be to define some custom indents
 (though the standard pep8 4-spaces indent is recommended, there are companies that define different styles).

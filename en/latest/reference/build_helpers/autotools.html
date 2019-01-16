@@ -255,7 +255,7 @@ This helper sets <code class="docutils literal notranslate"><span class="pre">LI
 </span><span class="hll">      <span class="n">autotools</span><span class="o">.</span><span class="n">make</span><span class="p">()</span>
 </span></pre></div>
 </div>
-<p>It also works using the <a class="reference internal" href="../tools.html#environment-append-tool"><span class="std std-ref">environment_append</span></a> context manager applied to your <strong>configure and make</strong> commands,
+<p>It also works using the <a class="reference internal" href="../tools.html#tools-environment-append"><span class="std std-ref">environment_append</span></a> context manager applied to your <strong>configure and make</strong> commands,
 calling <cite>configure</cite> and <cite>make</cite> manually:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">AutoToolsBuildEnvironment</span>
 
@@ -478,7 +478,7 @@ files of the requirements of the conanfile.</li>
 <li><strong>args</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>): A list of additional arguments to be passed to the <code class="docutils literal notranslate"><span class="pre">make</span></code> command. Each argument will be
 escaped accordingly to the current shell. No extra arguments will be added if <code class="docutils literal notranslate"><span class="pre">args=&quot;&quot;</span></code>.</li>
 <li><strong>make_program</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Allows to specify a different <code class="docutils literal notranslate"><span class="pre">make</span></code> executable, e.g., <code class="docutils literal notranslate"><span class="pre">mingw32-make</span></code>. The
-environment variable <a class="reference internal" href="../env_vars.html#conan-make-program"><span class="std std-ref">CONAN_MAKE_PROGRAM</span></a> can be used too.</li>
+environment variable <a class="reference internal" href="../env_vars.html#env-vars-conan-make-program"><span class="std std-ref">CONAN_MAKE_PROGRAM</span></a> can be used too.</li>
 <li><strong>target</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Choose which target to build. This allows building of e.g., docs, shared libraries or
 install for some AutoTools projects.</li>
 <li><strong>vars</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Overrides custom environment variables in the make step.</li>
@@ -498,7 +498,7 @@ install for some AutoTools projects.</li>
 <li><strong>args</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>): A list of additional arguments to be passed to the <code class="docutils literal notranslate"><span class="pre">make</span></code> command. Each argument will be
 escaped accordingly to the current shell. No extra arguments will be added if <code class="docutils literal notranslate"><span class="pre">args=&quot;&quot;</span></code>.</li>
 <li><strong>make_program</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Allows to specify a different <code class="docutils literal notranslate"><span class="pre">make</span></code> executable, e.g., <code class="docutils literal notranslate"><span class="pre">mingw32-make</span></code>. The
-environment variable <a class="reference internal" href="../env_vars.html#conan-make-program"><span class="std std-ref">CONAN_MAKE_PROGRAM</span></a> can be used too.</li>
+environment variable <a class="reference internal" href="../env_vars.html#env-vars-conan-make-program"><span class="std std-ref">CONAN_MAKE_PROGRAM</span></a> can be used too.</li>
 <li><strong>vars</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Overrides custom environment variables in the install step.</li>
 </ul>
 </dd>
@@ -539,7 +539,7 @@ environment variable <a class="reference internal" href="../env_vars.html#conan-
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <ul class="last simple">
-<li><a class="reference internal" href="../tools.html#environment-append-tool"><span class="std std-ref">Reference/Tools/environment_append</span></a></li>
+<li><a class="reference internal" href="../tools.html#tools-environment-append"><span class="std std-ref">Reference/Tools/environment_append</span></a></li>
 </ul>
 </div>
 </div>

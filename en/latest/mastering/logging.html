@@ -227,7 +227,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h1>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="how-to-log-and-debug-a-conan-execution">
 <span id="logging-and-debugging"></span><h2>How to log and debug a conan execution<a class="headerlink" href="#how-to-log-and-debug-a-conan-execution" title="Permalink to this headline">¶</a></h2>
-<p>You can use the <a class="reference internal" href="../reference/env_vars.html#conan-trace-file"><span class="std std-ref">CONAN_TRACE_FILE</span></a> environment variable to log and debug several conan command execution.
+<p>You can use the <a class="reference internal" href="../reference/env_vars.html#env-vars-conan-trace-file"><span class="std std-ref">CONAN_TRACE_FILE</span></a> environment variable to log and debug several conan command execution.
 Set the <code class="docutils literal notranslate"><span class="pre">CONAN_TRACE_FILE</span></code> environment variable pointing to a log file.</p>
 <p>Example:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">CONAN_TRACE_FILE</span><span class="o">=</span>/tmp/conan_trace.log <span class="c1"># Or SET in windows</span>
@@ -279,8 +279,8 @@ conan install zlib/1.2.8@lasote/stable
 </div>
 <div class="section" id="how-to-log-the-build-process">
 <h2>How to log the build process<a class="headerlink" href="#how-to-log-the-build-process" title="Permalink to this headline">¶</a></h2>
-<p>You can log your command executions <code class="docutils literal notranslate"><span class="pre">self.run</span></code> in a file named <em>conan_run.log</em> using the environment variable <a class="reference internal" href="../reference/env_vars.html#conan-log-run-to-file"><span class="std std-ref">CONAN_LOG_RUN_TO_FILE</span></a>.</p>
-<p>You can also use the variable <a class="reference internal" href="../reference/env_vars.html#conan-print-run-commands"><span class="std std-ref">CONAN_PRINT_RUN_COMMANDS</span></a> to log extra information about the commands being executed.</p>
+<p>You can log your command executions <code class="docutils literal notranslate"><span class="pre">self.run</span></code> in a file named <em>conan_run.log</em> using the environment variable <a class="reference internal" href="../reference/env_vars.html#env-vars-conan-log-run-to-file"><span class="std std-ref">CONAN_LOG_RUN_TO_FILE</span></a>.</p>
+<p>You can also use the variable <a class="reference internal" href="../reference/env_vars.html#env-vars-conan-print-run-commands"><span class="std std-ref">CONAN_PRINT_RUN_COMMANDS</span></a> to log extra information about the commands being executed.</p>
 <div class="section" id="package-the-log-files">
 <h3>Package the log files<a class="headerlink" href="#package-the-log-files" title="Permalink to this headline">¶</a></h3>
 <p>The <em>conan_run.log</em> file will be available in your <em>build</em> folder so you can package it the same way you package a library file:</p>
