@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Hooks [EXPERIMENTAL] &mdash; conan 1.11.2 documentation</title>
+  <title>Hooks &mdash; conan 1.11.2 documentation</title>
   
 
   
@@ -127,7 +127,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../extending.html">Extending Conan</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="python_requires.html">Python requires: reusing python code in recipes [EXPERIMENTAL]</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Hooks [EXPERIMENTAL]</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Hooks</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#hook-structure">Hook structure</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#importing-from-a-module">Importing from a module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#storage-activation-and-sharing">Storage, activation and sharing</a></li>
@@ -197,7 +197,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
           <li><a href="../extending.html">Extending Conan</a> &raquo;</li>
         
-      <li>Hooks [EXPERIMENTAL]</li>
+      <li>Hooks</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -218,8 +218,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="hooks-experimental">
-<span id="hooks"></span><h1>Hooks [EXPERIMENTAL]<a class="headerlink" href="#hooks-experimental" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="hooks">
+<span id="id1"></span><h1>Hooks<a class="headerlink" href="#hooks" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
@@ -231,8 +231,8 @@ points.</p>
 <p>Hooks are Python files containing <strong>pre</strong> and <strong>post</strong> functions that will be executed prior and after a determined task performed by the
 Conan client. Those tasks could be Conan commands, recipe interactions such as exporting or packaging or interactions with the remotes.</p>
 <p>Here you can see an example of a simple hook:</p>
-<div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text"><em>example_hook.py</em></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text"><em>example_hook.py</em></span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">tools</span>
 
 
@@ -286,8 +286,8 @@ section: <a class="reference internal" href="../reference/hooks.html#hooks-refer
 download/upload as a whole and for fine download tasks such as recipe and package downloads/uploads.</p>
 <p>For example they can be used to sign the packages (including a file with the signature) when the package is created and and checking that
 signature every time they are downloaded.</p>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text"><em>signing_hook.py</em></span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><em>signing_hook.py</em></span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">os</span>
  <span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">tools</span>
 
@@ -312,8 +312,8 @@ signature every time they are downloaded.</p>
 <h2>Importing from a module<a class="headerlink" href="#importing-from-a-module" title="Permalink to this headline">¶</a></h2>
 <p>The hook interface should always be placed inside a Python file with the name of the hook and stored in the <em>hooks</em> folder. However,
 you can use functionalities from imported modules if you have them installed in your system or if they are installed with Conan:</p>
-<div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">example_hook.py</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">example_hook.py</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">requests</span>
  <span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">tools</span>
 
@@ -348,17 +348,17 @@ you can use functionalities from imported modules if you have them installed in 
 </div>
 <div class="section" id="storage-activation-and-sharing">
 <h2>Storage, activation and sharing<a class="headerlink" href="#storage-activation-and-sharing" title="Permalink to this headline">¶</a></h2>
-<p>Hooks are Python files stored under <em>~/.conan/hooks</em> folder and <strong>their file name should be the same used for activation</strong> (without the
-<em>.py</em> extension).</p>
+<p>Hooks are Python files stored under <em>~/.conan/hooks</em> folder and <strong>their file name should be the same used for activation</strong> (the
+<em>.py</em> extension could be indicated or not).</p>
 <p>The activation of the hooks is done in the <em>conan.conf</em> section named <code class="docutils literal notranslate"><span class="pre">[hooks]</span></code>. The hook names or paths listed under this section will be
 considered activated.</p>
-<div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text"><em>conan.conf</em></span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text"><em>conan.conf</em></span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span> ...
  [hooks]
- attribute_checker
- conan-center
- my_custom_hook/hook
+ attribute_checker.py
+ conan-center.py
+ my_custom_hook/hook.py
 </pre></div>
 </div>
 </div>
@@ -385,8 +385,8 @@ $ conan <span class="nb">set</span> hooks.conan_hooks/hooks/conan-center.py
 <div class="section" id="attribute-checker">
 <h3>attribute_checker<a class="headerlink" href="#attribute-checker" title="Permalink to this headline">¶</a></h3>
 <p>This hook is shipped together with the Conan client and its functionality is warning when recipes do not contain some metadata attributes.</p>
-<div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text"><em>attribute_checker.py</em></span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text"><em>attribute_checker.py</em></span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="k">def</span> <span class="nf">pre_export</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">conanfile</span><span class="p">,</span> <span class="n">conanfile_path</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
      <span class="c1"># Check basic meta-data</span>
      <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">,</span> <span class="s2">&quot;license&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">]:</span>
