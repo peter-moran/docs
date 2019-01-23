@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Upgrading to conan 1.0 &mdash; conan 1.11.2 documentation</title>
+  <title>Upgrading to Conan 1.0 &mdash; conan 1.11.2 documentation</title>
   
 
   
@@ -121,7 +121,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../using_packages.html">Using packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../creating_packages.html">Creating Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading Packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../devtools.html">Package apps and devtools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
@@ -131,7 +131,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../videos.html">Videos and links</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../faq.html">FAQ</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Upgrading to conan 1.0</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Upgrading to Conan 1.0</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#command-line-changes">Command line changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#deprecations-removals">Deprecations/removals</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#settings-and-profiles-gcc-clang-versioning">Settings and profiles. GCC/Clang versioning</a></li>
@@ -139,7 +139,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="general.html">General</a></li>
-<li class="toctree-l2"><a class="reference internal" href="using.html">Using conan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using.html">Using Conan</a></li>
 <li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
 </ul>
 </li>
@@ -196,7 +196,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
           <li><a href="../faq.html">FAQ</a> &raquo;</li>
         
-      <li>Upgrading to conan 1.0</li>
+      <li>Upgrading to Conan 1.0</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -218,8 +218,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
            <div itemprop="articleBody">
             
   <div class="section" id="upgrading-to-conan-1-0">
-<span id="conan-1-0"></span><h1>Upgrading to conan 1.0<a class="headerlink" href="#upgrading-to-conan-1-0" title="Permalink to this headline">¶</a></h1>
-<p>If you have been using a 0.X version of Conan, there are some things to consider when upgrading to version 1.0. These are reflected in the <a class="reference internal" href="../changelog.html#changelog"><span class="std std-ref">changelog</span></a>., however, this section summarizes the most important ones:</p>
+<span id="conan-1-0"></span><h1>Upgrading to Conan 1.0<a class="headerlink" href="#upgrading-to-conan-1-0" title="Permalink to this headline">¶</a></h1>
+<p>If you have been using a 0.X version of Conan, there are some things to consider when upgrading to version 1.0. These are reflected in the <a class="reference internal" href="../changelog.html#changelog"><span class="std std-ref">changelog</span></a>. This section summarizes the most important considerations:</p>
 <div class="section" id="command-line-changes">
 <h2>Command line changes<a class="headerlink" href="#command-line-changes" title="Permalink to this headline">¶</a></h2>
 <p>There are quite a few things that will break existing usage (compared to 0.30). Most of these are in command line arguments, so they are relatively easy to fix. The most important one is that now, most commands require the path to the conanfile folder or file, instead of using <code class="docutils literal notranslate"><span class="pre">--path</span></code> and <code class="docutils literal notranslate"><span class="pre">--file</span></code> arguments. Specifically, <strong class="command">conan install</strong>, <strong class="command">conan export</strong> and <strong class="command">conan create</strong> are the ones most affected:</p>
@@ -246,7 +246,7 @@ $ conan <span class="nb">export</span> myfolder/myconanfile.py Pkg/0.1@user/chan
 <div class="section" id="deprecations-removals">
 <h2>Deprecations/removals<a class="headerlink" href="#deprecations-removals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>scopes were completely removed in conan 0.30.X</li>
+<li>Scopes were completely removed in conan 0.30.X</li>
 <li><code class="docutils literal notranslate"><span class="pre">self.conanfile_directory</span></code> has been removed. Use <code class="docutils literal notranslate"><span class="pre">self.source_folder</span></code>, <code class="docutils literal notranslate"><span class="pre">self.build_folder</span></code>, etc. instead</li>
 <li><code class="docutils literal notranslate"><span class="pre">self.cpp_info</span></code>, <code class="docutils literal notranslate"><span class="pre">self.env_info</span></code> and <code class="docutils literal notranslate"><span class="pre">self.user_info</span></code> scope has been reduced to only the <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method</li>
 <li><code class="docutils literal notranslate"><span class="pre">gcc</span></code> and <code class="docutils literal notranslate"><span class="pre">ConfigureEnvironment</span></code> were already removed in conan 0.30.1</li>

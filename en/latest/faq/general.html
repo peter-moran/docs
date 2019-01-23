@@ -44,8 +44,8 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="conan 1.11.2 documentation" href="../index.html"/>
         <link rel="up" title="FAQ" href="../faq.html"/>
-        <link rel="next" title="Using conan" href="using.html"/>
-        <link rel="prev" title="Upgrading to conan 1.0" href="conan1.0.html"/>
+        <link rel="next" title="Using Conan" href="using.html"/>
+        <link rel="prev" title="Upgrading to Conan 1.0" href="conan1.0.html"/>
 
  <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -121,7 +121,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../using_packages.html">Using packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../creating_packages.html">Creating Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading Packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../devtools.html">Package apps and devtools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
@@ -131,23 +131,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../videos.html">Videos and links</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../faq.html">FAQ</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="conan1.0.html">Upgrading to conan 1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conan1.0.html">Upgrading to Conan 1.0</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">General</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#is-conan-cmake-based-or-is-cmake-a-requirement">Is Conan CMake based, or is CMake a requirement?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#is-build-system-xxxxx-supported">Is build-system XXXXX supported?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#is-my-compiler-version-architecture-or-setting-supported">Is my compiler, version, architecture, or setting supported?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#does-it-run-offline">Does it run offline?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#is-it-possible-to-install-2-different-versions-of-the-same-library">Is it possible to install 2 different versions of the same library?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#can-i-run-multiple-conan-isolated-instances-virtual-environments-on-the-same-machine">Can I run multiple conan isolated instances (virtual environments) on the same machine?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#can-i-run-multiple-conan-isolated-instances-virtual-environments-on-the-same-machine">Can I run multiple Conan isolated instances (virtual environments) on the same machine?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#can-i-run-the-conan-server-behind-a-firewall-on-premises">Can I run the conan_server behind a firewall (on-premises)?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#can-i-connect-to-conan-remote-servers-through-a-corporate-proxy">Can I connect to conan remote servers through a corporate proxy?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#can-i-connect-to-conan-remote-servers-through-a-corporate-proxy">Can I connect to Conan remote servers through a corporate proxy?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#can-i-create-packages-for-third-party-libraries">Can I create packages for third-party libraries?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#can-i-upload-closed-source-libraries">Can I upload closed source libraries?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#do-i-always-need-to-specify-how-to-build-the-package-from-source">Do I always need to specify how to build the package from source?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#does-conan-use-semantic-versioning-semver-for-dependencies">Does conan use semantic versioning (semver) for dependencies?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#does-conan-use-semantic-versioning-semver-for-dependencies">Does Conan use semantic versioning (semver) for dependencies?</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="using.html">Using conan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using.html">Using Conan</a></li>
 <li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
 </ul>
 </li>
@@ -245,7 +245,7 @@ Please check out the alternatives explained in <a class="reference internal" hre
 <div class="section" id="is-my-compiler-version-architecture-or-setting-supported">
 <h2>Is my compiler, version, architecture, or setting supported?<a class="headerlink" href="#is-my-compiler-version-architecture-or-setting-supported" title="Permalink to this headline">¶</a></h2>
 <p>Yes. Conan is very general, and does not restrict any configuration at all.
-However, conan comes with some compilers, versions, architectures, …, etc. pre-configured in the
+However, Conan comes with some compilers, versions, architectures, …, etc. pre-configured in the
 <code class="docutils literal notranslate"><span class="pre">~/.conan/settings.yml</span></code> file, and you can get an error if using settings not present in that file.
 Go to <a class="reference internal" href="troubleshooting.html#error-invalid-setting"><span class="std std-ref">invalid settings</span></a> to learn more about it.</p>
 </div>
@@ -266,8 +266,8 @@ Packages are managed per user, but additionally differentiated by version and ch
 So large packages, like Boost, don’t have to be compiled or downloaded for every project.</p>
 </div>
 <div class="section" id="can-i-run-multiple-conan-isolated-instances-virtual-environments-on-the-same-machine">
-<h2>Can I run multiple conan isolated instances (virtual environments) on the same machine?<a class="headerlink" href="#can-i-run-multiple-conan-isolated-instances-virtual-environments-on-the-same-machine" title="Permalink to this headline">¶</a></h2>
-<p>Yes, conan supports the concept of virtual environments; so it manages all the information (packages, remotes, user credentials, …, etc.) in different, isolated environments.
+<h2>Can I run multiple Conan isolated instances (virtual environments) on the same machine?<a class="headerlink" href="#can-i-run-multiple-conan-isolated-instances-virtual-environments-on-the-same-machine" title="Permalink to this headline">¶</a></h2>
+<p>Yes, Conan supports the concept of virtual environments; so it manages all the information (packages, remotes, user credentials, …, etc.) in different, isolated environments.
 Check <a class="reference internal" href="../mastering/custom_cache.html#custom-cache"><span class="std std-ref">virtual environments</span></a> for more details.</p>
 </div>
 <div class="section" id="can-i-run-the-conan-server-behind-a-firewall-on-premises">
@@ -279,7 +279,7 @@ the package recipes, re-build from source on your premises, and then upload the 
 server.</p>
 </div>
 <div class="section" id="can-i-connect-to-conan-remote-servers-through-a-corporate-proxy">
-<h2>Can I connect to conan remote servers through a corporate proxy?<a class="headerlink" href="#can-i-connect-to-conan-remote-servers-through-a-corporate-proxy" title="Permalink to this headline">¶</a></h2>
+<h2>Can I connect to Conan remote servers through a corporate proxy?<a class="headerlink" href="#can-i-connect-to-conan-remote-servers-through-a-corporate-proxy" title="Permalink to this headline">¶</a></h2>
 <p>Yes, it can be configured in your <strong>~/.conan/conan.conf</strong> configuration file or with some
 environment variables. Check <a class="reference internal" href="../reference/config_files/conan.conf.html#proxys"><span class="std std-ref">proxy configuration</span></a> for more details.</p>
 </div>
@@ -301,7 +301,7 @@ build elsewhere, and upload them directly. Maybe your <code class="docutils lite
 binaries from another source and unzip them, instead of actually compiling from sources.</p>
 </div>
 <div class="section" id="does-conan-use-semantic-versioning-semver-for-dependencies">
-<h2>Does conan use semantic versioning (semver) for dependencies?<a class="headerlink" href="#does-conan-use-semantic-versioning-semver-for-dependencies" title="Permalink to this headline">¶</a></h2>
+<h2>Does Conan use semantic versioning (semver) for dependencies?<a class="headerlink" href="#does-conan-use-semantic-versioning-semver-for-dependencies" title="Permalink to this headline">¶</a></h2>
 <p>It uses a convention by which package dependencies follow semver by default; thus it intelligently
 avoids recompilation/repackaging if you update upstream minor versions, but will correctly do so if you
 update major versions upstream. This behavior can be easily configured and changed in the <code class="docutils literal notranslate"><span class="pre">package_id()</span></code>
@@ -319,10 +319,10 @@ method of your conanfile, and any versioning scheme you desire is supported.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="using.html" class="btn btn-neutral float-right" title="Using conan" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="using.html" class="btn btn-neutral float-right" title="Using Conan" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="conan1.0.html" class="btn btn-neutral" title="Upgrading to conan 1.0" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="conan1.0.html" class="btn btn-neutral" title="Upgrading to Conan 1.0" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
