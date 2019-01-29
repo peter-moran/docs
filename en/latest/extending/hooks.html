@@ -374,7 +374,7 @@ this variable and values in the environment variable will be used to load the ho
 However, they can also be managed in isolated git repositories cloned into the <em>hooks</em> folder:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/.conan/hooks
 $ git clone https://github.com/conan-io/hooks.git conan_hooks
-$ conan <span class="nb">set</span> hooks.conan_hooks/hooks/conan-center.py
+$ conan config <span class="nb">set</span> hooks.conan_hooks/hooks/conan-center.py
 </pre></div>
 </div>
 <p>This way you can easily change from one version to another.</p>
