@@ -521,8 +521,12 @@ legacy reasons.</p>
 </div>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p class="last">You can inspect available package options reading the package recipe, which can be
-done with the command <strong class="command">conan get MyPkg/0.1&#64;user/channel</strong>.</p>
+<ul class="last simple">
+<li>You can inspect available package options reading the package recipe, which can be
+done with the command <strong class="command">conan inspect MyPkg/0.1&#64;user/channel</strong>.</li>
+<li>Options <code class="docutils literal notranslate"><span class="pre">&quot;shared&quot;:</span> <span class="pre">[True,</span> <span class="pre">False]</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;fPIC&quot;:</span> <span class="pre">[True,</span> <span class="pre">False]</span></code> are automatically managed in <a class="reference internal" href="../build_helpers/cmake.html#cmake-reference"><span class="std std-ref">CMake</span></a> and
+<a class="reference internal" href="../build_helpers/autotools.html#autotools-reference"><span class="std std-ref">AutoToolsBuildEnvironment (configure/make)</span></a> build helpers.</li>
+</ul>
 </div>
 <p>As we mentioned before, values for options in a recipe can be defined using different ways, let’s
 go over all of them for the example recipe <code class="docutils literal notranslate"><span class="pre">MyPkg</span></code> defined above:</p>
