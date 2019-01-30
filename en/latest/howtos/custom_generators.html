@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>How to create and share a custom generator with generator packages &mdash; conan 1.11.2 documentation</title>
+  <title>How to create and share a custom generator with generator packages &mdash; conan 1.12.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.11.2 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.12.0 documentation" href="../index.html"/>
         <link rel="up" title="Howtos" href="../howtos.html"/>
         <link rel="next" title="How to manage shared libraries" href="manage_shared_libraries.html"/>
         <link rel="prev" title="How to reuse Python code in recipes" href="python_code_reuse.html"/>
@@ -141,6 +141,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#creating-a-custom-generator">Creating a custom generator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#premake-generator-example">Premake generator example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-the-generator">Using the generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-template-files-for-custom-generators">Using template files for custom generators</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="manage_shared_libraries.html">How to manage shared libraries</a></li>
@@ -475,6 +476,31 @@ Hello World!
 invokes premake4 in the build() method, and use <strong class="command">conan test</strong> to automatically test your custom generator with a real project.</p>
 </div>
 </div>
+<div class="section" id="using-template-files-for-custom-generators">
+<h2>Using template files for custom generators<a class="headerlink" href="#using-template-files-for-custom-generators" title="Permalink to this headline">¶</a></h2>
+<p>If your generator has a lot of common, non-parameterized text, you might want to use files that contain the template.
+It is possible to do this as long as the template file is exported in the recipe. The following example uses a simple text file,
+but you could use other templating formats:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">load</span>
+<span class="kn">from</span> <span class="nn">conans.model</span> <span class="kn">import</span> <span class="n">Generator</span>
+
+<span class="k">class</span> <span class="nc">MyCustomGenerator</span><span class="p">(</span><span class="n">Generator</span><span class="p">):</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">filename</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;customfile.gen&quot;</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">content</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&quot;mytemplate.txt&quot;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">template</span> <span class="o">%</span> <span class="s2">&quot;Hello&quot;</span>
+
+<span class="k">class</span> <span class="nc">MyCustomGeneratorPackage</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;custom&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;0.1&quot;</span>
+    <span class="n">exports</span> <span class="o">=</span> <span class="s2">&quot;mytemplate.txt&quot;</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -517,7 +543,7 @@ invokes premake4 in the build() method, and use <strong class="command">conan te
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.11
+      Version: 1.12
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -525,7 +551,11 @@ invokes premake4 in the build() method, and use <strong class="command">conan te
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.11</a></dd>
+            <dd><a href="/en/latest/index.html">1.12</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.11/index.html">1.11</a></dd>
           
         
           
@@ -575,7 +605,7 @@ invokes premake4 in the build() method, and use <strong class="command">conan te
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.11.2',
+            VERSION:'1.12.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

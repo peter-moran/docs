@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Developing packages &mdash; conan 1.11.2 documentation</title>
+  <title>Developing packages &mdash; conan 1.12.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="conan 1.11.2 documentation" href="index.html"/>
+    <link rel="top" title="conan 1.12.0 documentation" href="index.html"/>
         <link rel="next" title="Package development flow" href="developing_packages/package_dev_flow.html"/>
         <link rel="prev" title="Running conan_server" href="uploading_packages/running_your_server.html"/>
 
@@ -122,6 +122,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="uploading_packages.html">Uploading Packages</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Developing packages</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="developing_packages/package_dev_flow.html">Package development flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developing_packages/editable_packages.html">Packages in editable mode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developing_packages/workspaces.html">Workspaces</a></li>
 </ul>
 </li>
@@ -221,6 +222,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="developing_packages/package_dev_flow.html#conan-create">conan create</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="developing_packages/editable_packages.html">Packages in editable mode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="developing_packages/editable_packages.html#put-a-package-in-editable-mode">Put a package in editable mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developing_packages/editable_packages.html#editable-packages-layouts">Editable packages layouts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developing_packages/editable_packages.html#using-a-package-in-editable-mode">Using a package in editable mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developing_packages/editable_packages.html#revert-the-editable-mode">Revert the editable mode</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="developing_packages/workspaces.html">Workspaces</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="developing_packages/workspaces.html#in-source-builds">In-source builds</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developing_packages/workspaces.html#conanws-yml-syntax">conanws.yml syntax</a></li>
@@ -271,7 +279,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.11
+      Version: 1.12
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -279,7 +287,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.11</a></dd>
+            <dd><a href="/en/latest/index.html">1.12</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.11/index.html">1.11</a></dd>
           
         
           
@@ -329,7 +341,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.11.2',
+            VERSION:'1.12.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

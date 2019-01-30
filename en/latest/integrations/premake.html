@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Premake &mdash; conan 1.11.2 documentation</title>
+  <title>Premake &mdash; conan 1.12.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.11.2 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.12.0 documentation" href="../index.html"/>
         <link rel="up" title="Integrations" href="../integrations.html"/>
         <link rel="next" title="Make" href="make.html"/>
         <link rel="prev" title="QMake" href="qmake.html"/>
@@ -286,39 +286,27 @@ Premake generator too:</p>
 <div class="code-block-caption"><span class="caption-text">premake5.lua</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span> <span class="c1">-- premake5.lua</span>
 
- <span class="nb">require</span> <span class="s1">&#39;conanbuildinfo&#39;</span>
+ <span class="n">include</span><span class="p">(</span><span class="s2">&quot;conanbuildinfo.premake.lua&quot;</span><span class="p">)</span>
 
- <span class="n">workspace</span> <span class="s2">&quot;ConanPremakeDemo&quot;</span>
-     <span class="n">configurations</span> <span class="p">{</span> <span class="s2">&quot;Debug&quot;</span><span class="p">,</span> <span class="s2">&quot;Release&quot;</span> <span class="p">}</span>
-     <span class="n">platforms</span> <span class="p">{</span> <span class="s2">&quot;Win32&quot;</span><span class="p">,</span> <span class="s2">&quot;x64&quot;</span> <span class="p">}</span>
+ <span class="n">workspace</span><span class="p">(</span><span class="s2">&quot;ConanPremakeDemo&quot;</span><span class="p">)</span>
+     <span class="n">conan_basic_setup</span><span class="p">()</span>
 
-     <span class="n">filter</span> <span class="p">{</span> <span class="s2">&quot;platforms:Win32&quot;</span> <span class="p">}</span>
-     <span class="n">system</span> <span class="s2">&quot;Windows&quot;</span>
-     <span class="n">architecture</span> <span class="s2">&quot;x32&quot;</span>
+     <span class="n">project</span> <span class="s2">&quot;ConanPremakeDemo&quot;</span>
+         <span class="n">kind</span> <span class="s2">&quot;ConsoleApp&quot;</span>
+         <span class="n">language</span> <span class="s2">&quot;C++&quot;</span>
+         <span class="n">targetdir</span> <span class="s2">&quot;bin/%{cfg.buildcfg}&quot;</span>
 
-     <span class="n">filter</span> <span class="p">{</span> <span class="s2">&quot;platforms:x64&quot;</span> <span class="p">}</span>
-     <span class="n">system</span> <span class="s2">&quot;Windows&quot;</span>
-     <span class="n">architecture</span> <span class="s2">&quot;x64&quot;</span>
+         <span class="n">linkoptions</span> <span class="p">{</span> <span class="n">conan_exelinkflags</span> <span class="p">}</span>
 
- <span class="n">project</span> <span class="s2">&quot;ConanPremakeDemo&quot;</span>
-     <span class="n">kind</span> <span class="s2">&quot;ConsoleApp&quot;</span>
-     <span class="n">language</span> <span class="s2">&quot;C++&quot;</span>
-     <span class="n">targetdir</span> <span class="s2">&quot;bin/%{cfg.buildcfg}&quot;</span>
+         <span class="n">files</span> <span class="p">{</span> <span class="s2">&quot;**.h&quot;</span><span class="p">,</span> <span class="s2">&quot;**.cpp&quot;</span> <span class="p">}</span>
 
-     <span class="n">includedirs</span> <span class="p">{</span> <span class="n">conan_includedirs</span> <span class="p">}</span>
-     <span class="n">libdirs</span> <span class="p">{</span> <span class="n">conan_libdirs</span> <span class="p">}</span>
-     <span class="n">links</span> <span class="p">{</span> <span class="n">conan_libs</span> <span class="p">}</span>
-     <span class="n">linkoptions</span> <span class="p">{</span> <span class="n">conan_exelinkflags</span> <span class="p">}</span>
+         <span class="n">filter</span> <span class="s2">&quot;configurations:Debug&quot;</span>
+         <span class="n">defines</span> <span class="p">{</span> <span class="s2">&quot;DEBUG&quot;</span> <span class="p">}</span>
+         <span class="n">symbols</span> <span class="s2">&quot;On&quot;</span>
 
-     <span class="n">files</span> <span class="p">{</span> <span class="s2">&quot;**.h&quot;</span><span class="p">,</span> <span class="s2">&quot;**.cpp&quot;</span> <span class="p">}</span>
-
-     <span class="n">filter</span> <span class="s2">&quot;configurations:Debug&quot;</span>
-     <span class="n">defines</span> <span class="p">{</span> <span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span> <span class="n">conan_cppdefines</span> <span class="p">}</span>
-     <span class="n">symbols</span> <span class="s2">&quot;On&quot;</span>
-
-     <span class="n">filter</span> <span class="s2">&quot;configurations:Release&quot;</span>
-     <span class="n">defines</span> <span class="p">{</span> <span class="s2">&quot;NDEBUG&quot;</span><span class="p">,</span> <span class="n">conan_cppdefines</span> <span class="p">}</span>
-     <span class="n">optimize</span> <span class="s2">&quot;On&quot;</span>
+         <span class="n">filter</span> <span class="s2">&quot;configurations:Release&quot;</span>
+         <span class="n">defines</span> <span class="p">{</span> <span class="s2">&quot;NDEBUG&quot;</span> <span class="p">}</span>
+         <span class="n">optimize</span> <span class="s2">&quot;On&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -387,7 +375,7 @@ Premake generator too:</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.11
+      Version: 1.12
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -395,7 +383,11 @@ Premake generator too:</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.11</a></dd>
+            <dd><a href="/en/latest/index.html">1.12</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.11/index.html">1.11</a></dd>
           
         
           
@@ -445,7 +437,7 @@ Premake generator too:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.11.2',
+            VERSION:'1.12.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

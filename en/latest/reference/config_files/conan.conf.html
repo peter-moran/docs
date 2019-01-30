@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan.conf &mdash; conan 1.11.2 documentation</title>
+  <title>conan.conf &mdash; conan 1.12.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.11.2 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.12.0 documentation" href="../../index.html"/>
         <link rel="up" title="Configuration files" href="../config_files.html"/>
         <link rel="next" title="profiles/default" href="default_profile.html"/>
         <link rel="prev" title="Configuration files" href="../config_files.html"/>
@@ -149,6 +149,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="registry.txt.html">registry.txt / registry.json</a></li>
 <li class="toctree-l3"><a class="reference internal" href="client_certificates.html">client.crt / client.key</a></li>
 <li class="toctree-l3"><a class="reference internal" href="artifacts.properties.html">artifacts.properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="editable_layout.html">Editable layout files</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../env_vars.html">Environment variables</a></li>
@@ -255,13 +256,14 @@ request_timeout = 60                  # environment CONAN_REQUEST_TIMEOUT (secon
 # recipe_linter = False               # environment CONAN_RECIPE_LINTER
 # read_only_cache = True              # environment CONAN_READ_ONLY_CACHE
 # pylintrc = path/to/pylintrc_file    # environment CONAN_PYLINTRC
-# cache_no_locks = True               # Disable locking mechanism of local cache
+# cache_no_locks = True               # environment CONAN_CACHE_NO_LOCKS
 # user_home_short = your_path         # environment CONAN_USER_HOME_SHORT
 # use_always_short_paths = False      # environment CONAN_USE_ALWAYS_SHORT_PATHS
 # skip_vs_projects_upgrade = False    # environment CONAN_SKIP_VS_PROJECTS_UPGRADE
 # non_interactive = False             # environment CONAN_NON_INTERACTIVE
 
 # conan_make_program = make           # environment CONAN_MAKE_PROGRAM (overrides the make program used in AutoToolsBuildEnvironment.make)
+# conan_cmake_program = cmake         # environment CONAN_CMAKE_PROGRAM (overrides the make program used in CMake.cmake_program)
 
 # cmake_generator                     # environment CONAN_CMAKE_GENERATOR
 # http://www.vtk.org/Wiki/CMake_Cross_Compiling
@@ -273,6 +275,8 @@ request_timeout = 60                  # environment CONAN_REQUEST_TIMEOUT (secon
 # cmake_find_root_path_mode_program   # environment CONAN_CMAKE_FIND_ROOT_PATH_MODE_PROGRAM
 # cmake_find_root_path_mode_library   # environment CONAN_CMAKE_FIND_ROOT_PATH_MODE_LIBRARY
 # cmake_find_root_path_mode_include   # environment CONAN_CMAKE_FIND_ROOT_PATH_MODE_INCLUDE
+
+# msbuild_verbosity = minimal         # environment CONAN_MSBUILD_VERBOSITY
 
 # cpu_count = 1             # environment CONAN_CPU_COUNT
 
@@ -328,8 +332,23 @@ to debug the detected error.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">bash_path</span></code> variable is used only in windows to help the
 <a class="reference internal" href="../tools.html#tools-run-in-windows-bash"><span class="std std-ref">tools.run_in_windows_bash()</span></a> function to locate our Cygwin/MSYS2 bash.
 Set it with the bash executable path if it’s not in the PATH or you want to use a different one.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">cache_no_locks</span></code> variable is used to disable locking mechanism of local cache.
+This is primary used for debugging purposes, and in general it’s not recommended to disable locks otherwise,
+as it may result in corrupted packages.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">cmake_***</span></code> variables will declare the corresponding CMake variable when you use the
 <a class="reference internal" href="../generators/cmake.html#cmake-generator"><span class="std std-ref">cmake generator</span></a> and the <a class="reference internal" href="../build_helpers/cmake.html#cmake-reference"><span class="std std-ref">CMake build tool</span></a>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">msbuild_verbosity</span></code> variable is used only by <a class="reference internal" href="../build_helpers/visual_studio.html#msbuild"><span class="std std-ref">MSBuild</span></a> and <a class="reference internal" href="../build_helpers/cmake.html#cmake-reference"><span class="std std-ref">CMake</span></a> build helpers.
+For the <a class="reference internal" href="../build_helpers/cmake.html#cmake-reference"><span class="std std-ref">CMake</span></a> build helper, it has an effect only for <code class="docutils literal notranslate"><span class="pre">`Visual</span> <span class="pre">Studio`</span></code> generators.
+Variable defines verbosity level used by the <code class="docutils literal notranslate"><span class="pre">`msbuild`</span></code> tool, as documented on <cite>MSDN &lt;https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-command-line-reference?view=vs-2017&gt;</cite>.
+By default, <code class="docutils literal notranslate"><span class="pre">`minimal</span></code> verbosity level is used, matching the Visual Studio IDE behavior.
+Allowed values are (in ascending order): <code class="docutils literal notranslate"><span class="pre">`quiet`</span></code>, <code class="docutils literal notranslate"><span class="pre">`minimal`</span></code>, <code class="docutils literal notranslate"><span class="pre">`normal`</span></code>, <code class="docutils literal notranslate"><span class="pre">`detailed`</span></code>, <code class="docutils literal notranslate"><span class="pre">`diagnostic`</span></code>.
+You can also adjust the environment variable <code class="docutils literal notranslate"><span class="pre">CONAN_MSBUILD_VERBOSITY</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">conan_make_program</span></code> variable used by <a class="reference internal" href="../build_helpers/cmake.html#cmake-reference"><span class="std std-ref">CMake</span></a> and <a class="reference internal" href="../build_helpers/autotools.html#autotools-reference"><span class="std std-ref">AutotoolsBuildEnvironment</span></a> build helpers.
+It overrides a default <code class="docutils literal notranslate"><span class="pre">`make`</span></code> executable, might be useful in case you need to use a different make (e.g. BSD Make instead of GNU Make, or MinGW Make).
+Set it with the make executable path if it’s not in the PATH or you want to use a different one.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">conan_cmake_program</span></code> variable used only by <a class="reference internal" href="../build_helpers/cmake.html#cmake-reference"><span class="std std-ref">CMake</span></a> build helper.
+It overrides a default <code class="docutils literal notranslate"><span class="pre">`cmake`</span></code> executable, might be useful in case you need to use a CMake wrapper tool (such as scan build).
+Set it with the cmake executable path if it’s not in the PATH or you want to use a different one.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">cpu_count</span></code> variable set the number of cores that the <a class="reference internal" href="../tools.html#tools-cpu-count"><span class="std std-ref">tools.cpu_count()</span></a> will return,
 by default the number of cores available in your machine.
 Conan recipes can use the <code class="docutils literal notranslate"><span class="pre">cpu_count()</span></code> tool to build the library using more than one core.</p>
@@ -455,7 +474,7 @@ $ <span class="nb">set</span> <span class="nv">HTTPS_PROXY</span><span class="o"
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.11
+      Version: 1.12
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -463,7 +482,11 @@ $ <span class="nb">set</span> <span class="nv">HTTPS_PROXY</span><span class="o"
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.11</a></dd>
+            <dd><a href="/en/latest/index.html">1.12</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.11/index.html">1.11</a></dd>
           
         
           
@@ -513,7 +536,7 @@ $ <span class="nb">set</span> <span class="nv">HTTPS_PROXY</span><span class="o"
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.11.2',
+            VERSION:'1.12.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

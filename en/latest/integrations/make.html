@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Make &mdash; conan 1.11.2 documentation</title>
+  <title>Make &mdash; conan 1.12.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.11.2 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.12.0 documentation" href="../index.html"/>
         <link rel="up" title="Integrations" href="../integrations.html"/>
         <link rel="next" title="qbs" href="qbs.html"/>
         <link rel="prev" title="Premake" href="premake.html"/>
@@ -317,10 +317,10 @@ generator too:</p>
 <span class="c"> #----------------------------------------</span>
 
  <span class="nv">CFLAGS</span>          <span class="o">+=</span> <span class="k">$(</span>CONAN_CFLAGS<span class="k">)</span>
- <span class="nv">CXXFLAGS</span>        <span class="o">+=</span> <span class="k">$(</span>CONAN_CPPFLAGS<span class="k">)</span>
- <span class="nv">CPPFLAGS</span>        <span class="o">+=</span> <span class="k">$(</span>addprefix -I, <span class="k">$(</span>CONAN_INCLUDE_PATHS<span class="k">))</span>
+ <span class="nv">CXXFLAGS</span>        <span class="o">+=</span> <span class="k">$(</span>CONAN_CXXFLAGS<span class="k">)</span>
+ <span class="nv">CPPFLAGS</span>        <span class="o">+=</span> <span class="k">$(</span>addprefix -I, <span class="k">$(</span>CONAN_INCLUDE_DIRS<span class="k">))</span>
  <span class="nv">CPPFLAGS</span>        <span class="o">+=</span> <span class="k">$(</span>addprefix -D, <span class="k">$(</span>CONAN_DEFINES<span class="k">))</span>
- <span class="nv">LDFLAGS</span>         <span class="o">+=</span> <span class="k">$(</span>addprefix -L, <span class="k">$(</span>CONAN_LIB_PATHS<span class="k">))</span>
+ <span class="nv">LDFLAGS</span>         <span class="o">+=</span> <span class="k">$(</span>addprefix -L, <span class="k">$(</span>CONAN_LIB_DIRS<span class="k">))</span>
  <span class="nv">LDLIBS</span>          <span class="o">+=</span> <span class="k">$(</span>addprefix -l, <span class="k">$(</span>CONAN_LIBS<span class="k">))</span>
 
 
@@ -408,7 +408,7 @@ generator too:</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.11
+      Version: 1.12
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -416,7 +416,11 @@ generator too:</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.11</a></dd>
+            <dd><a href="/en/latest/index.html">1.12</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.11/index.html">1.11</a></dd>
           
         
           
@@ -466,7 +470,7 @@ generator too:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.11.2',
+            VERSION:'1.12.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

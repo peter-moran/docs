@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>premake [EXPERIMENTAL] &mdash; conan 1.11.2 documentation</title>
+  <title>premake &mdash; conan 1.12.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.11.2 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.12.0 documentation" href="../../index.html"/>
         <link rel="up" title="Generators" href="../generators.html"/>
         <link rel="next" title="make" href="make.html"/>
         <link rel="prev" title="json" href="json.html"/>
@@ -155,7 +155,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="ycm.html">youcompleteme</a></li>
 <li class="toctree-l3"><a class="reference internal" href="text.html">txt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="json.html">json</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#"><cite>premake</cite> [EXPERIMENTAL]</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">premake</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#variables">Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="make.html">make</a></li>
 </ul>
 </li>
@@ -224,7 +228,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
           <li><a href="../generators.html">Generators</a> &raquo;</li>
         
-      <li><cite>premake</cite> [EXPERIMENTAL]</li>
+      <li>premake</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -245,20 +249,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="premake-experimental">
-<span id="premake-generator"></span><h1><cite>premake</cite> [EXPERIMENTAL]<a class="headerlink" href="#premake-experimental" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="premake">
+<span id="premake-generator"></span><h1>premake<a class="headerlink" href="#premake" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
+</div>
 <div class="out-reference-box docutils container">
 This is the reference page for <code class="docutils literal notranslate"><span class="pre">premake</span></code> generator.
 Go to <a class="reference internal" href="../../integrations/premake.html#premake"><span class="std std-ref">Integrations/premake</span></a> if you want to learn how to integrate your project or recipes with premake.</div>
-<p>Generates a file name <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.lua</span></code> that can be used for your premake builds (both premake 4 and premake 5 are supported).
-The file contains:</p>
+<p>Generates a file name <em>conanbuildinfo.premake.lua</em> that can be used for your premake builds (both premake 4 and premake 5 are supported).</p>
+<p>The file contains:</p>
 <ul class="simple">
 <li>N groups of variables, one group per require, declaring the same individual values: include dirs, libs, bin dirs, defines, etc.</li>
 <li>One group of global variables with aggregated values for all requirements.</li>
+<li>Helper functions to setup the settings in your configuration.</li>
 </ul>
-<p><strong>Package declared vars</strong></p>
-<p>For each requirement <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.lua</span></code> file declares the following variables.
-<code class="docutils literal notranslate"><span class="pre">`XXX`</span></code> is the name of the require. e.g. “zlib” for <code class="docutils literal notranslate"><span class="pre">zlib/1.2.11&#64;lasote/stable</span></code> requirement:</p>
+<div class="section" id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="package-declared-variables">
+<h3>Package declared variables<a class="headerlink" href="#package-declared-variables" title="Permalink to this headline">¶</a></h3>
+<p>For each requirement <em>conanbuildinfo.premake.lua</em> file declares the following variables.
+<code class="docutils literal notranslate"><span class="pre">XXX</span></code> is the name of the require. e.g. “zlib” for <code class="docutils literal notranslate"><span class="pre">zlib/1.2.11&#64;lasote/stable</span></code> requirement:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="33%" />
@@ -282,10 +294,10 @@ The file contains:</p>
 <tr class="row-odd"><td>conan_libs_XXX</td>
 <td>Library names to link</td>
 </tr>
-<tr class="row-even"><td>conan_cppdefines_XXX</td>
+<tr class="row-even"><td>conan_defines_XXX</td>
 <td>Compile definitions</td>
 </tr>
-<tr class="row-odd"><td>conan_cppflags_XXX</td>
+<tr class="row-odd"><td>conan_cxxflags_XXX</td>
 <td>CXX flags</td>
 </tr>
 <tr class="row-even"><td>conan_cflags_XXX</td>
@@ -302,7 +314,9 @@ The file contains:</p>
 </tr>
 </tbody>
 </table>
-<p><strong>Global declared vars</strong></p>
+</div>
+<div class="section" id="global-declared-variables">
+<h3>Global declared variables<a class="headerlink" href="#global-declared-variables" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
 <col width="33%" />
@@ -326,10 +340,10 @@ The file contains:</p>
 <tr class="row-odd"><td>conan_libs</td>
 <td>Aggregated library names to link</td>
 </tr>
-<tr class="row-even"><td>conan_cppdefines</td>
+<tr class="row-even"><td>conan_defines</td>
 <td>Aggregated compile definitions</td>
 </tr>
-<tr class="row-odd"><td>conan_cppflags</td>
+<tr class="row-odd"><td>conan_cxxflags</td>
 <td>Aggregated CXX flags</td>
 </tr>
 <tr class="row-even"><td>conan_cflags</td>
@@ -343,6 +357,27 @@ The file contains:</p>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="conan-basic-setup">
+<h3>conan_basic_setup()<a class="headerlink" href="#conan-basic-setup" title="Permalink to this headline">¶</a></h3>
+<p>Basic function to setup the settings into your configuration. Useful to reduce the logic in premake scripts and automate the conversion of
+settings:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="kr">function</span> <span class="nf">conan_basic_setup</span><span class="p">()</span>
+    <span class="n">configurations</span><span class="p">{</span><span class="n">conan_build_type</span><span class="p">}</span>
+    <span class="n">architecture</span><span class="p">(</span><span class="n">conan_arch</span><span class="p">)</span>
+    <span class="n">includedirs</span><span class="p">{</span><span class="n">conan_includedirs</span><span class="p">}</span>
+    <span class="n">libdirs</span><span class="p">{</span><span class="n">conan_libdirs</span><span class="p">}</span>
+    <span class="n">links</span><span class="p">{</span><span class="n">conan_libs</span><span class="p">}</span>
+    <span class="n">defines</span><span class="p">{</span><span class="n">conan_cppdefines</span><span class="p">}</span>
+    <span class="n">bindirs</span><span class="p">{</span><span class="n">conan_bindirs</span><span class="p">}</span>
+<span class="kr">end</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 
 
@@ -385,7 +420,7 @@ The file contains:</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.11
+      Version: 1.12
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -393,7 +428,11 @@ The file contains:</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.11</a></dd>
+            <dd><a href="/en/latest/index.html">1.12</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.11/index.html">1.11</a></dd>
           
         
           
@@ -443,7 +482,7 @@ The file contains:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.11.2',
+            VERSION:'1.12.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

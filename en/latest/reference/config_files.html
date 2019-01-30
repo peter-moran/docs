@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configuration files &mdash; conan 1.11.2 documentation</title>
+  <title>Configuration files &mdash; conan 1.12.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.11.2 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.12.0 documentation" href="../index.html"/>
         <link rel="up" title="Reference" href="../reference.html"/>
         <link rel="next" title="conan.conf" href="config_files/conan.conf.html"/>
         <link rel="prev" title="Tools" href="tools.html"/>
@@ -143,6 +143,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="config_files/registry.txt.html">registry.txt / registry.json</a></li>
 <li class="toctree-l3"><a class="reference internal" href="config_files/client_certificates.html">client.crt / client.key</a></li>
 <li class="toctree-l3"><a class="reference internal" href="config_files/artifacts.properties.html">artifacts.properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config_files/editable_layout.html">Editable layout files</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="env_vars.html">Environment variables</a></li>
@@ -238,10 +239,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="config_files/default_profile.html">profiles/default</a></li>
-<li class="toctree-l1"><a class="reference internal" href="config_files/settings.yml.html">settings.yml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config_files/settings.yml.html">settings.yml</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="config_files/settings.yml.html#architectures">Architectures</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="config_files/registry.txt.html">registry.txt / registry.json</a></li>
 <li class="toctree-l1"><a class="reference internal" href="config_files/client_certificates.html">client.crt / client.key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="config_files/artifacts.properties.html">artifacts.properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config_files/editable_layout.html">Editable layout files</a></li>
 </ul>
 </div>
 </div>
@@ -286,7 +291,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.11
+      Version: 1.12
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -294,7 +299,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.11</a></dd>
+            <dd><a href="/en/latest/index.html">1.12</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.11/index.html">1.11</a></dd>
           
         
           
@@ -344,7 +353,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.11.2',
+            VERSION:'1.12.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

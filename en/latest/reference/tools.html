@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tools &mdash; conan 1.11.2 documentation</title>
+  <title>Tools &mdash; conan 1.12.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.11.2 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.12.0 documentation" href="../index.html"/>
         <link rel="up" title="Reference" href="../reference.html"/>
         <link rel="next" title="Configuration files" href="config_files.html"/>
         <link rel="prev" title="RunEnvironment" href="build_helpers/run_environment.html"/>
@@ -393,7 +393,8 @@ the new values will be returned, as a list.</li>
 <p class="last">This tool is deprecated and will be removed in Conan 2.0. Use <a class="reference internal" href="build_helpers/visual_studio.html#msbuild"><span class="std std-ref">MSBuild()</span></a> build helper instead.</p>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build_sln_command</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="n">sln_path</span><span class="p">,</span> <span class="n">targets</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">upgrade_project</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">build_type</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                      <span class="n">arch</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">toolset</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">platforms</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+                      <span class="n">arch</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">toolset</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">platforms</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">verbosity</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                      <span class="n">definitions</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Returns the command to call <cite>devenv</cite> and <cite>msbuild</cite> to build a Visual Studio project. It’s recommended to use it with
@@ -430,13 +431,18 @@ will be ignored and the project won’t be upgraded.</p>
 </li>
 <li><p class="first"><strong>platforms</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Dictionary with the mapping of archs/platforms from Conan naming to another one. It
 is useful for Visual Studio solutions that have a different naming in architectures. Example: <code class="docutils literal notranslate"><span class="pre">platforms={&quot;x86&quot;:&quot;Win32&quot;}</span></code> (Visual
-solution uses “Win32” instead of “x86”). This dictionary will update the default one:</p>
+solution uses “Win32” instead of “x86”). This dictionary will update the following default one:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">msvc_arch</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x86&#39;</span><span class="p">:</span> <span class="s1">&#39;x86&#39;</span><span class="p">,</span>
              <span class="s1">&#39;x86_64&#39;</span><span class="p">:</span> <span class="s1">&#39;x64&#39;</span><span class="p">,</span>
              <span class="s1">&#39;armv7&#39;</span><span class="p">:</span> <span class="s1">&#39;ARM&#39;</span><span class="p">,</span>
              <span class="s1">&#39;armv8&#39;</span><span class="p">:</span> <span class="s1">&#39;ARM64&#39;</span><span class="p">}</span>
 </pre></div>
 </div>
+</li>
+<li><p class="first"><strong>verbosity</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Specifies verbosity level (<code class="docutils literal notranslate"><span class="pre">/verbosity:</span></code> parameter).</p>
+</li>
+<li><p class="first"><strong>definitions</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Dictionary with additional compiler definitions to be applied during the build.
+Use value of None to set compiler definition with no value.</p>
 </li>
 </ul>
 </dd>
@@ -832,12 +838,14 @@ the <code class="docutils literal notranslate"><span class="pre">source()</span>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">tools</span>
 
 <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">tools</span><span class="o">.</span><span class="n">environment_append</span><span class="p">({</span><span class="s2">&quot;MY_VAR&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;CXX&quot;</span><span class="p">:</span> <span class="s2">&quot;/path/to/cxx&quot;</span><span class="p">}):</span>
+    <span class="k">with</span> <span class="n">tools</span><span class="o">.</span><span class="n">environment_append</span><span class="p">({</span><span class="s2">&quot;MY_VAR&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;CXX&quot;</span><span class="p">:</span> <span class="s2">&quot;/path/to/cxx&quot;</span><span class="p">,</span> <span class="s2">&quot;CPPFLAGS&quot;</span><span class="p">:</span> <span class="bp">None</span><span class="p">}):</span>
         <span class="n">do_something</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The environment variables will be overridden if the value is a string, while it will be prepended if the value is a list. When the context
-manager block ends, the environment variables will be unset.</p>
+<p>The environment variables will be overridden if the value is a string, while it will be prepended if the value is a list.
+Additionally, if value is <code class="docutils literal notranslate"><span class="pre">None</span></code>, the given environment variable is unset (In the previous example, <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code> environment
+variable will be unset), and in case variable wasn’t set prior to the invocation, it has no effect on the given variable (<code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code>).
+When the context manager block ends, the environment variables will recover their previous state.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd><ul class="first last simple">
@@ -1542,6 +1550,7 @@ will be used.</li>
 <li><strong>get_qualified_remote_url()</strong>: Returns the remote url (see <code class="docutils literal notranslate"><span class="pre">get_remote_url()</span></code>) but with forward slashes if it is a local folder.</li>
 <li><strong>get_revision(), get_commit()</strong>: Gets the current commit hash.</li>
 <li><strong>get_branch()</strong>: Gets the current branch.</li>
+<li><strong>get_tag()</strong>: Gets the current checkout tag (<strong class="command">git describe --exact-match --tags</strong>) and returns <code class="docutils literal notranslate"><span class="pre">None</span></code> if not in a tag.</li>
 <li><strong>excluded_files()</strong>: Gets a list of the files and folders that would be excluded by <em>.gitignore</em> file.</li>
 <li><strong>is_local_repository()</strong>: Returns <cite>True</cite> if the remote is a local folder.</li>
 <li><strong>is_pristine()</strong>: Returns <cite>True</cite> if there aren’t modified or uncommitted files in the working copy.</li>
@@ -1590,6 +1599,8 @@ parsing.</li>
 folder (<code class="docutils literal notranslate"><span class="pre">use_wc_root=False</span></code>) or in the working copy root (<code class="docutils literal notranslate"><span class="pre">use_wc_root=True</span></code>).</li>
 <li><strong>get_branch()</strong>: Tries to deduce the branch name from the
 <a class="reference external" href="http://svnbook.red-bean.com/en/1.7/svn.branchmerge.maint.html">standard SVN layout</a>. Will raise if cannot resolve it.</li>
+<li><strong>get_tag()</strong>: Tries to deduce the tag name from the <a class="reference external" href="http://svnbook.red-bean.com/en/1.7/svn.branchmerge.maint.html">standard SVN layout</a> and
+returns the current tag name. Otherwise it will return <code class="docutils literal notranslate"><span class="pre">None</span></code>.</li>
 <li><strong>excluded_files()</strong>: Gets a list of the files and folders that are marked to be ignored.</li>
 <li><strong>is_local_repository()</strong>: Returns <cite>True</cite> if the remote is a local folder.</li>
 <li><strong>is_pristine()</strong>: Returns <cite>True</cite> if there aren’t modified or uncommitted files in the working copy.</li>
@@ -1604,7 +1615,7 @@ depend on the root of the working copy that has been checked out.</p>
 </div>
 </div>
 <div class="section" id="tools-is-apple-os">
-<span id="id43"></span><h2>tools.is_apple_os()<a class="headerlink" href="#tools-is-apple-os" title="Permalink to this headline">¶</a></h2>
+<span id="id44"></span><h2>tools.is_apple_os()<a class="headerlink" href="#tools-is-apple-os" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">is_apple_os</span><span class="p">(</span><span class="n">os_</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1618,7 +1629,7 @@ depend on the root of the working copy that has been checked out.</p>
 </dl>
 </div>
 <div class="section" id="tools-to-apple-arch">
-<span id="id44"></span><h2>tools.to_apple_arch()<a class="headerlink" href="#tools-to-apple-arch" title="Permalink to this headline">¶</a></h2>
+<span id="id45"></span><h2>tools.to_apple_arch()<a class="headerlink" href="#tools-to-apple-arch" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_apple_arch</span><span class="p">(</span><span class="n">arch</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1632,7 +1643,7 @@ depend on the root of the working copy that has been checked out.</p>
 </dl>
 </div>
 <div class="section" id="tools-apple-sdk-name">
-<span id="id45"></span><h2>tools.apple_sdk_name()<a class="headerlink" href="#tools-apple-sdk-name" title="Permalink to this headline">¶</a></h2>
+<span id="id46"></span><h2>tools.apple_sdk_name()<a class="headerlink" href="#tools-apple-sdk-name" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">apple_sdk_name</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1646,7 +1657,7 @@ depend on the root of the working copy that has been checked out.</p>
 </dl>
 </div>
 <div class="section" id="tools-apple-deployment-target-env">
-<span id="id46"></span><h2>tools.apple_deployment_target_env()<a class="headerlink" href="#tools-apple-deployment-target-env" title="Permalink to this headline">¶</a></h2>
+<span id="id47"></span><h2>tools.apple_deployment_target_env()<a class="headerlink" href="#tools-apple-deployment-target-env" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">apple_deployment_target_env</span><span class="p">(</span><span class="n">os_</span><span class="p">,</span> <span class="n">os_version</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1662,7 +1673,7 @@ depend on the root of the working copy that has been checked out.</p>
 </dl>
 </div>
 <div class="section" id="tools-apple-deployment-target-flag">
-<span id="id47"></span><h2>tools.apple_deployment_target_flag()<a class="headerlink" href="#tools-apple-deployment-target-flag" title="Permalink to this headline">¶</a></h2>
+<span id="id48"></span><h2>tools.apple_deployment_target_flag()<a class="headerlink" href="#tools-apple-deployment-target-flag" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">apple_deployment_target_flag</span><span class="p">(</span><span class="n">os_</span><span class="p">,</span> <span class="n">os_version</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1677,7 +1688,7 @@ depend on the root of the working copy that has been checked out.</p>
 </dl>
 </div>
 <div class="section" id="tools-xcrun">
-<span id="id48"></span><h2>tools.XCRun()<a class="headerlink" href="#tools-xcrun" title="Permalink to this headline">¶</a></h2>
+<span id="id49"></span><h2>tools.XCRun()<a class="headerlink" href="#tools-xcrun" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">XCRun</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">settings</span><span class="p">,</span> <span class="n">sdk</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -1701,7 +1712,7 @@ depend on the root of the working copy that has been checked out.</p>
 </dl>
 </div>
 <div class="section" id="tools-latest-vs-version-installed">
-<span id="id49"></span><h2>tools.latest_vs_version_installed()<a class="headerlink" href="#tools-latest-vs-version-installed" title="Permalink to this headline">¶</a></h2>
+<span id="id50"></span><h2>tools.latest_vs_version_installed()<a class="headerlink" href="#tools-latest-vs-version-installed" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">latest_vs_version_installed</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1709,7 +1720,7 @@ depend on the root of the working copy that has been checked out.</p>
 it returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </div>
 <div class="section" id="tools-apple-dot-clean">
-<span id="id50"></span><h2>tools.apple_dot_clean()<a class="headerlink" href="#tools-apple-dot-clean" title="Permalink to this headline">¶</a></h2>
+<span id="id51"></span><h2>tools.apple_dot_clean()<a class="headerlink" href="#tools-apple-dot-clean" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">apple_dot_clean</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1766,7 +1777,7 @@ This tool will remove only files matching the pattern if there is file without t
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.11
+      Version: 1.12
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -1774,7 +1785,11 @@ This tool will remove only files matching the pattern if there is file without t
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.11</a></dd>
+            <dd><a href="/en/latest/index.html">1.12</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.11/index.html">1.11</a></dd>
           
         
           
@@ -1824,7 +1839,7 @@ This tool will remove only files matching the pattern if there is file without t
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.11.2',
+            VERSION:'1.12.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

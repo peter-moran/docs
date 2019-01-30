@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Attributes &mdash; conan 1.11.2 documentation</title>
+  <title>Attributes &mdash; conan 1.12.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.11.2 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.12.0 documentation" href="../../index.html"/>
         <link rel="up" title="conanfile.py" href="../conanfile.html"/>
         <link rel="next" title="Methods" href="methods.html"/>
         <link rel="prev" title="conanfile.py" href="../conanfile.html"/>
@@ -155,7 +155,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l4"><a class="reference internal" href="#build-policy">build_policy</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#short-paths">short_paths</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#no-copy-source">no_copy_source</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#folders">folders</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#source-folder">source_folder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-folder">install_folder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-folder">build_folder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#package-folder">package_folder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cpp-info">cpp_info</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#deps-cpp-info">deps_cpp_info</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#env-info">env_info</a></li>
@@ -391,10 +394,14 @@ channel than the current package, which could be achieved with something like:</
 </pre></div>
 </div>
 <p>Only package recipes that are in the conan local cache (i.e. “exported”) have a user/channel assigned.
-For package recipes working in user space, there is no current user/channel. The properties <code class="docutils literal notranslate"><span class="pre">self.user</span></code>
-and <code class="docutils literal notranslate"><span class="pre">self.channel</span></code> will then look for environment variables <code class="docutils literal notranslate"><span class="pre">CONAN_USERNAME</span></code> and <code class="docutils literal notranslate"><span class="pre">CONAN_CHANNEL</span></code>
-respectively. If they are not defined, an error will be raised unless <code class="docutils literal notranslate"><span class="pre">default_user</span></code> and <code class="docutils literal notranslate"><span class="pre">default_channel</span></code>
-are declared.</p>
+For package recipes working in user space, there is no current user/channel by default. They can be
+defined at <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">install</span></code> time with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install &lt;path to conanfile.py&gt; user/channel
+</pre></div>
+</div>
+<p>If they are not defined via command line, the properties <code class="docutils literal notranslate"><span class="pre">self.user</span></code> and <code class="docutils literal notranslate"><span class="pre">self.channel</span></code> will then look
+for environment variables <code class="docutils literal notranslate"><span class="pre">CONAN_USERNAME</span></code> and <code class="docutils literal notranslate"><span class="pre">CONAN_CHANNEL</span></code> respectively. If they are not defined,
+an error will be raised unless <code class="docutils literal notranslate"><span class="pre">default_user</span></code> and <code class="docutils literal notranslate"><span class="pre">default_channel</span></code> are declared in the recipe.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last">FAQ: <a class="reference internal" href="../../faq/using.html#faq-recommendation-user-channel"><span class="std std-ref">Is there any recommendation regarding which &lt;user&gt; or &lt;channel&gt; to use in a reference?</span></a></p>
@@ -699,12 +706,11 @@ requires it. Otherwise Zlib will not be a dependency of your package.</p>
 <span id="version-ranges-reference"></span><h3>version ranges<a class="headerlink" href="#version-ranges" title="Permalink to this headline">¶</a></h3>
 <p>The syntax is using brackets:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HelloConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
-    <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;Pkg/[&gt;1.0,&lt;1.8]@user/stable&quot;</span>
+    <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;Pkg/[&gt;1.0 &lt;1.8]@user/stable&quot;</span>
 </pre></div>
 </div>
-<p>Expressions are those defined and implemented by [python node-semver](<a class="reference external" href="https://pypi.org/project/node-semver/">https://pypi.org/project/node-semver/</a>),
-but using a comma instead of spaces. Accepted expressions would be:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="mf">1.1</span><span class="p">,</span><span class="o">&lt;</span><span class="mf">2.1</span>    <span class="c1"># In such range</span>
+<p>Expressions are those defined and implemented by [python node-semver](<a class="reference external" href="https://pypi.org/project/node-semver/">https://pypi.org/project/node-semver/</a>). Accepted expressions would be:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="mf">1.1</span> <span class="o">&lt;</span><span class="mf">2.1</span>    <span class="c1"># In such range</span>
 <span class="mf">2.8</span>          <span class="c1"># equivalent to =2.8</span>
 <span class="o">~=</span><span class="mf">3.0</span>        <span class="c1"># compatible, according to semver</span>
 <span class="o">&gt;</span><span class="mf">1.1</span> <span class="o">||</span> <span class="mf">0.8</span>  <span class="c1"># conditions can be OR&#39;ed</span>
@@ -861,19 +867,35 @@ This is mostly an optimization for packages with large source codebases, to avoi
 <p>To be able to use it, the package recipe can access the <code class="docutils literal notranslate"><span class="pre">self.source_folder</span></code> attribute, which will point to the <code class="docutils literal notranslate"><span class="pre">build</span></code> folder when <code class="docutils literal notranslate"><span class="pre">no_copy_source=False</span></code> or not defined, and will point to the <code class="docutils literal notranslate"><span class="pre">source</span></code> folder when <code class="docutils literal notranslate"><span class="pre">no_copy_source=True</span></code></p>
 <p>When this attribute is set to True, the <code class="docutils literal notranslate"><span class="pre">package()</span></code> method will be called twice, one copying from the <code class="docutils literal notranslate"><span class="pre">source</span></code> folder and the other copying from the <code class="docutils literal notranslate"><span class="pre">build</span></code> folder.</p>
 </div>
-<div class="section" id="folders">
-<span id="folders-attributes-reference"></span><h2>folders<a class="headerlink" href="#folders" title="Permalink to this headline">¶</a></h2>
-<p>In the package recipe methods, some attributes pointing to the relevant folders can be defined. Not all of them will be defined always, only in those relevant methods that might use them.</p>
-<ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">self.source_folder</span></code>: the folder in which the source code to be compiled lives. When a package is built in the conan local cache, by default it is the <code class="docutils literal notranslate"><span class="pre">build</span></code> folder,
-as the source code is copied from the <code class="docutils literal notranslate"><span class="pre">source</span></code> folder to the <code class="docutils literal notranslate"><span class="pre">build</span></code> folder,
-to ensure isolation and avoiding modifications of shared common source code among builds for different configurations.
-Only when <code class="docutils literal notranslate"><span class="pre">no_copy_source=True</span></code> this folder will actually point to the package <code class="docutils literal notranslate"><span class="pre">source</span></code> folder in the local cache.</li>
-<li><code class="docutils literal notranslate"><span class="pre">self.build_folder</span></code>: the folder in which the build is being done</li>
-<li><code class="docutils literal notranslate"><span class="pre">self.install_folder</span></code>: the folder in which the install has output the generator files, by default, and always in the local cache, is the same <code class="docutils literal notranslate"><span class="pre">self.build_folder</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">self.package_folder</span></code>: the folder to copy the final artifacts for the binary package</li>
-</ul>
-<p>When executing local conan commands (for a package not in the local cache, but in user folder), those fields would be pointing to the corresponding local user folder.</p>
+<div class="section" id="source-folder">
+<span id="attribute-source-folder"></span><span id="folders-attributes-reference"></span><h2>source_folder<a class="headerlink" href="#source-folder" title="Permalink to this headline">¶</a></h2>
+<p>The folder in which the source code lives.</p>
+<p>When a package is built in the Conan local cache its value is the same as the <code class="docutils literal notranslate"><span class="pre">build</span></code> folder by default. This is due to the fact that the
+source code is copied from the <code class="docutils literal notranslate"><span class="pre">source</span></code> folder to the <code class="docutils literal notranslate"><span class="pre">build</span></code> folder to ensure isolation and avoiding modifications of shared common
+source code among builds for different configurations. Only when <code class="docutils literal notranslate"><span class="pre">no_copy_source=True</span></code> this folder will actually point to the package
+<code class="docutils literal notranslate"><span class="pre">source</span></code> folder in the local cache.</p>
+<p>When executing Conan commands in the <a class="reference internal" href="../../developing_packages/package_dev_flow.html#package-dev-flow"><span class="std std-ref">Package development flow</span></a> like <strong class="command">conan source</strong>, this attribute will be pointing to the folder
+specified in the command line.</p>
+</div>
+<div class="section" id="install-folder">
+<span id="attribute-install-folder"></span><h2>install_folder<a class="headerlink" href="#install-folder" title="Permalink to this headline">¶</a></h2>
+<p>The folder in which the installation of packages outputs the generator files with the information of dependencies.
+By default in the the local cache its value is the same as <code class="docutils literal notranslate"><span class="pre">self.build_folder</span></code> one.</p>
+<p>When executing Conan commands in the <a class="reference internal" href="../../developing_packages/package_dev_flow.html#package-dev-flow"><span class="std std-ref">Package development flow</span></a> like <strong class="command">conan install</strong> or <strong class="command">conan build</strong>, this attribute will
+be pointing to the folder specified in the command line.</p>
+</div>
+<div class="section" id="build-folder">
+<span id="attribute-build-folder"></span><h2>build_folder<a class="headerlink" href="#build-folder" title="Permalink to this headline">¶</a></h2>
+<p>The folder used to build the source code. In the local cache a build folder is created with the name of the package ID that will be built.</p>
+<p>When executing Conan commands in the <a class="reference internal" href="../../developing_packages/package_dev_flow.html#package-dev-flow"><span class="std std-ref">Package development flow</span></a> like <strong class="command">conan build</strong>, this attribute will be pointing to the folder
+specified in the command line.</p>
+</div>
+<div class="section" id="package-folder">
+<span id="attribute-package-folder"></span><h2>package_folder<a class="headerlink" href="#package-folder" title="Permalink to this headline">¶</a></h2>
+<p>The folder to copy the final artifacts for the binary package. In the local cache a package folder is created for every different package
+ID.</p>
+<p>When executing Conan commands in the <a class="reference internal" href="../../developing_packages/package_dev_flow.html#package-dev-flow"><span class="std std-ref">Package development flow</span></a> like <strong class="command">conan package</strong>, this attribute will be pointing to the folder
+specified in the command line.</p>
 </div>
 <div class="section" id="cpp-info">
 <span id="cpp-info-attributes-reference"></span><h2>cpp_info<a class="headerlink" href="#cpp-info" title="Permalink to this headline">¶</a></h2>
@@ -1152,8 +1174,9 @@ to <a class="reference internal" href="../../devtools/running_packages.html#repa
 </div>
 <ul class="simple">
 <li><strong>type</strong> (Required): Currently only <code class="docutils literal notranslate"><span class="pre">git</span></code> and <code class="docutils literal notranslate"><span class="pre">svn</span></code> are supported. Others can be added eventually.</li>
-<li><strong>url</strong> (Required): URL of the remote or <code class="docutils literal notranslate"><span class="pre">auto</span></code> to capture the remote from the local working copy.
-When type is <code class="docutils literal notranslate"><span class="pre">svn</span></code> it can contain the <a class="reference external" href="http://svnbook.red-bean.com/en/1.7/svn.advanced.pegrevs.html">peg_revision</a>.</li>
+<li><strong>url</strong> (Required): URL of the remote or <code class="docutils literal notranslate"><span class="pre">auto</span></code> to capture the remote from the local working
+copy (credentials will be removed from it). When type is <code class="docutils literal notranslate"><span class="pre">svn</span></code> it can contain
+the <a class="reference external" href="http://svnbook.red-bean.com/en/1.7/svn.advanced.pegrevs.html">peg_revision</a>.</li>
 <li><strong>revision</strong> (Required): id of the revision or <code class="docutils literal notranslate"><span class="pre">auto</span></code> to capture the current working copy one.
 When type is <code class="docutils literal notranslate"><span class="pre">git</span></code>, it can also be the branch name or a tag.</li>
 <li><strong>subfolder</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">.</span></code>): A subfolder where the repository will be cloned.</li>
@@ -1224,7 +1247,7 @@ from a <a class="reference internal" href="../../extending/python_requires.html#
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.11
+      Version: 1.12
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -1232,7 +1255,11 @@ from a <a class="reference internal" href="../../extending/python_requires.html#
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.11</a></dd>
+            <dd><a href="/en/latest/index.html">1.12</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.11/index.html">1.11</a></dd>
           
         
           
@@ -1282,7 +1309,7 @@ from a <a class="reference internal" href="../../extending/python_requires.html#
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.11.2',
+            VERSION:'1.12.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

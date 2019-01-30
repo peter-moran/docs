@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Profiles &mdash; conan 1.11.2 documentation</title>
+  <title>Profiles &mdash; conan 1.12.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.11.2 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.12.0 documentation" href="../index.html"/>
         <link rel="up" title="Reference" href="../reference.html"/>
         <link rel="next" title="Build helpers" href="build_helpers.html"/>
         <link rel="prev" title="make" href="generators/make.html"/>
@@ -135,6 +135,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="generators.html">Generators</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Profiles</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#package-settings-and-env-vars">Package settings and env vars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#profile-composition">Profile composition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#profile-includes">Profile includes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#variable-declaration">Variable declaration</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
@@ -318,13 +319,32 @@ PATH=[/some/path/to/my/tool]
 </div>
 </div>
 </div>
+<div class="section" id="profile-composition">
+<h2>Profile composition<a class="headerlink" href="#profile-composition" title="Permalink to this headline">¶</a></h2>
+<p>You can specify multiple profiles in the command line. The applied configuration will be the composition
+of all the profiles applied in the order they are specified.</p>
+<p>If, for example, you want to apply a <a class="reference internal" href="../devtools/build_requires.html#build-requires"><span class="std std-ref">build require</span></a>, like a <code class="docutils literal notranslate"><span class="pre">cmake</span></code> installer to your dependency tree,
+it won’t be very practical adding the <cite>cmake</cite> installer reference, e.g  <code class="docutils literal notranslate"><span class="pre">cmake_installer/3.9.0&#64;conan/stable</span></code> to all your profiles where you could
+need to inject <code class="docutils literal notranslate"><span class="pre">cmake</span></code> as a build require.</p>
+<p>You can specify both profiles instead:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><em>.conan/profiles/cmake_39</em></span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> [build_requires]
+ cmake_installer/3.9.0@conan/stable
+</pre></div>
+</div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . --profile clang --profile cmake_39
+</pre></div>
+</div>
+</div>
 <div class="section" id="profile-includes">
 <h2>Profile includes<a class="headerlink" href="#profile-includes" title="Permalink to this headline">¶</a></h2>
 <p>You can include other profiles using the <code class="docutils literal notranslate"><span class="pre">include()</span></code> statement. The path can be relative to the current profile, absolute, or a profile
 name from the default profile location in the local cache.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">include()</span></code> statement has to be at the top of the profile file:</p>
-<div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text"><em>gcc_49</em></span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text"><em>gcc_49</em></span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span> [settings]
  compiler=gcc
  compiler.version=4.9
@@ -332,8 +352,8 @@ name from the default profile location in the local cache.</p>
 </pre></div>
 </div>
 </div>
-<div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text"><em>myprofile</em></span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text"><em>myprofile</em></span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span> include(gcc_49)
 
  [settings]
@@ -352,8 +372,8 @@ name from the default profile location in the local cache.</p>
 <h2>Variable declaration<a class="headerlink" href="#variable-declaration" title="Permalink to this headline">¶</a></h2>
 <p>In a profile you can declare variables that will be replaced automatically by Conan before the profile is applied. The variables have to be
 declared at the top of the file, after the <code class="docutils literal notranslate"><span class="pre">include()</span></code> statements.</p>
-<div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text"><em>myprofile</em></span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text"><em>myprofile</em></span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>include(gcc_49)
 CLANG=/usr/bin/clang
 
@@ -370,8 +390,8 @@ zlib:CXX=$CLANG/clang++
 </div>
 <p>The variables will be inherited too, so you can declare variables in a profile and then include the profile in a different one, all the
 variables will be available:</p>
-<div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text"><em>gcc_49</em></span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text"><em>gcc_49</em></span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>GCC_PATH=/my/custom/toolchain/path/
 
 [settings]
@@ -381,8 +401,8 @@ compiler.libcxx=libstdc++11
 </pre></div>
 </div>
 </div>
-<div class="literal-block-wrapper docutils container" id="id7">
-<div class="code-block-caption"><span class="caption-text"><em>myprofile</em></span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text"><em>myprofile</em></span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>include(gcc_49)
 
 [settings]
@@ -482,7 +502,7 @@ $ conan install -s <span class="nv">compiler</span><span class="o">=</span>clang
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.11
+      Version: 1.12
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -490,7 +510,11 @@ $ conan install -s <span class="nv">compiler</span><span class="o">=</span>clang
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.11</a></dd>
+            <dd><a href="/en/latest/index.html">1.12</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.11/index.html">1.11</a></dd>
           
         
           
@@ -540,7 +564,7 @@ $ conan install -s <span class="nv">compiler</span><span class="o">=</span>clang
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.11.2',
+            VERSION:'1.12.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
