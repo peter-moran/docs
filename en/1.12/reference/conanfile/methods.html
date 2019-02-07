@@ -606,7 +606,7 @@ with the library being packaged. There is an especial kind of exception that can
 the <code class="docutils literal notranslate"><span class="pre">configure()</span></code> method to state this situation: <code class="docutils literal notranslate"><span class="pre">conans.errors.ConanInvalidConfiguration</span></code>. Here
 it is an example of a recipe for a library that doesn’t support Windows operating system:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">os</span> <span class="o">==</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">os</span> <span class="o">!=</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">ConanInvalidConfiguration</span><span class="p">(</span><span class="s2">&quot;Library MyLib is only supported for Windows&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
