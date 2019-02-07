@@ -1724,9 +1724,11 @@ it returns <code class="docutils literal notranslate"><span class="pre">None</sp
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">apple_dot_clean</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Remove recursively all <code class="docutils literal notranslate"><span class="pre">._</span></code> files inside <code class="docutils literal notranslate"><span class="pre">folder</span></code> containing metadata information for Apple
-operating systems, these files can appear when unzipping a file that has been created in Macos.
-This tool will remove only files matching the pattern if there is file without the prefix too.</p>
+<p>Remove recursively all <code class="docutils literal notranslate"><span class="pre">._</span></code> files inside <code class="docutils literal notranslate"><span class="pre">folder</span></code>, these files are created by Apple OS when the
+underlying filesystem cannot store metadata associated to files (they could appear when unzipping
+a file that has been created in Macos). This tool will remove only the <code class="docutils literal notranslate"><span class="pre">._</span></code> files that are
+accompanied with a file without that prefix (it will remove <code class="docutils literal notranslate"><span class="pre">._file.txt</span></code> only
+if <code class="docutils literal notranslate"><span class="pre">file.txt</span></code> exists).</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd><ul class="first last simple">
