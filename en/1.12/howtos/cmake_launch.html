@@ -252,9 +252,8 @@ packages themselves.</p>
 
 <span class="nb">include</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="o">}</span><span class="s">/conan.cmake</span><span class="p">)</span>
 
-<span class="nb">conan_cmake_run</span><span class="p">(</span><span class="s">REQUIRES</span> <span class="s">Hello/0.1@memsharded/testing</span>
-                <span class="s">BASIC_SETUP</span>
-                <span class="s">BUILD</span> <span class="s">missing</span><span class="p">)</span>
+<span class="nb">conan_cmake_run</span><span class="p">(</span><span class="s">REQUIRES</span> <span class="s">Catch2/2.6.0@catchorg/stable</span>
+                <span class="s">BASIC_SETUP</span><span class="p">)</span>
 
 <span class="nb">add_executable</span><span class="p">(</span><span class="s">main</span> <span class="s">main.cpp</span><span class="p">)</span>
 <span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">main</span> <span class="o">${</span><span class="nv">CONAN_LIBS</span><span class="o">}</span><span class="p">)</span>
@@ -263,9 +262,8 @@ packages themselves.</p>
 </div>
 <p>If you want to use targets, you could do:</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="s">conan.cmake</span><span class="p">)</span>
-<span class="nb">conan_cmake_run</span><span class="p">(</span><span class="s">REQUIRES</span> <span class="s">Hello/0.1@memsharded/testing</span>
-                <span class="s">BASIC_SETUP</span> <span class="s">CMAKE_TARGETS</span>
-                <span class="s">BUILD</span> <span class="s">missing</span><span class="p">)</span>
+<span class="nb">conan_cmake_run</span><span class="p">(</span><span class="s">REQUIRES</span> <span class="s">Catch2/2.6.0@catchorg/stable</span>
+                <span class="s">BASIC_SETUP</span> <span class="s">CMAKE_TARGETS</span><span class="p">)</span>
 
 <span class="nb">add_executable</span><span class="p">(</span><span class="s">main</span> <span class="s">main.cpp</span><span class="p">)</span>
 <span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">main</span> <span class="s">CONAN_PKG::Hello</span><span class="p">)</span>
