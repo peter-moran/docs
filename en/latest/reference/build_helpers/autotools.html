@@ -288,8 +288,7 @@ an automatic value or add new values:</p>
 <p>You can use it also with <code class="docutils literal notranslate"><span class="pre">MSYS2</span></code>/<code class="docutils literal notranslate"><span class="pre">MinGW</span></code> subsystems installed by setting the <cite>win_bash</cite> parameter
 in the constructor. It will run the the <code class="docutils literal notranslate"><span class="pre">configure</span></code> and <code class="docutils literal notranslate"><span class="pre">make</span></code> commands inside a <code class="docutils literal notranslate"><span class="pre">bash</span></code> that
 has to be in the path or declared in <code class="docutils literal notranslate"><span class="pre">CONAN_BASH_PATH</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">AutoToolsBuildEnvironment</span>
-<span class="kn">import</span> <span class="nn">platform</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">AutoToolsBuildEnvironment</span><span class="p">,</span> <span class="n">tools</span>
 
 <span class="k">class</span> <span class="nc">ExampleConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span>
@@ -299,10 +298,9 @@ has to be in the path or declared in <code class="docutils literal notranslate">
      <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.dylib*&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;bin&quot;</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;lib&quot;</span><span class="p">)</span>
 
    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="hll">      <span class="n">in_win</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Windows&quot;</span>
-</span>      <span class="n">env_build</span> <span class="o">=</span> <span class="n">AutoToolsBuildEnvironment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">win_bash</span><span class="o">=</span><span class="n">in_win</span><span class="p">)</span>
-      <span class="n">env_build</span><span class="o">.</span><span class="n">configure</span><span class="p">()</span>
-      <span class="n">env_build</span><span class="o">.</span><span class="n">make</span><span class="p">()</span>
+      <span class="n">env_build</span> <span class="o">=</span> <span class="n">AutoToolsBuildEnvironment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">win_bash</span><span class="o">=</span><span class="n">tools</span><span class="o">.</span><span class="n">os_info</span><span class="o">.</span><span class="n">is_windows</span><span class="p">)</span>
+<span class="hll">      <span class="n">env_build</span><span class="o">.</span><span class="n">configure</span><span class="p">()</span>
+</span>      <span class="n">env_build</span><span class="o">.</span><span class="n">make</span><span class="p">()</span>
 </pre></div>
 </div>
 <div class="section" id="constructor">
