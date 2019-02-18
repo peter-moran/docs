@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conanfile.txt &mdash; conan 1.12.2 documentation</title>
+  <title>conanfile.txt &mdash; conan 1.12.3 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.12.2 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.12.3 documentation" href="../index.html"/>
         <link rel="up" title="Reference" href="../reference.html"/>
         <link rel="next" title="conanfile.py" href="conanfile.html"/>
         <link rel="prev" title="Return Codes" href="commands/return_codes.html"/>
@@ -313,6 +313,11 @@ lib, *.dylib* -&gt; ./bin # Copies all dylib files from packages lib folder to m
 <p>The first item is the subfolder of the packages (could be the root “.” one), the second is the pattern to match. Both relate to the local
 cache. The third (after the arrow) item, is the destination folder, living in user space, not in the local cache.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">[imports]</span></code> section also support the same arguments as the equivalent <code class="docutils literal notranslate"><span class="pre">imports()</span></code> method in <em>conanfile.py</em>, separated with an <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If your previous folders use an <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> in the path name, use a trailing (even if empty) <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> so the parser correctly gets the folders paths,
+e.g: <code class="docutils literal notranslate"><span class="pre">lib,</span> <span class="pre">*</span> <span class="pre">-&gt;</span> <span class="pre">/home/jenkins/workspace/conan_test&#64;2/g/install/lib</span> <span class="pre">&#64;</span></code></p>
+</div>
 <ul class="simple">
 <li><strong>root_package</strong> (Optional, Defaulted to <em>all packages in deps</em>): fnmatch pattern of the package name (“OpenCV”, “Boost”) from which files
 will be copied.</li>
@@ -440,7 +445,7 @@ Comments are ignored by the syntax; they are not tokens.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.12.2',
+            VERSION:'1.12.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
