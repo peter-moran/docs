@@ -257,7 +257,7 @@ This helper sets <code class="docutils literal notranslate"><span class="pre">LI
 </div>
 <p>It also works using the <a class="reference internal" href="../tools.html#tools-environment-append"><span class="std std-ref">environment_append</span></a> context manager applied to your <strong>configure and make</strong> commands,
 calling <cite>configure</cite> and <cite>make</cite> manually:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">AutoToolsBuildEnvironment</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">AutoToolsBuildEnvironment</span><span class="p">,</span> <span class="n">tools</span>
 
 <span class="k">class</span> <span class="nc">ExampleConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
     <span class="o">...</span>
