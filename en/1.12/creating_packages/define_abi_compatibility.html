@@ -549,7 +549,7 @@ Every version change prior to 1.0.0 changes the package ID, but only major chang
 </li>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">minor_mode()</span></code>: Any change in major or minor (not patch nor build) version of the required dependency changes the package ID.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="p">[</span><span class="s2">&quot;MyOtherLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">patch_mode</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="p">[</span><span class="s2">&quot;MyOtherLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">minor_mode</span><span class="p">()</span>
 </pre></div>
 </div>
 </li>
