@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tools &mdash; conan 1.12.3 documentation</title>
+  <title>Tools &mdash; conan 1.13.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.12.3 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.13.0 documentation" href="../index.html"/>
         <link rel="up" title="Reference" href="../reference.html"/>
         <link rel="next" title="Configuration files" href="config_files.html"/>
         <link rel="prev" title="RunEnvironment" href="build_helpers/run_environment.html"/>
@@ -1001,7 +1001,7 @@ downloads and unzip progress.</p>
 </div>
 <div class="section" id="tools-run-in-windows-bash">
 <span id="id23"></span><h2>tools.run_in_windows_bash()<a class="headerlink" href="#tools-run-in-windows-bash" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_in_windows_bash</span><span class="p">(</span><span class="n">conanfile</span><span class="p">,</span> <span class="n">bashcmd</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">subsystem</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">msys_mingw</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_in_windows_bash</span><span class="p">(</span><span class="n">conanfile</span><span class="p">,</span> <span class="n">bashcmd</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">subsystem</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">msys_mingw</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">with_login</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Runs a UNIX command inside a bash shell. It requires to have “bash” in the path.
@@ -1020,12 +1020,14 @@ variable to change the default bash location.</p>
 <li><strong>conanfile</strong> (Required): Current <code class="docutils literal notranslate"><span class="pre">ConanFile</span></code> object.</li>
 <li><strong>bashcmd</strong> (Required): String with the command to be run.</li>
 <li><strong>cwd</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Path to directory where to apply the command from.</li>
-<li><strong>subsystem</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code> will autodetect the subsystem). Used to escape the command according to the specified
+<li><strong>subsystem</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code> will autodetect the subsystem): Used to escape the command according to the specified
 subsystem.</li>
-<li><strong>msys_mingw</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>) If the specified subsystem is MSYS2, will start it in MinGW mode (native windows
+<li><strong>msys_mingw</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): If the specified subsystem is MSYS2, will start it in MinGW mode (native windows
 development).</li>
-<li><strong>env</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>) You can pass a dictionary with environment variable to be applied <strong>at first place</strong> so they
+<li><strong>env</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): You can pass a dictionary with environment variable to be applied <strong>at first place</strong> so they
 will have more priority than others.</li>
+<li><strong>with_login</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): Pass the <code class="docutils literal notranslate"><span class="pre">--login</span></code> flag to <strong class="command">bash</strong> command. This might come handy when you
+don’t want to create a fresh user session for running the command.</li>
 </ul>
 </dd>
 </dl>
@@ -1779,7 +1781,7 @@ if <code class="docutils literal notranslate"><span class="pre">file.txt</span><
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.12
+      Version: 1.13
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -1787,7 +1789,11 @@ if <code class="docutils literal notranslate"><span class="pre">file.txt</span><
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.12</a></dd>
+            <dd><a href="/en/latest/index.html">1.13</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.12/index.html">1.12</a></dd>
           
         
           
@@ -1841,7 +1847,7 @@ if <code class="docutils literal notranslate"><span class="pre">file.txt</span><
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.12.3',
+            VERSION:'1.13.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

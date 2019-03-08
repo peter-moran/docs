@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Manage RPATHs &mdash; conan 1.12.3 documentation</title>
+  <title>Manage RPATHs &mdash; conan 1.13.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.12.3 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.13.0 documentation" href="../../index.html"/>
         <link rel="up" title="How to manage shared libraries" href="../manage_shared_libraries.html"/>
         <link rel="next" title="How to reuse cmake install for package() method" href="../cmake_install.html"/>
         <link rel="prev" title="Manage Shared Libraries with Environment Variables" href="env_vars.html"/>
@@ -339,19 +339,22 @@ generated files in your recipe to not use $rpath:</p>
 <div class="section" id="different-approaches">
 <h2>Different approaches<a class="headerlink" href="#different-approaches" title="Permalink to this headline">¶</a></h2>
 <p>You can adjust the <strong>rpaths</strong> in the way that adapts better to your needs.</p>
-<p>If you are using <code class="docutils literal notranslate"><span class="pre">CMake</span></code> take a look to the <a class="reference external" href="https://cmake.org/Wiki/CMake_RPATH_handling">CMake RPATH handling</a> guide.</p>
+<p>If you are using <code class="docutils literal notranslate"><span class="pre">CMake</span></code> take a look to the <a class="reference external" href="https://gitlab.kitware.com/cmake/community/wikis/doc/cmake/RPATH-handling">CMake RPATH handling</a> guide.</p>
 <p>Remember to pass the <code class="docutils literal notranslate"><span class="pre">KEEP_RPATHS</span></code> variable to the <code class="docutils literal notranslate"><span class="pre">conan_basic_setup</span></code>:</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="o">}</span><span class="s">/conanbuildinfo.cmake</span><span class="p">)</span>
 <span class="nb">conan_basic_setup</span><span class="p">(</span><span class="s">KEEP_RPATHS</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Then, you could, for example, use the <code class="docutils literal notranslate"><span class="pre">&#64;executable_path</span></code> in OSX and <code class="docutils literal notranslate"><span class="pre">$ORIGIN</span></code> in Linux  to adjust
-a relative path from the executable:</p>
+<p>Then, you could, for example, use the <code class="docutils literal notranslate"><span class="pre">&#64;executable_path</span></code> in OSX and <code class="docutils literal notranslate"><span class="pre">$ORIGIN</span></code> in Linux  to adjust a relative path from the executable.
+Also, enabling <a class="reference external" href="https://cmake.org/cmake/help/v3.0/variable/CMAKE_BUILD_WITH_INSTALL_RPATH.html">CMAKE_BUILD_WITH_INSTALL_RPATH</a> will build the application with the RPATH value of <code class="docutils literal notranslate"><span class="pre">CMAKE_INSTALL_RPATH</span></code> and avoid
+the need to be relinked when installed.</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">if</span> <span class="p">(</span><span class="s">APPLE</span><span class="p">)</span>
     <span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_INSTALL_RPATH</span> <span class="s2">&quot;@executable_path/../lib&quot;</span><span class="p">)</span>
 <span class="nb">else</span><span class="p">()</span>
     <span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_INSTALL_RPATH</span> <span class="s2">&quot;$ORIGIN/../lib&quot;</span><span class="p">)</span>
 <span class="nb">endif</span><span class="p">()</span>
+
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_BUILD_WITH_INSTALL_RPATH</span> <span class="s">ON</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>You can use this imports statements in the consumer project:</p>
@@ -419,7 +422,7 @@ correctly.</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.12
+      Version: 1.13
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -427,7 +430,11 @@ correctly.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.12</a></dd>
+            <dd><a href="/en/latest/index.html">1.13</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.12/index.html">1.12</a></dd>
           
         
           
@@ -481,7 +488,7 @@ correctly.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.12.3',
+            VERSION:'1.13.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

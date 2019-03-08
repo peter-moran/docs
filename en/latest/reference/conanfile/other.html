@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Python requires &mdash; conan 1.12.3 documentation</title>
+  <title>Python requires &mdash; conan 1.13.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.12.3 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.13.0 documentation" href="../../index.html"/>
         <link rel="up" title="conanfile.py" href="../conanfile.html"/>
         <link rel="next" title="Generators" href="../generators.html"/>
         <link rel="prev" title="Methods" href="methods.html"/>
@@ -262,7 +262,7 @@ functionality, doing something like:</p>
 <div class="section" id="running-commands">
 <span id="id1"></span><h2>Running commands<a class="headerlink" href="#running-commands" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">win_bash</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">subsystem</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">msys_mingw</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-    <span class="n">ignore_errors</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">run_environment</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">ignore_errors</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">run_environment</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">with_login</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">self.run()</span></code> is a helper to run system commands and throw exceptions when errors occur,
@@ -271,29 +271,37 @@ so that command errors are do not pass unnoticed. It is just a wrapper for <code
 <code class="docutils literal notranslate"><span class="pre">print_run_commands</span></code> <em>conan.conf</em> configuration variable, under <code class="docutils literal notranslate"><span class="pre">[general]</span></code>) then all the
 invocations of <code class="docutils literal notranslate"><span class="pre">self.run()</span></code> will print to output the command to be executed.</p>
 <p>Optional parameters:</p>
-<ul class="simple">
+<ul>
 <li><dl class="first docutils">
 <dt><strong>output</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>) When True it will write in stdout.</dt>
-<dd>You can pass any stream that accepts a <code class="docutils literal notranslate"><span class="pre">write</span></code> method like a <code class="docutils literal notranslate"><span class="pre">six.StringIO()</span></code>:</dd>
+<dd><p class="first last">You can pass any stream that accepts a <code class="docutils literal notranslate"><span class="pre">write</span></code> method like a <code class="docutils literal notranslate"><span class="pre">six.StringIO()</span></code>:</p>
+</dd>
 </dl>
-</li>
-</ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">six</span> <span class="kn">import</span> <span class="n">StringIO</span>  <span class="c1"># Python 2 and 3 compatible</span>
 <span class="n">mybuf</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;mycommand&quot;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">mybuf</span><span class="p">)</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">mybuf</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><strong>cwd</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">.</span></code> current directory): Current directory to run the command.</li>
-<li><strong>win_bash</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">False</span></code>): When True, it will run the configure/make commands inside a bash.</li>
-<li><strong>subsystem</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code> will autodetect the subsystem). Used to escape the command according to the specified subsystem.</li>
-<li><strong>msys_mingw</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>) If the specified subsystem is MSYS2, will start it in MinGW mode (native windows development).</li>
-<li><strong>ignore_errors</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">False</span></code>). This method raises an exception if the command fails. If <code class="docutils literal notranslate"><span class="pre">ignore_errors=True</span></code>, it
-will not raise an exception. Instead, the user can use the return code to check for errors.</li>
-<li><strong>run_environment</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">False</span></code>). Applies a <code class="docutils literal notranslate"><span class="pre">RunEnvironment</span></code>, so the environment variables PATH, LD_LIBRARY_PATH and
+</li>
+<li><p class="first"><strong>cwd</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">.</span></code> current directory): Current directory to run the command.</p>
+</li>
+<li><p class="first"><strong>win_bash</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">False</span></code>): When True, it will run the configure/make commands inside a bash.</p>
+</li>
+<li><p class="first"><strong>subsystem</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code> will autodetect the subsystem): Used to escape the command according to the specified subsystem.</p>
+</li>
+<li><p class="first"><strong>msys_mingw</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>) If the specified subsystem is MSYS2, will start it in MinGW mode (native windows development).</p>
+</li>
+<li><p class="first"><strong>ignore_errors</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">False</span></code>). This method raises an exception if the command fails. If <code class="docutils literal notranslate"><span class="pre">ignore_errors=True</span></code>, it
+will not raise an exception. Instead, the user can use the return code to check for errors.</p>
+</li>
+<li><p class="first"><strong>run_environment</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">False</span></code>). Applies a <code class="docutils literal notranslate"><span class="pre">RunEnvironment</span></code>, so the environment variables PATH, LD_LIBRARY_PATH and
 DYLIB_LIBRARY_PATH are defined in the command execution adding the values of the “lib” and “bin” folders of the dependencies.
-Allows executables to be easily run using shared libraries from its dependencies.</li>
+Allows executables to be easily run using shared libraries from its dependencies.</p>
+</li>
+<li><p class="first"><strong>with_login</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): Pass the <code class="docutils literal notranslate"><span class="pre">--login</span></code> flag to <strong class="command">bash</strong> command when using <code class="docutils literal notranslate"><span class="pre">win_bash</span></code> parameter.
+This might come handy when you don’t want to create a fresh user session for running the command.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -338,7 +346,7 @@ Allows executables to be easily run using shared libraries from its dependencies
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.12
+      Version: 1.13
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -346,7 +354,11 @@ Allows executables to be easily run using shared libraries from its dependencies
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.12</a></dd>
+            <dd><a href="/en/latest/index.html">1.13</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.12/index.html">1.12</a></dd>
           
         
           
@@ -400,7 +412,7 @@ Allows executables to be easily run using shared libraries from its dependencies
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.12.3',
+            VERSION:'1.13.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

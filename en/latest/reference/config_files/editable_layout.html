@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Editable layout files &mdash; conan 1.12.3 documentation</title>
+  <title>Editable layout files &mdash; conan 1.13.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.12.3 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.13.0 documentation" href="../../index.html"/>
         <link rel="up" title="Configuration files" href="../config_files.html"/>
         <link rel="next" title="Environment variables" href="../env_vars.html"/>
         <link rel="prev" title="artifacts.properties" href="artifacts.properties.html"/>
@@ -232,32 +232,47 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <span id="editable-layout"></span><h1>Editable layout files<a class="headerlink" href="#editable-layout-files" title="Permalink to this headline">¶</a></h1>
 <p>This file contain information consumed by <a class="reference internal" href="../../developing_packages/editable_packages.html#editable-packages"><span class="std std-ref">editable packages</span></a>. It is
 an <em>.ini</em> file listing the directories that Conan should use for the packages that are opened
-in editable mode:</p>
+in editable mode. Before parsing this file Conan runs Jinja2 template engine with the
+<code class="docutils literal notranslate"><span class="pre">settings</span></code>, <code class="docutils literal notranslate"><span class="pre">options</span></code> and <code class="docutils literal notranslate"><span class="pre">reference</span></code> objects, so you can add <em>any</em> logic to this files:</p>
 <div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># Affects to all packages but cool/version@user/dev</span>
 <span class="k">[includedirs]</span>
 <span class="na">src/include</span>
 
 <span class="c1"># using placeholders from conan settings and options</span>
 <span class="k">[libdirs]</span>
-<span class="na">build/{settings.build_type}/{settings.arch}</span>
+<span class="na">build/{{settings.build_type}}/{{settings.arch}}</span>
 
 <span class="k">[bindirs]</span>
-<span class="na">build/{settings.build_type}/{settings.arch}</span>
+<span class="na">{% if options.shared %}</span>
+<span class="na">build/{{settings.build_type}}/shared</span>
+<span class="na">{% else %}</span>
+<span class="na">build/{{settings.build_type}}/static</span>
+<span class="na">{% endif %}</span>
 
 <span class="c1"># Affects only to cool/version@user/dev</span>
 <span class="k">[cool/version@user/dev:includedirs]</span>
 <span class="na">src/core/include</span>
 <span class="na">src/cmp_a/include</span>
+
+<span class="c1"># The source_folder, build_folder are useful for workspaces</span>
+<span class="k">[source_folder]</span>
+<span class="na">src</span>
+
+<span class="k">[build_folder]</span>
+<span class="na">build/{settings.build_type}/{settings.arch}</span>
 </pre></div>
 </div>
 <p>The specific sections using a package reference will have higher priority than the general ones.</p>
 <p>This file can live in the conan cache, in the <code class="docutils literal notranslate"><span class="pre">.conan/layouts</span></code> folder, or in a user folder, like
 inside the source repo.</p>
 <p>If there exists a <code class="docutils literal notranslate"><span class="pre">.conan/layouts/default</span></code> layout file in the cache and no layout file is specified
-in the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">link</span> <span class="pre">&lt;path&gt;</span> <span class="pre">&lt;reference&gt;</span></code> command, that file will be used.</p>
+in the <strong class="command">conan editable add &lt;path&gt; &lt;reference&gt;</strong> command, that file will be used.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">[source_folder]</span></code> and <code class="docutils literal notranslate"><span class="pre">[build_folder]</span></code> are useful for workspaces. For example, when using <code class="docutils literal notranslate"><span class="pre">cmake</span></code>
+workspace-generator, it will locate the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> of each package in editable mode in the
+<code class="docutils literal notranslate"><span class="pre">[source_folder]</span></code> and it will use the <code class="docutils literal notranslate"><span class="pre">[build_folder]</span></code> as the base folder for the build temporary files.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">Check the section <a class="reference internal" href="../../developing_packages/editable_packages.html#editable-packages"><span class="std std-ref">Packages in editable mode</span></a> to read more about this file.</p>
+<p class="last">Check the section <a class="reference internal" href="../../developing_packages/editable_packages.html#editable-packages"><span class="std std-ref">Packages in editable mode</span></a> and <a class="reference internal" href="../../developing_packages/workspaces.html#workspaces"><span class="std std-ref">Workspaces</span></a> to learn more about this file.</p>
 </div>
 </div>
 
@@ -301,7 +316,7 @@ in the <code class="docutils literal notranslate"><span class="pre">conan</span>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.12
+      Version: 1.13
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -309,7 +324,11 @@ in the <code class="docutils literal notranslate"><span class="pre">conan</span>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.12</a></dd>
+            <dd><a href="/en/latest/index.html">1.13</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.12/index.html">1.12</a></dd>
           
         
           
@@ -363,7 +382,7 @@ in the <code class="docutils literal notranslate"><span class="pre">conan</span>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.12.3',
+            VERSION:'1.13.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

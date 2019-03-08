@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan search &mdash; conan 1.12.3 documentation</title>
+  <title>conan search &mdash; conan 1.13.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.12.3 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.13.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan create" href="../creator/create.html"/>
         <link rel="prev" title="conan info" href="info.html"/>
@@ -270,6 +270,8 @@ optional arguments:
                         for a reference search
   -j JSON, --json JSON  json file path where the search information will be
                         written to
+  -rev, --revisions     Get a list of revisions for a reference or a package
+                        reference.
 </pre></div>
 </div>
 <p><strong>Examples</strong></p>
@@ -312,6 +314,19 @@ $ file.html <span class="c1"># or open the file, double-click</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="../../../_images/search_binary_table.png"><img alt="../../../_images/search_binary_table.png" class="align-center" src="../../../_images/search_binary_table.png" style="width: 600px; height: 500px;" /></a>
+<p>Search the local revision for a local cache recipe:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan search lib/1.0@conan/testing --revisions
+$ Revisions <span class="k">for</span> <span class="s1">&#39;lib/1.0@conan/testing&#39;</span>:
+    a55e3b054fdbf4e2c6f10e955da69502 <span class="o">(</span><span class="m">2019</span>-03-05 <span class="m">16</span>:37:27 UTC<span class="o">)</span>
+</pre></div>
+</div>
+<p>Search the remote revisions in a server:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan search lib/1.0@conan/testing --revisions -r<span class="o">=</span>myremote
+  Revisions <span class="k">for</span> <span class="s1">&#39;lib/1.0@conan/testing&#39;</span> at remote <span class="s1">&#39;myremote&#39;</span>:
+    78fcef25a1eaeecd5facbbf08624c561 <span class="o">(</span><span class="m">2019</span>-03-05 <span class="m">16</span>:37:27 UTC<span class="o">)</span>
+    f3367e0e7d170aa12abccb175fee5f97 <span class="o">(</span><span class="m">2019</span>-03-05 <span class="m">16</span>:37:27 UTC<span class="o">)</span>
+</pre></div>
+</div>
 </div>
 
 
@@ -354,7 +369,7 @@ $ file.html <span class="c1"># or open the file, double-click</span>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.12
+      Version: 1.13
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -362,7 +377,11 @@ $ file.html <span class="c1"># or open the file, double-click</span>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.12</a></dd>
+            <dd><a href="/en/latest/index.html">1.13</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.12/index.html">1.12</a></dd>
           
         
           
@@ -416,7 +435,7 @@ $ file.html <span class="c1"># or open the file, double-click</span>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.12.3',
+            VERSION:'1.13.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan.conf &mdash; conan 1.12.3 documentation</title>
+  <title>conan.conf &mdash; conan 1.13.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.12.3 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.13.0 documentation" href="../../index.html"/>
         <link rel="up" title="Configuration files" href="../config_files.html"/>
         <link rel="next" title="profiles/default" href="default_profile.html"/>
         <link rel="prev" title="Configuration files" href="../config_files.html"/>
@@ -335,6 +335,8 @@ Set it with the bash executable path if it’s not in the PATH or you want to us
 <p>The <code class="docutils literal notranslate"><span class="pre">cache_no_locks</span></code> variable is used to disable locking mechanism of local cache.
 This is primary used for debugging purposes, and in general it’s not recommended to disable locks otherwise,
 as it may result in corrupted packages.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">default_package_id_mode</span></code> changes the way package IDs are computed. By default, if not specified
+it will be <code class="docutils literal notranslate"><span class="pre">semver_direct_mode</span></code>, but can change to any value defined in <a class="reference internal" href="../../creating_packages/define_abi_compatibility.html#package-id-mode"><span class="std std-ref">Using package_id() for Package Dependencies</span></a>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">cmake_***</span></code> variables will declare the corresponding CMake variable when you use the
 <a class="reference internal" href="../generators/cmake.html#cmake-generator"><span class="std std-ref">cmake generator</span></a> and the <a class="reference internal" href="../build_helpers/cmake.html#cmake-reference"><span class="std std-ref">CMake build tool</span></a>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">msbuild_verbosity</span></code> variable is used only by <a class="reference internal" href="../build_helpers/visual_studio.html#msbuild"><span class="std std-ref">MSBuild</span></a> and <a class="reference internal" href="../build_helpers/cmake.html#cmake-reference"><span class="std std-ref">CMake</span></a> build helpers.
@@ -474,7 +476,7 @@ $ <span class="nb">set</span> <span class="nv">HTTPS_PROXY</span><span class="o"
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.12
+      Version: 1.13
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -482,7 +484,11 @@ $ <span class="nb">set</span> <span class="nv">HTTPS_PROXY</span><span class="o"
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.12</a></dd>
+            <dd><a href="/en/latest/index.html">1.13</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.12/index.html">1.12</a></dd>
           
         
           
@@ -536,7 +542,7 @@ $ <span class="nb">set</span> <span class="nv">HTTPS_PROXY</span><span class="o"
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.12.3',
+            VERSION:'1.13.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

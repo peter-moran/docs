@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Attributes &mdash; conan 1.12.3 documentation</title>
+  <title>Attributes &mdash; conan 1.13.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.12.3 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.13.0 documentation" href="../../index.html"/>
         <link rel="up" title="conanfile.py" href="../conanfile.html"/>
         <link rel="next" title="Methods" href="methods.html"/>
         <link rel="prev" title="conanfile.py" href="../conanfile.html"/>
@@ -482,6 +482,27 @@ independent in VS, we can just remove that setting field:</p>
     <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">compiler</span><span class="p">[</span><span class="s2">&quot;Visual Studio&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;runtime&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>It is possible to check the settings to implement conditional logic, with attribute syntax:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">os</span> <span class="o">==</span> <span class="s2">&quot;Windows&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">compiler</span><span class="o">.</span><span class="n">version</span> <span class="o">==</span> <span class="s2">&quot;15&quot;</span><span class="p">:</span>
+        <span class="c1"># do some special build commands</span>
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">arch</span> <span class="o">==</span> <span class="s2">&quot;x86_64&quot;</span><span class="p">:</span>
+        <span class="c1"># Other different commands</span>
+</pre></div>
+</div>
+<p>Those comparisons do content checking, for example if you do a typo like <code class="docutils literal notranslate"><span class="pre">self.settings.os</span> <span class="pre">==</span> <span class="pre">&quot;Windos&quot;</span></code>,
+conan will fail and tell you that is not a valid <code class="docutils literal notranslate"><span class="pre">settings.os</span></code> value, and the possible range of values.</p>
+<p>Likewise, if you try to access some setting that doesn’t exist, like <code class="docutils literal notranslate"><span class="pre">self.settings.compiler.libcxx</span></code>
+for the <code class="docutils literal notranslate"><span class="pre">Visual</span> <span class="pre">Studio</span></code> setting, conan will fail telling that <code class="docutils literal notranslate"><span class="pre">libcxx</span></code> does not exist for that compiler.</p>
+<p>If you want to do a safe check of settings values, you could use the <code class="docutils literal notranslate"><span class="pre">get_safe()</span></code> method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># Will be None if doesn&#39;t exist</span>
+    <span class="n">arch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_safe</span><span class="p">(</span><span class="s2">&quot;arch&quot;</span><span class="p">)</span>
+    <span class="c1"># Will be None if doesn&#39;t exist</span>
+    <span class="n">compiler_version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_safe</span><span class="p">(</span><span class="s2">&quot;compiler.version&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">get_safe()</span></code> method will return <code class="docutils literal notranslate"><span class="pre">None</span></code> if that setting or subsetting doesn’t exist.</p>
 </div>
 <div class="section" id="options">
 <span id="conanfile-options"></span><h2>options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
@@ -946,15 +967,18 @@ library paths… There are some default values that will be applied automaticall
 <td>Ordered list with pure C flags. Defaulted to <code class="docutils literal notranslate"><span class="pre">[]</span></code> (empty)</td>
 </tr>
 <tr class="row-even"><td>self.cpp_info.cppflags</td>
+<td>[DEPRECATED: use cxxflags instead]</td>
+</tr>
+<tr class="row-odd"><td>self.cpp_info.cxxflags</td>
 <td>Ordered list with C++ flags. Defaulted to <code class="docutils literal notranslate"><span class="pre">[]</span></code> (empty)</td>
 </tr>
-<tr class="row-odd"><td>self.cpp_info.sharedlinkflags</td>
+<tr class="row-even"><td>self.cpp_info.sharedlinkflags</td>
 <td>Ordered list with linker flags (shared libs). Defaulted to <code class="docutils literal notranslate"><span class="pre">[]</span></code> (empty)</td>
 </tr>
-<tr class="row-even"><td>self.cpp_info.exelinkflags</td>
+<tr class="row-odd"><td>self.cpp_info.exelinkflags</td>
 <td>Ordered list with linker flags (executables). Defaulted to <code class="docutils literal notranslate"><span class="pre">[]</span></code> (empty)</td>
 </tr>
-<tr class="row-odd"><td>self.cpp_info.rootpath</td>
+<tr class="row-even"><td>self.cpp_info.rootpath</td>
 <td>Filled with the root directory of the package, see <code class="docutils literal notranslate"><span class="pre">deps_cpp_info</span></code></td>
 </tr>
 </tbody>
@@ -1247,7 +1271,7 @@ from a <a class="reference internal" href="../../extending/python_requires.html#
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.12
+      Version: 1.13
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -1255,7 +1279,11 @@ from a <a class="reference internal" href="../../extending/python_requires.html#
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.12</a></dd>
+            <dd><a href="/en/latest/index.html">1.13</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.12/index.html">1.12</a></dd>
           
         
           
@@ -1309,7 +1337,7 @@ from a <a class="reference internal" href="../../extending/python_requires.html#
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.12.3',
+            VERSION:'1.13.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

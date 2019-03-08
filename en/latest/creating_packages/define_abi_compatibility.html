@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Defining Package ABI Compatibility &mdash; conan 1.12.3 documentation</title>
+  <title>Defining Package ABI Compatibility &mdash; conan 1.13.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.12.3 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.13.0 documentation" href="../index.html"/>
         <link rel="up" title="Creating Packages" href="../creating_packages.html"/>
         <link rel="next" title="Inspecting Packages" href="inspecting_packages.html"/>
         <link rel="prev" title="Understanding Packaging" href="understand_packaging.html"/>
@@ -130,6 +130,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#dependency-issues">Dependency Issues</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-package-id-for-package-dependencies">Using package_id() for Package Dependencies</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#versioning-schema">Versioning Schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#changing-the-default-package-id-mode">Changing the default package-id mode</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#library-types-shared-static-header-only">Library Types: Shared, Static, Header-only</a></li>
 </ul>
 </li>
@@ -309,13 +310,12 @@ string value.</p>
 only important thing is that it is the same for any GCC version between 4.5 and 5.0. For all those versions, the compiler version will
 always be hashed to the same ID.</p>
 <p>Let’s try and check that it works properly when installing the package for GCC 4.5:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan <span class="nb">export</span> myuser/mychannel
-$ conan install Pkg/1.0@myuser/mychannel -s <span class="nv">compiler</span><span class="o">=</span>gcc -s compiler.version<span class="o">=</span><span class="m">4</span>.5 ...
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan create . Pkg/1.0@myuser/mychannel -s <span class="nv">compiler</span><span class="o">=</span>gcc -s compiler.version<span class="o">=</span><span class="m">4</span>.5 ...
 
 Requirements
     Pkg/1.0@myuser/mychannel from <span class="nb">local</span>
 Packages
-    Pkg/1.0@myuser/mychannel:mychannel:af044f9619574eceb8e1cca737a64bdad88246ad
+    Pkg/1.0@myuser/mychannel:af044f9619574eceb8e1cca737a64bdad88246ad
 ...
 </pre></div>
 </div>
@@ -325,7 +325,7 @@ Packages
 Requirements
     Pkg/1.0@myuser/mychannel from <span class="nb">local</span>
 Packages
-    Pkg/1.0@myuser/mychannel:mychannel:af044f9619574eceb8e1cca737a64bdad88246ad
+    Pkg/1.0@myuser/mychannel:af044f9619574eceb8e1cca737a64bdad88246ad
 </pre></div>
 </div>
 <p>The required package has the same result again <code class="docutils literal notranslate"><span class="pre">af04...46ad</span></code>. Now we can try using GCC 4.4 (&lt; 4.5):</p>
@@ -334,7 +334,7 @@ Packages
 Requirements
     Pkg/1.0@myuser/mychannel from <span class="nb">local</span>
 Packages
-    Pkg/1.0@myuser/mychannel:mychannel:7d02dc01581029782b59dcc8c9783a73ab3c22dd
+    Pkg/1.0@myuser/mychannel:7d02dc01581029782b59dcc8c9783a73ab3c22dd
 </pre></div>
 </div>
 <p>The computed package ID is different which means that we need a different binary package for GCC 4.4.</p>
@@ -383,10 +383,10 @@ link against both <code class="docutils literal notranslate"><span class="pre">M
 <p>And the <code class="docutils literal notranslate"><span class="pre">addition()</span></code> function is called from the compiled <em>.cpp</em> files of <code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code>?</p>
 <p>Then, <strong>a new binary for MyLib/1.0 is required to be built for the new dependency version</strong>. Otherwise it will maintain the old, buggy
 <code class="docutils literal notranslate"><span class="pre">addition()</span></code> version. Even in the case that <code class="docutils literal notranslate"><span class="pre">MyLib/1.0</span></code> doesn’t have any change in its code lines neither in the recipe, the resulting
-binary rebuilding <code class="docutils literal notranslate"><span class="pre">MyLib</span></code> requires <cite>MyOtherLib/2.1`</cite> and the package to be different.</p>
+binary rebuilding <code class="docutils literal notranslate"><span class="pre">MyLib</span></code> requires <code class="docutils literal notranslate"><span class="pre">MyOtherLib/2.1</span></code> and the package to be different.</p>
 </div>
 <div class="section" id="using-package-id-for-package-dependencies">
-<h2>Using package_id() for Package Dependencies<a class="headerlink" href="#using-package-id-for-package-dependencies" title="Permalink to this headline">¶</a></h2>
+<span id="package-id-mode"></span><h2>Using package_id() for Package Dependencies<a class="headerlink" href="#using-package-id-for-package-dependencies" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">self.info</span></code> object has also a <code class="docutils literal notranslate"><span class="pre">requires</span></code> object. It is a dictionary containing the necessary information for each requirement, all direct
 and transitive dependencies. For example, <code class="docutils literal notranslate"><span class="pre">self.info.requires[&quot;MyOtherLib&quot;]</span></code> is a <code class="docutils literal notranslate"><span class="pre">RequirementInfo</span></code> object.</p>
 <ul>
@@ -468,63 +468,70 @@ affects the binary package, or even the required package ID can change your own 
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">semver_mode()</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">semver_direct_mode()</span></code></td>
 <td>Yes</td>
 <td>Yes, only &gt; 1.0.0 (e.g., <strong>1</strong>.2.Z+b102)</td>
 <td>No</td>
 <td>No</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">major_mode()</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">semver_mode()</span></code></td>
+<td>Yes</td>
+<td>Yes, only &gt; 1.0.0 (e.g., <strong>1</strong>.2.Z+b102)</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">major_mode()</span></code></td>
 <td>Yes</td>
 <td>Yes (e.g., <strong>1</strong>.2.Z+b102)</td>
 <td>No</td>
 <td>No</td>
 <td>No</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">minor_mode()</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">minor_mode()</span></code></td>
 <td>Yes</td>
 <td>Yes (e.g., <strong>1.2</strong>.Z+b102)</td>
 <td>No</td>
 <td>No</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">patch_mode()</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">patch_mode()</span></code></td>
 <td>Yes</td>
 <td>Yes (e.g., <strong>1.2.3</strong>+b102)</td>
 <td>No</td>
 <td>No</td>
 <td>No</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">base_mode()</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">base_mode()</span></code></td>
 <td>Yes</td>
 <td>Yes (e.g., <strong>1.7</strong>+b102)</td>
 <td>No</td>
 <td>No</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">full_version_mode()</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">full_version_mode()</span></code></td>
 <td>Yes</td>
 <td>Yes (e.g., <strong>1.2.3+b102</strong>)</td>
 <td>No</td>
 <td>No</td>
 <td>No</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">full_recipe_mode()</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">full_recipe_mode()</span></code></td>
 <td>Yes</td>
 <td>Yes (e.g., <strong>1.2.3+b102</strong>)</td>
 <td>Yes</td>
 <td>Yes</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">full_package_mode()</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">full_package_mode()</span></code></td>
 <td>Yes</td>
 <td>Yes (e.g., <strong>1.2.3+b102</strong>)</td>
 <td>Yes</td>
 <td>Yes</td>
 <td>Yes</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">unrelated_mode()</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">unrelated_mode()</span></code></td>
 <td>No</td>
 <td>No</td>
 <td>No</td>
@@ -533,19 +540,55 @@ affects the binary package, or even the required package ID can change your own 
 </tr>
 </tbody>
 </table>
+<p>All the modes can be applied to all dependencies, or to individual ones:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># apply semver_mode for all the dependencies of the package</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="o">.</span><span class="n">semver_mode</span><span class="p">()</span>
+    <span class="c1"># use semver_mode just for MyOtherLib</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="p">[</span><span class="s2">&quot;MyOtherLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">semver_mode</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
 <ul>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">semver_mode()</span></code>: This is the default mode. In this mode, only a major release version (starting from <strong>1.0.0</strong>) changes the package ID.
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">semver_direct_mode()</span></code>: This is the default mode. It uses <code class="docutils literal notranslate"><span class="pre">semver_mode()</span></code> for direct dependencies (first
+level dependencies, directly declared by the package) and <code class="docutils literal notranslate"><span class="pre">unrelated_mode()</span></code> for indirect, transitive
+dependencies of the package. It assumes that the binary will be affected by the direct dependencies, which
+they will already encode how their transitive dependencies affect them. This might not always be true, as
+explained above, and that is the reason it is possible to customize it.</p>
+<p>In this mode, if the package depends on “MyLib”, which transitively depends on “MyOtherLib”, the mode means:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MyLib/1.2.3@user/testing       =&gt; MyLib/1.Y.Z
+MyOtherLib/2.3.4@user/testing  =&gt;
+</pre></div>
+</div>
+<p>So the direct dependencies are mapped to the major version only. Changing its channel, or using version
+<code class="docutils literal notranslate"><span class="pre">MyLib/1.4.5</span></code> will still produce <code class="docutils literal notranslate"><span class="pre">MyLib/1.Y.Z</span></code> and thus the same package-id.
+The indirect, transitive dependency doesn’t affect the package-id at all.</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">semver_mode()</span></code>: In this mode, only a major release version (starting from <strong>1.0.0</strong>) changes the package ID.
 Every version change prior to 1.0.0 changes the package ID, but only major changes after 1.0.0 will be applied.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="p">[</span><span class="s2">&quot;MyOtherLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">semver_mode</span><span class="p">()</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="p">[</span><span class="s2">&quot;MyOtherLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">semver_mode</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This results in:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MyLib/1.2.3@user/testing       =&gt; MyLib/1.Y.Z
+MyOtherLib/2.3.4@user/testing  =&gt; MyOtherLib/2.Y.Z
+</pre></div>
+</div>
+<p>In this mode, versions starting with <code class="docutils literal notranslate"><span class="pre">0</span></code> are considered unstable and mapped to the full version:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MyLib/0.2.3@user/testing       =&gt; MyLib/0.2.3
+MyOtherLib/0.3.4@user/testing  =&gt; MyOtherLib/0.3.4
 </pre></div>
 </div>
 </li>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">major_mode()</span></code>: Any change in the major release version (starting from <strong>0.0.0</strong>) changes the package ID.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="p">[</span><span class="s2">&quot;MyOtherLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">major_mode</span><span class="p">()</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="p">[</span><span class="s2">&quot;MyOtherLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">major_mode</span><span class="p">()</span>
 </pre></div>
 </div>
+<p>This mode is basically the same as <code class="docutils literal notranslate"><span class="pre">semver_mode</span></code>, but the only difference is that major versions <code class="docutils literal notranslate"><span class="pre">0.Y.Z</span></code>,
+which are considered unstable by semver, are still mapped to only the major, dropping the minor and patch parts.</p>
 </li>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">minor_mode()</span></code>: Any change in major or minor (not patch nor build) version of the required dependency changes the package ID.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -569,19 +612,31 @@ version even without strict semver.</p>
 </li>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">full_version_mode()</span></code>: Any changes to the version of the required dependency changes the package ID.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="p">[</span><span class="s2">&quot;MyOtherLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">full_version_mode</span><span class="p">()</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="p">[</span><span class="s2">&quot;MyOtherLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">full_version_mode</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MyOtherLib/1.3.4-a4+b3@user/testing  =&gt; MyOtherLib/1.3.4-a4+b3
 </pre></div>
 </div>
 </li>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">full_recipe_mode()</span></code>: Any change in the reference of the requirement (user &amp; channel too) changes the package ID.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="p">[</span><span class="s2">&quot;MyOtherLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">full_recipe_mode</span><span class="p">()</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="p">[</span><span class="s2">&quot;MyOtherLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">full_recipe_mode</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This keeps the whole dependency reference, except the package-id of the dependency.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MyOtherLib/1.3.4-a4+b3@user/testing  =&gt; MyOtherLib/1.3.4-a4+b3@user/testing
 </pre></div>
 </div>
 </li>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">full_package_mode()</span></code>: Any change in the required version, user, channel or package ID changes the package ID.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="p">[</span><span class="s2">&quot;MyOtherLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">full_package_mode</span><span class="p">()</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="p">[</span><span class="s2">&quot;MyOtherLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">full_package_mode</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This is the stricter mode. Any change to the dependency, including its binary package-id, will in turn
+produce a new package-id for the consumer package.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MyOtherLib/1.3.4-a4+b3@user/testing:73b..fa56  =&gt; MyOtherLib/1.3.4-a4+b3@user/testing:73b..fa56
 </pre></div>
 </div>
 </li>
@@ -613,12 +668,39 @@ into account when generating the SHA1 hash for the package ID, while the <code c
 complete reference information.</p>
 <p>The default behavior produces a <em>conaninfo.txt</em> that looks like:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
-  MyOtherLib/2.Y.Z
+MyOtherLib/2.Y.Z
 
 [full_requires]
-  MyOtherLib/2.2@demo/testing:73bce3fd7eb82b2eabc19fe11317d37da81afa56
+MyOtherLib/2.2@demo/testing:73bce3fd7eb82b2eabc19fe11317d37da81afa56
 </pre></div>
 </div>
+</div>
+<div class="section" id="changing-the-default-package-id-mode">
+<h3>Changing the default package-id mode<a class="headerlink" href="#changing-the-default-package-id-mode" title="Permalink to this headline">¶</a></h3>
+<p>It is possible to change the default <code class="docutils literal notranslate"><span class="pre">semver_direct_mode</span></code> package-id mode, in the
+<em>conan.conf</em> file:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><em>conan.conf</em> configuration file</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[general]
+default_package_id_mode=full_package_mode
+</pre></div>
+</div>
+</div>
+<p>Possible values are the names of the above methods: <code class="docutils literal notranslate"><span class="pre">full_recipe_mode</span></code>, <code class="docutils literal notranslate"><span class="pre">semver_mode</span></code>, etc.</p>
+<p>Note that the default package-id mode is the mode that is used when the package is initialized
+and <strong>before</strong> <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> method is called. You can still define <code class="docutils literal notranslate"><span class="pre">full_package_mode</span></code>
+as default in <em>conan.conf</em>, but if a recipe declare that it is header-only, with:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">header_only</span><span class="p">()</span> <span class="c1"># clears requires, but also settings if existing</span>
+  <span class="c1"># or if there are no settings/options, this would be equivalent</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span> <span class="c1"># or self.info.requires.unrelated_mode()</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>That would still be executed, changing the “default” behavior, and leading to a package
+that only generates 1 package-id for all possible configurations and versions of dependencies.</p>
+<p>Remember that <em>conan.conf</em> can be shared and installed with <a class="reference internal" href="../reference/commands/consumer/config.html#conan-config-install"><span class="std std-ref">conan config install</span></a>.</p>
 </div>
 <div class="section" id="library-types-shared-static-header-only">
 <h3>Library Types: Shared, Static, Header-only<a class="headerlink" href="#library-types-shared-static-header-only" title="Permalink to this headline">¶</a></h3>
@@ -728,7 +810,7 @@ write:</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.12
+      Version: 1.13
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -736,7 +818,11 @@ write:</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.12</a></dd>
+            <dd><a href="/en/latest/index.html">1.13</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.12/index.html">1.12</a></dd>
           
         
           
@@ -790,7 +876,7 @@ write:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.12.3',
+            VERSION:'1.13.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

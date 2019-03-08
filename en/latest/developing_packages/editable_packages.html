@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Packages in editable mode &mdash; conan 1.12.3 documentation</title>
+  <title>Packages in editable mode &mdash; conan 1.13.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.12.3 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.13.0 documentation" href="../index.html"/>
         <link rel="up" title="Developing packages" href="../developing_packages.html"/>
         <link rel="next" title="Workspaces" href="workspaces.html"/>
         <link rel="prev" title="Package development flow" href="package_dev_flow.html"/>
@@ -255,9 +255,10 @@ resources of <code class="docutils literal notranslate"><span class="pre">cool</
 <div class="section" id="put-a-package-in-editable-mode">
 <h2>Put a package in editable mode<a class="headerlink" href="#put-a-package-in-editable-mode" title="Permalink to this headline">¶</a></h2>
 <p>To avoid creating the package <code class="docutils literal notranslate"><span class="pre">cool/version&#64;user/dev</span></code> in the cache for every change, we are going
-to create <strong>a link from the reference in the cache to the local working directory</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan link &lt;path/to/local/dev/libcool&gt; cool/version@user/dev
-<span class="c1"># you could do cd &lt;path/to/local/dev/libcool&gt; &amp;&amp; conan link . cool/version@user/dev</span>
+to put that package in editable mode, creating <strong>a link from the reference in the cache to the local
+working directory</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan editable add &lt;path/to/local/dev/libcool&gt; cool/version@user/dev
+<span class="c1"># you could do cd &lt;path/to/local/dev/libcool&gt; &amp;&amp; conan editable add . cool/version@user/dev</span>
 </pre></div>
 </div>
 <p>That is it. Now, every usage of <code class="docutils literal notranslate"><span class="pre">cool/version&#64;user/dev</span></code>, by any other Conan package, or project
@@ -318,23 +319,34 @@ That is only an example, the real layout used by VS would be different.</p>
 <h3>Layout files<a class="headerlink" href="#layout-files" title="Permalink to this headline">¶</a></h3>
 <p>Instead of changing the recipe file to match the local layout, it’s possible to define the
 layout in a separate file. This is especially useful if you have a large number of libraries
-with the structure so you can write it one and use it for several packages. Layout files have
-the following syntax:</p>
+with the same structure so you can write it once and use it for several packages.</p>
+<p>Layout files are <em>ini</em> files, but before parsing them Conan uses the Jinja2 template
+engine passing the <code class="docutils literal notranslate"><span class="pre">settings</span></code>, <code class="docutils literal notranslate"><span class="pre">options</span></code> and current <code class="docutils literal notranslate"><span class="pre">reference</span></code> objects, so you
+can add logic to the files:</p>
 <blockquote>
 <div><div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[includedirs]</span>
 <span class="na">src/core/include</span>
 <span class="na">src/cmp_a/include</span>
 
 <span class="k">[libdirs]</span>
-<span class="na">build/{settings.build_type}/{settings.arch}</span>
+<span class="na">build/{{settings.build_type}}/{{settings.arch}}</span>
 
 <span class="k">[bindirs]</span>
-<span class="na">build/{settings.build_type}/{settings.arch}</span>
+<span class="na">{% if options.shared %}</span>
+<span class="na">build/{{settings.build_type}}/shared</span>
+<span class="na">{% else %}</span>
+<span class="na">build/{{settings.build_type}}/static</span>
+<span class="na">{% endif %}</span>
+
+<span class="k">[resdirs]</span>
+<span class="na">{% for item in [&quot;cmp1&quot;, &quot;cmp2&quot;, &quot;cmp3&quot;] %}</span>
+<span class="na">src/{{ item }}/resouces/{% if item !</span><span class="o">=</span> <span class="s">&quot;cmp3&quot; %}{{ settings.arch }}{% endif %}</span>
+<span class="na">{% endfor %}</span>
 </pre></div>
 </div>
 </div></blockquote>
-<p>As you can see, you can use some <strong>placeholders</strong> inside these files that will be substituted with
-the values of the <code class="docutils literal notranslate"><span class="pre">settings</span></code> and the <code class="docutils literal notranslate"><span class="pre">options</span></code> of the package.</p>
+<p>You can have a look at the <a class="reference external" href="http://jinja.pocoo.org/">Jinja2 documentation</a> to know more
+about its powerful syntax.</p>
 <p>This file can use the package reference to customize logic for a specific package:</p>
 <blockquote>
 <div><div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[includedirs]</span>
@@ -358,8 +370,8 @@ paths.</p>
 </div>
 <div class="section" id="specifying-layout-files">
 <h3>Specifying layout files<a class="headerlink" href="#specifying-layout-files" title="Permalink to this headline">¶</a></h3>
-<p>Layout files are specified in the <strong class="command">conan link</strong> command, as an extra argument:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan link . cool/version@user/dev --layout<span class="o">=</span>win_layout
+<p>Layout files are specified in the <strong class="command">conan editable add</strong> command, as an extra argument:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan editable add . cool/version@user/dev --layout<span class="o">=</span>win_layout
 </pre></div>
 </div>
 <p>That <code class="docutils literal notranslate"><span class="pre">win_layout</span></code> file will be first looked for relative to the current directory (the
@@ -369,9 +381,9 @@ layouts in the source repositories, so they are always easy to find after a clon
 for in the conan cache, in the <code class="docutils literal notranslate"><span class="pre">.conan/layouts</span></code> folder. This is very convenient to have
 a single definition of layouts that can be shared with the team and installed with
 <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">config</span> <span class="pre">install</span></code>.</p>
-<p>If no argument is specified, the <strong class="command">conan link</strong> command will try to use a <cite>.conan/layouts/default</cite>
+<p>If no argument is specified, the <strong class="command">conan editable add</strong> command will try to use a <cite>.conan/layouts/default</cite>
 layout from the local cache.</p>
-<p>You can switch layout files by passing a different argument to new calls to <strong class="command">conan link</strong>.</p>
+<p>You can switch layout files by passing a different argument to new calls to <strong class="command">conan editable add</strong>.</p>
 </div>
 <div class="section" id="evaluation-order-and-priority">
 <h3>Evaluation order and priority<a class="headerlink" href="#evaluation-order-and-priority" title="Permalink to this headline">¶</a></h3>
@@ -390,8 +402,8 @@ have defined also its specific <code class="docutils literal notranslate"><span 
 folders specified without package reference won’t be applied once a match is found.</li>
 <li>It no match is found, the original values for the layout folders defined in <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> will
 be respected.</li>
-<li>The layout file to be used is defined at <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">link</span></code> time. If a <code class="docutils literal notranslate"><span class="pre">.conan/layouts/default</span></code> file
-is added after the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">link</span></code>, it will not be used at all.</li>
+<li>The layout file to be used is defined at <strong class="command">conan editable add</strong> time. If a <code class="docutils literal notranslate"><span class="pre">.conan/layouts/default</span></code> file
+is added after the <strong class="command">conan editable add</strong>, it will not be used at all.</li>
 </ul>
 </div>
 </div>
@@ -407,7 +419,7 @@ against it.</p>
 To try that it is working, the following flow should work:</p>
 <ul class="simple">
 <li>Get sources of <code class="docutils literal notranslate"><span class="pre">cool/version&#64;user/dev</span></code>: <strong class="command">git/svn clone... &amp;&amp; cd folder</strong></li>
-<li>Put package in editable mode: <strong class="command">conan link . cool/version&#64;user/dev --layout=mylayout</strong></li>
+<li>Put package in editable mode: <strong class="command">conan editable add . cool/version&#64;user/dev --layout=mylayout</strong></li>
 <li>Work with it and build using any tool. Check that your local layout is reflected in the layout
 file <em>mylayout</em> specified in the previous step.</li>
 <li>Go to the consumer project: <code class="docutils literal notranslate"><span class="pre">CoolApp</span></code></li>
@@ -419,14 +431,14 @@ file <em>mylayout</em> specified in the previous step.</li>
 time, without any Conan command.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">When a package is in editable mode, most of the commands will not work. It is not possible to <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">upload</span></code>,
-<code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">export</span></code> or <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">create</span></code> when a package is in editable mode.</p>
+<p class="last">When a package is in editable mode, most of the commands will not work. It is not possible to <strong class="command">conan upload</strong>,
+<strong class="command">conan export</strong> or <strong class="command">conan create</strong> when a package is in editable mode.</p>
 </div>
 </div>
 <div class="section" id="revert-the-editable-mode">
 <h2>Revert the editable mode<a class="headerlink" href="#revert-the-editable-mode" title="Permalink to this headline">¶</a></h2>
 <p>In order to revert the editable mode just remove the link using:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan link --remove cool/version@user/dev
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan editable remove cool/version@user/dev
 </pre></div>
 </div>
 <p>It will remove the link (the local directory won’t be affected) and all the packages consuming this
@@ -480,7 +492,7 @@ these packages without re-creating them with the in-cache version of all the lib
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.12
+      Version: 1.13
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -488,7 +500,11 @@ these packages without re-creating them with the in-cache version of all the lib
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.12</a></dd>
+            <dd><a href="/en/latest/index.html">1.13</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.12/index.html">1.12</a></dd>
           
         
           
@@ -542,7 +558,7 @@ these packages without re-creating them with the in-cache version of all the lib
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.12.3',
+            VERSION:'1.13.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
