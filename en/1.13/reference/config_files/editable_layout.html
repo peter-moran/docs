@@ -259,7 +259,7 @@ in editable mode. Before parsing this file Conan runs Jinja2 template engine wit
 <span class="na">src</span>
 
 <span class="k">[build_folder]</span>
-<span class="na">build/{settings.build_type}/{settings.arch}</span>
+<span class="na">build/{{settings.build_type}}/{{settings.arch}}</span>
 </pre></div>
 </div>
 <p>The specific sections using a package reference will have higher priority than the general ones.</p>
