@@ -352,21 +352,6 @@ and <code class="docutils literal notranslate"><span class="pre">build_type</spa
 </pre></div>
 </div>
 </div>
-<div class="section" id="parallel">
-<h3>parallel<a class="headerlink" href="#parallel" title="Permalink to this headline">¶</a></h3>
-<p><strong>Defaulted to</strong>: <code class="docutils literal notranslate"><span class="pre">True</span></code></p>
-<p>Run CMake process in parallel for compilation, installation and testing. This is translated into the proper command line argument:
-For <code class="docutils literal notranslate"><span class="pre">Unix</span> <span class="pre">Makefiles</span></code> it is <code class="docutils literal notranslate"><span class="pre">-jX</span></code> and for <code class="docutils literal notranslate"><span class="pre">Visual</span> <span class="pre">Studio</span></code> it is <code class="docutils literal notranslate"><span class="pre">/m:X</span></code>.</p>
-<p>However, the parallel executing can be changed for testing like this:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cmake</span> <span class="o">=</span> <span class="n">CMake</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-<span class="n">cmake</span><span class="o">.</span><span class="n">configure</span><span class="p">()</span>
-<span class="n">cmake</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>  <span class="c1"># &#39;parallel&#39; is enabled by default</span>
-<span class="n">cmake</span><span class="o">.</span><span class="n">parallel</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="n">cmake</span><span class="o">.</span><span class="n">test</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>In the case of <code class="docutils literal notranslate"><span class="pre">cmake.test()</span></code> this flag sets the <code class="docutils literal notranslate"><span class="pre">CTEST_PARALLEL_LEVEL</span></code> variable to the according value in <a class="reference internal" href="../tools.html#tools-cpu-count"><span class="std std-ref">tools.cpu_count()</span></a>.</p>
-</div>
 <div class="section" id="definitions">
 <h3>definitions<a class="headerlink" href="#definitions" title="Permalink to this headline">¶</a></h3>
 <p>The CMake helper will automatically append some definitions based on your settings:</p>
@@ -716,7 +701,7 @@ command line. Will raise if cannot resolve it to valid version.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016-2019, JFrog.
+        &copy; Copyright 2016-2018, JFrog.
 
     </p>
   </div>
@@ -742,7 +727,11 @@ command line. Will raise if cannot resolve it to valid version.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.12</a></dd>
+            <dd><a href="/en/latest/index.html">1.13</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.12/index.html">1.12</a></dd>
           
         
           
@@ -785,7 +774,7 @@ command line. Will raise if cannot resolve it to valid version.</p>
       <dl>
         <dt>Downloads</dt>
         
-          <dd><a href="/en/latest/conan.pdf">PDF</a></dd>
+          <dd><a href="/en/1.12/conan.pdf">PDF</a></dd>
         
       </dl>
     </div>
