@@ -381,7 +381,7 @@ has to be in the path or declared in <code class="docutils literal notranslate">
 configure, make and install steps. This variables are generated dynamically with the values of the attributes and can also be modified to be
 used in the following configure, make or install steps:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build</span><span class="p">():</span>
-    <span class="n">auotools</span> <span class="o">=</span> <span class="n">AutoToolsBuildEnvironment</span><span class="p">()</span>
+    <span class="n">autotools</span> <span class="o">=</span> <span class="n">AutoToolsBuildEnvironment</span><span class="p">()</span>
     <span class="n">autotools</span><span class="o">.</span><span class="n">fpic</span> <span class="o">=</span> <span class="bp">True</span>
     <span class="n">env_build_vars</span> <span class="o">=</span> <span class="n">autotools</span><span class="o">.</span><span class="n">vars</span>
     <span class="n">env_build_vars</span><span class="p">[</span><span class="s1">&#39;RCFLAGS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;-O COFF&#39;</span>
