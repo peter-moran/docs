@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>settings.yml &mdash; conan 1.13.3 documentation</title>
+  <title>settings.yml &mdash; conan 1.14.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.13.3 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.14.0 documentation" href="../../index.html"/>
         <link rel="up" title="Configuration files" href="../config_files.html"/>
         <link rel="next" title="registry.txt / registry.json" href="registry.txt.html"/>
         <link rel="prev" title="profiles/default" href="default_profile.html"/>
@@ -237,12 +237,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 are possible.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Only for cross building, &#39;os_build/arch_build&#39; is the system that runs Conan</span>
 <span class="nt">os_build</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">Windows</span><span class="p p-Indicator">,</span> <span class="nv">WindowsStore</span><span class="p p-Indicator">,</span> <span class="nv">Linux</span><span class="p p-Indicator">,</span> <span class="nv">Macos</span><span class="p p-Indicator">,</span> <span class="nv">FreeBSD</span><span class="p p-Indicator">,</span> <span class="nv">SunOS</span><span class="p p-Indicator">]</span>
-<span class="nt">arch_build</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">x86</span><span class="p p-Indicator">,</span> <span class="nv">x86_64</span><span class="p p-Indicator">,</span> <span class="nv">ppc32</span><span class="p p-Indicator">,</span> <span class="nv">ppc64le</span><span class="p p-Indicator">,</span> <span class="nv">ppc64</span><span class="p p-Indicator">,</span> <span class="nv">armv5el</span><span class="p p-Indicator">,</span> <span class="nv">armv5hf</span><span class="p p-Indicator">,</span> <span class="nv">armv6</span><span class="p p-Indicator">,</span> <span class="nv">armv7</span><span class="p p-Indicator">,</span> <span class="nv">armv7hf</span><span class="p p-Indicator">,</span> <span class="nv">armv7s</span><span class="p p-Indicator">,</span> <span class="nv">armv7k</span><span class="p p-Indicator">,</span> <span class="nv">armv8</span><span class="p p-Indicator">,</span> <span class="nv">armv8_32</span><span class="p p-Indicator">,</span> <span class="nv">armv8.3</span><span class="p p-Indicator">,</span> <span class="nv">sparc</span><span class="p p-Indicator">,</span> <span class="nv">sparcv9</span><span class="p p-Indicator">,</span> <span class="nv">mips</span><span class="p p-Indicator">,</span> <span class="nv">mips64</span><span class="p p-Indicator">,</span> <span class="nv">avr</span><span class="p p-Indicator">]</span>
+<span class="nt">arch_build</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">x86</span><span class="p p-Indicator">,</span> <span class="nv">x86_64</span><span class="p p-Indicator">,</span> <span class="nv">ppc32</span><span class="p p-Indicator">,</span> <span class="nv">ppc64le</span><span class="p p-Indicator">,</span> <span class="nv">ppc64</span><span class="p p-Indicator">,</span> <span class="nv">armv5el</span><span class="p p-Indicator">,</span> <span class="nv">armv5hf</span><span class="p p-Indicator">,</span> <span class="nv">armv6</span><span class="p p-Indicator">,</span> <span class="nv">armv7</span><span class="p p-Indicator">,</span> <span class="nv">armv7hf</span><span class="p p-Indicator">,</span> <span class="nv">armv7s</span><span class="p p-Indicator">,</span> <span class="nv">armv7k</span><span class="p p-Indicator">,</span> <span class="nv">armv8</span><span class="p p-Indicator">,</span> <span class="nv">armv8_32</span><span class="p p-Indicator">,</span> <span class="nv">armv8.3</span><span class="p p-Indicator">,</span> <span class="nv">sparc</span><span class="p p-Indicator">,</span> <span class="nv">sparcv9</span><span class="p p-Indicator">,</span> <span class="nv">mips</span><span class="p p-Indicator">,</span> <span class="nv">mips64</span><span class="p p-Indicator">,</span> <span class="nv">avr</span><span class="p p-Indicator">,</span> <span class="nv">s390</span><span class="p p-Indicator">,</span> <span class="nv">s390x</span><span class="p p-Indicator">]</span>
 
 <span class="c1"># Only for building cross compilation tools, &#39;os_target/arch_target&#39; is the system for</span>
 <span class="c1"># which the tools generate code</span>
 <span class="nt">os_target</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">Windows</span><span class="p p-Indicator">,</span> <span class="nv">Linux</span><span class="p p-Indicator">,</span> <span class="nv">Macos</span><span class="p p-Indicator">,</span> <span class="nv">Android</span><span class="p p-Indicator">,</span> <span class="nv">iOS</span><span class="p p-Indicator">,</span> <span class="nv">watchOS</span><span class="p p-Indicator">,</span> <span class="nv">tvOS</span><span class="p p-Indicator">,</span> <span class="nv">FreeBSD</span><span class="p p-Indicator">,</span> <span class="nv">SunOS</span><span class="p p-Indicator">,</span> <span class="nv">Arduino</span><span class="p p-Indicator">]</span>
-<span class="nt">arch_target</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">x86</span><span class="p p-Indicator">,</span> <span class="nv">x86_64</span><span class="p p-Indicator">,</span> <span class="nv">ppc32</span><span class="p p-Indicator">,</span> <span class="nv">ppc64le</span><span class="p p-Indicator">,</span> <span class="nv">ppc64</span><span class="p p-Indicator">,</span> <span class="nv">armv5el</span><span class="p p-Indicator">,</span> <span class="nv">armv5hf</span><span class="p p-Indicator">,</span> <span class="nv">armv6</span><span class="p p-Indicator">,</span> <span class="nv">armv7</span><span class="p p-Indicator">,</span> <span class="nv">armv7hf</span><span class="p p-Indicator">,</span> <span class="nv">armv7s</span><span class="p p-Indicator">,</span> <span class="nv">armv7k</span><span class="p p-Indicator">,</span> <span class="nv">armv8</span><span class="p p-Indicator">,</span> <span class="nv">armv8_32</span><span class="p p-Indicator">,</span> <span class="nv">armv8.3</span><span class="p p-Indicator">,</span> <span class="nv">sparc</span><span class="p p-Indicator">,</span> <span class="nv">sparcv9</span><span class="p p-Indicator">,</span> <span class="nv">mips</span><span class="p p-Indicator">,</span> <span class="nv">mips64</span><span class="p p-Indicator">,</span> <span class="nv">avr</span><span class="p p-Indicator">]</span>
+<span class="nt">arch_target</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">x86</span><span class="p p-Indicator">,</span> <span class="nv">x86_64</span><span class="p p-Indicator">,</span> <span class="nv">ppc32</span><span class="p p-Indicator">,</span> <span class="nv">ppc64le</span><span class="p p-Indicator">,</span> <span class="nv">ppc64</span><span class="p p-Indicator">,</span> <span class="nv">armv5el</span><span class="p p-Indicator">,</span> <span class="nv">armv5hf</span><span class="p p-Indicator">,</span> <span class="nv">armv6</span><span class="p p-Indicator">,</span> <span class="nv">armv7</span><span class="p p-Indicator">,</span> <span class="nv">armv7hf</span><span class="p p-Indicator">,</span> <span class="nv">armv7s</span><span class="p p-Indicator">,</span> <span class="nv">armv7k</span><span class="p p-Indicator">,</span> <span class="nv">armv8</span><span class="p p-Indicator">,</span> <span class="nv">armv8_32</span><span class="p p-Indicator">,</span> <span class="nv">armv8.3</span><span class="p p-Indicator">,</span> <span class="nv">sparc</span><span class="p p-Indicator">,</span> <span class="nv">sparcv9</span><span class="p p-Indicator">,</span> <span class="nv">mips</span><span class="p p-Indicator">,</span> <span class="nv">mips64</span><span class="p p-Indicator">,</span> <span class="nv">avr</span><span class="p p-Indicator">,</span> <span class="nv">s390</span><span class="p p-Indicator">,</span> <span class="nv">s390x</span><span class="p p-Indicator">]</span>
 
 <span class="c1"># Rest of the settings are &quot;host&quot; settings:</span>
 <span class="c1"># - For native building/cross building: Where the library/program will run.</span>
@@ -267,7 +267,7 @@ are possible.</p>
     <span class="nt">SunOS</span><span class="p">:</span>
     <span class="nt">Arduino</span><span class="p">:</span>
         <span class="nt">board</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ANY</span>
-<span class="nt">arch</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">x86</span><span class="p p-Indicator">,</span> <span class="nv">x86_64</span><span class="p p-Indicator">,</span> <span class="nv">ppc32</span><span class="p p-Indicator">,</span> <span class="nv">ppc64le</span><span class="p p-Indicator">,</span> <span class="nv">ppc64</span><span class="p p-Indicator">,</span> <span class="nv">armv5el</span><span class="p p-Indicator">,</span> <span class="nv">armv5hf</span><span class="p p-Indicator">,</span> <span class="nv">armv6</span><span class="p p-Indicator">,</span> <span class="nv">armv7</span><span class="p p-Indicator">,</span> <span class="nv">armv7hf</span><span class="p p-Indicator">,</span> <span class="nv">armv7s</span><span class="p p-Indicator">,</span> <span class="nv">armv7k</span><span class="p p-Indicator">,</span> <span class="nv">armv8</span><span class="p p-Indicator">,</span> <span class="nv">armv8_32</span><span class="p p-Indicator">,</span> <span class="nv">armv8.3</span><span class="p p-Indicator">,</span> <span class="nv">sparc</span><span class="p p-Indicator">,</span> <span class="nv">sparcv9</span><span class="p p-Indicator">,</span> <span class="nv">mips</span><span class="p p-Indicator">,</span> <span class="nv">mips64</span><span class="p p-Indicator">,</span> <span class="nv">avr</span><span class="p p-Indicator">]</span>
+<span class="nt">arch</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">x86</span><span class="p p-Indicator">,</span> <span class="nv">x86_64</span><span class="p p-Indicator">,</span> <span class="nv">ppc32</span><span class="p p-Indicator">,</span> <span class="nv">ppc64le</span><span class="p p-Indicator">,</span> <span class="nv">ppc64</span><span class="p p-Indicator">,</span> <span class="nv">armv5el</span><span class="p p-Indicator">,</span> <span class="nv">armv5hf</span><span class="p p-Indicator">,</span> <span class="nv">armv6</span><span class="p p-Indicator">,</span> <span class="nv">armv7</span><span class="p p-Indicator">,</span> <span class="nv">armv7hf</span><span class="p p-Indicator">,</span> <span class="nv">armv7s</span><span class="p p-Indicator">,</span> <span class="nv">armv7k</span><span class="p p-Indicator">,</span> <span class="nv">armv8</span><span class="p p-Indicator">,</span> <span class="nv">armv8_32</span><span class="p p-Indicator">,</span> <span class="nv">armv8.3</span><span class="p p-Indicator">,</span> <span class="nv">sparc</span><span class="p p-Indicator">,</span> <span class="nv">sparcv9</span><span class="p p-Indicator">,</span> <span class="nv">mips</span><span class="p p-Indicator">,</span> <span class="nv">mips64</span><span class="p p-Indicator">,</span> <span class="nv">avr</span><span class="p p-Indicator">,</span> <span class="nv">s390</span><span class="p p-Indicator">,</span> <span class="nv">s390x</span><span class="p p-Indicator">]</span>
 <span class="nt">compiler</span><span class="p">:</span>
     <span class="nt">sun-cc</span><span class="p">:</span>
         <span class="nt">version</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;5.10&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;5.11&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;5.12&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;5.13&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;5.14&quot;</span><span class="p p-Indicator">]</span>
@@ -338,6 +338,8 @@ Systems).</li>
 <li><strong>mips64</strong>: The 64 bit MIPS (Microprocessor without Interlocked Pipelined Stages) developed by MIPS Technologies (formerly MIPS Computer
 Systems).</li>
 <li><strong>avr</strong>: The 8 bit AVR microcontroller architecture developed by Atmel (Microchip Technology).</li>
+<li><strong>s390</strong>: The 32 bit address Enterprise Systems Architecture 390 from IBM.</li>
+<li><strong>s390x</strong>: The 64 bit address Enterprise Systems Architecture 390 from IBM.</li>
 </ul>
 </div>
 </div>
@@ -382,7 +384,7 @@ Systems).</li>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.13
+      Version: 1.14
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -390,7 +392,11 @@ Systems).</li>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.13</a></dd>
+            <dd><a href="/en/latest/index.html">1.14</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.13/index.html">1.13</a></dd>
           
         
           
@@ -448,7 +454,7 @@ Systems).</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.13.3',
+            VERSION:'1.14.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

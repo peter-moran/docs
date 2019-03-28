@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>json &mdash; conan 1.13.3 documentation</title>
+  <title>json &mdash; conan 1.14.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.13.3 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.14.0 documentation" href="../../index.html"/>
         <link rel="up" title="Generators" href="../generators.html"/>
         <link rel="next" title="premake" href="premake.html"/>
         <link rel="prev" title="txt" href="text.html"/>
@@ -133,10 +133,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="../conanfile_txt.html">conanfile.txt</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../conanfile.html">conanfile.py</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../generators.html">Generators</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="cmake.html"><cite>cmake</cite></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cmakemulti.html"><cite>cmake_multi</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake.html">cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmakemulti.html">cmake_multi</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cmake_paths.html"><cite>cmake_paths</cite></a></li>
 <li class="toctree-l3"><a class="reference internal" href="cmake_find_package.html"><cite>cmake_find_package</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_find_package_multi.html"><cite>cmake_find_package_multi</cite></a></li>
 <li class="toctree-l3"><a class="reference internal" href="visualstudio.html">visual_studio</a></li>
 <li class="toctree-l3"><a class="reference internal" href="visualstudiomulti.html"><cite>visual_studio_multi</cite></a></li>
 <li class="toctree-l3"><a class="reference internal" href="visualstudiolegacy.html">visual_studio_legacy</a></li>
@@ -254,7 +255,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="json">
 <span id="json-generator"></span><h1>json<a class="headerlink" href="#json" title="Permalink to this headline">¶</a></h1>
-<p>A file named <em>conanbuildinfo.json</em> will be generated. It will contain the information about every dependency and the installed settings and options:</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Actual JSON may have more fields not documented here. Those fields may change in the future
+without previous warning.</p>
+</div>
+<p>A file named <em>conanbuildinfo.json</em> will be generated. It will contain the information about
+every dependency and the installed settings and options:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;deps_env_info&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="nt">&quot;MY_ENV_VAR&quot;</span><span class="p">:</span> <span class="s2">&quot;foo&quot;</span>
@@ -298,20 +305,50 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>The generated <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.json</span></code> file is a json file with the following keys:</p>
+<p>The generated <em>conanbuildinfo.json</em> file is a JSON file with the following keys:</p>
 <div class="section" id="dependencies">
 <h2>dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
-<p>The dependencies is a list, with each item belonging to one dependency, and each one with the following keys:
-- name
-- version
-- description
-- rootpath
-- sysroot
-- include_paths, lib_paths, bin_paths, build_paths, res_paths
-- libs
-- defines, cflags, cppflags, sharedlinkflags, exelinkflags</p>
-<p>Please note it is an ordered list, not a map, and dependency order is relevant. Upstream dependencies, i.e. the
+<p>The dependencies is a list, with each item belonging to one dependency, and each one with the following keys:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">name</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">version</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">description</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">rootpath</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">sysroot</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">include_paths</span></code>, <code class="docutils literal notranslate"><span class="pre">lib_paths</span></code>, <code class="docutils literal notranslate"><span class="pre">bin_paths</span></code>, <code class="docutils literal notranslate"><span class="pre">build_paths</span></code>, <code class="docutils literal notranslate"><span class="pre">res_paths</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">libs</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">defines</span></code>, <code class="docutils literal notranslate"><span class="pre">cflags</span></code>, <code class="docutils literal notranslate"><span class="pre">cppflags</span></code>, <code class="docutils literal notranslate"><span class="pre">sharedlinkflags</span></code>, <code class="docutils literal notranslate"><span class="pre">exelinkflags</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">configs</span></code> (only for multi config dependencies, see below)</li>
+</ul>
+</div></blockquote>
+<p>Please note that the dependencies are ordered, it isn’t a map, order is relevant. Upstream dependencies, i.e. the
 ones that do not depend on other packages, will be first, and their direct dependencies after them, and so on.</p>
+<p>The node <code class="docutils literal notranslate"><span class="pre">configs</span></code> will appear only for <a class="reference internal" href="../../creating_packages/package_approaches.html#packaging-approach-n-1"><span class="std std-ref">multi config recipes</span></a>,
+it is holding a dictionary with the data related to each configuration:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="nt">&quot;...&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+<span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;rootpath&quot;</span><span class="p">:</span> <span class="s2">&quot;/private/var/folders/yq/14hmvxm96xd7gfgl37_tnrbh0000gn/T/tmpkp9l_dovconans/path with spaces/.conan/data/Hello/0.1/lasote/testing/package/46f53f156846659bf39ad6675fa0ee8156e859fe&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;...&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;configs&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;debug&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;libs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;hello_d&quot;</span><span class="p">]</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;release&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;libs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;hello&quot;</span><span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;...&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span>
+    <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="deps-env-info">
 <h2>deps_env_info<a class="headerlink" href="#deps-env-info" title="Permalink to this headline">¶</a></h2>
@@ -371,7 +408,7 @@ ones that do not depend on other packages, will be first, and their direct depen
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.13
+      Version: 1.14
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -379,7 +416,11 @@ ones that do not depend on other packages, will be first, and their direct depen
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.13</a></dd>
+            <dd><a href="/en/latest/index.html">1.14</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.13/index.html">1.13</a></dd>
           
         
           
@@ -437,7 +478,7 @@ ones that do not depend on other packages, will be first, and their direct depen
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.13.3',
+            VERSION:'1.14.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

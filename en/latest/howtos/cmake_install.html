@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>How to reuse cmake install for package() method &mdash; conan 1.13.3 documentation</title>
+  <title>How to reuse cmake install for package() method &mdash; conan 1.14.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.13.3 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.14.0 documentation" href="../index.html"/>
         <link rel="up" title="Howtos" href="../howtos.html"/>
         <link rel="next" title="How to collaborate on other users’ packages" href="collaborate_packages.html"/>
         <link rel="prev" title="Manage RPATHs" href="manage_shared_libraries/rpaths.html"/>
@@ -261,17 +261,6 @@ in <code class="docutils literal notranslate"><span class="pre">package()</span>
 <p>The <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method specifies the list of the necessary libraries, defines and flags for different build configurations for the
 consumers of the package. This is necessary as there is no possible way to extract this
 information from the CMake install automatically.</p>
-<div class="admonition important">
-<p class="first admonition-title">Important</p>
-<p>Please mind that if you use <code class="docutils literal notranslate"><span class="pre">cmake.install()</span></code> in <code class="docutils literal notranslate"><span class="pre">package()</span></code>, it will be called twice if you are using
-<a class="reference internal" href="../reference/conanfile/attributes.html#no-copy-source"><span class="std std-ref">no_copy_source</span></a> attribute in your conanfile.</p>
-<p>CMake usually uses <code class="docutils literal notranslate"><span class="pre">install</span></code> directive to package both the artifacts and source code (<em>i.e.</em> header files) into the package folder.
-Hence calling <code class="docutils literal notranslate"><span class="pre">package()</span></code> twice, while having no side effects, is wasting a couple of cycles, since source code is already copied in
-the first invocation of <code class="docutils literal notranslate"><span class="pre">package()</span></code> and the install step will be done twice. Files will be simply overwritten, but install steps are
-sometimes time-expensive and this doubles the “packaging” time.</p>
-<p class="last">This might be unintuitive if you only use CMake, but mind that Conan needs to cater to many different build systems and scenarios
-(<em>e.g.</em> where you don’t control the CMake configuration directly) and hence this workflow is indispensable.</p>
-</div>
 </div>
 
 
@@ -314,7 +303,7 @@ sometimes time-expensive and this doubles the “packaging” time.</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.13
+      Version: 1.14
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -322,7 +311,11 @@ sometimes time-expensive and this doubles the “packaging” time.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.13</a></dd>
+            <dd><a href="/en/latest/index.html">1.14</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.13/index.html">1.13</a></dd>
           
         
           
@@ -380,7 +373,7 @@ sometimes time-expensive and this doubles the “packaging” time.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.13.3',
+            VERSION:'1.14.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

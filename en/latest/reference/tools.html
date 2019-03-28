@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tools &mdash; conan 1.13.3 documentation</title>
+  <title>Tools &mdash; conan 1.14.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.13.3 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.14.0 documentation" href="../index.html"/>
         <link rel="up" title="Reference" href="../reference.html"/>
         <link rel="next" title="Configuration files" href="config_files.html"/>
         <link rel="prev" title="RunEnvironment" href="build_helpers/run_environment.html"/>
@@ -1410,7 +1410,7 @@ path only for that Visual type and version, otherwise <code class="docutils lite
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">collect_libs</span><span class="p">(</span><span class="n">conanfile</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Returns a list of library names from the libraries (files with extensions <em>.so</em>, <em>.lib</em>, <em>.a</em> and <em>.dylib</em>) located inside the
+<p>Returns a sorted list of library names from the libraries (files with extensions <em>.so</em>, <em>.lib</em>, <em>.a</em> and <em>.dylib</em>) located inside the
 <code class="docutils literal notranslate"><span class="pre">conanfile.cpp_info.libdirs</span></code> (by default) or the <strong>folder</strong> directory relative to the package folder. Useful to collect not
 inter-dependent libraries or with complex names like <code class="docutils literal notranslate"><span class="pre">libmylib-x86-debug-en.lib</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">tools</span>
@@ -1781,7 +1781,7 @@ if <code class="docutils literal notranslate"><span class="pre">file.txt</span><
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.13
+      Version: 1.14
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -1789,7 +1789,11 @@ if <code class="docutils literal notranslate"><span class="pre">file.txt</span><
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.13</a></dd>
+            <dd><a href="/en/latest/index.html">1.14</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.13/index.html">1.13</a></dd>
           
         
           
@@ -1847,7 +1851,7 @@ if <code class="docutils literal notranslate"><span class="pre">file.txt</span><
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.13.3',
+            VERSION:'1.14.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

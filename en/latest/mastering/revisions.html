@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Package Revisions &mdash; conan 1.13.3 documentation</title>
+  <title>Package Revisions &mdash; conan 1.14.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.13.3 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.14.0 documentation" href="../index.html"/>
         <link rel="up" title="Mastering Conan" href="../mastering.html"/>
         <link rel="next" title="Systems and cross building" href="../systems_cross_building.html"/>
         <link rel="prev" title="Conan local cache: concurrency, Continuous Integration, isolation" href="custom_cache.html"/>
@@ -223,7 +223,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
            <div itemprop="articleBody">
             
   <div class="section" id="package-revisions">
-<h1>Package Revisions<a class="headerlink" href="#package-revisions" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>Package Revisions<a class="headerlink" href="#package-revisions" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
@@ -241,28 +241,17 @@ of our project, we can install the same dependencies just by using the graph loc
 <p><strong>In the client</strong></p>
 <ul>
 <li><p class="first">When a <strong>recipe</strong> is exported, Conan calculates a unique ID (revision). For every change,
-a new recipe revision (RREV) will be calculated:</p>
-<blockquote>
-<div><ul class="simple">
-<li>If Conan detects some control version system (Git or SVN) in the conanfile directory, the commit hash will be used as the RREV.</li>
-<li>Otherwise, the checksum hash of the recipe manifest will be used as the RREV.</li>
-</ul>
-</div></blockquote>
+a new recipe revision (RREV) will be calculated. By default it will use the checksum hash of the
+recipe manifest.</p>
+<p>Nevertheless, the recipe creator can explicitly declare the <a class="reference internal" href="../reference/conanfile/attributes.html#revision-mode-attribute"><span class="std std-ref">revision mode</span></a>,
+it can be either <code class="docutils literal notranslate"><span class="pre">scm</span></code> (uses version control system or raises) or <code class="docutils literal notranslate"><span class="pre">hash</span></code> (use manifest hash).</p>
 </li>
-</ul>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">In future versions Conan will let the user choose to use the “recipe manifest” instead of the scm. For example,
-when you use a mono-repo with N recipes, it is more convenient to calculate each
-recipe revision based on its contents and not in the common github repository commit hash.
-(<a class="reference external" href="https://github.com/conan-io/conan/issues/4413">https://github.com/conan-io/conan/issues/4413</a>)</p>
-</div>
-<ul class="simple">
-<li>When a <strong>package</strong> is created (by running <a class="reference internal" href="../reference/commands/creator/create.html#conan-create"><span class="std std-ref">conan create</span></a> or <a class="reference internal" href="../reference/commands/creator/export-pkg.html#conan-export-pkg"><span class="std std-ref">conan export-pkg</span></a>)
+<li><p class="first">When a <strong>package</strong> is created (by running <a class="reference internal" href="../reference/commands/creator/create.html#conan-create"><span class="std std-ref">conan create</span></a> or <a class="reference internal" href="../reference/commands/creator/export-pkg.html#conan-export-pkg"><span class="std std-ref">conan export-pkg</span></a>)
 a new package revision (PREV) will be calculated always using the hash of the package contents.
 The packages and their revisions (PREVs) belongs to a concrete recipe revision (RREV).
 The same package ID (for example for Linux/GCC5/Debug), can have multiple revisions (PREVs) that belong
-to a concrete RREV.</li>
+to a concrete RREV.</p>
+</li>
 </ul>
 <p>If a client request a reference like <cite>lib/1.0&#64;conan/stable</cite>, Conan will retrieve automatically the latest revision.
 In the client cache there is <strong>only one revision installed at the same time</strong>.</p>
@@ -371,7 +360,7 @@ generate and upload again the N binaries if you want them to be used with the ne
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.13
+      Version: 1.14
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -379,7 +368,11 @@ generate and upload again the N binaries if you want them to be used with the ne
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.13</a></dd>
+            <dd><a href="/en/latest/index.html">1.14</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.13/index.html">1.13</a></dd>
           
         
           
@@ -437,7 +430,7 @@ generate and upload again the N binaries if you want them to be used with the ne
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.13.3',
+            VERSION:'1.14.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

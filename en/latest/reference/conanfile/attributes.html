@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Attributes &mdash; conan 1.13.3 documentation</title>
+  <title>Attributes &mdash; conan 1.14.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.13.3 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.14.0 documentation" href="../../index.html"/>
         <link rel="up" title="conanfile.py" href="../conanfile.html"/>
         <link rel="next" title="Methods" href="methods.html"/>
         <link rel="prev" title="conanfile.py" href="../conanfile.html"/>
@@ -171,6 +171,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l4"><a class="reference internal" href="#develop">develop</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#keep-imports">keep_imports</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#scm">scm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#revision-mode">revision_mode</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="methods.html">Methods</a></li>
@@ -723,6 +724,12 @@ the compression is enabled or not. Now, if you want to force the usage of Zlib(v
 </div>
 <p>This <strong>will not introduce a new dependency</strong>, it will just change Zlib v2 to v3 if A actually
 requires it. Otherwise Zlib will not be a dependency of your package.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To prevent accidental override of transitive dependencies, check the config variable
+<a class="reference internal" href="../config_files/conan.conf.html#conan-conf"><span class="std std-ref">general.error_on_override</span></a> or the environment variable
+<a class="reference internal" href="../env_vars.html#env-vars-conan-error-on-override"><span class="std std-ref">CONAN_ERROR_ON_OVERRIDE</span></a>.</p>
+</div>
 <div class="section" id="version-ranges">
 <span id="version-ranges-reference"></span><h3>version ranges<a class="headerlink" href="#version-ranges" title="Permalink to this headline">¶</a></h3>
 <p>The syntax is using brackets:</p>
@@ -886,7 +893,7 @@ through the <code class="docutils literal notranslate"><span class="pre">CONAN_U
 <p>The attribute <code class="docutils literal notranslate"><span class="pre">no_copy_source</span></code> tells the recipe that the source code will not be copied from the <code class="docutils literal notranslate"><span class="pre">source</span></code> folder to the <code class="docutils literal notranslate"><span class="pre">build</span></code> folder.
 This is mostly an optimization for packages with large source codebases, to avoid extra copies. It is <strong>mandatory</strong> that the source code must not be modified at all by the configure or build scripts, as the source code will be shared among all builds.</p>
 <p>To be able to use it, the package recipe can access the <code class="docutils literal notranslate"><span class="pre">self.source_folder</span></code> attribute, which will point to the <code class="docutils literal notranslate"><span class="pre">build</span></code> folder when <code class="docutils literal notranslate"><span class="pre">no_copy_source=False</span></code> or not defined, and will point to the <code class="docutils literal notranslate"><span class="pre">source</span></code> folder when <code class="docutils literal notranslate"><span class="pre">no_copy_source=True</span></code></p>
-<p>When this attribute is set to True, the <code class="docutils literal notranslate"><span class="pre">package()</span></code> method will be called twice, one copying from the <code class="docutils literal notranslate"><span class="pre">source</span></code> folder and the other copying from the <code class="docutils literal notranslate"><span class="pre">build</span></code> folder.</p>
+<p>When this attribute is set to True, the <code class="docutils literal notranslate"><span class="pre">self.copy()</span></code> lines will be called twice, one copying from the <code class="docutils literal notranslate"><span class="pre">source</span></code> folder and the other copying from the <code class="docutils literal notranslate"><span class="pre">build</span></code> folder.</p>
 </div>
 <div class="section" id="source-folder">
 <span id="attribute-source-folder"></span><span id="folders-attributes-reference"></span><h2>source_folder<a class="headerlink" href="#source-folder" title="Permalink to this headline">¶</a></h2>
@@ -1229,6 +1236,24 @@ from a <a class="reference internal" href="../../extending/python_requires.html#
 <li><a class="reference internal" href="../../creating_packages/package_repo.html#package-repo"><span class="std std-ref">Creating packages/Recipe and sources in the same repo</span></a></li>
 </ul>
 </div>
+<div class="section" id="revision-mode">
+<span id="revision-mode-attribute"></span><h2>revision_mode<a class="headerlink" href="#revision-mode" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This attribute is part of the <a class="reference internal" href="../../mastering/revisions.html#package-revisions"><span class="std std-ref">package revisions</span></a> feature, so
+it is also an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
+</div>
+<p>This attribute allow each recipe to declare how the revision for the recipe itself should
+be computed. It can take three different values:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">&quot;hash&quot;</span></code> (by default): Conan will use the checksum hash of the recipe manifest to
+compute the revision for the recipe.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&quot;scm&quot;</span></code>: the commit ID will be used as the recipe revision if it belongs to a known
+repository system (Git or SVN). If there is no repository it will raise an error.</li>
+</ul>
+</div></blockquote>
+</div>
 </div>
 
 
@@ -1271,7 +1296,7 @@ from a <a class="reference internal" href="../../extending/python_requires.html#
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.13
+      Version: 1.14
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -1279,7 +1304,11 @@ from a <a class="reference internal" href="../../extending/python_requires.html#
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.13</a></dd>
+            <dd><a href="/en/latest/index.html">1.14</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.13/index.html">1.13</a></dd>
           
         
           
@@ -1337,7 +1366,7 @@ from a <a class="reference internal" href="../../extending/python_requires.html#
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.13.3',
+            VERSION:'1.14.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

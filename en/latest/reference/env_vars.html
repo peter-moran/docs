@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Environment variables &mdash; conan 1.13.3 documentation</title>
+  <title>Environment variables &mdash; conan 1.14.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.13.3 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.14.0 documentation" href="../index.html"/>
         <link rel="up" title="Reference" href="../reference.html"/>
         <link rel="next" title="Hooks [EXPERIMENTAL]" href="hooks.html"/>
         <link rel="prev" title="Editable layout files" href="config_files/editable_layout.html"/>
@@ -171,7 +171,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#conan-user-home-short">CONAN_USER_HOME_SHORT</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-use-always-short-paths">CONAN_USE_ALWAYS_SHORT_PATHS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-verbose-traceback">CONAN_VERBOSE_TRACEBACK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conan-error-on-override">CONAN_ERROR_ON_OVERRIDE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-vs-installation-preference">CONAN_VS_INSTALLATION_PREFERENCE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conan-cacert-path">CONAN_CACERT_PATH</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="hooks.html">Hooks [EXPERIMENTAL]</a></li>
@@ -665,6 +667,13 @@ overrides the value defined in recipes for the attribute <a class="reference int
 <p><strong>Defaulted to</strong>: <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
 <p>When an error is raised in a recipe or even in the Conan code base, if set to <code class="docutils literal notranslate"><span class="pre">1</span></code> it will show the complete traceback to ease the debugging.</p>
 </div>
+<div class="section" id="conan-error-on-override">
+<span id="env-vars-conan-error-on-override"></span><h2>CONAN_ERROR_ON_OVERRIDE<a class="headerlink" href="#conan-error-on-override" title="Permalink to this headline">¶</a></h2>
+<p>** Defaulted to**: <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+<p>When a consumer overrides one transitive requirement without using explicitly the keyword <code class="docutils literal notranslate"><span class="pre">override</span></code>
+Conan will raise an error if this environmente variable is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<p>This variable can also be set in the <a class="reference internal" href="config_files/conan.conf.html#conan-conf"><span class="std std-ref">*conan.conf*</span></a> file under the section <code class="docutils literal notranslate"><span class="pre">[general]</span></code>.</p>
+</div>
 <div class="section" id="conan-vs-installation-preference">
 <span id="env-vars-conan-vs-installation-preference"></span><h2>CONAN_VS_INSTALLATION_PREFERENCE<a class="headerlink" href="#conan-vs-installation-preference" title="Permalink to this headline">¶</a></h2>
 <p><strong>Defaulted to</strong>: <code class="docutils literal notranslate"><span class="pre">Enterprise,</span> <span class="pre">Professional,</span> <span class="pre">Community,</span> <span class="pre">BuildTools</span></code></p>
@@ -678,6 +687,13 @@ that uses <code class="docutils literal notranslate"><span class="pre">tools.vs_
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span> <span class="nv">CONAN_VS_INSTALLATION_PREFERENCE</span><span class="o">=</span>BuildTools
 </pre></div>
 </div>
+</div>
+<div class="section" id="conan-cacert-path">
+<h2>CONAN_CACERT_PATH<a class="headerlink" href="#conan-cacert-path" title="Permalink to this headline">¶</a></h2>
+<p><strong>Defaulted to</strong>: Not defined</p>
+<p>Specify an alternative path to a <em>cacert.pem</em> file to be used for requests. This variable
+overrides the value defined in the <em>conan.conf</em> as <code class="docutils literal notranslate"><span class="pre">cacert_path</span> <span class="pre">=</span> <span class="pre">&lt;path/to/cacert.pem&gt;</span></code>
+under the section <code class="docutils literal notranslate"><span class="pre">[general]</span></code>.</p>
 </div>
 </div>
 
@@ -721,7 +737,7 @@ that uses <code class="docutils literal notranslate"><span class="pre">tools.vs_
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.13
+      Version: 1.14
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -729,7 +745,11 @@ that uses <code class="docutils literal notranslate"><span class="pre">tools.vs_
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.13</a></dd>
+            <dd><a href="/en/latest/index.html">1.14</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.13/index.html">1.13</a></dd>
           
         
           
@@ -787,7 +807,7 @@ that uses <code class="docutils literal notranslate"><span class="pre">tools.vs_
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.13.3',
+            VERSION:'1.14.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

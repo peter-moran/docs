@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan install &mdash; conan 1.13.3 documentation</title>
+  <title>conan install &mdash; conan 1.14.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.13.3 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.14.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan config" href="config.html"/>
         <link rel="prev" title="Commands" href="../../commands.html"/>
@@ -385,20 +385,31 @@ if new upstream versions are available:</p>
 <span id="buildoptions"></span><h2>build options<a class="headerlink" href="#build-options" title="Permalink to this headline">¶</a></h2>
 <p>Both the conan <strong>install</strong> and <strong>create</strong> commands have options to specify whether conan should try
 to build things or not:</p>
-<ul class="simple">
-<li><strong class="command">--build=never</strong>: This is the default option. It is not necessary to write it explicitly.
+<ul>
+<li><p class="first"><strong class="command">--build=never</strong>: This is the default option. It is not necessary to write it explicitly.
 Conan will not try to build packages when the requested configuration does not match, in which
-case it will throw an error.</li>
-<li><strong class="command">--build=missing</strong>: Conan will try to build from source, all packages of which the
-requested configuration was not found on any of the active remotes.</li>
-<li><strong class="command">--build=outdated</strong>: Conan will try to build from code if the binary is not built with the
-current recipe or when missing binary package.</li>
-<li><strong class="command">--build=[pattern]</strong>: A fnmatch file pattern of a package name. E.g., <code class="docutils literal notranslate"><span class="pre">zl*</span></code> will match
-<code class="docutils literal notranslate"><span class="pre">zlib</span></code> package. Conan will force the build of the packages, the name of which matches the given
-<strong>pattern</strong>. Several patterns can be specified, chaining multiple options,
-e.g., <strong class="command">--build=pattern1 --build=pattern2</strong>.</li>
-<li><strong class="command">--build</strong>: Always build everything from source. Produces a clean re-build of all packages
-and transitively dependent packages</li>
+case it will throw an error.</p>
+</li>
+<li><p class="first"><strong class="command">--build=missing</strong>: Conan will try to build from source, all packages of which the
+requested configuration was not found on any of the active remotes.</p>
+</li>
+<li><p class="first"><strong class="command">--build=outdated</strong>: Conan will try to build from code if the binary is not built with the
+current recipe or when missing binary package.</p>
+</li>
+<li><p class="first"><strong class="command">--build=[pattern]</strong>: A fnmatch case-sensitive pattern of a package reference or only the package name.
+Conan will force the build of the packages whose reference matches the given
+<strong>pattern</strong>. Several patterns can be specified, chaining multiple options:</p>
+<blockquote>
+<div><ul class="simple">
+<li>e.g., <strong class="command">--build=pattern1 --build=pattern2</strong> can be used to specify more than one pattern.</li>
+<li>e.g., <strong class="command">--build=zlib</strong> will match any package named <code class="docutils literal notranslate"><span class="pre">zlib</span></code> (same as <code class="docutils literal notranslate"><span class="pre">zlib/*</span></code>).</li>
+<li>e.g., <strong class="command">--build=z*&#64;conan/stable</strong> will match any package starting with <code class="docutils literal notranslate"><span class="pre">z</span></code> with <code class="docutils literal notranslate"><span class="pre">conan/stable</span></code> as user/channel.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><strong class="command">--build</strong>: Always build everything from source. Produces a clean re-build of all packages
+and transitively dependent packages</p>
+</li>
 </ul>
 </div>
 <div class="section" id="env-variables">
@@ -502,7 +513,7 @@ $ conan install pkg/version@user/testing user/channel <span class="c1"># Error, 
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.13
+      Version: 1.14
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -510,7 +521,11 @@ $ conan install pkg/version@user/testing user/channel <span class="c1"># Error, 
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.13</a></dd>
+            <dd><a href="/en/latest/index.html">1.14</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.13/index.html">1.13</a></dd>
           
         
           
@@ -568,7 +583,7 @@ $ conan install pkg/version@user/testing user/channel <span class="c1"># Error, 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.13.3',
+            VERSION:'1.14.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

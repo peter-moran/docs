@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan.conf &mdash; conan 1.13.3 documentation</title>
+  <title>conan.conf &mdash; conan 1.14.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.13.3 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.14.0 documentation" href="../../index.html"/>
         <link rel="up" title="Configuration files" href="../config_files.html"/>
         <link rel="next" title="profiles/default" href="default_profile.html"/>
         <link rel="prev" title="Configuration files" href="../config_files.html"/>
@@ -252,6 +252,7 @@ request_timeout = 60                  # environment CONAN_REQUEST_TIMEOUT (secon
 # sysrequires_mode = enabled            # environment CONAN_SYSREQUIRES_MODE (allowed modes enabled/verify/disabled)
 # vs_installation_preference = Enterprise, Professional, Community, BuildTools # environment CONAN_VS_INSTALLATION_PREFERENCE
 # verbose_traceback = False           # environment CONAN_VERBOSE_TRACEBACK
+# error_on_override = False           # environment CONAN_ERROR_ON_OVERRIDE
 # bash_path = &quot;&quot;                      # environment CONAN_BASH_PATH (only windows)
 # recipe_linter = False               # environment CONAN_RECIPE_LINTER
 # read_only_cache = True              # environment CONAN_READ_ONLY_CACHE
@@ -266,7 +267,7 @@ request_timeout = 60                  # environment CONAN_REQUEST_TIMEOUT (secon
 # conan_cmake_program = cmake         # environment CONAN_CMAKE_PROGRAM (overrides the make program used in CMake.cmake_program)
 
 # cmake_generator                     # environment CONAN_CMAKE_GENERATOR
-# http://www.vtk.org/Wiki/CMake_Cross_Compiling
+# https://vtk.org/Wiki/CMake_Cross_Compiling
 # cmake_toolchain_file                # environment CONAN_CMAKE_TOOLCHAIN_FILE
 # cmake_system_name                   # environment CONAN_CMAKE_SYSTEM_NAME
 # cmake_system_version                # environment CONAN_CMAKE_SYSTEM_VERSION
@@ -283,6 +284,8 @@ request_timeout = 60                  # environment CONAN_REQUEST_TIMEOUT (secon
 # Change the default location for building test packages to a temporary folder
 # which is deleted after the test.
 # temp_test_folder = True             # environment CONAN_TEMP_TEST_FOLDER
+
+# cacert_path                         # environment CONAN_CACERT_PATH
 
 [storage]
 # This is the default path, but you can write your own. It must be an absolute path or a
@@ -329,6 +332,9 @@ by default is Enterprise, Professional, Community and BuildTools. It can be fixe
 can also adjust the environment variable <code class="docutils literal notranslate"><span class="pre">CONAN_VS_INSTALLATION_PREFERENCE</span></code>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">verbose_traceback</span></code> variable will print the complete traceback when an error occurs in a recipe or even in the conan code base, allowing
 to debug the detected error.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">error_on_override</span></code> turn the messages related to dependencies overriding into errors. When a downstream
+package overrides some dependency upstream, if this variable is <code class="docutils literal notranslate"><span class="pre">True</span></code> then an error will be raised; to bypass
+these errors those requirements should be declared explicitly with the <code class="docutils literal notranslate"><span class="pre">override</span></code> keyword.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">bash_path</span></code> variable is used only in windows to help the
 <a class="reference internal" href="../tools.html#tools-run-in-windows-bash"><span class="std std-ref">tools.run_in_windows_bash()</span></a> function to locate our Cygwin/MSYS2 bash.
 Set it with the bash executable path if it’s not in the PATH or you want to use a different one.</p>
@@ -381,6 +387,8 @@ If not specified, the packages marked as <cite>short_paths</cite> will be stored
 for modern Windows that enable long paths at the system level.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">verbose_traceback</span></code> variable will print the complete traceback when an error occurs in a recipe or even
 in the conan code base, allowing to debug the detected error.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">cacert_path</span></code> variable lets the user specify a custom path to the <em>cacert.pem</em> file to use
+in requests. You can also adjust this value using the environment variable <code class="docutils literal notranslate"><span class="pre">CONAN_CACERT_PATH</span></code>.</p>
 </div>
 <div class="section" id="storage">
 <h2>Storage<a class="headerlink" href="#storage" title="Permalink to this headline">¶</a></h2>
@@ -476,7 +484,7 @@ $ <span class="nb">set</span> <span class="nv">HTTPS_PROXY</span><span class="o"
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.13
+      Version: 1.14
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -484,7 +492,11 @@ $ <span class="nb">set</span> <span class="nv">HTTPS_PROXY</span><span class="o"
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.13</a></dd>
+            <dd><a href="/en/latest/index.html">1.14</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.13/index.html">1.13</a></dd>
           
         
           
@@ -542,7 +554,7 @@ $ <span class="nb">set</span> <span class="nv">HTTPS_PROXY</span><span class="o"
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.13.3',
+            VERSION:'1.14.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

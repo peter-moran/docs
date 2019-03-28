@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan config &mdash; conan 1.13.3 documentation</title>
+  <title>conan config &mdash; conan 1.14.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.13.3 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.14.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan get" href="get.html"/>
         <link rel="prev" title="conan install" href="install.html"/>
@@ -268,6 +268,29 @@ $&gt; <span class="m">10</span>
 </ul>
 <div class="section" id="conan-config-install">
 <span id="id2"></span><h2>conan config install<a class="headerlink" href="#conan-config-install" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>usage: conan config install <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>--verify-ssl <span class="o">[</span>VERIFY_SSL<span class="o">]]</span> <span class="o">[</span>--type <span class="o">{</span>git<span class="o">}]</span>
+                          <span class="o">[</span>--args ARGS<span class="o">]</span> <span class="o">[</span>-sf SOURCE_FOLDER<span class="o">]</span>
+                          <span class="o">[</span>-tf TARGET_FOLDER<span class="o">]</span>
+                          <span class="o">[</span>item<span class="o">]</span>
+
+positional arguments:
+  item                  git repository, <span class="nb">local</span> folder or zip file <span class="o">(</span><span class="nb">local</span> or
+                        http<span class="o">)</span> where the configuration is stored
+
+optional arguments:
+  -h, --help            show this <span class="nb">help</span> message and <span class="nb">exit</span>
+  --verify-ssl <span class="o">[</span>VERIFY_SSL<span class="o">]</span>
+                        Verify SSL connection when downloading file
+  --type <span class="o">{</span>git<span class="o">}</span>, -t <span class="o">{</span>git<span class="o">}</span>
+                        Type of remote config
+  --args ARGS, -a ARGS  String with extra arguments <span class="k">for</span> <span class="s2">&quot;git clone&quot;</span>
+  -sf SOURCE_FOLDER, --source-folder SOURCE_FOLDER
+                        Install files only from a <span class="nb">source</span> subfolder from the
+                        specified origin
+  -tf TARGET_FOLDER, --target-folder TARGET_FOLDER
+                        Install to that path in the conan cache
+</pre></div>
+</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">install</span></code> is intended to share the Conan client configuration. For example, in a company or organization,
 is important to have common <code class="docutils literal notranslate"><span class="pre">settings.yml</span></code>, <code class="docutils literal notranslate"><span class="pre">profiles</span></code>, etc.</p>
 <p>It can get its configuration files from a local or remote zip file, from a local directory or from a git repository. It then installs the
@@ -320,20 +343,34 @@ a Conan client configuration.</p>
 remotes. Sharing the complete contents of this file via this command is not recommended as this records the status of the local cache,
 which may be different from one machine to another.</p>
 </div>
-<p>The specified URL or path, the arguments used (if any) and the source type (from git, from dir, from zip file or from URL) will be stored in
-the <code class="docutils literal notranslate"><span class="pre">general.config_install</span></code> variable of the <em>conan.conf</em> file, so as following calls to <strong class="command">conan config install</strong> command doesn’t
-need to specify them.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">During the installation, Conan skips any file with the name <em>README.md</em> or <em>LICENSE.txt</em>.</p>
 </div>
+<p>The <strong class="command">conan config install &lt;item&gt;</strong> calls are stored in a <em>config_install.json</em> file in the Conan local cache. That allows to issue a <strong class="command">conan config install</strong> command, without arguments, to iterate over the cached configurations, executing them again (updating).</p>
 <p><strong>Examples</strong>:</p>
 <ul>
 <li><p class="first">Install the configuration from a URL:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan config install http://url/to/some/config.zip
 </pre></div>
 </div>
-<p>Conan config command stores the specified URL in the conan.conf <code class="docutils literal notranslate"><span class="pre">general.config_install</span></code> variable.</p>
+</li>
+<li><p class="first">Install the configuration from a URL, but only getting the files inside a <em>origin</em> folder
+inside the zip file, and putting them inside a <em>target</em> folder in the local cache:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan config install http://url/to/some/config.zip -sf<span class="o">=</span>origin -tf<span class="o">=</span>target
+</pre></div>
+</div>
+</li>
+<li><p class="first">Install configuration from 2 different zip files from 2 different urls, using different source
+and target folders for each one, then update all:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan config install http://url/to/some/config.zip -sf<span class="o">=</span>origin -tf<span class="o">=</span>target
+$ conan config install http://url/to/some/config.zip -sf<span class="o">=</span>origin2 -tf<span class="o">=</span>target2
+$ conan config install http://other/url/to/other.zip -sf<span class="o">=</span>hooks -tf<span class="o">=</span>hooks
+<span class="c1"># Later on, execute again the previous configurations cached:</span>
+$ conan config install
+</pre></div>
+</div>
+<p>It’s not needed to specify any argument, it will iterate previously stored configurations in <em>config_install.json</em>, executing them again.</p>
 </li>
 <li><p class="first">Install the configuration from a Git repository with submodules:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan config install http://github.com/user/conan_config/.git --args <span class="s2">&quot;--recursive&quot;</span>
@@ -348,14 +385,7 @@ need to specify them.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan config install http://url/to/some/config.zip --verify-ssl<span class="o">=</span>False
 </pre></div>
 </div>
-<p>This will disable the SSL check of the certificate. This option is defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code> and it is also stored in <em>conan.conf</em>, so
-following calls to this command don’t need to specify it again.</p>
-</li>
-<li><p class="first">Refresh the configuration again:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan config install
-</pre></div>
-</div>
-<p>It’s not needed to specify the url again, it is already stored.</p>
+<p>This will disable the SSL check of the certificate.</p>
 </li>
 <li><p class="first">Install the configuration from a local path:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan config install /path/to/some/config.zip
@@ -406,7 +436,7 @@ following calls to this command don’t need to specify it again.</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.13
+      Version: 1.14
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -414,7 +444,11 @@ following calls to this command don’t need to specify it again.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.13</a></dd>
+            <dd><a href="/en/latest/index.html">1.14</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.13/index.html">1.13</a></dd>
           
         
           
@@ -472,7 +506,7 @@ following calls to this command don’t need to specify it again.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.13.3',
+            VERSION:'1.14.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
