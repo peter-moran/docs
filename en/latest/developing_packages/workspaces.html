@@ -228,9 +228,9 @@ it. Consider the file formats, commands and flows to be unstable and subject to 
 should be able to work on them in isolation. But sometimes, some changes require modifications in more than one package at the same time.
 The local development flow can help, but it still requires using <strong class="command">export-pkg</strong> to put the artifacts in the local cache, where other
 packages under development will consume them.</p>
-<p>The Conan workspaces allow to have more than one package in user folders, and have them to directly use other packages from user folders
+<p>The Conan workspaces allow to have more than one package in user folders, and have them directly use other packages from user folders
 without needing to put them in the local cache. Furthermore, they enable incremental builds on large projects containing multiple packages.</p>
-<p>Lets introduce them with a practical example, the code can be found in the conan examples repository:</p>
+<p>Lets introduce them with a practical example; the code can be found in the conan examples repository:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/conan-io/examples.git
 $ <span class="nb">cd</span> features/workspace/cmake
 </pre></div>
@@ -253,7 +253,7 @@ and for Visual Studio (MSBuild, multi-configuration build environment), respecti
 </pre></div>
 </div>
 <p>The first section <code class="docutils literal notranslate"><span class="pre">editables</span></code> defines the mapping between package references and relative paths. Each one is equivalent to
-a <a class="reference internal" href="../reference/commands/development/editable.html#conan-editable-add"><span class="std std-ref">conan editable add</span></a> command (Do NOT do this, not necessary, it will be automatically done later. Just to understand
+a <a class="reference internal" href="../reference/commands/development/editable.html#conan-editable-add"><span class="std std-ref">conan editable add</span></a> command (Do NOT do this – it is not necessary. It will be automatically done later. Just to understand
 the behavior):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan editable add say say/0.1@user/testing --layout<span class="o">=</span>layout_gcc
 $ conan editable add hello hello/0.1@user/testing --layout<span class="o">=</span>layout_gcc
@@ -262,7 +262,7 @@ $ conan editable add chat chat/0.1@user/testing --layout<span class="o">=</span>
 </div>
 <p>The main difference is that this <em>Editable</em> state is only temporary for this workspace. It doesn’t affect other projects or
 packages, which can still consume these say, hello, chat packages from the local cache.</p>
-<p>Note that the <code class="docutils literal notranslate"><span class="pre">layout:</span> <span class="pre">layout_gcc</span></code> declaration in the workspace affect all the packages. It is also possible to define
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">layout:</span> <span class="pre">layout_gcc</span></code> declaration in the workspace affects all the packages. It is also possible to define
 a different layout per package, as:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">editables</span><span class="p">:</span>
     <span class="nt">say/0.1@user/testing</span><span class="p">:</span>
@@ -303,8 +303,8 @@ depend on different versions of the same library, as in any other Conan command.
 </div>
 <div class="section" id="single-configuration-build-environments">
 <h2>Single configuration build environments<a class="headerlink" href="#single-configuration-build-environments" title="Permalink to this headline">¶</a></h2>
-<p>There are some build systems, like Makefiles that requires the developer to manage different configurations in different build folders,
-and switch between folders to change configuration. The above described file is <em>conan_gcc.yml</em> file, which defines a Conan workspace that
+<p>There are some build systems, like Make, that require the developer to manage different configurations in different build folders,
+and switch between folders to change configuration. The file described above is <em>conan_gcc.yml</em> file, which defines a Conan workspace that
 works for a CMake based project for MinGW/Unix Makefiles gcc environments (working for apple-clang or clang would be very similar, if not identical).</p>
 <p>Lets use it to install this workspace:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mkdir build_release <span class="o">&amp;&amp;</span> <span class="nb">cd</span> build_release
@@ -360,7 +360,7 @@ Release: Hello World!
 Release: Hello World!
 </pre></div>
 </div>
-<p>Now, go do a change in some of the packages, for example the “say” one, and rebuild, see how it does an incremental build (fast).</p>
+<p>Now, go do a change in some of the packages, for example the “say” one, and rebuild. See how it does an incremental build (fast).</p>
 <p>Note that nothing will really be installed in the local cache, all the dependencies are resolved locally:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan search say
 There are no packages matching the <span class="s1">&#39;say&#39;</span> pattern
@@ -373,8 +373,8 @@ have defined the following:</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">conan_basic_setup</span><span class="p">(</span><span class="s">NO_OUTPUT_DIRS</span><span class="p">)</span>
 </pre></div>
 </div>
-<p class="last">This is because the default <code class="docutils literal notranslate"><span class="pre">conan_basic_setup()</span></code> does define output directories for artifacts as <em>bin</em>, <em>lib</em>, etc, which is
-not what the local project layout expects. You need to check and make sure that your build scripts and recipe matches both
+<p class="last">This is because the default <code class="docutils literal notranslate"><span class="pre">conan_basic_setup()</span></code> does define output directories for artifacts such as <em>bin</em>, <em>lib</em>, etc, which
+is not what the local project layout expects. You need to check and make sure that your build scripts and recipe matches both
 the expected local layout (as defined in layout files), and the recipe <code class="docutils literal notranslate"><span class="pre">package()</span></code> method logic.</p>
 </div>
 <p>Building for debug mode is done in its own folder:</p>
@@ -391,10 +391,10 @@ Debug: Bye World!
 </div>
 <div class="section" id="multi-configuration-build-environments">
 <h2>Multi configuration build environments<a class="headerlink" href="#multi-configuration-build-environments" title="Permalink to this headline">¶</a></h2>
-<p>Some build systems, like Visual Studio (MSBuild), they use “multi-configuration” environments. That is, even if the project is configured just once
+<p>Some build systems, like Visual Studio (MSBuild), use “multi-configuration” environments. That is, even if the project is configured just once
 you can switch between different configurations (like Debug/Release) directly in the IDE and build there.</p>
 <p>The above example uses the Conan <code class="docutils literal notranslate"><span class="pre">cmake</span></code> generator, that creates a single <em>conanbuildinfo.cmake</em> file. This is not a problem if we have our
-configurations built in different folders, each one will contain its own <em>conanbuildinfo.cmake</em>. But for Visual Studio that means that if
+configurations built in different folders. Each one will contain its own <em>conanbuildinfo.cmake</em>. For Visual Studio that means that if
 we wanted to switch from Debug&lt;-&gt;Release, we should issue a new <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">workspace</span> <span class="pre">install</span></code> command with the right <code class="docutils literal notranslate"><span class="pre">-s</span> <span class="pre">build_type</span></code> and
 do a clean build, in order to get the right dependencies.</p>
 <p>Conan has the <a class="reference internal" href="../integrations/cmake/cmake_multi_generator.html#cmake-multi"><span class="std std-ref">cmake_multi generator</span></a> generator, that allows this direct switch of Debug/Release configuration in the IDE. The <em>conanfile.py</em>
@@ -448,7 +448,7 @@ executing, debugging, switching from Debug and Release configurations freely fro
         | - conanbuildinfo_debug.cmake
 </pre></div>
 </div>
-<p>Note that they are not located in <em>build/Release</em> and <em>build/Debug</em> subfolders, that is because of the multi-config environment. To account for that
+<p>Note that they are not located in <em>build/Release</em> and <em>build/Debug</em> subfolders; that is because of the multi-config environment. To account for that
 the <em>layout_vs</em> define the <code class="docutils literal notranslate"><span class="pre">[build_folder]</span></code> not as <code class="docutils literal notranslate"><span class="pre">build/{settings.build_type}</span></code> but just as:</p>
 <div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[build_folder]</span>
 <span class="na">build</span>
