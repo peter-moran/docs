@@ -229,7 +229,7 @@ don’t want to install or retrieve them.</li>
 as the <em>CMakeLists.txt</em> is compatible, it will produce the same final package.</li>
 <li>You don’t want to add a lot of different versions (like those of CMake) to be able to use them to build the package. You want to easily
 change the requirements, without needing to edit the zlib package recipe.</li>
-<li>Some of them might not be even be taken into account when a package like zlib is created, such as cross-compiling it to Android (in which
+<li>Some of them might not even be taken into account when a package like zlib is created, such as cross-compiling it to Android (in which
 the Android toolchain would be a build requirement too).</li>
 </ul>
 <p>To address these needs Conan implements <code class="docutils literal notranslate"><span class="pre">build_requires</span></code>.</p>
@@ -261,7 +261,7 @@ special character <code class="docutils literal notranslate"><span class="pre">&
 </ul>
 <p>Remember that the consumer conanfile is the one inside the <em>test_package</em> folder or the one referenced in the <strong class="command">conan install</strong>
 command.</p>
-<p>Build requirements can be also specified in a package recipe, with the <code class="docutils literal notranslate"><span class="pre">build_requires</span></code> attribute and the <code class="docutils literal notranslate"><span class="pre">build_requirements()</span></code> method:</p>
+<p>Build requirements can also be specified in a package recipe, with the <code class="docutils literal notranslate"><span class="pre">build_requires</span></code> attribute and the <code class="docutils literal notranslate"><span class="pre">build_requirements()</span></code> method:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyPkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
     <span class="n">build_requires</span> <span class="o">=</span> <span class="s2">&quot;ToolA/0.2@user/testing&quot;</span><span class="p">,</span> <span class="s2">&quot;ToolB/0.2@user/testing&quot;</span>
 
@@ -272,7 +272,7 @@ command.</p>
             <span class="bp">self</span><span class="o">.</span><span class="n">build_requires</span><span class="p">(</span><span class="s2">&quot;ToolWin/0.1@user/stable&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The above <code class="docutils literal notranslate"><span class="pre">ToolA</span></code> and <code class="docutils literal notranslate"><span class="pre">ToolB</span></code> will be always retrieved and used for building this recipe, while the <code class="docutils literal notranslate"><span class="pre">ToolWin</span></code> one will only be used
+<p>The above <code class="docutils literal notranslate"><span class="pre">ToolA</span></code> and <code class="docutils literal notranslate"><span class="pre">ToolB</span></code> will always be retrieved and used for building this recipe, while the <code class="docutils literal notranslate"><span class="pre">ToolWin</span></code> one will only be used
 only in Windows.</p>
 <p>If some build requirement defined inside <code class="docutils literal notranslate"><span class="pre">build_requirements()</span></code> has the same package name as the one defined in the <code class="docutils literal notranslate"><span class="pre">build_requires</span></code>
 attribute, the one inside the <code class="docutils literal notranslate"><span class="pre">build_requirements()</span></code> method will prevail.</p>
@@ -284,9 +284,9 @@ profile, it will overwrite the build requirements defined in package recipes tha
 <p>The behavior of <code class="docutils literal notranslate"><span class="pre">build_requires</span></code> is the same irrespective if they are defined in the profile or if defined in the package recipe.</p>
 <ul class="simple">
 <li>They will only be retrieved and installed if some package that has to be built from sources and matches the declared pattern. Otherwise,
-they will not be even checked for existence.</li>
+they will not even be checked for existence.</li>
 <li>Options and environment variables declared in the profile as well as in the command line will affect the build requirements for packages.
-In that way, you can define for example for the <code class="docutils literal notranslate"><span class="pre">cmake_installer/0.1</span></code> package which CMake version will be installed.</li>
+In that way, you can define, for example, for the <code class="docutils literal notranslate"><span class="pre">cmake_installer/0.1</span></code> package which CMake version will be installed.</li>
 <li>Build requirements will be activated for matching packages via the <code class="docutils literal notranslate"><span class="pre">deps_cpp_info</span></code> and <code class="docutils literal notranslate"><span class="pre">deps_env_info</span></code> members. So, include
 directories, library names, compile flags (CFLAGS, CXXFLAGS, LINKFLAGS), sysroot, etc. will be applied from the build requirement’s
 package <code class="docutils literal notranslate"><span class="pre">self.cpp_info</span></code> values. The same for <code class="docutils literal notranslate"><span class="pre">self.env_info</span></code>: variables such as <code class="docutils literal notranslate"><span class="pre">PATH</span></code>, <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code>, and any other environment
@@ -304,7 +304,7 @@ consider adding an option or a setting to model that (if not already modeled).</
 </div>
 <div class="section" id="testing-libraries">
 <h2>Testing libraries<a class="headerlink" href="#testing-libraries" title="Permalink to this headline">¶</a></h2>
-<p>One example of build requirement could be a testing framework, which is implemented as a library. Let’s call it <code class="docutils literal notranslate"><span class="pre">mytest_framework</span></code>, an
+<p>One example of a build requirement could be a testing framework, which is implemented as a library. Let’s call it <code class="docutils literal notranslate"><span class="pre">mytest_framework</span></code>, an
 existing Conan package.</p>
 <p>Build requirements can be checked for existence (whether they’ve been applied) in the recipes, which can be useful for conditional logic in
 the recipes. In this example, we could have one recipe with the following <code class="docutils literal notranslate"><span class="pre">build()</span></code> method:</p>
@@ -346,7 +346,7 @@ the recipes. In this example, we could have one recipe with the following <code 
 </pre></div>
 </div>
 </div>
-<p>Then the install command will retrieve the <code class="docutils literal notranslate"><span class="pre">mytest_framework</span></code>, build and run the tests:</p>
+<p>then the install command will retrieve the <code class="docutils literal notranslate"><span class="pre">mytest_framework</span></code>, build and run the tests:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . --profile<span class="o">=</span>mytest_profile
 </pre></div>
 </div>
@@ -358,7 +358,7 @@ the recipes. In this example, we could have one recipe with the following <code 
 <p class="last">This way of reusing python code has been superseded by <code class="docutils literal notranslate"><span class="pre">python_requires</span></code>.
 Please check <a class="reference internal" href="../extending/python_requires.html#python-requires"><span class="std std-ref">Python requires: reusing python code in recipes [EXPERIMENTAL]</span></a></p>
 </div>
-<p>The same technique can be even used to inject and reuse python code in the package recipes, without having to declare dependencies to such
+<p>The same technique can even be used to inject and reuse python code in the package recipes, without having to declare dependencies to such
 python packages.</p>
 <p>If a Conan package is defined to wrap and reuse the <em>mypythontool.py</em> file:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
