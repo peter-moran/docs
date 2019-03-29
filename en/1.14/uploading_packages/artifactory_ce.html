@@ -271,8 +271,8 @@ your packages, using the Conan client to download the packages and re-upload the
 <span class="n">packages</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
 
 <span class="k">for</span> <span class="n">package</span> <span class="ow">in</span> <span class="n">packages</span><span class="p">:</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Downloading </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">package</span><span class="p">)</span>
-<span class="n">run</span><span class="p">(</span><span class="s2">&quot;conan download </span><span class="si">%s</span><span class="s2"> -r=local&quot;</span> <span class="o">%</span> <span class="n">package</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Downloading </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">package</span><span class="p">)</span>
+    <span class="n">run</span><span class="p">(</span><span class="s2">&quot;conan download </span><span class="si">%s</span><span class="s2"> -r=local&quot;</span> <span class="o">%</span> <span class="n">package</span><span class="p">)</span>
 
 <span class="n">run</span><span class="p">(</span><span class="s2">&quot;conan upload * --all --confirm -r=artifactory&quot;</span><span class="p">)</span>
 </pre></div>
