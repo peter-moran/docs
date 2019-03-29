@@ -223,7 +223,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="use-conanfile-py-for-consumers">
 <h1>Use conanfile.py for consumers<a class="headerlink" href="#use-conanfile-py-for-consumers" title="Permalink to this headline">¶</a></h1>
-<p>You can use a <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> for installing/consuming packages, even if you are not creating a package with it. You can also use the existing <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> in a given package while developing it to install dependencies, no need to have a separate <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code>.</p>
+<p>You can use a <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> for installing/consuming packages, even if you are not creating a package with it. You can also use the existing <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> in a given package while developing it to install dependencies. There’s no need to have a separate <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code>.</p>
 <p>Let’s take a look at the complete <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code> from the previous <em>timer</em> example with POCO library, in which we have added a couple of extra generators</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
 Poco/1.7.8p3@pocoproject/stable
@@ -256,8 +256,8 @@ lib, *.dylib* -&gt; ./bin # Copies all dylib files from the package &quot;lib&qu
       <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.dylib*&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;bin&quot;</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;lib&quot;</span><span class="p">)</span> <span class="c1"># From lib to bin</span>
 </pre></div>
 </div>
-<p>Note that this <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> doesn’t have a name, version, or <code class="docutils literal notranslate"><span class="pre">build()</span></code> or <code class="docutils literal notranslate"><span class="pre">package()</span></code> method, as it is not creating a package, they are not required.</p>
-<p>With this <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> you can just work as usual, nothing changes from the user’s perspective.
+<p>Note that this <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> doesn’t have a name, version, or <code class="docutils literal notranslate"><span class="pre">build()</span></code> or <code class="docutils literal notranslate"><span class="pre">package()</span></code> method, as it is not creating a package. They are not required.</p>
+<p>With this <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> you can just work as usual. Nothing changes from the user’s perspective.
 You can install the requirements with (from mytimer/build folder):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install ..
 </pre></div>
@@ -294,7 +294,7 @@ $ conan build . --build-folder build
 (for the specified settings) and the <strong class="command">conan build</strong> command uses all that information
 to invoke your <code class="docutils literal notranslate"><span class="pre">build()</span></code> method to build your project, which in turn calls <code class="docutils literal notranslate"><span class="pre">cmake</span></code>.</p>
 <p>This <strong class="command">conan build</strong> will use the settings used in the <strong class="command">conan install</strong> which have been cached in the local <em>conaninfo.txt</em> and file
-in your build folder, which simplifies the process and reduces the errors of mismatches between the installed packages and the current
+in your build folder. This simplifies the process and reduces the errors of mismatches between the installed packages and the current
 project configuration. Also, the <em>conanbuildinfo.txt</em> file contains all the needed information obtained from the requirements:
 <code class="docutils literal notranslate"><span class="pre">deps_cpp_info</span></code>, <code class="docutils literal notranslate"><span class="pre">deps_env_info</span></code>, <code class="docutils literal notranslate"><span class="pre">deps_user_info</span></code> objects.</p>
 <p>If you want to build your project for <strong>x86</strong> or another setting just change the parameters passed to <strong class="command">conan install</strong>:</p>
