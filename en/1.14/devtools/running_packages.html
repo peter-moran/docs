@@ -219,12 +219,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="running-and-deploying-packages">
 <span id="running-packages"></span><h1>Running and deploying packages<a class="headerlink" href="#running-and-deploying-packages" title="Permalink to this headline">¶</a></h1>
-<p>Executables and applications including shared libraries can be also distributed, deployed and run with conan. This might have
+<p>Executables and applications including shared libraries can also be distributed, deployed and run with Conan. This might have
 some advantages compared to deploying with other systems:</p>
 <ul class="simple">
 <li>A unified development and distribution tool, for all systems and platforms</li>
 <li>Manage any number of different deployment configurations in the same way you manage them for development</li>
-<li>Use a conan server remote to store all your applications and runtimes for all Operating Systems, platforms and targets</li>
+<li>Use a Conan server remote to store all your applications and runtimes for all Operating Systems, platforms and targets</li>
 </ul>
 <p>There are different approaches:</p>
 <div class="section" id="using-virtual-environments">
@@ -273,7 +273,7 @@ $ deactivate_run.sh <span class="c1"># $ source deactivate_run.sh in Unix/Linux<
 <div class="section" id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
 <p>It is possible to define a custom conanfile (either .txt or .py), with an <code class="docutils literal notranslate"><span class="pre">imports</span></code> section, that can retrieve from local
-cache the desired files. This approach, requires a user conanfile.
+cache the desired files. This approach requires a user conanfile.
 For more details see example below <a class="reference internal" href="#repackage"><span class="std std-ref">runtime packages</span></a></p>
 </div>
 <div class="section" id="deployable-packages">
@@ -310,7 +310,7 @@ with:</p>
 </div>
 <div class="section" id="running-from-packages">
 <h2>Running from packages<a class="headerlink" href="#running-from-packages" title="Permalink to this headline">¶</a></h2>
-<p>If a dependency has an executable that we want to run in the conanfile it can be done directly in code
+<p>If a dependency has an executable that we want to run in the conanfile, it can be done directly in code
 using the <code class="docutils literal notranslate"><span class="pre">run_environment=True</span></code> argument. It internally uses a <code class="docutils literal notranslate"><span class="pre">RunEnvironment</span></code> helper.
 For example, if we want to execute the <code class="docutils literal notranslate"><span class="pre">greet</span></code> app while building the <code class="docutils literal notranslate"><span class="pre">Consumer</span></code> package:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">tools</span><span class="p">,</span> <span class="n">RunEnvironment</span>
@@ -382,7 +382,7 @@ it will not be necessary to retrieve it.</li>
 <li>It is using <code class="docutils literal notranslate"><span class="pre">imports()</span></code> to copy from the dependencies, in this case, the executable</li>
 <li>It is using the <code class="docutils literal notranslate"><span class="pre">keep_imports</span></code> attribute to define that imported artifacts during the <code class="docutils literal notranslate"><span class="pre">build()</span></code> step (which
 is not define, then using the default empty one), are kept and not removed after build</li>
-<li>The <code class="docutils literal notranslate"><span class="pre">package()</span></code> method packages the imported artifacts that will be in the build folder.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">package()</span></code> method packages the imported artifacts that will be created in the build folder.</li>
 </ul>
 <p>To create and upload this package to a remote:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan create . user/testing
