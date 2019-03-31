@@ -224,14 +224,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="virtual-environments">
 <span id="virtual-environment-generator"></span><h1>Virtual Environments<a class="headerlink" href="#virtual-environments" title="Permalink to this headline">¶</a></h1>
-<p>Conan offer three special conan generators to create virtual environments:</p>
+<p>Conan offer three special Conan generators to create virtual environments:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">virtualenv</span></code>:  Declares the <a class="reference internal" href="../reference/conanfile/methods.html#method-package-info-env-info"><span class="std std-ref">self.env_info</span></a> variables of the requirements.</li>
 <li><code class="docutils literal notranslate"><span class="pre">virtualbuildenv</span></code>: Special build environment variables for autotools/visual studio.</li>
 <li><code class="docutils literal notranslate"><span class="pre">virtualrunenv</span></code>: Special environment variables to locate executables and shared libraries in the requirements.</li>
 </ul>
 <p>These virtual environment generators create two executable script files (.sh or .bat depending on the current operating system), one
-for <code class="docutils literal notranslate"><span class="pre">activate</span></code> the virtual environment (set the environment variables) and one for <code class="docutils literal notranslate"><span class="pre">deactivate</span></code> it.</p>
+to <code class="docutils literal notranslate"><span class="pre">activate</span></code> the virtual environment (set the environment variables) and one to <code class="docutils literal notranslate"><span class="pre">deactivate</span></code> it.</p>
 <p>You can aggregate two or more virtual environments, that means that you can activate a <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code> and then activate a <code class="docutils literal notranslate"><span class="pre">virtualrunenv</span></code> so you will
 have available the environment variables declared in the <code class="docutils literal notranslate"><span class="pre">env_info</span></code> object of the requirements plus the special environment variables to locate executables
 and shared libraries.</p>
@@ -250,7 +250,7 @@ variables declared in the <code class="docutils literal notranslate"><span class
   <span class="bp">self</span><span class="o">.</span><span class="n">env_info</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">package_folder</span><span class="p">,</span> <span class="s2">&quot;bin&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>Let’s prepare a virtual environment to have available our cmake in the path, open <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code> and change (or add) <strong>virtualenv</strong> generator:</p>
+<p>Let’s prepare a virtual environment to have cmake available in the path. Open <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code> and change (or add) <strong>virtualenv</strong> generator:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
 cmake_installer/3.9.0@conan/stable
 
@@ -266,7 +266,7 @@ virtualenv
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install cmake_installer/3.9.0@conan/stable -g<span class="o">=</span>virtualenv
 </pre></div>
 </div>
-<p>And activate the virtual environment, and now you can run <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">--version</span></code> and check that you have the installed CMake in path.</p>
+<p>Activate the virtual environment, and now you can run <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">--version</span></code> to check that you have the installed CMake in path.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">source</span> activate.sh <span class="c1"># Windows: activate.bat without the source</span>
 $ cmake --version
 </pre></div>
@@ -278,8 +278,8 @@ Deactivate the virtual environment (or close the console) to restore the environ
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">Read the Howto <a class="reference internal" href="../devtools/create_installer_packages.html#create-installer-packages"><span class="std std-ref">Create installer packages</span></a> to know more about virtual environment feature.
-Check the section <a class="reference internal" href="../reference/generators/virtualenv.html#virtualenv-generator"><span class="std std-ref">Reference/virtualenv</span></a> to see the reference of the generator.</p>
+<p class="last">Read the Howto <a class="reference internal" href="../devtools/create_installer_packages.html#create-installer-packages"><span class="std std-ref">Create installer packages</span></a> to learn more about the virtual environment feature.
+Check the section <a class="reference internal" href="../reference/generators/virtualenv.html#virtualenv-generator"><span class="std std-ref">Reference/virtualenv</span></a> to see the generator reference.</p>
 </div>
 </div>
 <div class="section" id="virtualbuildenv-environment">
@@ -290,7 +290,7 @@ Autotools and Visual Studio.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p>Read More about the building environment variables defined in the sections <a class="reference internal" href="../reference/build_helpers/autotools.html#autotools-reference"><span class="std std-ref">Building with autotools</span></a> and <a class="reference internal" href="../reference/build_helpers/visual_studio.html#msbuild"><span class="std std-ref">Build with Visual Studio</span></a>.</p>
-<p class="last">Check the section <a class="reference internal" href="../reference/generators/virtualbuildenv.html#virtualbuildenv-generator"><span class="std std-ref">Reference/virtualbuildenv</span></a> to see the reference of the generator.</p>
+<p class="last">Check the section <a class="reference internal" href="../reference/generators/virtualbuildenv.html#virtualbuildenv-generator"><span class="std std-ref">Reference/virtualbuildenv</span></a> to see the generator reference.</p>
 </div>
 </div>
 <div class="section" id="virtualrunenv-generator">
@@ -306,8 +306,7 @@ Autotools and Visual Studio.</p>
 <li>If you have a requirement with some tool (executable) and you need it in the path.</li>
 </ul>
 <p>In the previous example of the <code class="docutils literal notranslate"><span class="pre">cmake_installer</span></code> recipe, even if the cmake_installer package doesn’t declare the <code class="docutils literal notranslate"><span class="pre">self.env_info.path</span></code> variable,
-using the virtualrunenv generator, the <code class="docutils literal notranslate"><span class="pre">bin</span></code> folder of the package will be available in the PATH. So after activating the virtual environment we could just run <code class="docutils literal notranslate"><span class="pre">cmake</span></code> and
-we will be executing the cmake of the package.</p>
+using the virtualrunenv generator, the <code class="docutils literal notranslate"><span class="pre">bin</span></code> folder of the package will be available in the PATH. So after activating the virtual environment we could just run <code class="docutils literal notranslate"><span class="pre">cmake</span></code> in order to execute the package’s cmake.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <ul class="last simple">

@@ -215,9 +215,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p class="first admonition-title">Warning</p>
 <p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code> feature allows to extend the recipes reusing Python code from other <strong>conanfile.py</strong> easily, even for inheritance
+<p>The <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code> feature allows extending the recipes reusing Python code from other <strong>conanfile.py</strong> easily, even for inheritance
 approaches. The code to be reused will be in a <em>conanfile.py</em> recipe, and will be managed as any other Conan package.</p>
-<p>Let’s create for example some reusable base class:</p>
+<p>Let’s create (for example) some reusable base class:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
 
 <span class="k">class</span> <span class="nc">MyBase</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
@@ -231,13 +231,13 @@ approaches. The code to be reused will be in a <em>conanfile.py</em> recipe, and
         <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;My cool package_info!&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>With this conanfile, we can export it to the local cache to make it available, and also upload to our remote:</p>
+<p>With this conanfile, we can export it to the local cache to make it available, and also upload it to our remote:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan <span class="nb">export</span> . MyBase/0.1@user/channel
 $ conan upload MyBase/0.1@user/channel -r<span class="o">=</span>myremote
 </pre></div>
 </div>
 <p>It is not necessary to “create” any package binaries, or to <code class="docutils literal notranslate"><span class="pre">upload</span> <span class="pre">--all</span></code>, because there are no binaries for this recipe.</p>
-<p>Now, using the <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code> we can write a new package recipe like:</p>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code>, we can write a new package recipe like:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">python_requires</span>
 
 <span class="n">base</span> <span class="o">=</span> <span class="n">python_requires</span><span class="p">(</span><span class="s2">&quot;MyBase/0.1@user/channel&quot;</span><span class="p">)</span>
@@ -246,7 +246,7 @@ $ conan upload MyBase/0.1@user/channel -r<span class="o">=</span>myremote
     <span class="k">pass</span>
 </pre></div>
 </div>
-<p>If we run a <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">create</span></code>, of this recipe, we can see how it is effectively reusing the above code:</p>
+<p>If we run a <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">create</span></code>, on this recipe, we can see how it is effectively reusing the above code:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan create . Pkg/0.1@user/channel
 
 Pkg/0.1@lasote/testing: Installing package
@@ -269,7 +269,7 @@ Pkg/0.1@lasote/testing: My cool package!
 Pkg/0.1@lasote/testing: My cool package_info!
 </pre></div>
 </div>
-<p>It is not compulsory to extend the reused <code class="docutils literal notranslate"><span class="pre">MyBase</span></code> class, it is possible to reuse just functions too:</p>
+<p>It is not mandatory to extend the reused <code class="docutils literal notranslate"><span class="pre">MyBase</span></code> class, it is possible to reuse just functions too:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
 
 <span class="k">def</span> <span class="nf">my_build</span><span class="p">(</span><span class="n">settings</span><span class="p">):</span>
@@ -332,19 +332,19 @@ Multiple <code class="docutils literal notranslate"><span class="pre">python_req
 <p>This would be created with the same <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">export</span></code> and consumed with the same <code class="docutils literal notranslate"><span class="pre">base</span> <span class="pre">=</span> <span class="pre">python_requires(&quot;MyBase/0.1&#64;user/channel&quot;)</span></code> as above.</p>
 <p>There are a few important considerations regarding <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code>:</p>
 <ul class="simple">
-<li>They are required at every step of the conan commands. If you are creating a package that <code class="docutils literal notranslate"><span class="pre">python_requires(&quot;MyBase/...&quot;)</span></code>,
-the <code class="docutils literal notranslate"><span class="pre">MyBase</span></code> package should be already available in the local cache or to be downloaded from the remotes. Otherwise, conan
+<li>They are required at every step of the Conan commands. If you are creating a package that <code class="docutils literal notranslate"><span class="pre">python_requires(&quot;MyBase/...&quot;)</span></code>,
+the <code class="docutils literal notranslate"><span class="pre">MyBase</span></code> package should already be available in the local cache or be downloaded from the remotes. Otherwise, Conan
 will raise a “missing package” error.</li>
 <li>They do not affect the package binary ID (hash). Depending on different version, or different channel of
 such <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code> do not change the package IDs as the normal dependencies do.</li>
-<li>They are imported only once. The python code that is reused is imported only once, the first time it is required.
-Subsequent requirements of that conan recipe will reuse the previously imported module. Global initialization at
+<li>They are imported only once. The Python code that is reused is imported only once, the first time it is required.
+Subsequent requirements of that Conan recipe will reuse the previously imported module. Global initialization at
 parsing time and global state are discouraged.</li>
-<li>They are transitive. One recipe using <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code> can be also consumed with a <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code> from
+<li>They are transitive. One recipe using <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code> can also be consumed with a <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code> from
 another package recipe.</li>
 <li>They are not automatically updated with the <code class="docutils literal notranslate"><span class="pre">--update</span></code> argument from remotes.</li>
 <li>Different packages can require different versions in their <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code>. They are private to each recipe,
-so they do not conflict with each other, but it is the responsibility of the user to keep consistency.</li>
+so they do not conflict with each other. However, it is the responsibility of the user to maintain consistency.</li>
 <li>They are not overridden from downstream consumers. Again, as they are private, they are not affected by other packages,
 even consumers</li>
 </ul>
