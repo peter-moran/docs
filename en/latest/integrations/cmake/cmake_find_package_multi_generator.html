@@ -255,7 +255,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p class="first admonition-title">Warning</p>
 <p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
 </div>
-<p>This generator is similar to the <a class="reference internal" href="cmake_find_package_generator.html#cmake-find-package-generator"><span class="std std-ref">cmake_find_package</span></a> generator but it allows to work with
+<p>This generator is similar to the <a class="reference internal" href="cmake_find_package_generator.html#cmake-find-package-generator"><span class="std std-ref">cmake_find_package</span></a> generator but it allows working with
 multi-configuration projects like <code class="docutils literal notranslate"><span class="pre">Visual</span> <span class="pre">Studio</span></code> with both <code class="docutils literal notranslate"><span class="pre">Debug</span></code> and <code class="docutils literal notranslate"><span class="pre">Release</span></code>. But there are some differences:</p>
 <ul class="simple">
 <li>Only works with CMake &gt; 3.0</li>
@@ -269,7 +269,7 @@ $ conan install . -g cmake_find_package_multi -s <span class="nv">build_type</sp
 </pre></div>
 </div>
 <p>These commands will generate several files for each dependency in your graph, including a <code class="docutils literal notranslate"><span class="pre">XXXConfig.cmake</span></code> that can be located
-by the CMake <a class="reference external" href="https://cmake.org/cmake/help/v3.0/command/find_package.html">find_package(XXX)</a> command, being XXX the package name.</p>
+by the CMake <a class="reference external" href="https://cmake.org/cmake/help/v3.0/command/find_package.html">find_package(XXX)</a> command, with XXX as the package name.</p>
 <p>The name of the files follows the pattern <code class="docutils literal notranslate"><span class="pre">&lt;package_name&gt;Config.cmake</span></code>. So for the <code class="docutils literal notranslate"><span class="pre">zlib/1.2.11&#64;conan/stable</span></code> package,
 a <code class="docutils literal notranslate"><span class="pre">zlibConfig.cmake</span></code> file will be generated.</p>
 <div class="admonition seealso">
