@@ -135,7 +135,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="android_studio.html"> Android Studio</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"> CLion</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#using-packages-in-a-clion-project">Using packages in a CLion project</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#creating-conan-packages-in-a-clion-project">Creating conan packages in a CLion project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-conan-packages-in-a-clion-project">Creating Conan packages in a CLion project</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ninja.html">Ninja, NMake, Borland</a></li>
@@ -273,10 +273,10 @@ the <code class="docutils literal notranslate"><span class="pre">zlib</span></co
 </div>
 <p><img alt="cmakelists" src="../_images/cmakelists.png" /></p>
 <p>3. CLion will reload your CMake project and you will be able to see a Warning in the console, because the
-<code class="docutils literal notranslate"><span class="pre">conanbuildinfo.cmake</span></code> file still doesn’t exists:</p>
+<code class="docutils literal notranslate"><span class="pre">conanbuildinfo.cmake</span></code> file still doesn’t exist:</p>
 <p><img alt="configure_warning_info" src="../_images/configure_warning_info.png" /></p>
-<p>4. Create a <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code> with all your requirements and use the <code class="docutils literal notranslate"><span class="pre">cmake</span></code> generator. In this case we are only
-requiring zlib library from a conan package:</p>
+<p>4. Create a <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code> with all your requirements and use the <code class="docutils literal notranslate"><span class="pre">cmake</span></code> generator. In this case we only
+require the zlib library from a Conan package:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
 zlib/1.2.11@conan/stable
 
@@ -285,32 +285,32 @@ cmake
 </pre></div>
 </div>
 <p><img alt="conanfile_txt" src="../_images/conanfile_txt.png" /></p>
-<p id="step-five">5. Now you can <strong class="command">conan install</strong> for debug in the <code class="docutils literal notranslate"><span class="pre">cmake-build-debug</span></code> folder to install your requirements and
+<p id="step-five">5. Now you can run <strong class="command">conan install</strong> for debug in the <code class="docutils literal notranslate"><span class="pre">cmake-build-debug</span></code> folder to install your requirements and
 generate the <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.cmake</span></code> file there:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . -s <span class="nv">build_type</span><span class="o">=</span>Debug --install-folder<span class="o">=</span>cmake-build-debug
 </pre></div>
 </div>
-<p>6. Repeat the last step if you have the release build types configured in your CLion IDE, but changing the build_type
+<p>6. Repeat the last step if you have the release build types configured in your CLion IDE, but change the build_type
 setting accordingly:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . -s <span class="nv">build_type</span><span class="o">=</span>Release --install-folder<span class="o">=</span>cmake-build-release
 </pre></div>
 </div>
 <ol class="arabic simple" start="7">
-<li>Now reconfigure your CLion project, the Warning message is not shown anymore:</li>
+<li>Now reconfigure your CLion project. The Warning message is not shown anymore:</li>
 </ol>
 <p><img alt="configure_ok" src="../_images/configure_ok.png" /></p>
-<p>8. Open the <code class="docutils literal notranslate"><span class="pre">library.cpp</span></code> file and include the <code class="docutils literal notranslate"><span class="pre">zlib.h</span></code>, if you follow the link you can see that CLion automatically
-detect the <code class="docutils literal notranslate"><span class="pre">zlib.h</span></code> header file from the local conan cache.</p>
+<p>8. Open the <code class="docutils literal notranslate"><span class="pre">library.cpp</span></code> file and include <code class="docutils literal notranslate"><span class="pre">zlib.h</span></code>. If you follow the link, you can see that CLion automatically
+detects the <code class="docutils literal notranslate"><span class="pre">zlib.h</span></code> header file from the local Conan cache.</p>
 <p><img alt="library_cpp" src="../_images/library_cpp.png" /></p>
 <ol class="arabic simple" start="9">
 <li>Build your project normally using your CLion IDE:</li>
 </ol>
 <p><img alt="built_ok" src="../_images/built_ok.png" /></p>
-<p>You can check a full example of a CLion project reusing conan packages in this github repository: <a class="reference external" href="https://github.com/lasote/clion-conan-consumer">lasote/clion-conan-consumer</a>.</p>
+<p>You can check a complete example of a CLion project reusing conan packages in this github repository: <a class="reference external" href="https://github.com/lasote/clion-conan-consumer">lasote/clion-conan-consumer</a>.</p>
 </div>
 <div class="section" id="creating-conan-packages-in-a-clion-project">
-<h2>Creating conan packages in a CLion project<a class="headerlink" href="#creating-conan-packages-in-a-clion-project" title="Permalink to this headline">¶</a></h2>
-<p>Now we are going to see how to create a conan package from the previous library.</p>
+<h2>Creating Conan packages in a CLion project<a class="headerlink" href="#creating-conan-packages-in-a-clion-project" title="Permalink to this headline">¶</a></h2>
+<p>Now we are going to see how to create a Conan package from the previous library.</p>
 <ol class="arabic simple">
 <li>Create a new CLion project</li>
 </ol>
@@ -333,15 +333,15 @@ detect the <code class="docutils literal notranslate"><span class="pre">zlib.h</
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan new mylibrary/1.0@myuser/channel
 </pre></div>
 </div>
-<p>And edit the <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code>:</p>
+<p>Edit the <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code>:</p>
 <ul class="simple">
-<li>We are removing the <code class="docutils literal notranslate"><span class="pre">source</span></code> method because we have the sources in the same project, so we can use the
+<li>We are removing the <code class="docutils literal notranslate"><span class="pre">source</span></code> method because we have the sources in the same project; so we can use the
 <code class="docutils literal notranslate"><span class="pre">exports_sources</span></code>.</li>
-<li>In the <code class="docutils literal notranslate"><span class="pre">package_info</span></code> method adjust the library name, in this case our <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> is creating a target library called
+<li>In the <code class="docutils literal notranslate"><span class="pre">package_info</span></code> method, adjust the library name. In this case our <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> creates a target library called
 <code class="docutils literal notranslate"><span class="pre">mylibrary</span></code>.</li>
-<li>Adjust the CMake helper in the <code class="docutils literal notranslate"><span class="pre">build()</span></code> method, the <code class="docutils literal notranslate"><span class="pre">cmake.configure()</span></code> doesn’t need to specify the <code class="docutils literal notranslate"><span class="pre">source_folder</span></code>, because
+<li>Adjust the CMake helper in the <code class="docutils literal notranslate"><span class="pre">build()</span></code> method. The <code class="docutils literal notranslate"><span class="pre">cmake.configure()</span></code> doesn’t need to specify the <code class="docutils literal notranslate"><span class="pre">source_folder</span></code>, because
 we have the <code class="docutils literal notranslate"><span class="pre">library.*</span></code> files in the root directory.</li>
-<li>Adjust the <code class="docutils literal notranslate"><span class="pre">copy</span></code> function calls in the <code class="docutils literal notranslate"><span class="pre">package</span></code> method to ensure that all your headers and libraries are copied to the conan package.</li>
+<li>Adjust the <code class="docutils literal notranslate"><span class="pre">copy</span></code> function calls in the <code class="docutils literal notranslate"><span class="pre">package</span></code> method to ensure that all your headers and libraries are copied to the Conan package.</li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">CMake</span><span class="p">,</span> <span class="n">tools</span>
 
@@ -380,21 +380,21 @@ we have the <code class="docutils literal notranslate"><span class="pre">library
 </pre></div>
 </div>
 <ol class="arabic simple" start="4">
-<li>To build your library with CLion follow the guide of <a class="reference internal" href="#step-five"><span class="std std-ref">Using packages from the step 5</span></a>.</li>
+<li>To build your library with CLion, follow the guide of <a class="reference internal" href="#step-five"><span class="std std-ref">Using packages from step 5</span></a>.</li>
 </ol>
-<p>5. To package your library use the <strong class="command">conan export-pkg</strong> command passing the used build-folder. It
-will call your <code class="docutils literal notranslate"><span class="pre">package()</span></code> method to extract the artifacts and push the conan package to the local
+<p>5. To package your library, use the <strong class="command">conan export-pkg</strong> command passing the used build-folder. It
+will call your <code class="docutils literal notranslate"><span class="pre">package()</span></code> method to extract the artifacts and push the Conan package to the local
 cache:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan export-pkg . mylibrary/1.0@myuser/channel --build-folder cmake-build-debug -pr<span class="o">=</span>myprofile
 </pre></div>
 </div>
 <ol class="arabic simple" start="7">
-<li>Now you can upload it to a conan server if needed:</li>
+<li>Now you can upload it to a Conan server if needed:</li>
 </ol>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan upload mylibrary/1.0@myuser/channel <span class="c1"># This will upload only the recipe, use --all to upload all the generated binary packages.</span>
 </pre></div>
 </div>
-<p>8. If you would like to see how the package looks like before exporting it to the local cache (conan export-pkg)
+<p>8. If you would like to see how the package looks like before exporting it to the local cache (<strong class="command">conan export-pkg</strong>)
 you can use the <strong class="command">conan package</strong> command to create the package in a local directory:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan package . --build-folder cmake-build-debug --package-folder<span class="o">=</span>mypackage
 </pre></div>
@@ -407,7 +407,7 @@ you can use the <strong class="command">conan package</strong> command to create
 <li>A <code class="docutils literal notranslate"><span class="pre">conaninfo.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">conanmanifest.txt</span></code> conan files, always present in all packages.</li>
 </ul>
 </div></blockquote>
-<p>You can check a full example of a CLion project for creating a conan package in this github repository: <a class="reference external" href="https://github.com/lasote/clion-conan-package">lasote/clion-conan-package</a>.</p>
+<p>You can check a full example of a CLion project for creating a Conan package in this github repository: <a class="reference external" href="https://github.com/lasote/clion-conan-package">lasote/clion-conan-package</a>.</p>
 </div>
 </div>
 
