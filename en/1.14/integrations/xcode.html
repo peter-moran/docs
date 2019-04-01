@@ -241,7 +241,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="xcode-logo-apple-xcode">
 <span id="xcode"></span><h1><img alt="xcode_logo" src="../_images/xcode_logo.jpg" />  Apple/Xcode<a class="headerlink" href="#xcode-logo-apple-xcode" title="Permalink to this headline">¶</a></h1>
-<p>Conan can be integrated with <strong>XCode</strong> in two different ways:</p>
+<p>Conan can be integrated with <strong>Apple’s XCode</strong> in two different ways:</p>
 <ul class="simple">
 <li>Using the <strong>cmake</strong> generator to create a <strong>conanbuildinfo.cmake</strong> file.</li>
 <li>Using the <strong>xcode</strong> generator to create a  <strong>conanbuildinfo.xcconfig</strong> file.</li>
@@ -253,7 +253,7 @@ Check the official <a class="reference external" href="https://cmake.org/cmake/h
 </div>
 <div class="section" id="with-the-xcode-generator">
 <h2>With the <em>xcode</em> generator<a class="headerlink" href="#with-the-xcode-generator" title="Permalink to this headline">¶</a></h2>
-<p>You can use the <strong>xcode</strong> generator to integrate your requirements in your <em>Xcode</em>  project.
+<p>You can use the <strong>xcode</strong> generator to integrate your requirements with your <em>Xcode</em>  project.
 This generator creates an <code class="docutils literal notranslate"><span class="pre">xcconfig</span></code> file, with all the <em>include paths</em>, <em>lib paths</em>, <em>libs</em>, <em>flags</em> etc, that can be imported in your project.</p>
 <p>Open <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code> and change (or add) the <strong>xcode</strong> generator:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
@@ -267,7 +267,7 @@ xcode
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install .
 </pre></div>
 </div>
-<p>Go to your <strong>Xcode</strong> project, click on the project and select <strong>Add files to</strong>.</p>
+<p>Go to your <strong>Xcode</strong> project, click on the project and select <strong>Add files to</strong>…</p>
 <img alt="../_images/xcode1.png" src="../_images/xcode1.png" />
 <p>Choose <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.xcconfig</span></code> generated.</p>
 <img alt="../_images/xcode2.png" src="../_images/xcode2.png" />
@@ -285,7 +285,7 @@ recipes using the toolchain as a <a class="reference internal" href="../devtools
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">Check the <a class="reference internal" href="../systems_cross_building/cross_building.html#darwin-toolchain"><span class="std std-ref">Darwin Toolchain package</span></a> section to know how to <strong>cross build</strong> for <code class="docutils literal notranslate"><span class="pre">iOS</span></code>, <code class="docutils literal notranslate"><span class="pre">watchOS</span></code> and
+<p class="last">Check the <a class="reference internal" href="../systems_cross_building/cross_building.html#darwin-toolchain"><span class="std std-ref">Darwin Toolchain package</span></a> section to learn how to <strong>cross build</strong> for <code class="docutils literal notranslate"><span class="pre">iOS</span></code>, <code class="docutils literal notranslate"><span class="pre">watchOS</span></code> and
 <code class="docutils literal notranslate"><span class="pre">tvOS</span></code>.</p>
 </div>
 </div>

@@ -237,7 +237,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="compilers-on-command-line">
 <span id="gcc-integration"></span><h1>Compilers on command line<a class="headerlink" href="#compilers-on-command-line" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>compiler_args</strong> generator creates a file named <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.args</span></code> containing a command
+<p>The <strong>compiler_args</strong> generator creates a file named <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.args</span></code> containing command
 line arguments to invoke <code class="docutils literal notranslate"><span class="pre">gcc</span></code>, <code class="docutils literal notranslate"><span class="pre">clang</span></code> or <code class="docutils literal notranslate"><span class="pre">cl</span></code> (Visual Studio) compiler.</p>
 <p>Now we are going to compile the <a class="reference internal" href="../getting_started.html#getting-started"><span class="std std-ref">getting started</span></a> example using <strong>compiler_args</strong> instead of the <strong>cmake</strong> generator.</p>
 <p>Open <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code> and change (or add) <strong>compiler_args</strong> generator:</p>
@@ -254,10 +254,10 @@ compiler_args
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Remember, if you don’t specify settings in <strong>install command</strong> with <strong>-s</strong>, conan will use the detected defaults.
+<p class="last">Remember, if you don’t specify settings in the <strong>install command</strong> with <strong>-s</strong>, Conan will use the detected defaults.
 You can always change them by editing the <code class="docutils literal notranslate"><span class="pre">~/.conan/profiles/default</span></code> or override them with “-s” parameters.</p>
 </div>
-<p>The generated <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.args</span></code>:</p>
+<p>The generated <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.args</span></code> show:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-DPOCO_STATIC=ON -DPOCO_NO_AUTOMATIC_LIBS
 -Ipath/to/Poco/1.7.9/pocoproject/stable/package/dd758cf2da203f96c86eb99047ac152bcd0c0fa9/include
 -Ipath/to/OpenSSL/1.0.2l/conan/stable/package/227fb0ea22f4797212e72ba94ea89c7b3fbc2a0c/include
