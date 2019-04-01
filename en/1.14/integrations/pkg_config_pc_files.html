@@ -137,7 +137,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="ninja.html">Ninja, NMake, Borland</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><strong class="command">pkg-config</strong> and <em>.pc</em> files</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#approach-1-import-and-patch-the-prefix-in-the-pc-files">Approach 1: Import and patch the prefix in the <em>.pc</em> files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#approach-2-prepare-and-package-pc-files-before-package-them">Approach 2: Prepare and package <em>.pc</em> files before package them</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#approach-2-prepare-and-package-pc-files-before-packaging-them">Approach 2: Prepare and package <em>.pc</em> files before packaging them</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#approach-3-use-define-prefix">Approach 3: Use <strong class="command">--define-prefix</strong></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#approach-4-use-pkg-config-package-variable">Approach 4: Use <code class="docutils literal notranslate"><span class="pre">PKG_CONFIG_$PACKAGE_$VARIABLE</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#approach-5-use-the-pkg-config-generator">Approach 5: Use the <code class="docutils literal notranslate"><span class="pre">pkg_config</span></code> generator</a></li>
@@ -246,7 +246,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <span id="pc-files"></span><h1><strong class="command">pkg-config</strong> and <em>.pc</em> files<a class="headerlink" href="#pkg-config-and-pc-files" title="Permalink to this headline">¶</a></h1>
 <p>If you are creating a Conan package for a library (A) and the build system uses <em>.pc</em> files to locate
 its dependencies (B and C) that are Conan packages too, you can follow different approaches.</p>
-<p>The main issue to solve is the absolute paths. When a user installs a package in the local cache,
+<p>The main issue to address is the absolute paths. When a user installs a package in the local cache,
 the directory will probably be different from the directory where the package was created. This could be
 because of the different computer, the change in Conan home directory or even a different user or channel:</p>
 <p>For example, in the machine where the packages were created:</p>
@@ -257,7 +257,7 @@ because of the different computer, the change in Conan home directory or even a 
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/custom/dir/.data/storage/zlib/1.2.11/conan/testing
 </pre></div>
 </div>
-<p>You can see that <em>.pc</em> files containing absolute paths won’t work to locate the dependencies.</p>
+<p>You can see that <em>.pc</em> files containing absolute paths won’t work with locating the dependencies.</p>
 <p>Example of a <em>.pc</em> file with an absolute path:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>prefix=/Users/lasote/.conan/data/zlib/1.2.11/lasote/stable/package/b5d68b3533204ad67e01fa587ad28fb8ce010527
 exec_prefix=${prefix}
@@ -304,14 +304,14 @@ locate them.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="approach-2-prepare-and-package-pc-files-before-package-them">
-<h2>Approach 2: Prepare and package <em>.pc</em> files before package them<a class="headerlink" href="#approach-2-prepare-and-package-pc-files-before-package-them" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="approach-2-prepare-and-package-pc-files-before-packaging-them">
+<h2>Approach 2: Prepare and package <em>.pc</em> files before packaging them<a class="headerlink" href="#approach-2-prepare-and-package-pc-files-before-packaging-them" title="Permalink to this headline">¶</a></h2>
 <p>With this approach you will patch the <em>.pc</em> files from B and C before packaging them.
 The goal is to replace the absolute path (the variable part of the path) with a variable placeholder.
 Then in the consumer package A, declare the variable using <code class="docutils literal notranslate"><span class="pre">--define-variable</span></code> when calling the
 <strong class="command">pkg-config</strong> command.</p>
 <p>This approach is cleaner than approach 1, because the packaged files are already prepared to be
-reused with or without Conan by declaring the needed variable. And it’s not needed to import the <em>.pc</em>
+reused with or without Conan by declaring the needed variable. And it’s unneeded to import the <em>.pc</em>
 files to the consumer package. However, you need B and C libraries to package the <em>.pc</em> files correctly.</p>
 <p>Library B recipe (preparing the <em>.pc</em> file):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">tools</span>
@@ -352,7 +352,7 @@ files to the consumer package. However, you need B and C libraries to package th
 </div>
 <div class="section" id="approach-3-use-define-prefix">
 <h2>Approach 3: Use <strong class="command">--define-prefix</strong><a class="headerlink" href="#approach-3-use-define-prefix" title="Permalink to this headline">¶</a></h2>
-<p>If you have available <strong class="command">pkg-config</strong> &gt;= 0.29 and you have only one dependency, you can use directly
+<p>If you have available <strong class="command">pkg-config</strong> &gt;= 0.29 and you have only one dependency, you can directly use
 the <strong class="command">--define-prefix</strong> option to declare a custom <code class="docutils literal notranslate"><span class="pre">prefix</span></code> variable. With this approach you won’t
 need to patch anything, just declare the correct variable.</p>
 </div>
@@ -380,7 +380,7 @@ with the prefixes:</p>
 <div class="section" id="approach-5-use-the-pkg-config-generator">
 <span id="pkg-config-generator-example"></span><h2>Approach 5: Use the <code class="docutils literal notranslate"><span class="pre">pkg_config</span></code> generator<a class="headerlink" href="#approach-5-use-the-pkg-config-generator" title="Permalink to this headline">¶</a></h2>
 <p>If you use <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> in library B and library C, and specify all the library names and any other needed flag,
-you can use the <code class="docutils literal notranslate"><span class="pre">pkg_config</span></code> generator for <strong>library bA</strong>. Those files doesn’t need to be patched, because
+you can use the <code class="docutils literal notranslate"><span class="pre">pkg_config</span></code> generator for <strong>library A</strong>. Those files doesn’t need to be patched, because they
 are dynamically generated with the correct path.</p>
 <p>So it can be a good solution in case you are building <strong>library A</strong> with a build system that manages <em>.pc</em> files like
 <a class="reference internal" href="meson.html#meson-build-tool"><span class="std std-ref">Meson Build</span></a> or <a class="reference internal" href="makefile.html#autotools-build-tool"><span class="std std-ref">AutoTools</span></a>:</p>
