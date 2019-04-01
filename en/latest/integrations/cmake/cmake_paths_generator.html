@@ -260,7 +260,8 @@ feature to locate the dependencies.</p>
 <li><code class="docutils literal notranslate"><span class="pre">CMAKE_MODULE_PATH</span></code> with the folders of the required packages, to allow CMake to locate the included cmake scripts and <code class="docutils literal notranslate"><span class="pre">FindXXX.cmake</span></code>
 files. The folder containing the <em>conan_paths.cmake</em> (<cite>self.install_folder</cite> when used in a recipe) is also included, so any custom file
 will be located too. Check <a class="reference internal" href="cmake_find_package_generator.html#cmake-find-package-generator"><span class="std std-ref">cmake_find_package generator</span></a> generator.</li>
-<li><code class="docutils literal notranslate"><span class="pre">CMAKE_PREFIX_PATH</span></code> used by <code class="docutils literal notranslate"><span class="pre">find_library()</span></code> to locate library files (<em>.a</em>, <em>.lib</em>, <em>.so</em>, <em>.dll</em>) in your packages.</li>
+<li><code class="docutils literal notranslate"><span class="pre">CMAKE_PREFIX_PATH</span></code> used by <code class="docutils literal notranslate"><span class="pre">find_library()</span></code> to locate library files (<em>.a</em>, <em>.lib</em>, <em>.so</em>, <em>.dll</em>) in your packages and <code class="docutils literal notranslate"><span class="pre">find_dependency()</span></code> to locate
+the transitive dependencies.</li>
 </ul>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">conanfile.txt</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
