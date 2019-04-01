@@ -314,8 +314,8 @@ lib/1.0@user/channel: Calling build<span class="o">()</span>
 <div class="section" id="in-a-conanfile-txt">
 <h2>In a <em>conanfile.txt</em><a class="headerlink" href="#in-a-conanfile-txt" title="Permalink to this headline">¶</a></h2>
 <p>If you are using a <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code> file in your project, instead of a <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code>, this generator can be used together with the
-<a class="reference internal" href="cmake_paths_generator.html#cmake-paths-generator"><span class="std std-ref">cmake_paths</span></a> generator to adjust the <code class="docutils literal notranslate"><span class="pre">CMAKE_MODULE_PATH</span></code> variable automatically and let CMake locate the
-generated <code class="docutils literal notranslate"><span class="pre">Find&lt;package_name&gt;.cmake</span></code> files.</p>
+<a class="reference internal" href="cmake_paths_generator.html#cmake-paths-generator"><span class="std std-ref">cmake_paths</span></a> generator to adjust the <code class="docutils literal notranslate"><span class="pre">CMAKE_MODULE_PATH</span></code> and <code class="docutils literal notranslate"><span class="pre">CMAKE_PREFIX_PATH</span></code> variables automatically
+and let CMake locate the generated <code class="docutils literal notranslate"><span class="pre">Find&lt;package_name&gt;.cmake</span></code> files.</p>
 <p>With <code class="docutils literal notranslate"><span class="pre">cmake_paths</span></code>:</p>
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">conanfile.txt</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
@@ -360,8 +360,8 @@ $ cmake .. -G <span class="s2">&quot;Unix Makefiles&quot;</span> -DCMAKE_BUILD_T
 $ cmake --build .
 </pre></div>
 </div>
-<p>Or you can also adjust <code class="docutils literal notranslate"><span class="pre">CMAKE_MODULE_PATH</span></code> manually.</p>
-<p>Without <strong>cmake_paths</strong>, adjusting <code class="docutils literal notranslate"><span class="pre">CMAKE_MODULE_PATH</span></code> manually:</p>
+<p>Or you can also adjust <code class="docutils literal notranslate"><span class="pre">CMAKE_MODULE_PATH</span></code> and <code class="docutils literal notranslate"><span class="pre">CMAKE_PREFIX_PATH</span></code> manually.</p>
+<p>Without <strong>cmake_paths</strong>, adjusting the variables manually:</p>
 <div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">conanfile.txt</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span> [requires]
@@ -378,7 +378,9 @@ $ cmake --build .
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span> <span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">3.0</span><span class="p">)</span>
  <span class="nb">project</span><span class="p">(</span><span class="s">helloworld</span><span class="p">)</span>
 <span class="hll"> <span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_MODULE_PATH</span> <span class="o">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="o">}</span> <span class="o">${</span><span class="nv">CMAKE_MODULE_PATH</span><span class="o">}</span><span class="p">)</span>
-</span> <span class="nb">add_executable</span><span class="p">(</span><span class="s">helloworld</span> <span class="s">hello.c</span><span class="p">)</span>
+</span> <span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_PREFIX_PATH</span> <span class="o">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="o">}</span> <span class="o">${</span><span class="nv">CMAKE_PREFIX_PATH</span><span class="o">}</span><span class="p">)</span>
+
+ <span class="nb">add_executable</span><span class="p">(</span><span class="s">helloworld</span> <span class="s">hello.c</span><span class="p">)</span>
  <span class="nb">find_package</span><span class="p">(</span><span class="s">zlib</span><span class="p">)</span>
 
  <span class="c"># Global approach</span>

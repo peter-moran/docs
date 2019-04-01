@@ -316,8 +316,10 @@ is declared like this:</p>
 <p>The targets are also transitive. So, if your project depends on a packages <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code>, and at the same time
 <code class="docutils literal notranslate"><span class="pre">A</span></code> depends on <code class="docutils literal notranslate"><span class="pre">C</span></code>, the <code class="docutils literal notranslate"><span class="pre">A</span></code> target will contain automatically the properties of the <code class="docutils literal notranslate"><span class="pre">C</span></code> dependency, so
 in your <cite>CMakeLists.txt</cite> file you only need to <code class="docutils literal notranslate"><span class="pre">find_package(A)</span></code> and <code class="docutils literal notranslate"><span class="pre">find_package(B)</span></code>.</p>
-<p>The <cite>{name}Config.cmake</cite> file will be found by the cmake <code class="docutils literal notranslate"><span class="pre">find_package(XXX)</span></code> function if the directory where the file is generated
-is listed in the <a class="reference external" href="https://cmake.org/cmake/help/v3.0/variable/CMAKE_PREFIX_PATH.html">CMAKE_PREFIX_PATH</a>.</p>
+<p>You also need to adjust <a class="reference external" href="https://cmake.org/cmake/help/v3.0/variable/CMAKE_PREFIX_PATH.html">CMAKE_PREFIX_PATH</a> and
+<a class="reference external" href="https://cmake.org/cmake/help/v3.0/variable/CMAKE_MODULE_PATH.html">CMAKE_MODULE_PATH</a> so CMake can locate all
+the <code class="docutils literal notranslate"><span class="pre">{name}Config.cmake</span></code> files: The <code class="docutils literal notranslate"><span class="pre">CMAKE_PREFIX_PATH</span></code> is used by the <code class="docutils literal notranslate"><span class="pre">find_package</span></code> and the <code class="docutils literal notranslate"><span class="pre">CMAKE_MODULE_PATH</span></code> is used by the
+<code class="docutils literal notranslate"><span class="pre">find_dependency</span></code> calls that locates the transitive dependencies.</p>
 </div>
 </div>
 
