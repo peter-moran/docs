@@ -260,7 +260,7 @@ could get the information of the dependencies in a <em>conanbuildinfo.mak</em> f
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>We are going to use the same example from <a class="reference internal" href="../getting_started.html#getting-started"><span class="std std-ref">Getting Started</span></a>, a MD5 Encrypter app.</p>
-<p>This is the main file for it:</p>
+<p>This is the main source file for it:</p>
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">main.cpp</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span> <span class="cp">#include</span> <span class="cpf">&quot;Poco/MD5Engine.h&quot;</span><span class="cp"></span>
@@ -281,8 +281,8 @@ could get the information of the dependencies in a <em>conanbuildinfo.mak</em> f
 </pre></div>
 </div>
 </div>
-<p>As this project relies on the Poco Libraries we are going to create a <em>conanfile.txt</em> with our requirement and declare there the Make
-generator too:</p>
+<p>As this project relies on the Poco Libraries we are going to create a <em>conanfile.txt</em> with our requirement and also declare the Make
+generator:</p>
 <div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption"><span class="caption-text">conanfile.txt</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span> [requires]
