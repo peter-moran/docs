@@ -45,7 +45,7 @@
     <link rel="top" title="conan 1.14.1 documentation" href="../index.html"/>
         <link rel="up" title="Howtos" href="../howtos.html"/>
         <link rel="next" title="How to create and share a custom generator with generator packages" href="custom_generators.html"/>
-        <link rel="prev" title="How to use docker to create and cross build C and C++ conan packages" href="run_conan_in_docker.html"/>
+        <link rel="prev" title="How to use Docker to create and cross-build C and C++ Conan packages" href="run_conan_in_docker.html"/>
 
  <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -135,12 +135,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="manage_gcc_abi.html">How to manage the GCC &gt;= 5 ABI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vs2017_cmake.html">Using Visual Studio 2017 - CMake integration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manage_cpp_standard.html">How to manage C++ standard [EXPERIMENTAL]</a></li>
-<li class="toctree-l2"><a class="reference internal" href="run_conan_in_docker.html">How to use docker to create and cross build C and C++ conan packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="run_conan_in_docker.html">How to use Docker to create and cross-build C and C++ Conan packages</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">How to reuse Python code in recipes</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#a-basic-python-package">A basic Python package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reusing-python-code-in-your-recipes">Reusing python code in your recipes</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#requiring-a-python-conan-package">Requiring a python conan package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#sharing-a-python-module">Sharing a python module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reusing-python-code-in-your-recipes">Reusing Python code in your recipes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#requiring-a-python-conan-package">Requiring a Python Conan package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sharing-a-python-module">Sharing a Python module</a></li>
 </ul>
 </li>
 </ul>
@@ -243,9 +243,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <span id="python-reuse"></span><h1>How to reuse Python code in recipes<a class="headerlink" href="#how-to-reuse-python-code-in-recipes" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">To reuse python code, from conan 1.7 there is a new <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code> feature.
-See: <a class="reference internal" href="../extending/python_requires.html#python-requires"><span class="std std-ref">Python requires: reusing python code in recipes</span></a>
-This “how to” might be deprecated and removed in the future, it is left here for reference only.</p>
+<p class="last">To reuse Python code, from Conan 1.7 there is a new <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code> feature.
+See: <a class="reference internal" href="../extending/python_requires.html#python-requires"><span class="std std-ref">Python requires: reusing Python code in recipes</span></a>
+This “how to” might be deprecated and removed in the future. It is left here for reference only.</p>
 </div>
 <p>First, if you feel that you are repeating a lot of Python code, and that repeated code could be
 useful for other Conan users, please propose it in a github issue.</p>
@@ -253,12 +253,12 @@ useful for other Conan users, please propose it in a github issue.</p>
 <ul class="simple">
 <li>To put common code in files, as explained <a class="reference internal" href="#split-conanfile"><span class="std std-ref">below</span></a>. This code
 has to be exported into the recipe itself.</li>
-<li>To create a Conan package with the common python code, and then <code class="docutils literal notranslate"><span class="pre">require</span></code> it from the recipe.</li>
+<li>To create a Conan package with the common Python code, and then <code class="docutils literal notranslate"><span class="pre">require</span></code> it from the recipe.</li>
 </ul>
 <p>This howto explains the latter.</p>
 <div class="section" id="a-basic-python-package">
 <h2>A basic Python package<a class="headerlink" href="#a-basic-python-package" title="Permalink to this headline">¶</a></h2>
-<p>Let’s begin with a simple python package, a “hello world” functionality that we want to package and reuse:</p>
+<p>Let’s begin with a simple Python package, a “hello world” functionality that we want to package and reuse:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Hello World from Python!&quot;</span><span class="p">)</span>
 </pre></div>
@@ -287,11 +287,11 @@ It is not necessary to compile code, so the package recipe <code class="docutils
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">exports</span></code> will copy both the <code class="docutils literal notranslate"><span class="pre">hello.py</span></code> and the <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> into the recipe. The <code class="docutils literal notranslate"><span class="pre">package()</span></code> method is also obvious: to
-construct the package just copy the python sources.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> adds the current package folder to the <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> conan environment variable. It will not affect the real
-environment variable unless the end user wants it.</p>
-<p>It can be seen that this recipe would be practically the same for most python packages, so it could be factored in a <code class="docutils literal notranslate"><span class="pre">PythonConanFile</span></code>
-base class to further simplify it (open a feature request, or better a pull request :) )</p>
+construct the package just copy the Python sources.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> adds the current package folder to the <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> Conan environment variable. It will not affect the real
+environment variable unless the end user desires it.</p>
+<p>It can be seen that this recipe would be practically the same for most Python packages, so it could be factored in a <code class="docutils literal notranslate"><span class="pre">PythonConanFile</span></code>
+base class to further simplify it. (Open a feature request, or better a pull request. :) )</p>
 <p>With this recipe, all we have to do is:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan <span class="nb">export</span> . memsharded/testing
 </pre></div>
@@ -321,13 +321,13 @@ Hello World from Python!
 &gt;&gt;&gt;
 </pre></div>
 </div>
-<p>The above shows an interactive session, but you can import also the functionality in a regular python script.</p>
+<p>The above shows an interactive session, but you can import also the functionality in a regular Python script.</p>
 </div>
 <div class="section" id="reusing-python-code-in-your-recipes">
-<h2>Reusing python code in your recipes<a class="headerlink" href="#reusing-python-code-in-your-recipes" title="Permalink to this headline">¶</a></h2>
+<h2>Reusing Python code in your recipes<a class="headerlink" href="#reusing-python-code-in-your-recipes" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="requiring-a-python-conan-package">
-<h3>Requiring a python conan package<a class="headerlink" href="#requiring-a-python-conan-package" title="Permalink to this headline">¶</a></h3>
-<p>As the conan recipes are python code itself, it is easy to reuse python packages in them. A basic recipe using the created package would be:</p>
+<h3>Requiring a Python Conan package<a class="headerlink" href="#requiring-a-python-conan-package" title="Permalink to this headline">¶</a></h3>
+<p>As the Conan recipes are Python code itself, it is easy to reuse Python packages in them. A basic recipe using the created package would be:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
 
 <span class="k">class</span> <span class="nc">HelloPythonReuseConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
@@ -350,8 +350,8 @@ Hello World from Python!
 </div>
 </div>
 <div class="section" id="sharing-a-python-module">
-<h3>Sharing a python module<a class="headerlink" href="#sharing-a-python-module" title="Permalink to this headline">¶</a></h3>
-<p>Another approach is sharing a python module and exporting within the recipe.</p>
+<h3>Sharing a Python module<a class="headerlink" href="#sharing-a-python-module" title="Permalink to this headline">¶</a></h3>
+<p>Another approach is sharing a Python module and exporting within the recipe.</p>
 <p id="split-conanfile">Let’s write for example a <code class="docutils literal notranslate"><span class="pre">msgs.py</span></code> file and put it besides the <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build_msg</span><span class="p">(</span><span class="n">output</span><span class="p">):</span>
     <span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Building!&quot;</span><span class="p">)</span>
@@ -407,7 +407,7 @@ self-contained.</p>
         <a href="custom_generators.html" class="btn btn-neutral float-right" title="How to create and share a custom generator with generator packages" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="run_conan_in_docker.html" class="btn btn-neutral" title="How to use docker to create and cross build C and C++ conan packages" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="run_conan_in_docker.html" class="btn btn-neutral" title="How to use Docker to create and cross-build C and C++ Conan packages" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
