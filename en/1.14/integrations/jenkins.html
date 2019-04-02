@@ -149,7 +149,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2 current"><a class="current reference internal" href="#"> Jenkins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#artifactory-and-jenkins-integration">Artifactory and Jenkins integration</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#example-test-your-project-getting-requirements-from-artifactory">Example: Test your project getting requirements from Artifactory</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#example-build-a-conan-package-and-upload-it-to-artifactory">Example: Build a conan package and upload it to Artifactory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-build-a-conan-package-and-upload-it-to-artifactory">Example: Build a Conan package and upload it to Artifactory</a></li>
 </ul>
 </li>
 </ul>
@@ -247,20 +247,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>You can use <cite>Jenkins CI</cite> both for:</p>
 <ul class="simple">
 <li>Building and testing your project, which manages dependencies with Conan, and probably a conanfile.txt file</li>
-<li>Building and testing conan binary packages for a given conan package recipe (with a conanfile.py) and uploading to a
-conan remote (Artifactory or conan_server)</li>
+<li>Building and testing conan binary packages for a given Conan package recipe (with a conanfile.py) and uploading to a
+Conan remote (Artifactory or conan_server)</li>
 </ul>
-<p>There is no need for any special setup for it, just install conan and your build tools in the Jenkins machine and call
-the needed <code class="docutils literal notranslate"><span class="pre">conan</span></code> commands.</p>
+<p>There is no need for any special setup for it, just install Conan and your build tools in the Jenkins machine and call
+the needed Conan commands.</p>
 <div class="section" id="artifactory-and-jenkins-integration">
 <h2>Artifactory and Jenkins integration<a class="headerlink" href="#artifactory-and-jenkins-integration" title="Permalink to this headline">¶</a></h2>
 <p>If you are using <a class="reference external" href="https://jfrog.com/artifactory/">Artifactory</a> you can take advantage of the <a class="reference external" href="https://www.jfrog.com/confluence/display/RTF/Jenkins+Artifactory+Plug-in">Jenkins Artifactory Plugin</a>.
 Check <a class="reference external" href="https://www.jfrog.com/confluence/display/RTF/Jenkins+Artifactory+Plug-in">here how to install the plugin</a> and <a class="reference external" href="https://www.jfrog.com/confluence/display/RTF/Working+With+Pipeline+Jobs+in+Jenkins">here you can check the full documentation about the DSL</a>.</p>
-<p>The Artifactory Jenkins plugin provides a powerful DSL language to call conan, connect with your Artifactory instance,
+<p>The Artifactory Jenkins plugin provides a powerful DSL (Domain Specific Language) to call Conan, connect with your Artifactory instance,
 upload and download your packages from Artifactory and manage your <a class="reference external" href="https://www.jfrog.com/confluence/display/RTF/Build+Integration">build information</a>.</p>
 <div class="section" id="example-test-your-project-getting-requirements-from-artifactory">
 <h3>Example: Test your project getting requirements from Artifactory<a class="headerlink" href="#example-test-your-project-getting-requirements-from-artifactory" title="Permalink to this headline">¶</a></h3>
-<p>This is a template to use Jenkins with Artifactory plugin and Conan to retrieve your package from Artifactory server
+<p>This is a template to use Jenkins with an Artifactory plugin and Conan to retrieve your package from Artifactory server
 and publish the <a class="reference external" href="https://www.jfrog.com/confluence/display/RTF/Build+Integration">build information</a> about the downloaded packages to Artifactory.</p>
 <p>In this script we assume that we already have all our dependencies in the Artifactory server, and we are building
 our project that uses <strong>Boost</strong> and <strong>Poco</strong> libraries.</p>
@@ -298,8 +298,8 @@ our project that uses <strong>Boost</strong> and <strong>Poco</strong> libraries
 <p><img alt="jenkins_stages" src="../_images/jenkins_stages.png" /></p>
 </div>
 <div class="section" id="example-build-a-conan-package-and-upload-it-to-artifactory">
-<h3>Example: Build a conan package and upload it to Artifactory<a class="headerlink" href="#example-build-a-conan-package-and-upload-it-to-artifactory" title="Permalink to this headline">¶</a></h3>
-<p>In this example we will call conan <a class="reference internal" href="../creating_packages/getting_started.html#creating-and-testing-packages"><span class="std std-ref">test package</span></a> command to create a binary packages
+<h3>Example: Build a Conan package and upload it to Artifactory<a class="headerlink" href="#example-build-a-conan-package-and-upload-it-to-artifactory" title="Permalink to this headline">¶</a></h3>
+<p>In this example we will call Conan <a class="reference internal" href="../creating_packages/getting_started.html#creating-and-testing-packages"><span class="std std-ref">test package</span></a> command to create a binary packages
 and then upload it to Artifactory. We also upload the <a class="reference external" href="https://www.jfrog.com/confluence/display/RTF/Build+Integration">build information</a>:</p>
 <div class="highlight-groovy notranslate"><div class="highlight"><pre><span></span><span class="kt">def</span> <span class="n">artifactory_name</span> <span class="o">=</span> <span class="s2">&quot;artifactory&quot;</span>
 <span class="kt">def</span> <span class="n">artifactory_repo</span> <span class="o">=</span> <span class="s2">&quot;conan-local&quot;</span>
