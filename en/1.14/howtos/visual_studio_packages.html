@@ -286,7 +286,7 @@ $ Hello World Release!
 </pre></div>
 </div>
 <p>This recipe is using the <a class="reference internal" href="../reference/build_helpers/visual_studio.html#msbuild"><span class="std std-ref">MSBuild() build helper</span></a> to build the <code class="docutils literal notranslate"><span class="pre">sln</span></code> project.
-If our recipe had <code class="docutils literal notranslate"><span class="pre">requires</span></code>, the <code class="docutils literal notranslate"><span class="pre">MSBUILD</span></code> helper will also take care of inject all the needed
+If our recipe has <code class="docutils literal notranslate"><span class="pre">requires</span></code>, the <code class="docutils literal notranslate"><span class="pre">MSBUILD</span></code> helper will also take care of inject all the needed
 information from the requirements, as include directories, library names, definitions, flags etc
 to allow our project to locate the declared dependencies.</p>
 <p>The recipe contains also a <code class="docutils literal notranslate"><span class="pre">test_package</span></code> folder with a simple example consuming application.
@@ -294,7 +294,7 @@ In this example, the consuming application is using cmake to build, but it could
 We have left the cmake one because it is the default generated with <strong class="command">conan new</strong>, and also to show that packages
 created from Visual Studio projects can also be consumed with other build systems like CMake.</p>
 <p>Once we want to create a package, it is advised to close VS IDE, clean the temporary build files from VS to avoid problems,
-then create and test the package (here it is using system defaults, assuming they are Visual Studio 14, Release, x86_64):</p>
+then create and test the package. Here it is using system defaults, assuming they are Visual Studio 14, Release, x86_64:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># close VS</span>
 $ git clean -xdf
 $ conan create . memsharded/testing
@@ -302,7 +302,7 @@ $ conan create . memsharded/testing
 &gt; Hello World Release!
 </pre></div>
 </div>
-<p>Instead of closing the IDE and running command:<cite>git clean</cite> we could also configure a smarter filter in <code class="docutils literal notranslate"><span class="pre">exports_sources</span></code> field, so temporary
+<p>Instead of closing the IDE and running the command:<cite>git clean</cite> we could also configure a smarter filter in <code class="docutils literal notranslate"><span class="pre">exports_sources</span></code> field, so temporary
 build files are not exported into the recipe.</p>
 <p>This process can be repeated to create and test packages for different configurations:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan create . memsharded/testing -s <span class="nv">arch</span><span class="o">=</span>x86
@@ -322,16 +322,16 @@ automatically use <code class="docutils literal notranslate"><span class="pre">r
 </div>
 <div class="section" id="uploading-binaries">
 <h2>Uploading binaries<a class="headerlink" href="#uploading-binaries" title="Permalink to this headline">¶</a></h2>
-<p>Your locally created packages can already be uploaded to a conan remote.
+<p>Your locally created packages can already be uploaded to a Conan remote.
 If you created them with the original username “memsharded”, as from the git clone, you might want to do a <strong class="command">conan copy</strong>
 to put them on your own username. Of course, you can also directly use your user name in <strong class="command">conan create</strong>.</p>
 <p>Another alternative is to configure the permissions in the remote, to allow uploading packages with
-different usernames. By default artifactory will do it but conan server won’t:
+different usernames. By default artifactory will do it but Conan server won’t:
 permissions must be given in <code class="docutils literal notranslate"><span class="pre">[write_permissions]</span></code> section of <code class="docutils literal notranslate"><span class="pre">server.conf</span></code>.</p>
 </div>
 <div class="section" id="reusing-packages">
 <h2>Reusing packages<a class="headerlink" href="#reusing-packages" title="Permalink to this headline">¶</a></h2>
-<p>To use existing packages directly from Visual Studio, conan provides the <code class="docutils literal notranslate"><span class="pre">visual_studio</span></code> generator.
+<p>To use existing packages directly from Visual Studio, Conan provides the <code class="docutils literal notranslate"><span class="pre">visual_studio</span></code> generator.
 Let’s clone an existing “Chat” project, consisting of a ChatLib static library that makes use of the
 previous “Hello World” package, and a MyChat application, calling the ChatLib library function.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/memsharded/chat_vs
@@ -410,7 +410,7 @@ You could also define multiple <code class="docutils literal notranslate"><span 
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">So far, the <code class="docutils literal notranslate"><span class="pre">visual_studio</span></code> generator is single-configuration (packages containing debug or release artifacts,
-the generally recommended approach), it does not support multi-config packages (packages containing both debug and release artifacts).
+the generally recommended approach). It does not support multi-config packages (packages containing both debug and release artifacts).
 Please report and provide feedback (submit an issue in github) to request this feature if necessary.</p>
 </div>
 </div>

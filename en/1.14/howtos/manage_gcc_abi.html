@@ -233,7 +233,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="how-to-manage-the-gcc-5-abi">
 <span id="manage-gcc-abi"></span><h1>How to manage the GCC &gt;= 5 ABI<a class="headerlink" href="#how-to-manage-the-gcc-5-abi" title="Permalink to this headline">¶</a></h1>
-<p>In the GCC 5.1 released the libstdc++, which introduced a
+<p>In version 5.1, GCC released libstdc++, which introduced a
 <a class="reference external" href="https://gcc.gnu.org/onlinedocs/libstdc++/manual/using_dual_abi.html">new library ABI</a> that includes new implementations of
 <code class="docutils literal notranslate"><span class="pre">std::string</span></code> and <code class="docutils literal notranslate"><span class="pre">std::list</span></code>. These changes were necessary to conform to the 2011 C++ standard which forbids Copy-On-Write strings
 and requires lists to keep track of their size.</p>
@@ -249,7 +249,7 @@ compatibility. However, if you are using GCC &gt;= 5 your compiler is likely to 
 <p>If you want Conan to use the new ABI, edit the default profile at <code class="docutils literal notranslate"><span class="pre">~/.conan/profiles/default</span></code> adjusting <code class="docutils literal notranslate"><span class="pre">compiler.libcxx=libstdc++11</span></code>
 or override this setting in the profile you are using.</p>
 <p>If you are using the <a class="reference internal" href="../reference/build_helpers/cmake.html#cmake-reference"><span class="std std-ref">CMake build helper</span></a> or the <a class="reference internal" href="../reference/build_helpers/autotools.html#autotools-reference"><span class="std std-ref">AutotoolsBuildEnvironment build helper</span></a>
-Conan will adjust automatically the <code class="docutils literal notranslate"><span class="pre">_GLIBCXX_USE_CXX11_ABI</span></code> flag to manage the ABI.</p>
+Conan will automatically adjust the <code class="docutils literal notranslate"><span class="pre">_GLIBCXX_USE_CXX11_ABI</span></code> flag to manage the ABI.</p>
 </div>
 
 
