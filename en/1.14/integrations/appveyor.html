@@ -150,7 +150,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="travisci.html"> Travis CI</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"> Appveyor</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#building-and-testing-your-project">Building and testing your project</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#creating-testing-and-uploading-conan-binary-packages">Creating, testing and uploading conan binary packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-testing-and-uploading-conan-binary-packages">Creating, testing and uploading Conan binary packages</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="gitlab.html"> Gitlab</a></li>
@@ -241,13 +241,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="appveyor-logo-appveyor">
 <span id="appveyor-ci"></span><h1><img alt="appveyor_logo" src="../_images/appveyor_logo.png" /> Appveyor<a class="headerlink" href="#appveyor-logo-appveyor" title="Permalink to this headline">¶</a></h1>
-<p>You can use <a class="reference external" href="https://ci.appveyor.com">AppVeyor</a> cloud service to automatically build and test your project in a Windows environment in the cloud.
+<p>You can use the <a class="reference external" href="https://ci.appveyor.com">AppVeyor</a> cloud service to automatically build and test your project in a Windows environment in the cloud.
 It is free for OSS projects, and offers an easy integration with Github, so builds can be automatically
 fired in Appveyor after a <strong class="command">git push</strong> to Github.</p>
 <p>You can use Appveyor both for:</p>
 <ul class="simple">
 <li>Building and testing your project, which manages dependencies with Conan, and probably a conanfile.txt file</li>
-<li>Building and testing conan binary packages for a given conan package recipe (with a conanfile.py)</li>
+<li>Building and testing Conan binary packages for a given Conan package recipe (with a conanfile.py)</li>
 </ul>
 <div class="section" id="building-and-testing-your-project">
 <h2>Building and testing your project<a class="headerlink" href="#building-and-testing-your-project" title="Permalink to this headline">¶</a></h2>
@@ -280,19 +280,19 @@ fired in Appveyor after a <strong class="command">git push</strong> to Github.</
       - cmmd: encryption_test.exe
 </pre></div>
 </div>
-<p>Appveyor will install the <strong>conan</strong> tool and will execute the <strong>conan install</strong> command.
+<p>Appveyor will install the <strong>Conan</strong> tool and will execute the <strong>conan install</strong> command.
 Then, the <strong>build_script</strong> section creates the build folder, compiles the project with <strong>cmake</strong> and the section <strong>test_script</strong> runs the <strong>tests</strong>.</p>
 </div>
 <div class="section" id="creating-testing-and-uploading-conan-binary-packages">
-<h2>Creating, testing and uploading conan binary packages<a class="headerlink" href="#creating-testing-and-uploading-conan-binary-packages" title="Permalink to this headline">¶</a></h2>
+<h2>Creating, testing and uploading Conan binary packages<a class="headerlink" href="#creating-testing-and-uploading-conan-binary-packages" title="Permalink to this headline">¶</a></h2>
 <p>You can use Appveyor to automate the building of binary packages, which will be created in the
-cloud after pushing to Github. You can probably setup your own way, but conan has some utilities to help in the process.</p>
+cloud after pushing to Github. You can probably set up your own way, but Conan has some utilities to help in the process.</p>
 <p>The command <strong class="command">conan new</strong> has arguments to create a default working <em>appveyor.yml</em> file. Other setups might be possible, but for this
 example we are assuming that you are using GitHub and also uploading your final packages to Bintray. You could follow these steps:</p>
 <ol class="arabic simple">
-<li>First, create an empty github repository, let’s call it “hello”, for creating a “hello world” package. Github allows to create it with a Readme and .gitignore.</li>
-<li>Get the credentials User and API Key (remember, Bintray uses the API key as “password”, not your main Bintray account password)</li>
-<li>Create a conan repository in Bintray under your user or organization, and get its URL (“Set me up”). We will call it <code class="docutils literal notranslate"><span class="pre">UPLOAD_URL</span></code></li>
+<li>First, create an empty github repository. Let’s call it “hello”, for creating a “hello world” package. Github allows to create it with a Readme and .gitignore.</li>
+<li>Get the credentials User and API Key. (Remember, Bintray uses the API key as “password”, not your main Bintray account password.)</li>
+<li>Create a Conan repository in Bintray under your user or organization, and get its URL (“Set me up”). We will call it <code class="docutils literal notranslate"><span class="pre">UPLOAD_URL</span></code></li>
 <li>Activate the repo in your Appveyor account, so it is built when we push changes to it.</li>
 <li>Under <em>Appveyor Settings-&gt;Environment</em>, add the <code class="docutils literal notranslate"><span class="pre">CONAN_PASSWORD</span></code> environment variable with the Bintray API Key, and encrypt it.  If your Bintray user is different from the package user, you can define your Bintray username too, defining the environment variable <code class="docutils literal notranslate"><span class="pre">CONAN_LOGIN_USERNAME</span></code></li>
 <li>Clone the repo: <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">git</span> <span class="pre">clone</span> <span class="pre">&lt;your_repo/hello&gt;</span> <span class="pre">&amp;&amp;</span> <span class="pre">cd</span> <span class="pre">hello</span></code></li>

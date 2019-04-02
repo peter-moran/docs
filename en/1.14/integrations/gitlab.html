@@ -151,7 +151,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="appveyor.html"> Appveyor</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"> Gitlab</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#building-and-testing-your-project">Building and testing your project</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#creating-testing-and-uploading-conan-binary-packages">Creating, testing and uploading conan binary packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-testing-and-uploading-conan-binary-packages">Creating, testing and uploading Conan binary packages</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="circleci.html"> Circle CI</a></li>
@@ -241,13 +241,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="gitlab-logo-gitlab">
 <span id="gitlab"></span><span id="gitlab-integration"></span><h1><img alt="gitlab_logo" src="../_images/gitlab_logo.png" /> Gitlab<a class="headerlink" href="#gitlab-logo-gitlab" title="Permalink to this headline">¶</a></h1>
-<p>You can use <a class="reference external" href="https://about.gitlab.com/">Gitlab CI</a> cloud or local service to automatically build and test your project in Linux/macOS/Windows environments.
+<p>You can use the <a class="reference external" href="https://about.gitlab.com/">Gitlab CI</a> cloud or local service to automatically build and test your project in Linux/MacOS/Windows environments.
 It is free for OSS projects, and offers an easy integration with Gitlab, so builds can be automatically
 fired in Gitlab CI after a <strong class="command">git push</strong> to Gitlab.</p>
 <p>You can use Gitlab CI both for:</p>
 <ul class="simple">
 <li>Building and testing your project, which manages dependencies with Conan, and probably a conanfile.txt file</li>
-<li>Building and testing conan binary packages for a given conan package recipe (with a conanfile.py)</li>
+<li>Building and testing Conan binary packages for a given Conan package recipe (with a conanfile.py)</li>
 </ul>
 <div class="section" id="building-and-testing-your-project">
 <h2>Building and testing your project<a class="headerlink" href="#building-and-testing-your-project" title="Permalink to this headline">¶</a></h2>
@@ -273,20 +273,20 @@ build:
 </div>
 <p>Gitlab CI will install the <strong>conan</strong> tool and will execute the <strong>conan install</strong> command.
 Then, the <strong>script</strong> section creates the build folder, compiles the project with <strong>cmake</strong> and runs the <strong>tests</strong>.</p>
-<p>On Windows the Gitlab runner may be running as a service and not have a home directory.  In which case you need to set a custom value for <code class="docutils literal notranslate"><span class="pre">CONAN_USER_HOME</span></code>.</p>
+<p>On Windows the Gitlab runner may be running as a service and not have a home directory, in which case you need to set a custom value for <code class="docutils literal notranslate"><span class="pre">CONAN_USER_HOME</span></code>.</p>
 </div>
 <div class="section" id="creating-testing-and-uploading-conan-binary-packages">
-<h2>Creating, testing and uploading conan binary packages<a class="headerlink" href="#creating-testing-and-uploading-conan-binary-packages" title="Permalink to this headline">¶</a></h2>
+<h2>Creating, testing and uploading Conan binary packages<a class="headerlink" href="#creating-testing-and-uploading-conan-binary-packages" title="Permalink to this headline">¶</a></h2>
 <p>You can use Gitlab CI to automate the building of binary packages, which will be created in the
-cloud after pushing to Gitlab. You can probably setup your own way, but conan has some utilities to help in the process.</p>
-<p>The command <strong class="command">conan new</strong> has arguments to create a default working <code class="docutils literal notranslate"><span class="pre">.gitlab-ci.yml</span></code> file.
+cloud after pushing to Gitlab. You can probably setup your own way, but Conan has some utilities to help in the process.
+The command <strong class="command">conan new</strong> has arguments to create a default working <code class="docutils literal notranslate"><span class="pre">.gitlab-ci.yml</span></code> file.
 Other setups might be possible, but for this example we are assuming that you are using github and also uploading your final packages to Bintray.
 You could follow these steps:</p>
 <ol class="arabic simple">
 <li>First, create an empty gitlab repository, let’s call it “hello”, for creating a “hello world” package. Gitlab allows to create it with a Readme, license and .gitignore.</li>
 <li>Get the credentials User and API Key (remember, Bintray uses the API key as “password”, not your main Bintray account password)</li>
-<li>Create a conan repository in Bintray under your user or organization, and get its URL (“Set me up”). We will call it <code class="docutils literal notranslate"><span class="pre">UPLOAD_URL</span></code></li>
-<li>Under your project page, <em>Settings -&gt; Pipelines -&gt; Add a variable</em>, add the <code class="docutils literal notranslate"><span class="pre">CONAN_PASSWORD</span></code> environment variable with the Bintray API Key. If your Bintray user is different from the package user, you can define your Bintray username too, defining the environment variable <code class="docutils literal notranslate"><span class="pre">CONAN_LOGIN_USERNAME</span></code></li>
+<li>Create a Conan repository in Bintray under your user or organization, and get its URL (“Set me up”). We will call it <code class="docutils literal notranslate"><span class="pre">UPLOAD_URL</span></code></li>
+<li>Under your project page, <em>Settings -&gt; Pipelines -&gt; Add a variable</em>, add the <code class="docutils literal notranslate"><span class="pre">CONAN_PASSWORD</span></code> environment variable with the Bintray API Key. If your Bintray user is different from the package user, you can also define your Bintray username, defining the environment variable <code class="docutils literal notranslate"><span class="pre">CONAN_LOGIN_USERNAME</span></code></li>
 <li>Clone the repo: <strong class="command">git clone &lt;your_repo/hello&gt; &amp;&amp; cd hello</strong>.</li>
 <li>Create the package: <strong class="command">conan new Hello/0.1&#64;&lt;user&gt;/testing -t -s -ciglg -ciglc -cis -ciu=UPLOAD_URL</strong> where <strong>user</strong> is your Bintray username.</li>
 <li>You can inspect the created files: both <em>.gitlab-ci.yml</em> and the <em>build.py</em> script, that is used by <strong>conan-package-tools</strong> utility to
@@ -294,7 +294,7 @@ split different builds with different configurations in different GitLab CI jobs
 <li>You can test locally, before pushing, with <strong class="command">conan create</strong> or by GitLab Runner.</li>
 <li>Add the changes, commit and push: <strong class="command">git add . &amp;&amp; git commit -m &quot;first commit&quot; &amp;&amp; git push</strong>.</li>
 <li>Go to Pipelines page and see the pipeline, with the different jobs.</li>
-<li>When it finish, go to your Bintray repository, you should see there the uploaded packages for different configurations.</li>
+<li>When it has finished, go to your Bintray repository, you should see there the uploaded packages for different configurations.</li>
 <li>Check locally, searching in Bintray: <strong class="command">conan search Hello/0.1&#64;&lt;user&gt;/testing -r=mybintray</strong>.</li>
 </ol>
 <p>If something fails, please report an issue in the <strong>conan-package-tools</strong> github repository: <a class="reference external" href="https://github.com/conan-io/conan-package-tools">https://github.com/conan-io/conan-package-tools</a></p>
