@@ -238,9 +238,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="section" id="creating-and-reusing-packages-based-on-makefiles">
 <span id="makefiles-howto"></span><h1>Creating and reusing packages based on Makefiles<a class="headerlink" href="#creating-and-reusing-packages-based-on-makefiles" title="Permalink to this headline">¶</a></h1>
 <p>Conan can create packages and reuse them with Makefiles. The <code class="docutils literal notranslate"><span class="pre">AutoToolsBuildEnvironment</span></code>
-build helper helps with most of the necessary task.</p>
-<p>This how-to has been tested in Windows with MinGW and Linux with gcc. It is using static libraries
-but could be extended to shared libraries too. The Makefiles surely can be improved they are just an example.</p>
+build helper helps with most of the necessary tasks.</p>
+<p>This how-to has been tested in Windows with MinGW and Linux with gcc. It uses static libraries
+but could be extended to shared libraries too. The Makefiles surely can be improved. They are just an example.</p>
 <div class="section" id="creating-packages">
 <h2>Creating packages<a class="headerlink" href="#creating-packages" title="Permalink to this headline">¶</a></h2>
 <p>Start cloning the existing example repository, containing a simple “Hello World” library, and application:</p>
@@ -250,7 +250,7 @@ $ <span class="nb">cd</span> hellolib
 </pre></div>
 </div>
 <p>It contains a <em>src</em> folder with the source code and a <em>conanfile.py</em> file for creating a package.</p>
-<p>Inside the <em>src</em> folder, there is <em>Makefile</em> to build the static library. This <em>Makefile</em> is using
+<p>Inside the <em>src</em> folder, there is <em>Makefile</em> to build the static library. This <em>Makefile</em> uses
 standard variables like <code class="docutils literal notranslate"><span class="pre">$(CPPFLAGS)</span></code> or <code class="docutils literal notranslate"><span class="pre">$(CXX)</span></code> to build it:</p>
 <div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nv">SRC</span> <span class="o">=</span> hello.cpp
 <span class="nv">OBJ</span> <span class="o">=</span> <span class="k">$(</span>SRC:.cpp<span class="o">=</span>.o<span class="k">)</span>
@@ -270,7 +270,7 @@ standard variables like <code class="docutils literal notranslate"><span class="
 </div>
 <p>The <em>conanfile.py</em> file uses the <code class="docutils literal notranslate"><span class="pre">AutoToolsBuildEnvironment</span></code> build helper. This helper defines
 the necessary environment variables with information from dependencies, as well as other variables
-to match the current conan settings (like <code class="docutils literal notranslate"><span class="pre">-m32</span></code> or <code class="docutils literal notranslate"><span class="pre">-m64</span></code> based on the conan <code class="docutils literal notranslate"><span class="pre">arch</span></code> setting)</p>
+to match the current Conan settings (like <code class="docutils literal notranslate"><span class="pre">-m32</span></code> or <code class="docutils literal notranslate"><span class="pre">-m64</span></code> based on the Conan <code class="docutils literal notranslate"><span class="pre">arch</span></code> setting)</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">AutoToolsBuildEnvironment</span>
 <span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">tools</span>
 
@@ -307,7 +307,7 @@ to match the current conan settings (like <code class="docutils literal notransl
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ../helloapp
 </pre></div>
 </div>
-<p>There you can see also a <em>src</em> folder with a <em>Makefile</em> creating an executable:</p>
+<p>There you can also see a <em>src</em> folder with a <em>Makefile</em> creating an executable:</p>
 <div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nv">SRC</span> <span class="o">=</span> app.cpp
 <span class="nv">OBJ</span> <span class="o">=</span> <span class="k">$(</span>SRC:.cpp<span class="o">=</span>.o<span class="k">)</span>
 <span class="nv">OUT</span> <span class="o">=</span> app
@@ -324,7 +324,7 @@ to match the current conan settings (like <code class="docutils literal notransl
     <span class="k">$(</span>CXX<span class="k">)</span> -o <span class="k">$(</span>OUT<span class="k">)</span>  <span class="k">$(</span>OBJ<span class="k">)</span>  <span class="k">$(</span>LDFLAGS<span class="k">)</span>  <span class="k">$(</span>LIBS<span class="k">)</span>
 </pre></div>
 </div>
-<p>And also a <em>conanfile.py</em> very similar to the previous one, in this case adding a <code class="docutils literal notranslate"><span class="pre">requires</span></code> and a <code class="docutils literal notranslate"><span class="pre">deploy()</span></code> method:</p>
+<p>And also a <em>conanfile.py</em> very similar to the previous one. In this case adding a <code class="docutils literal notranslate"><span class="pre">requires</span></code> and a <code class="docutils literal notranslate"><span class="pre">deploy()</span></code> method:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">AutoToolsBuildEnvironment</span>
  <span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">tools</span>
 
@@ -356,7 +356,7 @@ etc. to properly build and link with the <code class="docutils literal notransla
 </pre></div>
 </div>
 <p>There are different ways to run executables contained in packages, like using <code class="docutils literal notranslate"><span class="pre">virtualrunenv</span></code> generators.
-In this case, as the package has a <code class="docutils literal notranslate"><span class="pre">deploy()</span></code> method, we can use it:</p>
+In this case, since the package has a <code class="docutils literal notranslate"><span class="pre">deploy()</span></code> method, we can use it:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install Hello/0.1user/testing -s <span class="nv">compiler</span><span class="o">=</span>gcc -s compiler.version<span class="o">=</span><span class="m">4</span>.9 -s compiler.libcxx<span class="o">=</span>libstdc++
 $ ./bin/app
 $ Hello World Release!

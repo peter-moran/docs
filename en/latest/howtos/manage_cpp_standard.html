@@ -323,10 +323,10 @@ The detected default profile doesn’t set any value for the <code class="docuti
 </table>
 <div class="section" id="build-helpers">
 <h2>Build helpers<a class="headerlink" href="#build-helpers" title="Permalink to this headline">¶</a></h2>
-<p>When the <code class="docutils literal notranslate"><span class="pre">cppstd</span></code> setting is declared in the recipe and the consumer specify a value for it:</p>
+<p>When the <code class="docutils literal notranslate"><span class="pre">cppstd</span></code> setting is declared in the recipe and the consumer specifies a value for it:</p>
 <blockquote>
 <div><ul class="simple">
-<li>The <a class="reference internal" href="../reference/build_helpers/cmake.html#cmake-reference"><span class="std std-ref">CMake</span></a> build helper will set the <code class="docutils literal notranslate"><span class="pre">CONAN_CMAKE_CXX_STANDARD</span></code> and <code class="docutils literal notranslate"><span class="pre">CONAN_CMAKE_CXX_EXTENSIONS</span></code> definitions, that will be
+<li>The <a class="reference internal" href="../reference/build_helpers/cmake.html#cmake-reference"><span class="std std-ref">CMake</span></a> build helper will set the <code class="docutils literal notranslate"><span class="pre">CONAN_CMAKE_CXX_STANDARD</span></code> and <code class="docutils literal notranslate"><span class="pre">CONAN_CMAKE_CXX_EXTENSIONS</span></code> definitions that will be
 converted to the corresponding CMake variables to activate the standard automatically with the <code class="docutils literal notranslate"><span class="pre">conan_basic_setup()</span></code> macro.</li>
 <li>The <a class="reference internal" href="../reference/build_helpers/autotools.html#autotools-reference"><span class="std std-ref">AutotoolsBuildEnvironment</span></a> build helper will adjust the needed flag to <code class="docutils literal notranslate"><span class="pre">CXXFLAGS</span></code> automatically.</li>
 <li>The <a class="reference internal" href="../reference/build_helpers/visual_studio.html#msbuild"><span class="std std-ref">MSBuild/VisualStudioBuildEnvironment</span></a> build helper will adjust the needed flag to <code class="docutils literal notranslate"><span class="pre">CL</span></code> env var automatically.</li>
