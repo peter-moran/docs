@@ -270,7 +270,7 @@ and <strong>shared_lib_1</strong>, in turn, requires another <strong>shared_lib_
 </tr>
 </tbody>
 </table>
-<p>In <strong>linux</strong> if the linker doesn’t find the library in <strong>rpath</strong>, it will continue the search in
+<p>In <strong>Linux</strong> if the linker doesn’t find the library in <strong>rpath</strong>, it will continue the search in
 <strong>system defaults paths</strong> (LD_LIBRARY_PATH… etc)
 In OSX, if the linker detects an invalid <strong>rpath</strong> (the file does not exist there), it will fail.</p>
 <div class="section" id="default-conan-approach">
@@ -296,7 +296,7 @@ executable directory, and you will need to adjust the <cite>LD_LIBRARY_PATH</cit
 <p>On <strong>OSX</strong> if absolute rpaths are hardcoded in an executable or
 shared library and they don’t exist the executable will fail to run. This is the most common problem when
 we reuse packages in a different environment from where the artifacts have been generated.</p>
-<p>So, for <strong>OSX</strong>, conan, by default when you build your library with <strong>CMake</strong>, the rpaths will be
+<p>So for <strong>OSX</strong>, Conan, by default, when you build your library with <strong>CMake</strong>, the rpaths will be
 generated without any path:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -329,8 +329,8 @@ generated without any path:</p>
 <span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">timer</span> <span class="o">${</span><span class="nv">CONAN_LIBS</span><span class="o">}</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>If you are using <code class="docutils literal notranslate"><span class="pre">autotools</span></code> conan won’t auto-adjust the rpaths behavior, if you want to follow this
-default behavior probably you will need to replace the <code class="docutils literal notranslate"><span class="pre">install_name</span></code> in the <strong>configure</strong> or <strong>MakeFile</strong>
+<p>If you are using <code class="docutils literal notranslate"><span class="pre">autotools</span></code> Conan won’t auto-adjust the rpaths behavior. if you want to follow this
+default behavior you will probably need to replace the <code class="docutils literal notranslate"><span class="pre">install_name</span></code> in the <strong>configure</strong> or <strong>MakeFile</strong>
 generated files in your recipe to not use $rpath:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">replace_in_file</span><span class="p">(</span><span class="s2">&quot;./configure&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;-install_name \$rpath/&quot;</span><span class="p">,</span> <span class="s2">&quot;-install_name &quot;</span><span class="p">)</span>
 </pre></div>
@@ -367,7 +367,7 @@ lib, *.dylib* -&gt; ./lib # Copies all dylib files from packages lib folder to m
 lib, *.so* -&gt; ./lib # Copies all so files from packages lib folder to my &quot;lib&quot; folder
 </pre></div>
 </div>
-<p>And your finally application can follow this layout:</p>
+<p>And your final application can follow this layout:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>bin
  |_____ my_executable
  |_____ mylib.dll
