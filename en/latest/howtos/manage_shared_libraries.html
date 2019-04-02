@@ -135,7 +135,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="manage_gcc_abi.html">How to manage the GCC &gt;= 5 ABI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vs2017_cmake.html">Using Visual Studio 2017 - CMake integration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manage_cpp_standard.html">How to manage C++ standard [EXPERIMENTAL]</a></li>
-<li class="toctree-l2"><a class="reference internal" href="run_conan_in_docker.html">How to use docker to create and cross build C and C++ conan packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="run_conan_in_docker.html">How to use Docker to create and cross-build C and C++ Conan packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="python_code_reuse.html">How to reuse Python code in recipes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="custom_generators.html">How to create and share a custom generator with generator packages</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">How to manage shared libraries</a><ul>
@@ -237,8 +237,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="how-to-manage-shared-libraries">
 <span id="manage-shared"></span><h1>How to manage shared libraries<a class="headerlink" href="#how-to-manage-shared-libraries" title="Permalink to this headline">¶</a></h1>
-<p>The shared libraries, <cite>.DLL</cite> in windows, <cite>.dylib</cite> in OSX and <cite>.so</cite> in Linux, are loaded at runtime,
-that means that the application executable needs to know where are the required shared libraries when
+<p>Shared libraries, <cite>.DLL</cite> in windows, <cite>.dylib</cite> in OSX and <cite>.so</cite> in Linux, are loaded at runtime.
+That means that the application executable needs to know where are the required shared libraries when
 it runs.</p>
 <p>On Windows, the dynamic linker, will search in the same directory then in the <cite>PATH</cite> directories.
 On OSX, it will search in the directories declared in <cite>DYLD_LIBRARY_PATH</cite> as on Linux will use the <cite>LD_LIBRARY_PATH</cite>.</p>

@@ -135,7 +135,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="manage_gcc_abi.html">How to manage the GCC &gt;= 5 ABI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vs2017_cmake.html">Using Visual Studio 2017 - CMake integration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manage_cpp_standard.html">How to manage C++ standard [EXPERIMENTAL]</a></li>
-<li class="toctree-l2"><a class="reference internal" href="run_conan_in_docker.html">How to use docker to create and cross build C and C++ conan packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="run_conan_in_docker.html">How to use Docker to create and cross-build C and C++ Conan packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="python_code_reuse.html">How to reuse Python code in recipes</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">How to create and share a custom generator with generator packages</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#creating-a-custom-generator">Creating a custom generator</a></li>
@@ -241,13 +241,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <span id="dyn-generators"></span><h1>How to create and share a custom generator with generator packages<a class="headerlink" href="#how-to-create-and-share-a-custom-generator-with-generator-packages" title="Permalink to this headline">¶</a></h1>
 <p>There are several built-in generators, like <code class="docutils literal notranslate"><span class="pre">cmake</span></code>, <code class="docutils literal notranslate"><span class="pre">visual_studio</span></code>, <code class="docutils literal notranslate"><span class="pre">xcode</span></code>…
 But what if your build system is not included? Or maybe the existing built-in generators
-doesn’t satisfy your needs. There are several options:</p>
+doesn’t satisfy your needs? There are several options:</p>
 <ul class="simple">
 <li>Use the <code class="docutils literal notranslate"><span class="pre">txt</span></code> generator, that generates a plain text file easy to parse, which you might
 be able to use.</li>
 <li>Use <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> data, and for example in the <code class="docutils literal notranslate"><span class="pre">build()</span></code> method, access that information
 directly and generate a file or call directly your system</li>
-<li>Fork the conan codebase and write a built-in generator. Please make a pull request if possible to
+<li>Fork the Conan codebase and write a built-in generator. Please make a pull request if possible to
 contribute it to the community.</li>
 <li>Write a custom generator in a <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> and manage it as a package. You can upload it
 to your own server and share with your team, or share with the world uploading it to bintray.
@@ -271,7 +271,7 @@ that file. The <strong>name of the generator</strong> itself will be taken from 
         <span class="k">return</span> <span class="s2">&quot;whatever contents the generator produces&quot;</span>
 </pre></div>
 </div>
-<p>This class is just included in a <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> that must contain also a <code class="docutils literal notranslate"><span class="pre">ConanFile</span></code> class
+<p>This class is included in a <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> that must contain also a <code class="docutils literal notranslate"><span class="pre">ConanFile</span></code> class
 that implements the package itself, with the name of the package, the version, etc. This
 class typically has no <code class="docutils literal notranslate"><span class="pre">source()</span></code>, <code class="docutils literal notranslate"><span class="pre">build()</span></code>, <code class="docutils literal notranslate"><span class="pre">package()</span></code>, and even the <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method is
 overridden as it doesn’t have to define any include paths or library paths.</p>
@@ -289,7 +289,7 @@ filenames-&gt;contents in the <code class="docutils literal notranslate"><span c
         <span class="k">pass</span>
 </pre></div>
 </div>
-<p>Once, it is defined in the <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> you can treat is as a regular package, typically you
+<p>Once, it is defined in the <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> you can treat it as a regular package, typically you
 will <code class="docutils literal notranslate"><span class="pre">export</span></code> it first to your local cache, test it, and once it is working fine, you would
 <code class="docutils literal notranslate"><span class="pre">upload</span></code> it to a server.</p>
 <p>You have access to the <code class="docutils literal notranslate"><span class="pre">conanfile</span></code> instance at <code class="docutils literal notranslate"><span class="pre">self.conanfile</span></code> and get information from the requirements:</p>
@@ -407,8 +407,8 @@ matching the generator name if desired.</p>
 </div>
 <div class="section" id="using-the-generator">
 <h2>Using the generator<a class="headerlink" href="#using-the-generator" title="Permalink to this headline">¶</a></h2>
-<p>Let’s create a test project that uses this generator, and also an existing library conan package,
-we will use the simple “Hello World” package we already created before:</p>
+<p>Let’s create a test project that uses this generator, and also an existing library Conan package.
+We will use the simple “Hello World” package we already created before:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ..
 $ mkdir premake-project <span class="o">&amp;&amp;</span> <span class="nb">cd</span> premake-project
 </pre></div>
@@ -472,7 +472,7 @@ Hello World!
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This is a regular conan package. You could for example embed this example in a <em>test_package</em> folder, create a <em>conanfile.py</em> that
+<p class="last">This is a regular Conan package. You could for example embed this example in a <em>test_package</em> folder, create a <em>conanfile.py</em> that
 invokes premake4 in the build() method, and use <strong class="command">conan test</strong> to automatically test your custom generator with a real project.</p>
 </div>
 </div>

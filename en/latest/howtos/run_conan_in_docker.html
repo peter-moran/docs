@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>How to use docker to create and cross build C and C++ conan packages &mdash; conan 1.14.1 documentation</title>
+  <title>How to use Docker to create and cross-build C and C++ Conan packages &mdash; conan 1.14.1 documentation</title>
   
 
   
@@ -135,11 +135,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="manage_gcc_abi.html">How to manage the GCC &gt;= 5 ABI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vs2017_cmake.html">Using Visual Studio 2017 - CMake integration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manage_cpp_standard.html">How to manage C++ standard [EXPERIMENTAL]</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">How to use docker to create and cross build C and C++ conan packages</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#using-conan-inside-a-container">Using conan inside a container</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#sharing-a-local-folder-with-a-docker-container">Sharing a local folder with a docker container</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">How to use Docker to create and cross-build C and C++ Conan packages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-conan-inside-a-container">Using Conan inside a container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sharing-a-local-folder-with-a-docker-container">Sharing a local folder with a Docker container</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-the-images-to-cross-build-packages">Using the images to cross-build packages</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#available-docker-images">Available docker images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#available-docker-images">Available Docker images</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="python_code_reuse.html">How to reuse Python code in recipes</a></li>
@@ -216,7 +216,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
           <li><a href="../howtos.html">Howtos</a> &raquo;</li>
         
-      <li>How to use docker to create and cross build C and C++ conan packages</li>
+      <li>How to use Docker to create and cross-build C and C++ Conan packages</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -238,14 +238,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
            <div itemprop="articleBody">
             
   <div class="section" id="how-to-use-docker-to-create-and-cross-build-c-and-c-conan-packages">
-<span id="docker-conan"></span><h1>How to use docker to create and cross build C and C++ conan packages<a class="headerlink" href="#how-to-use-docker-to-create-and-cross-build-c-and-c-conan-packages" title="Permalink to this headline">¶</a></h1>
+<span id="docker-conan"></span><h1>How to use Docker to create and cross-build C and C++ Conan packages<a class="headerlink" href="#how-to-use-docker-to-create-and-cross-build-c-and-c-conan-packages" title="Permalink to this headline">¶</a></h1>
 <p>With Docker, you can run different virtual Linux operating systems in a Linux, Mac OSX or Windows machine.
 It is useful to reproduce build environments, for example to automate CI processes. You can have
 different images with different compilers or toolchains and run containers every time is needed.</p>
 <p>In this section you will find a <a class="reference internal" href="#available-docker-images"><span class="std std-ref">list of pre-built images</span></a> with common
 build tools and compilers as well as Conan installed.</p>
 <div class="section" id="using-conan-inside-a-container">
-<h2>Using conan inside a container<a class="headerlink" href="#using-conan-inside-a-container" title="Permalink to this headline">¶</a></h2>
+<h2>Using Conan inside a container<a class="headerlink" href="#using-conan-inside-a-container" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ docker run -it --rm conanio/gcc7 /bin/bash
 </pre></div>
 </div>
@@ -257,12 +257,12 @@ build tools and compilers as well as Conan installed.</p>
 <ul class="simple">
 <li><strong class="command">-it</strong>: Keep STDIN open and allocate a pseudo-tty, in other words, we want to type in the container because we are opening a bash.</li>
 <li><strong class="command">--rm</strong>: Once the container exits, remove the container. Helps to keep clean or hard drive.</li>
-<li><strong class="command">conanio/gcc7</strong>: Image name, check the <a class="reference internal" href="#available-docker-images"><span class="std std-ref">available docker images</span></a>.</li>
+<li><strong class="command">conanio/gcc7</strong>: Image name, check the <a class="reference internal" href="#available-docker-images"><span class="std std-ref">available Docker images</span></a>.</li>
 <li><strong class="command">/bin/bash</strong>: The command to run</li>
 </ul>
 <p>Now we are running on the conangcc7 container we can use Conan normally. In the following example we are
 creating a package from the recipe by cloning the repository, for OpenSSL.
-It is always recommended to upgrade conan from pip first:</p>
+It is always recommended to upgrade Conan from pip first:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo pip install conan --upgrade <span class="c1"># We make sure we are running the latest Conan version</span>
 $ git clone https://github.com/conan-community/conan-openssl
 $ <span class="nb">cd</span> conan-openssl
@@ -271,7 +271,7 @@ $ conan create . user/channel
 </div>
 </div>
 <div class="section" id="sharing-a-local-folder-with-a-docker-container">
-<h2>Sharing a local folder with a docker container<a class="headerlink" href="#sharing-a-local-folder-with-a-docker-container" title="Permalink to this headline">¶</a></h2>
+<h2>Sharing a local folder with a Docker container<a class="headerlink" href="#sharing-a-local-folder-with-a-docker-container" title="Permalink to this headline">¶</a></h2>
 <p>You can share a local folder with your container, for example a project:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/conan-community/conan-openssl
 $ <span class="nb">cd</span> conan-openssl
@@ -280,7 +280,7 @@ $ docker run -it -v<span class="k">$(</span><span class="nb">pwd</span><span cla
 </div>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">v$(pwd):/home/conan/project</span></code>: We are mapping the current directory (conan-openssl) to the container
-<code class="docutils literal notranslate"><span class="pre">/home/conan/project</span></code> directory, so anything we change in this shared folder, will be really changed
+<code class="docutils literal notranslate"><span class="pre">/home/conan/project</span></code> directory, so anything we change in this shared folder, will be reflected
 in our host machine.</li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now we are running on the conangcc7 container</span>
@@ -294,8 +294,8 @@ $ conan upload <span class="s2">&quot;*&quot;</span> -r myremote --all
 </div>
 <div class="section" id="using-the-images-to-cross-build-packages">
 <h2>Using the images to cross-build packages<a class="headerlink" href="#using-the-images-to-cross-build-packages" title="Permalink to this headline">¶</a></h2>
-<p>You can use the <a class="reference internal" href="#available-docker-images"><span class="std std-ref">images</span></a> <code class="docutils literal notranslate"><span class="pre">-i386</span></code>, <code class="docutils literal notranslate"><span class="pre">-armv7</span></code> and <code class="docutils literal notranslate"><span class="pre">-armv7gh</span></code> to cross build
-conan packages.</p>
+<p>You can use the <a class="reference internal" href="#available-docker-images"><span class="std std-ref">images</span></a> <code class="docutils literal notranslate"><span class="pre">-i386</span></code>, <code class="docutils literal notranslate"><span class="pre">-armv7</span></code> and <code class="docutils literal notranslate"><span class="pre">-armv7gh</span></code> to cross-build
+Conan packages.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">armv7</span></code> images have a cross toolchain for linux ARM installed, and declared as main compiler with the
 environment variables <code class="docutils literal notranslate"><span class="pre">CC</span></code> and <code class="docutils literal notranslate"><span class="pre">CXX</span></code>. Also, the default Conan profile (<code class="docutils literal notranslate"><span class="pre">~/.conan/profiles/default</span></code>)
 is adjusted to declare the correct arch (<code class="docutils literal notranslate"><span class="pre">armv7</span></code> / <code class="docutils literal notranslate"><span class="pre">armv7hf</span></code>).</p>
@@ -331,7 +331,7 @@ $ conan upload <span class="s2">&quot;*&quot;</span> -r myremoteARMV7 --all
 </div>
 </div>
 <div class="section" id="available-docker-images">
-<span id="id1"></span><h2>Available docker images<a class="headerlink" href="#available-docker-images" title="Permalink to this headline">¶</a></h2>
+<span id="id1"></span><h2>Available Docker images<a class="headerlink" href="#available-docker-images" title="Permalink to this headline">¶</a></h2>
 <p><strong>GCC</strong> images</p>
 <table border="1" class="docutils">
 <colgroup>

@@ -135,7 +135,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="../manage_gcc_abi.html">How to manage the GCC &gt;= 5 ABI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vs2017_cmake.html">Using Visual Studio 2017 - CMake integration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manage_cpp_standard.html">How to manage C++ standard [EXPERIMENTAL]</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../run_conan_in_docker.html">How to use docker to create and cross build C and C++ conan packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../run_conan_in_docker.html">How to use Docker to create and cross-build C and C++ Conan packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_code_reuse.html">How to reuse Python code in recipes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../custom_generators.html">How to create and share a custom generator with generator packages</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../manage_shared_libraries.html">How to manage shared libraries</a><ul class="current">
@@ -246,7 +246,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="manage-shared-libraries-with-environment-variables">
 <span id="manage-shared-libraries-env-vars"></span><h1>Manage Shared Libraries with Environment Variables<a class="headerlink" href="#manage-shared-libraries-with-environment-variables" title="Permalink to this headline">¶</a></h1>
-<p>The shared libraries, are loaded at runtime. The application executable needs to know where to find the
+<p>Shared libraries are loaded at runtime. The application executable needs to know where to find the
 required shared libraries when it runs.</p>
 <p>Depending on the operating system, we can use environment variables to help the dynamic linker to find the
 shared libraries:</p>
@@ -279,7 +279,7 @@ the right environment variable set, so they will be able to locate the (A) share
 activate it, you will get the paths needed to locate the shared libraries in your terminal.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p>We are packaging a tool called <code class="docutils literal notranslate"><span class="pre">toolA</span></code> with a library and an executable that, for example, compress data.</p>
+<p>We are packaging a tool called <code class="docutils literal notranslate"><span class="pre">toolA</span></code> with a library and an executable that will, for example, compress data.</p>
 <p>The package offers two flavors, shared library or static library (embedded in the executable of the tool and
 available to link with).
 You can use the <code class="docutils literal notranslate"><span class="pre">toolA</span></code> package library to develop another executable or library or you can just use the
@@ -314,7 +314,7 @@ you will need to have the shared library available.</p>
 </div>
 <div class="section" id="using-the-tool-from-a-different-package">
 <h2>Using the tool from a different package<a class="headerlink" href="#using-the-tool-from-a-different-package" title="Permalink to this headline">¶</a></h2>
-<p>If we are creating now a package that uses the <code class="docutils literal notranslate"><span class="pre">ToolA</span></code> executable to compress some data. You can
+<p>If we are now creating a package that uses the <code class="docutils literal notranslate"><span class="pre">ToolA</span></code> executable to compress some data, we can
 execute directly <code class="docutils literal notranslate"><span class="pre">toolA</span></code> using RunEnvironment build helper to set the environment variables accordingly:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">tools</span><span class="p">,</span> <span class="n">ConanFile</span>
@@ -333,7 +333,7 @@ execute directly <code class="docutils literal notranslate"><span class="pre">to
 </div>
 <div class="section" id="building-an-application-using-the-shared-library-from-toola">
 <h2>Building an application using the shared library from <code class="docutils literal notranslate"><span class="pre">toolA</span></code><a class="headerlink" href="#building-an-application-using-the-shared-library-from-toola" title="Permalink to this headline">¶</a></h2>
-<p>As we are building a final application, probably we will want to distribute it together with the
+<p>As we are building a final application, we will probably want to distribute it together with the
 shared library from the <code class="docutils literal notranslate"><span class="pre">toolA</span></code>, so we can use the <a class="reference internal" href="../../using_packages/conanfile_txt.html#imports-txt"><span class="std std-ref">Imports</span></a> to import the required
 shared libraries to our user space.</p>
 <div class="literal-block-wrapper docutils container" id="id1">
@@ -372,7 +372,7 @@ libraries too.</p>
 </div>
 <div class="section" id="using-shared-libraries-from-dependencies">
 <h2>Using shared libraries from dependencies<a class="headerlink" href="#using-shared-libraries-from-dependencies" title="Permalink to this headline">¶</a></h2>
-<p>If you are executing something that depends on shared libraries belonging to your dependencies, such shared libraries have to be found at
+<p>If you are executing something that depends on shared libraries belonging to your dependencies, those shared libraries have to be found at
 runtime. In Windows, it is enough if the package added its binary folder to the system <code class="docutils literal notranslate"><span class="pre">PATH</span></code>. In Linux and OSX, it is necessary that the
 <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> and <code class="docutils literal notranslate"><span class="pre">DYLD_LIBRARY_PATH</span></code> environment variables are used.</p>
 <p>Security restrictions might apply in OSX
