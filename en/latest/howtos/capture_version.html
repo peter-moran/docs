@@ -140,7 +140,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="custom_generators.html">How to create and share a custom generator with generator packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manage_shared_libraries.html">How to manage shared libraries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cmake_install.html">How to reuse cmake install for package() method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="collaborate_packages.html">How to collaborate on other users’ packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="collaborate_packages.html">How to collaborate with other users’ packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="link_apple_framework.html">How to link with Apple Frameworks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="link_apple_framework.html#how-to-package-apple-frameworks">How to package Apple Frameworks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="collect_licenses.html">How to collect licenses of dependencies</a></li>
@@ -233,7 +233,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="how-to-capture-package-version-from-scm-git">
 <h1>How to capture package version from SCM: git<a class="headerlink" href="#how-to-capture-package-version-from-scm-git" title="Permalink to this headline">¶</a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">Git()</span></code> helper from tools, can be used to capture data from the Git repo in which
+<p>The <code class="docutils literal notranslate"><span class="pre">Git()</span></code> helper from tools can be used to capture data from the Git repo in which
 the <em>conanfile.py</em> recipe resides, and use it to define the version of the Conan package.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">tools</span>
 
@@ -255,12 +255,12 @@ the <em>conanfile.py</em> recipe resides, and use it to define the version of th
 <p>In this example, the package created with <strong class="command">conan create</strong> will be called
 <code class="docutils literal notranslate"><span class="pre">Hello/branch_commit&#64;user/channel</span></code>. Note that <code class="docutils literal notranslate"><span class="pre">get_version()</span></code> returns <code class="docutils literal notranslate"><span class="pre">None</span></code>
 if it is not able to get the Git data. This is necessary when the recipe is already in the
-Conan cache, and the Git repository may not be there,. A value of <code class="docutils literal notranslate"><span class="pre">None</span></code> makes Conan
+Conan cache, and the Git repository may not be there. A value of <code class="docutils literal notranslate"><span class="pre">None</span></code> makes Conan
 get the version from the metadata.</p>
 </div>
 <div class="section" id="how-to-capture-package-version-from-scm-svn">
 <h1>How to capture package version from SCM: svn<a class="headerlink" href="#how-to-capture-package-version-from-scm-svn" title="Permalink to this headline">¶</a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">SVN()</span></code> helper from tools, can be used to capture data from the subversion repo in which
+<p>The <code class="docutils literal notranslate"><span class="pre">SVN()</span></code> helper from tools can be used to capture data from the subversion repo in which
 the <em>conanfile.py</em> recipe resides, and use it to define the version of the Conan package.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">tools</span>
 

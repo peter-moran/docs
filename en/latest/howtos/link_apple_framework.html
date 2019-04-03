@@ -45,7 +45,7 @@
     <link rel="top" title="conan 1.14.1 documentation" href="../index.html"/>
         <link rel="up" title="Howtos" href="../howtos.html"/>
         <link rel="next" title="How to collect licenses of dependencies" href="collect_licenses.html"/>
-        <link rel="prev" title="How to collaborate on other users’ packages" href="collaborate_packages.html"/>
+        <link rel="prev" title="How to collaborate with other users’ packages" href="collaborate_packages.html"/>
 
  <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -140,7 +140,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="custom_generators.html">How to create and share a custom generator with generator packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manage_shared_libraries.html">How to manage shared libraries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cmake_install.html">How to reuse cmake install for package() method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="collaborate_packages.html">How to collaborate on other users’ packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="collaborate_packages.html">How to collaborate with other users’ packages</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">How to link with Apple Frameworks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-package-apple-frameworks">How to package Apple Frameworks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="collect_licenses.html">How to collect licenses of dependencies</a></li>
@@ -233,9 +233,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="how-to-link-with-apple-frameworks">
 <span id="link-apple-framework"></span><h1>How to link with Apple Frameworks<a class="headerlink" href="#how-to-link-with-apple-frameworks" title="Permalink to this headline">¶</a></h1>
-<p>It is common in macOS that your conan package needs to link with a complete Apple framework,
-and, of course, you want to propagate this information to all projects/libraries that uses your package.</p>
-<p>With regular libraries we use <code class="docutils literal notranslate"><span class="pre">self.cpp_info.libs</span></code> object to append to it all the libraries:</p>
+<p>It is common in MacOS that your Conan package needs to link with a complete Apple framework,
+and, of course, you want to propagate this information to all projects/libraries that use your package.</p>
+<p>With regular libraries, use <code class="docutils literal notranslate"><span class="pre">self.cpp_info.libs</span></code> object to append to it all the libraries:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">libs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;SDL2&quot;</span><span class="p">]</span>
@@ -258,7 +258,7 @@ and, of course, you want to propagate this information to all projects/libraries
 <p>In the previous example we are using <code class="docutils literal notranslate"><span class="pre">self.cpp_info.exelinkflags</span></code>. If we are using CMake to consume this package, it will only link those
 frameworks if we are building an executable and <code class="docutils literal notranslate"><span class="pre">sharedlinkflags</span></code> will only apply if we are building a shared library.</p>
 <p>If we are not using CMake to consume this package <code class="docutils literal notranslate"><span class="pre">sharedlinkflags</span></code> and <code class="docutils literal notranslate"><span class="pre">exelinkflags</span></code> are used indistinctly.
-In the example above we are assigning in the last line <code class="docutils literal notranslate"><span class="pre">sharedlinkflags</span></code> with <code class="docutils literal notranslate"><span class="pre">exelinkflags</span></code>, so no matter what the consumer will build,
+In the example above, in the last line we are assigning <code class="docutils literal notranslate"><span class="pre">sharedlinkflags</span></code> with <code class="docutils literal notranslate"><span class="pre">exelinkflags</span></code>, so no matter what the consumer will build,
 it will indicate to the linker to link with the specified frameworks.</p>
 </div>
 <div class="section" id="how-to-package-apple-frameworks">
@@ -275,7 +275,7 @@ it will indicate to the linker to link with the specified frameworks.</p>
     <span class="c1"># ...</span>
 </pre></div>
 </div>
-<p>Declare the framework in the <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> object, passing a compiler flag <code class="docutils literal notranslate"><span class="pre">-F</span></code> with the
+<p>Declare the framework in the <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> object, pass a compiler flag <code class="docutils literal notranslate"><span class="pre">-F</span></code> with the
 directory of the framework folder (self.package_folder) and linker flags with the <code class="docutils literal notranslate"><span class="pre">-F</span></code> and <code class="docutils literal notranslate"><span class="pre">-framework</span></code> with
 the framework name.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -305,7 +305,7 @@ the framework name.</p>
         <a href="collect_licenses.html" class="btn btn-neutral float-right" title="How to collect licenses of dependencies" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="collaborate_packages.html" class="btn btn-neutral" title="How to collaborate on other users’ packages" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="collaborate_packages.html" class="btn btn-neutral" title="How to collaborate with other users’ packages" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
