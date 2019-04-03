@@ -240,7 +240,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="section" id="server-certificate-validation">
 <h2>Server certificate validation<a class="headerlink" href="#server-certificate-validation" title="Permalink to this headline">¶</a></h2>
 <p>By default, when a remote is added, if the URL schema is <code class="docutils literal notranslate"><span class="pre">https</span></code>, the Conan client will verify
-the certificate using a list of authorities declared in the <code class="docutils literal notranslate"><span class="pre">cacert.pem</span></code> file located in the conan home (~/.conan).</p>
+the certificate using a list of authorities declared in the <code class="docutils literal notranslate"><span class="pre">cacert.pem</span></code> file located in the Conan home (~/.conan).</p>
 <p>If you have a self signed certificate (not signed by any authority) you have two options:</p>
 <ul class="simple">
 <li>Use the <a class="reference internal" href="../reference/commands/misc/remote.html#conan-remote"><span class="std std-ref">conan remote</span></a> command to disable the SSL verification.</li>
@@ -250,7 +250,7 @@ the certificate using a list of authorities declared in the <code class="docutil
 <div class="section" id="client-certificates">
 <h2>Client certificates<a class="headerlink" href="#client-certificates" title="Permalink to this headline">¶</a></h2>
 <p>If your server is requiring client certificates to validate a connection from a Conan client,
-you need to create two files in the conan home directory (default ~/.conan):</p>
+you need to create two files in the Conan home directory (default ~/.conan):</p>
 <ul class="simple">
 <li>A file <code class="docutils literal notranslate"><span class="pre">client.crt</span></code> with the client certificate.</li>
 <li>A file <code class="docutils literal notranslate"><span class="pre">client.key</span></code> with the private key.</li>

@@ -238,7 +238,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h1>Use a generic CI with Conan and Artifactory<a class="headerlink" href="#use-a-generic-ci-with-conan-and-artifactory" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="uploading-the-buildinfo">
 <h2>Uploading the BuildInfo<a class="headerlink" href="#uploading-the-buildinfo" title="Permalink to this headline">¶</a></h2>
-<p>If you are using <a class="reference internal" href="../integrations/jenkins.html#jenkins-integration"><span class="std std-ref">Jenkins with Conan and Artifactory</span></a>, with the
+<p>If you are using <a class="reference internal" href="../integrations/jenkins.html#jenkins-integration"><span class="std std-ref">Jenkins with Conan and Artifactory</span></a>, along with the
 <a class="reference external" href="https://www.jfrog.com/confluence/display/RTF/Jenkins+Artifactory+Plug-in">Jenkins Artifactory Plugin</a>,
 any Conan package downloaded or uploaded during your build will be automatically recorded in
 the BuildInfo json file, that will be automatically uploaded to the specified Artifactory instance.</p>
@@ -263,7 +263,7 @@ $ conan upload mypackage/1.0@user/stable -r artifactory
 </pre></div>
 </div>
 <ol class="arabic simple" start="4">
-<li>Call the command <cite>conan_build_info</cite> passing the path to the generated conan traces file and a parameter <code class="docutils literal notranslate"><span class="pre">--output</span></code> to
+<li>Call the command <cite>conan_build_info</cite> passing the path to the generated Conan traces file and a parameter <code class="docutils literal notranslate"><span class="pre">--output</span></code> to
 indicate the output file. You can also, delete the traces.log` file` otherwise while the <cite>CONAN_TRACE_FILE</cite> is present, any
 Conan command will keep appending actions.</li>
 </ol>
