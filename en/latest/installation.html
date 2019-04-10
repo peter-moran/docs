@@ -237,7 +237,10 @@ Conan still supports Python 2, however some of the dependencies have started to 
 <ul class="last simple">
 <li>Make sure that your <strong>pip</strong> installation matches your <strong>Python (2.7 or 3.X)</strong> version.</li>
 <li>In <strong>Linux</strong>, you may need <strong>sudo</strong> permissions to install Conan globally.</li>
-<li>We strongly recommend using <strong>virtualenvs</strong> (virtualenvwrapper works great) for everything related to Python.</li>
+<li>We strongly recommend using <strong>virtualenvs</strong> (virtualenvwrapper works great) for everything related to Python.
+(check <a class="reference external" href="https://virtualenvwrapper.readthedocs.io/en/stable/">https://virtualenvwrapper.readthedocs.io/en/stable/</a>, or <a class="reference external" href="https://pypi.org/project/virtualenvwrapper-win/">https://pypi.org/project/virtualenvwrapper-win/</a> in Windows)
+If not using a <strong>virtualenv</strong> it is possible that conan dependencies will conflict with previously existing dependencies,
+specially if you are using Python for other purposes.</li>
 <li>In <strong>Windows</strong> and Python 2.7, you may need to use <strong>32bit</strong> python distribution (which is the Windows default), instead
 of 64 bit.</li>
 <li>In <strong>OSX</strong>, especially the latest versions that may have <strong>System Integrity Protection</strong>, pip may fail. Try using virtualenvs, or
