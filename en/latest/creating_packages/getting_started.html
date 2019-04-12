@@ -224,7 +224,7 @@ code origins, like downloading a zip or tarball from the internet.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">For this concrete example you will need, besides a C++ compiler, both <em>CMake</em> and <em>git</em>
-installed and in your path. They are not required by conan, so you could use your own build system
+installed and in your path. They are not required by Conan, so you could use your own build system
 and version control instead.</p>
 </div>
 <div class="section" id="creating-the-package-recipe">
@@ -416,7 +416,7 @@ Hello world!
 <p>If “Hello world!” is displayed, it worked.</p>
 <p>The <strong class="command">conan create</strong> command does the following:</p>
 <ul class="simple">
-<li>Copies (“export” in conan terms) the <em>conanfile.py</em> from the user folder into the <strong>local cache</strong>.</li>
+<li>Copies (“export” in Conan terms) the <em>conanfile.py</em> from the user folder into the <strong>local cache</strong>.</li>
 <li>Installs the package, forcing it to be built from the sources.</li>
 <li>Moves to the <em>test_package</em> folder and creates a temporary <em>build</em> folder.</li>
 <li>Executes the <strong class="command">conan install ..</strong>, to install the requirements of the
