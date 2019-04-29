@@ -374,7 +374,7 @@ to filter packages by topics or to reuse them in Bintray package page.</p>
 <p>The fields <code class="docutils literal notranslate"><span class="pre">user</span></code> and <code class="docutils literal notranslate"><span class="pre">channel</span></code> can be accessed from within a <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code>.
 Though their usage is usually not encouraged, it could be useful in different cases,
 e.g. to define requirements with the same user and
-channel than the current package, which could be achieved with something like:</p>
+channel as the current package, which could be achieved with something like:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
 
 <span class="k">class</span> <span class="nc">HelloConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
