@@ -245,18 +245,13 @@ fired in Travis-CI after a <strong class="command">git push</strong> to GitHub.<
 <p>A very common use case is to build your project after Conan takes care of installing your dependencies. Doing this process in Travis CI is
 quite convenient as you can do it with <strong class="command">conan install</strong>.</p>
 <p>To enable <strong>Travis CI</strong> support, you need to create a <em>.travis.yml</em> file and paste this code in it:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sudo: false
-language: cpp
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>os: linux
+language: python
+python: &quot;3.7&quot;
+dist: xenial
 compiler:
   - gcc
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-6
 install:
-  - &quot;[ $CXX = g++ ] &amp;&amp; export CXX=g++-6 || true&quot;
 # Install conan
   - pip install conan
 # Automatic detection of your arch, compiler, etc.
@@ -265,10 +260,10 @@ script:
 # Download dependencies and build project
   - conan install .
 # Call your build system
-  - cmake . -G &quot;Unix makefiles&quot;
+  - cmake . -G &quot;Unix Makefiles&quot;
   - cmake --build .
 # Run your tests
-  - ctest
+  - ctest .
 </pre></div>
 </div>
 <p>Travis will install the gcc compiler and the <strong class="command">conan</strong> client and will execute the <strong class="command">conan install</strong> command using the
