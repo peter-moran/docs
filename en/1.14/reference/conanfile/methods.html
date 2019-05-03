@@ -601,7 +601,7 @@ it is an example of a recipe for a library that doesn’t support Windows operat
         <span class="k">raise</span> <span class="n">ConanInvalidConfiguration</span><span class="p">(</span><span class="s2">&quot;Library MyLib is only supported for Windows&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>This exception will be propagated and Conan application will exit with the error code <code class="docutils literal notranslate"><span class="pre">6</span></code>.</p>
+<p>This exception will be propagated and Conan application will finish with a <a class="reference internal" href="../commands/return_codes.html#invalid-configuration-return-code"><span class="std std-ref">special return code</span></a>.</p>
 </div>
 </div>
 <div class="section" id="requirements">
