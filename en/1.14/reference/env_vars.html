@@ -133,6 +133,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#conan-bash-path">CONAN_BASH_PATH</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-cache-no-locks">CONAN_CACHE_NO_LOCKS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-cmake-generator">CONAN_CMAKE_GENERATOR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conan-cmake-generator-platform">CONAN_CMAKE_GENERATOR_PLATFORM</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-color-dark">CONAN_COLOR_DARK</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-color-display">CONAN_COLOR_DISPLAY</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-compression-level">CONAN_COMPRESSION_LEVEL</a></li>
@@ -291,6 +292,9 @@ the <a class="reference internal" href="build_helpers/cmake.html#cmake-reference
 <tr class="row-odd"><td>CONAN_CMAKE_FIND_ROOT_PATH_MODE_INCLUDE</td>
 <td>CMAKE_FIND_ROOT_PATH_MODE_INCLUDE</td>
 </tr>
+<tr class="row-even"><td>CONAN_CMAKE_GENERATOR_PLATFORM</td>
+<td>CMAKE_GENERATOR_PLATFORM</td>
+</tr>
 </tbody>
 </table>
 <div class="admonition seealso">
@@ -322,6 +326,41 @@ build system, as Ninja, should lead to the same binary if using appropriately th
 underlying compiler settings. So it doesn’t make sense to provide a setting or option for this.</p>
 <p>So it can be set with the environment variable <code class="docutils literal notranslate"><span class="pre">CONAN_CMAKE_GENERATOR</span></code>. Just set its value
 to your desired CMake generator (as <code class="docutils literal notranslate"><span class="pre">Ninja</span></code>).</p>
+</div>
+<div class="section" id="conan-cmake-generator-platform">
+<h2>CONAN_CMAKE_GENERATOR_PLATFORM<a class="headerlink" href="#conan-cmake-generator-platform" title="Permalink to this headline">¶</a></h2>
+<p>Defines generator platform to be used by particular CMake generator (see <cite>CMAKE_GENERATOR_PLATFORM documentation &lt;https://cmake.org/cmake/help/latest/variable/CMAKE_GENERATOR_PLATFORM.html&gt;</cite>).
+Resulting value is passed to the <code class="docutils literal notranslate"><span class="pre">cmake</span></code> command line (<code class="docutils literal notranslate"><span class="pre">-A</span></code> argument) by the Conan <code class="docutils literal notranslate"><span class="pre">CMake</span></code> helper class during the configuration step.
+Passing <code class="docutils literal notranslate"><span class="pre">None</span></code> causes auto-detection, which currently only happens for the <code class="docutils literal notranslate"><span class="pre">Visual</span> <span class="pre">Studio</span> <span class="pre">16</span> <span class="pre">2019</span></code> generator. The detection is according to the following table:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="46%" />
+<col width="54%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">settings.arch</th>
+<th class="head">generator platform</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>x86</td>
+<td>Win32</td>
+</tr>
+<tr class="row-odd"><td>x86_64</td>
+<td>x64</td>
+</tr>
+<tr class="row-even"><td>armv7</td>
+<td>ARM</td>
+</tr>
+<tr class="row-odd"><td>armv8</td>
+<td>ARM64</td>
+</tr>
+<tr class="row-even"><td>other</td>
+<td>(none)</td>
+</tr>
+</tbody>
+</table>
+<p>For any other generators besides the <code class="docutils literal notranslate"><span class="pre">Visual</span> <span class="pre">Studio</span> <span class="pre">16</span> <span class="pre">2019</span></code> generator, detection results in no generator platform applied (and no <code class="docutils literal notranslate"><span class="pre">-A</span></code> argument passed to the CMake command line).</p>
 </div>
 <div class="section" id="conan-color-dark">
 <h2>CONAN_COLOR_DARK<a class="headerlink" href="#conan-color-dark" title="Permalink to this headline">¶</a></h2>

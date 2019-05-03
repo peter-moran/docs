@@ -269,7 +269,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conanfile</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">cmake_system_name</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                  <span class="n">parallel</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">build_type</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">toolset</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">make_program</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                 <span class="n">set_cmake_flags</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">msbuild_verbosity</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">cmake_program</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+                 <span class="n">set_cmake_flags</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">msbuild_verbosity</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">cmake_program</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">generator_platform</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="docutils">
@@ -287,12 +288,21 @@ also make the <code class="docutils literal notranslate"><span class="pre">CMAKE
 <li><strong>set_cmake_flags</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Whether or not to set CMake flags like <code class="docutils literal notranslate"><span class="pre">CMAKE_CXX_FLAGS</span></code>, <code class="docutils literal notranslate"><span class="pre">CMAKE_C_FLAGS</span></code>, etc.</li>
 <li><strong>msbuild_verbosity</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): verbosity level for MSBuild (in case of Visual Studio generator).</li>
 <li><strong>cmake_program</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Path to the custom cmake executable.</li>
+<li><strong>generator_platform</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Generator platform name or none to autodetect (-A cmake option).</li>
 </ul>
 </dd>
 </dl>
 </div>
 <div class="section" id="attributes">
 <h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="generator">
+<h3>generator<a class="headerlink" href="#generator" title="Permalink to this headline">¶</a></h3>
+<p>Specifies a custom CMake generator to use, see also <cite>cmake-generators documentation &lt;https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html&gt;</cite>.</p>
+</div>
+<div class="section" id="generator-platform">
+<h3>generator_platform<a class="headerlink" href="#generator-platform" title="Permalink to this headline">¶</a></h3>
+<p>Specifies a custom CMake generator platform to use, see also <cite>CMAKE_GENERATOR_PLATFORM documentation &lt;https://cmake.org/cmake/help/latest/variable/CMAKE_GENERATOR_PLATFORM.html&gt;</cite>.</p>
+</div>
 <div class="section" id="verbose">
 <h3>verbose<a class="headerlink" href="#verbose" title="Permalink to this headline">¶</a></h3>
 <p><strong>Defaulted to</strong>: <code class="docutils literal notranslate"><span class="pre">False</span></code></p>

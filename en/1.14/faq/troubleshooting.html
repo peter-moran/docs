@@ -132,6 +132,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#error-failed-to-create-process">ERROR: Failed to create process</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#error-failed-to-remove-folder-windows">ERROR: Failed to remove folder (Windows)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#error-error-while-initializing-options">ERROR: Error while initializing Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-error-while-starting-conan-server-with-multiple-workers">ERROR: Error while starting Conan Server with multiple workers</a></li>
 </ul>
 </li>
 </ul>
@@ -327,6 +328,30 @@ $ mkvirtualenv conan
 <p>Probably your Conan version is outdated.
 The error is related to <cite>default_options</cite> be used as dictionary and only can be handled by Conan &gt;= 1.8.
 To fix this error, update Conan to 1.8 or higher.</p>
+</div>
+<div class="section" id="error-error-while-starting-conan-server-with-multiple-workers">
+<h2>ERROR: Error while starting Conan Server with multiple workers<a class="headerlink" href="#error-error-while-starting-conan-server-with-multiple-workers" title="Permalink to this headline">¶</a></h2>
+<p>When running <code class="docutils literal notranslate"><span class="pre">gunicorn</span></code> to start <code class="docutils literal notranslate"><span class="pre">conan_server</span></code> in an empty environment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ gunicorn -b <span class="m">0</span>.0.0.0:9300 -w <span class="m">4</span> -t <span class="m">300</span> conans.server.server_launcher:app
+
+    **********************************************
+    *                                            *
+    *      ERROR: STORAGE MIGRATION NEEDED!      *
+    *                                            *
+    **********************************************
+    A migration of your storage is needed, please backup first the storage directory and run:
+
+    $ conan_server --migrate
+</pre></div>
+</div>
+<p>Conan Server will try to create <cite>~/.conan_server/data</cite>, <cite>~/.conan_server/server.conf</cite> and <cite>~/.conan_server/version.txt</cite> at first time.
+However, as multiple workers are running at same time, it could result in a conflict.
+To fix this error, you should run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan_server --migrate
+</pre></div>
+</div>
+<p>This command must be executed before to start the workers. It will not migrate anything, but it will populate the conan_server folder.
+The original discussion about this error is <a class="reference external" href="https://github.com/conan-io/conan/issues/4723">here</a>.</p>
 </div>
 </div>
 
