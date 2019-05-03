@@ -269,6 +269,11 @@ relies on the set of possible settings inside your <em>settings.yml</em> file, s
       <span class="k">raise</span> <span class="n">ConanInvalidConfiguration</span><span class="p">(</span><span class="s2">&quot;This library is not compatible with Windows&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Use the <a class="reference internal" href="../reference/conanfile/methods.html#invalid-configuration"><span class="std std-ref">Invalid configuration</span></a> exception to make Conan return with a special error code. This will indicate that the
+configuration used for settings or options is not supported.</p>
+</div>
 <p>This same method is also valid for <code class="docutils literal notranslate"><span class="pre">options</span></code> and <code class="docutils literal notranslate"><span class="pre">config_options()</span></code> method and it is commonly used to remove options for one setting:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">config_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">os</span> <span class="o">==</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
