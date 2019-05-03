@@ -239,7 +239,7 @@ premake
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>We are going to use the same example from <a class="reference internal" href="../getting_started.html#getting-started"><span class="std std-ref">Getting Started</span></a>, a MD5 Encrypter app.</p>
-<p>This is the main file for it:</p>
+<p>This is the main source file for it:</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">main.cpp</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span> <span class="cp">#include</span> <span class="cpf">&quot;Poco/MD5Engine.h&quot;</span><span class="cp"></span>
@@ -260,8 +260,8 @@ premake
 </pre></div>
 </div>
 </div>
-<p>As this project has relies on the Poco Libraries we are going to create a <em>conanfile.txt</em> with our requirement and declare there the
-Premake generator too:</p>
+<p>As this project relies on the Poco Libraries, we are going to create a <em>conanfile.txt</em> with our requirement and also declare the
+Premake generator:</p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">conanfile.txt</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span> [requires]
@@ -272,7 +272,7 @@ Premake generator too:</p>
 </pre></div>
 </div>
 </div>
-<p>In order to use new generator within your project, use the following Premake script as a reference:</p>
+<p>In order to use the new generator within your project, use the following Premake script as a reference:</p>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">premake5.lua</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span> <span class="c1">-- premake5.lua</span>

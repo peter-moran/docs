@@ -131,6 +131,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#packages-got-outdated-when-uploading-an-unchanged-recipe-from-a-different-machine">Packages got outdated when uploading an unchanged recipe from a different machine</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#is-there-any-recommendation-regarding-which-user-or-channel-to-use-in-a-reference">Is there any recommendation regarding which <code class="docutils literal notranslate"><span class="pre">&lt;user&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;channel&gt;</span></code> to use in a reference?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#what-does-outdated-from-recipe-mean-exactly">What does “outdated from recipe” mean exactly?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-configure-the-remotes-priority-order">How to configure the remotes priority order</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
@@ -294,6 +295,33 @@ information is displayed in yellow with:</p>
 recipe. That means: if the recipe has completely removed an option (it could be a setting or a requirement) but there are old packages
 that were generated previously with that option, those packages will be impossible to install as their package ID are calculated from the
 recipe file (and that option does not exist anymore).</p>
+</div>
+<div class="section" id="how-to-configure-the-remotes-priority-order">
+<h2>How to configure the remotes priority order<a class="headerlink" href="#how-to-configure-the-remotes-priority-order" title="Permalink to this headline">¶</a></h2>
+<p>The lookup remote order is defined by the command <strong class="command">conan remote</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan remote list
+conan-center: https://conan.bintray.com <span class="o">[</span>Verify SSL: True<span class="o">]</span>
+conan-community: https://api.bintray.com/conan/conan-community/conan <span class="o">[</span>Verify SSL: True<span class="o">]</span>
+</pre></div>
+</div>
+<p>As you can see, the remote <code class="docutils literal notranslate"><span class="pre">conan-center</span></code> is listed on index <strong>0</strong>, which means it has the highest priority when searching or installing a package,
+followed by <code class="docutils literal notranslate"><span class="pre">conan-community</span></code>, on index <strong>1</strong>. To update the index order, the argument <code class="docutils literal notranslate"><span class="pre">--insert</span></code> can be added to the command <strong class="command">conan remote update</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan remote update conan-community https://api.bintray.com/conan/conan-community/conan --insert
+$ conan remote list
+conan-community: https://api.bintray.com/conan/conan-community/conan <span class="o">[</span>Verify SSL: True<span class="o">]</span>
+conan-center: https://conan.bintray.com <span class="o">[</span>Verify SSL: True<span class="o">]</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">--insert</span></code> argument means <em>index 0</em>, the highest priority, thus the <code class="docutils literal notranslate"><span class="pre">conan-community</span></code> remote will be updated as the first remote to be used.</p>
+<p>It’s also possible to define a specific index when adding a remote to the list:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan remote add bincrafters https://api.bintray.com/conan/bincracters/public-conan --insert <span class="m">1</span>
+$ conan remote list
+conan-community: https://api.bintray.com/conan/conan-community/conan <span class="o">[</span>Verify SSL: True<span class="o">]</span>
+bincrafters: https://api.bintray.com/conan/bincrafters/public-conan <span class="o">[</span>Verify SSL: True<span class="o">]</span>
+conan-center: https://conan.bintray.com <span class="o">[</span>Verify SSL: True<span class="o">]</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">bincrafters</span></code> remote needs to be added after <code class="docutils literal notranslate"><span class="pre">conan-community</span></code>, so we need to set the remote index as <strong>1</strong>.</p>
 </div>
 </div>
 
