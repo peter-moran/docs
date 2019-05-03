@@ -262,7 +262,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="section" id="name">
 <h2>name<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h2>
 <p>This is a string, with a minimum of 2 and a maximum of 50 characters (though shorter names are recommended), that defines the package name. It will be the <code class="docutils literal notranslate"><span class="pre">&lt;PkgName&gt;/version&#64;user/channel</span></code> of the package reference.
-It should match the following regex <code class="docutils literal notranslate"><span class="pre">^[a-zA-Z0-9_][a-zA-Z0-9_\+\.-]$</span></code>, so start with alphanumeric or underscore, then alphanumeric, underscore, +, ., - characters.</p>
+It should match the following regex <code class="docutils literal notranslate"><span class="pre">^[a-zA-Z0-9_][a-zA-Z0-9_\+\.-]{1,50}$</span></code>, so start with alphanumeric or underscore, then alphanumeric, underscore, +, ., - characters.</p>
 <p>The name is only necessary for <code class="docutils literal notranslate"><span class="pre">export</span></code>-ing the recipe into the local cache (<code class="docutils literal notranslate"><span class="pre">export</span></code> and <code class="docutils literal notranslate"><span class="pre">create</span></code> commands), if they are not defined in the command line.
 It might take its value from an environment variable, or even any python code that defines it (e.g. a function that reads an environment variable, or a file from disk).
 However, the most common and suggested approach would be to define it in plain text as a constant, or provide it as command line arguments.</p>
