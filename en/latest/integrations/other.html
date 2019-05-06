@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Custom integrations &mdash; conan 1.14.5 documentation</title>
+  <title>Custom integrations &mdash; conan 1.15.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.14.5 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.15.0 documentation" href="../index.html"/>
         <link rel="up" title="Integrations" href="../integrations.html"/>
         <link rel="next" title="Linting conanfile.py" href="pylint.html"/>
         <link rel="prev" title="YouCompleteMe (vim)" href="youcompleteme.html"/>
@@ -146,12 +146,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Custom integrations</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#use-the-json-generator">Use the JSON generator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#use-the-text-generator">Use the text generator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#use-conan-data-model-conanfile-py">Use Conan data model (conanfile.py)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-the-conan-data-model-in-a-conanfile-py">Use the Conan data model (in a <em>conanfile.py</em>)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#create-your-own-generator">Create your own generator</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="pylint.html">Linting conanfile.py</a></li>
 <li class="toctree-l2"><a class="reference internal" href="azure_devops.html"> Microsoft’s Azure DevOps (TFS, VSTS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="emscripten.html"> Emscripten</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../howtos.html">Howtos</a></li>
@@ -237,222 +238,226 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>If you intend to use a build system that does not have a built-in generator, you may still be
 able to do so. There are several options:</p>
 <ul class="simple">
-<li>First, search in bintray. Generators can now be created and contributed by users as regular
-packages, so you can depend on them, use versioning, and evolve faster without depending on the
-Conan releases. See <a class="reference internal" href="../howtos/custom_generators.html#dyn-generators"><span class="std std-ref">generator packages</span></a>.</li>
-<li>You can use the <strong>text or json generator</strong>. It will generate a text file which is simple to read and to parse
-that you can easily parse with your tools to extract the required information.</li>
-<li>Use the <strong>conanfile data model</strong> and access its properties and values, so you can directly
-call your build system with that information, without requiring you to generate a file.</li>
-<li>Write and <strong>create your own generator</strong>, so you can upload it, version and reuse it, as well
-as share it with your team or community. Check <a class="reference internal" href="../howtos/custom_generators.html#dyn-generators"><span class="std std-ref">generator packages</span></a> too.</li>
+<li>First, search in Bintray for generator packages. Generators can be created and contributed by users as regular packages, so you can depend
+on them as a normal requirement, use versioning and evolve faster without depending on the Conan releases.</li>
+<li>You can use the <a class="reference internal" href="../reference/generators/text.html#text-generator"><span class="std std-ref">txt</span></a> or <a class="reference internal" href="../reference/generators/json.html#json-generator"><span class="std std-ref">json</span></a> generators. They will generate a text file, simple to read that you can
+easily parse with your tools to extract the required information.</li>
+<li>Use the <strong>conanfile data model</strong> (<a class="reference internal" href="../reference/conanfile/attributes.html#deps-cpp-info-attributes-reference"><span class="std std-ref">deps_cpp_info</span></a>, <a class="reference internal" href="../reference/conanfile/attributes.html#deps-env-info-attributes-reference"><span class="std std-ref">deps_env_info</span></a>) in your recipe to
+access its properties and values, so you can directly call your build system with that information, without requiring to generate a file.</li>
+<li>Write and <strong>create your own generator</strong>. So you can upload it, version and reuse it, as well as share it with your team or community.
+Check <a class="reference internal" href="../howtos/custom_generators.html#dyn-generators"><span class="std std-ref">How to create and share a custom generator with generator packages</span></a>.</li>
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Need help integrating your build system? Tell us what you need. <a class="reference external" href="mailto:info&#37;&#52;&#48;conan&#46;io">info<span>&#64;</span>conan<span>&#46;</span>io</a></p>
+<p class="last">Need help integrating your build system? Tell us what you need: <a class="reference external" href="mailto:info&#37;&#52;&#48;conan&#46;io">info<span>&#64;</span>conan<span>&#46;</span>io</a></p>
 </div>
 <div class="section" id="use-the-json-generator">
 <span id="json-integration"></span><h2>Use the JSON generator<a class="headerlink" href="#use-the-json-generator" title="Permalink to this headline">¶</a></h2>
-<p>Specify the <strong>json</strong> generator in your conanfile:</p>
-<blockquote>
-<div><div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[requires]</span>
-<span class="na">fmt/4.1.0@&lt;user&gt;/&lt;stable&gt;</span>
-<span class="na">Poco/1.9.0@pocoproject/stable</span>
+<p>Specify the <code class="docutils literal notranslate"><span class="pre">json</span></code> generator in your recipe:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><em>conanfile.txt</em></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span> <span class="k">[requires]</span>
+ <span class="na">fmt/5.3.0@bincrafters/stable</span>
+ <span class="na">Poco/1.9.0@pocoproject/stable</span>
 
-<span class="k">[generators]</span>
-<span class="na">json</span>
+ <span class="k">[generators]</span>
+ <span class="na">json</span>
 </pre></div>
 </div>
-</div></blockquote>
+</div>
 <p>A file named <em>conanbuildinfo.json</em> will be generated. It will contain the information about every dependency:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span>
-  <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;fmt&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;4.1.0&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;include_paths&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;/path/to/.conan/data/fmt/4.1.0/&lt;user&gt;/&lt;channel&gt;/package/&lt;id&gt;/include&quot;</span>
-      <span class="p">],</span>
-      <span class="nt">&quot;lib_paths&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;/path/to/.conan/data/fmt/4.1.0/&lt;user&gt;/&lt;channel&gt;/package/&lt;id&gt;/lib&quot;</span>
-      <span class="p">],</span>
-      <span class="nt">&quot;libs&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;fmt&quot;</span>
-      <span class="p">],</span>
-      <span class="nt">&quot;...&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Poco&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.7.8p3&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;...&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text"><em>conanbuildinfo.json</em></span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span> <span class="p">{</span>
+   <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span>
+   <span class="p">[</span>
+     <span class="p">{</span>
+       <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;fmt&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;5.3.0&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;include_paths&quot;</span><span class="p">:</span> <span class="p">[</span>
+         <span class="s2">&quot;/path/to/.conan/data/fmt/5.3.0/bincrafters/stable/package/&lt;id&gt;/include&quot;</span>
+       <span class="p">],</span>
+       <span class="nt">&quot;lib_paths&quot;</span><span class="p">:</span> <span class="p">[</span>
+         <span class="s2">&quot;/path/to/.conan/data/fmt/5.3.0/bincrafters/stable/package/&lt;id&gt;/lib&quot;</span>
+       <span class="p">],</span>
+       <span class="nt">&quot;libs&quot;</span><span class="p">:</span> <span class="p">[</span>
+         <span class="s2">&quot;fmt&quot;</span>
+       <span class="p">],</span>
+       <span class="nt">&quot;...&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+     <span class="p">},</span>
+     <span class="p">{</span>
+       <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Poco&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.9.0&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;...&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span>
+     <span class="p">}</span>
+   <span class="p">]</span>
+ <span class="p">}</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="use-the-text-generator">
 <span id="txt-integration"></span><h2>Use the text generator<a class="headerlink" href="#use-the-text-generator" title="Permalink to this headline">¶</a></h2>
-<p>Just specify the <strong>txt</strong> generator in your conanfile:</p>
-<blockquote>
-<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
-Poco/1.9.0@pocoproject/stable
+<p>Just specify the <code class="docutils literal notranslate"><span class="pre">txt</span></code> generator in your recipe:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><em>conanfile.txt</em></span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> [requires]
+ Poco/1.9.0@pocoproject/stable
 
-[generators]
-txt
-</pre></div>
-</div>
-</div></blockquote>
-<p>And a file is generated, with the same information as in the case of CMake and gcc, only in a generic, text format,
-containing the information from the <code class="docutils literal notranslate"><span class="pre">deps_cpp_info</span></code> and <code class="docutils literal notranslate"><span class="pre">deps_user_info</span></code>. Check the conanfile <a class="reference internal" href="../reference/conanfile/methods.html#method-package-info"><span class="std std-ref">package_info</span></a>
-method to know more about these objects:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[includedirs]
-/home/laso/.conan/data/Poco/1.6.1/lasote/stable/package/afafc631e705f7296bec38318b28e4361ab6787c/include
-/home/laso/.conan/data/OpenSSL/1.0.2d/lasote/stable/package/154942d8bccb87fbba9157e1daee62e1200e80fc/include
-/home/laso/.conan/data/zlib/1.2.8/lasote/stable/package/3b92a20cb586af0d984797002d12b7120d38e95e/include
-
-[libs]
-PocoUtil
-PocoXML
-PocoJSON
-PocoMongoDB
-PocoNet
-PocoCrypto
-PocoData
-PocoDataSQLite
-PocoZip
-PocoFoundation
-pthread
-dl
-rt
-ssl
-crypto
-z
-
-[libdirs]
-/home/laso/.conan/data/Poco/1.6.1/lasote/stable/package/afafc631e705f7296bec38318b28e4361ab6787c/lib
-/home/laso/.conan/data/OpenSSL/1.0.2d/lasote/stable/package/154942d8bccb87fbba9157e1daee62e1200e80fc/lib
-/home/laso/.conan/data/zlib/1.2.8/lasote/stable/package/3b92a20cb586af0d984797002d12b7120d38e95e/lib
-
-[bindirs]
-/home/laso/.conan/data/Poco/1.6.1/lasote/stable/package/afafc631e705f7296bec38318b28e4361ab6787c/bin
-/home/laso/.conan/data/OpenSSL/1.0.2d/lasote/stable/package/154942d8bccb87fbba9157e1daee62e1200e80fc/bin
-/home/laso/.conan/data/zlib/1.2.8/lasote/stable/package/3b92a20cb586af0d984797002d12b7120d38e95e/bin
-
-[defines]
-POCO_STATIC=ON
-POCO_NO_AUTOMATIC_LIBS
-
-[USER_MyRequiredLib1]
-somevariable=Some Value
-othervar=Othervalue
-
-[USER_MyRequiredLib2]
-myvar=34
+ [generators]
+ txt
 </pre></div>
 </div>
 </div>
-<div class="section" id="use-conan-data-model-conanfile-py">
-<h2>Use Conan data model (conanfile.py)<a class="headerlink" href="#use-conan-data-model-conanfile-py" title="Permalink to this headline">¶</a></h2>
-<p>If you are using any other build system you can use Conan too.
-In the <code class="docutils literal notranslate"><span class="pre">build()</span></code> method you can access your settings and build information
-from your requirements and pass it to your build system. Note, however, that probably is simpler
-and much more reusable to create a generator to simplify the task for your build system.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+<p>A file is generated with the same information in a generic text format.</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text"><em>conanbuildinfo.txt</em></span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> [includedirs]
+ /home/laso/.conan/data/Poco/1.6.1/lasote/stable/package/afafc631e705f7296bec38318b28e4361ab6787c/include
+ /home/laso/.conan/data/OpenSSL/1.0.2d/lasote/stable/package/154942d8bccb87fbba9157e1daee62e1200e80fc/include
+ /home/laso/.conan/data/zlib/1.2.8/lasote/stable/package/3b92a20cb586af0d984797002d12b7120d38e95e/include
 
-<span class="k">class</span> <span class="nc">MyProjectWithConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
-   <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span>
-   <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;Poco/1.9.0@pocoproject/stable&quot;</span>
-   <span class="c1">########### IT&#39;S IMPORTANT TO DECLARE THE TXT GENERATOR TO DEAL WITH A GENERIC BUILD SYSTEM</span>
-   <span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;txt&quot;</span>
-   <span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Poco:shared&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s2">&quot;OpenSSL:shared&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">}</span>
+ [libs]
+ PocoUtil
+ PocoXML
+ PocoJSON
+ PocoMongoDB
+ PocoNet
+ PocoCrypto
+ PocoData
+ PocoDataSQLite
+ PocoZip
+ PocoFoundation
+ pthread
+ dl
+ rt
+ ssl
+ crypto
+ z
 
-   <span class="k">def</span> <span class="nf">imports</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.dll&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;bin&quot;</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;bin&quot;</span><span class="p">)</span> <span class="c1"># From bin to bin</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.dylib*&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;bin&quot;</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;lib&quot;</span><span class="p">)</span> <span class="c1"># From lib to bin</span>
+ [libdirs]
+ /home/laso/.conan/data/Poco/1.6.1/lasote/stable/package/afafc631e705f7296bec38318b28e4361ab6787c/lib
+ /home/laso/.conan/data/OpenSSL/1.0.2d/lasote/stable/package/154942d8bccb87fbba9157e1daee62e1200e80fc/lib
+ /home/laso/.conan/data/zlib/1.2.8/lasote/stable/package/3b92a20cb586af0d984797002d12b7120d38e95e/lib
 
-   <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="c1">############ Without any helper ###########</span>
-      <span class="c1"># Settings</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">os</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">arch</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">compiler</span><span class="p">)</span>
+ [bindirs]
+ /home/laso/.conan/data/Poco/1.6.1/lasote/stable/package/afafc631e705f7296bec38318b28e4361ab6787c/bin
+ /home/laso/.conan/data/OpenSSL/1.0.2d/lasote/stable/package/154942d8bccb87fbba9157e1daee62e1200e80fc/bin
+ /home/laso/.conan/data/zlib/1.2.8/lasote/stable/package/3b92a20cb586af0d984797002d12b7120d38e95e/bin
 
-      <span class="c1"># Options</span>
-      <span class="c1">#print(self.options.my_option)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;OpenSSL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shared</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;Poco&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shared</span><span class="p">)</span>
+ [defines]
+ POCO_STATIC=ON
+ POCO_NO_AUTOMATIC_LIBS
 
-      <span class="c1"># Paths and libraries, all</span>
-      <span class="k">print</span><span class="p">(</span><span class="s2">&quot;-------- ALL --------------&quot;</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="o">.</span><span class="n">include_paths</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="o">.</span><span class="n">lib_paths</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="o">.</span><span class="n">bin_paths</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="o">.</span><span class="n">libs</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="o">.</span><span class="n">defines</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="o">.</span><span class="n">cflags</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="o">.</span><span class="n">cxxflags</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="o">.</span><span class="n">sharedlinkflags</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="o">.</span><span class="n">exelinkflags</span><span class="p">)</span>
+ [USER_MyRequiredLib1]
+ somevariable=Some Value
+ othervar=Othervalue
 
-      <span class="c1"># Just from OpenSSL</span>
-      <span class="k">print</span><span class="p">(</span><span class="s2">&quot;--------- FROM OPENSSL -------------&quot;</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;OpenSSL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">include_paths</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;OpenSSL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lib_paths</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;OpenSSL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">bin_paths</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;OpenSSL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">libs</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;OpenSSL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">defines</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;OpenSSL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cflags</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;OpenSSL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cxxflags</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;OpenSSL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sharedlinkflags</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;OpenSSL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">exelinkflags</span><span class="p">)</span>
-
-      <span class="c1"># Just from POCO</span>
-      <span class="k">print</span><span class="p">(</span><span class="s2">&quot;--------- FROM POCO -------------&quot;</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;Poco&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">include_paths</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;Poco&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lib_paths</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;Poco&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">bin_paths</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;Poco&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">libs</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;Poco&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">defines</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;Poco&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cflags</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;Poco&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cxxflags</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;Poco&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sharedlinkflags</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;Poco&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">exelinkflags</span><span class="p">)</span>
-
-
-      <span class="c1"># self.run(&quot;invoke here your configure, make, or others&quot;)</span>
-      <span class="c1"># self.run(&quot;basically you can do what you want with your requirements build info)</span>
-
-
-      <span class="c1"># Environment variables (from requirements self.env_info objects)</span>
-      <span class="c1"># are automatically applied in the python ``os.environ`` but can be accesible as well:</span>
-      <span class="k">print</span><span class="p">(</span><span class="s2">&quot;--------- Globally -------------&quot;</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="p">)</span>
-
-      <span class="k">print</span><span class="p">(</span><span class="s2">&quot;--------- FROM MyLib -------------&quot;</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_env_info</span><span class="p">[</span><span class="s2">&quot;MyLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">some_env_var</span><span class="p">)</span>
-
-
-      <span class="c1"># User declared variables (from requirements self.user_info objects)</span>
-      <span class="c1"># are available in the self.deps_user_info object</span>
-      <span class="k">print</span><span class="p">(</span><span class="s2">&quot;--------- FROM MyLib -------------&quot;</span><span class="p">)</span>
-      <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_user_info</span><span class="p">[</span><span class="s2">&quot;MyLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">some_user_var</span><span class="p">)</span>
+ [USER_MyRequiredLib2]
+ myvar=34
 </pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="use-the-conan-data-model-in-a-conanfile-py">
+<h2>Use the Conan data model (in a <em>conanfile.py</em>)<a class="headerlink" href="#use-the-conan-data-model-in-a-conanfile-py" title="Permalink to this headline">¶</a></h2>
+<p>If you are using any other build system you can use Conan too. In the <code class="docutils literal notranslate"><span class="pre">build()</span></code> method you can access your settings and build information
+from your requirements and pass it to your build system. Note, however, that probably is simpler and much more reusable to create a
+generator to simplify the task for your build system.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text"><em>conanfile.py</em></span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+
+
+ <span class="k">class</span> <span class="nc">MyProjectWithConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+     <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span>
+     <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;Poco/1.9.0@pocoproject/stable&quot;</span>
+     <span class="c1">########### IT&#39;S IMPORTANT TO DECLARE THE TXT GENERATOR TO DEAL WITH A GENERIC BUILD SYSTEM</span>
+     <span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;txt&quot;</span>
+     <span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Poco:shared&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s2">&quot;OpenSSL:shared&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">}</span>
+
+     <span class="k">def</span> <span class="nf">imports</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.dll&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;bin&quot;</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;bin&quot;</span><span class="p">)</span> <span class="c1"># From bin to bin</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.dylib*&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;bin&quot;</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;lib&quot;</span><span class="p">)</span> <span class="c1"># From lib to bin</span>
+
+     <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+         <span class="c1">############ Without any helper ###########</span>
+         <span class="c1"># Settings</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">os</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">arch</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">compiler</span><span class="p">)</span>
+
+         <span class="c1"># Options</span>
+         <span class="c1">#print(self.options.my_option)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;OpenSSL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shared</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;Poco&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shared</span><span class="p">)</span>
+
+         <span class="c1"># Paths and libraries, all</span>
+         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;-------- ALL --------------&quot;</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="o">.</span><span class="n">include_paths</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="o">.</span><span class="n">lib_paths</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="o">.</span><span class="n">bin_paths</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="o">.</span><span class="n">libs</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="o">.</span><span class="n">defines</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="o">.</span><span class="n">cflags</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="o">.</span><span class="n">cxxflags</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="o">.</span><span class="n">sharedlinkflags</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="o">.</span><span class="n">exelinkflags</span><span class="p">)</span>
+
+         <span class="c1"># Just from OpenSSL</span>
+         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;--------- FROM OPENSSL -------------&quot;</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;OpenSSL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">include_paths</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;OpenSSL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lib_paths</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;OpenSSL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">bin_paths</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;OpenSSL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">libs</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;OpenSSL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">defines</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;OpenSSL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cflags</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;OpenSSL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cxxflags</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;OpenSSL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sharedlinkflags</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;OpenSSL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">exelinkflags</span><span class="p">)</span>
+
+         <span class="c1"># Just from POCO</span>
+         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;--------- FROM POCO -------------&quot;</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;Poco&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">include_paths</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;Poco&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lib_paths</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;Poco&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">bin_paths</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;Poco&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">libs</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;Poco&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">defines</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;Poco&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cflags</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;Poco&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cxxflags</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;Poco&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sharedlinkflags</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_cpp_info</span><span class="p">[</span><span class="s2">&quot;Poco&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">exelinkflags</span><span class="p">)</span>
+
+         <span class="c1"># self.run(&quot;invoke here your configure, make, or others&quot;)</span>
+         <span class="c1"># self.run(&quot;basically you can do what you want with your requirements build info)</span>
+
+         <span class="c1"># Environment variables (from requirements self.env_info objects)</span>
+         <span class="c1"># are automatically applied in the python ``os.environ`` but can be accesible as well:</span>
+         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;--------- Globally -------------&quot;</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="p">)</span>
+
+         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;--------- FROM MyLib -------------&quot;</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_env_info</span><span class="p">[</span><span class="s2">&quot;MyLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">some_env_var</span><span class="p">)</span>
+
+         <span class="c1"># User declared variables (from requirements self.user_info objects)</span>
+         <span class="c1"># are available in the self.deps_user_info object</span>
+         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;--------- FROM MyLib -------------&quot;</span><span class="p">)</span>
+         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deps_user_info</span><span class="p">[</span><span class="s2">&quot;MyLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">some_user_var</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="create-your-own-generator">
 <h2>Create your own generator<a class="headerlink" href="#create-your-own-generator" title="Permalink to this headline">¶</a></h2>
 <p>There are two ways in which generators can be contributed:</p>
 <ul class="simple">
-<li>Forking and adding the new generator in the Conan codebase. This will be a built-in generator.
-It might have a much slower release and update cycle. It needs to pass some tests before being accepted,
-but it has the advantage than no extra things are needed to use that generator (once released in Conan)</li>
-<li>Creating a custom <a class="reference internal" href="../howtos/custom_generators.html#dyn-generators"><span class="std std-ref">generator package</span></a>. You can write a <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> and add
-the custom logic for a generator inside that file, then upload, refer and depend on it as any other package. These
-generators have to be discovered (search), but they have many advantages: much faster release cycles,
-independent from the main Conan codebase, can be versioned, so backward compatibility and
-upgrades are much easier.</li>
+<li>Forking and adding the new generator in the Conan codebase. This will be a built-in generator. It might have a much slower release and
+update cycle, it needs to pass some tests before being accepted, but it has the advantage than no extra things are needed to use that
+generator (once next Conan version is released).</li>
+<li>Creating a custom <a class="reference internal" href="../howtos/custom_generators.html#dyn-generators"><span class="std std-ref">generator package</span></a>. You can write a <em>conanfile.py</em> and add the custom logic for a generator
+inside that file, then upload, refer and depend on it as any other package. These generators will be another node in the dependency graph
+but they have many advantages: much faster release cycles, independent from the Conan codebase and can be versioned. So backwards
+compatibility and upgrades are much easier.</li>
 </ul>
 </div>
 </div>
@@ -497,7 +502,7 @@ upgrades are much easier.</li>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.14
+      Version: 1.15
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -505,7 +510,11 @@ upgrades are much easier.</li>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.14</a></dd>
+            <dd><a href="/en/latest/index.html">1.15</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.14/index.html">1.14</a></dd>
           
         
           
@@ -567,7 +576,7 @@ upgrades are much easier.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.14.5',
+            VERSION:'1.15.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

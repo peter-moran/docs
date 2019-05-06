@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Attributes &mdash; conan 1.14.5 documentation</title>
+  <title>Attributes &mdash; conan 1.15.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.14.5 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.15.0 documentation" href="../../index.html"/>
         <link rel="up" title="conanfile.py" href="../conanfile.html"/>
         <link rel="next" title="Methods" href="methods.html"/>
         <link rel="prev" title="conanfile.py" href="../conanfile.html"/>
@@ -163,6 +163,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l4"><a class="reference internal" href="#keep-imports">keep_imports</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#scm">scm</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#revision-mode">revision_mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#python-requires">python_requires</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="methods.html">Methods</a></li>
@@ -312,7 +313,7 @@ repository, please indicate it in the <code class="docutils literal notranslate"
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HelloConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Hello&quot;</span>
     <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;0.1&quot;</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/memsharded/hellopack.git&quot;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/conan-io/hello.git&quot;</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">url</span></code> is the url <strong>of the package</strong> repository, i.e. not necessarily the original source code.
@@ -1188,8 +1189,8 @@ to <a class="reference internal" href="../../devtools/running_packages.html#repa
      <span class="n">scm</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;git&quot;</span><span class="p">,</span>
         <span class="s2">&quot;subfolder&quot;</span><span class="p">:</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://github.com/memsharded/hello.git&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;revision&quot;</span><span class="p">:</span> <span class="s2">&quot;static_shared&quot;</span>
+        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://github.com/conan-io/hello.git&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;revision&quot;</span><span class="p">:</span> <span class="s2">&quot;master&quot;</span>
      <span class="p">}</span>
     <span class="o">...</span>
 </pre></div>
@@ -1245,6 +1246,39 @@ repository system (Git or SVN). If there is no repository it will raise an error
 </ul>
 </div></blockquote>
 </div>
+<div class="section" id="python-requires">
+<span id="python-requires-attribute"></span><h2>python_requires<a class="headerlink" href="#python-requires" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This attribute is part of the <a class="reference internal" href="../../extending/python_requires.html#python-requires"><span class="std std-ref">python requires</span></a> feature, so
+it is also an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
+</div>
+<p>Python requires are associated with the <code class="docutils literal notranslate"><span class="pre">ConanFile</span></code> declared in the recipe file, data
+from those imported recipes is accessible using the <code class="docutils literal notranslate"><span class="pre">python_requires</span></code> attribute in
+the recipe itself. This attribute is a dictionary where the key is the name of the
+<em>python requires</em> reference and the value is a dictionary with the following information:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">ref</span></code>: full reference of the python requires.</li>
+<li><code class="docutils literal notranslate"><span class="pre">exports_folder</span></code>: directory in the cache where the exported files are located.</li>
+<li><code class="docutils literal notranslate"><span class="pre">exports_sources_folder</span></code>: directory in the cache where the files exported using the
+<code class="docutils literal notranslate"><span class="pre">exports_sources</span></code> attribute of the python requires recipe are located.</li>
+</ul>
+</div></blockquote>
+<p>You can use this information to copy files accompanying a python requires to the consumer
+workspace.:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span> <span class="nc">PyReq</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;pyreq&quot;</span>
+    <span class="n">exports_sources</span> <span class="o">=</span> <span class="s2">&quot;CMakeLists.txt&quot;</span>
+
+    <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">pyreq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">python_requires</span><span class="p">[</span><span class="s1">&#39;pyreq&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;CMakeLists.txt&quot;</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="n">pyreq</span><span class="o">.</span><span class="n">exports_sources_folder</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">source_folder</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -1287,7 +1321,7 @@ repository system (Git or SVN). If there is no repository it will raise an error
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.14
+      Version: 1.15
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -1295,7 +1329,11 @@ repository system (Git or SVN). If there is no repository it will raise an error
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.14</a></dd>
+            <dd><a href="/en/latest/index.html">1.15</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.14/index.html">1.14</a></dd>
           
         
           
@@ -1357,7 +1395,7 @@ repository system (Git or SVN). If there is no repository it will raise an error
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.14.5',
+            VERSION:'1.15.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

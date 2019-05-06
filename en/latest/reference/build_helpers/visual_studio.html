@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>MSBuild &mdash; conan 1.14.5 documentation</title>
+  <title>MSBuild &mdash; conan 1.15.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.14.5 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.15.0 documentation" href="../../index.html"/>
         <link rel="up" title="Build helpers" href="../build_helpers.html"/>
         <link rel="next" title="Meson" href="meson.html"/>
         <link rel="prev" title="AutoToolsBuildEnvironment (configure/make)" href="autotools.html"/>
@@ -265,7 +265,8 @@ environment variables with all the information from the requirements: include di
          <span class="n">msbuild</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="s2">&quot;MyProject.sln&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>To inject the flags corresponding to the <code class="docutils literal notranslate"><span class="pre">compiler.runtime</span></code>, <code class="docutils literal notranslate"><span class="pre">build_type</span></code> and <code class="docutils literal notranslate"><span class="pre">cppstd</span></code> settings, this build helper also generates a
+<p>To inject the flags corresponding to the <code class="docutils literal notranslate"><span class="pre">compiler.runtime</span></code>, <code class="docutils literal notranslate"><span class="pre">build_type</span></code> and
+<code class="docutils literal notranslate"><span class="pre">compiler.cppstd</span></code> settings, this build helper also generates a
 properties file (in the build folder) that is passed to :command:<code class="docutils literal notranslate"><span class="pre">MSBuild</span></code> with
 :command:<code class="docutils literal notranslate"><span class="pre">/p:ForceImportBeforeCppTargets=&quot;conan_build.props&quot;</span></code>.</p>
 <div class="section" id="constructor">
@@ -331,7 +332,7 @@ dictionary that returns the final string used for the <code class="docutils lite
 version.</p>
 </li>
 <li><p class="first"><strong>toolset</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Sets <code class="docutils literal notranslate"><span class="pre">/p:PlatformToolset</span></code> to the specified toolset. When <code class="docutils literal notranslate"><span class="pre">None</span></code> it will apply the
-setting <code class="docutils literal notranslate"><span class="pre">compiler.toolset</span></code> if specified.</p>
+setting <code class="docutils literal notranslate"><span class="pre">compiler.toolset</span></code> if specified. When <code class="docutils literal notranslate"><span class="pre">False</span></code> it will skip adjusting the <code class="docutils literal notranslate"><span class="pre">/p:PlatformToolset</span></code>.</p>
 </li>
 <li><p class="first"><strong>platforms</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): This dictionary will update the default one (see <code class="docutils literal notranslate"><span class="pre">msvc_arch</span></code> below) and will be
 used to get the mapping of architectures to platforms from the Conan naming to another one. It is useful for Visual Studio solutions
@@ -515,8 +516,9 @@ Use it together with <a class="reference internal" href="../tools.html#tools-vcv
 </div>
 <div class="section" id="std">
 <h3>std<a class="headerlink" href="#std" title="Permalink to this headline">¶</a></h3>
-<p>If the setting <code class="docutils literal notranslate"><span class="pre">cppstd</span></code> is set, the property will contain the corresponding flag of the language
-standard.</p>
+<p>This property contains the flag corresponding to the C++ standard. If you are still using
+the deprecated setting <code class="docutils literal notranslate"><span class="pre">cppstd</span></code> (see <a class="reference internal" href="../../howtos/manage_cpp_standard.html#manage-cpp-standard"><span class="std std-ref">How to manage C++ standard [EXPERIMENTAL]</span></a>) and you are not providing
+any value for this setting, the property will be <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </div>
 <div class="section" id="parallel">
 <h3>parallel<a class="headerlink" href="#parallel" title="Permalink to this headline">¶</a></h3>
@@ -570,7 +572,7 @@ standard.</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.14
+      Version: 1.15
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -578,7 +580,11 @@ standard.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.14</a></dd>
+            <dd><a href="/en/latest/index.html">1.15</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.14/index.html">1.14</a></dd>
           
         
           
@@ -640,7 +646,7 @@ standard.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.14.5',
+            VERSION:'1.15.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

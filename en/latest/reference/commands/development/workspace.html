@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan workspace &mdash; conan 1.14.5 documentation</title>
+  <title>conan workspace &mdash; conan 1.15.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.14.5 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.15.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan profile" href="../misc/profile.html"/>
         <link rel="prev" title="conan editable" href="editable.html"/>
@@ -232,9 +232,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </div>
 <p>Command to manage workspaces</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>positional arguments:
-{install}   sub-command help
+  {install}   sub-command help
     install   same as a &quot;conan install&quot; command but using the workspace data
-            from the file
+              from the file. If no file is provided, it will look for a file
+              named &quot;conanws.yml&quot;
 
 optional arguments:
 -h, --help  show this help message and exit
@@ -243,15 +244,17 @@ optional arguments:
 <div class="section" id="conan-workspace-install">
 <span id="id2"></span><h2>conan workspace install<a class="headerlink" href="#conan-workspace-install" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan workspace install <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-b <span class="o">[</span>BUILD<span class="o">]]</span> <span class="o">[</span>-e ENV<span class="o">]</span> <span class="o">[</span>-o OPTIONS<span class="o">]</span>
-                           <span class="o">[</span>-pr PROFILE<span class="o">]</span> <span class="o">[</span>-r REMOTE<span class="o">]</span> <span class="o">[</span>-s SETTINGS<span class="o">]</span> <span class="o">[</span>-u<span class="o">]</span>
-                           path
+                          <span class="o">[</span>-pr PROFILE<span class="o">]</span> <span class="o">[</span>-r REMOTE<span class="o">]</span> <span class="o">[</span>-s SETTINGS<span class="o">]</span> <span class="o">[</span>-u<span class="o">]</span>
+                          <span class="o">[</span>-if INSTALL_FOLDER<span class="o">]</span>
+                          path
 </pre></div>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>positional arguments:
-path                  path to workspace definition file
+path                    path to workspace definition file (it will look for a
+                        &quot;conanws.yml&quot; inside if a directory is given)
 
 optional arguments:
--h, --help            show this help message and exit
+-h, --help              show this help message and exit
 -b [BUILD], --build [BUILD]
                         Optional, use it to choose if you want to build from
                         sources: --build Build all from sources, do not use
@@ -279,7 +282,10 @@ optional arguments:
 -s SETTINGS, --settings SETTINGS
                         Settings to build the package, overwriting the
                         defaults. e.g., -s compiler=gcc
--u, --update          Check updates exist from upstream remotes
+-u, --update            Check updates exist from upstream remotes
+-if INSTALL_FOLDER, --install-folder INSTALL_FOLDER
+                        Folder where the workspace files will be created
+                        (default to current working directory)
 </pre></div>
 </div>
 <p>Note that these arguments, like <code class="docutils literal notranslate"><span class="pre">settings</span></code> and <code class="docutils literal notranslate"><span class="pre">options</span></code> mostly apply to the dependencies,
@@ -330,7 +336,7 @@ parameterizing the layout with <code class="docutils literal notranslate"><span 
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.14
+      Version: 1.15
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -338,7 +344,11 @@ parameterizing the layout with <code class="docutils literal notranslate"><span 
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.14</a></dd>
+            <dd><a href="/en/latest/index.html">1.15</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.14/index.html">1.14</a></dd>
           
         
           
@@ -400,7 +410,7 @@ parameterizing the layout with <code class="docutils literal notranslate"><span 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.14.5',
+            VERSION:'1.15.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

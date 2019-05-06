@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Environment variables &mdash; conan 1.14.5 documentation</title>
+  <title>Environment variables &mdash; conan 1.15.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.14.5 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.15.0 documentation" href="../index.html"/>
         <link rel="up" title="Reference" href="../reference.html"/>
         <link rel="next" title="Hooks [EXPERIMENTAL]" href="hooks.html"/>
         <link rel="prev" title="Editable layout files" href="config_files/editable_layout.html"/>
@@ -166,6 +166,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#conan-error-on-override">CONAN_ERROR_ON_OVERRIDE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-vs-installation-preference">CONAN_VS_INSTALLATION_PREFERENCE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-cacert-path">CONAN_CACERT_PATH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conan-default-package-id-mode">CONAN_DEFAULT_PACKAGE_ID_MODE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conan-skip-broken-symlinks-check">CONAN_SKIP_BROKEN_SYMLINKS_CHECK</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="hooks.html">Hooks [EXPERIMENTAL]</a></li>
@@ -725,6 +727,16 @@ that uses <code class="docutils literal notranslate"><span class="pre">tools.vs_
 overrides the value defined in the <em>conan.conf</em> as <code class="docutils literal notranslate"><span class="pre">cacert_path</span> <span class="pre">=</span> <span class="pre">&lt;path/to/cacert.pem&gt;</span></code>
 under the section <code class="docutils literal notranslate"><span class="pre">[general]</span></code>.</p>
 </div>
+<div class="section" id="conan-default-package-id-mode">
+<h2>CONAN_DEFAULT_PACKAGE_ID_MODE<a class="headerlink" href="#conan-default-package-id-mode" title="Permalink to this headline">¶</a></h2>
+<p><strong>Defaulted to</strong>: semver_direct_mode</p>
+<p>It changes the way package IDs are computed, but can change to any value defined in <a class="reference internal" href="../creating_packages/define_abi_compatibility.html#package-id-mode"><span class="std std-ref">Using package_id() for Package Dependencies</span></a>.</p>
+</div>
+<div class="section" id="conan-skip-broken-symlinks-check">
+<h2>CONAN_SKIP_BROKEN_SYMLINKS_CHECK<a class="headerlink" href="#conan-skip-broken-symlinks-check" title="Permalink to this headline">¶</a></h2>
+<p><strong>Defaulted to</strong>: <code class="docutils literal notranslate"><span class="pre">False</span></code>/<code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+<p>When set to <code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">1</span></code>, Conan will allow the existence broken symlinks while creating a package.</p>
+</div>
 </div>
 
 
@@ -767,7 +779,7 @@ under the section <code class="docutils literal notranslate"><span class="pre">[
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.14
+      Version: 1.15
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -775,7 +787,11 @@ under the section <code class="docutils literal notranslate"><span class="pre">[
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.14</a></dd>
+            <dd><a href="/en/latest/index.html">1.15</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.14/index.html">1.14</a></dd>
           
         
           
@@ -837,7 +853,7 @@ under the section <code class="docutils literal notranslate"><span class="pre">[
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.14.5',
+            VERSION:'1.15.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

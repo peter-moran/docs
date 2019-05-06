@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Getting Started &mdash; conan 1.14.5 documentation</title>
+  <title>Getting Started &mdash; conan 1.15.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.14.5 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.15.0 documentation" href="../index.html"/>
         <link rel="up" title="Creating Packages" href="../creating_packages.html"/>
         <link rel="next" title="Recipe and Sources in a Different Repo" href="external_repo.html"/>
         <link rel="prev" title="Creating Packages" href="../creating_packages.html"/>
@@ -216,7 +216,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="section" id="getting-started">
 <span id="packaging-getting-started"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
 <p>To start learning about creating packages, we will create a package from the existing source code
-repository: <a class="reference external" href="https://github.com/memsharded/hello">https://github.com/memsharded/hello</a>. You can check that project, it is a very simple
+repository: <a class="reference external" href="https://github.com/conan-io/hello">https://github.com/conan-io/hello</a>. You can check that project, it is a very simple
 “hello world” C++ library, using CMake as the build system to build a library and an executable. It does not contain
 any association with Conan.</p>
 <p>We are using a similar GitHub repository as an example, but the same process also applies to other source
@@ -262,8 +262,7 @@ that our package is correctly created.</p>
     <span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;cmake&quot;</span>
 
     <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;git clone https://github.com/memsharded/hello.git&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;cd hello &amp;&amp; git checkout static_shared&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;git clone https://github.com/conan-io/hello.git&quot;</span><span class="p">)</span>
         <span class="c1"># This small hack might be useful to guarantee proper /MT /MD linkage</span>
         <span class="c1"># in MSVC if the packaged project doesn&#39;t have variables to set it</span>
         <span class="c1"># properly</span>
@@ -516,7 +515,7 @@ If not specified other. the package will be static.</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.14
+      Version: 1.15
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -524,7 +523,11 @@ If not specified other. the package will be static.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.14</a></dd>
+            <dd><a href="/en/latest/index.html">1.15</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.14/index.html">1.14</a></dd>
           
         
           
@@ -586,7 +589,7 @@ If not specified other. the package will be static.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.14.5',
+            VERSION:'1.15.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

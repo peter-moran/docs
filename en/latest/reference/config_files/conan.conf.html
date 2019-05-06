@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan.conf &mdash; conan 1.14.5 documentation</title>
+  <title>conan.conf &mdash; conan 1.15.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.14.5 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.15.0 documentation" href="../../index.html"/>
         <link rel="up" title="Configuration files" href="../config_files.html"/>
         <link rel="next" title="profiles/default" href="default_profile.html"/>
         <link rel="prev" title="Configuration files" href="../config_files.html"/>
@@ -240,6 +240,7 @@ default_profile = default
 compression_level = 9                 # environment CONAN_COMPRESSION_LEVEL
 sysrequires_sudo = True               # environment CONAN_SYSREQUIRES_SUDO
 request_timeout = 60                  # environment CONAN_REQUEST_TIMEOUT (seconds)
+default_package_id_mode = semver_direct_mode # environment CONAN_DEFAULT_PACKAGE_ID_MODE
 # sysrequires_mode = enabled            # environment CONAN_SYSREQUIRES_MODE (allowed modes enabled/verify/disabled)
 # vs_installation_preference = Enterprise, Professional, Community, BuildTools # environment CONAN_VS_INSTALLATION_PREFERENCE
 # verbose_traceback = False           # environment CONAN_VERBOSE_TRACEBACK
@@ -253,6 +254,7 @@ request_timeout = 60                  # environment CONAN_REQUEST_TIMEOUT (secon
 # use_always_short_paths = False      # environment CONAN_USE_ALWAYS_SHORT_PATHS
 # skip_vs_projects_upgrade = False    # environment CONAN_SKIP_VS_PROJECTS_UPGRADE
 # non_interactive = False             # environment CONAN_NON_INTERACTIVE
+# skip_broken_symlinks_check = False  # enviornment CONAN_SKIP_BROKEN_SYMLINKS_CHECK
 
 # conan_make_program = make           # environment CONAN_MAKE_PROGRAM (overrides the make program used in AutoToolsBuildEnvironment.make)
 # conan_cmake_program = cmake         # environment CONAN_CMAKE_PROGRAM (overrides the make program used in CMake.cmake_program)
@@ -283,7 +285,7 @@ request_timeout = 60                  # environment CONAN_REQUEST_TIMEOUT (secon
 # This is the default path, but you can write your own. It must be an absolute path or a
 # path beginning with &quot;~&quot; (if the environment var CONAN_USER_HOME is specified, this directory, even
 # with &quot;~/&quot;, will be relative to the conan user home, not to the system user home)
-path = ~/.conan/data
+path = ./data
 
 [proxies]
 # Empty section will try to use system proxies.
@@ -381,10 +383,14 @@ for modern Windows that enable long paths at the system level.</p>
 in the conan code base, allowing to debug the detected error.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">cacert_path</span></code> variable lets the user specify a custom path to the <em>cacert.pem</em> file to use
 in requests. You can also adjust this value using the environment variable <code class="docutils literal notranslate"><span class="pre">CONAN_CACERT_PATH</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">skip_broken_symlinks_check</span></code> variable (defaulted to <code class="docutils literal notranslate"><span class="pre">False</span></code>) allows the existence broken symlinks while creating a package.</p>
 </div>
 <div class="section" id="storage">
 <h2>Storage<a class="headerlink" href="#storage" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">storage.path</span></code> variable define the path where all the packages will be stored.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">storage.path</span></code> variable define the path where all the packages will be stored. By default it is <em>./data</em>, which
+is relative to the folder containing this <em>conan.conf</em> file, which by default is the <em>&lt;userhome&gt;/.conan</em> folder.
+It can start with “~”, and that will be expanded to the current user home folder. If the environment var CONAN_USER_HOME is specified,
+the “~” will be replaced by the current Conan home (the folder pointed by the CONAN_USER_HOME environment variable).</p>
 <p>On Windows:</p>
 <ul class="simple">
 <li>It is recommended to assign it to some unit, e.g. map it to X: in order to avoid hitting the 260 chars path name length limit).</li>
@@ -476,7 +482,7 @@ $ <span class="nb">set</span> <span class="nv">HTTPS_PROXY</span><span class="o"
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.14
+      Version: 1.15
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -484,7 +490,11 @@ $ <span class="nb">set</span> <span class="nv">HTTPS_PROXY</span><span class="o"
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.14</a></dd>
+            <dd><a href="/en/latest/index.html">1.15</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.14/index.html">1.14</a></dd>
           
         
           
@@ -546,7 +556,7 @@ $ <span class="nb">set</span> <span class="nv">HTTPS_PROXY</span><span class="o"
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.14.5',
+            VERSION:'1.15.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

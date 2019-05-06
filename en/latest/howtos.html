@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Howtos &mdash; conan 1.14.5 documentation</title>
+  <title>Howtos &mdash; conan 1.15.0 documentation</title>
   
 
   
@@ -42,9 +42,9 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="conan 1.14.5 documentation" href="index.html"/>
+    <link rel="top" title="conan 1.15.0 documentation" href="index.html"/>
         <link rel="next" title="How to package header-only libraries" href="howtos/header_only.html"/>
-        <link rel="prev" title="Microsoft’s Azure DevOps (TFS, VSTS)" href="integrations/azure_devops.html"/>
+        <link rel="prev" title="Emscripten" href="integrations/emscripten.html"/>
 
  <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -266,8 +266,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="howtos/custom_generators.html">How to create and share a custom generator with generator packages</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="howtos/custom_generators.html#creating-a-custom-generator">Creating a custom generator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="howtos/custom_generators.html#premake-generator-example">Premake generator example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howtos/custom_generators.html#creating-a-premake-generator">Creating a Premake generator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="howtos/custom_generators.html#using-the-generator">Using the generator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="howtos/custom_generators.html#using-template-files-for-custom-generators">Using template files for custom generators</a></li>
 </ul>
@@ -322,7 +321,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <a href="howtos/header_only.html" class="btn btn-neutral float-right" title="How to package header-only libraries" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="integrations/azure_devops.html" class="btn btn-neutral" title="Microsoft’s Azure DevOps (TFS, VSTS)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="integrations/emscripten.html" class="btn btn-neutral" title="Emscripten" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -349,7 +348,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.14
+      Version: 1.15
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -357,7 +356,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.14</a></dd>
+            <dd><a href="/en/latest/index.html">1.15</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.14/index.html">1.14</a></dd>
           
         
           
@@ -419,7 +422,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.14.5',
+            VERSION:'1.15.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

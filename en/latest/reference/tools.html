@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tools &mdash; conan 1.14.5 documentation</title>
+  <title>Tools &mdash; conan 1.15.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.14.5 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.15.0 documentation" href="../index.html"/>
         <link rel="up" title="Reference" href="../reference.html"/>
         <link rel="next" title="Configuration files" href="config_files.html"/>
         <link rel="prev" title="RunEnvironment" href="build_helpers/run_environment.html"/>
@@ -183,6 +183,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#tools-xcrun">tools.XCRun()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-latest-vs-version-installed">tools.latest_vs_version_installed()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-apple-dot-clean">tools.apple_dot_clean()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tools-version">tools.Version()</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="config_files.html">Configuration files</a></li>
@@ -469,6 +470,8 @@ Use value of None to set compiler definition with no value.</p>
 Internet.</p>
 <p>This function accepts <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar</span></code>, <code class="docutils literal notranslate"><span class="pre">.tzb2</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar.bz2</span></code>, <code class="docutils literal notranslate"><span class="pre">.tgz</span></code>, <code class="docutils literal notranslate"><span class="pre">.txz</span></code>, <code class="docutils literal notranslate"><span class="pre">tar.xz</span></code>, and <code class="docutils literal notranslate"><span class="pre">.zip</span></code> files, and decompresses
 them into the given destination folder (the current one by default).</p>
+<p>It also accepts gzipped files, with extension <code class="docutils literal notranslate"><span class="pre">.gz</span></code> (not matching any of the above), and it will unzip them into a file with the same name
+but without the extension, or to a filename defined by the <code class="docutils literal notranslate"><span class="pre">destination</span></code> argument.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">tools</span>
 
 <span class="n">tools</span><span class="o">.</span><span class="n">unzip</span><span class="p">(</span><span class="s2">&quot;myfile.zip&quot;</span><span class="p">)</span>
@@ -870,7 +873,7 @@ When the context manager block ends, the environment variables will recover thei
 <span id="id19"></span><h2>tools.pythonpath()<a class="headerlink" href="#tools-pythonpath" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">This way of reusing python code from other recipes can be improved via <a class="reference internal" href="../extending/python_requires.html#python-requires"><span class="std std-ref">Python requires: reusing python code in recipes [EXPERIMENTAL]</span></a>.</p>
+<p class="last">This way of reusing python code from other recipes can be improved via <a class="reference internal" href="../extending/python_requires.html#python-requires"><span class="std std-ref">Python requires: reusing code [EXPERIMENTAL]</span></a>.</p>
 </div>
 <p>This tool is automatically applied in the conanfile methods unless <a class="reference internal" href="conanfile/attributes.html#apply-env"><span class="std std-ref">apply_env</span></a> is deactivated, so any <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code>
 inherited from the requirements will be automatically available.</p>
@@ -1548,6 +1551,7 @@ will be used.</li>
 <li><strong>is_local_repository()</strong>: Returns <cite>True</cite> if the remote is a local folder.</li>
 <li><strong>is_pristine()</strong>: Returns <cite>True</cite> if there aren’t modified or uncommitted files in the working copy.</li>
 <li><strong>get_repo_root()</strong>: Returns the root folder of the working copy.</li>
+<li><strong>get_commit_message()</strong>: Returns the latest log message</li>
 </ul>
 </dd>
 </dl>
@@ -1598,6 +1602,7 @@ returns the current tag name. Otherwise it will return <code class="docutils lit
 <li><strong>is_local_repository()</strong>: Returns <cite>True</cite> if the remote is a local folder.</li>
 <li><strong>is_pristine()</strong>: Returns <cite>True</cite> if there aren’t modified or uncommitted files in the working copy.</li>
 <li><strong>get_repo_root()</strong>: Returns the root folder of the working copy.</li>
+<li><strong>get_revision_message()</strong>: Returns the latest log message</li>
 </ul>
 </dd>
 </dl>
@@ -1730,6 +1735,32 @@ if <code class="docutils literal notranslate"><span class="pre">file.txt</span><
 </dd>
 </dl>
 </div>
+<div class="section" id="tools-version">
+<span id="id52"></span><h2>tools.Version()<a class="headerlink" href="#tools-version" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">tools</span>
+
+<span class="n">v</span> <span class="o">=</span> <span class="n">tools</span><span class="o">.</span><span class="n">Version</span><span class="p">(</span><span class="s2">&quot;1.2.3-dev23&quot;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="s2">&quot;1.2.3&quot;</span>
+</pre></div>
+</div>
+<p>This is a helper class to work with semantic versions, built on top of <code class="docutils literal notranslate"><span class="pre">semver.SemVer</span></code> class
+with loose parsing. It exposes all the version components as properties and offers total
+ordering through compare operators.</p>
+<p>Build the <code class="docutils literal notranslate"><span class="pre">tools.Version</span></code> object using any valid string or any object that converts to
+string, the constructor will raise if the string is not a valid loose semver.</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd><ul class="first last simple">
+<li><strong>major</strong>: component <code class="docutils literal notranslate"><span class="pre">major</span></code> of semver version</li>
+<li><strong>minor</strong>: component <code class="docutils literal notranslate"><span class="pre">minor</span></code> of semver version (defaults to <code class="docutils literal notranslate"><span class="pre">&quot;0&quot;</span></code>)</li>
+<li><strong>patch</strong>: component <code class="docutils literal notranslate"><span class="pre">patch</span></code> of semver version (defaults to <code class="docutils literal notranslate"><span class="pre">&quot;0&quot;</span></code>)</li>
+<li><strong>prerelease</strong>: component <code class="docutils literal notranslate"><span class="pre">prerelease</span></code> of semver version (defaults to <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>)</li>
+<li><strong>build</strong>: component <code class="docutils literal notranslate"><span class="pre">build</span></code> of semver version (defaults to <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>). Take into account
+that <code class="docutils literal notranslate"><span class="pre">build</span></code> component doesn’t affect precedence between versions.</li>
+</ul>
+</dd>
+</dl>
+</div>
 </div>
 
 
@@ -1772,7 +1803,7 @@ if <code class="docutils literal notranslate"><span class="pre">file.txt</span><
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.14
+      Version: 1.15
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -1780,7 +1811,11 @@ if <code class="docutils literal notranslate"><span class="pre">file.txt</span><
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.14</a></dd>
+            <dd><a href="/en/latest/index.html">1.15</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.14/index.html">1.14</a></dd>
           
         
           
@@ -1842,7 +1877,7 @@ if <code class="docutils literal notranslate"><span class="pre">file.txt</span><
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.14.5',
+            VERSION:'1.15.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

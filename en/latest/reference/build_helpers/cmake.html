@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CMake &mdash; conan 1.14.5 documentation</title>
+  <title>CMake &mdash; conan 1.15.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.14.5 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.15.0 documentation" href="../../index.html"/>
         <link rel="up" title="Build helpers" href="../build_helpers.html"/>
         <link rel="next" title="AutoToolsBuildEnvironment (configure/make)" href="autotools.html"/>
         <link rel="prev" title="Build helpers" href="../build_helpers.html"/>
@@ -438,13 +438,13 @@ For <code class="docutils literal notranslate"><span class="pre">Unix</span> <sp
 <td>Set to the runtime value from <code class="docutils literal notranslate"><span class="pre">self.settings.compiler.runtime</span></code> for MSVS</td>
 </tr>
 <tr class="row-even"><td>CONAN_CMAKE_CXX_STANDARD</td>
-<td>Set to the <code class="docutils literal notranslate"><span class="pre">self.settings.cppstd</span></code> value</td>
+<td>Set to the <code class="docutils literal notranslate"><span class="pre">self.settings.compiler.cppstd</span></code> value (or <code class="docutils literal notranslate"><span class="pre">self.settings.cppstd</span></code> for backward compatibility)</td>
 </tr>
 <tr class="row-odd"><td>CONAN_CMAKE_CXX_EXTENSIONS</td>
-<td>Set to the <code class="docutils literal notranslate"><span class="pre">self.settings.cppstd</span></code> value when GNU extensions are enabled</td>
+<td>Set to <code class="docutils literal notranslate"><span class="pre">ON</span></code> or <code class="docutils literal notranslate"><span class="pre">OFF</span></code> value when GNU extensions for the given C++ standard are enabled</td>
 </tr>
 <tr class="row-even"><td>CONAN_STD_CXX_FLAG</td>
-<td>Set to the <code class="docutils literal notranslate"><span class="pre">self.settings.cppstd</span></code> value. Flag for compiler directly (for CMake &lt; 3.1)</td>
+<td>Set to the flag corresponding to the C++ standard defined in <code class="docutils literal notranslate"><span class="pre">self.settings.compiler.cppstd</span></code>. Used for CMake &lt; 3.1)</td>
 </tr>
 <tr class="row-odd"><td>CMAKE_EXPORT_NO_PACKAGE_REGISTRY</td>
 <td>Defined by default to disable the package registry</td>
@@ -741,7 +741,7 @@ For Unix systems it generates <code class="docutils literal notranslate"><span c
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.14
+      Version: 1.15
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -749,7 +749,11 @@ For Unix systems it generates <code class="docutils literal notranslate"><span c
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.14</a></dd>
+            <dd><a href="/en/latest/index.html">1.15</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.14/index.html">1.14</a></dd>
           
         
           
@@ -811,7 +815,7 @@ For Unix systems it generates <code class="docutils literal notranslate"><span c
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.14.5',
+            VERSION:'1.15.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

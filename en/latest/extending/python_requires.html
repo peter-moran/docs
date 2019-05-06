@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Python requires: reusing python code in recipes [EXPERIMENTAL] &mdash; conan 1.14.5 documentation</title>
+  <title>Python requires: reusing code [EXPERIMENTAL] &mdash; conan 1.15.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.14.5 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.15.0 documentation" href="../index.html"/>
         <link rel="up" title="Extending Conan" href="../extending.html"/>
         <link rel="next" title="Hooks" href="hooks.html"/>
         <link rel="prev" title="Customizing settings" href="custom_settings.html"/>
@@ -118,7 +118,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../extending.html">Extending Conan</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="custom_settings.html">Customizing settings</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Python requires: reusing python code in recipes [EXPERIMENTAL]</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Python requires: reusing code [EXPERIMENTAL]</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#import-a-python-requires">Import a python requires</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reuse-python-sources">Reuse python sources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reuse-source-files">Reuse source files</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="hooks.html">Hooks</a></li>
 </ul>
 </li>
@@ -180,7 +185,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
           <li><a href="../extending.html">Extending Conan</a> &raquo;</li>
         
-      <li>Python requires: reusing python code in recipes [EXPERIMENTAL]</li>
+      <li>Python requires: reusing code [EXPERIMENTAL]</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -201,145 +206,234 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="python-requires-reusing-python-code-in-recipes-experimental">
-<span id="python-requires"></span><h1>Python requires: reusing python code in recipes [EXPERIMENTAL]<a class="headerlink" href="#python-requires-reusing-python-code-in-recipes-experimental" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="python-requires-reusing-code-experimental">
+<span id="python-requires"></span><h1>Python requires: reusing code [EXPERIMENTAL]<a class="headerlink" href="#python-requires-reusing-code-experimental" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code> feature allows extending the recipes reusing Python code from other <strong>conanfile.py</strong> easily, even for inheritance
-approaches. The code to be reused will be in a <em>conanfile.py</em> recipe, and will be managed as any other Conan package.</p>
-<p>Let’s create (for example) some reusable base class:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+<p>The <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code> feature is a very convenient way to share files and code between
+different recipes. A <em>Python Requires</em> is just like any other recipe, it is the way it is
+required from the consumer what makes the difference.</p>
+<p>The <em>Python Requires</em> recipe file, besides exporting its own required sources, can export
+files to be used by the consumer recipes and also python code in the recipe file itself.</p>
+<p>Let’s have a look at an example showing all its capabilities (you can find all
+the sources in <a class="reference external" href="https://github.com/conan-io/examples/tree/master/features/">Conan examples repository</a>):</p>
+<blockquote>
+<div><ul>
+<li><p class="first">Python requires recipe:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">CMake</span><span class="p">,</span> <span class="n">tools</span>
+<span class="kn">from</span> <span class="nn">scm_utils</span> <span class="kn">import</span> <span class="n">get_version</span>
 
-<span class="k">class</span> <span class="nc">MyBase</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;My cool source!&quot;</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;My cool build!&quot;</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">package</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;My cool package!&quot;</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;My cool package_info!&quot;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">PythonRequires</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;pyreq&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;version&quot;</span>
+
+    <span class="n">exports</span> <span class="o">=</span> <span class="s2">&quot;scm_utils.py&quot;</span>
+    <span class="n">exports_sources</span> <span class="o">=</span> <span class="s2">&quot;CMakeLists.txt&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">get_conanfile</span><span class="p">():</span>
+
+    <span class="k">class</span> <span class="nc">BaseConanFile</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+
+        <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">]}</span>
+        <span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">}</span>
+        <span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;cmake&quot;</span>
+        <span class="n">exports_sources</span> <span class="o">=</span> <span class="s2">&quot;src/*&quot;</span>
+
+        <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="c1"># Copy the CMakeLists.txt file exported with the python requires</span>
+            <span class="n">pyreq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">python_requires</span><span class="p">[</span><span class="s2">&quot;pyreq&quot;</span><span class="p">]</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pyreq</span><span class="o">.</span><span class="n">exports_sources_folder</span><span class="p">,</span> <span class="s2">&quot;CMakeLists.txt&quot;</span><span class="p">),</span>
+                        <span class="n">dst</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">source_folder</span><span class="p">)</span>
+
+            <span class="c1"># Rename the project to match the consumer name</span>
+            <span class="n">tools</span><span class="o">.</span><span class="n">replace_in_file</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source_folder</span><span class="p">,</span> <span class="s2">&quot;CMakeLists.txt&quot;</span><span class="p">),</span>
+                                  <span class="s2">&quot;add_library(mylibrary ${sources})&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;add_library({} ${{sources}})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+
+        <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="n">cmake</span> <span class="o">=</span> <span class="n">CMake</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">cmake</span><span class="o">.</span><span class="n">configure</span><span class="p">()</span>
+            <span class="n">cmake</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">package</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.h&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;include&quot;</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;src&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.lib&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;lib&quot;</span><span class="p">,</span> <span class="n">keep_path</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.dll&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;bin&quot;</span><span class="p">,</span> <span class="n">keep_path</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.dylib*&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;lib&quot;</span><span class="p">,</span> <span class="n">keep_path</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.so&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;lib&quot;</span><span class="p">,</span> <span class="n">keep_path</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.a&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;lib&quot;</span><span class="p">,</span> <span class="n">keep_path</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">libs</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">BaseConanFile</span>
 </pre></div>
 </div>
-<p>With this conanfile, we can export it to the local cache to make it available, and also upload it to our remote:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan <span class="nb">export</span> . MyBase/0.1@user/channel
-$ conan upload MyBase/0.1@user/channel -r<span class="o">=</span>myremote
+</div></blockquote>
+</li>
+<li><p class="first">Consumer recipe</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">python_requires</span>
+
+
+<span class="n">base</span> <span class="o">=</span> <span class="n">python_requires</span><span class="p">(</span><span class="s2">&quot;pyreq/version@user/channel&quot;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">ConsumerConan</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">get_conanfile</span><span class="p">()):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;consumer&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">get_version</span><span class="p">()</span>
+
+    <span class="c1"># Everything else is inherited</span>
 </pre></div>
 </div>
-<p>It is not necessary to “create” any package binaries, or to <code class="docutils literal notranslate"><span class="pre">upload</span> <span class="pre">--all</span></code>, because there are no binaries for this recipe.</p>
-<p>Using the <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code>, we can write a new package recipe like:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">python_requires</span>
-
-<span class="n">base</span> <span class="o">=</span> <span class="n">python_requires</span><span class="p">(</span><span class="s2">&quot;MyBase/0.1@user/channel&quot;</span><span class="p">)</span>
-
-<span class="k">class</span> <span class="nc">PkgTest</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">MyBase</span><span class="p">):</span>
-    <span class="k">pass</span>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>We must make available for other to use the recipe with the <em>Python Requires</em>, this recipe
+won’t have any associated binaries, only the sources will be needed, so we only need to execute
+the export and upload commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan <span class="nb">export</span> . pyreq/version@user/channel
+$ conan upload pyreq/version@user/channel -r<span class="o">=</span>myremote
 </pre></div>
 </div>
-<p>If we run a <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">create</span></code>, on this recipe, we can see how it is effectively reusing the above code:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan create . Pkg/0.1@user/channel
-
-Pkg/0.1@lasote/testing: Installing package
-Requirements
-    Pkg/0.1@lasote/testing from <span class="nb">local</span> cache - Cache
-Python requires
-    MyConanfileBase/1.1@lasote/testing
-Packages
-    Pkg/0.1@lasote/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9 - Build
-...
-Pkg/0.1@lasote/testing: Configuring sources
-Pkg/0.1@lasote/testing: My cool source!
-...
-Pkg/0.1@lasote/testing: Calling build<span class="o">()</span>
-Pkg/0.1@lasote/testing: My cool build!
-...
-Pkg/0.1@lasote/testing: Calling package<span class="o">()</span>
-Pkg/0.1@lasote/testing: My cool package!
-...
-Pkg/0.1@lasote/testing: My cool package_info!
+<p>Now any consumer will be able to reuse the business logic and files available in the recipe,
+let’s have a look at the most common use cases.</p>
+<div class="section" id="import-a-python-requires">
+<h2>Import a python requires<a class="headerlink" href="#import-a-python-requires" title="Permalink to this headline">¶</a></h2>
+<p>To import a recipe as a <em>Python requires</em> it is needed to call the <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code>
+function with the reference as the only parameter:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">base</span> <span class="o">=</span> <span class="n">python_requires</span><span class="p">(</span><span class="s2">&quot;pyreq/version@user/channel&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>It is not mandatory to extend the reused <code class="docutils literal notranslate"><span class="pre">MyBase</span></code> class, it is possible to reuse just functions too:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
-
-<span class="k">def</span> <span class="nf">my_build</span><span class="p">(</span><span class="n">settings</span><span class="p">):</span>
-    <span class="c1"># doing custom stuff based on settings</span>
-
-<span class="k">class</span> <span class="nc">MyBase</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
-    <span class="k">pass</span>
-</pre></div>
-</div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan <span class="nb">export</span> . MyBuild/0.1@user/channel
-$ conan upload MyBuild/0.1@user/channel -r<span class="o">=</span>myremote
-</pre></div>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">python_requires</span>
-
-<span class="n">base</span> <span class="o">=</span> <span class="n">python_requires</span><span class="p">(</span><span class="s2">&quot;MyBuild/0.1@user/channel&quot;</span><span class="p">)</span>
-
-<span class="k">class</span> <span class="nc">PkgTest</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
-    <span class="o">...</span>
-    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">base</span><span class="o">.</span><span class="n">my_build</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Version ranges are possible with the version ranges notation <code class="docutils literal notranslate"><span class="pre">[]</span></code>, similar to regular requirements.
-Multiple <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code> are also possible</p>
-<div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text"><strong>conanfile.py</strong></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">python_requires</span>
-
-<span class="n">base</span> <span class="o">=</span> <span class="n">python_requires</span><span class="p">(</span><span class="s2">&quot;MyBase/[~0.1]@user/channel&quot;</span><span class="p">)</span>
-<span class="n">other</span> <span class="o">=</span> <span class="n">python_requires</span><span class="p">(</span><span class="s2">&quot;Other/1.2@user/channel&quot;</span><span class="p">)</span>
-
-<span class="k">class</span> <span class="nc">Pkg</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">MyBase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">other</span><span class="o">.</span><span class="n">some_function</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<p>It is possible to structure the code in different files too:</p>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text"><strong>conanfile.py</strong></span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
-<span class="kn">import</span> <span class="nn">mydata</span> <span class="c1"># reuse the strings from here</span>
-<span class="k">class</span> <span class="nc">MyConanfileBase</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
-    <span class="n">exports</span> <span class="o">=</span> <span class="s2">&quot;*.py&quot;</span>
-    <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">mydata</span><span class="o">.</span><span class="n">src</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text"><strong>mydata.py</strong></span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">src</span> <span class="o">=</span> <span class="s2">&quot;My cool source!&quot;</span>
-<span class="n">build</span> <span class="o">=</span> <span class="s2">&quot;My cool build!&quot;</span>
-<span class="n">pkg</span> <span class="o">=</span> <span class="s2">&quot;My cool package!&quot;</span>
-<span class="n">info</span> <span class="o">=</span> <span class="s2">&quot;My cool package_info!&quot;</span>
-</pre></div>
-</div>
-</div>
-<p>This would be created with the same <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">export</span></code> and consumed with the same <code class="docutils literal notranslate"><span class="pre">base</span> <span class="pre">=</span> <span class="pre">python_requires(&quot;MyBase/0.1&#64;user/channel&quot;)</span></code> as above.</p>
-<p>There are a few important considerations regarding <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code>:</p>
-<ul class="simple">
-<li>They are required at every step of the Conan commands. If you are creating a package that <code class="docutils literal notranslate"><span class="pre">python_requires(&quot;MyBase/...&quot;)</span></code>,
-the <code class="docutils literal notranslate"><span class="pre">MyBase</span></code> package should already be available in the local cache or be downloaded from the remotes. Otherwise, Conan
+<p>All the code available in the <em>conanfile.py</em> file of the imported recipe will be available
+in the consumer through the <code class="docutils literal notranslate"><span class="pre">base</span></code> variable.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p>There are <strong>several important considerations</strong> regarding <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code>:</p>
+<ul class="last simple">
+<li>They are required at every step of the conan commands. If you are creating a package that <code class="docutils literal notranslate"><span class="pre">python_requires(&quot;MyBase/...&quot;)</span></code>,
+the <code class="docutils literal notranslate"><span class="pre">MyBase</span></code> package should be already available in the local cache or to be downloaded from the remotes. Otherwise, conan
 will raise a “missing package” error.</li>
 <li>They do not affect the package binary ID (hash). Depending on different version, or different channel of
 such <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code> do not change the package IDs as the normal dependencies do.</li>
-<li>They are imported only once. The Python code that is reused is imported only once, the first time it is required.
-Subsequent requirements of that Conan recipe will reuse the previously imported module. Global initialization at
+<li>They are imported only once. The python code that is reused is imported only once, the first time it is required.
+Subsequent requirements of that conan recipe will reuse the previously imported module. Global initialization at
 parsing time and global state are discouraged.</li>
-<li>They are transitive. One recipe using <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code> can also be consumed with a <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code> from
+<li>They are transitive. One recipe using <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code> can be also consumed with a <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code> from
 another package recipe.</li>
 <li>They are not automatically updated with the <code class="docutils literal notranslate"><span class="pre">--update</span></code> argument from remotes.</li>
 <li>Different packages can require different versions in their <code class="docutils literal notranslate"><span class="pre">python_requires()</span></code>. They are private to each recipe,
-so they do not conflict with each other. However, it is the responsibility of the user to maintain consistency.</li>
+so they do not conflict with each other, but it is the responsibility of the user to keep consistency.</li>
 <li>They are not overridden from downstream consumers. Again, as they are private, they are not affected by other packages,
 even consumers</li>
 </ul>
+</div>
+</div>
+<div class="section" id="reuse-python-sources">
+<h2>Reuse python sources<a class="headerlink" href="#reuse-python-sources" title="Permalink to this headline">¶</a></h2>
+<p>In the example proposed we are using two functions through the <code class="docutils literal notranslate"><span class="pre">base</span></code>
+variable: <code class="docutils literal notranslate"><span class="pre">base.get_conanfile()</span></code> and <code class="docutils literal notranslate"><span class="pre">base.get_version()</span></code>. The first one is defined
+directly in the <em>conanfile.py</em> file, but the second one is in a different source file that
+was exported together with the <code class="docutils literal notranslate"><span class="pre">pyreq/version&#64;user/channel</span></code> recipe using the
+<code class="docutils literal notranslate"><span class="pre">exports</span></code> attribute.</p>
+<p>This works without any Conan magic, it is just plain Python and you can even return a
+class from a function and inherit from it. That’s just what we are proposing in this
+example: all the business logic in contained in the <em>Python Requires</em> so every recipe
+will reuse it automatically. The consumer only needs to define the <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">version</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">python_requires</span>
+
+
+<span class="n">base</span> <span class="o">=</span> <span class="n">python_requires</span><span class="p">(</span><span class="s2">&quot;pyreq/version@user/channel&quot;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">ConsumerConan</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">get_conanfile</span><span class="p">()):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;consumer&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;version&quot;</span>
+
+    <span class="c1"># Everything else is inherited</span>
+</pre></div>
+</div>
+<p>while all the functional code is defined in the <em>python requires</em> recipe file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">python_requires</span>
+
+<span class="p">[</span><span class="o">...</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">get_conanfile</span><span class="p">():</span>
+
+    <span class="k">class</span> <span class="nc">BaseConanFile</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+
+        <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reuse-source-files">
+<h2>Reuse source files<a class="headerlink" href="#reuse-source-files" title="Permalink to this headline">¶</a></h2>
+<p>Up to now, we have been reusing python code, but we can also package files within the
+<em>python requires</em> recipe and consume them afterward, that’s what we are doing with a
+<em>CMakeList.txt</em> file, it will allow us to share the CMake code and ensure that all
+the libraries using the same <em>python requires</em> will have the same build script. These
+are the relevant code snippets from the example files:</p>
+<blockquote>
+<div><ul>
+<li><p class="first">The <em>python requires</em> exports the needed sources (the file exists next to this <em>conanfile.py</em>):</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PythonRequires</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;pyreq&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;version&quot;</span>
+
+    <span class="n">exports_sources</span> <span class="o">=</span> <span class="s2">&quot;CMakeLists.txt&quot;</span>
+
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The file will be exported together with the recipe <code class="docutils literal notranslate"><span class="pre">pyreq/version&#64;user/channel</span></code>
+during the call to <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">export</span> <span class="pre">.</span> <span class="pre">pyreq/version&#64;user/channel</span></code> as it is expected
+for any Conan package.</p>
+</li>
+<li><p class="first">The consumer recipe will copy the file from the <em>python requires</em> folder, we need to
+make this copy ourselves, there is nothing run automatically during the
+<code class="docutils literal notranslate"><span class="pre">python_requires()</span></code> call:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BaseConanFile</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Copy the CMakeLists.txt file exported with the python requires</span>
+        <span class="n">pyreq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">python_requires</span><span class="p">[</span><span class="s2">&quot;pyreq&quot;</span><span class="p">]</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pyreq</span><span class="o">.</span><span class="n">exports_sources_folder</span><span class="p">,</span> <span class="s2">&quot;CMakeLists.txt&quot;</span><span class="p">),</span>
+                    <span class="n">dst</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">source_folder</span><span class="p">)</span>
+
+        <span class="c1"># Rename the project to match the consumer name</span>
+        <span class="n">tools</span><span class="o">.</span><span class="n">replace_in_file</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source_folder</span><span class="p">,</span> <span class="s2">&quot;CMakeLists.txt&quot;</span><span class="p">),</span>
+                              <span class="s2">&quot;add_library(mylibrary ${sources})&quot;</span><span class="p">,</span>
+                              <span class="s2">&quot;add_library({} ${{sources}})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>As you can see, in the inherited <code class="docutils literal notranslate"><span class="pre">source()</span></code> method, we are copying the <em>CMakeLists.txt</em>
+file from the <em>exports_sources</em> folder of the python requires (take a look at
+the <a class="reference internal" href="../reference/conanfile/attributes.html#python-requires-attribute"><span class="std std-ref">python_requires attribute</span></a>), and modifying a line to
+name the library with the current recipe name.</p>
+<p>In the example, our <code class="docutils literal notranslate"><span class="pre">ConsumerConan</span></code> class will also inherit the <code class="docutils literal notranslate"><span class="pre">build()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">package()</span></code> and <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method, turning the actual <em>conanfile.py</em> of the
+library into a mere declaration of the name and version.</p>
+</li>
+</ul>
+</div></blockquote>
+<p>You can find the full example in the <a class="reference external" href="https://github.com/conan-io/examples/tree/master/features/">Conan examples repository</a>.</p>
+</div>
 </div>
 
 
@@ -382,7 +476,7 @@ even consumers</li>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.14
+      Version: 1.15
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -390,7 +484,11 @@ even consumers</li>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.14</a></dd>
+            <dd><a href="/en/latest/index.html">1.15</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.14/index.html">1.14</a></dd>
           
         
           
@@ -452,7 +550,7 @@ even consumers</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.14.5',
+            VERSION:'1.15.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
