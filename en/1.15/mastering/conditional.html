@@ -264,7 +264,9 @@ settings under development.</p>
 <li><p class="first"><strong>Use</strong> <code class="docutils literal notranslate"><span class="pre">configure()</span></code> <strong>to raise an error for non-supported configurations</strong>:</p>
 <p>This approach is the first one evaluated when Conan loads the recipe so it is quite handy to perform checks of the input settings. It
 relies on the set of possible settings inside your <em>settings.yml</em> file, so it can be used to constrain any recipe.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans.errors</span> <span class="kn">import</span> <span class="n">ConanInvalidConfiguration</span>
+<span class="o">...</span>
+<span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">os</span> <span class="o">==</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
       <span class="k">raise</span> <span class="n">ConanInvalidConfiguration</span><span class="p">(</span><span class="s2">&quot;This library is not compatible with Windows&quot;</span><span class="p">)</span>
 </pre></div>
