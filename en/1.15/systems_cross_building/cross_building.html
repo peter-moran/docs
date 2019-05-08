@@ -415,6 +415,41 @@ declared at the top of the profile:</p>
 </div>
 <p>A <em>bin/example</em> for Raspberry PI (Linux/armv7hf) platform has been built.</p>
 </div>
+<div class="section" id="windows-to-windows-ce">
+<span id="cross-building-windows-ce"></span><h4>Windows to Windows CE<a class="headerlink" href="#windows-to-windows-ce" title="Permalink to this headline">¶</a></h4>
+<p>The Windows CE (WinCE) operating system is supported for CMake and MSBuild. Since WinCE depends on the
+MSVC compiler, Visual Studio and the according Windows CE platform SDK for the WinCE device have to be installed
+on the build host.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">os.platform</span></code> defines the WinCE Platform SDK and is equal to the <code class="docutils literal notranslate"><span class="pre">Platform</span></code> in Visual Studio.</p>
+<p>Some examples for Windows CE platforms:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">SDK_AM335X_SK_WEC2013_V310</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">STANDARDSDK_500</span> <span class="pre">(ARMV4I)</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">Windows</span> <span class="pre">Mobile</span> <span class="pre">5.0</span> <span class="pre">Pocket</span> <span class="pre">PC</span> <span class="pre">SDK</span> <span class="pre">(ARMV4I)</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">Toradex_CE800</span> <span class="pre">(ARMV7)</span></code></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">os.version</span></code> defines the WinCE version and must be <code class="docutils literal notranslate"><span class="pre">&quot;5.0&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;6.0&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;7.0&quot;</span></code>.</p>
+<p>CMake supports Visual Studio 2008 (<code class="docutils literal notranslate"><span class="pre">compiler.version=9</span></code>) and Visual Studio 2012 (<code class="docutils literal notranslate"><span class="pre">compiler.version=11</span></code>).</p>
+<p>Example of an Windows CE conan profile:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[settings]
+os=WindowsCE
+os.version=8.0
+os.platform=Toradex_CE800 (ARMV7)
+arch=armv7
+compiler=Visual Studio
+compiler.version=11
+
+# Release configuration
+build_type=Release
+compiler.runtime=MD
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Further information about CMake and WinCE can be found in the CMake documentation:</p>
+<p class="last"><a class="reference external" href="https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html#cross-compiling-for-windows-ce">CMake - Cross Compiling for Windows CE</a></p>
+</div>
+</div>
 <div class="section" id="linux-windows-macos-to-android">
 <span id="cross-building-android"></span><h4>Linux/Windows/macOS to Android<a class="headerlink" href="#linux-windows-macos-to-android" title="Permalink to this headline">¶</a></h4>
 <p>Cross-building a library for Android is very similar to the previous examples, except the complexity of managing different
