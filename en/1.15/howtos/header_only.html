@@ -257,7 +257,7 @@ to the include path</li>
 no need to do so because source code is not modified at all by the <code class="docutils literal notranslate"><span class="pre">configure()</span></code> or <code class="docutils literal notranslate"><span class="pre">build()</span></code> methods.</li>
 <li>Note that this recipe has no other dependencies, settings or options. If it had any of those, it would be very
 convenient to add the <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> method, to ensure that only one package with always the same ID is
-create irrespective of the configurations and dependencies:</li>
+created, irrespective of the configurations and dependencies:</li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">header_only</span><span class="p">()</span>
