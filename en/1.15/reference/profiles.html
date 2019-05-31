@@ -234,6 +234,10 @@ Tool2/0.1@user/channel, Tool3/0.1@user/channel
 *: Tool4/0.1@user/channel
 </pre></div>
 </div>
+<p>Profile can be created with <code class="docutils literal notranslate"><span class="pre">new</span></code> option in <strong class="command">conan profile</strong>. And then edit it later.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan profile new mynewprofile --detect
+</pre></div>
+</div>
 <p>Profile files can be used with <code class="docutils literal notranslate"><span class="pre">-pr</span></code>/<code class="docutils literal notranslate"><span class="pre">--profile</span></code> option in <strong class="command">conan install</strong> and <strong class="command">conan create</strong> commands.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan create . demo/testing -pr<span class="o">=</span>myprofile
 </pre></div>
