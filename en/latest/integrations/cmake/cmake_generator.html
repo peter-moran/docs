@@ -244,7 +244,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="cmake-generator">
 <h1><code class="docutils literal notranslate"><span class="pre">cmake</span></code> generator<a class="headerlink" href="#cmake-generator" title="Permalink to this headline">¶</a></h1>
-<p>If you are using <strong>CMake</strong> to build your project, you can use the <code class="docutils literal notranslate"><span class="pre">cmake</span></code> generator to define all your requirements in cmake syntax.
+<p>If you are using CMake to build your project, you can use the <code class="docutils literal notranslate"><span class="pre">cmake</span></code> generator to define all your requirements in CMake syntax.
 It creates a file named <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.cmake</span></code> that can be imported from your <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>.</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text"><em>conanfile.txt</em></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
@@ -256,11 +256,12 @@ cmake
 </div>
 <p>When <strong class="command">conan install</strong> is executed, a file named <em>conanbuildinfo.cmake</em> is created.</p>
 <p>You can include <em>conanbuildinfo.cmake</em> in your project’s <em>CMakeLists.txt</em> to manage your requirements.
-The inclusion of <em>conanbuildinfo.cmake</em> doesn’t alter the CMake environment at all. It simply provides <code class="docutils literal notranslate"><span class="pre">CONAN_</span></code> variables and some useful macros.</p>
+The inclusion of <em>conanbuildinfo.cmake</em> doesn’t alter the CMake environment at all. It simply provides <code class="docutils literal notranslate"><span class="pre">CONAN_</span></code> variables and some useful
+macros.</p>
 <div class="section" id="global-variables-approach">
 <h2>Global variables approach<a class="headerlink" href="#global-variables-approach" title="Permalink to this headline">¶</a></h2>
 <p>The simplest way to consume it would be to invoke the <code class="docutils literal notranslate"><span class="pre">conan_basic_setup()</span></code> macro, which will basically
-set global include directories, libraries directories, definitions, etc. so typically its enough to call:</p>
+set global include directories, libraries directories, definitions, etc. so typically it is enough to call:</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="o">}</span><span class="s">/conanbuildinfo.cmake</span><span class="p">)</span>
 <span class="nb">conan_basic_setup</span><span class="p">()</span>
 
