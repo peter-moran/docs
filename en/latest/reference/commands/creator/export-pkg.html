@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan export-pkg &mdash; conan 1.15.1 documentation</title>
+  <title>conan export-pkg &mdash; conan 1.16.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.15.1 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.16.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan new" href="new.html"/>
         <link rel="prev" title="conan export" href="export.html"/>
@@ -235,11 +235,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                    path reference
 </pre></div>
 </div>
-<p>Exports a recipe, then creates a package from local source and build folders.
-The package is created by calling the package() method applied to the local
-folders ‘–source-folder’ and ‘–build-folder’ It’s created in the local cache
-for the specified ‘reference’ and for the specified ‘–settings’, ‘–options’
-and or ‘–profile’.</p>
+<p>Exports a recipe, then creates a package from local source and build folders.</p>
+<p>If ‘–package-folder’ is provided it will copy the files from there, otherwise it
+will execute package() method over ‘–source-folder’ and ‘–build-folder’ to create
+the binary package.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>positional arguments:
   path                  Path to a folder containing a conanfile.py or to a
                         recipe file e.g., my_folder/conanfile.py
@@ -280,55 +279,74 @@ optional arguments:
                         be written
 </pre></div>
 </div>
-<p><strong class="command">conan export-pkg</strong> executes the following methods of a <em>conanfile.py</em> whenever <code class="docutils literal notranslate"><span class="pre">--package-folder</span></code> is used:</p>
-<ol class="arabic simple">
-<li><code class="docutils literal notranslate"><span class="pre">config_options()</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">configure()</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">requirements()</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">package_id()</span></code></li>
-</ol>
-<p>In case a package folder is not specified, this command will also execute:</p>
-<ol class="arabic simple" start="5">
-<li><code class="docutils literal notranslate"><span class="pre">package()</span></code></li>
-</ol>
-<p>Note that this is <strong>not</strong> the normal or recommended flow for creating Conan packages,
-as packages created this way will not have a reproducible build from sources.
-This command should be used when:</p>
+<p>The <strong class="command">export-pkg</strong> command let you create a package from already existing files
+in your working folder, it can be useful if you are using a build process external to Conan
+and do not want to provide it with the recipe. Nevertheless, you should take into
+account that it will generate a package and Conan won’t be able to guarantee its
+reproducibility or regenerate it again. This is <strong>not</strong> the normal or recommended flow
+for creating Conan packages.</p>
+<p>Execution of this command will result in several files copied to the package
+folder in the cache identified by its <code class="docutils literal notranslate"><span class="pre">package_id</span></code> (Conan will perform all the
+required actions to compute this _id_: build the graph, evaluate the requirements and
+options, and call any required method), but there could be two
+different sources for the files:</p>
 <blockquote>
 <div><ul class="simple">
-<li>It is not possible to build the packages from sources (only pre-built binaries available).</li>
-<li>You are developing your package locally and want to export the built artifacts to the local
-cache.</li>
+<li>If the argument <code class="docutils literal notranslate"><span class="pre">--package-folder</span></code> is provided, Conan will just copy all the
+contents of that folder to the package one in the cache.</li>
+<li>If no <code class="docutils literal notranslate"><span class="pre">--package-folder</span></code> is given, Conan will execute the method <code class="docutils literal notranslate"><span class="pre">package()</span></code> once
+and the <code class="docutils literal notranslate"><span class="pre">self.copy(...)</span></code> functions will copy matching files from the <code class="docutils literal notranslate"><span class="pre">source_folder</span></code>
+<strong>and</strong> <code class="docutils literal notranslate"><span class="pre">build_folder</span></code> to the corresponding path in the Conan cache (working directory
+corresponds to the <code class="docutils literal notranslate"><span class="pre">build_folder</span></code>).</li>
 </ul>
 </div></blockquote>
-<p>The command <strong class="command">conan new &lt;ref&gt; --bare</strong> will create a simple recipe that could be used in combination
-with the <code class="docutils literal notranslate"><span class="pre">export-pkg</span></code> command. Check this <a class="reference internal" href="../../../creating_packages/existing_binaries.html#existing-binaries"><span class="std std-ref">How to package existing binaries</span></a>.</p>
-<p><strong class="command">export-pkg</strong> has two different modes of operation:</p>
-<ul class="simple">
-<li>Specifying <strong class="command">--package-folder</strong> will perform a copy of the given folder, without executing the <code class="docutils literal notranslate"><span class="pre">package()</span></code> method.
-Use it if you have already created the package, for example with <strong class="command">conan package</strong> or
-with <code class="docutils literal notranslate"><span class="pre">cmake.install()</span></code> from the <code class="docutils literal notranslate"><span class="pre">build()</span></code> step.</li>
-<li>Specifying <strong class="command">--build-folder</strong> and/or <strong class="command">--source-folder</strong> will execute the <code class="docutils literal notranslate"><span class="pre">package()</span></code> method,
-to filter, select and arrange the layout of the artifacts.</li>
+<p>There are different scenarios where this command could look like useful:</p>
+<blockquote>
+<div><ul class="simple">
+<li>You are <a class="reference internal" href="../../../developing_packages/package_dev_flow.html#package-dev-flow"><span class="std std-ref">working locally on a package</span></a> and you want to
+upload it to the cache to be able to consume it from other recipes. In this situation
+you can use the <strong class="command">export-pkg</strong> command to copy the package to the cache,
+but you could also put the <a class="reference internal" href="../../../developing_packages/editable_packages.html#editable-packages"><span class="std std-ref">package in editable mode</span></a> and
+avoid this extra step.</li>
+<li>You only have precompiled binaries available, then you can use the <strong class="command">export-pkg</strong>
+to create the Conan package, or you can build a working recipe to download and
+package them. These scenarios are described in the documentation section
+<a class="reference internal" href="../../../creating_packages/existing_binaries.html#existing-binaries"><span class="std std-ref">How to package existing binaries</span></a>.</li>
 </ul>
-<p><strong>Examples</strong>:</p>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note that if <strong class="command">--profile</strong>, settings or options are not provided to <strong class="command">export-pkg</strong>,
+the configuration will be extracted from the information stored after a previous <strong class="command">conan install</strong>.
+That information might be incomplete in some edge cases, so we strongly recommend the usage of
+<strong class="command">--profile</strong> or <strong class="command">--settings, --options</strong>, etc.</p>
+</div>
+<p><strong>Examples</strong></p>
 <ul>
 <li><p class="first">Create a package from a directory containing the binaries for Windows/x86/Release:</p>
-<p>Having these files:</p>
+<p>We need to collect all the files from the local filesystem and tell Conan to
+compute the proper <code class="docutils literal notranslate"><span class="pre">package_id</span></code> so its get associated with the correct
+settings and it works when consuming it.</p>
+<p>If the files in the working folder are:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Release_x86/lib/libmycoollib.a
 Release_x86/lib/other.a
 Release_x86/include/mylib.h
 Release_x86/include/other.h
 </pre></div>
 </div>
-<p>Run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan new Hello/0.1 --bare  <span class="c1"># In case you still don&#39;t have a recipe for the binaries</span>
-$ conan export-pkg . Hello/0.1@user/stable -s <span class="nv">os</span><span class="o">=</span>Windows -s <span class="nv">arch</span><span class="o">=</span>x86 -s <span class="nv">build_type</span><span class="o">=</span>Release --build-folder<span class="o">=</span>Release_x86
+<p>then, just run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan new Hello/0.1 --bare  <span class="c1"># It creates a minimum recipe example</span>
+$ conan export-pkg . Hello/0.1@user/stable -s <span class="nv">os</span><span class="o">=</span>Windows -s <span class="nv">arch</span><span class="o">=</span>x86 -s <span class="nv">build_type</span><span class="o">=</span>Release --package-folder<span class="o">=</span>Release_x86
 </pre></div>
 </div>
+<p>This last command will copy all the contents from the <code class="docutils literal notranslate"><span class="pre">package-folder</span></code> and
+create the package associated with the settings provided through the command
+line.</p>
 </li>
-<li><p class="first">Create a package from a user folder build and sources folders:</p>
-<p>Given these files in the current folder</p>
+<li><p class="first">Create a package from a source and build folder:</p>
+<p>The objective is to collect the files that will be part of the package from
+the source folder (<em>include files</em>) and from the build folder (libraries), so,
+if these are the files in the working folder:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sources/include/mylib.h
 sources/src/file.cpp
 build/lib/mylib.lib
@@ -336,63 +354,20 @@ build/lib/mylib.tmp
 build/file.obj
 </pre></div>
 </div>
-<p>And assuming the <code class="docutils literal notranslate"><span class="pre">Hello/0.1&#64;user/stable</span></code> recipe has a <code class="docutils literal notranslate"><span class="pre">package()</span></code> method like this:</p>
+<p>we would need a slightly more complicated <em>conanfile.py</em> than in the previous
+example to select which files to copy, we need to change the patterns in the
+<code class="docutils literal notranslate"><span class="pre">package()</span></code> method:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.h&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;include&quot;</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;include&quot;</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.lib&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;lib&quot;</span><span class="p">,</span> <span class="n">keep_path</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+   <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.h&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;include&quot;</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;include&quot;</span><span class="p">)</span>
+   <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.lib&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;lib&quot;</span><span class="p">,</span> <span class="n">keep_path</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Then, the following code will create a package in the conan local cache:</p>
+<p>Now, we can run Conan to create the package:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan export-pkg . Hello/0.1@user/stable -pr<span class="o">=</span>myprofile --source-folder<span class="o">=</span>sources --build-folder<span class="o">=</span>build
 </pre></div>
 </div>
-<p>And such package will contain just the files:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>include/mylib.h
-lib/mylib.lib
-</pre></div>
-</div>
-</li>
-<li><p class="first">Building a conan package (for architecture x86) in a local directory and then send it to the local cache:</p>
-<p><strong>conanfile.py</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">CMake</span><span class="p">,</span> <span class="n">tools</span>
-
-<span class="k">class</span> <span class="nc">LibConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Hello&quot;</span>
-    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;0.1&quot;</span>
-    <span class="o">...</span>
-
-    <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;git clone https://github.com/conan-io/hello.git&quot;</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">cmake</span> <span class="o">=</span> <span class="n">CMake</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">cmake</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">source_folder</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
-        <span class="n">cmake</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">package</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.h&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;include&quot;</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;include&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.lib&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;lib&quot;</span><span class="p">,</span> <span class="n">keep_path</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>First we will call <strong class="command">conan source</strong> to get our source code in the <em>src</em> directory, then
-<strong class="command">conan install</strong> to install the requirements and generate the info files, <strong class="command">conan build</strong> to
-build the package, and finally <strong class="command">conan export-pkg</strong> to send the binary files to a package in the
-local cache:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan <span class="nb">source</span> . --source-folder src
-$ conan install . --install-folder build_x86 -s <span class="nv">arch</span><span class="o">=</span>x86
-$ conan build . --build-folder build_x86 --source-folder src
-<span class="hll">$ conan export-pkg . Hello/0.1@user/stable --build-folder build_x86 -s <span class="nv">arch</span><span class="o">=</span>x86
-</span></pre></div>
-</div>
 </li>
 </ul>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Note that if <strong class="command">--profile</strong> or settings, options, are not provided to <strong class="command">export-pkg</strong>,
-the configuration will be extracted from the information from a previous <strong class="command">conan install</strong>.
-That information might be incomplete in some edge cases, so we strongly recommend the usage of
-<strong class="command">--profile</strong> or <strong class="command">--settings, --options</strong>, etc.</p>
-</div>
 </div>
 
 
@@ -435,7 +410,7 @@ That information might be incomplete in some edge cases, so we strongly recommen
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.15
+      Version: 1.16
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -443,7 +418,11 @@ That information might be incomplete in some edge cases, so we strongly recommen
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.15</a></dd>
+            <dd><a href="/en/latest/index.html">1.16</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.15/index.html">1.15</a></dd>
           
         
           
@@ -509,7 +488,7 @@ That information might be incomplete in some edge cases, so we strongly recommen
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.15.1',
+            VERSION:'1.16.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

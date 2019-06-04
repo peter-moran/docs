@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan alias &mdash; conan 1.15.1 documentation</title>
+  <title>conan alias &mdash; conan 1.16.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.15.1 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.16.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan inspect" href="inspect.html"/>
         <link rel="prev" title="conan remove" href="remove.html"/>
@@ -235,11 +235,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan <span class="nb">alias</span> <span class="o">[</span>-h<span class="o">]</span> reference target
 </pre></div>
 </div>
-<p>Creates and exports an ‘alias package recipe’. An “alias” package is a
-symbolic name (reference) for another package (target). When some package
-depends on an alias, the target one will be retrieved and used instead, so the
-alias reference, the symbolic name, does not appear in the final dependency
-graph.</p>
+<p>Creates and exports an ‘alias package recipe’.</p>
+<p>An “alias” package is a symbolic name (reference) for another package
+(target). When some package depends on an alias, the target one will be
+retrieved and used instead, so the alias reference, the symbolic name,
+does not appear in the final dependency graph.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>positional arguments:
   reference   Alias reference. e.g.: mylib/1.X@user/channel
   target      Target reference. e.g.: mylib/1.12@user/channel
@@ -308,7 +308,7 @@ order to enable usage from servers.</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.15
+      Version: 1.16
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -316,7 +316,11 @@ order to enable usage from servers.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.15</a></dd>
+            <dd><a href="/en/latest/index.html">1.16</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.15/index.html">1.15</a></dd>
           
         
           
@@ -382,7 +386,7 @@ order to enable usage from servers.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.15.1',
+            VERSION:'1.16.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

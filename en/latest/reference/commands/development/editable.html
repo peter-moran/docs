@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan editable &mdash; conan 1.15.1 documentation</title>
+  <title>conan editable &mdash; conan 1.16.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.15.1 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.16.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan workspace" href="workspace.html"/>
         <link rel="prev" title="conan package" href="package.html"/>
@@ -230,15 +230,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan editable <span class="o">[</span>-h<span class="o">]</span> <span class="o">{</span>add,remove,list<span class="o">}</span> ...
 </pre></div>
 </div>
-<p>Manage editable packages</p>
+<p>Manages editable packages (package that resides in the user workspace, but
+are consumed as if they were in the cache).</p>
+<p>Use the subcommands ‘add’, ‘remove’ and ‘list’ to create, remove an list
+packages currently installed in this mode.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>positional arguments:
-{add,remove,list}  sub-command help
+  {add,remove,list}  sub-command help
     add              Put a package in editable mode
     remove           Disable editable mode for a package
     list             List packages in editable mode
 
 optional arguments:
--h, --help         show this help message and exit
+  -h, --help         show this help message and exit
 </pre></div>
 </div>
 <div class="section" id="conan-editable-add">
@@ -335,7 +338,7 @@ optional arguments:
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.15
+      Version: 1.16
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -343,7 +346,11 @@ optional arguments:
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.15</a></dd>
+            <dd><a href="/en/latest/index.html">1.16</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.15/index.html">1.15</a></dd>
           
         
           
@@ -409,7 +416,7 @@ optional arguments:
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.15.1',
+            VERSION:'1.16.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

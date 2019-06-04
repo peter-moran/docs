@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan upload &mdash; conan 1.15.1 documentation</title>
+  <title>conan upload &mdash; conan 1.16.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.15.1 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.16.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan test" href="test.html"/>
         <link rel="prev" title="conan new" href="new.html"/>
@@ -234,17 +234,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                pattern_or_reference
 </pre></div>
 </div>
-<p>Uploads a recipe and binary packages to a remote. If no remote is specified,
-the first configured remote (by default conan-center, use ‘conan remote list’
-to list the remotes) will be used.</p>
+<p>Uploads a recipe and binary packages to a remote.</p>
+<p>If no remote is specified, the first configured remote (by default conan-center, use
+‘conan remote list’ to list the remotes) will be used.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>positional arguments:
-  pattern_or_reference  Pattern or package recipe reference, e.g.,
-                        &#39;MyPackage/1.2@user/channel&#39;, &#39;boost/*&#39;
+  pattern_or_reference  Pattern, recipe reference or package reference e.g.,
+                        &#39;boost/*&#39;, &#39;MyPackage/1.2@user/channel&#39;, &#39;MyPackage/1.
+                        2@user/channel:af7901d8bdfde621d086181aa1c495c25a17b13
+                        7&#39;
 
 optional arguments:
   -h, --help            show this help message and exit
   -p PACKAGE, --package PACKAGE
-                        package ID to upload
+                        Package ID [DEPRECATED: use full reference instead]
   -q QUERY, --query QUERY
                         Only upload packages matching a specific query.
                         Packages query: &#39;os=Windows AND (arch=x86 OR
@@ -261,7 +263,7 @@ optional arguments:
                         before upload
   -c, --confirm         Upload all matching recipes without confirmation
   --retry RETRY         In case of fail retries to upload again the specified
-                        times. Defaulted to 2
+                        times.
   --retry-wait RETRY_WAIT
                         Waits specified seconds before retry again
   -no [{all,recipe}], --no-overwrite [{all,recipe}]
@@ -274,6 +276,10 @@ optional arguments:
 <p><strong>Examples</strong>:</p>
 <p>Uploads a package recipe (<em>conanfile.py</em> and the exported files):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan upload OpenCV/1.4.0@lasote/stable
+</pre></div>
+</div>
+<p>Uploads a package recipe and a single binary package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan upload OpenCV/1.4.0@lasote/stable:d50a0d523d98c15bb147b18fa7d203887c38be8b
 </pre></div>
 </div>
 <p>Uploads a package recipe and all the generated binary packages to a specified remote:</p>
@@ -344,7 +350,7 @@ between upload attempts:</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.15
+      Version: 1.16
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -352,7 +358,11 @@ between upload attempts:</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.15</a></dd>
+            <dd><a href="/en/latest/index.html">1.16</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.15/index.html">1.15</a></dd>
           
         
           
@@ -418,7 +428,7 @@ between upload attempts:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.15.1',
+            VERSION:'1.16.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

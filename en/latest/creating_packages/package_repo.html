@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Recipe and Sources in the Same Repo &mdash; conan 1.15.1 documentation</title>
+  <title>Recipe and Sources in the Same Repo &mdash; conan 1.16.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.15.1 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.16.0 documentation" href="../index.html"/>
         <link rel="up" title="Creating Packages" href="../creating_packages.html"/>
         <link rel="next" title="Packaging Existing Binaries" href="existing_binaries.html"/>
         <link rel="prev" title="Recipe and Sources in a Different Repo" href="external_repo.html"/>
@@ -358,11 +358,12 @@ be valid too:</p>
 </div>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p class="last">While you are in the same computer (the same Conan cache), even when you have exported the recipe and
-Conan has captured the absolute url and commit, Conan will store the local folder where your source code lives.
-If you build your package locally, it will use the local repository (in the local folder) instead of the remote URL,
-even if the local directory contains uncommitted changes.
-This allows you to speed up the development of your packages when cloning from a local repository.</p>
+<p>When doing a <strong class="command">conan create</strong> of a recipe using <code class="docutils literal notranslate"><span class="pre">scm</span></code>, Conan will save the path to the local source repository. Every time the
+<strong class="command">conan create</strong> command is invoked, the sources will not be downloaded from the remote repository but copied from the local directory.</p>
+<p>This allows to build packages making changes to the source code without the need of committing them and pushing them to the remote
+repository. This convenient to speed up the development of your packages when cloning from a local repository.</p>
+<p class="last"><strong>Warning:</strong> This optimization can lead to non-reproducible packages if changes in the source code are not committed and the recipe is
+uploaded with its packages to a remote.</p>
 </div>
 </div>
 </div>
@@ -407,7 +408,7 @@ This allows you to speed up the development of your packages when cloning from a
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.15
+      Version: 1.16
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -415,7 +416,11 @@ This allows you to speed up the development of your packages when cloning from a
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.15</a></dd>
+            <dd><a href="/en/latest/index.html">1.16</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.15/index.html">1.15</a></dd>
           
         
           
@@ -481,7 +486,7 @@ This allows you to speed up the development of your packages when cloning from a
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.15.1',
+            VERSION:'1.16.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

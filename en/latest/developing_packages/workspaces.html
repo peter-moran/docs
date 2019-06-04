@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Workspaces &mdash; conan 1.15.1 documentation</title>
+  <title>Workspaces &mdash; conan 1.16.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.15.1 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.16.0 documentation" href="../index.html"/>
         <link rel="up" title="Developing packages" href="../developing_packages.html"/>
         <link rel="next" title="Package apps and devtools" href="../devtools.html"/>
         <link rel="prev" title="Packages in editable mode" href="editable_packages.html"/>
@@ -289,8 +289,25 @@ Here you can see the <em>CMakeLists.txt</em> used in this project:</p>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">root:</span> <span class="pre">chat/0.1&#64;user/testing</span></code> defines which is the consumer node of the graph, typically some kind of executable. You
-can provide a comma separated list of references. All the root nodes will be in the same dependency graph, leading to conflicts if they
+can provide a comma separated list of references, as a string, or a yaml list (abbreviated or full as yaml items). All the root nodes will be in the same dependency graph, leading to conflicts if they
 depend on different versions of the same library, as in any other Conan command.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">editables</span><span class="p">:</span>
+    <span class="nt">say/0.1@user/testing</span><span class="p">:</span>
+        <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">say</span>
+    <span class="nt">hello/0.1@user/testing</span><span class="p">:</span>
+        <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">hello</span>
+    <span class="nt">chat/0.1@user/testing</span><span class="p">:</span>
+        <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">chat</span>
+
+<span class="nt">root</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">chat/0.1@user/testing, say/0.1@user/testing</span>
+<span class="c1"># or</span>
+<span class="nt">root</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;HelloA/0.1@lasote/stable&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;HelloB/0.1@lasote/stable&quot;</span><span class="p p-Indicator">]</span>
+<span class="c1"># or</span>
+<span class="nt">root</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">HelloA/0.1@lasote/stable</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">HelloB/0.1@lasote/stable</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="single-configuration-build-environments">
 <h2>Single configuration build environments<a class="headerlink" href="#single-configuration-build-environments" title="Permalink to this headline">¶</a></h2>
@@ -388,7 +405,7 @@ you can switch between different configurations (like Debug/Release) directly in
 configurations built in different folders. Each one will contain its own <em>conanbuildinfo.cmake</em>. For Visual Studio that means that if
 we wanted to switch from Debug&lt;-&gt;Release, we should issue a new <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">workspace</span> <span class="pre">install</span></code> command with the right <code class="docutils literal notranslate"><span class="pre">-s</span> <span class="pre">build_type</span></code> and
 do a clean build, in order to get the right dependencies.</p>
-<p>Conan has the <a class="reference internal" href="../integrations/cmake/cmake_multi_generator.html#cmake-multi"><span class="std std-ref">cmake_multi generator</span></a> generator, that allows this direct switch of Debug/Release configuration in the IDE. The <em>conanfile.py</em>
+<p>Conan has the <a class="reference internal" href="../integrations/build_system/cmake/cmake_multi_generator.html#cmake-multi"><span class="std std-ref">cmake_multi generator</span></a> generator, that allows this direct switch of Debug/Release configuration in the IDE. The <em>conanfile.py</em>
 recipes they have defined the <code class="docutils literal notranslate"><span class="pre">cmake</span></code> generator, so the first step is to override that in our <em>conanws_vs.yml</em> file:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">editables</span><span class="p">:</span>
 <span class="nt">say/0.1@user/testing</span><span class="p">:</span>
@@ -515,7 +532,7 @@ and using [workspaces] prefix in the issue title.</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.15
+      Version: 1.16
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -523,7 +540,11 @@ and using [workspaces] prefix in the issue title.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.15</a></dd>
+            <dd><a href="/en/latest/index.html">1.16</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.15/index.html">1.15</a></dd>
           
         
           
@@ -589,7 +610,7 @@ and using [workspaces] prefix in the issue title.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.15.1',
+            VERSION:'1.16.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

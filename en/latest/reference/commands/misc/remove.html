@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan remove &mdash; conan 1.15.1 documentation</title>
+  <title>conan remove &mdash; conan 1.16.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.15.1 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.16.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan alias" href="alias.html"/>
         <link rel="prev" title="conan download" href="download.html"/>
@@ -238,13 +238,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                <span class="o">[</span>pattern_or_reference<span class="o">]</span>
 </pre></div>
 </div>
-<p>Removes packages or binaries matching pattern from local cache or remote. It
-can also be used to remove temporary source or build folders in the local
-conan cache. If no remote is specified, the removal will be done by default in
-the local conan cache.</p>
+<p>Removes packages or binaries matching pattern from local cache or remote.</p>
+<p>It can also be used to remove temporary source or build folders in the
+local conan cache. If no remote is specified, the removal will be done
+by default in the local conan cache.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>positional arguments:
-  pattern_or_reference  Pattern or package recipe reference, e.g.,
-                        &#39;MyPackage/1.2@user/channel&#39;, &#39;boost/*&#39;
+  pattern_or_reference  Pattern or package recipe reference, e.g., &#39;boost/*&#39;,
+                        &#39;MyPackage/1.2@user/channel&#39;
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -293,13 +293,24 @@ requesting confirmation:</p>
 </div>
 </li>
 </ul>
-<ul class="simple" id="conan-remove-system-reqs">
-<li>Remove system requirements installation registry for the package name referred globally for all package ids:</li>
-</ul>
+<ul id="conan-remove-system-reqs">
+<li><p class="first">Remove system requirements installation registry for the package name referred globally for all package ids:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan remove --system-reqs package/version@user/channel
 </pre></div>
 </div>
 <p>This command does not remove the system installed packages, but only the Conan lock to indicate they were installed.</p>
+</li>
+<li><p class="first">Remove system requirements installation registry for all packages named <code class="docutils literal notranslate"><span class="pre">package</span></code> via a wildcard</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan remove --system-reqs <span class="s1">&#39;package/*&#39;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Remove system requirements installation registry for all packages via a wildcard</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan remove --system-reqs <span class="s1">&#39;*&#39;</span>
+</pre></div>
+</div>
+</li>
+</ul>
 </div>
 
 
@@ -342,7 +353,7 @@ requesting confirmation:</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.15
+      Version: 1.16
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -350,7 +361,11 @@ requesting confirmation:</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.15</a></dd>
+            <dd><a href="/en/latest/index.html">1.16</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.15/index.html">1.15</a></dd>
           
         
           
@@ -416,7 +431,7 @@ requesting confirmation:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.15.1',
+            VERSION:'1.16.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

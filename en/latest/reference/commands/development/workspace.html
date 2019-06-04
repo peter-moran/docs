@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan workspace &mdash; conan 1.15.1 documentation</title>
+  <title>conan workspace &mdash; conan 1.16.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.15.1 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.16.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan profile" href="../misc/profile.html"/>
         <link rel="prev" title="conan editable" href="editable.html"/>
@@ -230,7 +230,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan workspace <span class="o">[</span>-h<span class="o">]</span> <span class="o">{</span>install<span class="o">}</span> ...
 </pre></div>
 </div>
-<p>Command to manage workspaces</p>
+<p>Manages a workspace (a set of packages consumed from the user workspace that
+belongs to the same project).</p>
+<p>Use this command to manage a Conan workspace, use the subcommand ‘install’ to
+create the workspace from a file.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>positional arguments:
   {install}   sub-command help
     install   same as a &quot;conan install&quot; command but using the workspace data
@@ -238,7 +241,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               named &quot;conanws.yml&quot;
 
 optional arguments:
--h, --help  show this help message and exit
+  -h, --help  show this help message and exit
 </pre></div>
 </div>
 <div class="section" id="conan-workspace-install">
@@ -336,7 +339,7 @@ parameterizing the layout with <code class="docutils literal notranslate"><span 
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.15
+      Version: 1.16
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -344,7 +347,11 @@ parameterizing the layout with <code class="docutils literal notranslate"><span 
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.15</a></dd>
+            <dd><a href="/en/latest/index.html">1.16</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.15/index.html">1.15</a></dd>
           
         
           
@@ -410,7 +417,7 @@ parameterizing the layout with <code class="docutils literal notranslate"><span 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.15.1',
+            VERSION:'1.16.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

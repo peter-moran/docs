@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tools &mdash; conan 1.15.1 documentation</title>
+  <title>Tools &mdash; conan 1.16.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.15.1 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.16.0 documentation" href="../index.html"/>
         <link rel="up" title="Reference" href="../reference.html"/>
         <link rel="next" title="Configuration files" href="config_files.html"/>
         <link rel="prev" title="RunEnvironment" href="build_helpers/run_environment.html"/>
@@ -154,6 +154,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#tools-get-gnu-triplet">tools.get_gnu_triplet()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-run-in-windows-bash">tools.run_in_windows_bash()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-get-cased-path">tools.get_cased_path()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tools-detected-os">tools.detected_os()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-remove-from-path">tools.remove_from_path()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-unix-path">tools.unix_path()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-escape-windows-cmd">tools.escape_windows_cmd()</a></li>
@@ -184,6 +185,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#tools-latest-vs-version-installed">tools.latest_vs_version_installed()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-apple-dot-clean">tools.apple_dot_clean()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-version">tools.Version()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tools-to-android-abi">tools.to_android_abi()</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="config_files.html">Configuration files</a></li>
@@ -562,8 +564,10 @@ shell-style wildcard. See <a class="reference external" href="https://docs.pytho
 <li><strong>keep_permissions</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">False</span></code>): Propagates the parameter to <a class="reference internal" href="#tools-unzip"><span class="std std-ref">tools.unzip()</span></a>.</li>
 <li><strong>pattern</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Propagates the parameter to <a class="reference internal" href="#tools-unzip"><span class="std std-ref">tools.unzip()</span></a>.</li>
 <li><strong>verify</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): When False, disables https certificate validation.</li>
-<li><strong>retry</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">2</span></code>): Number of retries in case of failure.</li>
-<li><strong>retry_wait</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">5</span></code>): Seconds to wait between download attempts.</li>
+<li><strong>retry</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">2</span></code>): Number of retries in case of failure. Default is overriden by <code class="docutils literal notranslate"><span class="pre">general.retry</span></code>
+in the <em>conan.conf</em> file or an env variable <code class="docutils literal notranslate"><span class="pre">CONAN_RETRY</span></code>.</li>
+<li><strong>retry_wait</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">5</span></code>): Seconds to wait between download attempts. Default is overriden by <code class="docutils literal notranslate"><span class="pre">general.retry_wait</span></code>
+in the <em>conan.conf</em> file or an env variable <code class="docutils literal notranslate"><span class="pre">CONAN_RETRY_WAIT</span></code>.</li>
 <li><strong>overwrite</strong>: (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">False</span></code>): When <code class="docutils literal notranslate"><span class="pre">True</span></code> Conan will overwrite the destination file if it exists. Otherwise it
 will raise.</li>
 <li><strong>auth</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): A tuple of user, password can be passed to use HTTPBasic authentication. This is passed
@@ -640,8 +644,10 @@ downloads, but this can be optionally disabled.</p>
 <li><strong>verify</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>): When False, disables https certificate validation.</li>
 <li><strong>out</strong>: (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): An object with a <code class="docutils literal notranslate"><span class="pre">write()</span></code> method can be passed to get the output. <code class="docutils literal notranslate"><span class="pre">stdout</span></code> will use
 if not specified.</li>
-<li><strong>retry</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">2</span></code>): Number of retries in case of failure.</li>
-<li><strong>retry_wait</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">5</span></code>): Seconds to wait between download attempts.</li>
+<li><strong>retry</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">2</span></code>): Number of retries in case of failure. Default is overriden by <code class="docutils literal notranslate"><span class="pre">general.retry</span></code>
+in the <em>conan.conf</em> file or an env variable <code class="docutils literal notranslate"><span class="pre">CONAN_RETRY</span></code>.</li>
+<li><strong>retry_wait</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">5</span></code>): Seconds to wait between download attempts. Default is overriden by <code class="docutils literal notranslate"><span class="pre">general.retry_wait</span></code>
+in the <em>conan.conf</em> file or an env variable <code class="docutils literal notranslate"><span class="pre">CONAN_RETRY_WAIT</span></code>.</li>
 <li><strong>overwrite</strong>: (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">False</span></code>): When <code class="docutils literal notranslate"><span class="pre">True</span></code>, Conan will overwrite the destination file if exists. Otherwise it
 will raise an exception.</li>
 <li><strong>auth</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): A tuple of user and password to use HTTPBasic authentication. This is used directly in the
@@ -1034,8 +1040,15 @@ don’t want to create a fresh user session for running the command.</li>
 <p>This function converts a case-insensitive absolute path to a case-sensitive one. That is, with the real cased characters. Useful when using
 Windows subsystems where the file system is case-sensitive.</p>
 </div>
+<div class="section" id="tools-detected-os">
+<span id="id25"></span><h2>tools.detected_os()<a class="headerlink" href="#tools-detected-os" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">detected_os</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>It returns the recognized OS name e.g “Macos”, “Windows”. Otherwise it will return the value from <code class="docutils literal notranslate"><span class="pre">platform.system()</span></code>.</p>
+</div>
 <div class="section" id="tools-remove-from-path">
-<span id="id25"></span><h2>tools.remove_from_path()<a class="headerlink" href="#tools-remove-from-path" title="Permalink to this headline">¶</a></h2>
+<span id="id26"></span><h2>tools.remove_from_path()<a class="headerlink" href="#tools-remove-from-path" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">remove_from_path</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1049,7 +1062,7 @@ and will remove from the <code class="docutils literal notranslate"><span class=
 </div>
 </div>
 <div class="section" id="tools-unix-path">
-<span id="id26"></span><h2>tools.unix_path()<a class="headerlink" href="#tools-unix-path" title="Permalink to this headline">¶</a></h2>
+<span id="id27"></span><h2>tools.unix_path()<a class="headerlink" href="#tools-unix-path" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">unix_path</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">path_flavor</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1065,7 +1078,7 @@ and will remove from the <code class="docutils literal notranslate"><span class=
 </dl>
 </div>
 <div class="section" id="tools-escape-windows-cmd">
-<span id="id27"></span><h2>tools.escape_windows_cmd()<a class="headerlink" href="#tools-escape-windows-cmd" title="Permalink to this headline">¶</a></h2>
+<span id="id28"></span><h2>tools.escape_windows_cmd()<a class="headerlink" href="#tools-escape-windows-cmd" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">escape_windows_cmd</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1083,7 +1096,7 @@ and will remove from the <code class="docutils literal notranslate"><span class=
 </dl>
 </div>
 <div class="section" id="tools-sha1sum-sha256sum-md5sum">
-<span id="id28"></span><h2>tools.sha1sum(), sha256sum(), md5sum()<a class="headerlink" href="#tools-sha1sum-sha256sum-md5sum" title="Permalink to this headline">¶</a></h2>
+<span id="id29"></span><h2>tools.sha1sum(), sha256sum(), md5sum()<a class="headerlink" href="#tools-sha1sum-sha256sum-md5sum" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">def</span> <span class="n">md5sum</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">sha1sum</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">sha256sum</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
@@ -1105,7 +1118,7 @@ and will remove from the <code class="docutils literal notranslate"><span class=
 </dl>
 </div>
 <div class="section" id="tools-md5">
-<span id="id29"></span><h2>tools.md5()<a class="headerlink" href="#tools-md5" title="Permalink to this headline">¶</a></h2>
+<span id="id30"></span><h2>tools.md5()<a class="headerlink" href="#tools-md5" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">md5</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1124,7 +1137,7 @@ and will remove from the <code class="docutils literal notranslate"><span class=
 </dl>
 </div>
 <div class="section" id="tools-save">
-<span id="id30"></span><h2>tools.save()<a class="headerlink" href="#tools-save" title="Permalink to this headline">¶</a></h2>
+<span id="id31"></span><h2>tools.save()<a class="headerlink" href="#tools-save" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1145,7 +1158,7 @@ and will remove from the <code class="docutils literal notranslate"><span class=
 </dl>
 </div>
 <div class="section" id="tools-load">
-<span id="id31"></span><h2>tools.load()<a class="headerlink" href="#tools-load" title="Permalink to this headline">¶</a></h2>
+<span id="id32"></span><h2>tools.load()<a class="headerlink" href="#tools-load" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">binary</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1192,7 +1205,7 @@ directory already exists and <code class="docutils literal notranslate"><span cl
 </dl>
 </div>
 <div class="section" id="tools-which">
-<span id="id32"></span><h2>tools.which()<a class="headerlink" href="#tools-which" title="Permalink to this headline">¶</a></h2>
+<span id="id33"></span><h2>tools.which()<a class="headerlink" href="#tools-which" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">which</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1216,7 +1229,7 @@ directory already exists and <code class="docutils literal notranslate"><span cl
 </dl>
 </div>
 <div class="section" id="tools-unix2dos">
-<span id="id33"></span><h2>tools.unix2dos()<a class="headerlink" href="#tools-unix2dos" title="Permalink to this headline">¶</a></h2>
+<span id="id34"></span><h2>tools.unix2dos()<a class="headerlink" href="#tools-unix2dos" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">unix2dos</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1235,7 +1248,7 @@ directory already exists and <code class="docutils literal notranslate"><span cl
 </dl>
 </div>
 <div class="section" id="tools-dos2unix">
-<span id="id34"></span><h2>tools.dos2unix()<a class="headerlink" href="#tools-dos2unix" title="Permalink to this headline">¶</a></h2>
+<span id="id35"></span><h2>tools.dos2unix()<a class="headerlink" href="#tools-dos2unix" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dos2unix</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1279,7 +1292,7 @@ fails if the file does not exist.</p>
 </dl>
 </div>
 <div class="section" id="tools-relative-dirs">
-<span id="id35"></span><h2>tools.relative_dirs()<a class="headerlink" href="#tools-relative-dirs" title="Permalink to this headline">¶</a></h2>
+<span id="id36"></span><h2>tools.relative_dirs()<a class="headerlink" href="#tools-relative-dirs" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">relative_dirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1298,7 +1311,7 @@ fails if the file does not exist.</p>
 </dl>
 </div>
 <div class="section" id="tools-vswhere">
-<span id="id36"></span><h2>tools.vswhere()<a class="headerlink" href="#tools-vswhere" title="Permalink to this headline">¶</a></h2>
+<span id="id37"></span><h2>tools.vswhere()<a class="headerlink" href="#tools-vswhere" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">vswhere</span><span class="p">(</span><span class="n">all_</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">prerelease</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">products</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
             <span class="n">latest</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">legacy</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">property_</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">nologo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
@@ -1331,7 +1344,7 @@ object and property names. Example: <code class="docutils literal notranslate"><
 </dl>
 </div>
 <div class="section" id="tools-vs-comntools">
-<span id="id37"></span><h2>tools.vs_comntools()<a class="headerlink" href="#tools-vs-comntools" title="Permalink to this headline">¶</a></h2>
+<span id="id38"></span><h2>tools.vs_comntools()<a class="headerlink" href="#tools-vs-comntools" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">vs_comntools</span><span class="p">(</span><span class="n">compiler_version</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1375,7 +1388,7 @@ path only for that Visual type and version, otherwise <code class="docutils lite
 </dl>
 </div>
 <div class="section" id="tools-replace-prefix-in-pc-file">
-<span id="id38"></span><h2>tools.replace_prefix_in_pc_file()<a class="headerlink" href="#tools-replace-prefix-in-pc-file" title="Permalink to this headline">¶</a></h2>
+<span id="id39"></span><h2>tools.replace_prefix_in_pc_file()<a class="headerlink" href="#tools-replace-prefix-in-pc-file" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">replace_prefix_in_pc_file</span><span class="p">(</span><span class="n">pc_file</span><span class="p">,</span> <span class="n">new_prefix</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1396,11 +1409,11 @@ path only for that Visual type and version, otherwise <code class="docutils lite
 </dl>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">Check section <a class="reference internal" href="../integrations/pkg_config_pc_files.html#pc-files"><span class="std std-ref">pkg-config and .pc files</span></a> to know more.</p>
+<p class="last">Check section <a class="reference internal" href="../integrations/build_system/pkg_config_pc_files.html#pc-files"><span class="std std-ref">pkg-config and .pc files</span></a> to know more.</p>
 </div>
 </div>
 <div class="section" id="tools-collect-libs">
-<span id="id39"></span><h2>tools.collect_libs()<a class="headerlink" href="#tools-collect-libs" title="Permalink to this headline">¶</a></h2>
+<span id="id40"></span><h2>tools.collect_libs()<a class="headerlink" href="#tools-collect-libs" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">collect_libs</span><span class="p">(</span><span class="n">conanfile</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1431,7 +1444,7 @@ inter-dependent, then <code class="docutils literal notranslate"><span class="pr
 </div>
 </div>
 <div class="section" id="tools-pkgconfig">
-<span id="id40"></span><h2>tools.PkgConfig()<a class="headerlink" href="#tools-pkgconfig" title="Permalink to this headline">¶</a></h2>
+<span id="id41"></span><h2>tools.PkgConfig()<a class="headerlink" href="#tools-pkgconfig" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PkgConfig</span><span class="p">(</span><span class="n">library</span><span class="p">,</span> <span class="n">pkg_config_executable</span><span class="o">=</span><span class="s2">&quot;pkg-config&quot;</span><span class="p">,</span> <span class="n">static</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">msvc_syntax</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">variables</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">print_errors</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1509,7 +1522,7 @@ command line).</li>
 </table>
 </div>
 <div class="section" id="tools-git">
-<span id="id41"></span><h2>tools.Git()<a class="headerlink" href="#tools-git" title="Permalink to this headline">¶</a></h2>
+<span id="id42"></span><h2>tools.Git()<a class="headerlink" href="#tools-git" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
@@ -1557,7 +1570,7 @@ will be used.</li>
 </dl>
 </div>
 <div class="section" id="tools-svn">
-<span id="id42"></span><h2>tools.SVN()<a class="headerlink" href="#tools-svn" title="Permalink to this headline">¶</a></h2>
+<span id="id43"></span><h2>tools.SVN()<a class="headerlink" href="#tools-svn" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
@@ -1613,7 +1626,7 @@ depend on the root of the working copy that has been checked out.</p>
 </div>
 </div>
 <div class="section" id="tools-is-apple-os">
-<span id="id44"></span><h2>tools.is_apple_os()<a class="headerlink" href="#tools-is-apple-os" title="Permalink to this headline">¶</a></h2>
+<span id="id45"></span><h2>tools.is_apple_os()<a class="headerlink" href="#tools-is-apple-os" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">is_apple_os</span><span class="p">(</span><span class="n">os_</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1627,7 +1640,7 @@ depend on the root of the working copy that has been checked out.</p>
 </dl>
 </div>
 <div class="section" id="tools-to-apple-arch">
-<span id="id45"></span><h2>tools.to_apple_arch()<a class="headerlink" href="#tools-to-apple-arch" title="Permalink to this headline">¶</a></h2>
+<span id="id46"></span><h2>tools.to_apple_arch()<a class="headerlink" href="#tools-to-apple-arch" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_apple_arch</span><span class="p">(</span><span class="n">arch</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1641,7 +1654,7 @@ depend on the root of the working copy that has been checked out.</p>
 </dl>
 </div>
 <div class="section" id="tools-apple-sdk-name">
-<span id="id46"></span><h2>tools.apple_sdk_name()<a class="headerlink" href="#tools-apple-sdk-name" title="Permalink to this headline">¶</a></h2>
+<span id="id47"></span><h2>tools.apple_sdk_name()<a class="headerlink" href="#tools-apple-sdk-name" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">apple_sdk_name</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1655,7 +1668,7 @@ depend on the root of the working copy that has been checked out.</p>
 </dl>
 </div>
 <div class="section" id="tools-apple-deployment-target-env">
-<span id="id47"></span><h2>tools.apple_deployment_target_env()<a class="headerlink" href="#tools-apple-deployment-target-env" title="Permalink to this headline">¶</a></h2>
+<span id="id48"></span><h2>tools.apple_deployment_target_env()<a class="headerlink" href="#tools-apple-deployment-target-env" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">apple_deployment_target_env</span><span class="p">(</span><span class="n">os_</span><span class="p">,</span> <span class="n">os_version</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1671,7 +1684,7 @@ depend on the root of the working copy that has been checked out.</p>
 </dl>
 </div>
 <div class="section" id="tools-apple-deployment-target-flag">
-<span id="id48"></span><h2>tools.apple_deployment_target_flag()<a class="headerlink" href="#tools-apple-deployment-target-flag" title="Permalink to this headline">¶</a></h2>
+<span id="id49"></span><h2>tools.apple_deployment_target_flag()<a class="headerlink" href="#tools-apple-deployment-target-flag" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">apple_deployment_target_flag</span><span class="p">(</span><span class="n">os_</span><span class="p">,</span> <span class="n">os_version</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1686,7 +1699,7 @@ depend on the root of the working copy that has been checked out.</p>
 </dl>
 </div>
 <div class="section" id="tools-xcrun">
-<span id="id49"></span><h2>tools.XCRun()<a class="headerlink" href="#tools-xcrun" title="Permalink to this headline">¶</a></h2>
+<span id="id50"></span><h2>tools.XCRun()<a class="headerlink" href="#tools-xcrun" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">XCRun</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">settings</span><span class="p">,</span> <span class="n">sdk</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -1710,7 +1723,7 @@ depend on the root of the working copy that has been checked out.</p>
 </dl>
 </div>
 <div class="section" id="tools-latest-vs-version-installed">
-<span id="id50"></span><h2>tools.latest_vs_version_installed()<a class="headerlink" href="#tools-latest-vs-version-installed" title="Permalink to this headline">¶</a></h2>
+<span id="id51"></span><h2>tools.latest_vs_version_installed()<a class="headerlink" href="#tools-latest-vs-version-installed" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">latest_vs_version_installed</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1718,7 +1731,7 @@ depend on the root of the working copy that has been checked out.</p>
 it returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </div>
 <div class="section" id="tools-apple-dot-clean">
-<span id="id51"></span><h2>tools.apple_dot_clean()<a class="headerlink" href="#tools-apple-dot-clean" title="Permalink to this headline">¶</a></h2>
+<span id="id52"></span><h2>tools.apple_dot_clean()<a class="headerlink" href="#tools-apple-dot-clean" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">apple_dot_clean</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1736,7 +1749,7 @@ if <code class="docutils literal notranslate"><span class="pre">file.txt</span><
 </dl>
 </div>
 <div class="section" id="tools-version">
-<span id="id52"></span><h2>tools.Version()<a class="headerlink" href="#tools-version" title="Permalink to this headline">¶</a></h2>
+<span id="id53"></span><h2>tools.Version()<a class="headerlink" href="#tools-version" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">tools</span>
 
 <span class="n">v</span> <span class="o">=</span> <span class="n">tools</span><span class="o">.</span><span class="n">Version</span><span class="p">(</span><span class="s2">&quot;1.2.3-dev23&quot;</span><span class="p">)</span>
@@ -1757,6 +1770,20 @@ string, the constructor will raise if the string is not a valid loose semver.</p
 <li><strong>prerelease</strong>: component <code class="docutils literal notranslate"><span class="pre">prerelease</span></code> of semver version (defaults to <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>)</li>
 <li><strong>build</strong>: component <code class="docutils literal notranslate"><span class="pre">build</span></code> of semver version (defaults to <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>). Take into account
 that <code class="docutils literal notranslate"><span class="pre">build</span></code> component doesn’t affect precedence between versions.</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="tools-to-android-abi">
+<span id="id54"></span><h2>tools.to_android_abi()<a class="headerlink" href="#tools-to-android-abi" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_android_abi</span><span class="p">(</span><span class="n">arch</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Converts Conan style architecture into Android NDK style architecture.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li><strong>arch</strong> (Required): Arch to perform the conversion. Usually this would be <code class="docutils literal notranslate"><span class="pre">self.settings.arch</span></code>.</li>
 </ul>
 </dd>
 </dl>
@@ -1803,7 +1830,7 @@ that <code class="docutils literal notranslate"><span class="pre">build</span></
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.15
+      Version: 1.16
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -1811,7 +1838,11 @@ that <code class="docutils literal notranslate"><span class="pre">build</span></
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.15</a></dd>
+            <dd><a href="/en/latest/index.html">1.16</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.15/index.html">1.15</a></dd>
           
         
           
@@ -1877,7 +1908,7 @@ that <code class="docutils literal notranslate"><span class="pre">build</span></
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.15.1',
+            VERSION:'1.16.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

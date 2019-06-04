@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan test &mdash; conan 1.15.1 documentation</title>
+  <title>conan test &mdash; conan 1.16.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.15.1 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.16.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan source" href="../development/source.html"/>
         <link rel="prev" title="conan upload" href="upload.html"/>
@@ -233,12 +233,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
              path reference
 </pre></div>
 </div>
-<p>Test a package consuming it from a conanfile.py with a test() method. This
-command installs the conanfile dependencies (including the tested package),
-calls a ‘conan build’ to build test apps and finally executes the test()
-method. The testing recipe does not require name or version, neither
-definition of package() or package_info() methods. The package to be tested
-must exist in the local cache or in any configured remote.</p>
+<p>Tests a package consuming it from a conanfile.py with a test() method.</p>
+<p>This command installs the conanfile dependencies (including the tested
+package), calls a ‘conan build’ to build test apps and finally executes
+the test() method. The testing recipe does not require name or version,
+neither definition of package() or package_info() methods. The package
+to be tested must exist in the local cache or in any configured remote.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>positional arguments:
   path                  Path to the &quot;testing&quot; folder containing a conanfile.py
                         or to a recipe file with test() methode.g. conan
@@ -255,16 +255,21 @@ optional arguments:
                         binary packages. --build=never Never build, use binary
                         packages or fail if a binary package is not found.
                         --build=missing Build from code if a binary package is
-                        not found. --build=outdated Build from code if the
-                        binary is not built with the current recipe or when
-                        missing binary package. --build=[pattern] Build always
-                        these packages from source, but never build the
+                        not found. --build=cascade Will build from code all
+                        the nodes with some dependency being built (for any
+                        reason). Can be used together with any other build
+                        policy. Useful to make sure that any new change
+                        introduced in a dependency is incorporated by building
+                        again the package. --build=outdated Build from code if
+                        the binary is not built with the current recipe or
+                        when missing binary package. --build=[pattern] Build
+                        always these packages from source, but never build the
                         others. Allows multiple --build parameters. &#39;pattern&#39;
-                        is a fnmatch file pattern of a package name. Default
-                        behavior: If you don&#39;t specify anything, it will be
-                        similar to &#39;--build=never&#39;, but package recipes can
-                        override it with their &#39;build_policy&#39; attribute in the
-                        conanfile.py.
+                        is a fnmatch file pattern of a package reference.
+                        Default behavior: If you don&#39;t specify anything, it
+                        will be similar to &#39;--build=never&#39;, but package
+                        recipes can override it with their &#39;build_policy&#39;
+                        attribute in the conanfile.py.
   -e ENV, --env ENV     Environment variables that will be set during the
                         package build, -e CXX=/usr/bin/clang++
   -o OPTIONS, --options OPTIONS
@@ -335,7 +340,7 @@ package.</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.15
+      Version: 1.16
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -343,7 +348,11 @@ package.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.15</a></dd>
+            <dd><a href="/en/latest/index.html">1.16</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.15/index.html">1.15</a></dd>
           
         
           
@@ -409,7 +418,7 @@ package.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.15.1',
+            VERSION:'1.16.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

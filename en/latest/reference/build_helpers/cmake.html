@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CMake &mdash; conan 1.15.1 documentation</title>
+  <title>CMake &mdash; conan 1.16.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.15.1 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.16.0 documentation" href="../../index.html"/>
         <link rel="up" title="Build helpers" href="../build_helpers.html"/>
         <link rel="next" title="AutoToolsBuildEnvironment (configure/make)" href="autotools.html"/>
         <link rel="prev" title="Build helpers" href="../build_helpers.html"/>
@@ -269,7 +269,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conanfile</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">cmake_system_name</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                  <span class="n">parallel</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">build_type</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">toolset</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">make_program</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                 <span class="n">set_cmake_flags</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">msbuild_verbosity</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">cmake_program</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">set_cmake_flags</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">msbuild_verbosity</span><span class="o">=</span><span class="s1">&#39;minimal&#39;</span><span class="p">,</span> <span class="n">cmake_program</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                  <span class="n">generator_platform</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -286,7 +286,9 @@ also make the <code class="docutils literal notranslate"><span class="pre">CMAKE
 <li><strong>toolset</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Specify a toolset for Visual Studio.</li>
 <li><strong>make_program</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Indicate path to <code class="docutils literal notranslate"><span class="pre">make</span></code>.</li>
 <li><strong>set_cmake_flags</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Whether or not to set CMake flags like <code class="docutils literal notranslate"><span class="pre">CMAKE_CXX_FLAGS</span></code>, <code class="docutils literal notranslate"><span class="pre">CMAKE_C_FLAGS</span></code>, etc.</li>
-<li><strong>msbuild_verbosity</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): verbosity level for MSBuild (in case of Visual Studio generator).</li>
+<li><strong>msbuild_verbosity</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">minimal</span></code>): verbosity level for
+MSBuild (in case of Visual Studio generator). Set this parameter to <code class="docutils literal notranslate"><span class="pre">None</span></code> to avoid
+using it in the command line.</li>
 <li><strong>cmake_program</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Path to the custom cmake executable.</li>
 <li><strong>generator_platform</strong> (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): Generator platform name or none to autodetect (-A cmake option).</li>
 </ul>
@@ -454,6 +456,12 @@ For <code class="docutils literal notranslate"><span class="pre">Unix</span> <sp
 </tr>
 <tr class="row-odd"><td>CONAN_EXPORTED</td>
 <td>Defined when CMake is called using Conan CMake helper</td>
+</tr>
+<tr class="row-even"><td>ANDROID_ABI</td>
+<td>Just alias for CMAKE_ANDROID_ARCH_ABI</td>
+</tr>
+<tr class="row-odd"><td>ANDROID_NDK</td>
+<td>Defined when one of ANDROID_NDK_ROOT or ANDROID_NDK_HOME environment variables presented</td>
 </tr>
 </tbody>
 </table>
@@ -741,7 +749,7 @@ For Unix systems it generates <code class="docutils literal notranslate"><span c
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.15
+      Version: 1.16
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -749,7 +757,11 @@ For Unix systems it generates <code class="docutils literal notranslate"><span c
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.15</a></dd>
+            <dd><a href="/en/latest/index.html">1.16</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.15/index.html">1.15</a></dd>
           
         
           
@@ -815,7 +827,7 @@ For Unix systems it generates <code class="docutils literal notranslate"><span c
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.15.1',
+            VERSION:'1.16.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Integrations &mdash; conan 1.15.1 documentation</title>
+  <title>Integrations &mdash; conan 1.16.0 documentation</title>
   
 
   
@@ -42,8 +42,8 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="conan 1.15.1 documentation" href="index.html"/>
-        <link rel="next" title="CMake" href="integrations/cmake.html"/>
+    <link rel="top" title="conan 1.16.0 documentation" href="index.html"/>
+        <link rel="next" title="Build systems" href="integrations/build_system.html"/>
         <link rel="prev" title="Hooks" href="extending/hooks.html"/>
 
  <!-- Google Tag Manager -->
@@ -117,35 +117,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="systems_cross_building.html">Systems and cross building</a></li>
 <li class="toctree-l1"><a class="reference internal" href="extending.html">Extending Conan</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Integrations</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="integrations/cmake.html"> CMake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/makefile.html">Autotools: configure/make</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/visual_studio.html"> Visual Studio</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/xcode.html">  Apple/Xcode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/gcc.html">Compilers on command line</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/android_studio.html"> Android Studio</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/clion.html"> CLion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/ninja.html">Ninja, NMake, Borland</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/pkg_config_pc_files.html"><strong class="command">pkg-config</strong> and <em>.pc</em> files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/boost_build.html"> Boost Build</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/b2.html"> B2 (Boost Build)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/qmake.html">QMake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/premake.html"> Premake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/make.html">Make</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/qbs.html">qbs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/meson.html"> Meson Build</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/scons.html"> SCons</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/docker.html"> Docker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/git.html"> Git</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/jenkins.html"> Jenkins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/travisci.html"> Travis CI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/appveyor.html"> Appveyor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/gitlab.html"> Gitlab</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/circleci.html"> Circle CI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/youcompleteme.html">YouCompleteMe (vim)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/other.html">Custom integrations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/pylint.html">Linting conanfile.py</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/azure_devops.html"> Microsoft’s Azure DevOps (TFS, VSTS)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/emscripten.html"> Emscripten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/build_system.html">Build systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/ides.html">IDEs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/ci.html">CI Platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/cross_platform.html">Other Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/vcs.html">Version Control System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/custom.html">Custom integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/linting.html">Linting</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="howtos.html">Howtos</a></li>
@@ -230,109 +208,62 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 packages can be consumed, created, and continuously deployed/tested with each, as applicable.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="integrations/cmake.html"> CMake</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="integrations/cmake/cmake_generator.html"><code class="docutils literal notranslate"><span class="pre">cmake</span></code> generator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/cmake/cmake_multi_generator.html"><code class="docutils literal notranslate"><span class="pre">cmake_multi</span></code> generator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/cmake/cmake_paths_generator.html"><code class="docutils literal notranslate"><span class="pre">cmake_paths</span></code> generator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/cmake/cmake_find_package_generator.html"><code class="docutils literal notranslate"><span class="pre">cmake_find_package</span></code> generator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/cmake/cmake_find_package_multi_generator.html"><code class="docutils literal notranslate"><span class="pre">cmake_find_package_multi</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/cmake/build_automation.html">Build automation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/cmake/find_packages.html">Find Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integrations/build_system.html">Build systems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="integrations/build_system/cmake.html"> CMake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/build_system/msbuild.html"> MSBuild (Visual Studio)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/build_system/makefile.html">Autotools: configure/make</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/build_system/ninja.html">Ninja, NMake, Borland</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/build_system/pkg_config_pc_files.html"><strong class="command">pkg-config</strong> and <em>.pc</em> files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/build_system/boost_build.html"> Boost Build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/build_system/b2.html"> B2 (Boost Build)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/build_system/qmake.html">QMake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/build_system/premake.html"> Premake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/build_system/make.html">Make</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/build_system/qbs.html">qbs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/build_system/meson.html"> Meson Build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/build_system/scons.html"> SCons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/build_system/gcc.html">Compilers on command line</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/makefile.html">Autotools: configure/make</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/visual_studio.html"> Visual Studio</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="integrations/visual_studio.html#with-cmake">With CMake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/visual_studio.html#with-visual-studio-generator">With <em>visual_studio</em> generator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/visual_studio.html#calling-visual-studio-compiler">Calling Visual Studio compiler</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/visual_studio.html#build-an-existing-visual-studio-project">Build an existing Visual Studio project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/visual_studio.html#toolsets">Toolsets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integrations/ides.html">IDEs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="integrations/ide/visual_studio.html"> Visual Studio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/ide/clion.html"> CLion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/ide/xcode.html">  Apple/Xcode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/ide/android_studio.html"> Android Studio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/ide/youcompleteme.html">YouCompleteMe (vim)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/xcode.html">  Apple/Xcode</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="integrations/xcode.html#with-cmake">With CMake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/xcode.html#with-the-xcode-generator">With the <em>xcode</em> generator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integrations/ci.html">CI Platforms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="integrations/ci/jenkins.html"> Jenkins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/ci/travisci.html"> Travis CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/ci/appveyor.html"> Appveyor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/ci/gitlab.html"> Gitlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/ci/circleci.html"> Circle CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/ci/azure_devops.html"> Microsoft’s Azure DevOps (TFS, VSTS)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/gcc.html">Compilers on command line</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/android_studio.html"> Android Studio</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/clion.html"> CLion</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="integrations/clion.html#using-packages-in-a-clion-project">Using packages in a CLion project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/clion.html#creating-conan-packages-in-a-clion-project">Creating Conan packages in a CLion project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integrations/cross_platform.html">Other Systems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="integrations/cross_platform/docker.html"> Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/cross_platform/emscripten.html"> Emscripten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/cross_platform/qnx_neutrino.html"> QNX Neutrino</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/ninja.html">Ninja, NMake, Borland</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/pkg_config_pc_files.html"><strong class="command">pkg-config</strong> and <em>.pc</em> files</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="integrations/pkg_config_pc_files.html#approach-1-import-and-patch-the-prefix-in-the-pc-files">Approach 1: Import and patch the prefix in the <em>.pc</em> files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/pkg_config_pc_files.html#approach-2-prepare-and-package-pc-files-before-packaging-them">Approach 2: Prepare and package <em>.pc</em> files before packaging them</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/pkg_config_pc_files.html#approach-3-use-define-prefix">Approach 3: Use <strong class="command">--define-prefix</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/pkg_config_pc_files.html#approach-4-use-pkg-config-package-variable">Approach 4: Use <code class="docutils literal notranslate"><span class="pre">PKG_CONFIG_$PACKAGE_$VARIABLE</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/pkg_config_pc_files.html#approach-5-use-the-pkg-config-generator">Approach 5: Use the <code class="docutils literal notranslate"><span class="pre">pkg_config</span></code> generator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integrations/vcs.html">Version Control System</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="integrations/vcs/git.html"> Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/vcs/svn.html"> SVN</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/boost_build.html"> Boost Build</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/b2.html"> B2 (Boost Build)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/qmake.html">QMake</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="integrations/qmake.html#example">Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integrations/custom.html">Custom integrations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="integrations/custom.html#use-the-json-generator">Use the JSON generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/custom.html#use-the-text-generator">Use the text generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/custom.html#use-the-conan-data-model-in-a-conanfile-py">Use the Conan data model (in a <em>conanfile.py</em>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/custom.html#create-your-own-generator">Create your own generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/custom.html#extending-conan">Extending Conan</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/premake.html"> Premake</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="integrations/premake.html#example">Example</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/make.html">Make</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="integrations/make.html#example">Example</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/qbs.html">qbs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/meson.html"> Meson Build</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/scons.html"> SCons</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/docker.html"> Docker</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/git.html"> Git</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="integrations/git.html#temporary-files">Temporary files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/git.html#package-creators">Package creators</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/jenkins.html"> Jenkins</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="integrations/jenkins.html#artifactory-and-jenkins-integration">Artifactory and Jenkins integration</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/travisci.html"> Travis CI</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="integrations/travisci.html#installing-dependencies-and-building-your-project">Installing dependencies and building your project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/travisci.html#creating-testing-and-uploading-conan-binary-packages">Creating, testing and uploading Conan binary packages</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/appveyor.html"> Appveyor</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="integrations/appveyor.html#building-and-testing-your-project">Building and testing your project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/appveyor.html#creating-testing-and-uploading-conan-binary-packages">Creating, testing and uploading Conan binary packages</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/gitlab.html"> Gitlab</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="integrations/gitlab.html#building-and-testing-your-project">Building and testing your project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/gitlab.html#creating-testing-and-uploading-conan-binary-packages">Creating, testing and uploading Conan binary packages</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/circleci.html"> Circle CI</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="integrations/circleci.html#building-and-testing-your-project">Building and testing your project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/circleci.html#creating-testing-and-uploading-conan-package-binaries">Creating, testing and uploading Conan package binaries</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/youcompleteme.html">YouCompleteMe (vim)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/other.html">Custom integrations</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="integrations/other.html#use-the-json-generator">Use the JSON generator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/other.html#use-the-text-generator">Use the text generator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/other.html#use-the-conan-data-model-in-a-conanfile-py">Use the Conan data model (in a <em>conanfile.py</em>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/other.html#create-your-own-generator">Create your own generator</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/pylint.html">Linting conanfile.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/azure_devops.html"> Microsoft’s Azure DevOps (TFS, VSTS)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="integrations/azure_devops.html#configuring-devops-azure-to-use-artifactory-with-conan">Configuring DevOps Azure to use Artifactory with Conan</a></li>
-<li class="toctree-l2"><a class="reference internal" href="integrations/azure_devops.html#steps-to-follow">Steps to follow</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="integrations/emscripten.html"> Emscripten</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="integrations/emscripten.html#running-the-code-inside-the-browser">Running the code inside the browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integrations/linting.html">Linting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="integrations/linting/recipe.html">Linting the recipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrations/linting/binary.html">Linting binary packages</a></li>
 </ul>
 </li>
 </ul>
@@ -349,7 +280,7 @@ packages can be consumed, created, and continuously deployed/tested with each, a
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="integrations/cmake.html" class="btn btn-neutral float-right" title="CMake" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="integrations/build_system.html" class="btn btn-neutral float-right" title="Build systems" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="extending/hooks.html" class="btn btn-neutral" title="Hooks" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -379,7 +310,7 @@ packages can be consumed, created, and continuously deployed/tested with each, a
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.15
+      Version: 1.16
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -387,7 +318,11 @@ packages can be consumed, created, and continuously deployed/tested with each, a
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.15</a></dd>
+            <dd><a href="/en/latest/index.html">1.16</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.15/index.html">1.15</a></dd>
           
         
           
@@ -453,7 +388,7 @@ packages can be consumed, created, and continuously deployed/tested with each, a
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.15.1',
+            VERSION:'1.16.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

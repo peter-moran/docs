@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan new &mdash; conan 1.15.1 documentation</title>
+  <title>conan new &mdash; conan 1.16.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.15.1 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.16.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan upload" href="upload.html"/>
         <link rel="prev" title="conan export-pkg" href="export-pkg.html"/>
@@ -228,9 +228,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="conan-new">
 <span id="id1"></span><h1>conan new<a class="headerlink" href="#conan-new" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan new <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-t<span class="o">]</span> <span class="o">[</span>-i<span class="o">]</span> <span class="o">[</span>-c<span class="o">]</span> <span class="o">[</span>-s<span class="o">]</span> <span class="o">[</span>-b<span class="o">]</span> <span class="o">[</span>-cis<span class="o">]</span> <span class="o">[</span>-cilg<span class="o">]</span> <span class="o">[</span>-cilc<span class="o">]</span> <span class="o">[</span>-cio<span class="o">]</span>
-            <span class="o">[</span>-ciw<span class="o">]</span> <span class="o">[</span>-ciglg<span class="o">]</span> <span class="o">[</span>-ciglc<span class="o">]</span> <span class="o">[</span>-ciccg<span class="o">]</span> <span class="o">[</span>-ciccc<span class="o">]</span> <span class="o">[</span>-cicco<span class="o">]</span> <span class="o">[</span>-gi<span class="o">]</span>
-            <span class="o">[</span>-ciu CI_UPLOAD_URL<span class="o">]</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan new <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-t<span class="o">]</span> <span class="o">[</span>-i<span class="o">]</span> <span class="o">[</span>-c<span class="o">]</span> <span class="o">[</span>-s<span class="o">]</span> <span class="o">[</span>-b<span class="o">]</span> <span class="o">[</span>-f FILE<span class="o">]</span> <span class="o">[</span>-cis<span class="o">]</span> <span class="o">[</span>-cilg<span class="o">]</span>
+            <span class="o">[</span>-cilc<span class="o">]</span> <span class="o">[</span>-cio<span class="o">]</span> <span class="o">[</span>-ciw<span class="o">]</span> <span class="o">[</span>-ciglg<span class="o">]</span> <span class="o">[</span>-ciglc<span class="o">]</span> <span class="o">[</span>-ciccg<span class="o">]</span> <span class="o">[</span>-ciccc<span class="o">]</span>
+            <span class="o">[</span>-cicco<span class="o">]</span> <span class="o">[</span>-gi<span class="o">]</span> <span class="o">[</span>-ciu CI_UPLOAD_URL<span class="o">]</span>
             name
 </pre></div>
 </div>
@@ -253,6 +253,9 @@ optional arguments:
   -b, --bare            Create the minimum package recipe, without build()
                         method. Useful in combination with &quot;export-pkg&quot;
                         command
+  -m TEMPLATE, --template TEMPLATE
+                        Use the given template from the local cache for
+                        conanfile.py
   -cis, --ci-shared     Package will have a &quot;shared&quot; option to be used in CI
   -cilg, --ci-travis-gcc
                         Generate travis-ci files for linux gcc
@@ -300,6 +303,20 @@ optional arguments:
 </pre></div>
 </div>
 </li>
+<li><p class="first">Create files from a custom, predefined user template:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan new mypackage/1.0 --template<span class="o">=</span>myconanfile.py
+</pre></div>
+</div>
+<p>Conan will look for <code class="docutils literal notranslate"><span class="pre">templates/myconanfile.py</span></code> in the Conan local cache. If an absolute path is given as argument, it will be used instead.
+These files can be installed and managed by <a class="reference internal" href="../consumer/config.html#conan-config-install"><span class="std std-ref">conan config install</span></a> command. The templates use Jinja syntax:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>class {{package_name}}Conan(ConanFile):
+    name = &quot;{{name}}&quot;
+    version = &quot;{{version}}&quot;
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">version</span></code> placeholders are defined from the command line, and <code class="docutils literal notranslate"><span class="pre">package_name</span></code> is a camel case
+variant of the package <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p>
+</li>
 </ul>
 </div>
 
@@ -343,7 +360,7 @@ optional arguments:
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.15
+      Version: 1.16
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -351,7 +368,11 @@ optional arguments:
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.15</a></dd>
+            <dd><a href="/en/latest/index.html">1.16</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.15/index.html">1.15</a></dd>
           
         
           
@@ -417,7 +438,7 @@ optional arguments:
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.15.1',
+            VERSION:'1.16.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

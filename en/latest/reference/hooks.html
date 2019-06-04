@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Hooks [EXPERIMENTAL] &mdash; conan 1.15.1 documentation</title>
+  <title>Hooks [EXPERIMENTAL] &mdash; conan 1.16.0 documentation</title>
   
 
   
@@ -42,7 +42,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.15.1 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.16.0 documentation" href="../index.html"/>
         <link rel="up" title="Reference" href="../reference.html"/>
         <link rel="next" title="Videos and links" href="../videos.html"/>
         <link rel="prev" title="Environment variables" href="env_vars.html"/>
@@ -337,6 +337,14 @@ context:</p>
     <span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;reference=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">reference</span><span class="p">))</span>
     <span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;package_id=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">package_id</span><span class="p">)</span>
     <span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;remote.name=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">remote</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">pre_package_info</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">conanfile</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;reference=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">reference</span><span class="o">.</span><span class="n">full_repr</span><span class="p">())</span>
+    <span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;conanfile.cpp_info.defines=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">conanfile</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">defines</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">post_package_info</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">conanfile</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;reference=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">reference</span><span class="o">.</span><span class="n">full_repr</span><span class="p">())</span>
+    <span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;conanfile.cpp_info.defines=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">conanfile</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">defines</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Functions of the hooks are intended to be self-descriptive regarding to the execution of them. For example, the <code class="docutils literal notranslate"><span class="pre">pre_package()</span></code> function
@@ -367,14 +375,15 @@ and dynamic objects such as <code class="docutils literal notranslate"><span cla
 </ul>
 <table border="1" class="docutils">
 <colgroup>
-<col width="11%" />
-<col width="14%" />
 <col width="10%" />
-<col width="10%" />
+<col width="12%" />
 <col width="9%" />
-<col width="11%" />
-<col width="17%" />
-<col width="18%" />
+<col width="9%" />
+<col width="8%" />
+<col width="9%" />
+<col width="15%" />
+<col width="16%" />
+<col width="12%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td colspan="2" rowspan="2"><div class="first last line-block">
@@ -383,7 +392,7 @@ and dynamic objects such as <code class="docutils literal notranslate"><span cla
 <div class="line">the context</div>
 </div>
 </td>
-<td colspan="6"><strong>Hook Functions*</strong></td>
+<td colspan="7"><strong>Hook Functions*</strong></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">export()</span></code></td>
 <td><code class="docutils literal notranslate"><span class="pre">source()</span></code></td>
@@ -401,6 +410,7 @@ and dynamic objects such as <code class="docutils literal notranslate"><span cla
 <div class="line"><code class="docutils literal notranslate"><span class="pre">download_package()</span></code></div>
 </div>
 </td>
+<td><code class="docutils literal notranslate"><span class="pre">package_info()</span></code></td>
 </tr>
 <tr class="row-odd"><td rowspan="5"><strong>Parameters</strong></td>
 <td><code class="docutils literal notranslate"><span class="pre">conanfile</span></code></td>
@@ -410,6 +420,7 @@ and dynamic objects such as <code class="docutils literal notranslate"><span cla
 <td>Yes</td>
 <td>No</td>
 <td>post</td>
+<td>Yes</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">conanfile_path</span></code></td>
 <td>pre / post</td>
@@ -418,12 +429,14 @@ and dynamic objects such as <code class="docutils literal notranslate"><span cla
 <td>pre / post</td>
 <td>Yes</td>
 <td>post</td>
+<td>No</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">reference</span></code></td>
 <td>Yes</td>
 <td>cache</td>
 <td>cache</td>
 <td>cache</td>
+<td>Yes</td>
 <td>Yes</td>
 <td>Yes</td>
 </tr>
@@ -434,6 +447,7 @@ and dynamic objects such as <code class="docutils literal notranslate"><span cla
 <td>Yes</td>
 <td>Yes</td>
 <td>Yes</td>
+<td>No</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">remote</span></code></td>
 <td>No</td>
@@ -442,6 +456,7 @@ and dynamic objects such as <code class="docutils literal notranslate"><span cla
 <td>No</td>
 <td>Yes</td>
 <td>Yes</td>
+<td>No</td>
 </tr>
 </tbody>
 </table>
@@ -515,7 +530,7 @@ of Conan.</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.15
+      Version: 1.16
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -523,7 +538,11 @@ of Conan.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.15</a></dd>
+            <dd><a href="/en/latest/index.html">1.16</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.15/index.html">1.15</a></dd>
           
         
           
@@ -589,7 +608,7 @@ of Conan.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.15.1',
+            VERSION:'1.16.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
