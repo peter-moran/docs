@@ -386,8 +386,8 @@ order according to the dependency tree.</p>
 </pre></div>
 </div>
 <p>Other library requiring <code class="docutils literal notranslate"><span class="pre">MyLib</span></code> and using this generator will get:</p>
-<div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text"><em>conanbuildinfo.cmake</em></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><em>conanbuildinfo.cmake</em></span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span> <span class="c"># ...</span>
  <span class="nb">set</span><span class="p">(</span><span class="s">CONAN_USER_MYLIB_var1</span> <span class="s2">&quot;2&quot;</span><span class="p">)</span>
 </pre></div>
@@ -444,44 +444,45 @@ order.</li>
 </ul>
 </div>
 <div class="section" id="conan-check-compiler">
-<h3>conan_check_compiler()<a class="headerlink" href="#conan-check-compiler" title="Permalink to this headline">¶</a></h3>
+<span id="id1"></span><h3>conan_check_compiler()<a class="headerlink" href="#conan-check-compiler" title="Permalink to this headline">¶</a></h3>
 <p>Checks that your compiler matches the one declared in settings.</p>
+<p>This method can be disabled setting the <a class="reference internal" href="#conan-disable-check-compiler"><span class="std std-ref">CONAN_DISABLE_CHECK_COMPILER</span></a> variable.</p>
 </div>
 <div class="section" id="conan-output-dirs-setup">
 <h3>conan_output_dirs_setup()<a class="headerlink" href="#conan-output-dirs-setup" title="Permalink to this headline">¶</a></h3>
-<p>Adjust the <em>bin/</em> and <em>lib/</em> output directories.</p>
+<p>Adjusts the <em>bin/</em> and <em>lib/</em> output directories.</p>
 </div>
 <div class="section" id="conan-set-find-library-paths">
 <h3>conan_set_find_library_paths()<a class="headerlink" href="#conan-set-find-library-paths" title="Permalink to this headline">¶</a></h3>
-<p>Set <code class="docutils literal notranslate"><span class="pre">CMAKE_INCLUDE_PATH</span></code> and <code class="docutils literal notranslate"><span class="pre">CMAKE_INCLUDE_PATH</span></code>.</p>
+<p>Sets <code class="docutils literal notranslate"><span class="pre">CMAKE_INCLUDE_PATH</span></code> and <code class="docutils literal notranslate"><span class="pre">CMAKE_INCLUDE_PATH</span></code>.</p>
 </div>
 <div class="section" id="conan-global-flags">
 <h3>conan_global_flags()<a class="headerlink" href="#conan-global-flags" title="Permalink to this headline">¶</a></h3>
-<p>Set the corresponding variables to CMake’s <code class="docutils literal notranslate"><span class="pre">include_directories()</span></code> and <code class="docutils literal notranslate"><span class="pre">link_directories()</span></code>.</p>
+<p>Sets the corresponding variables to CMake’s <code class="docutils literal notranslate"><span class="pre">include_directories()</span></code> and <code class="docutils literal notranslate"><span class="pre">link_directories()</span></code>.</p>
 </div>
 <div class="section" id="conan-define-targets">
 <h3>conan_define_targets()<a class="headerlink" href="#conan-define-targets" title="Permalink to this headline">¶</a></h3>
-<p>Define the targets for each dependency (target flags instead of global flags).</p>
+<p>Defines the targets for each dependency (target flags instead of global flags).</p>
 </div>
 <div class="section" id="conan-set-rpath">
 <h3>conan_set_rpath()<a class="headerlink" href="#conan-set-rpath" title="Permalink to this headline">¶</a></h3>
-<p>Set <code class="docutils literal notranslate"><span class="pre">CMAKE_SKIP_RPATH=1</span></code> in the case of working in OSX.</p>
+<p>Sets <code class="docutils literal notranslate"><span class="pre">CMAKE_SKIP_RPATH=1</span></code> in the case of working in OSX.</p>
 </div>
 <div class="section" id="conan-set-vs-runtime">
 <h3>conan_set_vs_runtime()<a class="headerlink" href="#conan-set-vs-runtime" title="Permalink to this headline">¶</a></h3>
-<p>Adjust the runtime flags <code class="docutils literal notranslate"><span class="pre">/MD</span></code>, <code class="docutils literal notranslate"><span class="pre">/MDd</span></code>, <code class="docutils literal notranslate"><span class="pre">/MT</span></code> or <code class="docutils literal notranslate"><span class="pre">/MTd</span></code> for Visual Studio.</p>
+<p>Adjusts the runtime flags <code class="docutils literal notranslate"><span class="pre">/MD</span></code>, <code class="docutils literal notranslate"><span class="pre">/MDd</span></code>, <code class="docutils literal notranslate"><span class="pre">/MT</span></code> or <code class="docutils literal notranslate"><span class="pre">/MTd</span></code> for Visual Studio.</p>
 </div>
 <div class="section" id="conan-set-std">
 <h3>conan_set_std()<a class="headerlink" href="#conan-set-std" title="Permalink to this headline">¶</a></h3>
-<p>Set <code class="docutils literal notranslate"><span class="pre">CMAKE_CXX_STANDARD</span></code> and <code class="docutils literal notranslate"><span class="pre">CMAKE_CXX_EXTENSIONS</span></code> to the appropriate values.</p>
+<p>Sets <code class="docutils literal notranslate"><span class="pre">CMAKE_CXX_STANDARD</span></code> and <code class="docutils literal notranslate"><span class="pre">CMAKE_CXX_EXTENSIONS</span></code> to the appropriate values.</p>
 </div>
 <div class="section" id="conan-set-libcxx">
 <h3>conan_set_libcxx()<a class="headerlink" href="#conan-set-libcxx" title="Permalink to this headline">¶</a></h3>
-<p>Adjust the standard library flags (<code class="docutils literal notranslate"><span class="pre">libc++`</span></code>, <code class="docutils literal notranslate"><span class="pre">libstdc++</span></code>, <code class="docutils literal notranslate"><span class="pre">libstdc++11</span></code>) in <code class="docutils literal notranslate"><span class="pre">CMAKE_CXX_FLAGS</span></code>.</p>
+<p>Adjusts the standard library flags (<code class="docutils literal notranslate"><span class="pre">libc++`</span></code>, <code class="docutils literal notranslate"><span class="pre">libstdc++</span></code>, <code class="docutils literal notranslate"><span class="pre">libstdc++11</span></code>) in <code class="docutils literal notranslate"><span class="pre">CMAKE_CXX_FLAGS</span></code>.</p>
 </div>
 <div class="section" id="conan-set-find-paths">
 <h3>conan_set_find_paths()<a class="headerlink" href="#conan-set-find-paths" title="Permalink to this headline">¶</a></h3>
-<p>Adjust <code class="docutils literal notranslate"><span class="pre">CMAKE_MODULE_PATH</span></code> and <code class="docutils literal notranslate"><span class="pre">CMAKE_PREFIX_PATH</span></code> to the values of <code class="docutils literal notranslate"><span class="pre">deps_cpp_info.build_paths</span></code>.</p>
+<p>Adjusts <code class="docutils literal notranslate"><span class="pre">CMAKE_MODULE_PATH</span></code> and <code class="docutils literal notranslate"><span class="pre">CMAKE_PREFIX_PATH</span></code> to the values of <code class="docutils literal notranslate"><span class="pre">deps_cpp_info.build_paths</span></code>.</p>
 </div>
 </div>
 <div class="section" id="input-variables-for-conanbuildinfo-cmake">
@@ -490,6 +491,11 @@ order.</li>
 <h3>CONAN_CMAKE_SILENT_OUTPUT<a class="headerlink" href="#conan-cmake-silent-output" title="Permalink to this headline">¶</a></h3>
 <p><strong>Default to</strong>: <code class="docutils literal notranslate"><span class="pre">FALSE</span></code></p>
 <p>Activate it to silence the Conan message output.</p>
+</div>
+<div class="section" id="conan-disable-check-compiler">
+<span id="id2"></span><h3>CONAN_DISABLE_CHECK_COMPILER<a class="headerlink" href="#conan-disable-check-compiler" title="Permalink to this headline">¶</a></h3>
+<p><strong>Default to</strong>: <code class="docutils literal notranslate"><span class="pre">FALSE</span></code></p>
+<p>Deactivates the check of the compiler done with the method <a class="reference internal" href="#conan-check-compiler"><span class="std std-ref">conan_check_compiler()</span></a>.</p>
 </div>
 </div>
 </div>
