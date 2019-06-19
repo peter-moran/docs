@@ -411,7 +411,7 @@ an error will be raised unless <code class="docutils literal notranslate"><span 
 <p>For package recipes working in the user space, with local methods like <strong class="command">conan install .</strong> and <strong class="command">conan build .</strong>,
 there is no current user/channel. If you are accessing to <code class="docutils literal notranslate"><span class="pre">self.user</span></code> or <code class="docutils literal notranslate"><span class="pre">self.channel</span></code> in your recipe,
 you need to declare the environment variables <code class="docutils literal notranslate"><span class="pre">CONAN_USERNAME</span></code> and <code class="docutils literal notranslate"><span class="pre">CONAN_CHANNEL</span></code> or you can set the attributes
-<code class="docutils literal notranslate"><span class="pre">default_user</span></code> and <code class="docutils literal notranslate"><span class="pre">default_channel</span></code>. You can also use python <code class="docutils literal notranslate"><span class="pre">&#64;properties</span></code>:</p>
+<code class="docutils literal notranslate"><span class="pre">default_user</span></code> and <code class="docutils literal notranslate"><span class="pre">default_channel</span></code>. You can also use python <code class="docutils literal notranslate"><span class="pre">&#64;property</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
 
 <span class="k">class</span> <span class="nc">HelloConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
