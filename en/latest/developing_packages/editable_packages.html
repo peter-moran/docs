@@ -225,10 +225,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p class="first admonition-title">Warning</p>
 <p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
 </div>
-<p>When working in big projects with several functionalities interconnected it is recomended to avoid
-the one-and-only huge project approach in favor of several libraries each one of them specialized
+<p>When working in big projects with several functionalities interconnected it is recommended to avoid
+the one-and-only huge project approach in favor of several libraries, each one specialized
 in a set of common tasks, even maintained by dedicated teams. This approach helps to isolate
-and reuse code, helps with compiling times and reduces the likelihood of including files that
+and reusing code helps with compiling times and reduces the likelihood of including files that
 not correspond to the API of the required library.</p>
 <p>Nevertheless, in some case, it is useful to work in several libraries at the same time and see how
 the changes in one of them are propagated to the others. Following the
@@ -237,14 +237,12 @@ the changes in one of them are propagated to the others. Following the
 get the changes ready for a consumer library, it is needed the <strong class="command">conan create</strong> that will
 actually trigger a build to generate the binaries in the cache or to run <strong class="command">conan export-pkg</strong>
 to copy locally built artifacts into the conan cache and make them available to consumers.</p>
-<p>What about if you just can tell Conan where to find the headers and the artifacts ready for
-consumption in your local working directory? No need to package, just tell Conan to use those
-artifacts you have just generated with your IDE, sounds good? This is what the feature
-<em>editable packages</em> will do for you.</p>
+<p>With the editable packages, you can tell Conan where to find the headers and the artifacts ready for
+consumption in your local working directory. There is no need to package.</p>
 <p>Let’s see this feature over an example where a developer is creating a <code class="docutils literal notranslate"><span class="pre">CoolApp</span></code> but at the same
-time they wants to work on <code class="docutils literal notranslate"><span class="pre">cool/version&#64;user/dev</span></code> library which is tightly coupled to the app.</p>
+time they want to work on <code class="docutils literal notranslate"><span class="pre">cool/version&#64;user/dev</span></code> library which is tightly coupled to the app.</p>
 <p>The package <code class="docutils literal notranslate"><span class="pre">cool/version&#64;user/dev</span></code> is already working, the developer has the sources in a
-local folder, they is using whatever method to build and develop locally and can perform
+local folder and they are using whatever method to build and develop locally and can perform
 a <strong class="command">conan create . cool/version&#64;user/dev</strong> to create the package.</p>
 <p>Also, there is a <em>conanfile.txt</em> (or a more complex recipe) for the application <code class="docutils literal notranslate"><span class="pre">CoolApp</span></code> that
 has <code class="docutils literal notranslate"><span class="pre">cool/version&#64;user/dev</span></code> among its requirements. When building this application, the
@@ -255,13 +253,13 @@ resources of <code class="docutils literal notranslate"><span class="pre">cool</
 to put that package in editable mode, creating <strong>a link from the reference in the cache to the local
 working directory</strong>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan editable add &lt;path/to/local/dev/libcool&gt; cool/version@user/dev
-<span class="c1"># you could do cd &lt;path/to/local/dev/libcool&gt; &amp;&amp; conan editable add . cool/version@user/dev</span>
+<span class="c1"># you could do &quot;cd &lt;path/to/local/dev/libcool&gt; &amp;&amp; conan editable add . cool/version@user/dev&quot;</span>
 </pre></div>
 </div>
-<p>That is it. Now, every usage of <code class="docutils literal notranslate"><span class="pre">cool/version&#64;user/dev</span></code>, by any other Conan package, or project
-will be redirected to the <code class="docutils literal notranslate"><span class="pre">&lt;path/to/local/dev/libcool&gt;</span></code> user folder, instead of using the package
+<p>That is it. Now, every usage of <code class="docutils literal notranslate"><span class="pre">cool/version&#64;user/dev</span></code>, by any other Conan package or project,
+will be redirected to the <code class="docutils literal notranslate"><span class="pre">&lt;path/to/local/dev/libcool&gt;</span></code> user folder instead of using the package
 from the conan cache.</p>
-<p>Conan package recipes define a package “layout” in their <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> methods. The default one,
+<p>The Conan package recipes define a package “layout” in their <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> methods. The default one,
 if nothing is specified is equivalent to:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="c1"># default behavior, doesn&#39;t need to be explicitly defined in recipes</span>
