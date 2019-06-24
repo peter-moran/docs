@@ -228,8 +228,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>The goal of the revisions feature is to achieve package immutability, the packages in a server are never overwritten.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>This is the first piece to achieve reproducibility: Recreate the exact dependency graph by using some
-mechanism like a “graph lock” file. For example, if we store a “graph lock” file for the different releases
+<p>This is the first piece to achieve reproducibility: recreate the exact dependency graph by using some
+mechanism like a <code class="docutils literal notranslate"><span class="pre">graph</span> <span class="pre">lock</span></code> file. For example, if we store a <code class="docutils literal notranslate"><span class="pre">graph</span> <span class="pre">lock</span></code> file for the different releases
 of our project, we can install the same dependencies just by using the graph lock.</p>
 <p class="last"><strong>IMPORTANT:</strong> The reproducibility is in the Conan roadmap and currently under development.</p>
 </div>
@@ -250,10 +250,10 @@ The same package ID (for example for Linux/GCC5/Debug), can have multiple revisi
 to a concrete RREV.</p>
 </li>
 </ul>
-<p>If a client requests a reference like <code class="docutils literal notranslate"><span class="pre">lib/1.0&#64;conan/stable</span></code>, Conan will retrieve automatically the latest revision.
-In the client cache there will be <strong>only one revision installed at the same time</strong>.</p>
+<p>If a client requests a reference like <code class="docutils literal notranslate"><span class="pre">lib/1.0&#64;conan/stable</span></code>, Conan will automatically retrieve the latest revision.
+In the client cache there is <strong>only one revision installed simultaneously</strong>.</p>
 <p>The revisions can be pinned when you write a reference (in the recipe requires, or in a reference in a
-<strong class="command">conan install</strong> command…) but if you don’t specify a revision the server will retrieve the latest one.</p>
+<strong class="command">conan install</strong> command…) but if you don’t specify a revision, the server will retrieve the latest revision.</p>
 <p>You can specify the references in the following formats:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -295,12 +295,12 @@ In the client cache there will be <strong>only one revision installed at the sam
 <p>Take into account that it changes the default Conan behavior. e.g:</p>
 <blockquote>
 <div><ul class="simple">
-<li>A client with revisions enabled will only find binary packages that belongs to the installed recipe revision.
+<li>A client with revisions enabled will only find binary packages that belong to the installed recipe revision.
 For example, If you create a recipe and run <strong class="command">conan create . user/channel</strong> and then you modify the recipe and
-export it <strong class="command">conan export . user/channel</strong>, the binary package generated in the <strong class="command">conan create</strong> command doesn’t
-belong to the new exported recipe, so it won’t be located unless the previous recipe is recovered.</li>
-<li>If you generate and upload N binary packages for a recipe revision, if you upload the revision you need to
-generate and upload again the N binaries if you want them to be used with the new recipe.</li>
+export it (<strong class="command">conan export . user/channel</strong>), the binary package generated in the <strong class="command">conan create</strong> command
+doesn’t belong to the new exported recipe. So it won’t be located unless the previous recipe is recovered.</li>
+<li>If you generate and upload N binary packages for a recipe with a given revision, then if you modify the recipe, and thus the recipe
+revision, you need to build and upload N new binaries matching that new recipe revision.</li>
 </ul>
 </div></blockquote>
 </div>
