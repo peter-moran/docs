@@ -554,12 +554,13 @@ automatically detected (compiler, architecture…) and stored as the default pro
 <p class="first admonition-title">Tip</p>
 <p class="last">We strongly recommend using <a class="reference internal" href="reference/profiles.html#profiles"><span class="std std-ref">Profiles</span></a> and managing them with <a class="reference internal" href="reference/commands/consumer/config.html#conan-config-install"><span class="std std-ref">conan config install</span></a>.</p>
 </div>
-<p>However, the user can always override the default profile settings in the <strong class="command">conan install</strong> command using the <strong class="command">--settings</strong>
-parameter. As an exercise, try building the Encrypter project 32-bit version:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . --profile<span class="o">=</span>gcc_x86 --settings <span class="nv">arch</span><span class="o">=</span>x86_64
+<p>However, the user can always override the profile settings in the <strong class="command">conan install</strong> command using the <strong class="command">--settings</strong>
+parameter. As an exercise, try building the 32-bit version of the Encrypter project like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . --settings <span class="nv">arch</span><span class="o">=</span>x86
 </pre></div>
 </div>
-<p>The above command installs a different package, using the <strong class="command">--settings arch=x86</strong> instead of the one of the profile used previously.</p>
+<p>The above command installs a different package, using the <strong class="command">--settings arch=x86</strong> instead of the one of the default profile used
+previously.</p>
 <p>To use the 32-bit binaries, you will also have to change your project build:</p>
 <ul class="simple">
 <li>In Windows, change the CMake invocation to <code class="docutils literal notranslate"><span class="pre">Visual</span> <span class="pre">Studio</span> <span class="pre">14</span></code>.</li>
