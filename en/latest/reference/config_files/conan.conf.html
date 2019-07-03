@@ -422,6 +422,10 @@ the environment variable <code class="docutils literal notranslate"><span class=
 </div>
 <div class="section" id="proxies">
 <span id="proxys"></span><h2>Proxies<a class="headerlink" href="#proxies" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">no_proxy</span></code> is deprecated in favor of <code class="docutils literal notranslate"><span class="pre">no_proxy_match</span></code> since Conan 1.16.</p>
+</div>
 <p>If you are not using proxies at all, or you want to use the proxies specified by the operating system,
 just remove the <code class="docutils literal notranslate"><span class="pre">[proxies]</span></code> section completely. You can run <strong class="command">conan config rm proxies</strong>.</p>
 <p>If you leave the <code class="docutils literal notranslate"><span class="pre">[proxies]</span></code> section blank, conan will copy the system configured
