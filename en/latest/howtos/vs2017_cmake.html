@@ -370,15 +370,12 @@ would need to make sure the right CMake code is executed, please check <a class=
 <h2>Using tasks with tasks.vs.json<a class="headerlink" href="#using-tasks-with-tasks-vs-json" title="Permalink to this headline">¶</a></h2>
 <p>Another alternative is using file <a class="reference external" href="https://docs.microsoft.com/en-us/visualstudio/ide/customize-build-and-debug-tasks-in-visual-studio?view=vs-2017">tasks</a>
 feature of Visual Studio 2017. This way you can install dependencies by running <strong class="command">conan install</strong> as task directly in the IDE.</p>
-<p>All you need is to right click on your <em>conanfile.py</em>-&gt; Configure Tasks (see the
+<p>All you need is to right click on your <em>conanfile.py</em> -&gt; Configure Tasks (see the
 <a class="reference external" href="https://docs.microsoft.com/en-us/visualstudio/ide/customize-build-and-debug-tasks-in-visual-studio?view=vs-2017">link above</a>) and add the
 following to your <em>tasks.vs.json</em>.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">The file <em>tasks.vs.json</em> is added to your local <em>.vs</em> folder so it is not supposed to be added to your version control system. There is
-also a feature
-<a class="reference external" href="https://visualstudio.uservoice.com/forums/121579-visual-studio-ide/suggestions/33814138-add-macro-buildroot-to-tasks-vs-json">request</a>
-to improve this process.</p>
+<p class="last">The file <em>tasks.vs.json</em> is added to your local <em>.vs</em> folder so it is not supposed to be added to your version control system.</p>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span> {
      &quot;tasks&quot;: [
