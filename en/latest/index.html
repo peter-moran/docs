@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to conan &mdash; conan 1.16.1 documentation</title>
+  <title>Welcome to conan &mdash; conan 1.17.1 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="conan 1.16.1 documentation" href="#"/>
+    <link rel="top" title="conan 1.17.1 documentation" href="#"/>
         <link rel="next" title="Introduction" href="introduction.html"/>
 
  <!-- Google Tag Manager -->
@@ -114,6 +114,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="uploading_packages.html">Uploading Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developing_packages.html">Developing packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="versioning.html">Versioning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mastering.html">Mastering Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="systems_cross_building.html">Systems and cross building</a></li>
 <li class="toctree-l1"><a class="reference internal" href="extending.html">Extending Conan</a></li>
@@ -276,17 +277,22 @@ builds from source, dependencies, and precompiled binaries for any language.</p>
 <li class="toctree-l2"><a class="reference internal" href="devtools/build_requires.html">Build requirements</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="versioning.html">Versioning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="versioning/introduction.html">Introduction to versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="versioning/version_ranges.html">Version ranges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="versioning/revisions.html">Package Revisions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="versioning/lockfiles.html">Lockfiles</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="mastering.html">Mastering Conan</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="mastering/conanfile_py.html">Use conanfile.py for consumers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mastering/conditional.html">Conditional settings, options and requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mastering/version_ranges.html">Version ranges</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mastering/policies.html">Build policies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mastering/envvars.html">Environment variables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mastering/virtualenv.html">Virtual Environments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mastering/logging.html">Logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mastering/sharing_settings_and_config.html">Sharing the settings and other configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mastering/custom_cache.html">Conan local cache: concurrency, Continuous Integration, isolation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mastering/revisions.html">Package Revisions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="systems_cross_building.html">Systems and cross building</a><ul>
@@ -359,126 +365,127 @@ builds from source, dependencies, and precompiled binaries for any language.</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#jul-2019">1.17.0 (9-Jul-2019)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#jun-2019">1.16.1 (14-Jun-2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id10">1.16.0 (4-Jun-2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id39">1.15.4</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id42">1.15.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id38">1.16.0 (4-Jun-2019)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id67">1.15.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id70">1.15.3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#may-2019">1.15.2 (31-May-2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id45">1.15.1 (16-May-2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id49">1.15.0 (6-May-2019)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id73">1.15.1 (16-May-2019)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id77">1.15.0 (6-May-2019)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#apr-2019">1.14.5 (30-Apr-2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id82">1.14.4 (25-Apr-2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id90">1.14.3 (11-Apr-2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id92">1.14.2 (11-Apr-2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id94">1.14.1 (1-Apr-2019)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id110">1.14.4 (25-Apr-2019)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id118">1.14.3 (11-Apr-2019)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id120">1.14.2 (11-Apr-2019)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id122">1.14.1 (1-Apr-2019)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#mar-2019">1.14.0 (28-Mar-2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id128">1.13.3 (27-Mar-2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id130">1.13.2 (21-Mar-2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id135">1.13.1 (15-Mar-2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id137">1.13.0 (07-Mar-2019)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id156">1.13.3 (27-Mar-2019)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id158">1.13.2 (21-Mar-2019)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id163">1.13.1 (15-Mar-2019)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id165">1.13.0 (07-Mar-2019)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#feb-2019">1.12.3 (18-Feb-2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id170">1.12.2 (8-Feb-2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id172">1.12.1 (5-Feb-2019)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id198">1.12.2 (8-Feb-2019)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id200">1.12.1 (5-Feb-2019)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#jan-2019">1.12.0 (30-Jan-2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id231">1.11.2 (8-Jan-2019)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id259">1.11.2 (8-Jan-2019)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#dec-2018">1.11.1 (20-Dec-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id234">1.11.0 (19-Dec-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id253">1.10.2 (17-Dec-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id255">1.10.1 (11-Dec-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id259">1.10.0 (4-Dec-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id262">1.11.0 (19-Dec-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id281">1.10.2 (17-Dec-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id283">1.10.1 (11-Dec-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id287">1.10.0 (4-Dec-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#nov-2018">1.9.2 (20-Nov-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id278">1.9.1 (08-Nov-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id306">1.9.1 (08-Nov-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#october-2018">1.9.0 (30-October-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id325">1.8.4 (19-October-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id329">1.8.3 (17-October-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id332">1.8.2 (10-October-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id335">1.8.1 (10-October-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id339">1.8.0 (9-October-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id353">1.8.4 (19-October-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id357">1.8.3 (17-October-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id360">1.8.2 (10-October-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id363">1.8.1 (10-October-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id367">1.8.0 (9-October-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#september-2018">1.7.4 (18-September-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id398">1.7.3 (6-September-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id399">1.7.2 (4-September-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id426">1.7.3 (6-September-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id427">1.7.2 (4-September-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#august-2018">1.7.1 (31-August-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id400">1.7.0 (29-August-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id428">1.7.0 (29-August-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#july-2018">1.6.1 (27-July-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id401">1.6.0 (19-July-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id402">1.5.2 (5-July-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id429">1.6.0 (19-July-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id430">1.5.2 (5-July-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#june-2018">1.5.1 (29-June-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id403">1.5.0 (27-June-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id404">1.4.5 (22-June-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id405">1.4.4 (11-June-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id406">1.4.3 (6-June-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id407">1.4.2 (4-June-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id431">1.5.0 (27-June-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id432">1.4.5 (22-June-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id433">1.4.4 (11-June-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id434">1.4.3 (6-June-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id435">1.4.2 (4-June-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#may-2018">1.4.1 (31-May-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id408">1.4.0 (30-May-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id409">1.3.3 (10-May-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id410">1.3.2 (7-May-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id411">1.3.1 (3-May-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id436">1.4.0 (30-May-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id437">1.3.3 (10-May-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id438">1.3.2 (7-May-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id439">1.3.1 (3-May-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#april-2018">1.3.0 (30-April-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#apr-2017">1.2.3 (10-Apr-2017)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#apr-2018">1.2.1 (3-Apr-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#mar-2018">1.2.0 (28-Mar-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id412">1.1.1 (5-Mar-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id440">1.1.1 (5-Mar-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#feb-2018">1.1.0 (27-Feb-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#january-2018">1.0.4 (30-January-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id413">1.0.3 (22-January-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id414">1.0.2 (16-January-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id415">1.0.1 (12-January-2018)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id416">1.0.0 (10-January-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id441">1.0.3 (22-January-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id442">1.0.2 (16-January-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id443">1.0.1 (12-January-2018)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id444">1.0.0 (10-January-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#beta5-8-january-2018">1.0.0-beta5 (8-January-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#beta4-4-january-2018">1.0.0-beta4 (4-January-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#beta3-28-december-2017">1.0.0-beta3 (28-December-2017)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#beta2-23-december-2017">1.0.0-beta2 (23-December-2017)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#december-2017">0.30.3 (15-December-2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id417">0.30.2 (14-December-2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id418">0.30.1 (12-December-2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id419">0.29.2 (2-December-2017)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id445">0.30.2 (14-December-2017)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id446">0.30.1 (12-December-2017)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id447">0.29.2 (2-December-2017)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#november-2017">0.29.1 (23-November-2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id420">0.29.0 (21-November-2017)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id448">0.29.0 (21-November-2017)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#october-2017">0.28.1 (31-October-2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id421">0.28.0 (26-October-2017)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id449">0.28.0 (26-October-2017)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#september-2017">0.27.0 (20-September-2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id422">0.26.1 (05-September-2017)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id450">0.26.1 (05-September-2017)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#august-2017">0.26.0 (31-August-2017)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#july-2017">0.25.1 (20-July-2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id423">0.25.0 (19-July-2017)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id451">0.25.0 (19-July-2017)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#june-2017">0.24.0 (15-June-2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id424">0.23.1 (05-June-2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id425">0.23.0 (01-June-2017)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id452">0.23.1 (05-June-2017)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id453">0.23.0 (01-June-2017)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#may-2017">0.22.3 (03-May-2017)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#april-2017">0.22.2 (20-April-2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id426">0.22.1 (18-April-2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id427">0.22.0 (18-April-2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id428">0.21.2 (04-April-2017)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id454">0.22.1 (18-April-2017)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id455">0.22.0 (18-April-2017)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id456">0.21.2 (04-April-2017)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#march-2017">0.21.1 (23-March-2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id429">0.21.0 (21-March-2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id430">0.20.3 (06-March-2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id431">0.20.2 (02-March-2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id432">0.20.1 (01-March-2017)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id457">0.21.0 (21-March-2017)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id458">0.20.3 (06-March-2017)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id459">0.20.2 (02-March-2017)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id460">0.20.1 (01-March-2017)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#february-2017">0.20.0 (27-February-2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id433">0.19.3 (27-February-2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id434">0.19.2 (15-February-2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id435">0.19.1 (02-February-2017)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id461">0.19.3 (27-February-2017)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id462">0.19.2 (15-February-2017)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id463">0.19.1 (02-February-2017)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#january-2017">0.19.0 (31-January-2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id436">0.18.1 (11-January-2017)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id437">0.18.0 (3-January-2017)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id464">0.18.1 (11-January-2017)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id465">0.18.0 (3-January-2017)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#december-2016">0.17.2 (21-December-2016)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id438">0.17.1 (15-December-2016)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id439">0.17.0 (13-December-2016)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id440">0.16.1 (05-December-2016)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id466">0.17.1 (15-December-2016)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id467">0.17.0 (13-December-2016)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id468">0.16.1 (05-December-2016)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#november-2016">0.16.0 (19-November-2016)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id441">0.15.0 (08-November-2016)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id469">0.15.0 (08-November-2016)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#october-2016">0.14.1 (20-October-2016)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id442">0.14.0 (20-October-2016)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id443">0.13.3 (13-October-2016)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id444">0.13.0 (03-October-2016)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id470">0.14.0 (20-October-2016)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id471">0.13.3 (13-October-2016)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id472">0.13.0 (03-October-2016)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#september-2016">0.12.0 (13-September-2016)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#august-2016">0.11.1 (31-August-2016)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id445">0.11.0 (3-August-2016)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id473">0.11.0 (3-August-2016)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#june-2016">0.10.0 (29-June-2016)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#may-2016">0.9.2 (11-May-2016)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id446">0.9 (3-May-2016)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id474">0.9 (3-May-2016)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#mar-2016">0.8.4 (28-Mar-2016)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#id447">0.8 (15-Mar-2016)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id475">0.8 (15-Mar-2016)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#feb-2016">0.7 (5-Feb-2016)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#jan-2016">0.6 (11-Jan-2016)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#dec-2015">0.5 (18-Dec-2015)</a></li>
@@ -526,7 +533,7 @@ builds from source, dependencies, and precompiled binaries for any language.</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.16
+      Version: 1.17
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -534,7 +541,11 @@ builds from source, dependencies, and precompiled binaries for any language.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.16</a></dd>
+            <dd><a href="/en/latest/index.html">1.17</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.16/index.html">1.16</a></dd>
           
         
           
@@ -604,7 +615,7 @@ builds from source, dependencies, and precompiled binaries for any language.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.16.1',
+            VERSION:'1.17.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -641,7 +652,7 @@ builds from source, dependencies, and precompiled binaries for any language.</p>
 
 
   <script>
-    initSearch("1.16");
+    initSearch("1.17");
   </script>
 
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WK44ZFM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Mastering Conan &mdash; conan 1.16.1 documentation</title>
+  <title>Mastering Conan &mdash; conan 1.17.1 documentation</title>
   
 
   
@@ -45,9 +45,9 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="conan 1.16.1 documentation" href="index.html"/>
+    <link rel="top" title="conan 1.17.1 documentation" href="index.html"/>
         <link rel="next" title="Use conanfile.py for consumers" href="mastering/conanfile_py.html"/>
-        <link rel="prev" title="Build requirements" href="devtools/build_requires.html"/>
+        <link rel="prev" title="Lockfiles" href="versioning/lockfiles.html"/>
 
  <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -115,17 +115,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="uploading_packages.html">Uploading Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developing_packages.html">Developing packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="versioning.html">Versioning</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Mastering Conan</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="mastering/conanfile_py.html">Use conanfile.py for consumers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mastering/conditional.html">Conditional settings, options and requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mastering/version_ranges.html">Version ranges</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mastering/policies.html">Build policies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mastering/envvars.html">Environment variables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mastering/virtualenv.html">Virtual Environments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mastering/logging.html">Logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mastering/sharing_settings_and_config.html">Sharing the settings and other configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mastering/custom_cache.html">Conan local cache: concurrency, Continuous Integration, isolation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mastering/revisions.html">Package Revisions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="systems_cross_building.html">Systems and cross building</a></li>
@@ -230,7 +229,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="mastering/conditional.html#constrain-settings-and-options">Constrain settings and options</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="mastering/version_ranges.html">Version ranges</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mastering/policies.html">Build policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mastering/envvars.html">Environment variables</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="mastering/envvars.html#defining-environment-variables">Defining environment variables</a></li>
@@ -254,12 +252,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="mastering/custom_cache.html#system-requirements">System Requirements</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="mastering/revisions.html">Package Revisions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="mastering/revisions.html#how-it-works">How it works</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mastering/revisions.html#how-to-activate-the-revisions">How to activate the revisions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mastering/revisions.html#server-support">Server support</a></li>
-</ul>
-</li>
 </ul>
 </div>
 </div>
@@ -277,7 +269,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <a href="mastering/conanfile_py.html" class="btn btn-neutral float-right" title="Use conanfile.py for consumers" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="devtools/build_requires.html" class="btn btn-neutral" title="Build requirements" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="versioning/lockfiles.html" class="btn btn-neutral" title="Lockfiles" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -304,7 +296,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.16
+      Version: 1.17
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -312,7 +304,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.16</a></dd>
+            <dd><a href="/en/latest/index.html">1.17</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.16/index.html">1.16</a></dd>
           
         
           
@@ -382,7 +378,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.16.1',
+            VERSION:'1.17.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -419,7 +415,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <script>
-    initSearch("1.16");
+    initSearch("1.17");
   </script>
 
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WK44ZFM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

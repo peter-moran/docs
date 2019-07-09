@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conanfile.txt &mdash; conan 1.16.1 documentation</title>
+  <title>conanfile.txt &mdash; conan 1.17.1 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.16.1 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.17.1 documentation" href="../index.html"/>
         <link rel="up" title="Reference" href="../reference.html"/>
         <link rel="next" title="conanfile.py" href="conanfile.html"/>
         <link rel="prev" title="Return Codes" href="commands/return_codes.html"/>
@@ -116,6 +116,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versioning.html">Versioning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../extending.html">Extending Conan</a></li>
@@ -243,7 +244,7 @@ Poco/1.9.0@pocoproject/stable
 zlib/1.2.11@conan/stable
 </pre></div>
 </div>
-<p>This section supports references with <a class="reference internal" href="../mastering/version_ranges.html#version-ranges"><span class="std std-ref">version ranges</span></a>:</p>
+<p>This section supports references with <a class="reference internal" href="../versioning/version_ranges.html#version-ranges"><span class="std std-ref">version ranges</span></a>:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
 Poco/[&gt;1.0,&lt;1.8]@pocoproject/stable
 zlib/1.2.11@conan/stable
@@ -257,7 +258,7 @@ zlib/1.2.11@conan/stable
 7z_installer/1.0@conan/stable
 </pre></div>
 </div>
-<p>This section supports references with <a class="reference internal" href="../mastering/version_ranges.html#version-ranges"><span class="std std-ref">version ranges</span></a>.</p>
+<p>This section supports references with <a class="reference internal" href="../versioning/version_ranges.html#version-ranges"><span class="std std-ref">version ranges</span></a>.</p>
 <p>In practice the <code class="docutils literal notranslate"><span class="pre">[build_requires]</span></code> will be always installed (same as <code class="docutils literal notranslate"><span class="pre">[requires]</span></code>) as installing from a <em>conanfile.txt</em> means that
 something is going to be built, so the build requirements are indeed needed.</p>
 <p>It is useful and conceptually cleaner to have them in separate sections, so users of this <em>conanfile.txt</em> might quickly identify some
@@ -385,7 +386,7 @@ Comments are ignored by the syntax; they are not tokens.</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.16
+      Version: 1.17
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -393,7 +394,11 @@ Comments are ignored by the syntax; they are not tokens.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.16</a></dd>
+            <dd><a href="/en/latest/index.html">1.17</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.16/index.html">1.16</a></dd>
           
         
           
@@ -463,7 +468,7 @@ Comments are ignored by the syntax; they are not tokens.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.16.1',
+            VERSION:'1.17.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -500,7 +505,7 @@ Comments are ignored by the syntax; they are not tokens.</p>
 
 
   <script>
-    initSearch("1.16");
+    initSearch("1.17");
   </script>
 
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WK44ZFM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

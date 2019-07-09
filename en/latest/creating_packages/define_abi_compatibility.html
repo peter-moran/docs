@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Defining Package ABI Compatibility &mdash; conan 1.16.1 documentation</title>
+  <title>Defining Package ABI Compatibility &mdash; conan 1.17.1 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.16.1 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.17.1 documentation" href="../index.html"/>
         <link rel="up" title="Creating Packages" href="../creating_packages.html"/>
         <link rel="next" title="Inspecting Packages" href="inspecting_packages.html"/>
         <link rel="prev" title="Understanding Packaging" href="understand_packaging.html"/>
@@ -137,6 +137,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../uploading_packages.html">Uploading Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../developing_packages.html">Developing packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versioning.html">Versioning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mastering.html">Mastering Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../systems_cross_building.html">Systems and cross building</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../extending.html">Extending Conan</a></li>
@@ -454,11 +455,13 @@ affects the binary package, or even the required package ID can change your own 
 <table border="1" class="docutils">
 <colgroup>
 <col width="22%" />
-<col width="9%" />
-<col width="36%" />
-<col width="9%" />
-<col width="11%" />
-<col width="14%" />
+<col width="8%" />
+<col width="32%" />
+<col width="8%" />
+<col width="10%" />
+<col width="12%" />
+<col width="5%" />
+<col width="5%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head"><strong>Modes / Variables</strong></th>
@@ -467,6 +470,7 @@ affects the binary package, or even the required package ID can change your own 
 <th class="head"><code class="docutils literal notranslate"><span class="pre">user</span></code></th>
 <th class="head"><code class="docutils literal notranslate"><span class="pre">channel</span></code></th>
 <th class="head"><code class="docutils literal notranslate"><span class="pre">package_id</span></code></th>
+<th class="head" colspan="2">RREV | PREV</th>
 </tr>
 </thead>
 <tbody valign="top">
@@ -476,10 +480,13 @@ affects the binary package, or even the required package ID can change your own 
 <td>No</td>
 <td>No</td>
 <td>No</td>
+<td colspan="2">No   | No</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">semver_mode()</span></code></td>
 <td>Yes</td>
 <td>Yes, only &gt; 1.0.0 (e.g., <strong>1</strong>.2.Z+b102)</td>
+<td>No</td>
+<td>No</td>
 <td>No</td>
 <td>No</td>
 <td>No</td>
@@ -490,10 +497,14 @@ affects the binary package, or even the required package ID can change your own 
 <td>No</td>
 <td>No</td>
 <td>No</td>
+<td>No</td>
+<td>No</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">minor_mode()</span></code></td>
 <td>Yes</td>
 <td>Yes (e.g., <strong>1.2</strong>.Z+b102)</td>
+<td>No</td>
+<td>No</td>
 <td>No</td>
 <td>No</td>
 <td>No</td>
@@ -504,10 +515,14 @@ affects the binary package, or even the required package ID can change your own 
 <td>No</td>
 <td>No</td>
 <td>No</td>
+<td>No</td>
+<td>No</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">base_mode()</span></code></td>
 <td>Yes</td>
 <td>Yes (e.g., <strong>1.7</strong>+b102)</td>
+<td>No</td>
+<td>No</td>
 <td>No</td>
 <td>No</td>
 <td>No</td>
@@ -518,12 +533,16 @@ affects the binary package, or even the required package ID can change your own 
 <td>No</td>
 <td>No</td>
 <td>No</td>
+<td>No</td>
+<td>No</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">full_recipe_mode()</span></code></td>
 <td>Yes</td>
 <td>Yes (e.g., <strong>1.2.3+b102</strong>)</td>
 <td>Yes</td>
 <td>Yes</td>
+<td>No</td>
+<td>No</td>
 <td>No</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">full_package_mode()</span></code></td>
@@ -532,6 +551,8 @@ affects the binary package, or even the required package ID can change your own 
 <td>Yes</td>
 <td>Yes</td>
 <td>Yes</td>
+<td>No</td>
+<td>No</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">unrelated_mode()</span></code></td>
 <td>No</td>
@@ -539,6 +560,26 @@ affects the binary package, or even the required package ID can change your own 
 <td>No</td>
 <td>No</td>
 <td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">recipe_revision_mode()</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">package_revision_mode()</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
 </tr>
 </tbody>
 </table>
@@ -636,7 +677,7 @@ version even without strict semver.</p>
   <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="p">[</span><span class="s2">&quot;MyOtherLib&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">full_package_mode</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>This is the stricter mode. Any change to the dependency, including its binary package-id, will in turn
+<p>Any change to the dependency, including its binary package-id, will in turn
 produce a new package-id for the consumer package.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MyOtherLib/1.3.4-a4+b3@user/testing:73b..fa56  =&gt; MyOtherLib/1.3.4-a4+b3@user/testing:73b..fa56
 </pre></div>
@@ -648,7 +689,45 @@ produce a new package-id for the consumer package.</p>
 </pre></div>
 </div>
 </li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">recipe_revision_mode()</span></code>: The full reference <cite>pkg/version&#64;user/channel#RREV</cite> of the dependencies,
+including the recipe revision will be taken into account to compute the consumer package ID</p>
+</li>
 </ul>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  mypkg/1.3.4@user/testing#RREV1:73b..fa56#PREV1  =&gt; mypkg/1.3.4-a4+b3@user/testing#RREV1
+
+.. code-block:: python
+
+    def package_id(self):
+        self.info.requires[&quot;mypkg&quot;].recipe_revision_mode()
+</pre></div>
+</div>
+</div></blockquote>
+<ul>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">package_revision_mode()</span></code>: The full pckage reference <cite>pkg/version&#64;user/channel#RREV:ID#PREV</cite>
+of the dependencies, including the recipe revision, the binary package ID and the package revision
+will be taken into account to compute the consumer package ID</p>
+<p>This is the most strict mode. Any change in the upstream will produce new consumers package IDs,
+becoming a fully deterministic binary model.</p>
+</li>
+</ul>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  # The full reference of the dependency package binary will be used as-is
+  mypkg/1.3.4@user/testing#RREV1:73b..fa56#PREV1  =&gt; mypkg/1.3.4@user/testing#RREV1:73b..fa56#PREV1
+
+.. code-block:: python
+
+    def package_id(self):
+        self.info.requires[&quot;mypkg&quot;].package_revision_mode()
+
+ Given that the package ID of consumers depends on the package revision PREV of the dependencies, when
+ one of the upstream dependencies doesn&#39;t have a package revision yet (for example it is going to be
+ built from sources, so its PREV cannot be determined yet), the consumers package ID will be unknown and
+ marked as such. These dependency graphs cannot be built in a single invocation, because they are intended
+ for CI systems, in which a package creation/built is called for each package in the graph.
+</pre></div>
+</div>
+</div></blockquote>
 <p>You can also adjust the individual properties manually:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="n">myotherlib</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">requires</span><span class="p">[</span><span class="s2">&quot;MyOtherLib&quot;</span><span class="p">]</span>
@@ -812,7 +891,7 @@ write:</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.16
+      Version: 1.17
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -820,7 +899,11 @@ write:</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.16</a></dd>
+            <dd><a href="/en/latest/index.html">1.17</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.16/index.html">1.16</a></dd>
           
         
           
@@ -890,7 +973,7 @@ write:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.16.1',
+            VERSION:'1.17.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -927,7 +1010,7 @@ write:</p>
 
 
   <script>
-    initSearch("1.16");
+    initSearch("1.17");
   </script>
 
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WK44ZFM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

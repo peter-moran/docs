@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan export-pkg &mdash; conan 1.16.1 documentation</title>
+  <title>conan export-pkg &mdash; conan 1.17.1 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.16.1 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.17.1 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan new" href="new.html"/>
         <link rel="prev" title="conan export" href="export.html"/>
@@ -116,6 +116,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../../../uploading_packages.html">Uploading Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../developing_packages.html">Developing packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../versioning.html">Versioning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../mastering.html">Mastering Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../systems_cross_building.html">Systems and cross building</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../extending.html">Extending Conan</a></li>
@@ -242,7 +243,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan export-pkg <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-bf BUILD_FOLDER<span class="o">]</span> <span class="o">[</span>-e ENV<span class="o">]</span> <span class="o">[</span>-f<span class="o">]</span>
                    <span class="o">[</span>-if INSTALL_FOLDER<span class="o">]</span> <span class="o">[</span>-o OPTIONS<span class="o">]</span> <span class="o">[</span>-pr PROFILE<span class="o">]</span>
                    <span class="o">[</span>-pf PACKAGE_FOLDER<span class="o">]</span> <span class="o">[</span>-s SETTINGS<span class="o">]</span> <span class="o">[</span>-sf SOURCE_FOLDER<span class="o">]</span>
-                   <span class="o">[</span>-j JSON<span class="o">]</span>
+                   <span class="o">[</span>-j JSON<span class="o">]</span> <span class="o">[</span>-l <span class="o">[</span>LOCKFILE<span class="o">]]</span>
                    path reference
 </pre></div>
 </div>
@@ -288,6 +289,10 @@ optional arguments:
                         directory can also be specified
   -j JSON, --json JSON  Path to a json file where the install information will
                         be written
+  -l [LOCKFILE], --lockfile [LOCKFILE]
+                        Path to a lockfile or folder containing &#39;conan.lock&#39;
+                        file. Lockfile will be updated with the exported
+                        package
 </pre></div>
 </div>
 <p>The <strong class="command">export-pkg</strong> command let you create a package from already existing files
@@ -421,7 +426,7 @@ example to select which files to copy, we need to change the patterns in the
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.16
+      Version: 1.17
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -429,7 +434,11 @@ example to select which files to copy, we need to change the patterns in the
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.16</a></dd>
+            <dd><a href="/en/latest/index.html">1.17</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.16/index.html">1.16</a></dd>
           
         
           
@@ -499,7 +508,7 @@ example to select which files to copy, we need to change the patterns in the
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.16.1',
+            VERSION:'1.17.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -536,7 +545,7 @@ example to select which files to copy, we need to change the patterns in the
 
 
   <script>
-    initSearch("1.16");
+    initSearch("1.17");
   </script>
 
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WK44ZFM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

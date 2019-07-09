@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Attributes &mdash; conan 1.16.1 documentation</title>
+  <title>Attributes &mdash; conan 1.17.1 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.16.1 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.17.1 documentation" href="../../index.html"/>
         <link rel="up" title="conanfile.py" href="../conanfile.html"/>
         <link rel="next" title="Methods" href="methods.html"/>
         <link rel="prev" title="conanfile.py" href="../conanfile.html"/>
@@ -116,6 +116,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../../uploading_packages.html">Uploading Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../developing_packages.html">Developing packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../devtools.html">Package apps and devtools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versioning.html">Versioning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../mastering.html">Mastering Conan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../systems_cross_building.html">Systems and cross building</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../extending.html">Extending Conan</a></li>
@@ -699,16 +700,20 @@ downstream dependent packages.</p>
 </div>
 <div class="section" id="requires">
 <h2>requires<a class="headerlink" href="#requires" title="Permalink to this headline">¶</a></h2>
-<p>Specify package dependencies as a list of other packages:</p>
+<p>Specify package dependencies as a list or tuple of other packages:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyLibConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
     <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;Hello/1.0@user/stable&quot;</span><span class="p">,</span> <span class="s2">&quot;OtherLib/2.1@otheruser/testing&quot;</span>
 </pre></div>
 </div>
 <p>You can specify further information about the package requirements:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyLibConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
-    <span class="n">requires</span> <span class="o">=</span> <span class="p">((</span><span class="s2">&quot;Hello/0.1@user/testing&quot;</span><span class="p">),</span>
+    <span class="n">requires</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;Hello/0.1@user/testing&quot;</span><span class="p">),</span>
                 <span class="p">(</span><span class="s2">&quot;Say/0.2@dummy/stable&quot;</span><span class="p">,</span> <span class="s2">&quot;override&quot;</span><span class="p">),</span>
-                <span class="p">(</span><span class="s2">&quot;Bye/2.1@coder/beta&quot;</span><span class="p">,</span> <span class="s2">&quot;private&quot;</span><span class="p">))</span>
+                <span class="p">(</span><span class="s2">&quot;Bye/2.1@coder/beta&quot;</span><span class="p">,</span> <span class="s2">&quot;private&quot;</span><span class="p">)]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyLibConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">requires</span> <span class="o">=</span> <span class="p">((</span><span class="s2">&quot;Hello/1.0@user/stable&quot;</span><span class="p">,</span> <span class="s2">&quot;private&quot;</span><span class="p">),</span> <span class="p">)</span>
 </pre></div>
 </div>
 <p>Requirements can be complemented by 2 different parameters:</p>
@@ -748,7 +753,7 @@ requires it. Otherwise Zlib will not be a dependency of your package.</p>
 </pre></div>
 </div>
 <div class="out-reference-box docutils container">
-Go to <a class="reference internal" href="../../mastering/version_ranges.html#version-ranges"><span class="std std-ref">Mastering/Version Ranges</span></a> if you want to learn more about version ranges.</div>
+Go to <a class="reference internal" href="../../versioning/version_ranges.html#version-ranges"><span class="std std-ref">Mastering/Version Ranges</span></a> if you want to learn more about version ranges.</div>
 </div>
 </div>
 <div class="section" id="build-requires">
@@ -1243,7 +1248,7 @@ from a <a class="reference internal" href="../../extending/python_requires.html#
 <span id="revision-mode-attribute"></span><h2>revision_mode<a class="headerlink" href="#revision-mode" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">This attribute is part of the <a class="reference internal" href="../../mastering/revisions.html#package-revisions"><span class="std std-ref">package revisions</span></a> feature, so
+<p class="last">This attribute is part of the <a class="reference internal" href="../../versioning/revisions.html#package-revisions"><span class="std std-ref">package revisions</span></a> feature, so
 it is also an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
 </div>
 <p>This attribute allow each recipe to declare how the revision for the recipe itself should
@@ -1332,7 +1337,7 @@ workspace.:</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.16
+      Version: 1.17
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -1340,7 +1345,11 @@ workspace.:</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.16</a></dd>
+            <dd><a href="/en/latest/index.html">1.17</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.16/index.html">1.16</a></dd>
           
         
           
@@ -1410,7 +1419,7 @@ workspace.:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.16.1',
+            VERSION:'1.17.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -1447,7 +1456,7 @@ workspace.:</p>
 
 
   <script>
-    initSearch("1.16");
+    initSearch("1.17");
   </script>
 
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WK44ZFM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
