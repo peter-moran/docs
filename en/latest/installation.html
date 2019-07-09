@@ -226,7 +226,7 @@ also actively used in FreeBSD and Solaris SunOS. There are also several addition
 <ol class="arabic simple">
 <li>The preferred and <strong>strongly recommended way to install Conan</strong> is from PyPI, the Python Package Index, using the <code class="docutils literal notranslate"><span class="pre">pip</span></code> command.</li>
 <li>There are other available installers for different systems, which might come with a bundled python interpreter, so that you don’t have to
-install python first. Note that some of <strong>these installers might have some limitations</strong>, specially those created with pyinstaller
+install python first. Note that some of <strong>these installers might have some limitations</strong>, especially those created with pyinstaller
 (such as Windows exe &amp; Linux deb).</li>
 <li>Running Conan from sources.</li>
 </ol>
@@ -251,8 +251,9 @@ Conan still supports Python 2, however some of the dependencies have started to 
 <li>In <strong>Linux</strong>, you may need <strong>sudo</strong> permissions to install Conan globally.</li>
 <li>We strongly recommend using <strong>virtualenvs</strong> (virtualenvwrapper works great) for everything related to Python.
 (check <a class="reference external" href="https://virtualenvwrapper.readthedocs.io/en/stable/">https://virtualenvwrapper.readthedocs.io/en/stable/</a>, or <a class="reference external" href="https://pypi.org/project/virtualenvwrapper-win/">https://pypi.org/project/virtualenvwrapper-win/</a> in Windows)
+With Python 3, the built-in module <code class="docutils literal notranslate"><span class="pre">venv</span></code> can also be used instead (check <a class="reference external" href="https://docs.python.org/3/library/venv.html">https://docs.python.org/3/library/venv.html</a>).
 If not using a <strong>virtualenv</strong> it is possible that conan dependencies will conflict with previously existing dependencies,
-specially if you are using Python for other purposes.</li>
+especially if you are using Python for other purposes.</li>
 <li>In <strong>Windows</strong> and Python 2.7, you may need to use <strong>32bit</strong> python distribution (which is the Windows default), instead
 of 64 bit.</li>
 <li>In <strong>OSX</strong>, especially the latest versions that may have <strong>System Integrity Protection</strong>, pip may fail. Try using virtualenvs, or
@@ -262,7 +263,7 @@ install with another user <code class="docutils literal notranslate"><span class
 virtualenv in another location or upgrade your Python installation.</li>
 <li>Some Linux distros, such as Linux Mint, require a restart (shell restart, or logout/system if not enough) after
 installation, so Conan is found in the path.</li>
-<li>Windows, Python 3 installation can fail installing the <code class="docutils literal notranslate"><span class="pre">wrapt</span></code> dependency because of a bug in <strong>pip</strong>. Information about this issue and
+<li>In Windows, Python 3 installation can fail installing the <code class="docutils literal notranslate"><span class="pre">wrapt</span></code> dependency because of a bug in <strong>pip</strong>. Information about this issue and
 workarounds is available here: <a class="reference external" href="https://github.com/GrahamDumpleton/wrapt/issues/112">https://github.com/GrahamDumpleton/wrapt/issues/112</a>.</li>
 <li>Conan works with Python 2.7, but not all features are available when not using Python 3.x starting with version 1.6</li>
 </ul>
@@ -325,8 +326,8 @@ Make sure to first install the three Conan dependencies which are also found in 
 </div>
 <p>The response should be similar to:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Consumer commands
-  install    Installs the requirements specified in a conanfile <span class="o">(</span>.py or .txt<span class="o">)</span>.
-  config     Manages configuration. Edits the conan.conf or installs config files.
+  install    Installs the requirements specified in a recipe <span class="o">(</span>conanfile.py or conanfile.txt<span class="o">)</span>.
+  config     Manages Conan configuration.
   get        Gets a file or list a directory of a given reference or package.
   info       Gets information about the dependency graph of a recipe.
   ...
@@ -378,7 +379,7 @@ If you want to regenerate the settings, you can remove the <em>settings.yml</em>
 <p>All features of Conan until version 1.6 are fully supported in both Python 2 and Python 3. However, new features in upcoming Conan releases
 that are only available in Python 3 or more easily available in Python 3 will be implemented and tested only in Python 3, and versions of
 Conan using Python 2 will not have access to that feature. This will be clearly described in code and documentation.</p>
-<p>If and when Conan 2.x is released (Not expected in 2018) the level of compatibility with Python 2 may be reduced further.</p>
+<p>If and when Conan 2.x is released, the level of compatibility with Python 2 may be reduced further.</p>
 <p>We encourage you to upgrade to Python 3 as soon as possible. However, if this is impossible for you or your team, we would like to know it.
 Please give feedback in the <a class="reference external" href="https://github.com/conan-io/conan/issues/3334">Conan issue tracker</a> or write us to <a class="reference external" href="mailto:info&#37;&#52;&#48;conan&#46;io">info<span>&#64;</span>conan<span>&#46;</span>io</a>.</p>
 </div>

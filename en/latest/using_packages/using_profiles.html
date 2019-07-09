@@ -215,8 +215,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="using-profiles">
 <span id="id1"></span><h1>Using profiles<a class="headerlink" href="#using-profiles" title="Permalink to this headline">¶</a></h1>
-<p>So far, we have used the default settings stored in <code class="docutils literal notranslate"><span class="pre">~/.conan/profiles/default</span></code> and defined as command line arguments.</p>
-<p>However, in large projects, configurations can get complex, settings can be very different, and we need an easy way to switch between different configurations with different settings, options etc,.
+<p>So far, we have used the default settings stored in <code class="docutils literal notranslate"><span class="pre">~/.conan/profiles/default</span></code> and defined custom values for some of them as command line arguments.</p>
+<p>However, in large projects, configurations can get complex, settings can be very different, and we need an easy way to switch between different configurations with different settings, options etc.
 An easy way to switch between configurations is by using profiles.</p>
 <p>A profile file contains a predefined set of <code class="docutils literal notranslate"><span class="pre">settings</span></code>, <code class="docutils literal notranslate"><span class="pre">options</span></code>, <code class="docutils literal notranslate"><span class="pre">environment</span> <span class="pre">variables</span></code>, and <code class="docutils literal notranslate"><span class="pre">build_requires</span></code> specified in the following structure:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[settings]
@@ -260,7 +260,7 @@ Tool2/0.1@user/channel, Tool3/0.1@user/channel
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan create . demo/testing -pr<span class="o">=</span>clang_3.5
 </pre></div>
 </div>
-<p>Continuing with the example of Poco, instead of passing in a long list of command line arguments, we can define a handy profile that defines them all and pass that to the command line when installing the different project dependencies.</p>
+<p>Continuing with the example of Poco, instead of passing in a long list of command line arguments, we can define a handy profile that defines them all and pass that to the command line when installing the project dependencies.</p>
 <p>A profile to install dependencies as <strong>shared</strong> and in <strong>debug</strong> mode would look like this:</p>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text"><em>debug_shared</em></span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
@@ -277,7 +277,7 @@ Tool2/0.1@user/channel, Tool3/0.1@user/channel
 </div>
 </div>
 <p>To install dependencies using the profile file, we would use:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . -pr<span class="o">=</span>debug_shared
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install .. -pr<span class="o">=</span>debug_shared
 </pre></div>
 </div>
 <p>We could also create a new profile to use a different compiler version and store that in our project directory. For example:</p>
@@ -293,12 +293,12 @@ Tool2/0.1@user/channel, Tool3/0.1@user/channel
 </div>
 </div>
 <p>To install dependencies using this new profile, we would use:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . -pr<span class="o">=</span>./poco_clang_3.5
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install .. -pr<span class="o">=</span>../poco_clang_3.5
 </pre></div>
 </div>
 <p>You can specify multiple profiles in the command line. The applied configuration will be the composition
 of all the profiles applied in the order they are specified:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . -pr<span class="o">=</span>./poco_clang_3.5 -pr<span class="o">=</span>my_build_tool1 -pr<span class="o">=</span>my_build_tool2
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install .. -pr<span class="o">=</span>../poco_clang_3.5 -pr<span class="o">=</span>my_build_tool1 -pr<span class="o">=</span>my_build_tool2
 </pre></div>
 </div>
 <div class="admonition seealso">
