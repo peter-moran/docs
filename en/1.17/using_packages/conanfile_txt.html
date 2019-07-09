@@ -241,8 +241,9 @@ headers and libraries for each package.</p>
 <p>If you execute a <strong class="command">conan install Poco/1.9.0&#64;pocoproject/stable</strong> command in your shell, Conan will
 download the Poco package and its dependencies (<em>OpenSSL/1.0.2l&#64;conan/stable</em> and
 <em>zlib/1.2.11&#64;conan/stable</em>) to your local cache and print information about the folder where
-they are installed. While you can handle them manually, the recommended approach is to
-use a <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code>.</p>
+they are installed. While you can install each of your dependencies individually like that,
+the recommended approach for handling dependencies is to use a <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code> file.
+The structure of <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code> is described below.</p>
 <div class="section" id="requires">
 <h2>Requires<a class="headerlink" href="#requires" title="Permalink to this headline">¶</a></h2>
 <p>The required dependencies should be specified in the <strong>[requires]</strong> section.
@@ -286,14 +287,14 @@ the OpenSSL library updated.</p>
 <p>Consider that a new release of the OpenSSL library has been released, and a new corresponding Conan package is
 available. In our example, we do not need to wait until <a class="reference external" href="https://bintray.com/pocoproject/conan/Poco%3Apocoproject">pocoproject</a> (the author) generates a new package of POCO that
 includes the new OpenSSL library.</p>
-<p>We can simply enter the new version in <strong>[requires]</strong> section:</p>
+<p>We can simply enter the new version in the <strong>[requires]</strong> section:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
 Poco/1.9.0@pocoproject/stable
 OpenSSL/1.0.2p@conan/stable
 </pre></div>
 </div>
 <p>The second line will override the OpenSSL/1.0.2l required by POCO with the currently non-existent <strong>OpenSSL/1.0.2p</strong>.</p>
-<p>Another example in which we may want to try some new zlib alpha features, we could replace the zlib
+<p>Another example in which we may want to try some new zlib alpha features: we could replace the zlib
 requirement with one from another user or channel.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
 Poco/1.9.0@pocoproject/stable
@@ -322,7 +323,7 @@ change accordingly.</p>
 <div class="section" id="options">
 <span id="options-txt"></span><h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <p>We have already seen that there are some <strong>settings</strong> that can be specified during installation. For
-example, <strong class="command">conan install . -s build_type=Debug</strong>. These settings are typically a project-wide
+example, <strong class="command">conan install .. -s build_type=Debug</strong>. These settings are typically a project-wide
 configuration defined by the client machine, so they cannot have a default value in the recipe. For
 example, it doesn’t make sense for a package recipe to declare “Visual Studio” as a default compiler
 because that is something defined by the end consumer, and unlikely to make sense if they are
@@ -343,7 +344,7 @@ $ conan inspect Poco/1.9.0@pocoproject/stable -a=default_options
 </div>
 </div>
 <p>For example, we can modify the previous example to use dynamic linkage instead of the default one, which was static, by editing the
-<em>conanfile.txt</em>:</p>
+<strong>[options]</strong> section in <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code>:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
 Poco/1.9.0@pocoproject/stable
 
@@ -369,9 +370,9 @@ $ conan install .. -o *:shared<span class="o">=</span>True
 </pre></div>
 </div>
 <p>Conan will install the binaries of the shared library packages, and the example will link with them. You can again inspect the different binaries installed.
-For example, <strong class="command">conan search zlib/1.2.8&#64;lasote/stable</strong>.</p>
+For example, <strong class="command">conan search zlib/1.2.8&#64;conan/stable</strong>.</p>
 <p>Finally, launch the executable:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./bin/timer
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./bin/md5
 </pre></div>
 </div>
 <p>What happened? It fails because it can’t find the shared libraries in the path. Remember that shared
@@ -379,7 +380,7 @@ libraries are used at runtime, so the operating system, which is running the app
 <p>We could inspect the generated executable, and see that it is using the shared libraries. For
 example, in Linux, we could use the <cite>objdump</cite> tool and see the <em>Dynamic section</em>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> bin
-$ objdump -p timer
+$ objdump -p md5
 ...
 Dynamic Section:
  NEEDED               libPocoUtil.so.31
@@ -409,11 +410,11 @@ Dynamic Section:
 <p>There are some differences between shared libraries on Linux (*.so), Windows (*.dll) and MacOS
 (*.dylib). The shared libraries must be located in a folder where they can be found, either by
 the linker, or by the OS runtime.</p>
-<p>You can add the libraries’ folders to the path (dynamic linker LD_LIBRARY_PATH path
+<p>You can add the libraries’ folders to the path (LD_LIBRARY_PATH environment variable
 in Linux, DYLD_LIBRARY_PATH in OSX, or system PATH in Windows), or copy those shared libraries to
-some system folder where they can be found by the OS. But these operations are are typical operations deployments or
-final installation of apps; they are not desired during development, and Conan is intended for developers, so
-it avoids manipulations on the OS.</p>
+some system folder where they can be found by the OS. But these operations are only related to the deployment or
+installation of apps; they are not relevant during development. Conan is intended for developers, so
+it avoids such manipulation of the OS environment.</p>
 <p>In Windows and OSX, the simplest approach is to copy the shared libraries to the executable
 folder, so they are found by the executable, without having to modify the path.</p>
 <p>This is done using the <strong>[imports]</strong> section in <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code>.</p>
@@ -440,17 +441,17 @@ libraries are. It is common that <strong>*.dll</strong> are copied to <strong>/b
 should be found in the <strong>/lib</strong> folder, however, this is just a convention, and different layouts are
 possible.</p>
 </div>
-<p>Install the requirements (from the <code class="docutils literal notranslate"><span class="pre">mytimer/build</span></code> folder), and run the binary again:</p>
+<p>Install the requirements (from the <code class="docutils literal notranslate"><span class="pre">build</span></code> folder), and run the binary again:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install ..
-$ ./bin/timer
+$ ./bin/md5
 </pre></div>
 </div>
-<p>Now look at the <code class="docutils literal notranslate"><span class="pre">mytimer/build/bin</span></code> folder and verify that the required shared libraries are there.</p>
+<p>Now look at the <code class="docutils literal notranslate"><span class="pre">build/bin</span></code> folder and verify that the required shared libraries are there.</p>
 <p>As you can see, the <strong>[imports]</strong> section is a very generic way to import files from your
 requirements to your project.</p>
 <p>This method can be used for packaging applications and copying the resulting executables to your bin
 folder, or for copying assets, images, sounds, test static files, etc. Conan is a generic solution
-for package management, not only (but focused in) for C/C++ or libraries.</p>
+for package management, not only for (but focused on) C/C++ libraries.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last">To learn more about working with shared libraries, please refer to <a class="reference internal" href="../howtos/manage_shared_libraries.html#manage-shared"><span class="std std-ref">Howtos/Manage shared libraries</span></a>.</p>

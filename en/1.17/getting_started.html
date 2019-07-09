@@ -214,14 +214,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="getting-started">
 <span id="id1"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p>Let’s get started with an example: We are going to create a an MD5 encrypter app that uses one of the most popular C++ libraries: <a class="reference external" href="https://pocoproject.org/">Poco</a>.</p>
+<p>Let’s get started with an example: We are going to create an MD5 encrypter app that uses one of the most popular C++ libraries: <a class="reference external" href="https://pocoproject.org/">Poco</a>.</p>
 <p>We’ll use CMake as build system in this case but keep in mind that Conan <strong>works with any build system</strong> and is not limited to using CMake.</p>
 <div class="section" id="an-md5-encrypter-using-the-poco-libraries">
 <h2>An MD5 Encrypter using the Poco Libraries<a class="headerlink" href="#an-md5-encrypter-using-the-poco-libraries" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>The source files to recreate this project are available in the following GitHub repository.
-You can skip the manual creation of folder an sources with this command:</p>
+<p>The source files to recreate this project are available in the <a class="reference external" href="https://github.com/conan-io/examples">example repository</a> in GitHub.
+You can skip the manual creation of the folder and sources with this command:</p>
 <div class="last highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/conan-io/examples.git <span class="o">&amp;&amp;</span> <span class="nb">cd</span> examples/libraries/poco/md5
 </pre></div>
 </div>
@@ -264,6 +264,8 @@ Poco/1.8.0.1@pocoproject/stable
 Poco/1.8.0@pocoproject/stable
 Poco/1.8.1@pocoproject/stable
 Poco/1.9.0@pocoproject/stable
+Poco/1.9.1@pocoproject/stable
+Poco/1.9.2@pocoproject/stable
 </pre></div>
 </div>
 </div></blockquote>
@@ -417,7 +419,7 @@ adjust the settings to accurately describe your system as shown in the <a class=
 <p>It is very important to understand the installation process. When the <strong class="command">conan install</strong> command runs, settings specified on the
 command line or taken from the defaults in <em>&lt;userhome&gt;/.conan/profiles/default</em> file are applied.</p>
 <a class="reference internal image-reference" href="_images/install_flow.png"><img alt="_images/install_flow.png" class="align-center" src="_images/install_flow.png" style="width: 500px; height: 400px;" /></a>
-<p>For example, the command <strong class="command">conan install . --settings os=&quot;Linux&quot; --settings compiler=&quot;gcc&quot;</strong>, performs these steps:</p>
+<p>For example, the command <strong class="command">conan install .. --settings os=&quot;Linux&quot; --settings compiler=&quot;gcc&quot;</strong>, performs these steps:</p>
 <ul class="simple">
 <li>Checks if the package recipe (for <code class="docutils literal notranslate"><span class="pre">Poco/1.9.0&#64;pocoproject/stable</span></code> package) exists in the local cache. If we are just starting, the
 cache is empty.</li>
@@ -429,7 +431,7 @@ cache is empty.</li>
 </ul>
 <p>There are binaries for several mainstream compilers and versions available in Conan Center repository in Bintray, such as Visual Studio 14,
 15, Linux GCC 4.9 and Apple Clang 3.5… Conan will throw an error if the binary package required for specific settings doesn’t exist. You
-can build the binary package from sources using <strong class="command">conan install --build=missing</strong>, it will succeed if your configuration is
+can build the binary package from sources using <strong class="command">conan install .. --build=missing</strong>, it will succeed if your configuration is
 supported by the recipe. You will find more info in the <a class="reference internal" href="#getting-started-other-configurations"><span class="std std-ref">Building with Other Configurations</span></a> section.</p>
 </div>
 <div class="section" id="inspecting-dependencies">
@@ -553,7 +555,7 @@ information.</p>
 automatically detected (compiler, architecture…) and stored as the default profile. You can edit these settings
 <em>~/.conan/profiles/default</em> or create new profiles with your desired configuration.</p>
 <p>For example, if we have a profile with a 32-bit GCC configuration in a profile called <em>gcc_x86</em>, we can run the following:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . --profile<span class="o">=</span>gcc_x86
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install .. --profile<span class="o">=</span>gcc_x86
 </pre></div>
 </div>
 <div class="admonition tip">
@@ -562,7 +564,7 @@ automatically detected (compiler, architecture…) and stored as the default pro
 </div>
 <p>However, the user can always override the profile settings in the <strong class="command">conan install</strong> command using the <strong class="command">--settings</strong>
 parameter. As an exercise, try building the 32-bit version of the Encrypter project like this:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . --settings <span class="nv">arch</span><span class="o">=</span>x86
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install .. --settings <span class="nv">arch</span><span class="o">=</span>x86
 </pre></div>
 </div>
 <p>The above command installs a different package, using the <strong class="command">--settings arch=x86</strong> instead of the one of the default profile used
