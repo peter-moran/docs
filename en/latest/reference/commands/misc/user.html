@@ -315,6 +315,32 @@ server) checking the password against the remote credentials. If the password is
 authentication token will be obtained, and that token is the information cached locally. For
 any subsequent interaction with the remotes, the Conan client will only use that JWT token.</p>
 </div>
+<div class="section" id="using-environment-variables">
+<h2>Using environment variables<a class="headerlink" href="#using-environment-variables" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../../env_vars.html#env-vars-conan-login-username"><span class="std std-ref">CONAN_LOGIN_USERNAME</span></a> and <a class="reference internal" href="../../env_vars.html#env-vars-conan-password"><span class="std std-ref">CONAN_PASSWORD</span></a> environment variables allow
+defining the user and the password in the environment.
+If those environment variables are defined, the user input will no be necessary whenever the user or
+password are requested. Values for user and password will be automatically taken from the
+environment variables without any interactive input.</p>
+<p>This applies also to the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">user</span></code> command, if you want to force the authentication in some
+scripts, without requiring to put the password in plain text, the following can be done:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan user --clean  <span class="c1"># remove previous auth tokens</span>
+$ <span class="nb">export</span> <span class="nv">CONAN_PASSWORD</span><span class="o">=</span>mypassword
+$ conan user mysyusername -p -r<span class="o">=</span>myremote
+Please enter a password <span class="k">for</span> <span class="s2">&quot;mysusername&quot;</span> account: Got password <span class="s1">&#39;******&#39;</span> from environment
+Changed user of remote <span class="s1">&#39;myremote&#39;</span> from <span class="s1">&#39;None&#39;</span> <span class="o">(</span>anonymous<span class="o">)</span> to <span class="s1">&#39;mysusername&#39;</span>
+$ conan upload zlib* -r<span class="o">=</span>myremote --all --confirm
+</pre></div>
+</div>
+<p>In this example, <strong class="command">conan user mysyusername -p -r=myremote</strong> will interactively request a password
+if <code class="docutils literal notranslate"><span class="pre">CONAN_PASSWORD</span></code> is not defined.</p>
+<p>The environment variable <a class="reference internal" href="../../env_vars.html#env-vars-non-interactive"><span class="std std-ref">CONAN_NON_INTERACTIVE</span></a> (or <code class="docutils literal notranslate"><span class="pre">general.non_interactive</span></code> in <em>conan.conf</em>)
+can be defined to guarantee that an error will be raise if user input is required, to avoid stalls in CI
+builds.</p>
+<p>Note that defining <code class="docutils literal notranslate"><span class="pre">CONAN_LOGIN_USERNAME</span></code> and/or <code class="docutils literal notranslate"><span class="pre">CONAN_PASSWORD</span></code> do not perform in any case an
+authentication request against the server. Only when the server request credentials
+(or a explicit <strong class="command">conan user -p</strong> is done), they will be used as an alternative source rather than interactive user input. This means that for servers like Artifactory that allow enabling <em>“Hide Existence of Unauthorized Resource”</em> modes, it will be necessary to explicitly call <strong class="command">conan user -p</strong> before downloading or uploading anything from the server, otherwise, Artifactory will return 404 errors instead of requesting authentication.</p>
+</div>
 </div>
 
 

@@ -414,7 +414,7 @@ Conan recipes can use the <code class="docutils literal notranslate"><span class
 as default. If relative, the path will be resolved from the profiles folder.</p>
 </div>
 <div class="section" id="conan-non-interactive">
-<h2>CONAN_NON_INTERACTIVE<a class="headerlink" href="#conan-non-interactive" title="Permalink to this headline">¶</a></h2>
+<span id="env-vars-non-interactive"></span><h2>CONAN_NON_INTERACTIVE<a class="headerlink" href="#conan-non-interactive" title="Permalink to this headline">¶</a></h2>
 <p><strong>Defaulted to</strong>: <code class="docutils literal notranslate"><span class="pre">False</span></code>/<code class="docutils literal notranslate"><span class="pre">0</span></code></p>
 <p>This environment variable, if set to <code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">1</span></code>, will prevent interactive prompts.
 Invocations of Conan commands where an interactive prompt would otherwise appear, will fail instead.</p>
@@ -474,7 +474,7 @@ to show more detailed logging information, set this variable to lower values, as
 debug information.</p>
 </div>
 <div class="section" id="conan-login-username-conan-login-username-remote-name">
-<h2>CONAN_LOGIN_USERNAME, CONAN_LOGIN_USERNAME_{REMOTE_NAME}<a class="headerlink" href="#conan-login-username-conan-login-username-remote-name" title="Permalink to this headline">¶</a></h2>
+<span id="env-vars-conan-login-username"></span><h2>CONAN_LOGIN_USERNAME, CONAN_LOGIN_USERNAME_{REMOTE_NAME}<a class="headerlink" href="#conan-login-username-conan-login-username-remote-name" title="Permalink to this headline">¶</a></h2>
 <p><strong>Defaulted to</strong>: Not defined</p>
 <p>You can define the username for the authentication process using environment variables.
 Conan will use a variable <strong>CONAN_LOGIN_USERNAME_{REMOTE_NAME}</strong>, if the variable is not
@@ -485,6 +485,10 @@ Conan will request to the user to input a username.</p>
 <p>For example: For a remote named “conan-center”:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>SET <span class="nv">CONAN_LOGIN_USERNAME_CONAN_CENTER</span><span class="o">=</span>MyUser
 </pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">See the <a class="reference internal" href="commands/misc/user.html#conan-user"><span class="std std-ref">conan user</span></a> command documentation for more information about login to remotes</p>
 </div>
 </div>
 <div class="section" id="conan-make-program">
@@ -529,7 +533,7 @@ Conan will request to the user to input a username.</p>
 <a class="reference external" href="https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-command-line-reference?view=vs-2017">MSBuild documentation</a>.</p>
 </div>
 <div class="section" id="conan-password-conan-password-remote-name">
-<h2>CONAN_PASSWORD, CONAN_PASSWORD_{REMOTE_NAME}<a class="headerlink" href="#conan-password-conan-password-remote-name" title="Permalink to this headline">¶</a></h2>
+<span id="env-vars-conan-password"></span><h2>CONAN_PASSWORD, CONAN_PASSWORD_{REMOTE_NAME}<a class="headerlink" href="#conan-password-conan-password-remote-name" title="Permalink to this headline">¶</a></h2>
 <p><strong>Defaulted to</strong>: Not defined</p>
 <p>You can define the authentication password using environment variables.
 Conan will use a variable <strong>CONAN_PASSWORD_{REMOTE_NAME}</strong>, if the variable is not
@@ -541,6 +545,10 @@ you have to replace it with “_” in the variable name.</p>
 <p>For example, for a remote named “conan-center”:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>SET <span class="nv">CONAN_PASSWORD_CONAN_CENTER</span><span class="o">=</span>Mypassword
 </pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">See the <a class="reference internal" href="commands/misc/user.html#conan-user"><span class="std std-ref">conan user</span></a> command documentation for more information about login to remotes</p>
 </div>
 </div>
 <div class="section" id="conan-hooks">
