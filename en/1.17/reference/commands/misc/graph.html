@@ -261,7 +261,119 @@ optional arguments:
   -h, --help            show this help message and exit
 </pre></div>
 </div>
-<p>–EXAMPLES COMING SOON–</p>
+<div class="section" id="conan-graph-update-lock">
+<h2>conan graph update-lock<a class="headerlink" href="#conan-graph-update-lock" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan graph update-lock <span class="o">[</span>-h<span class="o">]</span> old_lockfile new_lockfile
+</pre></div>
+</div>
+<p>Updates the <em>old_lockfile</em> file with the contents of the <em>new_lockfiles</em>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>positional arguments:
+  old_lockfile  path to previous lockfile
+  new_lockfile  path to modified lockfile
+
+optional arguments:
+  -h, --help    show this help message and exit
+</pre></div>
+</div>
+<p>Only the packages in <em>new_lockfile</em> marked as “modified” will be processed.
+If a node in <em>old_lockfile</em> is already modified and an incompatible (different
+binary ID, different revision) updated is attempted, it will raise an error.
+The updated nodes will keep the “modified” flag when updated in <em>old_lockfile</em></p>
+<p>This command is useful for distributed or concurrent builds of different packages
+in the same dependency graph locked by the same lockfile. When one package is rebuilt
+it will modify the package reference, and will be marked as “modified”. The way
+of integrating the information of package builds into the main lockfile is this command.</p>
+<p>Example:</p>
+<p>Integrate the information of building a “pkgb” package using a lockfile (and modified
+in the folder pkgb_temp) in the main lockfile:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan graph update-lock release/conan.lock pkgb_temp/release/conan.lock
+</pre></div>
+</div>
+</div>
+<div class="section" id="conan-graph-clean-modified">
+<h2>conan graph clean-modified<a class="headerlink" href="#conan-graph-clean-modified" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan graph clean-modified <span class="o">[</span>-h<span class="o">]</span> lockfile
+</pre></div>
+</div>
+<p>Cleans all “modified” flags from the given lockfile.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>positional arguments:
+  lockfile    lockfile folder
+
+optional arguments:
+  -h, --help  show this help message and exit
+</pre></div>
+</div>
+<p>When a package of a dependency graph is going to be re-built, using a given lockfile,
+it is desired to finish the build knowing which packages of the graph have been
+actually rebuilt as a result of the last command. This command will clean all the
+previously existing “modified” flags before such build, so after the build
+the “modified” are only those that have been built now.</p>
+</div>
+<div class="section" id="conan-graph-build-order">
+<h2>conan graph build-order<a class="headerlink" href="#conan-graph-build-order" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan graph build-order <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-b <span class="o">[</span>BUILD<span class="o">]]</span> <span class="o">[</span>--json JSON<span class="o">]</span> lockfile
+</pre></div>
+</div>
+<p>Given a lockfile, compute which packages and in which order they should be built,
+as mandated by the binary ID (<code class="docutils literal notranslate"><span class="pre">package_id()</span></code>) definitions and the <code class="docutils literal notranslate"><span class="pre">--build</span></code> argument,
+which is the same as <strong class="command">conan create|install</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>positional arguments:
+  lockfile              lockfile folder
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -b [BUILD], --build [BUILD]
+                        nodes to build
+  --json JSON           generate output file in json format
+</pre></div>
+</div>
+<p>The result is a list of lists, containing tuples. Each tuple contains 2 elements, the
+first is a UUID of the node of the graph. It is unique and ensures a way to address
+exactly one node, even if there are nodes with the same reference (it is possible for
+example to have different build_requires with the same name and version, but different
+configuration)</p>
+</div>
+<div class="section" id="conan-graph-lock">
+<h2>conan graph lock<a class="headerlink" href="#conan-graph-lock" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conan graph lock <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-l LOCKFILE<span class="o">]</span> <span class="o">[</span>-b <span class="o">[</span>BUILD<span class="o">]]</span> <span class="o">[</span>-e ENV<span class="o">]</span> <span class="o">[</span>-o OPTIONS<span class="o">]</span>
+                        <span class="o">[</span>-pr PROFILE<span class="o">]</span> <span class="o">[</span>-r REMOTE<span class="o">]</span> <span class="o">[</span>-s SETTINGS<span class="o">]</span> <span class="o">[</span>-u<span class="o">]</span>
+                        path_or_reference
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>positional arguments:
+  path_or_reference     Path to a folder containing a recipe (conanfile.py or
+                        conanfile.txt) or to a recipe file. e.g.,
+                        ./my_project/conanfile.txt. It could also be a
+                        reference
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -l LOCKFILE, --lockfile LOCKFILE
+                        Path to lockfile to be created. If not specified
+                        &#39;conan.lock&#39; will be created in current folder
+  -b [BUILD], --build [BUILD]
+                        Packages to build from source
+  -e ENV, --env ENV     Environment variables that will be set during the
+                        package build, -e CXX=/usr/bin/clang++
+  -o OPTIONS, --options OPTIONS
+                        Define options values, e.g., -o Pkg:with_qt=true
+  -pr PROFILE, --profile PROFILE
+                        Apply the specified profile to the install command
+  -r REMOTE, --remote REMOTE
+                        Look in the specified remote server
+  -s SETTINGS, --settings SETTINGS
+                        Settings to build the package, overwriting the
+                        defaults. e.g., -s compiler=gcc
+  -u, --update          Check updates exist from upstream remotes
+</pre></div>
+</div>
+<p>This command is similar to <strong class="command">conan install</strong> or <strong class="command">conan info</strong>, but
+with a few differences:</p>
+<ul class="simple">
+<li>It doesn’t need to retrieve binaries, it will only compute what is necessary to do, according to the <code class="docutils literal notranslate"><span class="pre">--build</span></code> argument and rules</li>
+<li>Even when <code class="docutils literal notranslate"><span class="pre">--build</span></code> values are specified, packages will not be built from sources. It will just compute, as a “dry-run” what would happen in an equivalent <strong class="command">conan install</strong></li>
+</ul>
+</div>
 </div>
 
 

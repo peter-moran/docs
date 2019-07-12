@@ -341,38 +341,140 @@ following the <strong class="command">--build</strong> arguments and the <code c
 </div>
 <div class="section" id="how-to-use-lockfiles-in-ci">
 <h2>How to use lockfiles in CI<a class="headerlink" href="#how-to-use-lockfiles-in-ci" title="Permalink to this headline">¶</a></h2>
-<p>One of the applications of lockfiles is to be able to propagate changes done in one package
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The code used in this section, including a <em>build.py</em> script to reproduce it, is in the
+examples repository: <a class="reference external" href="https://github.com/conan-io/examples">https://github.com/conan-io/examples</a></p>
+<div class="code bash last highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/conan-io/examples.git
+$ cd features/lockfiles/ci
+$ python build.py
+</pre></div>
+</div>
+</div>
+<p>One of the applications of lockfiles is to be able to propagate changes in one package
 belonging to a dependency graph downstream its affected consumers.</p>
-<p>Let’s say that we have the following scenario in which one developer does some changes to PkgB,
-creating a new version <strong>PkgB/1.1</strong>, and lets assume that all packages use version-ranges.
-The goal is to be able to build a new dependency graph down to <strong>PkgE/1.0</strong> in which only those
-changes done in <strong>PkgB/1.1</strong> are taken into account but not other new versions of other packages,
-like new versions of PkgA and PkgF.</p>
-<p>The process can begin capturing a lockfile of the initial status of our “product”, down to PkgE:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> PkgE
-$ conan graph lock .
+<p>Lets say that we have the following project in which packages PkgA, PkgB, PkgC, PkgZ and App
+have already been created and only one version of each, the version 0.1 exists. All packages
+are using version ranges with a range like <code class="docutils literal notranslate"><span class="pre">PkgZ/[&gt;0.0]</span></code>, so basically they will resolve to
+any new version of their dependencies that it is published.</p>
+<p>Also, the <code class="docutils literal notranslate"><span class="pre">full_version_mode</span></code> will be defined for dependencies. This means that if the version
+number of one package dependencies change, then it will require a new binary. This assumption
+is reasonable, as PkgA, PkgZ are header only libraries and PkgB and PkgC are static libraries
+that inline functionality defined in PkgA and PkgZ. No matter what the changes in PkgA and PkgZ
+are in new versions, it will be necessary to build new binaries for the downstream consumers.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>$ conan config set general.default_package_id_mode=full_version_mode
 </pre></div>
 </div>
-<p>After that, we can proceed to build the new <strong>PkgB/1.1</strong> version, with its dependencies locked:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> PkgB
-$ cp ../PkgE/conan.lock . <span class="c1"># Do a copy of the lockfile</span>
-$ conan create PkgB/1.1@user/testing --lockfile
-<span class="c1"># Now the lockfile has been modified, contains PkgB/1.1 instead of PkgB/1.0</span>
+<p>Now, some developer does some changes to PkgA, and do a pull request to the develop branch,
+and we want our CI to build the new binaries for the dependants packages, down to the final
+application App, to make sure that every works as expected.</p>
+<p>The process starts generating a <em>conan.lock</em> lockfile in the <em>release</em> subfolder:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan graph lock App/0.1@user/testing --lockfile<span class="o">=</span>release
 </pre></div>
 </div>
+<p>This lockfile will contain the resolved dependencies in the graph, as we only have one version
+0.1 for all the packages, all of them will be locked to that 0.1 version.</p>
 <img alt="../_images/lockfile_ci_1.png" src="../_images/lockfile_ci_1.png" />
+<p>Once the lockfile has been generated, it doesn’t matter if new, unrelated versions of other
+packages, like <strong>PkgZ/0.2</strong> is created with <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">PkgZ</span> <span class="pre">&amp;&amp;</span> <span class="pre">conan</span> <span class="pre">create</span> <span class="pre">.</span> <span class="pre">PkgZ/0.2&#64;user/testing</span></code></p>
+<p>Now we can safely create the new version of <strong>PkgA/0.2</strong>, that will resolve to use <strong>PkgZ/0.1</strong>
+instead of the latest 0.2, if we use the lockfile:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> PkgA <span class="o">&amp;&amp;</span> conan create . PkgA/0.2@user/testing --lockfile<span class="o">=</span>../release
+<span class="c1"># lockfile in release/conan.lock is modified to contain PkgA/0.2</span>
+</pre></div>
+</div>
+<p>Note that the lockfile is modified, to contain the new <strong>PkgA/0.2</strong> version.</p>
 <p>The next step is to know which dependants need to be built because they are affected by the new
-<strong>PkgB/1.1</strong> version:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan graph build-order . --build<span class="o">=</span>missing
-<span class="o">[[</span>PkgC, PkgD<span class="o">]</span>, <span class="o">[</span>PkgE<span class="o">]]</span>  <span class="c1"># simplified format</span>
+<strong>PkgA/0.2</strong> version:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan graph build-order ./release --json<span class="o">=</span>bo.json --build<span class="o">=</span>missing
+<span class="o">[[</span>PkgC, PkgD<span class="o">]</span>, <span class="o">[</span>App<span class="o">]]</span>  <span class="c1"># simplified format</span>
 </pre></div>
 </div>
-<p>This command will return a list of lists, in order, of those packages to be built. We take the
-first sub-list and each package can be rebuilt, making sure the lockfile is applied:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>EXAMPLE COMING SOON!<span class="o">)</span>
+<p>This command will return a list of lists, in order, of those packages to be built. It will be
+stored in a <em>bo.json</em> json file too. Note that the <code class="docutils literal notranslate"><span class="pre">--build=missing</span></code> follows the same rules
+as <strong class="command">create</strong> and <strong class="command">install</strong> commands. The result of evaluating the graph with
+the <strong>PkgA/0.2</strong> version, due to the <code class="docutils literal notranslate"><span class="pre">full_version_mode</span></code> policy is that new binaries for
+PkgB, PkgC and App are necessary, and they do not exist yet. If we don’t provide the <code class="docutils literal notranslate"><span class="pre">--build=missing</span></code>
+it will return an empty list (but it will fail later, because binary packages are not available).</p>
+<p>We can now proceed iteratively with the following procedure:</p>
+<ol class="arabic">
+<li><p class="first">pop the first element of the first sublist of the build order result, get its <code class="docutils literal notranslate"><span class="pre">ref</span></code> reference</p>
+<blockquote>
+<div><div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># python</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">ref</span> <span class="o">=</span> <span class="n">build_order</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ref</span> <span class="o">=</span> <span class="n">ref</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
+</div></blockquote>
+</li>
+<li><p class="first">allocate some resource, like a CI build server, or create a temporary folder.</p>
+<blockquote>
+<div><div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir build_server_folder &amp;&amp; mkdir build_server_folder/release
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">copy the lockfile to that resource (and move to it)</p>
+<blockquote>
+<div><div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>$ cp release/conan.lock build_server_folder/release
+$ cd build_server_folder
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">clean “modified” nodes from the lockfile</p>
+<blockquote>
+<div><div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>$ conan graph clean-modified release/
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">build the package</p>
+<blockquote>
+<div><div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>$ conan install &lt;ref&gt; --build=&lt;ref&gt; --lockfile=release
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">go back to the parent, update the lockfile with the changes</p>
+<blockquote>
+<div><div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd ..
+$ conan graph update-lock release build_server_folder/release
+$ rm -rf build_server_folder
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">compute again the build-order of packages, if not empty, goto 1</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan graph build-order ./release --json<span class="o">=</span>bo.json --build<span class="o">=</span>missing
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<p>Note that this is a suboptimal approach, in order to explain the functionality, which
+is more easy to follow if it is sequential. In reality, the CI can take the first
+sublist output of <strong class="command">conan graph build-order</strong> and fire all its packages in parallel,
+because they are guaranteed to be independent. Then, as soon as they start finishing and
+build servers become available, the <strong class="command">conan graph build-order</strong> can be reevaluated,
+and new builds can be launched accordingly, just taking care of not re-launching the same
+build again. Note that the result of build-order contains a unique UUID, which is the identifier
+of the node in the graph, which could be useful to dissambiguate.</p>
 <img alt="../_images/lockfile_ci_2.png" src="../_images/lockfile_ci_2.png" />
+<p>With this later approach, a deterministic build with optimal Continuous Integration process
+with optimal utilization of resources and minimizing unnecessary rebuilds is achieved.</p>
+<p>Note that this example has been using incremental versions and version ranges.
+With package revisions it is also possible to achieve the same flow without bumping the versions and using fixed version dependencies:</p>
+<ul class="simple">
+<li>It will not be necessary to change the recipes or even to inject the values in CI.
+Every change in a recipe will produce a new different recipe revision.</li>
+<li>Revisions are also locked in lockfiles.</li>
+<li>As revisions are resolved by default to latest, and the conan cache can only hold
+one revision, it might be necessary to pass <code class="docutils literal notranslate"><span class="pre">--update</span></code> argument so the correct revision is updated in the cache.</li>
+<li>It is necessary to define the <code class="docutils literal notranslate"><span class="pre">recipe_revision_mode</span></code> or the <code class="docutils literal notranslate"><span class="pre">package_revision_mode</span></code> if we want to guarantee that the binaries correctly model the dependencies changes.</li>
+</ul>
+<p>For implementing this flow, it might be necessary to share the different <code class="docutils literal notranslate"><span class="pre">conan.lock</span></code> lockfiles among different machines, to pass them to build servers. A git repo could be used, but also an Artifactory generic repository could be very convenient for this purpose.</p>
 </div>
 </div>
 
