@@ -288,8 +288,8 @@ your <em>conanfile.py</em>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="n">env_build</span> <span class="o">=</span> <span class="n">RunEnvironment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">tools</span><span class="o">.</span><span class="n">environment_append</span><span class="p">(</span><span class="n">env_build</span><span class="o">.</span><span class="n">vars</span><span class="p">):</span>
-        <span class="c1"># self.run(&#39;./myexetool&quot;) # won&#39;t work, even if &#39;DYLD_LIBRARY_PATH&#39; is in the env</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;DYLD_LIBRARY_PATH=</span><span class="si">%s</span><span class="s1"> ./myexetool&quot; </span><span class="si">% o</span><span class="s1">s.environ[&#39;</span><span class="n">DYLD_LIBRARY_PATH</span><span class="s1">&#39;])</span>
+        <span class="c1"># self.run(&quot;./myexetool&quot;) # won&#39;t work, even if &#39;DYLD_LIBRARY_PATH&#39; is in the env</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;DYLD_LIBRARY_PATH=</span><span class="si">%s</span><span class="s2"> ./myexetool&quot;</span> <span class="o">%</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DYLD_LIBRARY_PATH&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p class="last">This is already handled automatically by the <code class="docutils literal notranslate"><span class="pre">self.run(...,</span> <span class="pre">run_environment=True)</span></code> argument.</p>
