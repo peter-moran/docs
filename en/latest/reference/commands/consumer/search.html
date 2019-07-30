@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan search &mdash; conan 1.17.2 documentation</title>
+  <title>conan search &mdash; conan 1.18.0 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.17.2 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.18.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan create" href="../creator/create.html"/>
         <link rel="prev" title="conan info" href="info.html"/>
@@ -296,6 +296,11 @@ and parenthesis, with settings and also options.</p>
 $ conan search Boost/1.60.0@lasote/stable -q <span class="s2">&quot;(arch=x86_64 OR arch=ARM) AND (build_type=Release OR os=Windows)&quot;</span>
 </pre></div>
 </div>
+<p>Also, query syntax allows sub-settings, even for custom properties. e.g:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan search Boost/1.60.0@lasote/stable -q <span class="s2">&quot;compiler=gcc AND compiler.version=9&quot;</span>
+$ conan search Boost/1.60.0@lasote/stable -q <span class="s2">&quot;os=Linux AND os.distro=Ubuntu AND os.distro.version=19.04&quot;</span>
+</pre></div>
+</div>
 <p>If you specify a query filter for a setting and the package recipe is not restricted by this
 setting, Conan won’t find the packages. e.g:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyRecipe</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
@@ -316,6 +321,13 @@ $ file.html <span class="c1"># or open the file, double-click</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="../../../_images/search_binary_table.png"><img alt="../../../_images/search_binary_table.png" class="align-center" src="../../../_images/search_binary_table.png" style="width: 600px; height: 500px;" /></a>
+<p>Search all the local Conan packages matching a pattern and showing the revision:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan search lib* --revisions
+$ Existing package recipes:
+
+  lib/1.0@user/channel#404e86c18e4a47a166fabe70b3b15e33
+</pre></div>
+</div>
 <p>Search the local revision for a local cache recipe:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan search lib/1.0@conan/testing --revisions
 $ Revisions <span class="k">for</span> <span class="s1">&#39;lib/1.0@conan/testing&#39;</span>:
@@ -371,7 +383,7 @@ $ Revisions <span class="k">for</span> <span class="s1">&#39;lib/1.0@conan/testi
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.17
+      Version: 1.18
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -379,7 +391,11 @@ $ Revisions <span class="k">for</span> <span class="s1">&#39;lib/1.0@conan/testi
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.17</a></dd>
+            <dd><a href="/en/latest/index.html">1.18</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.17/index.html">1.17</a></dd>
           
         
           
@@ -453,7 +469,7 @@ $ Revisions <span class="k">for</span> <span class="s1">&#39;lib/1.0@conan/testi
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.17.2',
+            VERSION:'1.18.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -490,7 +506,7 @@ $ Revisions <span class="k">for</span> <span class="s1">&#39;lib/1.0@conan/testi
 
 
   <script>
-    initSearch("1.17");
+    initSearch("1.18");
   </script>
 
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WK44ZFM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

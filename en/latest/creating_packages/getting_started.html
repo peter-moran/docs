@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Getting Started &mdash; conan 1.17.2 documentation</title>
+  <title>Getting Started &mdash; conan 1.18.0 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.17.2 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.18.0 documentation" href="../index.html"/>
         <link rel="up" title="Creating Packages" href="../creating_packages.html"/>
         <link rel="next" title="Recipe and Sources in a Different Repo" href="external_repo.html"/>
         <link rel="prev" title="Creating Packages" href="../creating_packages.html"/>
@@ -116,7 +116,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Getting Started</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#creating-the-package-recipe">Creating the Package Recipe</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#the-test-package-folder">The test_package Folder</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#creating-and-testing-packages">Creating and Testing Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-and-testing-packages">Creating and Testing Packages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#omitting-user-channel">Omitting user/channel</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#settings-vs-options">Settings vs. Options</a></li>
 </ul>
 </li>
@@ -450,6 +453,77 @@ $ conan create . demo/testing -pr my_gcc49_debug_profile
 $ conan create ...
 </pre></div>
 </div>
+<div class="section" id="omitting-user-channel">
+<span id="create-omit-user-channel"></span><h3>Omitting user/channel<a class="headerlink" href="#omitting-user-channel" title="Permalink to this headline">¶</a></h3>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
+</div>
+<p>You can create a package omitting the <code class="docutils literal notranslate"><span class="pre">user</span></code> and the <code class="docutils literal notranslate"><span class="pre">channel</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan create .
+</pre></div>
+</div>
+<p>To reference that package, you have to omit also the <code class="docutils literal notranslate"><span class="pre">user</span></code> and the <code class="docutils literal notranslate"><span class="pre">channel</span></code>.</p>
+<div class="section" id="examples">
+<h4>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">Specifying requirements in your recipes:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="k">class</span> <span class="nc">HelloTestConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+     <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span>
+<span class="hll">     <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;packagename/1.0&quot;</span>
+</span>
+     <span class="o">...</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Installing individual packages. The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">install</span></code> command we have to use the syntax (always valid) of <code class="docutils literal notranslate"><span class="pre">packagename/1.0&#64;</span></code> to disambiguate the
+argument that also can be used to specify a path:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install packagename/1.0@
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Searching for the binary packages of a reference. The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">search</span></code> command requires to use the syntax (always valid) of <code class="docutils literal notranslate"><span class="pre">packagename/1.0&#64;</span></code> to
+disambiguate the usage of a pattern:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span> $ conan search packagename/1.0@
+
+
+Existing packages <span class="k">for</span> recipe packagename/1.0:
+
+ Package_ID: 9bfdcfa2bb925892ecf42e2a018a3f3529826676
+     <span class="o">[</span>settings<span class="o">]</span>
+         arch: x86_64
+         build_type: Release
+         compiler: gcc
+         compiler.libcxx: libstdc++11
+         compiler.version: <span class="m">7</span>
+         os: Linux
+     Outdated from recipe: False
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Removing packages:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan remove packagename/1.0
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Uploading packages:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan upload packagename/1.0
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="section" id="settings-vs-options">
 <span id="id2"></span><h2>Settings vs. Options<a class="headerlink" href="#settings-vs-options" title="Permalink to this headline">¶</a></h2>
@@ -525,7 +599,7 @@ If not specified other. the package will be static.</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.17
+      Version: 1.18
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -533,7 +607,11 @@ If not specified other. the package will be static.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.17</a></dd>
+            <dd><a href="/en/latest/index.html">1.18</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.17/index.html">1.17</a></dd>
           
         
           
@@ -607,7 +685,7 @@ If not specified other. the package will be static.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.17.2',
+            VERSION:'1.18.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -644,7 +722,7 @@ If not specified other. the package will be static.</p>
 
 
   <script>
-    initSearch("1.17");
+    initSearch("1.18");
   </script>
 
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WK44ZFM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

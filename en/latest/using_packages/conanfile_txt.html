@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installing dependencies &mdash; conan 1.17.2 documentation</title>
+  <title>Installing dependencies &mdash; conan 1.18.0 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.17.2 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.18.0 documentation" href="../index.html"/>
         <link rel="up" title="Using packages" href="../using_packages.html"/>
         <link rel="next" title="Using profiles" href="using_profiles.html"/>
         <link rel="prev" title="Using packages" href="../using_packages.html"/>
@@ -114,6 +114,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1 current"><a class="reference internal" href="../using_packages.html">Using packages</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Installing dependencies</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#requires">Requires</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#optional-user-channel">Optional user/channel</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#overriding-requirements">Overriding requirements</a></li>
 </ul>
 </li>
@@ -266,6 +267,19 @@ string such as “stable” or “testing”, but they can be used for any purpo
 library version has not changed, but the package recipe has evolved).</li>
 </ul>
 </div></blockquote>
+<div class="section" id="optional-user-channel">
+<h3>Optional user/channel<a class="headerlink" href="#optional-user-channel" title="Permalink to this headline">¶</a></h3>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
+</div>
+<p>If the package was <a class="reference internal" href="../creating_packages/getting_started.html#create-omit-user-channel"><span class="std std-ref">created</span></a> and <a class="reference internal" href="../uploading_packages.html#uploading-packages"><span class="std std-ref">uploaded</span></a> without specifying
+the <code class="docutils literal notranslate"><span class="pre">user</span></code> and <code class="docutils literal notranslate"><span class="pre">channel</span></code> you can omit the <code class="docutils literal notranslate"><span class="pre">user/channel</span></code> when specifying a reference:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
+packagename/1.2.0
+</pre></div>
+</div>
+</div>
 <div class="section" id="overriding-requirements">
 <h3>Overriding requirements<a class="headerlink" href="#overriding-requirements" title="Permalink to this headline">¶</a></h3>
 <p>You can specify multiple requirements and <strong>override</strong> transitive “require’s
@@ -497,7 +511,7 @@ for package management, not only for (but focused on) C/C++ libraries.</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.17
+      Version: 1.18
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -505,7 +519,11 @@ for package management, not only for (but focused on) C/C++ libraries.</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.17</a></dd>
+            <dd><a href="/en/latest/index.html">1.18</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.17/index.html">1.17</a></dd>
           
         
           
@@ -579,7 +597,7 @@ for package management, not only for (but focused on) C/C++ libraries.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.17.2',
+            VERSION:'1.18.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -616,7 +634,7 @@ for package management, not only for (but focused on) C/C++ libraries.</p>
 
 
   <script>
-    initSearch("1.17");
+    initSearch("1.18");
   </script>
 
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WK44ZFM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

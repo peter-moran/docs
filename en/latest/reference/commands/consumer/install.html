@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan install &mdash; conan 1.17.2 documentation</title>
+  <title>conan install &mdash; conan 1.18.0 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 1.17.2 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 1.18.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Commands" href="../../commands.html"/>
         <link rel="next" title="conan config" href="config.html"/>
         <link rel="prev" title="Commands" href="../../commands.html"/>
@@ -449,7 +449,7 @@ separator.</p>
 <ul class="simple">
 <li>Global settings (<strong class="command">-s compiler=&quot;Visual Studio&quot;</strong>). Will apply to all the requires.</li>
 <li>Specific package settings (<strong class="command">-s zlib:compiler=&quot;MinGW&quot;</strong>). Those settings will be applied only to
-the specified packages.</li>
+the specified packages. They accept patterns too, like <code class="docutils literal notranslate"><span class="pre">-s</span> <span class="pre">*&#64;myuser/*:compiler=MinGW</span></code>, which means that packages that have the username “myuser” will use MinGW as compiler.</li>
 </ul>
 <p>You can specify custom settings not only for your direct <code class="docutils literal notranslate"><span class="pre">requires</span></code> but for any package in the
 dependency graph.</p>
@@ -524,7 +524,7 @@ $ conan install pkg/version@user/testing user/channel <span class="c1"># Error, 
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.17
+      Version: 1.18
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -532,7 +532,11 @@ $ conan install pkg/version@user/testing user/channel <span class="c1"># Error, 
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.17</a></dd>
+            <dd><a href="/en/latest/index.html">1.18</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.17/index.html">1.17</a></dd>
           
         
           
@@ -606,7 +610,7 @@ $ conan install pkg/version@user/testing user/channel <span class="c1"># Error, 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.17.2',
+            VERSION:'1.18.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -643,7 +647,7 @@ $ conan install pkg/version@user/testing user/channel <span class="c1"># Error, 
 
 
   <script>
-    initSearch("1.17");
+    initSearch("1.18");
   </script>
 
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WK44ZFM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

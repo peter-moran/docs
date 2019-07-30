@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Lockfiles &mdash; conan 1.17.2 documentation</title>
+  <title>Lockfiles &mdash; conan 1.18.0 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.17.2 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.18.0 documentation" href="../index.html"/>
         <link rel="up" title="Versioning" href="../versioning.html"/>
         <link rel="next" title="Mastering Conan" href="../mastering.html"/>
         <link rel="prev" title="Package Revisions" href="revisions.html"/>
@@ -307,16 +307,6 @@ generate a lockfile, but the problem with <strong class="command">conan info -if
 specify a profile or settings.</p>
 </div></blockquote>
 </li>
-<li><p class="first"><strong class="command">conan graph clean-modified</strong></p>
-<blockquote>
-<div><p>When a <strong class="command">conan create</strong> command that uses a lockfile builds a new binary, its reference
-will change. This change, typically in the form of a recipe revision and/or package revision
-is updated in the lockfile and the node is marked as “modified”. This <strong class="command">clean-modified</strong>
-removes these “modified” flags from a lockfile. This operation is typically needed before starting
-the build of a package in a locked graph, to know exactly which nodes have been modified by this
-operation.</p>
-</div></blockquote>
-</li>
 <li><p class="first"><strong class="command">conan graph update-lock</strong></p>
 <blockquote>
 <div><p>Update the current lockfile with the information of the second lockfile. Only the nodes marked
@@ -420,13 +410,6 @@ $ cd build_server_folder
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">clean “modified” nodes from the lockfile</p>
-<blockquote>
-<div><div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>$ conan graph clean-modified release/
-</pre></div>
-</div>
-</div></blockquote>
-</li>
 <li><p class="first">build the package</p>
 <blockquote>
 <div><div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>$ conan install &lt;ref&gt; --build=&lt;ref&gt; --lockfile=release
@@ -516,7 +499,7 @@ one revision, it might be necessary to pass <code class="docutils literal notran
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.17
+      Version: 1.18
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -524,7 +507,11 @@ one revision, it might be necessary to pass <code class="docutils literal notran
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.17</a></dd>
+            <dd><a href="/en/latest/index.html">1.18</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.17/index.html">1.17</a></dd>
           
         
           
@@ -598,7 +585,7 @@ one revision, it might be necessary to pass <code class="docutils literal notran
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.17.2',
+            VERSION:'1.18.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -635,7 +622,7 @@ one revision, it might be necessary to pass <code class="docutils literal notran
 
 
   <script>
-    initSearch("1.17");
+    initSearch("1.18");
   </script>
 
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WK44ZFM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

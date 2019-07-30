@@ -77,6 +77,13 @@ and parenthesis, with settings and also options.
     $ conan search Boost/1.60.0@lasote/stable -q arch=x86_64
     $ conan search Boost/1.60.0@lasote/stable -q "(arch=x86_64 OR arch=ARM) AND (build_type=Release OR os=Windows)"
 
+Also, query syntax allows sub-settings, even for custom properties. e.g:
+
+.. code-block:: bash
+
+    $ conan search Boost/1.60.0@lasote/stable -q "compiler=gcc AND compiler.version=9"
+    $ conan search Boost/1.60.0@lasote/stable -q "os=Linux AND os.distro=Ubuntu AND os.distro.version=19.04"
+
 If you specify a query filter for a setting and the package recipe is not restricted by this
 setting, Conan won't find the packages. e.g:
 
@@ -96,7 +103,6 @@ The query above won't find the ``MyRecipe`` binary packages (because the recipe 
 
     $ conan search MyRecipe/1.0@lasote/stable -q os=None
 
-
 You can generate a table for all binaries from a given recipe with the ``--table`` option:
 
 .. code-block:: bash
@@ -108,6 +114,17 @@ You can generate a table for all binaries from a given recipe with the ``--table
     :height: 500 px
     :width: 600 px
     :align: center
+
+
+Search all the local Conan packages matching a pattern and showing the revision:
+
+.. code-block:: bash
+
+    $ conan search lib* --revisions
+    $ Existing package recipes:
+
+      lib/1.0@user/channel#404e86c18e4a47a166fabe70b3b15e33
+
 
 Search the local revision for a local cache recipe:
 

@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Attributes &mdash; conan 1.17.2 documentation</title>
+  <title>Attributes &mdash; conan 1.18.0 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 1.17.2 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 1.18.0 documentation" href="../../index.html"/>
         <link rel="up" title="conanfile.py" href="../conanfile.html"/>
         <link rel="next" title="Methods" href="methods.html"/>
         <link rel="prev" title="conanfile.py" href="../conanfile.html"/>
@@ -1236,6 +1236,11 @@ depend on the workspace layout. Nevertheless, all the other code in the recipe m
 run in the export folder inside the cache, where it has access only to the files exported (see
 attribute <a class="reference internal" href="#exports-attribute"><span class="std std-ref">exports</span></a>) and to any other functionality
 from a <a class="reference internal" href="../../extending/python_requires.html#python-requires"><span class="std std-ref">python_requires</span></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In case of git, by default conan will try to perform shallow clone of the repository, and will fallback to the full
+clone in case shallow fails (e.g. not supported by the server).</p>
+</div>
 <p>To know more about the usage of <code class="docutils literal notranslate"><span class="pre">scm</span></code> check:</p>
 <ul class="simple">
 <li><a class="reference internal" href="../../creating_packages/external_repo.html#external-repo"><span class="std std-ref">Creating packages/Recipe and sources in a different repo</span></a></li>
@@ -1335,7 +1340,7 @@ workspace.:</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
-      Version: 1.17
+      Version: 1.18
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -1343,7 +1348,11 @@ workspace.:</p>
         <dt>Versions</dt>
         
           
-            <dd><a href="/en/latest/index.html">1.17</a></dd>
+            <dd><a href="/en/latest/index.html">1.18</a></dd>
+          
+        
+          
+            <dd><a href="/en/1.17/index.html">1.17</a></dd>
           
         
           
@@ -1417,7 +1426,7 @@ workspace.:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.17.2',
+            VERSION:'1.18.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -1454,7 +1463,7 @@ workspace.:</p>
 
 
   <script>
-    initSearch("1.17");
+    initSearch("1.18");
   </script>
 
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WK44ZFM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
