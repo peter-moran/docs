@@ -115,11 +115,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../creating_packages.html">Creating Packages</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../uploading_packages.html">Uploading Packages</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Remotes</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#bintray-official-repositories">Bintray Official Repositories</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#conan-center">Conan Center</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#conan-transit">Conan Transit</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#conan-center">Conan-center</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#bintray-community-repositories">Bintray Community Repositories</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#bincrafters">Bincrafters</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conan-community">Conan Community</a></li>
@@ -255,35 +251,20 @@ promote, and distribute software. You can create binary repositories in Bintray 
 packages or even create an organization. It is free for open source packages, and the recommended
 server to distribute to the C and C++ communities. Check <a class="reference internal" href="using_bintray.html#using-bintray"><span class="std std-ref">Using Bintray</span></a> for more information.</li>
 </ul>
-<div class="section" id="bintray-official-repositories">
-<span id="bintray-repositories"></span><h2>Bintray Official Repositories<a class="headerlink" href="#bintray-official-repositories" title="Permalink to this headline">¶</a></h2>
-<p>Conan official repositories for open source libraries are hosted in Bintray. These repositories are maintained by the Conan
-team. Currently there are two central repositories:</p>
 <div class="section" id="conan-center">
-<span id="id2"></span><h3>Conan Center<a class="headerlink" href="#conan-center" title="Permalink to this headline">¶</a></h3>
-<p><strong>conan-center</strong>: <a class="reference external" href="https://bintray.com/conan/conan-center">https://bintray.com/conan/conan-center</a></p>
-<blockquote class="pull-quote">
-<div>This repository contains moderated, curated and well-maintained packages, and is the place in which you
-can share your packages with the community. To share your package, upload it to your own
-(or your organization’s) repositories and submit an inclusion request to <a class="reference external" href="https://bintray.com/conan/conan-center">conan-center</a>.
-Check <a class="reference internal" href="bintray/conan_center_guide.html#conan-center-flow"><span class="std std-ref">conan-center guide</span></a> for more information.</div></blockquote>
-</div>
-<div class="section" id="conan-transit">
-<h3>Conan Transit<a class="headerlink" href="#conan-transit" title="Permalink to this headline">¶</a></h3>
-<p><strong>conan-transit</strong>: <a class="reference external" href="https://bintray.com/conan/conan-transit">https://bintray.com/conan/conan-transit</a> (DEPRECATED)</p>
-<blockquote class="pull-quote">
-<div>Deprecated. Contains mostly outdated packages some of which are not compatible with the latest Conan
-versions, so refrain from using them. This repository only exists for backward compatibility purposes.
-It is not a default remote in the Conan client and will be completely removed soon. This
-repository is an exact duplicate of the old <code class="docutils literal notranslate"><span class="pre">server.conan.io</span></code> repository at
-<strong>June 11, 2017 08:00 CET</strong>. It’s a read-only repository, allowing you to only download hosted
-packages.</div></blockquote>
-<p>Conan comes with <strong>conan-center</strong> repository configured by default. Just in case you want to manually configure this repository you can
-always add it like this:</p>
+<span id="bintray-repositories"></span><span id="id2"></span><h2>Conan-center<a class="headerlink" href="#conan-center" title="Permalink to this headline">¶</a></h2>
+<p><strong>Conan-center</strong> (<a class="reference external" href="https://bintray.com/conan/conan-center">https://bintray.com/conan/conan-center</a>) is the main official repository for open source
+Conan packages. It is configured as the default remote in the Conan client, but if you want to add it manually:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan remote add conan-center https://conan.bintray.com
 </pre></div>
 </div>
-</div>
+<p>There are 2 different types of packages right now in Conan-center:</p>
+<ul class="simple">
+<li><strong>Packages with full reference</strong>: Packages like <cite>pkg/version&#64;user/channel</cite>. These packages binaries were created by users in their own
+Bintray repositories, and included here. This flow of contributing packages to Conan-center is deprecated now.</li>
+<li><strong>Packages without “user/channel”</strong>: Can be used directly as <cite>pkg/version</cite>: These packages are created automatically from the central Github repository <a class="reference external" href="https://github.com/conan-io/conan-center-index">conan-center-index</a>, with an automated build service: C3I (Conan-Center Continuous Integration)</li>
+</ul>
+<p>To contribute packages to Conan-center, read the <a class="reference internal" href="bintray/conan_center_guide.html#conan-center-flow"><span class="std std-ref">conan-center guide</span></a> for more information.</p>
 </div>
 <div class="section" id="bintray-community-repositories">
 <h2>Bintray Community Repositories<a class="headerlink" href="#bintray-community-repositories" title="Permalink to this headline">¶</a></h2>
