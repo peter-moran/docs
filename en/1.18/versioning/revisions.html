@@ -226,10 +226,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>The goal of the revisions feature is to achieve package immutability, the packages in a server are never overwritten.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>This is the first piece to achieve reproducibility: recreate the exact dependency graph by using some
-mechanism like a <code class="docutils literal notranslate"><span class="pre">graph</span> <span class="pre">lock</span></code> file. For example, if we store a <code class="docutils literal notranslate"><span class="pre">graph</span> <span class="pre">lock</span></code> file for the different releases
-of our project, we can install the same dependencies just by using the graph lock.</p>
-<p class="last"><strong>IMPORTANT:</strong> The reproducibility is in the Conan roadmap and currently under development.</p>
+<p>Revisions achieve inmmutatibility. For achieving reproducible builds and reproducible dependencies, <strong>lockfiles</strong>
+are used. Lockfiles can capture an exact state of a dependency graph, down to exact versions and revisions, and use
+it later to force their usage, even if new versions or revisions were uploaded to the servers.</p>
+<p class="last">Learn more about <a class="reference internal" href="lockfiles.html#versioning-lockfiles"><span class="std std-ref">lockfiles here.</span></a></p>
 </div>
 <div class="section" id="how-it-works">
 <h2>How it works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
