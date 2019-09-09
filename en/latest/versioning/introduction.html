@@ -15,7 +15,7 @@
 
   
   
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="shortcut icon" href="../_static/conan-favicon.png"/>
   
 
   
@@ -85,7 +85,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
           
             
-            <img src="../_static/conan_logo.png" class="logo" />
+            <img src="../_static/conan-logo.png" class="logo" />
           
           </a>
 
@@ -326,14 +326,14 @@ which contain static libraries. In turn, <strong>PkgB/1.0</strong> depends on <s
 <strong>PkgA/2.0</strong>, which is also another static library.</p>
 <p>The executable in <strong>PkgD/1.0</strong>, cannot link with 2 different versions of the same static library in <strong>PkgC</strong>, and the dependency resolution algorithm raises an error to let the
 user decide which one.</p>
-<img alt="../_images/graph_conflicts.png" src="../_images/graph_conflicts.png" />
+<img alt="../_images/conan-graph_conflicts.png" src="../_images/conan-graph_conflicts.png" />
 <p>The same situation happens if the different packages require different configurations of the same upstream package, even if the same version is used. In the example above, both <strong>PkgB</strong> and <strong>PkgC</strong> can be requiring the same version <strong>PkgA/1.0</strong>, but one of them will try to use it as a static library and the other one will try to use it as shared library.
 The dependency resolution algorithm will also raise an error.</p>
 </div>
 <div class="section" id="dependencies-overriding">
 <h2>Dependencies overriding<a class="headerlink" href="#dependencies-overriding" title="Permalink to this headline">¶</a></h2>
 <p>The downstream consumer packages always have higher priority, so the versions they request, will be overriden upstream as the dependency graph is built, re-defining the possible requires that the packages could have. For example, <strong>PkgB/1.0</strong> could define in its recipe a dependency to <strong>PkgA/1.0</strong>. But if a downstream consumer defines a requirement to <strong>PkgA/2.0</strong>, then that version will be used in the upstream graph:</p>
-<img alt="../_images/graph_override.png" src="../_images/graph_override.png" />
+<img alt="../_images/conan-graph_override.png" src="../_images/conan-graph_override.png" />
 <p>This is what enables the users to have control. Even when a package recipe upstream defines an older version, the downstream consumers can force to use an updated version. Note that this is not a diamond structure in the graph, so it is not a conflict by default. This behavior can be also restricted defining the <a class="reference internal" href="../reference/env_vars.html#env-vars-conan-error-on-override"><span class="std std-ref">CONAN_ERROR_ON_OVERRIDE</span></a> environment variable to raise an error when these overrides happen, and then the user can go and explicitly modify the upstream <strong>PkgB/1.0</strong> recipe to match the version of PkgA and avoid the override.</p>
 <p>In some scenarios, the downstream consumer <strong>PkgD/1.0</strong> might not want to force a dependency on PkgA. There are several possibilities, for example that PkgA is a conditional requirement that only happens in some operating systems. If PkgD defines a normal requirement to PkgA, then, it will be introducing that edge in the graph, forcing PkgA to be used always, in all operating systems. For this purpose the <code class="docutils literal notranslate"><span class="pre">override</span></code> qualifier can be defined in requirement, see <a class="reference internal" href="../reference/conanfile/methods.html#method-requirements"><span class="std std-ref">requirements()</span></a>.</p>
 </div>

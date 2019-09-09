@@ -15,7 +15,7 @@
 
   
   
-    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="shortcut icon" href="../../_static/conan-favicon.png"/>
   
 
   
@@ -85,7 +85,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
           
             
-            <img src="../../_static/conan_logo.png" class="logo" />
+            <img src="../../_static/conan-logo.png" class="logo" />
           
           </a>
 
@@ -225,7 +225,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
            <div itemprop="articleBody">
             
   <div class="section" id="android-studio-logo-android-studio">
-<span id="android-studio"></span><h1><img alt="android_studio_logo" src="../../_images/android_studio_logo.png" /> Android Studio<a class="headerlink" href="#android-studio-logo-android-studio" title="Permalink to this headline">¶</a></h1>
+<span id="android-studio"></span><h1><img alt="android_studio_logo" src="../../_images/conan-android_studio_logo.png" /> Android Studio<a class="headerlink" href="#android-studio-logo-android-studio" title="Permalink to this headline">¶</a></h1>
 <p>You can use Conan to <a class="reference internal" href="../../systems_cross_building/cross_building.html#cross-building-android"><span class="std std-ref">cross-build your libraries for Android</span></a> with different architectures.
 If you are using Android Studio for your Android application development, you can integrate Conan to automate the
 library building for the different architectures that you want to support in your project.</p>
@@ -239,23 +239,23 @@ You can also use the NDK that the Android Studio installs.</li>
 <li>Create a new Android Studio project and include C++ support.</li>
 </ol>
 <blockquote>
-<div><img alt="wizard1" src="../../_images/wizard1.png" /></div></blockquote>
+<div><img alt="wizard1" src="../../_images/conan-wizard1.png" /></div></blockquote>
 <p>3. Select your API level and target. The arch and api level have to match with the standalone
 toolchain created in step 1.</p>
 <blockquote>
-<div><img alt="wizard2" src="../../_images/wizard2.png" /></div></blockquote>
+<div><img alt="wizard2" src="../../_images/conan-wizard2.png" /></div></blockquote>
 <ol class="arabic simple" start="4">
 <li>Add an empty Activity and name it.</li>
 </ol>
 <blockquote>
-<div><p><img alt="wizard3" src="../../_images/wizard3.png" /></p>
-<p><img alt="wizard4" src="../../_images/wizard4.png" /></p>
+<div><p><img alt="wizard3" src="../../_images/conan-wizard3.png" /></p>
+<p><img alt="wizard4" src="../../_images/conan-wizard4.png" /></p>
 </div></blockquote>
 <ol class="arabic simple" start="5">
 <li>Select the C++ standard</li>
 </ol>
 <blockquote>
-<div><img alt="wizard5" src="../../_images/wizard5.png" /></div></blockquote>
+<div><img alt="wizard5" src="../../_images/conan-wizard5.png" /></div></blockquote>
 <p>6. Change to the <cite>project view</cite> and in the <cite>app</cite> folder create a <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code> with
 the following contents:</p>
 <p><strong>conanfile.txt</strong></p>
@@ -341,7 +341,7 @@ Be careful with the JNICALL name if you used another app name in the wizard:</li
 </div>
 <p>Build your project normally. Conan will create a <code class="docutils literal notranslate"><span class="pre">conan</span></code> folder with a folder for each different architecture you have specified in the abiFilters with a <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.cmake</span></code> file.</p>
 <p>Then run the app using an x86 emulator for best performance:</p>
-<p><img alt="wizard9" src="../../_images/wizard9.png" /></p>
+<p><img alt="wizard9" src="../../_images/conan-wizard9.png" /></p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last">Check the section <a class="reference internal" href="../../systems_cross_building/cross_building.html#cross-building-android"><span class="std std-ref">Linux/Windows/macOS to Android</span></a> to read more about cross-building for Android.</p>

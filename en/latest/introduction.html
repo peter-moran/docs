@@ -15,7 +15,7 @@
 
   
   
-    <link rel="shortcut icon" href="_static/favicon.png"/>
+    <link rel="shortcut icon" href="_static/conan-favicon.png"/>
   
 
   
@@ -84,7 +84,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
           
             
-            <img src="_static/conan_logo.png" class="logo" />
+            <img src="_static/conan-logo.png" class="logo" />
           
           </a>
 
@@ -225,7 +225,7 @@ the “git” push-pull model to/from git remotes.</p>
 <p>On a high level, the servers are just package storage. They do not build nor create the packages.
 The packages are created by the client, and if binaries are built from sources, that compilation is
 also done by the client application.</p>
-<a class="reference internal image-reference" href="_images/systems.png"><img alt="_images/systems.png" class="align-center" src="_images/systems.png" style="width: 400px; height: 200px;" /></a>
+<a class="reference internal image-reference" href="_images/conan-systems.png"><img alt="_images/conan-systems.png" class="align-center" src="_images/conan-systems.png" style="width: 400px; height: 200px;" /></a>
 <p>The different applications in the image above are:</p>
 <ul class="simple">
 <li>The <strong>Conan client</strong>: this is a console/terminal command line application, containing the heavy
@@ -257,7 +257,7 @@ being accepted to ensure quality.</li>
 define a package, referenced by its name, version, user and channel, a package recipe is needed.
 Such a package recipe is a conanfile.py python script that defines how the package is built from
 sources, what the final binary artifacts are, the package dependencies, etc.</p>
-<a class="reference internal image-reference" href="_images/binary_mgmt.png"><img alt="_images/binary_mgmt.png" class="align-center" src="_images/binary_mgmt.png" style="width: 400px; height: 200px;" /></a>
+<a class="reference internal image-reference" href="_images/conan-binary_mgmt.png"><img alt="_images/conan-binary_mgmt.png" class="align-center" src="_images/conan-binary_mgmt.png" style="width: 400px; height: 200px;" /></a>
 <p>When a package recipe is used in the Conan client, and a “binary package” is built from sources, that
 binary package will be compatible with specific settings, such as the OS it was created for, the
 compiler and compiler version, or the computer architecture. If the package is built again from the

@@ -15,7 +15,7 @@
 
   
   
-    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="shortcut icon" href="../../_static/conan-favicon.png"/>
   
 
   
@@ -85,7 +85,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
           
             
-            <img src="../../_static/conan_logo.png" class="logo" />
+            <img src="../../_static/conan-logo.png" class="logo" />
           
           </a>
 
@@ -229,10 +229,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
            <div itemprop="articleBody">
             
   <div class="section" id="clion-logo-clion">
-<span id="clion"></span><h1><img alt="clion_logo" src="../../_images/icon_CLion.png" /> CLion<a class="headerlink" href="#clion-logo-clion" title="Permalink to this headline">¶</a></h1>
+<span id="clion"></span><h1><img alt="clion_logo" src="../../_images/conan-icon_CLion.png" /> CLion<a class="headerlink" href="#clion-logo-clion" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="conan-clion-plugin">
 <h2>Conan-Clion plugin<a class="headerlink" href="#conan-clion-plugin" title="Permalink to this headline">¶</a></h2>
-<p><img alt="clion_plugin" src="../../_images/clion_plugin.png" /></p>
+<p><img alt="clion_plugin" src="../../_images/conan-clion_plugin.png" /></p>
 <p>There is an <a class="reference external" href="https://plugins.jetbrains.com/plugin/11956-conan">official Jetbrains plugin</a> Conan
 plugin for Clion.</p>
 <p>You can read how to use it in the following <a class="reference external" href="https://blog.jetbrains.com/clion/2019/05/getting-started-with-the-conan-clion-plugin/">blog post</a></p>
@@ -257,7 +257,7 @@ the <code class="docutils literal notranslate"><span class="pre">zlib</span></co
 <ol class="arabic simple">
 <li>Create a new CLion project</li>
 </ol>
-<p><img alt="wizard_new" src="../../_images/wizard_new.png" /></p>
+<p><img alt="wizard_new" src="../../_images/conan-wizard_new.png" /></p>
 <ol class="arabic simple" start="2">
 <li>Edit the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file and add the following lines:</li>
 </ol>
@@ -269,10 +269,10 @@ the <code class="docutils literal notranslate"><span class="pre">zlib</span></co
 <span class="nb">endif</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><img alt="cmakelists" src="../../_images/cmakelists.png" /></p>
+<p><img alt="cmakelists" src="../../_images/conan-cmakelists.png" /></p>
 <p>3. CLion will reload your CMake project and you will be able to see a Warning in the console, because the
 <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.cmake</span></code> file still doesn’t exist:</p>
-<p><img alt="configure_warning_info" src="../../_images/configure_warning_info.png" /></p>
+<p><img alt="configure_warning_info" src="../../_images/conan-configure_warning_info.png" /></p>
 <p>4. Create a <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code> with all your requirements and use the <code class="docutils literal notranslate"><span class="pre">cmake</span></code> generator. In this case we only
 require the zlib library from a Conan package:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
@@ -282,7 +282,7 @@ zlib/1.2.11@conan/stable
 cmake
 </pre></div>
 </div>
-<p><img alt="conanfile_txt" src="../../_images/conanfile_txt.png" /></p>
+<p><img alt="conanfile_txt" src="../../_images/conan-conanfile_txt.png" /></p>
 <p id="step-five">5. Now you can run <strong class="command">conan install</strong> for debug in the <code class="docutils literal notranslate"><span class="pre">cmake-build-debug</span></code> folder to install your requirements and
 generate the <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.cmake</span></code> file there:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . -s <span class="nv">build_type</span><span class="o">=</span>Debug --install-folder<span class="o">=</span>cmake-build-debug
@@ -296,14 +296,14 @@ setting accordingly:</p>
 <ol class="arabic simple" start="7">
 <li>Now reconfigure your CLion project. The Warning message is not shown anymore:</li>
 </ol>
-<p><img alt="configure_ok" src="../../_images/configure_ok.png" /></p>
+<p><img alt="configure_ok" src="../../_images/conan-configure_ok.png" /></p>
 <p>8. Open the <code class="docutils literal notranslate"><span class="pre">library.cpp</span></code> file and include <code class="docutils literal notranslate"><span class="pre">zlib.h</span></code>. If you follow the link, you can see that CLion automatically
 detects the <code class="docutils literal notranslate"><span class="pre">zlib.h</span></code> header file from the local Conan cache.</p>
-<p><img alt="library_cpp" src="../../_images/library_cpp.png" /></p>
+<p><img alt="library_cpp" src="../../_images/conan-library_cpp.png" /></p>
 <ol class="arabic simple" start="9">
 <li>Build your project normally using your CLion IDE:</li>
 </ol>
-<p><img alt="built_ok" src="../../_images/built_ok.png" /></p>
+<p><img alt="built_ok" src="../../_images/conan-built_ok.png" /></p>
 <p>You can check a complete example of a CLion project reusing conan packages in this github repository: <a class="reference external" href="https://github.com/lasote/clion-conan-consumer">lasote/clion-conan-consumer</a>.</p>
 </div>
 <div class="section" id="creating-conan-packages-in-a-clion-project">
@@ -312,7 +312,7 @@ detects the <code class="docutils literal notranslate"><span class="pre">zlib.h<
 <ol class="arabic simple">
 <li>Create a new CLion project</li>
 </ol>
-<p><img alt="wizard_new" src="../../_images/wizard_new.png" /></p>
+<p><img alt="wizard_new" src="../../_images/conan-wizard_new.png" /></p>
 <ol class="arabic simple" start="2">
 <li>Edit the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file and add the following lines:</li>
 </ol>
@@ -324,7 +324,7 @@ detects the <code class="docutils literal notranslate"><span class="pre">zlib.h<
 <span class="nb">endif</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><img alt="cmakelists" src="../../_images/cmakelists.png" /></p>
+<p><img alt="cmakelists" src="../../_images/conan-cmakelists.png" /></p>
 <ol class="arabic simple" start="3">
 <li>Create a <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> file. It’s recommended to use the <strong class="command">conan new</strong> command.</li>
 </ol>
