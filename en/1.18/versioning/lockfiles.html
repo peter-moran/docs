@@ -15,7 +15,7 @@
 
   
   
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="shortcut icon" href="../_static/conan-favicon.png"/>
   
 
   
@@ -85,7 +85,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
           
             
-            <img src="../_static/conan_logo.png" class="logo" />
+            <img src="../_static/conan-logo.png" class="logo" />
           
           </a>
 
@@ -231,7 +231,7 @@ different configuration, there will be one lockfile for every configuration.</p>
 definitions in conanfile recipes are not fully deterministic, for example when using
 version ranges or using package revisions.</p>
 <p>Let’s say we have 3 package recipes PkgC, PkgB, and PkgA, that define this dependency graph:</p>
-<img alt="../_images/graph_not_deterministic.png" src="../_images/graph_not_deterministic.png" />
+<img alt="../_images/conan-graph_not_deterministic.png" src="../_images/conan-graph_not_deterministic.png" />
 <p>The first time, when a <strong class="command">conan install .</strong> is executed, the requirement defined
 in PkgB is resolved to <strong>PkgA/1.0</strong>, because that was the latest at that time that
 satisfied the version range <code class="docutils literal notranslate"><span class="pre">PkgA/[*]</span></code>. After such install, the user can build and
@@ -254,7 +254,7 @@ $ conan install . --lockfile <span class="c1"># uses the existing conan.lock</sp
 it will load the previously generated <em>conan.lock</em> file, that contains the information that
 <strong>PkgA/1.0</strong> is used, and will apply it again to the dependency resolution, resolving exactly
 the same dependency graph:</p>
-<img alt="../_images/graph_locked.png" src="../_images/graph_locked.png" />
+<img alt="../_images/conan-graph_locked.png" src="../_images/conan-graph_locked.png" />
 <p>The <em>conan.lock</em> file contains more information than the versions of the dependencies, it contains:</p>
 <ul class="simple">
 <li>The “effective” profile that has been used to compute this lockfile. The effective profile is the
@@ -362,7 +362,7 @@ application App, to make sure that every works as expected.</p>
 </div>
 <p>This lockfile will contain the resolved dependencies in the graph, as we only have one version
 0.1 for all the packages, all of them will be locked to that 0.1 version.</p>
-<img alt="../_images/lockfile_ci_1.png" src="../_images/lockfile_ci_1.png" />
+<img alt="../_images/conan-lockfile_ci_1.png" src="../_images/conan-lockfile_ci_1.png" />
 <p>Once the lockfile has been generated, it doesn’t matter if new, unrelated versions of other
 packages, like <strong>PkgZ/0.2</strong> is created with <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">PkgZ</span> <span class="pre">&amp;&amp;</span> <span class="pre">conan</span> <span class="pre">create</span> <span class="pre">.</span> <span class="pre">PkgZ/0.2&#64;user/testing</span></code></p>
 <p>Now we can safely create the new version of <strong>PkgA/0.2</strong>, that will resolve to use <strong>PkgZ/0.1</strong>
@@ -442,7 +442,7 @@ build servers become available, the <strong class="command">conan graph build-or
 and new builds can be launched accordingly, just taking care of not re-launching the same
 build again. Note that the result of build-order contains a unique UUID, which is the identifier
 of the node in the graph, which could be useful to dissambiguate.</p>
-<img alt="../_images/lockfile_ci_2.png" src="../_images/lockfile_ci_2.png" />
+<img alt="../_images/conan-lockfile_ci_2.png" src="../_images/conan-lockfile_ci_2.png" />
 <p>With this later approach, a deterministic build with optimal Continuous Integration process
 with optimal utilization of resources and minimizing unnecessary rebuilds is achieved.</p>
 <p>Note that this example has been using incremental versions and version ranges.

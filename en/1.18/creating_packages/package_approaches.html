@@ -15,7 +15,7 @@
 
   
   
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="shortcut icon" href="../_static/conan-favicon.png"/>
   
 
   
@@ -85,7 +85,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
           
             
-            <img src="../_static/conan_logo.png" class="logo" />
+            <img src="../_static/conan-logo.png" class="logo" />
           
           </a>
 
@@ -236,7 +236,7 @@ release pre-compiled libraries.</p>
 the release version of the “hello.lib” library and a different package containing a debug version of
 that library (in the figure denoted as “hello_d.lib”, to make it clear, it is not necessary to use
 different names).</p>
-<a class="reference internal image-reference" href="../_images/single_conf_packages.png"><img alt="../_images/single_conf_packages.png" class="align-center" src="../_images/single_conf_packages.png" style="width: 400px; height: 300px;" /></a>
+<a class="reference internal image-reference" href="../_images/conan-single_conf_packages.png"><img alt="../_images/conan-single_conf_packages.png" class="align-center" src="../_images/conan-single_conf_packages.png" style="width: 400px; height: 300px;" /></a>
 <p>Using this approach, the <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method, allows you to set the appropriate values for consumers,
 letting them know about the package library names, necessary definitions and compile flags.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HelloConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
@@ -284,7 +284,7 @@ mistake could be a very risky issue.</p>
 change the debug/release configuration from the IDE, without having to specify it in the command line. This type of package can contain
 different artifacts for different configurations and can be used to include both the release and debug version of a library in the same
 package.</p>
-<a class="reference internal image-reference" href="../_images/multi_conf_packages.png"><img alt="../_images/multi_conf_packages.png" class="align-center" src="../_images/multi_conf_packages.png" style="width: 400px; height: 300px;" /></a>
+<a class="reference internal image-reference" href="../_images/conan-multi_conf_packages.png"><img alt="../_images/conan-multi_conf_packages.png" class="align-center" src="../_images/conan-multi_conf_packages.png" style="width: 400px; height: 300px;" /></a>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>A complete working example of the following code can be found in the examples repo: <a class="reference external" href="https://github.com/conan-io/examples">https://github.com/conan-io/examples</a></p>
@@ -378,7 +378,7 @@ approach, it will definitely work without problems. However, we’ll be wasting 
 we’ll be rebuilding the project for each package, then extracting the relevant artifacts for
 the relevant configuration, while ignoring the others.</p>
 <p>It is more efficient to build the logic, whereby the same build can be reused to create different packages:</p>
-<a class="reference internal image-reference" href="../_images/build_once.png"><img alt="../_images/build_once.png" class="align-center" src="../_images/build_once.png" style="width: 400px; height: 300px;" /></a>
+<a class="reference internal image-reference" href="../_images/conan-build_once.png"><img alt="../_images/conan-build_once.png" class="align-center" src="../_images/conan-build_once.png" style="width: 400px; height: 300px;" /></a>
 <p>This can be done by defining a <code class="docutils literal notranslate"><span class="pre">build_id()</span></code> method in the package recipe that will specify the
 logic.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
