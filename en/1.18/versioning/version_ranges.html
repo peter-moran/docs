@@ -234,8 +234,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>There are two options for the version range:</p>
 <blockquote>
 <div><ul class="simple">
-<li><em>loose=True|False</em>: As default Conan uses the <cite>loose=True</cite> mode. When using <cite>loose=False</cite> the loose mode is deactivated, so that only valid Semantic Versioning strings are accepted.</li>
-<li><em>include_prerelease=True|False</em>: Default is <cite>include_prerelease=False</cite>. When set to <cite>include_prerelease=True</cite>, it will include prerelease versions in the search range.</li>
+<li><code class="docutils literal notranslate"><span class="pre">loose=True|False</span></code> (default <code class="docutils literal notranslate"><span class="pre">True</span></code>): When using <code class="docutils literal notranslate"><span class="pre">loose=False</span></code> only valid Semantic Versioning strings are accepted.</li>
+<li><code class="docutils literal notranslate"><span class="pre">include_prerelease=True|False</span></code> (default <code class="docutils literal notranslate"><span class="pre">False</span></code>): If set to <code class="docutils literal notranslate"><span class="pre">include_prerelease=True</span></code>,
+Conan will include prerelease versions in the search range. Take into account that prerelease
+versions have lower precedence than the associated normal one (e.g.: <code class="docutils literal notranslate"><span class="pre">1.0.0</span> <span class="pre">&gt;</span> <span class="pre">1.0.0-beta</span></code>).</li>
 </ul>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&gt;</span><span class="mf">1.1</span> <span class="o">&lt;</span><span class="mf">2.1</span><span class="p">,</span> <span class="n">include_prerelease</span><span class="o">=</span><span class="bp">True</span><span class="p">]</span>            <span class="c1"># Would e.g. accept &quot;2.0.0-pre.1&quot; as match</span>
