@@ -382,10 +382,10 @@ to filter packages by topics or to reuse them in Bintray package page.</p>
 </div>
 <div class="section" id="user-channel">
 <span id="id1"></span><h2>user, channel<a class="headerlink" href="#user-channel" title="Permalink to this headline">¶</a></h2>
-<p>The fields <code class="docutils literal notranslate"><span class="pre">user</span></code> and <code class="docutils literal notranslate"><span class="pre">channel</span></code> can be accessed from within a <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code>.
-Though their usage is usually not encouraged, it could be useful in different cases,
-e.g. to define requirements with the same user and
-channel as the current package, which could be achieved with something like:</p>
+<p><strong>These fields are optional in a Conan reference</strong>, they could be useful to identify a forked recipe
+from the community with changes specific for your company. Using these fields you may keep the
+same <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">version</span></code> and use the <code class="docutils literal notranslate"><span class="pre">user/channel</span></code> to disambiguate your recipe.</p>
+<p>The value of these fields can be accessed from within a <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
 
 <span class="k">class</span> <span class="nc">HelloConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
@@ -393,21 +393,30 @@ channel as the current package, which could be achieved with something like:</p>
     <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;0.1&quot;</span>
 
     <span class="k">def</span> <span class="nf">requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="s2">&quot;Say/0.1@</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="s2">&quot;common-lib/version&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="p">:</span>
+            <span class="c1"># If the recipe is using them, I want to consume my fork.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="s2">&quot;Say/0.1@</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># otherwise, I&#39;ll consume the community one</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="s2">&quot;Say/0.1&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Only package recipes that are in the conan local cache (i.e. “exported”) have a user/channel assigned.
-For package recipes working in user space, there is no current user/channel by default. They can be
-defined at <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">install</span></code> time with:</p>
+<p>Only packages that have already been exported (packages in the local cache or in a remote server)
+can have a user/channel assigned. For package recipes working in the user space, there is no
+current user/channel by default, although they can be defined at <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">install</span></code> time with:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install &lt;path to conanfile.py&gt; user/channel
 </pre></div>
 </div>
-<p>If they are not defined via command line, the properties <code class="docutils literal notranslate"><span class="pre">self.user</span></code> and <code class="docutils literal notranslate"><span class="pre">self.channel</span></code> will then look
-for environment variables <code class="docutils literal notranslate"><span class="pre">CONAN_USERNAME</span></code> and <code class="docutils literal notranslate"><span class="pre">CONAN_CHANNEL</span></code> respectively. If they are not defined,
-an error will be raised unless <code class="docutils literal notranslate"><span class="pre">default_user</span></code> and <code class="docutils literal notranslate"><span class="pre">default_channel</span></code> are declared in the recipe.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last">FAQ: <a class="reference internal" href="../../faq/using.html#faq-recommendation-user-channel"><span class="std std-ref">Is there any recommendation regarding which &lt;user&gt; or &lt;channel&gt; to use in a reference?</span></a></p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Environment variables <code class="docutils literal notranslate"><span class="pre">CONAN_USERNAME</span></code> and <code class="docutils literal notranslate"><span class="pre">CONAN_CHANNEL</span></code> that were used to assign a value
+to these fields are now deprecated and will be removed in Conan 2.0. Don’t use them to
+populate the value of <code class="docutils literal notranslate"><span class="pre">self.user</span></code> and <code class="docutils literal notranslate"><span class="pre">self.channel</span></code>.</p>
 </div>
 </div>
 <div class="section" id="default-user-default-channel">

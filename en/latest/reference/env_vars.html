@@ -627,7 +627,8 @@ with <a class="reference internal" href="../howtos/header_only.html#header-only-
 <div class="section" id="conan-skip-vs-projects-upgrade">
 <span id="env-vars-conan-skip-vs-project-upgrade"></span><h2>CONAN_SKIP_VS_PROJECTS_UPGRADE<a class="headerlink" href="#conan-skip-vs-projects-upgrade" title="Permalink to this headline">¶</a></h2>
 <p><strong>Defaulted to</strong>: <code class="docutils literal notranslate"><span class="pre">False</span></code>/<code class="docutils literal notranslate"><span class="pre">0</span></code></p>
-<p>When set to <code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">1</span></code>, the <a class="reference internal" href="tools.html#tools-build-sln-command"><span class="std std-ref">tools.build_sln_command() [DEPRECATED]</span></a>, the <a class="reference internal" href="tools.html#tools-msvc-build-command"><span class="std std-ref">tools.msvc_build_command() [DEPRECATED]</span></a>
+<p>When set to <code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">1</span></code>, the <a class="reference internal" href="tools.html#tools-build-sln-command"><span class="std std-ref">tools.build_sln_command()</span></a>,
+the <a class="reference internal" href="tools.html#tools-msvc-build-command"><span class="std std-ref">tools.msvc_build_command()</span></a>
 and the <a class="reference internal" href="build_helpers/visual_studio.html#msbuild"><span class="std std-ref">MSBuild()</span></a> build helper, will not call <code class="docutils literal notranslate"><span class="pre">devenv</span></code> command to upgrade the <code class="docutils literal notranslate"><span class="pre">sln</span></code> project, irrespective of
 the <code class="docutils literal notranslate"><span class="pre">upgrade_project</span></code> parameter value.</p>
 </div>
@@ -684,12 +685,15 @@ Each line contains a JSON object. The <code class="docutils literal notranslate"
 </div>
 <div class="section" id="conan-username-conan-channel">
 <h2>CONAN_USERNAME, CONAN_CHANNEL<a class="headerlink" href="#conan-username-conan-channel" title="Permalink to this headline">¶</a></h2>
-<p>These environment variables will be checked when using <code class="docutils literal notranslate"><span class="pre">self.user</span></code> or <code class="docutils literal notranslate"><span class="pre">self.channel</span></code> in package recipes in user space, where the user
-and channel have not been assigned yet (they are assigned when exported in the local cache).</p>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last">Read more about it in <a class="reference internal" href="conanfile/attributes.html#user-channel"><span class="std std-ref">user, channel</span></a></p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Environment variables <code class="docutils literal notranslate"><span class="pre">CONAN_USERNAME</span></code> and <code class="docutils literal notranslate"><span class="pre">CONAN_CHANNEL</span></code> are deprecated and will be
+removed in Conan 2.0. Don’t use them to populate the value of <code class="docutils literal notranslate"><span class="pre">self.user</span></code> and <code class="docutils literal notranslate"><span class="pre">self.channel</span></code>.</p>
 </div>
+<p>These environment variables will be checked when using <code class="docutils literal notranslate"><span class="pre">self.user</span></code> or <code class="docutils literal notranslate"><span class="pre">self.channel</span></code> in package
+recipes in user space, where the user and channel have not been assigned yet (they are assigned
+when exported in the local cache). More about these variables in
+the <a class="reference internal" href="conanfile/attributes.html#user-channel"><span class="std std-ref">attributes reference</span></a>.</p>
 </div>
 <div class="section" id="conan-user-home">
 <h2>CONAN_USER_HOME<a class="headerlink" href="#conan-user-home" title="Permalink to this headline">¶</a></h2>

@@ -468,7 +468,8 @@ affects the binary package, or even the required package ID can change your own 
 <th class="head"><code class="docutils literal notranslate"><span class="pre">user</span></code></th>
 <th class="head"><code class="docutils literal notranslate"><span class="pre">channel</span></code></th>
 <th class="head"><code class="docutils literal notranslate"><span class="pre">package_id</span></code></th>
-<th class="head" colspan="2">RREV | PREV</th>
+<th class="head">RREV</th>
+<th class="head">PREV</th>
 </tr>
 </thead>
 <tbody valign="top">
@@ -478,7 +479,8 @@ affects the binary package, or even the required package ID can change your own 
 <td>No</td>
 <td>No</td>
 <td>No</td>
-<td colspan="2">No   | No</td>
+<td>No</td>
+<td>No</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">semver_mode()</span></code></td>
 <td>Yes</td>
@@ -687,8 +689,9 @@ produce a new package-id for the consumer package.</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">recipe_revision_mode()</span></code>: The full reference <cite>pkg/version&#64;user/channel#RREV</cite> of the dependencies,
-including the recipe revision will be taken into account to compute the consumer package ID</p>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">recipe_revision_mode()</span></code>: The full reference and the package ID of the dependencies,
+<cite>pkg/version&#64;user/channel#RREV:pkg_id</cite> (including the recipe revision), will be taken
+into account to compute the consumer package ID</p>
 </li>
 </ul>
 <blockquote>
