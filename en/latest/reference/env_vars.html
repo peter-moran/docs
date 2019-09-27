@@ -171,6 +171,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#conan-cacert-path">CONAN_CACERT_PATH</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-default-package-id-mode">CONAN_DEFAULT_PACKAGE_ID_MODE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conan-skip-broken-symlinks-check">CONAN_SKIP_BROKEN_SYMLINKS_CHECK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conan-pylint-werr">CONAN_PYLINT_WERR</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="hooks.html">Hooks [EXPERIMENTAL]</a></li>
@@ -758,6 +759,12 @@ under the section <code class="docutils literal notranslate"><span class="pre">[
 <h2>CONAN_SKIP_BROKEN_SYMLINKS_CHECK<a class="headerlink" href="#conan-skip-broken-symlinks-check" title="Permalink to this headline">¶</a></h2>
 <p><strong>Defaulted to</strong>: <code class="docutils literal notranslate"><span class="pre">False</span></code>/<code class="docutils literal notranslate"><span class="pre">0</span></code></p>
 <p>When set to <code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">1</span></code>, Conan will allow the existence broken symlinks while creating a package.</p>
+</div>
+<div class="section" id="conan-pylint-werr">
+<h2>CONAN_PYLINT_WERR<a class="headerlink" href="#conan-pylint-werr" title="Permalink to this headline">¶</a></h2>
+<p><strong>Defaulted to</strong>: Not defined</p>
+<p>This environment variable changes the PyLint behavior from <em>warning</em> level to <em>error</em>. Therefore,
+any inconsistency found in the recipe will break the process during linter analysis.</p>
 </div>
 </div>
 

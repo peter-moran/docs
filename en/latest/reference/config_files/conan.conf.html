@@ -256,6 +256,7 @@ default_package_id_mode = semver_direct_mode # environment CONAN_DEFAULT_PACKAGE
 # error_on_override = False           # environment CONAN_ERROR_ON_OVERRIDE
 # bash_path = &quot;&quot;                      # environment CONAN_BASH_PATH (only windows)
 # recipe_linter = False               # environment CONAN_RECIPE_LINTER
+# pylint_werr = False                 # environment CONAN_PYLINT_WERR
 # read_only_cache = True              # environment CONAN_READ_ONLY_CACHE
 # pylintrc = path/to/pylintrc_file    # environment CONAN_PYLINTRC
 # cache_no_locks = True               # environment CONAN_CACHE_NO_LOCKS
@@ -378,6 +379,7 @@ The <code class="docutils literal notranslate"><span class="pre">pylintrc</span>
 <p>Running <code class="docutils literal notranslate"><span class="pre">pylint</span> <span class="pre">--generate-rcfile</span></code> will output a complete rcfile with comments explaining the fields.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">recipe_linter</span></code> variable allows to disable the package recipe analysis (linting) executed at <strong class="command">conan install</strong>.
 Please note that this linting is very recommended, specially for sharing package recipes and collaborating with others.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">pylint_werr</span></code> variable changes PyLint level from <em>warning</em> to <em>error</em> when some inconsistency is found in the recipe.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">retry</span></code> variable allows to set up the global default value for the number of retries in all commands related to
 download/upload. User can override the value provided by the variable if the command provides an argument with the same name.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">retry_wait</span></code> variable allows to set up the global default value for the time (in seconds) to wait until the next retry
