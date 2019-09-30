@@ -264,6 +264,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     update_pref         Update the remote associated with a binary package
     clean               Clean the list of remotes and all recipe-remote
                         associations
+    enable              Enable a remote
+    disable             Disable a remote
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -357,6 +359,12 @@ zlib/1.2.8@lasote/stable: conan.io
 </li>
 <li><p class="first">Update the remote associated with a package recipe:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan remote update_ref OpenSSL/1.0.2i@conan/stable local-remote
+</pre></div>
+</div>
+</li>
+<li><p class="first">Enable or disable remotes (accepts patterns such as <code class="docutils literal notranslate"><span class="pre">*</span></code> as argument using Unix shell-style wildcards):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan remote disable *
+$ conan remote <span class="nb">enable</span> local-remote
 </pre></div>
 </div>
 </li>

@@ -145,6 +145,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="scons.html">scons</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pkg_config.html">pkg_config</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualenv.html">virtualenv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtualenv_python.html">virtualenv_python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualbuildenv.html">virtualbuildenv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualrunenv.html">virtualrunenv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ycm.html">youcompleteme</a></li>
@@ -308,6 +309,12 @@ your compiler in the command line.</div>
 </tr>
 <tr class="row-odd"><td>-D_GLIBCXX_USE_CXX11_ABI=1</td>
 <td>When setting libcxx == “libstdc++11”</td>
+</tr>
+<tr class="row-even"><td>-framework XXX</td>
+<td>Corresponding to requirements <cite>frameworks</cite> (OSX)</td>
+</tr>
+<tr class="row-odd"><td>-F XXX</td>
+<td>Corresponding to requirements <cite>framework dirs</cite> (OSX)</td>
 </tr>
 <tr class="row-even"><td>Other flags</td>
 <td>cxxflags, cflags, sharedlinkflags, exelinkflags (applied directly)</td>

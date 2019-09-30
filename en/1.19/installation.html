@@ -227,7 +227,7 @@ install python first. Note that some of <strong>these installers might have some
 </ol>
 <div class="section" id="install-with-pip-recommended">
 <h2>Install with pip (recommended)<a class="headerlink" href="#install-with-pip-recommended" title="Permalink to this headline">¶</a></h2>
-<p>To install Conan using <code class="docutils literal notranslate"><span class="pre">pip</span></code>, you need Python 2.7 or 3.X distribution installed on your machine. Modern Python distros come
+<p>To install Conan using <code class="docutils literal notranslate"><span class="pre">pip</span></code>, you need Python 2.7 or &gt;= 3.5 distribution installed on your machine. Python 3.4 support has been dropped. Modern Python distros come
 with pip pre-installed. However, if necessary you can install pip by following the instructions in <a class="reference external" href="https://pip.pypa.io/en/stable/installing/">pip docs</a>.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -242,7 +242,7 @@ Conan still supports Python 2, however some of the dependencies have started to 
 <p class="first admonition-title">Important</p>
 <p><strong>Please READ carefully</strong></p>
 <ul class="last simple">
-<li>Make sure that your <strong>pip</strong> installation matches your <strong>Python (2.7 or 3.X)</strong> version.</li>
+<li>Make sure that your <strong>pip</strong> installation matches your <strong>Python (2.7 or &gt;= 3.5)</strong> version. Python 3.4 support has been dropped.</li>
 <li>In <strong>Linux</strong>, you may need <strong>sudo</strong> permissions to install Conan globally.</li>
 <li>We strongly recommend using <strong>virtualenvs</strong> (virtualenvwrapper works great) for everything related to Python.
 (check <a class="reference external" href="https://virtualenvwrapper.readthedocs.io/en/stable/">https://virtualenvwrapper.readthedocs.io/en/stable/</a>, or <a class="reference external" href="https://pypi.org/project/virtualenvwrapper-win/">https://pypi.org/project/virtualenvwrapper-win/</a> in Windows)
@@ -253,9 +253,6 @@ especially if you are using Python for other purposes.</li>
 of 64 bit.</li>
 <li>In <strong>OSX</strong>, especially the latest versions that may have <strong>System Integrity Protection</strong>, pip may fail. Try using virtualenvs, or
 install with another user <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--user</span> <span class="pre">conan</span></code>.</li>
-<li>If you are using Windows and Python &lt;3.5, you may have issues if Python is installed in a path with spaces, such as
-“C:/Program Files(x86)/Python”. This is a known Python limitation, and is not related to Conan. Try installing Python in a path without spaces, use a
-virtualenv in another location or upgrade your Python installation.</li>
 <li>Some Linux distros, such as Linux Mint, require a restart (shell restart, or logout/system if not enough) after
 installation, so Conan is found in the path.</li>
 <li>In Windows, Python 3 installation can fail installing the <code class="docutils literal notranslate"><span class="pre">wrapt</span></code> dependency because of a bug in <strong>pip</strong>. Information about this issue and
@@ -266,14 +263,6 @@ workarounds is available here: <a class="reference external" href="https://githu
 <div class="section" id="known-installation-issues-with-pip">
 <h3>Known installation issues with pip<a class="headerlink" href="#known-installation-issues-with-pip" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p class="first">With Python 3.4 the installation sometimes fails with <code class="docutils literal notranslate"><span class="pre">NameError:</span> <span class="pre">name</span> <span class="pre">'implementation_name'</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">defined</span></code>. This issue seems to
-happen when using <cite>pip</cite> without a virtual environment. You can fix it by upgrading <cite>pip</cite> this way:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-$ python3.4 get-pip.py
-$ pip install conan
-</pre></div>
-</div>
-</li>
 <li><p class="first">When Conan is installed with <strong class="command">pip install --user &lt;username&gt;</strong>, usually a new directory is created for it. However, the directory
 is not appended automatically to the <cite>PATH</cite> and the <strong class="command">conan</strong> commands do not work. This can usually be solved restarting the session of
 the terminal or running the following command:</p>

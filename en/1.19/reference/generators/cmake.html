@@ -150,6 +150,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="scons.html">scons</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pkg_config.html">pkg_config</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualenv.html">virtualenv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtualenv_python.html">virtualenv_python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualbuildenv.html">virtualbuildenv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualrunenv.html">virtualrunenv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ycm.html">youcompleteme</a></li>
@@ -260,12 +261,12 @@ Go to <a class="reference internal" href="../../integrations/build_system/cmake.
 <span id="conanbuildinfocmake-variables"></span><h2>Variables in <em>conanbuildinfo.cmake</em><a class="headerlink" href="#variables-in-conanbuildinfo-cmake" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p class="first"><strong>Package declared variables</strong>:</p>
-<p>For each requirement <em>conanbuildinfo.cmake</em> file declares the following variables. <code class="docutils literal notranslate"><span class="pre">XXX</span></code> is the name of the require in uppercase. e.g.
-“ZLIB” for <code class="docutils literal notranslate"><span class="pre">zlib/1.2.8&#64;lasote/stable</span></code> requirement:</p>
+<p>For each requirement <em>conanbuildinfo.cmake</em> file declares the following variables. Where <code class="docutils literal notranslate"><span class="pre">&lt;PKG-NAME&gt;</span></code> is the placeholder for the name of
+the require in uppercase (<code class="docutils literal notranslate"><span class="pre">ZLIB</span></code> for <code class="docutils literal notranslate"><span class="pre">zlib/1.2.8&#64;lasote/stable</span></code>) or the one declared in <code class="docutils literal notranslate"><span class="pre">cpp_info.name</span></code>:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="31%" />
-<col width="69%" />
+<col width="36%" />
+<col width="64%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">NAME</th>
@@ -273,38 +274,44 @@ Go to <a class="reference internal" href="../../integrations/build_system/cmake.
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>CONAN_XXX_ROOT</td>
+<tr class="row-even"><td>CONAN_&lt;PKG-NAME&gt;_ROOT</td>
 <td>Abs path to root package folder.</td>
 </tr>
-<tr class="row-odd"><td>CONAN_INCLUDE_DIRS_XXX</td>
+<tr class="row-odd"><td>CONAN_INCLUDE_DIRS_&lt;PKG-NAME&gt;</td>
 <td>Header’s folders</td>
 </tr>
-<tr class="row-even"><td>CONAN_LIB_DIRS_XXX</td>
-<td>Library folders  (default {CONAN_XXX_ROOT}/lib)</td>
+<tr class="row-even"><td>CONAN_LIB_DIRS_&lt;PKG-NAME&gt;</td>
+<td>Library folders  (default {CONAN_&lt;PKG-NAME&gt;_ROOT}/lib)</td>
 </tr>
-<tr class="row-odd"><td>CONAN_BIN_DIRS_XXX</td>
-<td>Binary folders  (default {CONAN_XXX_ROOT}/bin)</td>
+<tr class="row-odd"><td>CONAN_BIN_DIRS_&lt;PKG-NAME&gt;</td>
+<td>Binary folders  (default {CONAN_&lt;PKG-NAME&gt;_ROOT}/bin)</td>
 </tr>
-<tr class="row-even"><td>CONAN_SRC_DIRS_XXX</td>
+<tr class="row-even"><td>CONAN_SRC_DIRS_&lt;PKG-NAME&gt;</td>
 <td>Sources folders</td>
 </tr>
-<tr class="row-odd"><td>CONAN_LIBS_XXX</td>
+<tr class="row-odd"><td>CONAN_LIBS_&lt;PKG-NAME&gt;</td>
 <td>Library names to link</td>
 </tr>
-<tr class="row-even"><td>CONAN_DEFINES_XXX</td>
+<tr class="row-even"><td>CONAN_DEFINES_&lt;PKG-NAME&gt;</td>
 <td>Library defines</td>
 </tr>
-<tr class="row-odd"><td>CONAN_COMPILE_DEFINITIONS_XXX</td>
+<tr class="row-odd"><td>CONAN_COMPILE_DEFINITIONS_&lt;PKG-NAME&gt;</td>
 <td>Compile definitions</td>
 </tr>
-<tr class="row-even"><td>CONAN_CXX_FLAGS_XXX</td>
+<tr class="row-even"><td>CONAN_CXX_FLAGS_&lt;PKG-NAME&gt;</td>
 <td>CXX flags</td>
 </tr>
-<tr class="row-odd"><td>CONAN_SHARED_LINK_FLAGS_XXX</td>
+<tr class="row-odd"><td>CONAN_SHARED_LINK_FLAGS_&lt;PKG-NAME&gt;</td>
 <td>Shared link flags</td>
 </tr>
-<tr class="row-even"><td>CONAN_C_FLAGS_XXX</td>
+<tr class="row-even"><td>CONAN_C_FLAGS_&lt;PKG-NAME&gt;</td>
 <td>C flags</td>
+</tr>
+<tr class="row-odd"><td>CONAN_FRAMEWORKS_XXX</td>
+<td>Frameworks (OSX)</td>
+</tr>
+<tr class="row-even"><td>CONAN_FRAMEWORK_PATHS_XXX</td>
+<td>Framework folders (OSX)  (default {CONAN_XXX_ROOT}/Frameworks</td>
 </tr>
 </tbody>
 </table>
@@ -353,6 +360,12 @@ order according to the dependency tree.</p>
 <tr class="row-odd"><td>CONAN_C_FLAGS</td>
 <td>Aggregated C flags</td>
 </tr>
+<tr class="row-even"><td>CONAN_FRAMEWORKS</td>
+<td>Aggregated frameworks (OSX)</td>
+</tr>
+<tr class="row-odd"><td>CONAN_FRAMEWORK_PATHS</td>
+<td>Aggregated framework folders (OSX)</td>
+</tr>
 </tbody>
 </table>
 </li>
@@ -361,8 +374,8 @@ order according to the dependency tree.</p>
 <a class="reference internal" href="../conanfile/methods.html#method-package-info"><span class="std std-ref">package_info</span></a> method a set of variables will be declared following this naming:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="31%" />
-<col width="69%" />
+<col width="34%" />
+<col width="66%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">NAME</th>
@@ -370,12 +383,13 @@ order according to the dependency tree.</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>CONAN_USER_XXXX_YYYY</td>
+<tr class="row-even"><td>CONAN_USER_&lt;PKG-NAME&gt;_&lt;VAR-NAME&gt;</td>
 <td>User declared value</td>
 </tr>
 </tbody>
 </table>
-<p>Where <code class="docutils literal notranslate"><span class="pre">XXXX</span></code> means the name of the requirement in uppercase and <code class="docutils literal notranslate"><span class="pre">YYYY</span></code> the variable name. For example, if this recipe declares:</p>
+<p>Where <code class="docutils literal notranslate"><span class="pre">&lt;PKG-NAME&gt;</span></code> means the name of the requirement in uppercase and <code class="docutils literal notranslate"><span class="pre">&lt;VAR-NAME&gt;</span></code> the variable name. For example, if this recipe
+declares:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyLibConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;MyLib&quot;</span>
     <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;1.6.0&quot;</span>
@@ -432,11 +446,11 @@ variables. See the macros below for detailed information.</p>
 <p>Helper to link all libraries to a specified target.</p>
 <p>These targets are:</p>
 <ul class="simple">
-<li>A <code class="docutils literal notranslate"><span class="pre">CONAN_PKG::PkgName</span></code> target per package in the dependency graph. This is an <code class="docutils literal notranslate"><span class="pre">IMPORTED</span> <span class="pre">INTERFACE</span></code> target. <code class="docutils literal notranslate"><span class="pre">IMPORTED</span></code> because it is
+<li>A <code class="docutils literal notranslate"><span class="pre">CONAN_PKG::&lt;PKG-NAME&gt;</span></code> target per package in the dependency graph. This is an <code class="docutils literal notranslate"><span class="pre">IMPORTED</span> <span class="pre">INTERFACE</span></code> target. <code class="docutils literal notranslate"><span class="pre">IMPORTED</span></code> because it is
 external, a pre-compiled library. <code class="docutils literal notranslate"><span class="pre">INTERFACE</span></code>, because it doesn’t necessarily match a library, it could be a header-only library, or the
 package could even contain several libraries. It contains all the properties (include paths, compile flags, etc.) that are defined in the
 <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method of the recipe.</li>
-<li>Inside each package a <code class="docutils literal notranslate"><span class="pre">CONAN_LIB::PkgName_LibName</span></code> target will be generated for each library. Its type is <code class="docutils literal notranslate"><span class="pre">IMPORTED</span> <span class="pre">UNKNOWN</span></code> and its
+<li>Inside each package a <code class="docutils literal notranslate"><span class="pre">CONAN_LIB::&lt;PKG-NAME&gt;_&lt;LIB-NAME&gt;</span></code> target will be generated for each library. Its type is <code class="docutils literal notranslate"><span class="pre">IMPORTED</span> <span class="pre">UNKNOWN</span></code> and its
 main purpose is to provide a correct link order. Their only properties are the location and the dependencies.</li>
 <li>A <code class="docutils literal notranslate"><span class="pre">CONAN_PKG</span></code> depends on every <code class="docutils literal notranslate"><span class="pre">CONAN_LIB</span></code> that belongs to it, and to its direct public dependencies (e.g. other <code class="docutils literal notranslate"><span class="pre">CONAN_PKG</span></code> targets
 from its requirements).</li>

@@ -148,6 +148,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="scons.html">scons</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pkg_config.html">pkg_config</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualenv.html">virtualenv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtualenv_python.html">virtualenv_python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualbuildenv.html">virtualbuildenv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualrunenv.html">virtualrunenv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ycm.html">youcompleteme</a></li>
@@ -258,8 +259,8 @@ Go to <a class="reference internal" href="../../integrations/build_system/cmake.
 <span id="conan-paths-cmake-variables"></span><h2>Variables in <em>conan_paths.cmake</em><a class="headerlink" href="#variables-in-conan-paths-cmake" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="12%" />
-<col width="88%" />
+<col width="13%" />
+<col width="87%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">NAME</th>
@@ -273,11 +274,13 @@ Go to <a class="reference internal" href="../../integrations/build_system/cmake.
 <tr class="row-odd"><td>CMAKE_PREFIX_PATH</td>
 <td>Containing all requires root folders, any declared <a class="reference internal" href="../conanfile/attributes.html#cpp-info-attributes-reference"><span class="std std-ref">self.cpp_info.builddirs</span></a> and the current directory of this file</td>
 </tr>
-<tr class="row-even"><td>CONAN_XXX_ROOT</td>
-<td>For each dep, the root folder, being XXX the dep name uppercase. Useful when a .cmake is patched with <a class="reference internal" href="../build_helpers/cmake.html#patch-config-paths"><span class="std std-ref">cmake.patch_config_paths()</span></a></td>
+<tr class="row-even"><td>CONAN_&lt;PKG-NAME&gt;_ROOT</td>
+<td>For each dep, the root folder, being XXX the dep name uppercase. Useful when a <em>.cmake</em> is patched with <a class="reference internal" href="../build_helpers/cmake.html#patch-config-paths"><span class="std std-ref">cmake.patch_config_paths()</span></a></td>
 </tr>
 </tbody>
 </table>
+<p>Where <code class="docutils literal notranslate"><span class="pre">&lt;PKG-NAME&gt;</span></code> is the placeholder for the name of the require in uppercase (<code class="docutils literal notranslate"><span class="pre">ZLIB</span></code> for <code class="docutils literal notranslate"><span class="pre">zlib/1.2.8&#64;lasote/stable</span></code>) or the one
+declared in <code class="docutils literal notranslate"><span class="pre">cpp_info.name</span></code>.</p>
 </div>
 </div>
 

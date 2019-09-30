@@ -234,18 +234,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="conan-config">
 <span id="id1"></span><h1>conan config<a class="headerlink" href="#conan-config" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan config <span class="o">[</span>-h<span class="o">]</span> <span class="o">{</span>rm,set,get,install<span class="o">}</span> ...
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan config <span class="o">[</span>-h<span class="o">]</span> <span class="o">{</span>get,home,install,rm,set<span class="o">}</span> ...
 </pre></div>
 </div>
 <p>Manages Conan configuration.</p>
 <p>Used to edit conan.conf, or install config files.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>positional arguments:
-  {rm,set,get,install}  sub-command help
+  {get,home,install,rm,set}
+                        sub-command help
+    get                 Get the value of configuration item
+    home                Retrieve the Conan home directory
+    install             Install a full configuration from a local or remote
+                        zip file
     rm                  Remove an existing config element
     set                 Set a value for a configuration item
-    get                 Get the value of configuration item
-    install             install a full configuration from a local or remote
-                        zip file
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -261,6 +263,12 @@ optional arguments:
 <li><p class="first">Get the logging level:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan config get log.level
 $&gt; <span class="m">10</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Get the Conan home directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan config home
+$&gt; /home/user/.conan
 </pre></div>
 </div>
 </li>

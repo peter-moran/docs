@@ -131,8 +131,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="cmakemulti.html">cmake_multi</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cmake_paths.html"><cite>cmake_paths</cite></a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#"><cite>cmake_find_package</cite></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#variables-in-find-name-cmake">Variables in Find{name}.cmake</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#target-in-find-package-name-cmake">Target in Find&lt;package_name&gt;.cmake</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#variables-in-find-pkg-name-cmake">Variables in Find&lt;PKG-NAME&gt;.cmake</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#target-in-find-pkg-name-cmake">Target in Find&lt;PKG-NAME&gt;.cmake</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="cmake_find_package_multi.html"><cite>cmake_find_package_multi</cite></a></li>
@@ -149,6 +149,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="scons.html">scons</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pkg_config.html">pkg_config</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualenv.html">virtualenv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtualenv_python.html">virtualenv_python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualbuildenv.html">virtualbuildenv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualrunenv.html">virtualrunenv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ycm.html">youcompleteme</a></li>
@@ -255,15 +256,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 This is the reference page for <code class="docutils literal notranslate"><span class="pre">cmake_find_package</span></code> generator.
 Go to <a class="reference internal" href="../../integrations/build_system/cmake.html#cmake"><span class="std std-ref">Integrations/CMake</span></a> if you want to learn how to integrate your project or recipes with CMake.</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">cmake_find_package</span></code> generator creates a file for each requirement specified in the conanfile.</p>
-<p>The name of the files follow the pattern <code class="docutils literal notranslate"><span class="pre">Find&lt;package_name&gt;.cmake</span></code>. So for the <code class="docutils literal notranslate"><span class="pre">zlib/1.2.11&#64;conan/stable</span></code> package,
+<p>The name of the files follow the pattern <code class="docutils literal notranslate"><span class="pre">Find&lt;PKG-NAME&gt;.cmake</span></code>. So for the <code class="docutils literal notranslate"><span class="pre">zlib/1.2.11&#64;conan/stable</span></code> package,
 a <code class="docutils literal notranslate"><span class="pre">Findzlib.cmake</span></code> file will be generated.</p>
-<div class="section" id="variables-in-find-name-cmake">
-<h2>Variables in Find{name}.cmake<a class="headerlink" href="#variables-in-find-name-cmake" title="Permalink to this headline">¶</a></h2>
-<p>Being {name} the package name:</p>
+<div class="section" id="variables-in-find-pkg-name-cmake">
+<h2>Variables in Find&lt;PKG-NAME&gt;.cmake<a class="headerlink" href="#variables-in-find-pkg-name-cmake" title="Permalink to this headline">¶</a></h2>
+<p>Being <code class="docutils literal notranslate"><span class="pre">&lt;PKG-NAME&gt;</span></code> the package name used in the reference (by default) or the one declared in <code class="docutils literal notranslate"><span class="pre">cpp_info.name</span></code>:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="18%" />
-<col width="82%" />
+<col width="26%" />
+<col width="74%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">NAME</th>
@@ -271,33 +272,33 @@ a <code class="docutils literal notranslate"><span class="pre">Findzlib.cmake</s
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>{name}_FOUND</td>
+<tr class="row-even"><td>&lt;PKG-NAME&gt;_FOUND</td>
 <td>Set to 1</td>
 </tr>
-<tr class="row-odd"><td>{name}_VERSION</td>
+<tr class="row-odd"><td>&lt;PKG-NAME&gt;_VERSION</td>
 <td>Package version</td>
 </tr>
-<tr class="row-even"><td>{name}_INCLUDE_DIRS</td>
+<tr class="row-even"><td>&lt;PKG-NAME&gt;_INCLUDE_DIRS</td>
 <td>Containing all the include directories of the package</td>
 </tr>
-<tr class="row-odd"><td>{name}_INCLUDES</td>
+<tr class="row-odd"><td>&lt;PKG-NAME&gt;_INCLUDES</td>
 <td>Same as the XXX_INCLUDE_DIRS</td>
 </tr>
-<tr class="row-even"><td>{name}_DEFINITIONS</td>
+<tr class="row-even"><td>&lt;PKG-NAME&gt;_DEFINITIONS</td>
 <td>Definitions of the library</td>
 </tr>
-<tr class="row-odd"><td>{name}_LIBRARIES</td>
+<tr class="row-odd"><td>&lt;PKG-NAME&gt;_LIBRARIES</td>
 <td>Library paths to link</td>
 </tr>
-<tr class="row-even"><td>{name}_LIBS</td>
+<tr class="row-even"><td>&lt;PKG-NAME&gt;_LIBS</td>
 <td>Same as XXX_LIBRARIES</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="section" id="target-in-find-package-name-cmake">
-<h2>Target in Find&lt;package_name&gt;.cmake<a class="headerlink" href="#target-in-find-package-name-cmake" title="Permalink to this headline">¶</a></h2>
-<p>A target named <code class="docutils literal notranslate"><span class="pre">{name}::{name}</span></code> target is generated with the following properties adjusted:</p>
+<div class="section" id="target-in-find-pkg-name-cmake">
+<h2>Target in Find&lt;PKG-NAME&gt;.cmake<a class="headerlink" href="#target-in-find-pkg-name-cmake" title="Permalink to this headline">¶</a></h2>
+<p>A target named <code class="docutils literal notranslate"><span class="pre">&lt;PKG-NAME&gt;::&lt;PKG-NAME&gt;</span></code> target is generated with the following properties adjusted:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">INTERFACE_INCLUDE_DIRECTORIES</span></code>: Containing all the include directories of the package.</li>
 <li><code class="docutils literal notranslate"><span class="pre">INTERFACE_LINK_LIBRARIES</span></code>: Library paths to link.</li>

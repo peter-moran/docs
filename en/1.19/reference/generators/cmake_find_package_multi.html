@@ -149,6 +149,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="scons.html">scons</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pkg_config.html">pkg_config</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualenv.html">virtualenv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtualenv_python.html">virtualenv_python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualbuildenv.html">virtualbuildenv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualrunenv.html">virtualrunenv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ycm.html">youcompleteme</a></li>
@@ -261,11 +262,11 @@ Go to <a class="reference internal" href="../../integrations/build_system/cmake.
 <div class="section" id="generated-files">
 <h2>Generated files<a class="headerlink" href="#generated-files" title="Permalink to this headline">¶</a></h2>
 <p>For each conan package in your graph, it will generate 2 files and 1 more per different <code class="docutils literal notranslate"><span class="pre">build_type</span></code>.
-Being {name} the package name:</p>
+Being <code class="docutils literal notranslate"><span class="pre">&lt;PKG-NAME&gt;</span></code> the package name used in the reference (by default) or the one declared in <code class="docutils literal notranslate"><span class="pre">cpp_info.name</span></code>:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="30%" />
-<col width="70%" />
+<col width="32%" />
+<col width="68%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">NAME</th>
@@ -273,22 +274,22 @@ Being {name} the package name:</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>{name}Config.cmake</td>
-<td>It includes the {name}Targets.cmake and call find_dependency for each dep</td>
+<tr class="row-even"><td>&lt;PKG-NAME&gt;Config.cmake</td>
+<td>It includes the &lt;PKG-NAME&gt;Targets.cmake and call find_dependency for each dep</td>
 </tr>
-<tr class="row-odd"><td>{name}Targets.cmake</td>
+<tr class="row-odd"><td>&lt;PKG-NAME&gt;Targets.cmake</td>
 <td>It includes the following files</td>
 </tr>
-<tr class="row-even"><td>{name}Targets-debug.cmake</td>
+<tr class="row-even"><td>&lt;PKG-NAME&gt;Targets-debug.cmake</td>
 <td>Specific information for the Debug configuration</td>
 </tr>
-<tr class="row-odd"><td>{name}Targets-release.cmake</td>
+<tr class="row-odd"><td>&lt;PKG-NAME&gt;Targets-release.cmake</td>
 <td>Specific information for the Release configuration</td>
 </tr>
-<tr class="row-even"><td>{name}Targets-relwithdebinfo.cmake</td>
+<tr class="row-even"><td>&lt;PKG-NAME&gt;Targets-relwithdebinfo.cmake</td>
 <td>Specific information for the RelWithDebInfo configuration</td>
 </tr>
-<tr class="row-odd"><td>{name}Targets-minsizerel.cmake</td>
+<tr class="row-odd"><td>&lt;PKG-NAME&gt;Targets-minsizerel.cmake</td>
 <td>Specific information for the MinSizeRel configuration</td>
 </tr>
 </tbody>
@@ -296,7 +297,7 @@ Being {name} the package name:</p>
 </div>
 <div class="section" id="targets">
 <h2>Targets<a class="headerlink" href="#targets" title="Permalink to this headline">¶</a></h2>
-<p>A target named <code class="docutils literal notranslate"><span class="pre">{name}::{name}</span></code> target is generated with the following properties adjusted:</p>
+<p>A target named <code class="docutils literal notranslate"><span class="pre">&lt;PKG-NAME&gt;::&lt;PKG-NAME&gt;</span></code> target is generated with the following properties adjusted:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">INTERFACE_INCLUDE_DIRECTORIES</span></code>: Containing all the include directories of the package.</li>
 <li><code class="docutils literal notranslate"><span class="pre">INTERFACE_LINK_LIBRARIES</span></code>: Library paths to link.</li>
@@ -304,12 +305,12 @@ Being {name} the package name:</p>
 </ul>
 <p>The targets contains multi-configuration properties, for example, the compile options property
 is declared like this:</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">set_property</span><span class="p">(</span><span class="s">TARGET</span> <span class="s">{name}::{name}</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">set_property</span><span class="p">(</span><span class="s">TARGET</span> <span class="s">&lt;PKG-NAME&gt;::&lt;PKG-NAME&gt;</span>
          <span class="s">PROPERTY</span> <span class="s">INTERFACE_COMPILE_OPTIONS</span>
-             <span class="o">$&lt;</span><span class="nv">$&lt;CONFIG:Release</span><span class="o">&gt;</span><span class="s">:</span><span class="o">${</span><span class="nv">{{name</span><span class="o">}</span><span class="s">_COMPILE_OPTIONS_RELEASE_LIST}}&gt;</span>
-             <span class="o">$&lt;</span><span class="nv">$&lt;CONFIG:RelWithDebInfo</span><span class="o">&gt;</span><span class="s">:</span><span class="o">${</span><span class="nv">{{name</span><span class="o">}</span><span class="s">_COMPILE_OPTIONS_RELWITHDEBINFO_LIST}}&gt;</span>
-             <span class="o">$&lt;</span><span class="nv">$&lt;CONFIG:MinSizeRel</span><span class="o">&gt;</span><span class="s">:</span><span class="o">${</span><span class="nv">{{name</span><span class="o">}</span><span class="s">_COMPILE_OPTIONS_MINSIZEREL_LIST}}&gt;</span>
-             <span class="o">$&lt;</span><span class="nv">$&lt;CONFIG:Debug</span><span class="o">&gt;</span><span class="s">:</span><span class="o">${</span><span class="nv">{{name</span><span class="o">}</span><span class="s">_COMPILE_OPTIONS_DEBUG_LIST}}&gt;</span><span class="p">)</span>
+             <span class="o">$&lt;</span><span class="nv">$&lt;CONFIG:Release</span><span class="o">&gt;</span><span class="s">:</span><span class="o">${</span><span class="nv">{&lt;PKG-NAME&gt;_COMPILE_OPTIONS_RELEASE_LIST</span><span class="o">}</span><span class="s">}&gt;</span>
+             <span class="o">$&lt;</span><span class="nv">$&lt;CONFIG:RelWithDebInfo</span><span class="o">&gt;</span><span class="s">:</span><span class="o">${</span><span class="nv">{&lt;PKG-NAME&gt;_COMPILE_OPTIONS_RELWITHDEBINFO_LIST</span><span class="o">}</span><span class="s">}&gt;</span>
+             <span class="o">$&lt;</span><span class="nv">$&lt;CONFIG:MinSizeRel</span><span class="o">&gt;</span><span class="s">:</span><span class="o">${</span><span class="nv">{&lt;PKG-NAME&gt;_COMPILE_OPTIONS_MINSIZEREL_LIST</span><span class="o">}</span><span class="s">}&gt;</span>
+             <span class="o">$&lt;</span><span class="nv">$&lt;CONFIG:Debug</span><span class="o">&gt;</span><span class="s">:</span><span class="o">${</span><span class="nv">{&lt;PKG-NAME&gt;_COMPILE_OPTIONS_DEBUG_LIST</span><span class="o">}</span><span class="s">}&gt;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The targets are also transitive. So, if your project depends on a packages <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code>, and at the same time
@@ -318,12 +319,12 @@ in your <cite>CMakeLists.txt</cite> file you only need to <code class="docutils 
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
 <p class="last">Add the <code class="docutils literal notranslate"><span class="pre">CONFIG</span></code> option to <code class="docutils literal notranslate"><span class="pre">find_package</span></code> so that <em>module mode</em> is explicitly skipped by CMake.
-This helps to solve issues when there is for example a <code class="docutils literal notranslate"><span class="pre">FindXXXX.cmake</span></code> file in CMake’s default modules directory
-that could be loaded instead of the <code class="docutils literal notranslate"><span class="pre">XXXXConfig.cmake</span></code> generated by Conan.</p>
+This helps to solve issues when there is for example a <code class="docutils literal notranslate"><span class="pre">Find&lt;PKG-NAME&gt;.cmake</span></code> file in CMake’s default modules directory
+that could be loaded instead of the <code class="docutils literal notranslate"><span class="pre">&lt;PKG-NAME&gt;Config.cmake</span></code> generated by Conan.</p>
 </div>
 <p>You also need to adjust <a class="reference external" href="https://cmake.org/cmake/help/v3.0/variable/CMAKE_PREFIX_PATH.html">CMAKE_PREFIX_PATH</a> and
 <a class="reference external" href="https://cmake.org/cmake/help/v3.0/variable/CMAKE_MODULE_PATH.html">CMAKE_MODULE_PATH</a> so CMake can locate all
-the <code class="docutils literal notranslate"><span class="pre">{name}Config.cmake</span></code> files: The <code class="docutils literal notranslate"><span class="pre">CMAKE_PREFIX_PATH</span></code> is used by the <code class="docutils literal notranslate"><span class="pre">find_package</span></code> and the <code class="docutils literal notranslate"><span class="pre">CMAKE_MODULE_PATH</span></code> is used by the
+the <code class="docutils literal notranslate"><span class="pre">&lt;PKG-NAME&gt;Config.cmake</span></code> files: The <code class="docutils literal notranslate"><span class="pre">CMAKE_PREFIX_PATH</span></code> is used by the <code class="docutils literal notranslate"><span class="pre">find_package</span></code> and the <code class="docutils literal notranslate"><span class="pre">CMAKE_MODULE_PATH</span></code> is used by the
 <code class="docutils literal notranslate"><span class="pre">find_dependency</span></code> calls that locates the transitive dependencies.</p>
 </div>
 </div>

@@ -405,7 +405,8 @@ source folder), and the other will copy from the build folder (<code class="docu
 <p>Each package has to specify certain build information for its consumers. This can be done in the <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> attribute within the
 <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> attribute has the following properties you can assign/append to:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">includedirs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;include&#39;</span><span class="p">]</span>  <span class="c1"># Ordered list of include paths</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&lt;PKG_NAME&gt;&quot;</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">includedirs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;include&#39;</span><span class="p">]</span>  <span class="c1"># Ordered list of include paths</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">libs</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># The libs to link against</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">libdirs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lib&#39;</span><span class="p">]</span>  <span class="c1"># Directories where libraries can be found</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">resdirs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;res&#39;</span><span class="p">]</span>  <span class="c1"># Directories where resources, data, etc can be found</span>
@@ -419,6 +420,7 @@ source folder), and the other will copy from the build folder (<code class="docu
 </pre></div>
 </div>
 <ul class="simple">
+<li><strong>name</strong>: Alternative name for the package to be used by generators.</li>
 <li><strong>includedirs</strong>: List of relative paths (starting from the package root) of directories where headers can be found. By default it is
 initialized to <code class="docutils literal notranslate"><span class="pre">['include']</span></code>, and it is rarely changed.</li>
 <li><strong>libs</strong>: Ordered list of libs the client should link against. Empty by default, it is common that different configurations produce
