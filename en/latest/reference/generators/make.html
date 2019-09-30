@@ -145,6 +145,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="scons.html">scons</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pkg_config.html">pkg_config</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualenv.html">virtualenv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtualenv_python.html">virtualenv_python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualbuildenv.html">virtualbuildenv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualrunenv.html">virtualrunenv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ycm.html">youcompleteme</a></li>
@@ -308,6 +309,12 @@ make builds.</p>
 <tr class="row-even"><td>CONAN_EXELINK_FLAGS_&lt;PKG-NAME&gt;</td>
 <td>Executable linker flags</td>
 </tr>
+<tr class="row-odd"><td>CONAN_FRAMEWORKS_&lt;PKG-NAME&gt;</td>
+<td>Frameworks (OSX)</td>
+</tr>
+<tr class="row-even"><td>CONAN_FRAMEWORK_PATHS_&lt;PKG-NAME&gt;</td>
+<td>Framework folders (OSX)  (default {CONAN_XXX_ROOT}/Frameworks</td>
+</tr>
 </tbody>
 </table>
 <p>Conan also declares some <strong>global variables</strong> with the aggregated values of all our requirements. The values are ordered in the right order
@@ -361,6 +368,12 @@ according to the dependency tree.</p>
 </tr>
 <tr class="row-even"><td>CONAN_EXELINKFLAGS</td>
 <td>Aggregated Executable linker flags</td>
+</tr>
+<tr class="row-odd"><td>CONAN_FRAMEWORKS</td>
+<td>Aggregated frameworks (OSX)</td>
+</tr>
+<tr class="row-even"><td>CONAN_FRAMEWORK_PATHS</td>
+<td>Aggregated framework folders (OSX)</td>
 </tr>
 </tbody>
 </table>

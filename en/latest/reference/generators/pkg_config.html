@@ -145,6 +145,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="scons.html">scons</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">pkg_config</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualenv.html">virtualenv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtualenv_python.html">virtualenv_python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualbuildenv.html">virtualbuildenv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualrunenv.html">virtualrunenv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ycm.html">youcompleteme</a></li>
@@ -247,8 +248,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="pkg-config">
 <span id="pkg-config-generator"></span><h1>pkg_config<a class="headerlink" href="#pkg-config" title="Permalink to this headline">¶</a></h1>
-<p>Generates N files named <code class="docutils literal notranslate"><span class="pre">{dep_name}.pc</span></code>, containing a valid pkg-config file syntax.
-The <code class="docutils literal notranslate"><span class="pre">prefix</span></code> variable is automatically adjusted to the <code class="docutils literal notranslate"><span class="pre">package_folder</span></code>.</p>
+<p>Generates N files named <code class="docutils literal notranslate"><span class="pre">&lt;PKG-NAME&gt;.pc</span></code> (where <code class="docutils literal notranslate"><span class="pre">&lt;PKG-NAME</span></code> is the name declared by dependencies in <code class="docutils literal notranslate"><span class="pre">cpp_info.name</span></code>), containing a
+valid pkg-config file syntax. The <code class="docutils literal notranslate"><span class="pre">prefix</span></code> variable is automatically adjusted to the <code class="docutils literal notranslate"><span class="pre">package_folder</span></code>.</p>
 <p>Go to <a class="reference internal" href="../../integrations/build_system/pkg_config_pc_files.html#pkg-config-generator-example"><span class="std std-ref">Integrations/pkg-config and pc files/Use the pkg_config generator</span></a>
 if you want to learn how to use this generator.</p>
 </div>

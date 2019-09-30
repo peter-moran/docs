@@ -167,6 +167,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l4"><a class="reference internal" href="#scm">scm</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#revision-mode">revision_mode</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#python-requires">python_requires</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conandata">conandata</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="methods.html">Methods</a></li>
@@ -997,8 +998,22 @@ library paths… There are some default values that will be applied automaticall
 <tr class="row-odd"><td>self.cpp_info.exelinkflags</td>
 <td>Ordered list with linker flags (executables). Defaulted to <code class="docutils literal notranslate"><span class="pre">[]</span></code> (empty)</td>
 </tr>
+<tr class="row-even"><td>self.cpp_info.frameworks</td>
+<td>Ordered list with the framework names (OSX), Defaulted to <code class="docutils literal notranslate"><span class="pre">[]</span></code> (empty)</td>
+</tr>
+<tr class="row-odd"><td>self.cpp_info.frameworkdirs</td>
+<td>Ordered list with frameworks search paths (OSX). Defaulted to <code class="docutils literal notranslate"><span class="pre">[&quot;Frameworks&quot;]</span></code></td>
+</tr>
 <tr class="row-even"><td>self.cpp_info.rootpath</td>
 <td>Filled with the root directory of the package, see <code class="docutils literal notranslate"><span class="pre">deps_cpp_info</span></code></td>
+</tr>
+<tr class="row-odd"><td>self.cpp_info.name</td>
+<td><div class="first last line-block">
+<div class="line">Alternative name for the package used by generators to create files or variables.</div>
+<div class="line">Defaulted to the package name. Supported by <cite>cmake</cite>, <cite>cmake_multi</cite>, <cite>cmake_find_package</cite>,</div>
+<div class="line"><cite>cmake_find_package_multi</cite> and <cite>pkg_config</cite> generators.</div>
+</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -1038,6 +1053,9 @@ absolute paths:</p>
 </tr>
 <tr class="row-even"><td>self.cpp_info.res_paths</td>
 <td>Same as <code class="docutils literal notranslate"><span class="pre">resdirs</span></code> but transformed to absolute paths</td>
+</tr>
+<tr class="row-odd"><td>self.cpp_info.framework_paths</td>
+<td>Same as <code class="docutils literal notranslate"><span class="pre">frameworkdirs</span></code> but transformed to absolute paths</td>
 </tr>
 </tbody>
 </table>
@@ -1302,6 +1320,26 @@ workspace.:</p>
     <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">pyreq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">python_requires</span><span class="p">[</span><span class="s1">&#39;pyreq&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;CMakeLists.txt&quot;</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="n">pyreq</span><span class="o">.</span><span class="n">exports_sources_folder</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">source_folder</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="conandata">
+<span id="conandata-attribute"></span><h2>conandata<a class="headerlink" href="#conandata" title="Permalink to this headline">¶</a></h2>
+<p>This attribute is a dictionary with the keys and values provided in a <a class="reference internal" href="../config_files/conandata.yml.html#conandata-yml"><span class="std std-ref">conandata.yml</span></a> file format placed next to the <em>conanfile.py</em>.
+This YAML file is automatically exported with the recipe and automatically loaded with it too.</p>
+<p>You can declare information in the <em>conandata.yml</em> file and then access it inside any of the methods of the recipe.
+For example, a <em>conandata.yml</em> with information about sources that looks like this:</p>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">sources</span><span class="p">:</span>
+  <span class="s">&quot;1.1.0&quot;</span><span class="p p-Indicator">:</span>
+    <span class="nt">url</span><span class="p">:</span> <span class="s">&quot;https://www.url.org/source/mylib-1.0.0.tar.gz&quot;</span>
+    <span class="nt">sha256</span><span class="p">:</span> <span class="s">&quot;8c48baf3babe0d505d16cfc0cf272589c66d3624264098213db0fb00034728e9&quot;</span>
+  <span class="s">&quot;1.1.1&quot;</span><span class="p p-Indicator">:</span>
+    <span class="nt">url</span><span class="p">:</span> <span class="s">&quot;https://www.url.org/source/mylib-1.0.1.tar.gz&quot;</span>
+    <span class="nt">sha256</span><span class="p">:</span> <span class="s">&quot;15b6393c20030aab02c8e2fe0243cb1d1d18062f6c095d67bca91871dc7f324a&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">tools</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">conan_data</span><span class="p">[</span><span class="s2">&quot;sources&quot;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>

@@ -151,6 +151,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="scons.html">scons</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pkg_config.html">pkg_config</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualenv.html">virtualenv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtualenv_python.html">virtualenv_python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualbuildenv.html">virtualbuildenv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualrunenv.html">virtualrunenv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ycm.html">youcompleteme</a></li>
@@ -306,11 +307,11 @@ directories and uses the default ones designated by CMake).</li>
 <p>Helper to link all libraries to a specified target.</p>
 <p>These targets are:</p>
 <ul class="simple">
-<li>A <code class="docutils literal notranslate"><span class="pre">CONAN_PKG::PkgName</span></code> target per package in the dependency graph. This is an <code class="docutils literal notranslate"><span class="pre">IMPORTED</span> <span class="pre">INTERFACE</span></code> target. <code class="docutils literal notranslate"><span class="pre">IMPORTED</span></code> because it is
+<li>A <code class="docutils literal notranslate"><span class="pre">CONAN_PKG::&lt;PKG-NAME&gt;</span></code> target per package in the dependency graph. This is an <code class="docutils literal notranslate"><span class="pre">IMPORTED</span> <span class="pre">INTERFACE</span></code> target. <code class="docutils literal notranslate"><span class="pre">IMPORTED</span></code> because it is
 external, a pre-compiled library. <code class="docutils literal notranslate"><span class="pre">INTERFACE</span></code>, because it doesn’t necessarily match a library, it could be a header-only library, or the
 package could even contain several libraries. It contains all the properties (include paths, compile flags, etc.) that are defined in the
 <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method of the recipe.</li>
-<li>Inside each package a <code class="docutils literal notranslate"><span class="pre">CONAN_LIB::PkgName_LibName</span></code> target will be generated for each library. Its type is <code class="docutils literal notranslate"><span class="pre">IMPORTED</span> <span class="pre">UNKNOWN</span></code> and its
+<li>Inside each package a <code class="docutils literal notranslate"><span class="pre">CONAN_LIB::&lt;PKG-NAME&gt;_&lt;LIB-NAME&gt;</span></code> target will be generated for each library. Its type is <code class="docutils literal notranslate"><span class="pre">IMPORTED</span> <span class="pre">UNKNOWN</span></code> and its
 main purpose is to provide a correct link order. Their only properties are the location and the dependencies.</li>
 <li>A <code class="docutils literal notranslate"><span class="pre">CONAN_PKG</span></code> depends on every <code class="docutils literal notranslate"><span class="pre">CONAN_LIB</span></code> that belongs to it, and to its direct public dependencies (e.g. other <code class="docutils literal notranslate"><span class="pre">CONAN_PKG</span></code> targets
 from its requirements).</li>

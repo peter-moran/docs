@@ -145,6 +145,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="scons.html">scons</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pkg_config.html">pkg_config</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualenv.html">virtualenv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtualenv_python.html">virtualenv_python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualbuildenv.html">virtualbuildenv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="virtualrunenv.html">virtualrunenv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ycm.html">youcompleteme</a></li>
@@ -306,6 +307,12 @@ Go to <a class="reference internal" href="../../integrations/custom.html#txt-int
 <tr class="row-even"><td>[cppflags_XXX]</td>
 <td>List with C++ compilation flags</td>
 </tr>
+<tr class="row-odd"><td>[frameworks_XXX]</td>
+<td>List with the framework names (OSX)</td>
+</tr>
+<tr class="row-even"><td>[frameworkdirs_XXX]</td>
+<td>List with the frameworks search paths (OSX).</td>
+</tr>
 <tr class="row-odd"><td>[rootpath_XXX]</td>
 <td>Root path of the package</td>
 </tr>
@@ -357,6 +364,12 @@ The values are ordered in the right order according to the dependency tree.</p>
 </tr>
 <tr class="row-even"><td>[cppflags]</td>
 <td>List with aggregated C++ compilation flags</td>
+</tr>
+<tr class="row-odd"><td>[frameworks]</td>
+<td>List with aggregated framework names (OSX)</td>
+</tr>
+<tr class="row-even"><td>[frameworkdirs]</td>
+<td>List with aggregated frameworks search paths (OSX).</td>
 </tr>
 </tbody>
 </table>

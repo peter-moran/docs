@@ -291,8 +291,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tools</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Returns the number of CPUs available, for parallel builds. If processor detection is not enabled, it will safely return 1. Can be
-overwritten with the environment variable <a class="reference internal" href="env_vars.html#env-vars-conan-cpu-count"><span class="std std-ref">CONAN_CPU_COUNT</span></a> and configured in the <a class="reference internal" href="config_files/conan.conf.html#conan-conf"><span class="std std-ref">conan.conf</span></a>.</p>
+<p>Returns the number of CPUs available, for parallel builds. If processor detection is not enabled, it will safely return 1. When
+running in Docker, it reads cgroup to detect the configured number of CPUs. It Can be overwritten with the environment variable
+<a class="reference internal" href="env_vars.html#env-vars-conan-cpu-count"><span class="std std-ref">CONAN_CPU_COUNT</span></a> and configured in the <a class="reference internal" href="config_files/conan.conf.html#conan-conf"><span class="std std-ref">conan.conf</span></a>.</p>
 </div>
 <div class="section" id="tools-vcvars-command">
 <span id="id3"></span><h2>tools.vcvars_command()<a class="headerlink" href="#tools-vcvars-command" title="Permalink to this headline">¶</a></h2>
