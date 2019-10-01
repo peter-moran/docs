@@ -241,24 +241,14 @@ and, of course, you want to propagate this information to all projects/libraries
     <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">libs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;OpenGL32&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>With frameworks we need to declare the “-framework flag” as a linker flag:</p>
+<p>With frameworks we need to use <code class="docutils literal notranslate"><span class="pre">self.cpp_info.frameworks</span></code> in a similar manner:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">libs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;SDL2&quot;</span><span class="p">]</span>
 
-    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">exelinkflags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;-framework Carbon&quot;</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">exelinkflags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;-framework CoreAudio&quot;</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">exelinkflags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;-framework Security&quot;</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">exelinkflags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;-framework IOKit&quot;</span><span class="p">)</span>
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">sharedlinkflags</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">exelinkflags</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">frameworks</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s2">&quot;Carbon&quot;</span><span class="p">,</span> <span class="s2">&quot;CoreAudio&quot;</span><span class="p">,</span> <span class="s2">&quot;Security&quot;</span><span class="p">,</span> <span class="s2">&quot;IOKit&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>In the previous example we are using <code class="docutils literal notranslate"><span class="pre">self.cpp_info.exelinkflags</span></code>. If we are using CMake to consume this package, it will only link those
-frameworks if we are building an executable and <code class="docutils literal notranslate"><span class="pre">sharedlinkflags</span></code> will only apply if we are building a shared library.</p>
-<p>If we are not using CMake to consume this package <code class="docutils literal notranslate"><span class="pre">sharedlinkflags</span></code> and <code class="docutils literal notranslate"><span class="pre">exelinkflags</span></code> are used indistinctly.
-In the example above, in the last line we are assigning <code class="docutils literal notranslate"><span class="pre">sharedlinkflags</span></code> with <code class="docutils literal notranslate"><span class="pre">exelinkflags</span></code>, so no matter what the consumer will build,
-it will indicate to the linker to link with the specified frameworks.</p>
 </div>
 <div class="section" id="how-to-package-apple-frameworks">
 <span id="package-apple-framework"></span><h1>How to package Apple Frameworks<a class="headerlink" href="#how-to-package-apple-frameworks" title="Permalink to this headline">¶</a></h1>
@@ -274,19 +264,13 @@ it will indicate to the linker to link with the specified frameworks.</p>
     <span class="c1"># ...</span>
 </pre></div>
 </div>
-<p>Declare the framework in the <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> object, pass a compiler flag <code class="docutils literal notranslate"><span class="pre">-F</span></code> with the
-directory of the framework folder (self.package_folder) and linker flags with the <code class="docutils literal notranslate"><span class="pre">-F</span></code> and <code class="docutils literal notranslate"><span class="pre">-framework</span></code> with
-the framework name.</p>
+<p>Declare the framework in the <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> object, the
+directory of the framework folder (self.package_folder) into the <code class="docutils literal notranslate"><span class="pre">cpp_info.frameworkdirs</span></code> and the framework name
+into the <code class="docutils literal notranslate"><span class="pre">cpp_info.frameworks</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="o">...</span>
-    <span class="c1"># Note that -F flags are not automatically adjusted in &quot;cmake&quot;</span>
-    <span class="c1"># generator so it will be needed to declare its path like this:</span>
-    <span class="c1"># self.cpp_info.exelinkflags.append(&quot;-F path/to/the/framework -framework MyFramework&quot;)</span>
-
-    <span class="n">f_location</span> <span class="o">=</span> <span class="s1">&#39;-F &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">package_folder</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">cflags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f_location</span><span class="p">)</span> <span class="c1"># or cpp_info.cppflags if cpp library</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">sharedlinkflags</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">f_location</span><span class="p">,</span> <span class="s2">&quot;-framework MyFramework&quot;</span><span class="p">])</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">exelinkflags</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">sharedlinkflags</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">frameworkdirs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">package_folder</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">frameworks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;MyFramework&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
