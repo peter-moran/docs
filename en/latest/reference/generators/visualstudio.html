@@ -129,17 +129,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2 current"><a class="reference internal" href="../generators.html">Generators</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="cmake.html">cmake</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cmakemulti.html">cmake_multi</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cmake_paths.html"><cite>cmake_paths</cite></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cmake_find_package.html"><cite>cmake_find_package</cite></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cmake_find_package_multi.html"><cite>cmake_find_package_multi</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_paths.html">cmake_paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_find_package.html">cmake_find_package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_find_package_multi.html">cmake_find_package_multi</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">visual_studio</a></li>
-<li class="toctree-l3"><a class="reference internal" href="visualstudiomulti.html"><cite>visual_studio_multi</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualstudiomulti.html">visual_studio_multi</a></li>
 <li class="toctree-l3"><a class="reference internal" href="visualstudiolegacy.html">visual_studio_legacy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="xcode.html">xcode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="compiler_args.html">compiler_args</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gcc.html">gcc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="boost_build.html">Boost Build</a></li>
-<li class="toctree-l3"><a class="reference internal" href="b2.html"><cite>B2</cite> [EXPERIMENTAL]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="boost_build.html">boost-build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="b2.html">b2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qbs.html">qbs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qmake.html">qmake</a></li>
 <li class="toctree-l3"><a class="reference internal" href="scons.html">scons</a></li>
@@ -251,7 +251,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="out-reference-box docutils container">
 This is the reference page for <code class="docutils literal notranslate"><span class="pre">visual_studio</span></code> generator.
 Go to <a class="reference internal" href="../../integrations/ide/visual_studio.html#visual-studio"><span class="std std-ref">Integrations/Visual Studio</span></a> if you want to learn how to integrate your project or recipes with Visual Studio.</div>
-<p>Generates a file named <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.props</span></code> containing an XML that can be imported to your <em>Visual Studio</em> project.</p>
+<p>Generates a file named <em>conanbuildinfo.props</em> containing an XML that can be imported to your Visual Studio project.</p>
 <p>Generated xml structure:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="nt">&lt;Project</span> <span class="na">ToolsVersion=</span><span class="s">&quot;4.0&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;http://schemas.microsoft.com/developer/msbuild/2003&quot;</span><span class="nt">&gt;</span>
@@ -286,14 +286,18 @@ Go to <a class="reference internal" href="../../integrations/ide/visual_studio.h
 <span class="nt">&lt;/Project&gt;</span>
 </pre></div>
 </div>
-<p>Note that for single-configuration packages, which is the most typical, conan install Debug/Release, 32/64bits, packages separately. So a different property sheet will be generated for each configuration. The process could be:</p>
-<p>Given for example a <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code> like:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
-Pkg/0.1@user/channel
+<p>Note that for single-configuration packages (which is the most typical), Conan installs Debug/Release, 32/64bits, packages separately. So a
+different property sheet will be generated for each configuration. The process could be:</p>
+<p>Given for example a recipe like:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><em>conanfile.txt</em></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> [requires]
+ Pkg/0.1@user/channel
 
-[generators]
-visual_studio
+ [generators]
+ visual_studio
 </pre></div>
+</div>
 </div>
 <p>And assuming that binary packages exist for <code class="docutils literal notranslate"><span class="pre">Pkg/0.1&#64;user/channel</span></code>, we could do:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mkdir debug32 <span class="o">&amp;&amp;</span> <span class="nb">cd</span> debug32
@@ -311,7 +315,8 @@ $ conan install .. -s <span class="nv">compiler</span><span class="o">=</span><s
 <span class="c1"># Now go to VS 2017 Property Manager, load the respective sheet into each configuration</span>
 </pre></div>
 </div>
-<p>The above process can be simplified using profiles (assuming you have created the respective profiles), and you can also specify the generators in the command line:</p>
+<p>The above process can be simplified using profiles (assuming you have created the respective profiles), and you can also specify the
+generators in the command line:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install .. -pr<span class="o">=</span>vs15release64 -g visual_studio
 ...
 </pre></div>

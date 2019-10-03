@@ -129,17 +129,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2 current"><a class="reference internal" href="../generators.html">Generators</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="cmake.html">cmake</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cmakemulti.html">cmake_multi</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cmake_paths.html"><cite>cmake_paths</cite></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cmake_find_package.html"><cite>cmake_find_package</cite></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cmake_find_package_multi.html"><cite>cmake_find_package_multi</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_paths.html">cmake_paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_find_package.html">cmake_find_package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_find_package_multi.html">cmake_find_package_multi</a></li>
 <li class="toctree-l3"><a class="reference internal" href="visualstudio.html">visual_studio</a></li>
-<li class="toctree-l3"><a class="reference internal" href="visualstudiomulti.html"><cite>visual_studio_multi</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualstudiomulti.html">visual_studio_multi</a></li>
 <li class="toctree-l3"><a class="reference internal" href="visualstudiolegacy.html">visual_studio_legacy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="xcode.html">xcode</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">compiler_args</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">compiler_args</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#with-gcc-or-clang">With gcc or clang</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#with-cl-visual-studio">With cl (Visual Studio)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#directly-inside-a-recipe">Directly inside a recipe</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="gcc.html">gcc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="boost_build.html">Boost Build</a></li>
-<li class="toctree-l3"><a class="reference internal" href="b2.html"><cite>B2</cite> [EXPERIMENTAL]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="boost_build.html">boost-build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="b2.html">b2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qbs.html">qbs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qmake.html">qmake</a></li>
 <li class="toctree-l3"><a class="reference internal" href="scons.html">scons</a></li>
@@ -252,8 +257,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 This is the reference page for <code class="docutils literal notranslate"><span class="pre">compiler_args</span></code> generator.
 Go to <a class="reference internal" href="../../integrations/build_system/gcc.html#gcc-integration"><span class="std std-ref">Integrations/Compilers on command line</span></a> if you want to learn how to integrate your project calling
 your compiler in the command line.</div>
-<p>Generates a file named <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.args</span></code> containing a command line parameters to invoke <code class="docutils literal notranslate"><span class="pre">gcc</span></code>, <code class="docutils literal notranslate"><span class="pre">clang</span></code> or <code class="docutils literal notranslate"><span class="pre">cl</span></code> compiler.</p>
-<p>You can use the <strong>compiler_args</strong> generator directly to build simple programs:</p>
+<p>Generates a file named <em>conanbuildinfo.args</em> containing a command line parameters to invoke <code class="docutils literal notranslate"><span class="pre">gcc</span></code>, <code class="docutils literal notranslate"><span class="pre">clang</span></code> or <code class="docutils literal notranslate"><span class="pre">cl</span></code> compiler.</p>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">compiler_args</span></code> generator directly to build simple programs:</p>
 <p><strong>gcc/clang</strong>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt; g++ timer.cpp @conanbuildinfo.args -o bin/timer
 </pre></div>
@@ -262,7 +267,8 @@ your compiler in the command line.</div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cl /EHsc timer.cpp @conanbuildinfo.args
 </pre></div>
 </div>
-<p><strong>gcc/clang</strong></p>
+<div class="section" id="with-gcc-or-clang">
+<h2>With gcc or clang<a class="headerlink" href="#with-gcc-or-clang" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -321,7 +327,9 @@ your compiler in the command line.</div>
 </tr>
 </tbody>
 </table>
-<p><strong>cl (Visual Studio)</strong></p>
+</div>
+<div class="section" id="with-cl-visual-studio">
+<h2>With cl (Visual Studio)<a class="headerlink" href="#with-cl-visual-studio" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -353,24 +361,23 @@ your compiler in the command line.</div>
 </tr>
 </tbody>
 </table>
-<p>You can also use it in a recipe:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+</div>
+<div class="section" id="directly-inside-a-recipe">
+<h2>Directly inside a recipe<a class="headerlink" href="#directly-inside-a-recipe" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
 
-<span class="k">class</span> <span class="nc">PocoTimerConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
-   <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span>
-   <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;Poco/1.9.0@pocoproject/stable&quot;</span>
-   <span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;compiler_args&quot;</span>
-   <span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Poco:shared&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s2">&quot;OpenSSL:shared&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+ <span class="k">class</span> <span class="nc">PocoTimerConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+     <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span>
+     <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;Poco/1.9.0@pocoproject/stable&quot;</span>
+     <span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;compiler_args&quot;</span>
+     <span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Poco:shared&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s2">&quot;OpenSSL:shared&quot;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
 
-   <span class="k">def</span> <span class="nf">imports</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.dll&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;bin&quot;</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;bin&quot;</span><span class="p">)</span> <span class="c1"># From bin to bin</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*.dylib*&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;bin&quot;</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;lib&quot;</span><span class="p">)</span> <span class="c1"># From lib to bin</span>
-
-   <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;mkdir -p bin&quot;</span><span class="p">)</span>
-<span class="hll">      <span class="n">command</span> <span class="o">=</span> <span class="s1">&#39;g++ timer.cpp @conanbuildinfo.args -o bin/timer&#39;</span>
-</span>      <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+     <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;mkdir -p bin&quot;</span><span class="p">)</span>
+<span class="hll">         <span class="n">command</span> <span class="o">=</span> <span class="s1">&#39;g++ timer.cpp @conanbuildinfo.args -o bin/timer&#39;</span>
+</span>         <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 

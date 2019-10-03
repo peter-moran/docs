@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>B2 [EXPERIMENTAL] &mdash; conan 1.19.0 documentation</title>
+  <title>b2 &mdash; conan 1.19.0 documentation</title>
   
 
   
@@ -48,7 +48,7 @@
     <link rel="top" title="conan 1.19.0 documentation" href="../../index.html"/>
         <link rel="up" title="Generators" href="../generators.html"/>
         <link rel="next" title="qbs" href="qbs.html"/>
-        <link rel="prev" title="Boost Build" href="boost_build.html"/>
+        <link rel="prev" title="boost-build" href="boost_build.html"/>
 
  <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -129,21 +129,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2 current"><a class="reference internal" href="../generators.html">Generators</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="cmake.html">cmake</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cmakemulti.html">cmake_multi</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cmake_paths.html"><cite>cmake_paths</cite></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cmake_find_package.html"><cite>cmake_find_package</cite></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cmake_find_package_multi.html"><cite>cmake_find_package_multi</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_paths.html">cmake_paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_find_package.html">cmake_find_package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_find_package_multi.html">cmake_find_package_multi</a></li>
 <li class="toctree-l3"><a class="reference internal" href="visualstudio.html">visual_studio</a></li>
-<li class="toctree-l3"><a class="reference internal" href="visualstudiomulti.html"><cite>visual_studio_multi</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualstudiomulti.html">visual_studio_multi</a></li>
 <li class="toctree-l3"><a class="reference internal" href="visualstudiolegacy.html">visual_studio_legacy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="xcode.html">xcode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="compiler_args.html">compiler_args</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gcc.html">gcc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="boost_build.html">Boost Build</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#"><cite>B2</cite> [EXPERIMENTAL]</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boost_build.html">boost-build</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">b2</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#sub-projects-in-conanbuildinfo-xxx-jam">Sub-projects in conanbuildinfo-XXX.jam</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#targets-in-conanbuildinfo-xxx-jam">Targets in conanbuildinfo-XXX.jam</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#constants-in-conanbuildinfo-xxx-jam">Constants in conanbuildinfo-XXX.jam</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#targets-in-conanbuildinfo-xxx-jam">Targets in <em>conanbuildinfo-XXX.jam</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#constants-in-conanbuildinfo-xxx-jam">Constants in <em>conanbuildinfo-XXX.jam</em></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="qbs.html">qbs</a></li>
@@ -230,7 +230,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
           <li><a href="../generators.html">Generators</a> &raquo;</li>
         
-      <li><cite>B2</cite> [EXPERIMENTAL]</li>
+      <li>b2</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -252,11 +252,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="b2-experimental">
-<span id="b2-generator"></span><h1><cite>B2</cite> [EXPERIMENTAL]<a class="headerlink" href="#b2-experimental" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="b2">
+<span id="b2-generator"></span><h1>b2<a class="headerlink" href="#b2" title="Permalink to this headline">¶</a></h1>
 <div class="out-reference-box docutils container">
-This is the reference page for the <code class="docutils literal notranslate"><span class="pre">B2</span></code>, aka <em>Boost Build</em>, generator. It is
-a multi-generator to match the multi-build nature of <code class="docutils literal notranslate"><span class="pre">B2</span></code>.</div>
+This is the reference page for the <code class="docutils literal notranslate"><span class="pre">b2</span></code> (<em>Boost Build</em>) generator. It is
+a multi-generator to match the multi-build nature of B2.</div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
@@ -283,10 +283,10 @@ built.</li>
 </div>
 <div class="section" id="sub-projects-in-conanbuildinfo-xxx-jam">
 <span id="conanbuildinfo-jam-projects"></span><h2>Sub-projects in conanbuildinfo-XXX.jam<a class="headerlink" href="#sub-projects-in-conanbuildinfo-xxx-jam" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">B2</span></code> generator defines sub-projects relative to the location of the
-<code class="docutils literal notranslate"><span class="pre">B2</span></code> project you generate the conan configuration. For each package a
+<p>The <code class="docutils literal notranslate"><span class="pre">b2</span></code> generator defines sub-projects relative to the location of the
+B2 project you generate the Conan configuration. For each package a
 sub-project with the package name is created that contains targets you can
-use as <code class="docutils literal notranslate"><span class="pre">B2</span></code> sources in your projects.</p>
+use as B2 sources in your projects.</p>
 <p>For example with this <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code>:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
 clara/[&gt;=1.1.0]@bincrafters/stable
@@ -305,71 +305,75 @@ project zlib ;
 </pre></div>
 </div>
 <p>For a root level project those could be referenced with an absolute project
-path, for example <code class="docutils literal notranslate"><span class="pre">/clara</span></code>. Or you can use relative project paths as needed,
-for example <code class="docutils literal notranslate"><span class="pre">../clara</span></code> or <code class="docutils literal notranslate"><span class="pre">subproject/clara</span></code>.</p>
+path, for example <em>/clara</em>. Or you can use relative project paths as needed,
+for example <em>../clara</em> or <em>subproject/clara</em>.</p>
 </div>
 <div class="section" id="targets-in-conanbuildinfo-xxx-jam">
-<span id="conanbuildinfo-jam-targets"></span><h2>Targets in conanbuildinfo-XXX.jam<a class="headerlink" href="#targets-in-conanbuildinfo-xxx-jam" title="Permalink to this headline">¶</a></h2>
+<span id="conanbuildinfo-jam-targets"></span><h2>Targets in <em>conanbuildinfo-XXX.jam</em><a class="headerlink" href="#targets-in-conanbuildinfo-xxx-jam" title="Permalink to this headline">¶</a></h2>
 <p>For each package a target in the corresponding package subproject is created
 that is specific to the variant built. There is also a general <code class="docutils literal notranslate"><span class="pre">libs</span></code> target
 that is an alias to all the package library targets. For header only packages
 this <code class="docutils literal notranslate"><span class="pre">libs</span></code> target would not contain references to the package libraries
 as they do not exist. But it would still contain the rest of the Usage
 requirements for you to make use of the headers in that package. For example,
-for the above <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code> the targets would be..</p>
-<p><code class="docutils literal notranslate"><span class="pre">clara</span> <span class="pre">subproject</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>alias libs
-    : # source, none as it&#39;s header only
-    : # requirements specific to the build
-      ...
-    : # default-build
-    : # usage-requirements
-      &lt;include&gt;/absolute/path/to/conan/package/include
-      &lt;define&gt;...
-      &lt;cflags&gt;...
-      &lt;cxxflags&gt;...
-      &lt;link&gt;shared:&lt;linkflags&gt;...
-    ;
+for the above <em>conanfile.txt</em>, the targets would be:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">clara</span> <span class="pre">subproject</span></code></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> alias libs
+     : # source, none as it&#39;s header only
+     : # requirements specific to the build
+       ...
+     : # default-build
+     : # usage-requirements
+       &lt;include&gt;/absolute/path/to/conan/package/include
+       &lt;define&gt;...
+       &lt;cflags&gt;...
+       &lt;cxxflags&gt;...
+       &lt;link&gt;shared:&lt;linkflags&gt;...
+     ;
 </pre></div>
+</div>
 </div>
 <p>Where <code class="docutils literal notranslate"><span class="pre">...</span></code> contains references to the variant specific constants. The target
 for <code class="docutils literal notranslate"><span class="pre">boost_predef</span></code> is equivalent as that’s also a header only library. For
 <code class="docutils literal notranslate"><span class="pre">libz</span></code> it contains a built linkable library and hence it has additional
 targets for that.</p>
-<p><code class="docutils literal notranslate"><span class="pre">libz</span> <span class="pre">subproject</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>alias z
-    : # source, no source as it&#39;s a searched pre-built library
-    : # requirements
-      &lt;name&gt;z
-      &lt;search&gt;/absolute/path/to/conan/package/lib
-      # rest of the requirements specific to the build
-    : # default-build
-    : # usage-requirements
-      &lt;include&gt;/abolute/path/to/conan/package/include
-      &lt;define&gt;...
-      &lt;cflags&gt;...
-      &lt;cxxflags&gt;...
-      &lt;link&gt;shared:&lt;linkflags&gt;...
-    ;
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">libz</span> <span class="pre">subproject</span></code></span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> alias z
+     : # source, no source as it&#39;s a searched pre-built library
+     : # requirements
+       &lt;name&gt;z
+       &lt;search&gt;/absolute/path/to/conan/package/lib
+       # rest of the requirements specific to the build
+     : # default-build
+     : # usage-requirements
+       &lt;include&gt;/abolute/path/to/conan/package/include
+       &lt;define&gt;...
+       &lt;cflags&gt;...
+       &lt;cxxflags&gt;...
+       &lt;link&gt;shared:&lt;linkflags&gt;...
+     ;
 
-alias libs
-    : # source
-      z
-    : # requirements specific to the build
-      ...
-    : # default-build
-    : # usage-requirements
-      &lt;include&gt;/absolute/path/to/conan/package/include
-      &lt;define&gt;...
-      &lt;cflags&gt;...
-      &lt;cxxflags&gt;...
-      &lt;link&gt;shared:&lt;linkflags&gt;...
-    ;
+ alias libs
+     : # source
+       z
+     : # requirements specific to the build
+       ...
+     : # default-build
+     : # usage-requirements
+       &lt;include&gt;/absolute/path/to/conan/package/include
+       &lt;define&gt;...
+       &lt;cflags&gt;...
+       &lt;cxxflags&gt;...
+       &lt;link&gt;shared:&lt;linkflags&gt;...
+     ;
 </pre></div>
 </div>
 </div>
+</div>
 <div class="section" id="constants-in-conanbuildinfo-xxx-jam">
-<span id="conanbuildinfo-jam-variables"></span><h2>Constants in conanbuildinfo-XXX.jam<a class="headerlink" href="#constants-in-conanbuildinfo-xxx-jam" title="Permalink to this headline">¶</a></h2>
+<span id="conanbuildinfo-jam-variables"></span><h2>Constants in <em>conanbuildinfo-XXX.jam</em><a class="headerlink" href="#constants-in-conanbuildinfo-xxx-jam" title="Permalink to this headline">¶</a></h2>
 <p>This generator also defines constants, and path constants, in the project
 where the conanfile.txt is located. The constants define variant specific
 variables for all the packages and a transitive <code class="docutils literal notranslate"><span class="pre">conan</span></code> set of constants
@@ -382,7 +386,7 @@ constants. <code class="docutils literal notranslate"><span class="pre">variatio
 <code class="docutils literal notranslate"><span class="pre">YYY</span></code> variation takes the form of a comma separated list of: package name,
 address-model, architecture, target-os, toolset with version, and variant
 (<code class="docutils literal notranslate"><span class="pre">debug</span></code>, <code class="docutils literal notranslate"><span class="pre">release</span></code>, <code class="docutils literal notranslate"><span class="pre">relwithdebinfo</span></code>, and <code class="docutils literal notranslate"><span class="pre">minsizerel</span></code>). All are lower case and use
-the values of the corresponding <code class="docutils literal notranslate"><span class="pre">B2</span></code> features. For example a <code class="docutils literal notranslate"><span class="pre">boost_predef</span></code>
+the values of the corresponding B2 features. For example a <code class="docutils literal notranslate"><span class="pre">boost_predef</span></code>
 package dependency when building with apple-clang 9.0 and debug would be:
 <code class="docutils literal notranslate"><span class="pre">boost_predef,64,x86,darwin,clang-9.0,debug</span></code>.</p>
 <table border="1" class="docutils">
@@ -432,7 +436,7 @@ other constants.</p>
 </ul>
 <p>The generator also defines a corresponding set of constants that aggregate
 the values of all the package requirements. The constants for this are the same
-as the package-specific ones but with “conan” as the name of the project.</p>
+as the package-specific ones but with <code class="docutils literal notranslate"><span class="pre">conan</span></code> as the name of the project.</p>
 <ul class="simple">
 <li><strong>Constants from user_info</strong></li>
 </ul>
@@ -466,10 +470,12 @@ name in lower case. For example:</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">user_info</span><span class="o">.</span><span class="n">var1</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 </div>
-<p>When other library requires <code class="docutils literal notranslate"><span class="pre">MyLib</span></code> and uses the <code class="docutils literal notranslate"><span class="pre">B2</span></code> generator:</p>
-<p><strong>conanbuildinfo-XXX.jam</strong>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>constant user(var1,mylib,...) : &quot;2&quot; ;
+<p>When other library requires <code class="docutils literal notranslate"><span class="pre">MyLib</span></code> and uses the <code class="docutils literal notranslate"><span class="pre">b2</span></code> generator:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><em>conanbuildinfo-XXX.jam</em></span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> constant user(var1,mylib,...) : &quot;2&quot; ;
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -487,7 +493,7 @@ name in lower case. For example:</p>
         <a href="qbs.html" class="btn btn-neutral float-right" title="qbs" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="boost_build.html" class="btn btn-neutral" title="Boost Build" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="boost_build.html" class="btn btn-neutral" title="boost-build" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
