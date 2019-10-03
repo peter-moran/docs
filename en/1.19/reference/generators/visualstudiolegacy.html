@@ -129,17 +129,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2 current"><a class="reference internal" href="../generators.html">Generators</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="cmake.html">cmake</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cmakemulti.html">cmake_multi</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cmake_paths.html"><cite>cmake_paths</cite></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cmake_find_package.html"><cite>cmake_find_package</cite></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cmake_find_package_multi.html"><cite>cmake_find_package_multi</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_paths.html">cmake_paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_find_package.html">cmake_find_package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_find_package_multi.html">cmake_find_package_multi</a></li>
 <li class="toctree-l3"><a class="reference internal" href="visualstudio.html">visual_studio</a></li>
-<li class="toctree-l3"><a class="reference internal" href="visualstudiomulti.html"><cite>visual_studio_multi</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualstudiomulti.html">visual_studio_multi</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">visual_studio_legacy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="xcode.html">xcode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="compiler_args.html">compiler_args</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gcc.html">gcc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="boost_build.html">Boost Build</a></li>
-<li class="toctree-l3"><a class="reference internal" href="b2.html"><cite>B2</cite> [EXPERIMENTAL]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="boost_build.html">boost-build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="b2.html">b2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qbs.html">qbs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qmake.html">qmake</a></li>
 <li class="toctree-l3"><a class="reference internal" href="scons.html">scons</a></li>
@@ -248,8 +248,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="visual-studio-legacy">
 <span id="visualstudiolegacy-generator"></span><h1>visual_studio_legacy<a class="headerlink" href="#visual-studio-legacy" title="Permalink to this headline">¶</a></h1>
-<p>Generates a file named <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.vsprops</span></code> containing an XML that can be imported to your <em>Visual Studio 2008</em> project. Note that the format of this file is different and incompatible with the <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.props</span></code> file generated with the <code class="docutils literal notranslate"><span class="pre">visual_studio</span></code> generator for newer VS.</p>
-<p>Generated xml structure:</p>
+<p>Generates a file named <em>conanbuildinfo.vsprops</em> containing an XML that can be imported to your <em>Visual Studio 2008</em> project. Note that the
+format of this file is different and incompatible with the <em>conanbuildinfo.props</em> file generated with the <code class="docutils literal notranslate"><span class="pre">visual_studio</span></code> generator for
+newer versions.</p>
+<p>Generated XML structure:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;Windows-1252&quot;?&gt;</span>
 <span class="nt">&lt;VisualStudioPropertySheet</span>
     <span class="na">ProjectType=</span><span class="s">&quot;Visual C++&quot;</span>
@@ -273,14 +275,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </div>
 <p>This file can be loaded from the Menu-&gt;View-&gt;PropertyManager window, selecting “Add Existing Property Sheet” for the desired configuration.</p>
 <img alt="../../_images/conan-vc2008_props.png" src="../../_images/conan-vc2008_props.png" />
-<p>Note that for single-configuration packages, which is the most typical, conan install Debug and Release packages separately. So a different property sheet will be generated for each configuration. The process could be:</p>
-<p>Given for example a conanfile.txt like:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[requires]
-Pkg/0.1@user/channel
+<p>Note that for single-configuration packages (which is the most typical), Conan installs Debug and Release packages separately. So a
+different property sheet will be generated for each configuration. The process could be:</p>
+<p>Given for example a recipe like:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><em>conanfile.txt</em></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> [requires]
+ Pkg/0.1@user/channel
 
-[generators]
-visual_studio_legacy
+ [generators]
+ visual_studio_legacy
 </pre></div>
+</div>
 </div>
 <p>And assuming that binary packages exist for <code class="docutils literal notranslate"><span class="pre">Pkg/0.1&#64;user/channel</span></code>, we could do:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mkdir debug <span class="o">&amp;&amp;</span> <span class="nb">cd</span> debug
@@ -291,7 +297,8 @@ $ conan install .. -s <span class="nv">compiler</span><span class="o">=</span><s
 <span class="c1"># Now go to VS 2008 Property Manager, load the respective sheet into each configuration</span>
 </pre></div>
 </div>
-<p>The above process can be simplified using profiles (assuming you have created “vs9release” profile), and you can also specify the generators in the command line:</p>
+<p>The above process can be simplified using profiles (assuming you have created a <em>vs9release</em> profile) and you can also specify the
+generators in the command line:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install .. -pr<span class="o">=</span>vs9release -g visual_studio_legacy
 </pre></div>
 </div>

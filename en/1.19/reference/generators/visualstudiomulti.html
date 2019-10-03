@@ -129,11 +129,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2 current"><a class="reference internal" href="../generators.html">Generators</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="cmake.html">cmake</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cmakemulti.html">cmake_multi</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cmake_paths.html"><cite>cmake_paths</cite></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cmake_find_package.html"><cite>cmake_find_package</cite></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cmake_find_package_multi.html"><cite>cmake_find_package_multi</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_paths.html">cmake_paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_find_package.html">cmake_find_package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_find_package_multi.html">cmake_find_package_multi</a></li>
 <li class="toctree-l3"><a class="reference internal" href="visualstudio.html">visual_studio</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#"><cite>visual_studio_multi</cite></a><ul>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">visual_studio_multi</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
 </ul>
 </li>
@@ -141,8 +141,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="xcode.html">xcode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="compiler_args.html">compiler_args</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gcc.html">gcc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="boost_build.html">Boost Build</a></li>
-<li class="toctree-l3"><a class="reference internal" href="b2.html"><cite>B2</cite> [EXPERIMENTAL]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="boost_build.html">boost-build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="b2.html">b2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qbs.html">qbs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qmake.html">qmake</a></li>
 <li class="toctree-l3"><a class="reference internal" href="scons.html">scons</a></li>
@@ -227,7 +227,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
           <li><a href="../generators.html">Generators</a> &raquo;</li>
         
-      <li><cite>visual_studio_multi</cite></li>
+      <li>visual_studio_multi</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -250,7 +250,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
            <div itemprop="articleBody">
             
   <div class="section" id="visual-studio-multi">
-<span id="id1"></span><h1><cite>visual_studio_multi</cite><a class="headerlink" href="#visual-studio-multi" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>visual_studio_multi<a class="headerlink" href="#visual-studio-multi" title="Permalink to this headline">¶</a></h1>
 <div class="out-reference-box docutils container">
 This is the reference page for <code class="docutils literal notranslate"><span class="pre">visual_studio_multi</span></code> generator.
 Go to <a class="reference internal" href="../../integrations/ide/visual_studio.html#visual-studio"><span class="std std-ref">Integrations/Visual Studio</span></a> if you want to learn how to integrate your project or recipes with Visual Studio.</div>
@@ -264,15 +264,14 @@ $ conan install . -g visual_studio_multi -s <span class="nv">arch</span><span cl
 </div>
 <p>These commands will generate 5 files for each compiler version:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">conanbuildinfo_multi.props</span></code>: All properties</li>
-<li><code class="docutils literal notranslate"><span class="pre">conanbuildinfo_release_x64_v141.props.props</span></code>: Variables for release/64bits/VS2015 (toolset v141)</li>
-<li><code class="docutils literal notranslate"><span class="pre">conanbuildinfo_debug_x64_v141.props.props</span></code>: Variables for debug/64bits/VS2015 (toolset v141)</li>
-<li><code class="docutils literal notranslate"><span class="pre">conanbuildinfo_release_win32_v141.props.props</span></code>: Variables for release/32bits/VS2015 (toolset v141)</li>
-<li><code class="docutils literal notranslate"><span class="pre">conanbuildinfo_debug_win32_v141.props.props</span></code>: Variables for debug/32bits/VS2015 (toolset v141)</li>
+<li><em>conanbuildinfo_multi.props</em>: All properties</li>
+<li><em>conanbuildinfo_release_x64_v141.props.props</em>: Variables for release/64bits/VS2015 (toolset v141).</li>
+<li><em>conanbuildinfo_debug_x64_v141.props.props</em>: Variables for debug/64bits/VS2015 (toolset v141).</li>
+<li><em>conanbuildinfo_release_win32_v141.props.props</em>: Variables for release/32bits/VS2015 (toolset v141).</li>
+<li><em>conanbuildinfo_debug_win32_v141.props.props</em>: Variables for debug/32bits/VS2015 (toolset v141).</li>
 </ul>
-<p>You can now load <code class="docutils literal notranslate"><span class="pre">conanbuildinfo_multi.props</span></code> in your Visual Studio IDE property manager,
-and all configurations will be loaded at once.</p>
-<p>Each one of the configurations will have the format and information defined in <a class="reference internal" href="visualstudio.html#visualstudio-generator"><span class="std std-ref">the visual_studio generator</span></a></p>
+<p>You can now load <em>conanbuildinfo_multi.props</em> in your Visual Studio IDE property manager, and all configurations will be loaded at once.</p>
+<p>Each one of the configurations will have the format and information defined in <a class="reference internal" href="visualstudio.html#visualstudio-generator"><span class="std std-ref">the visual_studio generator</span></a>.</p>
 </div>
 </div>
 

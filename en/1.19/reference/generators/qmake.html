@@ -129,20 +129,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2 current"><a class="reference internal" href="../generators.html">Generators</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="cmake.html">cmake</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cmakemulti.html">cmake_multi</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cmake_paths.html"><cite>cmake_paths</cite></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cmake_find_package.html"><cite>cmake_find_package</cite></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cmake_find_package_multi.html"><cite>cmake_find_package_multi</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_paths.html">cmake_paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_find_package.html">cmake_find_package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake_find_package_multi.html">cmake_find_package_multi</a></li>
 <li class="toctree-l3"><a class="reference internal" href="visualstudio.html">visual_studio</a></li>
-<li class="toctree-l3"><a class="reference internal" href="visualstudiomulti.html"><cite>visual_studio_multi</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualstudiomulti.html">visual_studio_multi</a></li>
 <li class="toctree-l3"><a class="reference internal" href="visualstudiolegacy.html">visual_studio_legacy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="xcode.html">xcode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="compiler_args.html">compiler_args</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gcc.html">gcc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="boost_build.html">Boost Build</a></li>
-<li class="toctree-l3"><a class="reference internal" href="b2.html"><cite>B2</cite> [EXPERIMENTAL]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="boost_build.html">boost-build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="b2.html">b2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="qbs.html">qbs</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">qmake</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#methods-available-in-conanbuildinfo-pri">Methods available in conanbuildinfo.pri</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#package-declared-vars">Package declared vars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#global-declared-vars">Global declared vars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#methods-available-in-conanbuildinfo-pri">Methods available in <em>conanbuildinfo.pri</em></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="scons.html">scons</a></li>
@@ -260,7 +262,8 @@ The file contains:</p>
 <li>N groups of variables, one group per require, declaring the same individual values: include_paths, libs, bin dirs, libraries, defines etc.</li>
 <li>One group of global variables with the aggregated values for all requirements.</li>
 </ul>
-<p><strong>Package declared vars</strong></p>
+<div class="section" id="package-declared-vars">
+<h2>Package declared vars<a class="headerlink" href="#package-declared-vars" title="Permalink to this headline">¶</a></h2>
 <p>For each requirement <code class="docutils literal notranslate"><span class="pre">conanbuildinfo.pri</span></code> file declares the following variables.
 <code class="docutils literal notranslate"><span class="pre">XXX</span></code> is the name of the require in uppercase. e.k “ZLIB” for <code class="docutils literal notranslate"><span class="pre">zlib/1.2.8&#64;lasote/stable</span></code> requirement:</p>
 <table border="1" class="docutils">
@@ -306,7 +309,9 @@ The file contains:</p>
 </tr>
 </tbody>
 </table>
-<p><strong>Global declared vars</strong></p>
+</div>
+<div class="section" id="global-declared-vars">
+<h2>Global declared vars<a class="headerlink" href="#global-declared-vars" title="Permalink to this headline">¶</a></h2>
 <p>Conan also declares some global variables with the aggregated values of all our requirements.
 The values are ordered in the right order according to the dependency tree.</p>
 <table border="1" class="docutils">
@@ -349,8 +354,9 @@ The values are ordered in the right order according to the dependency tree.</p>
 </tr>
 </tbody>
 </table>
+</div>
 <div class="section" id="methods-available-in-conanbuildinfo-pri">
-<span id="conanbuildinfoqmake-methods"></span><h2>Methods available in conanbuildinfo.pri<a class="headerlink" href="#methods-available-in-conanbuildinfo-pri" title="Permalink to this headline">¶</a></h2>
+<span id="conanbuildinfoqmake-methods"></span><h2>Methods available in <em>conanbuildinfo.pri</em><a class="headerlink" href="#methods-available-in-conanbuildinfo-pri" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
 <col width="29%" />
