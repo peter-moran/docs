@@ -263,8 +263,14 @@ Go to <a class="reference internal" href="../../integrations/ide/visual_studio.h
     ...
   <span class="nt">&lt;/PropertyGroup&gt;</span>
   <span class="nt">&lt;PropertyGroup</span> <span class="na">Label=</span><span class="s">&quot;ConanVariables&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;ConanBinaryDirectories&gt;</span>{CONAN BINARY DIRECTORIES LIST}<span class="nt">&lt;/ConanBinaryDirectories&gt;</span>
-    <span class="nt">&lt;ConanResourceDirectories&gt;</span>{CONAN RESOURCE DIRECTORIES LIST}<span class="nt">&lt;/ConanResourceDirectories&gt;</span>
+    <span class="nt">&lt;ConanCompilerFlags&gt;</span>{compiler_flags}<span class="nt">&lt;/ConanCompilerFlags&gt;</span>
+    <span class="nt">&lt;ConanLinkerFlags&gt;</span>{linker_flags}<span class="nt">&lt;/ConanLinkerFlags&gt;</span>
+    <span class="nt">&lt;ConanPreprocessorDefinitions&gt;</span>{definitions}<span class="nt">&lt;/ConanPreprocessorDefinitions&gt;</span>
+    <span class="nt">&lt;ConanIncludeDirectories&gt;</span>{include_dirs}<span class="nt">&lt;/ConanIncludeDirectories&gt;</span>
+    <span class="nt">&lt;ConanResourceDirectories&gt;</span>{res_dirs}<span class="nt">&lt;/ConanResourceDirectories&gt;</span>
+    <span class="nt">&lt;ConanLibraryDirectories&gt;</span>{lib_dirs}<span class="nt">&lt;/ConanLibraryDirectories&gt;</span>
+    <span class="nt">&lt;ConanBinaryDirectories&gt;</span>{bin_dirs}<span class="nt">&lt;/ConanBinaryDirectories&gt;</span>
+    <span class="nt">&lt;ConanLibraries&gt;</span>{libs}<span class="nt">&lt;/ConanLibraries&gt;</span>
   <span class="nt">&lt;/PropertyGroup&gt;</span>
   <span class="nt">&lt;PropertyGroup&gt;</span>
     <span class="nt">&lt;LocalDebuggerEnvironment&gt;</span>PATH=%PATH%;{CONAN BINARY DIRECTORIES LIST}<span class="nt">&lt;/LocalDebuggerEnvironment&gt;</span>
@@ -272,15 +278,23 @@ Go to <a class="reference internal" href="../../integrations/ide/visual_studio.h
   <span class="nt">&lt;/PropertyGroup&gt;</span>
   <span class="nt">&lt;ItemDefinitionGroup&gt;</span>
     <span class="nt">&lt;ClCompile&gt;</span>
-      <span class="nt">&lt;AdditionalIncludeDirectories&gt;</span>{CONAN INCLUDE DIRECTORIES LIST}%(AdditionalIncludeDirectories)<span class="nt">&lt;/AdditionalIncludeDirectories&gt;</span>
-      <span class="nt">&lt;PreprocessorDefinitions&gt;</span>{CONAN DEFINITIONS}%(PreprocessorDefinitions)<span class="nt">&lt;/PreprocessorDefinitions&gt;</span>
-      <span class="nt">&lt;AdditionalOptions&gt;</span> %(AdditionalOptions)<span class="nt">&lt;/AdditionalOptions&gt;</span>
+      <span class="nt">&lt;AdditionalIncludeDirectories&gt;</span>$(ConanIncludeDirectories)%(AdditionalIncludeDirectories)<span class="nt">&lt;/AdditionalIncludeDirectories&gt;</span>
+      <span class="nt">&lt;PreprocessorDefinitions&gt;</span>$(ConanPreprocessorDefinitions)%(PreprocessorDefinitions)<span class="nt">&lt;/PreprocessorDefinitions&gt;</span>
+      <span class="nt">&lt;AdditionalOptions&gt;</span>$(ConanCompilerFlags) %(AdditionalOptions)<span class="nt">&lt;/AdditionalOptions&gt;</span>
     <span class="nt">&lt;/ClCompile&gt;</span>
     <span class="nt">&lt;Link&gt;</span>
-      <span class="nt">&lt;AdditionalLibraryDirectories&gt;</span>{CONAN LIB DIRECTORIES LIST}%(AdditionalLibraryDirectories)<span class="nt">&lt;/AdditionalLibraryDirectories&gt;</span>
-      <span class="nt">&lt;AdditionalDependencies&gt;</span>{CONAN LIBS LIST}<span class="nt">&lt;/AdditionalDependencies&gt;</span>
-      <span class="nt">&lt;AdditionalOptions&gt;</span> %(AdditionalOptions)<span class="nt">&lt;/AdditionalOptions&gt;</span>
+      <span class="nt">&lt;AdditionalLibraryDirectories&gt;</span>$(ConanLibraryDirectories)%(AdditionalLibraryDirectories)<span class="nt">&lt;/AdditionalLibraryDirectories&gt;</span>
+      <span class="nt">&lt;AdditionalDependencies&gt;</span>$(ConanLibraries)%(AdditionalDependencies)<span class="nt">&lt;/AdditionalDependencies&gt;</span>
+      <span class="nt">&lt;AdditionalOptions&gt;</span>$(ConanLinkerFlags) %(AdditionalOptions)<span class="nt">&lt;/AdditionalOptions&gt;</span>
     <span class="nt">&lt;/Link&gt;</span>
+    <span class="nt">&lt;Midl&gt;</span>
+      <span class="nt">&lt;AdditionalIncludeDirectories&gt;</span>$(ConanIncludeDirectories)%(AdditionalIncludeDirectories)<span class="nt">&lt;/AdditionalIncludeDirectories&gt;</span>
+    <span class="nt">&lt;/Midl&gt;</span>
+    <span class="nt">&lt;ResourceCompile&gt;</span>
+      <span class="nt">&lt;AdditionalIncludeDirectories&gt;</span>$(ConanIncludeDirectories)%(AdditionalIncludeDirectories)<span class="nt">&lt;/AdditionalIncludeDirectories&gt;</span>
+      <span class="nt">&lt;PreprocessorDefinitions&gt;</span>$(ConanPreprocessorDefinitions)%(PreprocessorDefinitions)<span class="nt">&lt;/PreprocessorDefinitions&gt;</span>
+      <span class="nt">&lt;AdditionalOptions&gt;</span>$(ConanCompilerFlags) %(AdditionalOptions)<span class="nt">&lt;/AdditionalOptions&gt;</span>
+    <span class="nt">&lt;/ResourceCompile&gt;</span>
   <span class="nt">&lt;/ItemDefinitionGroup&gt;</span>
   <span class="nt">&lt;ItemGroup</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/Project&gt;</span>
@@ -288,7 +302,9 @@ Go to <a class="reference internal" href="../../integrations/ide/visual_studio.h
 </div>
 <p>Note that for single-configuration packages (which is the most typical), Conan installs Debug/Release, 32/64bits, packages separately. So a
 different property sheet will be generated for each configuration. The process could be:</p>
-<p>Given for example a recipe like:</p>
+<p>There are <code class="docutils literal notranslate"><span class="pre">ConanVariables</span></code> containing the information of the dependencies. Those variables are used later in the file, like in the <code class="docutils literal notranslate"><span class="pre">&lt;Link&gt;</span></code> task.</p>
+<p>Note that for single-configuration packages, which is the most typical, conan install Debug/Release, 32/64bits, packages separately. So a different property sheet will be generated for each configuration. The process could be:</p>
+<p>Given for example a <code class="docutils literal notranslate"><span class="pre">conanfile.txt</span></code> like:</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text"><em>conanfile.txt</em></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span> [requires]
