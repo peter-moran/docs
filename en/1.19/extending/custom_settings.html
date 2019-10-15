@@ -270,9 +270,10 @@ created.</p>
 <p>For example, it is possible that you are managing binaries for older Linux distros, like RHEL 6, or old Centos,
 besides other modern distributions. The problem is that the binaries compiled for modern distributions will
 not work (will not be binary compatible, or ABI incompatible) in those older distributions, mainly because of
-different versions of glibc. We would need a way to model the differences of the binaries for those platforms.</p>
+different versions of glibc. We would need a way to model the differences of the binaries for those platforms.
+Check out the section <a class="reference internal" href="../devtools/running_packages.html#deployment-challenges"><span class="std std-ref">Deployment challenges</span></a> which explains mentioned situation in detail.</p>
 <div class="section" id="adding-new-settings">
-<h2>Adding new settings<a class="headerlink" href="#adding-new-settings" title="Permalink to this headline">¶</a></h2>
+<span id="add-new-settings"></span><h2>Adding new settings<a class="headerlink" href="#adding-new-settings" title="Permalink to this headline">¶</a></h2>
 <p>It is possible to add new settings at the root of the <em>settings.yml</em> file, something like:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">os</span><span class="p">:</span>
     <span class="nt">Windows</span><span class="p">:</span>
@@ -307,7 +308,7 @@ compiler = &quot;gcc&quot;
 </div>
 </div>
 <div class="section" id="adding-new-sub-settings">
-<h2>Adding new sub-settings<a class="headerlink" href="#adding-new-sub-settings" title="Permalink to this headline">¶</a></h2>
+<span id="add-new-sub-settings"></span><h2>Adding new sub-settings<a class="headerlink" href="#adding-new-sub-settings" title="Permalink to this headline">¶</a></h2>
 <p>The above approach requires modification to all recipes to take it into account. It is also possible to define
 kind of incompatible settings, like <code class="docutils literal notranslate"><span class="pre">os=Windows</span></code> and <code class="docutils literal notranslate"><span class="pre">distro=CentOS</span></code>. While adding new settings is totally
 possible, it might make more sense for other cases, but for this example it is more adequate to add it as above
