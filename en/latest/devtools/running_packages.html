@@ -120,8 +120,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#using-virtual-environments">Using virtual environments</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#imports">Imports</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#deployable-packages">Deployable packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-deploy-generator">Using the <cite>deploy</cite> generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-json-generator">Using the <cite>json</cite> generator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#running-from-packages">Running from packages</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#runtime-packages-and-re-packaging">Runtime packages and re-packaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#runtime-packages-and-re-packaging">Runtime packages and re-packaging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#deployment-challenges">Deployment challenges</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="create_installer_packages.html">Creating conan packages to install dev tools</a></li>
@@ -221,9 +226,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>Executables and applications including shared libraries can also be distributed, deployed and run with Conan. This might have
 some advantages compared to deploying with other systems:</p>
 <ul class="simple">
-<li>A unified development and distribution tool, for all systems and platforms</li>
-<li>Manage any number of different deployment configurations in the same way you manage them for development</li>
-<li>Use a Conan server remote to store all your applications and runtimes for all Operating Systems, platforms and targets</li>
+<li>A unified development and distribution tool, for all systems and platforms.</li>
+<li>Manage any number of different deployment configurations in the same way you manage them for development.</li>
+<li>Use a Conan server remote to store all your applications and runtimes for all Operating Systems, platforms and targets.</li>
 </ul>
 <p>There are different approaches:</p>
 <div class="section" id="using-virtual-environments">
@@ -307,11 +312,88 @@ with:</p>
 <p class="last">Read more about the <a class="reference internal" href="../reference/conanfile/methods.html#method-deploy"><span class="std std-ref">deploy()</span></a> method.</p>
 </div>
 </div>
+<div class="section" id="using-the-deploy-generator">
+<span id="deployable-deploy-generator"></span><h2>Using the <cite>deploy</cite> generator<a class="headerlink" href="#using-the-deploy-generator" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../reference/generators/deploy.html#deploy-generator"><span class="std std-ref">deploy generator</span></a> is used to have all the dependencies of an application copied into a single place. Then all the files can be repackaged into the distribution format of choice.
+For instance, if the application depends on boost, we may not know that it also requires many other 3rt-party libraries,
+such as
+<a class="reference external" href="https://zlib.net/">zlib</a>,
+<a class="reference external" href="https://sourceware.org/bzip2/">bzip2</a>,
+<a class="reference external" href="https://tukaani.org/xz/">lzma</a>,
+<a class="reference external" href="https://facebook.github.io/zstd/">zstd</a>,
+<a class="reference external" href="https://www.gnu.org/software/libiconv/">iconv</a>, etc.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . -g deploy
+</pre></div>
+</div>
+<p>This helps to collect all the dependencies into a single place, moving them out of the Conan cache.</p>
+</div>
+<div class="section" id="using-the-json-generator">
+<span id="deployable-json-generator"></span><h2>Using the <cite>json</cite> generator<a class="headerlink" href="#using-the-json-generator" title="Permalink to this headline">¶</a></h2>
+<p>A more advanced approach is to use the <a class="reference internal" href="../reference/generators/json.html#json-generator"><span class="std std-ref">json generator</span></a>:
+This generator works in a similar fashion as the <cite>deploy</cite> one, although it doesn’t copy the files to a directory. Instead, it generates a JSON file with all the information about the dependencies including the location of the files in the Conan cache.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conan install . -g json
+</pre></div>
+</div>
+<p>The <em>conanbuildinfo.json</em> file produced is fully machine-readable and could be used by scripts to prepare the files and recreate the appropriate format for distribution. The following code shows how to read the library and binary directories from the <em>conanbuildinfo.json</em>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;conanbuildinfo.json&quot;</span><span class="p">))</span>
+
+<span class="n">dep_lib_dirs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">dep_bin_dirs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">dep</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;dependencies&quot;</span><span class="p">]:</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">dep</span><span class="p">[</span><span class="s2">&quot;rootpath&quot;</span><span class="p">]</span>
+    <span class="n">lib_paths</span> <span class="o">=</span> <span class="n">dep</span><span class="p">[</span><span class="s2">&quot;lib_paths&quot;</span><span class="p">]</span>
+    <span class="n">bin_paths</span> <span class="o">=</span> <span class="n">dep</span><span class="p">[</span><span class="s2">&quot;bin_paths&quot;</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">lib_path</span> <span class="ow">in</span> <span class="n">lib_paths</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">lib_path</span><span class="p">):</span>
+            <span class="n">lib_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">relpath</span><span class="p">(</span><span class="n">lib_path</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>
+            <span class="n">dep_lib_dirs</span><span class="p">[</span><span class="n">lib_path</span><span class="p">]</span> <span class="o">=</span> <span class="n">lib_dir</span>
+    <span class="k">for</span> <span class="n">bin_path</span> <span class="ow">in</span> <span class="n">bin_paths</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">bin_path</span><span class="p">):</span>
+            <span class="n">bin_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">relpath</span><span class="p">(</span><span class="n">bin_path</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>
+            <span class="n">dep_bin_dirs</span><span class="p">[</span><span class="n">bin_path</span><span class="p">]</span> <span class="o">=</span> <span class="n">bin_dir</span>
+</pre></div>
+</div>
+<p>While with the <cite>deploy</cite> generator all the files were copied into a folder, the advantage with the <cite>json</cite> one is that you have fine-grained control over the files and those can be directly copied to the desired layout.
+In that sense, the script above could be easily modified to apply some sort of filtering (e.g. to copy only shared libraries,
+and omit any static libraries or auxiliary files such as pkg-config .pc files).</p>
+<p>Additionally, you could also write a simple startup script for your application with the extracted information like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">executable</span> <span class="o">=</span> <span class="s2">&quot;MyApp&quot;</span>  <span class="c1"># just an example</span>
+<span class="n">varname</span> <span class="o">=</span> <span class="s2">&quot;$APPDIR&quot;</span>
+
+<span class="k">def</span> <span class="nf">_format_dirs</span><span class="p">(</span><span class="n">dirs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;:&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">varname</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dirs</span><span class="p">])</span>
+
+<span class="n">path</span> <span class="o">=</span> <span class="n">_format_dirs</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">dep_bin_dirs</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+<span class="n">ld_library_path</span> <span class="o">=</span> <span class="n">_format_dirs</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">dep_lib_dirs</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+<span class="n">exe</span> <span class="o">=</span> <span class="n">varname</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">executable</span>
+
+<span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;#!/usr/bin/env bash</span>
+<span class="s2">set -ex</span>
+<span class="s2">export PATH=$PATH:{path}</span>
+<span class="s2">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:{ld_library_path}</span>
+<span class="s2">pushd $(dirname {exe})</span>
+<span class="s2">$(basename {exe})</span>
+<span class="s2">popd</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
+       <span class="n">ld_library_path</span><span class="o">=</span><span class="n">ld_library_path</span><span class="p">,</span>
+       <span class="n">exe</span><span class="o">=</span><span class="n">exe</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The full example might be found on <a class="reference external" href="https://github.com/conan-io/examples/tree/master/features">GitHub</a>.</p>
+</div>
+</div>
 <div class="section" id="running-from-packages">
 <h2>Running from packages<a class="headerlink" href="#running-from-packages" title="Permalink to this headline">¶</a></h2>
 <p>If a dependency has an executable that we want to run in the conanfile, it can be done directly in code
-using the <code class="docutils literal notranslate"><span class="pre">run_environment=True</span></code> argument. It internally uses a <code class="docutils literal notranslate"><span class="pre">RunEnvironment</span></code> helper.
-For example, if we want to execute the <code class="docutils literal notranslate"><span class="pre">greet</span></code> app while building the <code class="docutils literal notranslate"><span class="pre">Consumer</span></code> package:</p>
+using the <code class="docutils literal notranslate"><span class="pre">run_environment=True</span></code> argument. It internally uses a <code class="docutils literal notranslate"><span class="pre">RunEnvironment()</span></code> helper.
+For example, if we want to execute the <strong class="command">greet</strong> app while building the <code class="docutils literal notranslate"><span class="pre">Consumer</span></code> package:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span><span class="p">,</span> <span class="n">tools</span><span class="p">,</span> <span class="n">RunEnvironment</span>
 
 <span class="k">class</span> <span class="nc">ConsumerConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
@@ -397,6 +479,88 @@ $ greet
 &gt; Hello World!
 $ deactivate_run.sh <span class="c1"># $ source deactivate_run.sh in Unix/Linux</span>
 </pre></div>
+</div>
+<div class="section" id="deployment-challenges">
+<span id="id1"></span><h3>Deployment challenges<a class="headerlink" href="#deployment-challenges" title="Permalink to this headline">¶</a></h3>
+<p>When deploying a C/C++ application there are some specific challenges that have to be solved when distributing your application. Here you
+will find the most usual ones and some recommendations to overcome them.</p>
+<div class="section" id="the-c-standard-library">
+<h4>The C standard library<a class="headerlink" href="#the-c-standard-library" title="Permalink to this headline">¶</a></h4>
+<p>A common challenge for all the applications no matter if they are written in pure C or in C++ is the dependency on C standard library. The
+most wide-spread variant of this library is GNU C library or just <a class="reference external" href="https://www.gnu.org/software/libc/">glibc</a>.</p>
+<p>Glibc is not a just C standard library, as it provides:</p>
+<ul class="simple">
+<li>C functions (like <code class="docutils literal notranslate"><span class="pre">malloc()</span></code>, <code class="docutils literal notranslate"><span class="pre">sin()</span></code>, etc.) for various language standards, including C99.</li>
+<li>POSIX functions (like posix threads in the <code class="docutils literal notranslate"><span class="pre">pthread</span></code> library).</li>
+<li>BSD functions (like BSD sockets).</li>
+<li>Wrappers for OS-specific APIs (like Linux system calls)</li>
+</ul>
+<p>Even if your application doesn’t use directly any of these functions, they are often used by other libraries,
+so, in practice, it’s almost always in actual use.</p>
+<p>There are other implementations of the C standard library that present the same challenge, such as
+<a class="reference external" href="https://sourceware.org/newlib/">newlib</a> or <a class="reference external" href="https://www.musl-libc.org/">musl</a>, used for embedded development.</p>
+<p>To illustrate the problem, a simple hello-world application compiled in a modern Ubuntu distribution will give the following error when it
+is run in a Centos 6 one:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> /hello
+<span class="go">/hello: /lib64/libc.so.6: version `GLIBC_2.14&#39; not found (required by /hello)</span>
+</pre></div>
+</div>
+<p>This is because the versions of the <code class="docutils literal notranslate"><span class="pre">glibc</span></code> are different between those Linux distributions.</p>
+<p>There are several solutions to this problem:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/AppImage/AppImageKit/tree/stable/v1.0/LibcWrapGenerator">LibcWrapGenerator</a></li>
+<li><a class="reference external" href="https://github.com/wheybags/glibc_version_header">glibc_version_header</a></li>
+<li><a class="reference external" href="https://github.com/sulix/bingcc">bingcc</a></li>
+</ul>
+<p>Some people also advice to use static of glibc, but it’s strongly discouraged. One of the reasons is that newer glibc  might be using
+syscalls that are not available in the previous versions, so it will randomly fail in runtime, which is much harder to debug (the situation
+about system calls is described below).</p>
+<p>It’s possible to model either <code class="docutils literal notranslate"><span class="pre">glibc</span></code> version or Linux distribution name in Conan by defining custom Conan sub-setting in the
+<em>settings.yml</em> file (check out sections <a class="reference internal" href="../extending/custom_settings.html#add-new-settings"><span class="std std-ref">Adding new settings</span></a> and <a class="reference internal" href="../extending/custom_settings.html#add-new-sub-settings"><span class="std std-ref">Adding new sub-settings</span></a>). The process will be similar to:</p>
+<ul class="simple">
+<li>Define new sub-setting, for instance <cite>os.distro</cite>, as explained in the section <a class="reference internal" href="../extending/custom_settings.html#add-new-sub-settings"><span class="std std-ref">Adding new sub-settings</span></a>.</li>
+<li>Define compatibility mode, as explained by sections <a class="reference internal" href="../reference/conanfile/methods.html#method-package-id"><span class="std std-ref">package_id()</span></a> and <a class="reference internal" href="../reference/conanfile/methods.html#method-build-id"><span class="std std-ref">build_id()</span></a> (e.g. you may consider some <code class="docutils literal notranslate"><span class="pre">Ubuntu</span></code> and <code class="docutils literal notranslate"><span class="pre">Debian</span></code> packages to be compatible with each other)</li>
+<li>Generate different packages for each distribution.</li>
+<li>Generate deployable artifacts for each distribution.</li>
+</ul>
+</div>
+<div class="section" id="c-standard-library">
+<h4>C++ standard library<a class="headerlink" href="#c-standard-library" title="Permalink to this headline">¶</a></h4>
+<p>Usually, the default C++ standard library is <a class="reference external" href="https://gcc.gnu.org/onlinedocs/libstdc++/">libstdc++</a>, but
+<a class="reference external" href="https://libcxx.llvm.org/">libc++</a> and <a class="reference external" href="http://www.stlport.org/">stlport</a> are other well-known implementations.</p>
+<p>Similarly to the standard C library <cite>glibc</cite>, running the application linked with libstdc++ in the older system may result in an error:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> /hello
+<span class="go">/hello: /usr/lib64/libstdc++.so.6: version `GLIBCXX_3.4.21&#39; not found (required by /hello)</span>
+<span class="go">/hello: /usr/lib64/libstdc++.so.6: version `GLIBCXX_3.4.26&#39; not found (required by /hello)</span>
+</pre></div>
+</div>
+<p>Fortunately, this is much easier to address by just adding <code class="docutils literal notranslate"><span class="pre">-static-libstdc++</span></code> compiler flag. Unlike C runtime, C++ runtime can be
+linked statically safely, because it doesn’t use system calls directly, but instead relies on <code class="docutils literal notranslate"><span class="pre">libc</span></code> to provide required wrappers.</p>
+</div>
+<div class="section" id="compiler-runtime">
+<h4>Compiler runtime<a class="headerlink" href="#compiler-runtime" title="Permalink to this headline">¶</a></h4>
+<p>Besides C and C++ runtime libraries, the compiler runtime libraries are also used by applications. Those libraries usually provide
+lower-level functions, such as compiler intrinsics or support for exception handling. Functions from these runtime libraries are rarely
+referenced directly in code and are mostly implicitly inserted by the compiler itself.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> ldd ./a.out
+<span class="go">libgcc_s.so.1 =&gt; /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f6626aee000)</span>
+</pre></div>
+</div>
+<p>you can avoid this kind of dependency by the using of the <code class="docutils literal notranslate"><span class="pre">-static-libgcc</span></code> compiler flag. However, it’s not always sane thing to do, as
+there are certain situations when applications should use shared runtime. The most common is when the application wishes to throw and catch
+exceptions across different shared libraries. Check out the <a class="reference external" href="https://gcc.gnu.org/onlinedocs/gcc/Link-Options.html">GCC manual</a> for the
+detailed information.</p>
+</div>
+<div class="section" id="system-api-system-calls">
+<h4>System API (system calls)<a class="headerlink" href="#system-api-system-calls" title="Permalink to this headline">¶</a></h4>
+<p>New system calls are often introduced with new releases of <a class="reference external" href="https://www.kernel.org/">Linux kernel</a>. If the application, or 3rd-party
+libraries, want to take advantage of these new features, they sometimes directly refer to such system calls (instead of using wrappers
+provided by <code class="docutils literal notranslate"><span class="pre">glibc</span></code>).</p>
+<p>As a result, if the application was compiled on a machine with a newer kernel and build system used to auto-detect available system calls,
+it may fail to execute properly on machines with older kernels.</p>
+<p>The solution is to either use a build machine with lowest supported kernel, or model supported operation system (just like in case of <code class="docutils literal notranslate"><span class="pre">glibc</span></code>).
+Check out sections <a class="reference internal" href="../extending/custom_settings.html#add-new-settings"><span class="std std-ref">Adding new settings</span></a> and <a class="reference internal" href="../extending/custom_settings.html#add-new-sub-settings"><span class="std std-ref">Adding new sub-settings</span></a> to get a piece of information on how to model distribution in conan settings.</p>
+</div>
 </div>
 </div>
 </div>
