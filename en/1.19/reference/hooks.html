@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Hooks [EXPERIMENTAL] &mdash; conan 1.19.2 documentation</title>
+  <title>Hooks &mdash; conan 1.19.2 documentation</title>
   
 
   
@@ -132,7 +132,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="tools.html">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="config_files.html">Configuration files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="env_vars.html">Environment variables</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Hooks [EXPERIMENTAL]</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Hooks</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#hook-interface">Hook interface</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#function-parameters">Function parameters</a></li>
 </ul>
@@ -198,7 +198,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
           <li><a href="../reference.html">Reference</a> &raquo;</li>
         
-      <li>Hooks [EXPERIMENTAL]</li>
+      <li>Hooks</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -220,14 +220,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="hooks-experimental">
-<span id="hooks-reference"></span><h1>Hooks [EXPERIMENTAL]<a class="headerlink" href="#hooks-experimental" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="hooks">
+<span id="hooks-reference"></span><h1>Hooks<a class="headerlink" href="#hooks" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">This is an <strong>experimental</strong> feature subject to breaking changes in future releases.</p>
 </div>
 <p>The Conan hooks are Python functions that are intended to extend the Conan functionalities and let users customize the client behavior at
-determined execution points.</p>
+determined execution points. Check the <a class="reference internal" href="../extending/hooks.html#hooks"><span class="std std-ref">hooks section in extending Conan</span></a> to see
+some examples of how to use them and already available ones providing useful functionality.</p>
 <div class="section" id="hook-interface">
 <h2>Hook interface<a class="headerlink" href="#hook-interface" title="Permalink to this headline">¶</a></h2>
 <p>Here you can see a complete example of all the hook functions available and the different parameters for each of them depending on the
