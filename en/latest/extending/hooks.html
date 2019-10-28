@@ -126,10 +126,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#hook-structure">Hook structure</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#importing-from-a-module">Importing from a module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#storage-activation-and-sharing">Storage, activation and sharing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#official-hooks">Official Hooks</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#attribute-checker">attribute_checker</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#official-hooks">Official Hooks</a></li>
 </ul>
 </li>
 </ul>
@@ -228,8 +225,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 points.</p>
 <div class="section" id="hook-structure">
 <h2>Hook structure<a class="headerlink" href="#hook-structure" title="Permalink to this headline">¶</a></h2>
-<p>Hooks are Python files containing <strong>pre</strong> and <strong>post</strong> functions that will be executed before and after a particular task performed by the
-Conan client. Those tasks could be Conan commands, recipe interactions such as exporting or packaging, or interactions with the remotes.</p>
+<p>A hook is a Python function that will be executed at certain points of Conan workflow
+to customize the client behavior without modifying the client sources or the recipe ones.
+In the <a class="reference internal" href="../reference/hooks.html#hooks-reference"><span class="std std-ref">hooks reference</span></a> you can find the full list of hook functions
+and exhaustive documentation about their arguments.</p>
+<p>Hooks can implement any functionality: it could be Conan commands, recipe interactions
+such as exporting or packaging, or interactions with the remotes.</p>
 <p>Here is an example of a simple hook:</p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text"><em>example_hook.py</em></span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
@@ -270,18 +271,11 @@ Conan client. Those tasks could be Conan commands, recipe interactions such as e
 <p>This hook checks the recipe content prior to it being exported and prior to downloading the sources. Basically the
 <code class="docutils literal notranslate"><span class="pre">pre_export()</span></code> function checks the attributes of the <code class="docutils literal notranslate"><span class="pre">conanfile</span></code> object to see if there is an URL, a license and a description and if missing,
 warns the user with a message through the <code class="docutils literal notranslate"><span class="pre">output</span></code>. This is done <strong>before</strong> the recipe is exported to the local cache.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">pre_source()</span></code> function checks if the recipe contains a <code class="docutils literal notranslate"><span class="pre">source()</span></code> method (this time it is using the conanfile content instead of
+<p>The <code class="docutils literal notranslate"><span class="pre">pre_source()</span></code> function checks if the recipe contains a <code class="docutils literal notranslate"><span class="pre">source()</span></code> method (this time it is using the <em>conanfile.py</em> content instead of
 the <code class="docutils literal notranslate"><span class="pre">conanfile</span></code> object) and in that case it checks if the download of the sources are likely coming from immutable places (a compressed
 file or a determined <strong class="command">git checkout</strong>). This is done <strong>before</strong> the <strong>source()</strong> method of the recipe is called.</p>
 <p>Any kind of Python script can be executed. You can create global functions and call them from different hook functions, import from a
 relative module and warn, error or even raise to abort the Conan client execution.</p>
-<p>Each function receives some parameters but not all of them are available for all functions as this may change depending on
-the context of the commands being executed, such as the recipe being in the local cache or not.</p>
-<div class="admonition important">
-<p class="first admonition-title">Important</p>
-<p class="last">A detailed description of the functions allowed and its parameters as well as their execution can be found in it dedicated reference
-section: <a class="reference internal" href="../reference/hooks.html#hooks-reference"><span class="std std-ref">Hooks [EXPERIMENTAL]</span></a>.</p>
-</div>
 <p>Other useful task where a hook may come handy are the upload and download actions. There are <strong>pre</strong> and <strong>post</strong> functions for every
 download/upload as a whole and for fine download tasks such as recipe and package downloads/uploads.</p>
 <p>For example they can be used to sign the packages (including a file with the signature) when the package is created and check that
@@ -310,7 +304,7 @@ signature every time they are downloaded.</p>
 </div>
 <div class="section" id="importing-from-a-module">
 <h2>Importing from a module<a class="headerlink" href="#importing-from-a-module" title="Permalink to this headline">¶</a></h2>
-<p>The hook interface should always be placed inside a Python file with the name of the hook and stored in the <em>hooks</em> folder. However,
+<p>The hook interface should always be placed inside a Python file with the name of the hook and stored in the <em>~/.conan/hooks</em> folder. However,
 you can use functionalities from imported modules if you have them installed in your system or if they are installed with Conan:</p>
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">example_hook.py</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
@@ -337,9 +331,8 @@ you can use functionalities from imported modules if you have them installed in 
     <span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;my_printer(): CUSTOM MODULE&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>And it can be used in hook importing the module:</p>
+<p>And it can be used in the hook importing the module, just like regular Python:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">custom_module.custom</span> <span class="kn">import</span> <span class="n">my_printer</span>
-
 
 <span class="k">def</span> <span class="nf">pre_export</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">conanfile</span><span class="p">,</span> <span class="n">conanfile_path</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="n">my_printer</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
@@ -368,10 +361,10 @@ considered activated.</p>
 $ conan config rm hooks.my_custom_hook/hook  <span class="c1"># Deactivates &#39;my_custom_hook&#39;</span>
 </pre></div>
 </div>
-<p>There is also an environment variable <code class="docutils literal notranslate"><span class="pre">CONAN_HOOKS</span></code> to list the active hooks. Hooks listed in <em>conan.conf</em> will be loaded into
-this variable and values in the environment variable will be used to load the hooks.</p>
+<p>There is also an environment variable <a class="reference internal" href="../reference/env_vars.html#env-vars-conan-hooks"><span class="std std-ref">CONAN_HOOKS</span></a> that you can use to declare which hooks should be
+activated.</p>
 <p>Hooks are considered part of the Conan client configuration and can be shared as usual with the <a class="reference internal" href="../reference/commands/consumer/config.html#conan-config-install"><span class="std std-ref">conan config install</span></a> command.
-However, they can also be managed in isolated git repositories cloned into the <em>hooks</em> folder:</p>
+However, they can also be managed in isolated Git repositories cloned into the <em>~/.conan/hooks</em> folder:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/.conan/hooks
 $ git clone https://github.com/conan-io/hooks.git conan_hooks
 $ conan config <span class="nb">set</span> hooks.conan_hooks/hooks/conan-center.py
@@ -381,23 +374,14 @@ $ conan config <span class="nb">set</span> hooks.conan_hooks/hooks/conan-center.
 </div>
 <div class="section" id="official-hooks">
 <h2>Official Hooks<a class="headerlink" href="#official-hooks" title="Permalink to this headline">¶</a></h2>
-<p>There is a simple <em>attribute_checker</em> hook ready to be used in Conan. You can take it as a starting point to create your own ones.</p>
-<div class="section" id="attribute-checker">
-<h3>attribute_checker<a class="headerlink" href="#attribute-checker" title="Permalink to this headline">¶</a></h3>
-<p>This hook is shipped together with the Conan client and it warns the user when recipes do not contain some metadata attributes.</p>
-<div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text"><em>attribute_checker.py</em></span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="k">def</span> <span class="nf">pre_export</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">conanfile</span><span class="p">,</span> <span class="n">conanfile_path</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-     <span class="c1"># Check basic meta-data</span>
-     <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">,</span> <span class="s2">&quot;license&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">]:</span>
-         <span class="n">field_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">conanfile</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-         <span class="k">if</span> <span class="ow">not</span> <span class="n">field_value</span><span class="p">:</span>
-             <span class="n">output</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Conanfile doesn&#39;t have &#39;</span><span class="si">%s</span><span class="s2">&#39;. It is recommended to add it as attribute&quot;</span>
-                         <span class="o">%</span> <span class="n">field</span><span class="p">)</span>
+<p>There are some officially maintained hooks in its own repository in <a class="reference external" href="https://github.com/conan-io/hooks">GitHub</a>,
+including the <code class="docutils literal notranslate"><span class="pre">attribute_checker</span></code> that has been packaged with Conan sources for several versions (although it is
+distributed with Conan still, it is no longer maintained and we may remove it in the future, so we encourage you to install
+the one in the hooks repository and activate it).</p>
+<p>Using the hooks in the official repository is as easy as installing them and activating the ones of interest:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>conan config install https://github.com/conan-io/hooks.git -sf hooks -tf hooks
+conan config set hooks.attribute_checker
 </pre></div>
-</div>
-</div>
-<p>This hook comes activated by default.</p>
 </div>
 </div>
 </div>
